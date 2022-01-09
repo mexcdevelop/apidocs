@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ 'spot_v2_en' ]
+    branches: [ 'spot_v2_cn' ]
 
 jobs:
   deploy:
@@ -40,6 +40,15 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        destination_dir: spot/v2/en
+        destination_dir: spot/v2/cn
+        publish_dir: ./build
+        keep_files: true
+
+    - run: bundle exec middleman build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
         keep_files: true
