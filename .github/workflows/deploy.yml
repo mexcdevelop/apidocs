@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ 'spot_v2_en' ]
 
 jobs:
   deploy:
@@ -40,5 +40,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        destination_dir: spot/v2/en
         publish_dir: ./build
         keep_files: true
