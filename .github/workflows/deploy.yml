@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ 'contract_v1_cn' ]
+    branches: [ 'contract_v1_en' ]
 
 jobs:
   deploy:
@@ -40,6 +40,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        destination_dir: contract/v1/cn
+        destination_dir: contract/v1/en
         publish_dir: ./build
         keep_files: true
