@@ -16,112 +16,121 @@ meta:
     content: Documentation for the mexc global API
 ---
 
-# 简介
+# Introduction
 
-欢迎使用MEXC API！本文档为您提供了REST API的相关信息，帮助您获取市场行情，管理账户信息，并进行交易等。
+Welcome to use MEXC API! This document provides you with REST API related information to help you obtain market information, manage account information, and conduct trading.
 
-## 什么是API？
+## What is API？
 
-API是应用程序接口（Application Programming Interface），缩写为API，是一种结算接口，它定义多个应用程序之间的交互，以及可以进行的调用（call）或请求（request）的种类，如何进行调用或发出请求，应使用的数据格式，应遵循的惯例等。API文档中描述了应用程序如何与我们的交易所进行交互。
+API is an Application Programming Interface, abbreviated as API, which is a settlement interface. It defines the interaction between multiple applications, the types of calls or requests that can be made, how to make calls or requests, the data format that should be used, the conventions that should be followed, etc. The API document describes how the application interacts with our exchange.
 
-## 使用流程
+## Instructions
 
-步骤：开发者如需使用API，请先 <a href="https://www.mexc.com/user/openapi" target="_blank">创建APIKey</a> ，然后根据此文档详情进行开发交易，使用过程中如有问题或者建议请及时反馈。 
+Step: if the developer needs to use the API, please first <a href="https://www.mexc.io/user/openapi" target="_blank">create APIKey</a> and then carry out the development of trading according to the details of this document. If you have any problems or suggestions in the process of using it, please let us know in time.
 
-- 请参考 <a href="https://support.mxc-exchange.com/hc/zh-cn/articles/360056373151" target="_blank">这个页面</a> 来设置API Key。
-- 设置API Key的同时，为了安全，建议设置IP访问白名单。
-- 永远不要把你的API key/secret告诉给任何人。
+- Please refer to <a href="https://support.mxc-exchange.com/hc/en-001/articles/360055933652" target="_blank">this page</a> to set the API Key.
+- When setting API key, it is recommended to set IP access whitelist for security.
+- Never tell anyone your API key/secret.
 
-## 接口类型 REST API
+##Interface type REST API
 
-REST，即Representational State Transfer的缩写，是目前较为流行的基于HTTP的一种通信机制。它结构清晰、符合标准、易于理解、扩展方便，正得到越来越多网站的采用。其优点如下：
+REST, the abbreviation of Representational State Transfer, is a popular communication mechanism based on HTTP. Its structure is clear, standard, easy to understand, easy to expand, and is being adopted by more and more websites. Its advantages are as follows:
 
-- 在RESTful架构中，每一个URL代表一种资源；
-- 客户端和服务器之间，传递这种资源的某种表现层；
-- 建议开发者使用Rest API进行币币交易或者资产提现等操作；
-- 客户端通过四个HTTP指令，对服务器端资源进行操作，实现“表现层状态转化”；
+- Each URL represents a resource in RESTful structure;
+- Some presentation layer of the resource is passed between the client and the server;
+- It is suggested that developers use Rest API for currency trading or asset withdrawal;
+- The client uses four HTTP instructions to operate the server-side resources to achieve "Representational State Transfer";
 
-## API V1或API V2
+## API V1 or API V2
 
 <aside class="notice">
-API V1将于2021年6月底停用，不再维护，请提前做好准备。
+API V1 will no longer be maintained starting from the end of June 2021. Please prepare in advance.
 </aside>
 
-我们建议所有用户在API的V2上构建其应用程序。使用V2具有以下优点：
+We recommend that all users build their applications on V2 of the API. Using V2 has the following advantages:
 
-- 相对API V1，API V2签名的安全性和合理性更好。
-- 提高了特定端点/通道的性能。
-- 我们的官方客户库提供了更广泛的支持。
+- Compared with API V1, the security and rationality of API V2 signature are better.
+- Improved performance for particular endpoints / channels.
+- Our official customer base provides a wider range of support.
 
-# 更新日志
+# Change log
 
-| 时间       | 接口                                                                                      | 更新类型 | 说明                                                                                                                                |
-| ---------- | ----------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| 2020-01-09 | *                                                                                         | 新增     | REST API V2发布                                                                                                                     |
-| 2020-02-24 | /open/api/v2/order/place<br/>/open/api/v2/order/place_batch<br/>/open/api/v2/order/cancel | 更新     | 添加client order id支持                                                                                                             |
-| 2020-07-20 | /open/api/v2/order/cancel_by_symbol                                                       | 新增     | 按交易对撤单                                                                                                                        |
-| 2021-03-01 | /open/api/v2/order/list                                                                   | 修改     | 入参states由非必填改为必填，且只能单状态查询；入参start_time修改为默认查询最近7天，最多查询30天；修复入参start_time时间不准确的情况 |
-| 2021-08-27 | /open/api/v2/market/api_default_symbols                                                   | 新增     | 新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式                                                       |
+| Effective Time（UTC+8) | Interface | Update Type | Description |
+|-----|-----|-----|-----|
+|2020-01-09|*|Add|REST API V2 released|
+|2020-02-24|/open/api/v2/order/place<br/>/open/api/v2/order/place_batch<br/>/open/api/v2/order/cancel|Update|Add support for client order id|
+|2020-07-20|/open/api/v2/order/cancel_by_symbol|Add|New API for canceling orders|
+|2021-03-01|/open/api/v2/order/list| change | Parameter states change to the mandatory than optional, and only single statu query supported; Parameter start_time default queries in last 7 days, maximum is 30 days; Fixed the situation of incorrect time about parameter start_time|
+|2021-08-27|/open/api/v2/market/api_default_symbols|Add|The newly acquired platform supports the trading pair endpoint of API transactions; Cancel the display of signature method 2 and retain the signature method of the same futures.|
 
-# 接入说明
+# Integration guide
 
-## 接入URL
+## Access URLs
 
-请选用以下的baseurl进行API请求：
+Please make API requests with the following base urls:
 
 - ```https://www.mexc.com```
 
-## 请求格式
+## Request Format
 
-相应API接受GET，POST或DELETE类型的请求
+The APIs accept GET, POST or DELETE request, as will be described in later sections
 
-- 对于GET/DELETE请求，所有参数都放在路径（request param）中
-- 对于POST请求，所有参数都放在请求体（request body）中
+- For a GET or DELETE reqeust, all parameters are path paremeters (query string)
+- For a POST reqeust, business parameters are to be put in request body and of JSON format(with```content-type```set to```application/json```), they will not be used for signing of the request. To calculate signature, params ```api_key```、```req_time```、```recv_window```(optional)、```sign``` need to be sent as path parameter
 
-## 返回格式
+## Response Format
 
-所有接口的返回数据均为JSON形式
+Response is of JSON format for all APIs
 
-## 签名规则
+## Signature
 
-我们提供了公共接口（市场信息，交易行情数据），以及私有接口（账户信息，订单操作，资产操作等）<br/><br/>对于公共接口，不需要进行签名<br/><br/>而对于私有接口，需要对接口信息及相应参数进行签名操作，收到请求后服务端验证签名通过后才能进行相应的操作<br/><br/>请参考详细的[签名方法](#8e3023a1c8)
+Public APIs (for market data) and private APIs (for account and order operations) are provided.<br/><br/>Signature is not required for public APIs.<br/><br/>And for private APIs, signature is required and will be used for checking the validity of each request.<br/><br/>Please refer to [Signature Method](#signature-method) for detail
 
-## 时间安全
+## Time Security
 
-所有签名接口均需要请求头中传入参数```Request-Time```，服务端接收到请求后会验证请求发出的时间范围。
+```
+ if (req_time > (server_time + 2 ) || req_time < (server_time - recv_window)) {
+   // reject request     
+ }else{
+  // process request
+ }
 
-若接受请求时，收到的```Request-Time```小于或大于服务端时间10秒（默认值）以上（该时间窗口值可以通过发送可选header参数 ```Recv-Window```来自定义，其最大值为60，不推荐使用30秒以上的```Recv-Window```），则认为该请求无效。
+```
 
-## 签名操作的组成
+Parameter ```req_time``` is required for each private API, After API server receives a request, timestamp validation will be conducted to make sure the requesting time from client is valid.
 
-各接口与签名验证相关的数据
+The request is considered invalid if the received req_time is less or more than 10 seconds (the default value) (the time window can be adjusted by sending an optional header parameter ```recv-window``` with a maximum value of 60, ```recv_window``` of 30 seconds or more is not recommended)
 
-| 组成部分           | 说明                                                                           |
-| ------------------ | ------------------------------------------------------------------------------ |
-| ```ApiKey```       | API key中的access key                                                          |
-| ```Request-Time``` | 发出请求的时间戳，以秒表示的13位时间戳字符串，如```1572537600000```            |
-| ```Signature```    | 生成的签名字符串（使用HMAC SHA256算法对 apikey + timestamp + params 进行签名） |
-| 接口HTTP请求方法   | 各接口对应的HTTP方法，```GET```，```POST```或```DELETE```                      |
-| 接口URI            | 接口对应的URI字符串                                                            |
-| 业务参数           | 各接口要求的业务参数，仅```GET```及```DELETE```方法需要将业务参数纳入签名计算  |
+## Signature Parameters
 
-## 创建API key
+Parameters related to request signature
 
-用户可以在MEXC站点个人中心，创建API key，其包括两个部分，```Access key```API的访问秘钥，```Secret key```对应的秘钥，用于签名计算及验证。开始使用前，请为生成的API key设置相应的权限。
+|   Components   |   Description  |
+| ------------ | -------------------------- |
+|   param ```api_key```  |  access key from API key    |
+|   param ```req_time```  |  the timestamp when sending the request, string of 10 digits stands for the seconds since Unix epoch, for instance ```1572537600```    |
+|   param ```sign```  |  calculated signature    |
+|   HTTP request method  |  GET, POST or DELETE as described in later sections for each API    |
+|   URI  |  URI of the API    |
+|   business parameters  |  business parameters required by each API, only the business parameters of ```GET``` and ```DELETE``` requests will be included in the signature calulation |
+
+## Creating API key
+
+API key can be created in the ```User Center``` of MEXC site. There are two parts of API key, ```Access key``` and ```Secret key```，both of them will be used for calculating and validating a signature. Please grant appropriate permissions for the created API key, before using it. 
 
 <aside class="warning">
-Secret key仅在申请时展示，请做好记录留存
+Secret key will ONLY be displayed in the page when API key is generated, please make records accordingly
 </aside>
 
-## 签名方法 
+## Signature Method 
 
-> java示例
+> java example
 
 ```java
 /**
- * 获取get请求参数字符串
+ * Gets the get request parameter string
  *
- * @param param get/delete请求参数map
+ * @param param get/delete Request parameters map
  * @return
  */
 public static String getRequestParamString(Map<String, String> param) {
@@ -148,7 +157,7 @@ public static String urlEncode(String s) {
 }
 
 /**
- * 签名
+ * signature
  */
 public static String sign(SignVo signVo) {
     if (signVo.getRequestParam() == null) {
@@ -180,98 +189,96 @@ public static class SignVo {
     private String reqTime;
     private String accessKey;
     private String secretKey;
-    private String requestParam; //get请求参数根据字典顺序排序,使用&拼接字符串,post为json字符串
+    private String requestParam; //get the request parameters are sorted in dictionary order, with & concatenated strings, POST should be a JSON string
 }
 ```
 
-1. 对于公共接口,不需要签名。
+1. Signature is not required for public endpoint.
 
-2. 对于私有接口,需要在header中传入ApiKey、Request-Time（以13位毫秒表示的时间戳字符串）、Signature、Content-Type 必须指定为application/json、Recv-Window(可选)参数,Signature为签名字符串
+2. For private endpoint, ApiKey, Request-Time(Timestamp string displayed in milliseconds
+), Signature and Content-Type need to be passed into the header, must be specified as application / JSON, Recv-Window (optional) parameters, Signature is a signature string. The signature rules are as follows:
 
-* 签名规则如下:
-    1. 签名时需要先获得请求参数字符串，无参时为""：<br />对于GET/DELETE请求，按 **字典序** 拼接业务参数以&间隔，并最终获得签名目标串（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。<br />对于POST请求，签名参数为json字符串（无需进行字典排序）。
-    2. 获得参数字符串后，再拼接签名目标串，规则为：accessKey+时间戳+获取到的参数字符串
-    3. 使用HMAC SHA256算法对目标串用SecretKey进行签名，并最终将签名作为参数携带到header中
+	1) When signing, you need to get the request parameter string first. It is "" if there is no parameter:
 
-注意：
+		For GET/DELETE requests, the service parameters are spliced in dictionary order with & interval, and finally the signature target string is obtained (in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
 
-  1)参与签名的业务参数为null时，不参与签名；注意get请求将参数拼接至url上时，如果参数为null， 后台解析时，会解析成""，POST请求，参数为null时，不要传该参数，或者签名时，将该参数的值设置为""，否则会出现验签失败。
+		For POST requests, the signature parameter is a JSON string (dictionary sorting is not required).
 
-  2)请求时将签名时用到的Request-Time的值放入header的Request-Time参数中，获得的签名字符串放入header的Signature参数中，将APIKEY的Access Key放在header的ApiKey参数中，其余业务参数按正常传递即可。
+	2) After obtaining the parameter string, the signature target string is spliced. The rule is: accessKey + timestamp + obtained parameter string.
 
-  3)获得的签名字符串不需要进行base64进行编码。
+	3) The HMAC SHA256 algorithm is used to sign the target string, and finally the signature is passed into the header as a parameter.
 
+Note：
 
-## 错误码
+	1) When the service parameter participating in the signature is null, it does not participate in the signature. For the path parameter, it does not participate in the signature; note that when get request stitches the parameter and pass it in the URL, if the parameter is null, it will be parsed into "" in the background parsing, fixed post request, when the parameter is null, do not pass the parameter, or set the value of the parameter to "" when signing, otherwise signature verification will fail.
 
-以下为接口可能返回的错误码信息
+	2) When requesting, put the value of Request-Time used in signing into the Request-Time parameter of the header, put the obtained signature string into the signature parameter of the header, put the Access Key of APIKEY into the ApiKey parameter of the header, and pass the other service parameters.
 
-| 错误码 | 说明                            |
-| ------ | ------------------------------- |
-| 400    | 请求参数无效                    |
-| 401    | 签名验证失败                    |
-| 429    | 请求过于频繁                    |
-| 10072  | 无效的access key                |
-| 10073  | 无效的请求时间                  |
-| 30000  | 当前交易对已暂停交易            |
-| 30001  | 当前交易方向不允许下单          |
-| 30002  | 小于最小交易金额                |
-| 30003  | 大于最大交易金额                |
-| 30004  | 持仓不足                        |
-| 30005  | 卖出超额                        |
-| 30010  | 下单价格超过范围                |
-| 30016  | 暂停交易                        |
-| 30019  | 订单集合超出最大允许长度        |
-| 30020  | 受限制的交易对，暂不支持API访问 |
-| 30021  | 无效的交易对                    |
+	3) The obtained signature string does not need to be base64 encoded.
 
-## 限频规则
+## Error Code
 
-对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁
+The following error information can be returend
 
-需要携带access key进行访问的接口，以账号作为限速的基本单位；不需要携带access key进行访问的接口，以IP作为限速的基本单位
+|   Code     |   Description    |
+| ------------ | -------------------------- |
+| 400     | Invalid parameter |
+| 401     | Invalid signature, fail to pass the validation |
+| 429     | Too many requests, rate limit rule is violated |
+| 10072     | Invalid access key |
+| 10073     | Invalid request time |
+| 30000     | Trading is suspended for the requested symbol |
+| 30001     | Current trading type (bid or ask) is not allowed |
+| 30002     | Invalid trading amount, smaller than the symbol minimum trading amount |
+| 30003     | Invalid trading amount, greater than the symbol maximum trading amount |
+| 30004    | Insufficient balance |
+| 30005    | Oversell error |
+| 30010    | Price out of allowed range |
+| 30016    | Market is closed |
+| 30019    | Orders count over limit for batch processing |
+| 30020    | Restricted symbol, API access is not allowed for the time being |
+| 30021    | Invalid symbol |
 
-未说明限速规则的接口默认为20次/秒
+## Rate Limit
 
-## 枚举定义
+There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests.
 
-### 订单状态
+The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
 
-|                    |          |
-| ------------------ | -------- |
-| NEW                | 未成交   |
-| FILLED             | 已成交   |
-| PARTIALLY_FILLED   | 部分成交 |
-| CANCELED           | 已撤单   |
-| PARTIALLY_CANCELED | 部分撤单 |
+The default rate limiting rule for an endpoint is 20 times per second.
 
+## ENUM Definition
 
-### 订单类型
+### Order State
 
-|                     |            |
-| ------------------- | ---------- |
-| LIMIT_ORDER         | 限价订单   |
-| POST_ONLY           | 限价做市单 |
-| IMMEDIATE_OR_CANCEL | 下单即撤销 |
+|  |   |
+|----------|------------|
+|NEW|New order, waiting to be filled|
+|FILLED|Order fully filled|
+|PARTIALLY_FILLED|Order partially filled|
+|CANCELED|Order canceled|
+|PARTIALLY_CANCELED|Order filled partially, and then the rest of the order is canceled|
 
 
-### 交易类型
+### Order Type
 
-|     |      |
-| --- | ---- |
-| BID | 买单 |
-| ASK | 卖单 |
+|  |   |
+|----------|------------|
+|LIMIT_ORDER|Limit price order|
+|POST_ONLY|Post only maker order|
+|IMMEDIATE_OR_CANCEL|Immediate or cancel|
 
-### 充值状态
 
-|         |        |
-| ------- | ------ |
-| PENDING | 入账中 |
-| SUCCESS | 已完成 |
+### Trade Type
 
-### 时间间隔
+|  |   |
+|----------|------------|
+|BID|Buy|
+|ASK|Sell|
 
-m -> 分钟; h -> 小时; d -> 天; M -> 月
+### Time Interval
+
+m -> minute; h -> hour; d -> day; M -> month
 
 - 1m
 - 5m
@@ -281,11 +288,11 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 - 4h
 - 1M
 
-# 基本信息
+# General data
 
-## 所有交易对信息
+## All symbols
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -310,18 +317,27 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 
 - **GET** ```/open/api/v2/market/symbols```
 
-参数：None
+Request parameters：None
 
-响应：
+Response
 
-| 字段名         | 数据类型 | 是否必须                         |
-| -------------- | -------- | -------------------------------- |
-| symbol         | string   | 交易对名称                       |
-| state          | string   | 交易对状态，当前是否可以进行交易 |
-| price_scale    | integer  | 价格精度                         |
-| quantity_scale | integer  | 数量精度                         | ## 各接口限速信息 |
+| Feild | Data type | Description |
+|----------|------------|------------|
+|symbol|string|symbol name|
+|state|string|symbol status, whether available for trading|
+|price_scale|integer|price precision|
+|quantity_scale|integer|quantity precision|
+|min_amount|string|minimum amount|
+|max_amount|string|maximum amount|
+|maker_fee_rate|string|maker fee|
+|taker_fee_rate|string|taker fee|
+|limited|string|API trading enables marking (Valid values: true, false)|
+|etf_mark|integer|Etf identification, 0 represents not ETF, and positive and negative integers represent ETF|
+|symbol-partition|string|Trading areas, such as the Main|
 
-> 响应示例
+## Rate Limit Info
+
+> Response example
 
 ```json
 {
@@ -338,29 +354,18 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 
 - **GET** ```/open/api/v2/common/rate_limit```
 
-参数：None
+Request parameters：None
 
-响应
+Response
 
-| 字段名           | 数据类型 | 说明                                     |
-| ---------------- | -------- | ---------------------------------------- |
-| total_limit      | string   | 用户每秒最大请求阈值                     |
-| request_limit    | map      | 用户每秒每个API最大请求阈值              |
-| min_amount       | string   | 最小交易金额                             |
-| max_amount       | string   | 最大交易金额                             |
-| maker_fee_rate   | string   | Maker费率                                |
-| taker_fee_rate   | string   | Taker费率                                |
-| limited          | string   | API交易使能标记（有效值：true, false）   |
-| etf_mark         | integer  | Etf标识，0代表不是ETF，正负整数代表是ETF |
-| symbol-partition | string   | 交易区，如主板区                         |
+| Field | Data type | Description |
+|----------|------------|------------|
+|total_limit|string|Maximum request count per access key per second|
+|request_limit|map|Maximum request count per interface per access key per second|
 
+## Current System Time
 
-
-
-
-## 当前系统时间
-
-> 响应示例
+> Response example
 
 ```json
 {
@@ -371,17 +376,17 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 
 - **GET** ```/open/api/v2/common/timestamp```
 
-参数：None
+Request parameters：None
 
-响应
+Response
 
-| 字段名 | 数据类型 | 说明                                   |
-| ------ | -------- | -------------------------------------- |
-| data   | long     | 系统当前时间戳，Unix epoch以来的毫秒数 |
+| Field | Data type | Description |
+|----------|------------|------------|
+|data|long|System timestamp, milliseconds since Unix epoch|
 
 ## Ping
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -391,17 +396,17 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 
 - **GET** ```/open/api/v2/common/ping```
 
-参数：None
+Request parameters：None
 
-响应
+Response
 
-| 字段名 | 数据类型 | 说明                 |
-| ------ | -------- | -------------------- |
-| code   | int      | 有返回则服务器状态OK |
+| Field | Data type | Description |
+|----------|------------|------------|
+|code|int|With response indicates server OK|
 
-## 获取平台支持接口交易的交易对
+## Obtain the transaction pairs that supports API transactions on the platform.
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -420,33 +425,33 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 }
 ```
 
-获取平台支持API交易的交易对。
+Obtain the transaction pairs that supports API transactions on the platform.
 
 - **GET** ```/open/api/v2/market/api_default_symbols```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**请求参数:**
+**Request Parameters:**
 
 None
 
-**响应参数:**
+**Response Parameters:**
 
-| 参数名  | 类型    | 说明             |
-| ------- | ------- | ---------------- |
-| code    | integer | 状态码           |
-| message | string  | 错误描述（如有） |
-| <data>  | array   |                  |
-| symbol  | string  | 交易对           |
-| </data> |         |                  |
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code | integer | Status code | 
+| message | string | Misdescription (If there has )） | 
+| <data> | array |  | 
+| symbol  | string  | symbol name |
+| </data> |  |  | 
 
-# 行情数据
+# Market Data
 
-## Ticker行情
+## Ticker Information
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -470,28 +475,35 @@ None
 
 - **GET** ```/open/api/v2/market/ticker```
 
-参数：
+Request parameters：
 
-| 参数名 | 数据类型 | 是否必须 | 说明       |
-| ------ | -------- | -------- | ---------- |
-| symbol | string   | 是       | 交易对名称 |
+| Parameter | Data type | Mandatory | Description |
+|-----|-----|-----|-----|
+|symbol|string|Y|symbol name|
 
-响应：
+Response：
 
-| 参数名      | 数据类型 | 说明                    |
-| ----------- | -------- | ----------------------- |
-| symbol      | string   | 交易对                  |
-| volume      | string   | 本阶段交易量            |
-| high        | string   | 本阶段最高价            |
-| low         | string   | 本阶段最低价            |
-| bid         | string   | 当前最高买价            |
-| ask         | string   | 当前最低卖价            |
-| open        | string   | 本阶段开盘价            |
-| last        | string   | 本阶段最新成交价        |
-| time        | string   | 最新报价时间            |
-| change_rate | string   | 本阶段涨跌幅## 深度信息 |
+| Field | Data type | Description |
+|-----|-----|-----|
+|symbol|string|symbol name|
+|volume|string|deal total amount of this period|
+|high|string|the highest price of this period|
+|low|string|the lowest price of this period|
+|bid|string|current highest bid price|
+|ask|string|current lowest ask price|
+|open|string|open price of this period|
+|last|string|the latest deal price|
+|time|string|timestamp of the latest quote|
+|change_rate|string|price change rate of this period|
 
-> 响应示例
+<aside class="notice">
+The module is refreshed according to a 24-hour cycle.
+</aside>
+
+
+## Market depth
+
+> Response example
 
 ```json
 {
@@ -523,28 +535,23 @@ None
 
 - **GET** ```/open/api/v2/market/depth ```
 
-参数：
+Request parameters：
 
-| 参数名 | 数据类型 | 是否必须 | 说明         | 取值范围 |
-| ------ | -------- | -------- | ------------ | -------- |
-| symbol | string   | 是       | 交易对名称   |          |
-| depth  | string   | 是       | 返回的深度数 | 1~2000   |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|depth|string|Y|number of depth to be returned| 1~2000|
 
-响应：
+Response：
 
-| 参数名 | 数据类型 | 说明                                       |
-| ------ | -------- | ------------------------------------------ |
-| bids   | object   | 买单，包含字段[price, quantity] 价格及数量 |
-| asks   | object   | 卖单，包含字段[price, quantity] 价格及数量 |  |
+| Field | Data type | Description |
+|-----|-----|-----|
+|bids|object|bids data, including the fields of price and quantity|
+|asks|object|asks data, including the fields of price and quantity|
 
-<aside class="notice">
-阶段是以当前时间的滚动24小时计。
-</aside>
+## Latest Deals
 
-
-## 成交记录
-
-> 响应示例
+> Response example
 
 ```json
 {
@@ -574,25 +581,25 @@ None
 
 - **GET** ```/open/api/v2/market/deals```
 
-参数：
+Request paramters：
 
-| 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围          |
-| ------ | -------- | -------- | ---------- | ----------------- |
-| symbol | string   | 是       | 交易对名称 |                   |
-| limit  | integer  | 否       | 返回的条数 | 1~1000，默认值100 |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|limit|integer|N|Number of records to be returned| 1~1000，default to 100|
 
-响应：
+Response：
 
-| 参数名         | 数据类型 | 说明               |
-| -------------- | -------- | ------------------ |
-| trade_time     | long     | 成交时间           |
-| trade_price    | string   | 成交价格           |
-| trade_quantity | string   | 成交数量           |
-| trade_type     | string   | 交易方向，BID或ASK |
+| Field | Data type | Description |
+|-----|-----|-----|
+|trade_time|long|deal time|
+|trade_price|string|deal price|
+|trade_quantity|string|volume|
+|trade_type|string|trade type, BID or ASK|
 
-## K线数据
+## Candlestick Data
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -622,96 +629,72 @@ None
 
 - **GET** ```/open/api/v2/market/kline```
 
-参数：
+Request parameters：
 
-| 参数名     | 数据类型 | 是否必须 | 说明                         | 取值范围                                                  |
-| ---------- | -------- | -------- | ---------------------------- | --------------------------------------------------------- |
-| symbol     | string   | 是       | 交易对名称                   |                                                           |
-| interval   | string   | 是       | 时间间隔                     | 分钟制:1m，5m，15m，30m，60m。小时制:4h，天制:1d，月制:1M |
-| start_time | long     | 否       | 起始时间。以秒记的10位时间戳 |                                                           |
-| limit      | integer  | 否       | 返回条数                     | 1~1000，默认值100                                         |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|interval|string|Y|inteval|of minutes: 1m, 5m, 15m, 30m, 60m. of hour: 4h, of day: 1d, of month: 1M|
+|start_time|long|N|start time, string of 10 digits stands for the seconds since Unix epoch| |
+|limit|integer|N|number of records to be returned| 1~1000，default to 100|
 
-响应：
+Response：
 
-| 参数名 | 说明                            |
-| ------ | ------------------------------- |
-| time   | 开始时间 (以秒表示的10位时间戳) |
-| open   | 开盘价                          |
-| close  | 收盘价                          |
-| high   | 最高价                          |
-| low    | 最低价                          |
-| vol    | 成交量                          |
-| amount | 计价货币成交量                  |
+| Field | Data type |
+|-----|-----|
+|time|start time, string of 10 digits stands for seconds since Unit epoch|
+|open|opening price|
+|close|closing price|
+|high|highest price|
+|low|lowest price|
+|vol|volume|
+|amount|trading volume in the pricing currency|
 
-## 获取币种信息
 
-> 响应示例
+## Get currency information
 
-```json
-{
-    "code": 200,
-    "data": [
-        {
-            "currency": "AGLD",
-            "coins": [
-                {
-                    "chain": "ERC20",
-                    "precision": 18,
-                    "fee": 15.37,
-                    "is_withdraw_enabled": true,
-                    "is_deposit_enabled": true,
-                    "deposit_min_confirm": 16,
-                    "withdraw_limit_max": 500000.0,
-                    "withdraw_limit_min": 14.0
-                }
-            ],
-            "full_name": "Adventure Gold"
-        }
-    ]
-}
-```
-
-此接口，返回币种详情列表。
+This endpoint returns a list of currency details.
 
 - **GET** ```/open/api/v2/market/coin/list```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币读
+**API Permission:** Read(for public )
 
-**请求参数:**
+**Request Parameters:**
 
-| 参数名   | 类型   | 是否必填 | 说明 |
-| -------- | ------ | -------- | ---- |
-| currency | string | false    | 币种 |
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency  | string  |  false  | Crypto currency |
 
-**响应参数:**
+**Response Parameters:**
 
-| 参数名              | 类型   | 说明               |
-| ------------------- | ------ | ------------------ |
-| code                | int    | 状态码             |
-| message             | string | 错误描述（如有）   |
-| currency            | string | 币种               |
-| full_name           | string | 币种全称           |
-| chain               | string | 链名称             |
-| precision           | string | 币种精度           |
-| is_withdraw_enabled | string | 是否可提现         |
-| is_deposit_enabled  | string | 是否可充值         |
-| deposit_minconfirm  | number | 充值区块最小确认数 |
-| withdraw_limit_max  | number | 单次最大提币数量   |
-| withdraw_limit_min  | number | 单次最小提币数量   |
-| fee                 | string | 提币手续费数量     |
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | int  | Status code |
+| message  | string  |  Misdescription (If there has ) |
+| currency  | string  | Crypto currency |
+| full_name  | string  | Crypto currency name |
+| chain  | string  | Block chain name |
+| precision  | string  | Currency precision |
+| is_withdraw_enabled  | string  | Withdrawable  or not |
+| is_deposit_enabled  | string  | Deposit or not  |
+| deposit_minConfirm   | number   | Minimum confirmation of blocks |
+| withdraw_limit_max   | number   | Maximum withdraw amount in each request |
+| withdraw_limit_min  | number   | Minimum withdraw amount in each request  |
+| fee  | string   | Withdraw fee |
 
-注意：
-隐藏币种及下架币种不显示；
+Note: 
+the hidden currencies and off shelve currencies does not display; 
 
-# 账户信息
 
-## 账户余额
+# Account Information
 
-> 响应示例
+## Balance
+
+> Resposne example
 
 ```json
 {
@@ -737,9 +720,22 @@ None
 }
 ```
 
-- **GET** ```/open/api/v2/account/info```## 获取账户可接口交易的交易对
+- **GET** ```/open/api/v2/account/info```
 
-> 响应示例
+Request parameters：None
+
+Response：
+
+Balance information of each currency
+
+| Field | Data type | Description |
+|-----|-----|-----|
+|frozen|string|frozen balance|
+|available|string|available balance|
+
+## Obtain the trading pairs of the accounts that can trade through the API
+
+> Response example
 
 ```json
 {
@@ -758,59 +754,33 @@ None
 }
 ```
 
-获取账户可API交易的交易对，私有接口。
+Obtain the transaction pairs where the API transactions and private endpoint are enabled by the account. 
 
-- **GET** ```/open/api/v2/market/api_symbols```
+- **POST** ```/open/api/v2/market/api_symbols```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**请求参数:**
+**Request Parameters:**
 
 None
 
-**响应参数:**
+**Response Parameters:**
 
-| 参数名  | 类型    | 说明             |
-| ------- | ------- | ---------------- |
-| code    | integer | 状态码           |
-| message | string  | 错误描述（如有） |
-| <data>  | array   |                  |
-| symbol  | string  | 交易对           |
-| </data> |         |                  |
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code | integer | Status code | 
+| message | string | Misdescription (If there has )） | 
+| <data> | array |  | 
+| symbol  | string  | symbol name |
+| </data> |  |  | 
 
+# Spot Trading
 
+## Place Order
 
-参数：None
-
-响应：
-
-币种对应的冻结余额和可用余额
-
-| 参数名    | 数据类型 | 说明     |
-| --------- | -------- | -------- |
-| frozen    | string   | 冻结余额 |
-| available | string   | 可用余额 |
-
-# 现货交易
-
-## 下单
-
-
-> 请求示例
-
-```json
-{
-    "order_type": "LIMIT_ORDER",
-    "price": "0.00846945",
-    "quantity": "1",
-    "symbol": "RACA_USDT",
-    "trade_type": "ASK"
-}
-```
-
-> 响应示例
+> Response example
 
 ```json
 {
@@ -821,31 +791,30 @@ None
 
 - **POST** ```/open/api/v2/order/place```
 
-参数：
+Request parameters：
 
-| 参数名          | 数据类型 | 是否必须 | 说明       | 取值范围                                    |
-| --------------- | -------- | -------- | ---------- | ------------------------------------------- |
-| symbol          | string   | 是       | 交易对名称 |                                             |
-| price           | string   | 是       | 交易价格   |                                             |
-| quantity        | string   | 是       | 交易量     |                                             |
-| trade_type      | string   | 是       | 交易类型   | BID，ASK                                    |
-| order_type      | string   | 是       | 订单类型   | LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL |
-| client_order_id | string   | 否       | 客户订单id | 最大长度32位字符                            |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|price|string|Y|price| |
+|quantity|string|Y|quantity| |
+|trade_type|string|Y|trade type|BID，ASK|
+|order_type|string|Y|order type|LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL|
+|client_order_id|string|N|client order id|With maximum length of 32 characters|
 
 <aside class="notice">
-用户需要维护client order id的唯一性
+It's the user's responsibility to maintain the uniqueness of the client order id
 </aside>
 
-响应：
+Response：
 
-| 参数名 | 数据类型 | 说明   |
-| ------ | -------- | ------ |
-| data   | string   | 订单id |
+| Field | Data type | Description |
+|-----|-----|-----|
+|data|string|new order id|
 
+## Cancel Order
 
-## 撤销订单
-
-> 响应示例
+> Response example
 
 ```json
 {
@@ -858,56 +827,33 @@ None
 
 - **DELETE** ```/open/api/v2/order/cancel```
 
-参数：
+Request parameters：
 
-| 参数名           | 数据类型 | 是否必须 | 说明                                                               |
-| ---------------- | -------- | -------- | ------------------------------------------------------------------ |
-| order_ids        | string   | 否       | 订单号，支持批量撤单，各订单号以逗号分隔。最大批量操作数目为20     |
-| client_order_ids | string   | 否       | 客户订单id，支持批量撤单，各订单号以逗号分隔。最大批量操作数目为20 |
+| Parameter | Data type | Mandatory | Description |
+|-----|-----|-----|-----|
+|order_ids|string|N|order id. Cancel in batch is supported, the ids should be separated by comma. The maximum order count in a batch is 20|
+|client_order_ids|string|N|Client order id of orders to be canceled. Cancel in batch is supported, the ids should be separated by comma. The maximum order count in a batch is 20|
 
 
-响应：
+Response：
 
-| 参数名 | 数据类型 | 说明                 |
-| ------ | -------- | -------------------- |
-| data   | map      | 订单号及对应操作结果 |
+| Field | Data type | Description |
+|-----|-----|-----|
+|data|map|order id and the relevant processing result|
 
 <aside class="notice">
-请求参数为order_ids与client_order_ids二选一，两者都提供时，将忽略client_order_ids
+Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the client_order_ids will be ignored
 </aside>
 
 <aside class="notice">
-请求返回表示服务端接收到了对应订单的撤单请求，并不表示已经撤单完成
+When client recieves response from server, it only means the cancelling request has been accepted, doesn't mean the cancellation is finished
 </aside>
 
-## 批量下单
+## Place Order In Batch
 
-> 请求示例
+> Response example
 
-```json
-[
-    {
-        "order_type": "LIMIT_ORDER",
-        "price": "40000",
-        "quantity": "0.0002",
-        "symbol": "BTC_USDT",
-        "trade_type": "BID",
-        "client_order_id":  9588234
-    },
-    {
-        "order_type": "LIMIT_ORDER",
-        "price": "0.00846945",
-        "quantity": "1",
-        "symbol": "RACA_USDT",
-        "trade_type": "ASK"
-    }
-]
-```
-
-
-> 响应示例
-
-> 在有client_order_id输入的情况下响应为
+> response when requesting with client_order_id
 
 ```json
 {
@@ -920,7 +866,7 @@ None
 }
 ```
 
-> 没有client_order_id输入则返回
+> response when requesting without client_order_id
 
 ```json
 {
@@ -935,34 +881,34 @@ None
 
 - **POST** ```/open/api/v2/order/place_batch```
 
-参数：
+Request parameters：
 
-| 参数名          | 数据类型 | 是否必须 | 说明       | 取值范围                                    |
-| --------------- | -------- | -------- | ---------- | ------------------------------------------- |
-| symbol          | string   | 是       | 交易对名称 |                                             |
-| price           | string   | 是       | 交易价格   |                                             |
-| quantity        | string   | 是       | 交易量     |                                             |
-| trade_type      | string   | 是       | 交易类型   | BID，ASK                                    |
-| order_type      | string   | 是       | 订单类型   | LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL |
-| client_order_id | string   | 否       | 客户订单id | 最大长度32位字符                            |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|price|string|Y|price| |
+|quantity|string|Y|quantity of the order| |
+|trade_type|string|Y|trade type|BID，ASK|
+|order_type|string|Y|order type|LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL|
+|client_order_id|string|N|client order id|With maximum length of 32 characters|
 
-响应：
+Response：
 
-| 参数名 | 数据类型 | 说明                                              |
-| ------ | -------- | ------------------------------------------------- |
-| data   | map      | 客户订单id(client_order_id)及对应订单号(order_id) |
+| Field | Data type | Description |
+|-----|-----|-----|
+|data|map|client order id and the corresponding new order id|
 
 <aside class="notice">
-用户需要维护client order id的唯一性
+It's the user's responsibility to maintain the uniqueness of the client order id
 </aside>
 
 <aside class="notice">
-对于同一次批量下单的操作，参数中的订单元素需要统一客户订单id行为，不能有些元素带有客户订单id另一些元素不带
+For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
 </aside>
 
-## 当前挂单
+## Open Orders
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -985,35 +931,35 @@ None
 
 - **GET** ```/open/api/v2/order/open_orders```
 
-参数：
+Request parameters：
 
-| 参数名     | 数据类型 | 是否必须 | 说明       | 取值范围         |
-| ---------- | -------- | -------- | ---------- | ---------------- |
-| symbol     | string   | 是       | 交易对名称 |                  |
-| start_time | string   | 否       | 起始时间   |                  |
-| limit      | string   | 否       | 返回条数   | 1~1000，默认值50 |
-| trade_type | string   | 否       | 交易类型   | BID，ASK         |
-
-
-响应：
-
-| 参数名          | 数据类型 | 说明       |
-| --------------- | -------- | ---------- |
-| symbol          | string   | 交易对名称 |
-| id              | string   | 订单id     |
-| price           | string   | 挂单价格   |
-| quantity        | string   | 挂单数量   |
-| remain_quantity | string   | 剩余数量   |
-| remain_amount   | string   | 剩余金额   |
-| create_time     | string   | 下单时间   |
-| state           | string   | 订单状态   |
-| type            | string   | 订单类型   |
-| client_order_id | string   | 客户订单id |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|start_time|string|N|start time| |
+|limit|string|N|number of records to be returned| 1~1000，default to 50 |
+|trade_type|string|N|order type| BID，ASK |
 
 
-## 所有订单
+Response：
 
-> 响应示例
+| Field | Data type | Description |
+|-----|-----|-----|
+|symbol|string|symbol name|
+|id|string|order id|
+|price|string|order price|
+|quantity|string|order quantity|
+|remain_quantity|string|remaining quantity|
+|remain_amount|string|remaining volume|
+|create_time|string|order create time|
+|state|string|order state|
+|type|string|order type|
+|client_order_id|string|client order id|
+
+
+## All Orders
+
+> Response example
 
 ```json
 {
@@ -1047,35 +993,36 @@ None
 
 - **GET** ```/open/api/v2/order/list```
 
-参数：
+Request parameters：
 
-| 参数名     | 数据类型 | 是否必须 | 说明         | 取值范围                                                                                                |
-| ---------- | -------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------- |
-| symbol     | string   | 是       | 交易对名称   |                                                                                                         |
-| start_time | string   | 否       | 起始时间     | 默认查询最近7天，最多查询30天                                                                           |
-| limit      | string   | 否       | 返回条数     | 1~1000，默认值50                                                                                        |
-| trade_type | string   | 是       | 交易类型     | BID，ASK                                                                                                |
-| states     | string   | 是       | 查询订单状态 | NEW：未成交；FILLED：已成交；PARTIALLY_FILLED：部分成交；CANCELED：已撤单；PARTIALLY_CANCELED：部分撤单 |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|start_time|string|N|start time| the default is the last 7 days, and the maximum query is 30 days. |
+|limit|string|N|number of records to be returned| 1~1000，default to 50|
+|trade_type|string|Y|order type| BID，ASK |
+|states|string|Y|state to be quired| NEW：Unfilled ；FILLED：Filled；PARTIALLY_FILLED：Partially filled；CANCELED：Canceled；PARTIALLY_CANCELED：Partially canceled |
 
 
-响应：
+Response：
 
-| 参数名          | 数据类型 | 说明       |
-| --------------- | -------- | ---------- |
-| symbol          | string   | 交易对名称 |
-| id              | string   | 订单id     |
-| price           | string   | 挂单价格   |
-| quantity        | string   | 挂单数量   |
-| deal_quantity   | string   | 成交数量   |
-| deal_amount     | string   | 成交金额   |
-| create_time     | string   | 下单时间   |
-| state           | string   | 订单状态   |
-| type            | string   | 订单类型   |
-| client_order_id | string   | 客户订单id |
+| Field | Data type | Description |
+|-----|-----|-----|
+|symbol|string|symbol name|
+|id|string|order id|
+|price|string|order price|
+|quantity|string|order quantity|
+|deal_quantity|string|deal quantity|
+|deal_amount|string|volume|
+|create_time|string|order create time|
+|state|string|order state|
+|type|string|order type|
+|client_order_id|string|client order id|
 
-## 查询订单
 
-> 响应示例
+## Query Orders
+
+> Response example
 
 ```json
 {
@@ -1109,31 +1056,31 @@ None
 
 - **GET** ```/open/api/v2/order/query```
 
-参数：
+Request parameters：
 
-| 参数名    | 数据类型 | 是否必须 | 说明                                       | 取值范围 |
-| --------- | -------- | -------- | ------------------------------------------ | -------- |
-| order_ids | string   | 是       | 订单号，支持批量操作。最大批量操作数目为20 |          |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|order_ids|string|Y|order id, batch process is supported. There can be 20 ids in one batch at most| |
 
-响应：
+Response：
 
-| 参数名          | 数据类型 | 说明       |
-| --------------- | -------- | ---------- |
-| symbol          | string   | 交易对名称 |
-| id              | string   | 订单id     |
-| price           | string   | 挂单价格   |
-| quantity        | string   | 挂单数量   |
-| deal_quantity   | string   | 成交数量   |
-| deal_amount     | string   | 成交金额   |
-| create_time     | string   | 下单时间   |
-| state           | string   | 订单状态   |
-| type            | string   | 订单类型   |
-| client_order_id | string   | 客户订单id |
+| Field | Data type | Description |
+|-----|-----|-----|
+|symbol|string|symbol name|
+|id|string|order id|
+|price|string|order price|
+|quantity|string|order quantity|
+|deal_quantity|string|deal quantity|
+|deal_amount|string|volume|
+|create_time|string|order create time|
+|state|string|order state|
+|type|string|order type|
+|client_order_id|string|client order id|
 
 
-## 个人成交记录
+## Deals History
 
-> 响应示例
+> Response example
 
 ```json
 {
@@ -1157,34 +1104,34 @@ None
 
 - **GET** ```/open/api/v2/order/deals```
 
-参数：
+Request parameters：
 
-| 参数名     | 数据类型 | 是否必须 | 说明         | 取值范围         |
-| ---------- | -------- | -------- | ------------ | ---------------- |
-| symbol     | string   | 是       | 交易对名称   |                  |
-| limit      | string   | 否       | 返回条数     | 1~1000，默认值50 |
-| start_time | string   | 否       | 查询起始时间 |                  |
-
-
-响应：
-
-| 参数名       | 数据类型 | 说明                      |
-| ------------ | -------- | ------------------------- |
-| symbol       | string   | 交易对                    |
-| order_id     | string   | 订单id                    |
-| trade_type   | string   | 交易类型                  |
-| quantity     | string   | 成交数量                  |
-| price        | string   | 成交价格                  |
-| amount       | string   | 成交金额                  |
-| fee          | string   | 成交手续费                |
-| fee_currency | string   | 手续费币种                |
-| is_taker     | bool     | 订单在成交中是否为taker单 |
-| create_time  | long     | 成交时间                  |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|-----|
+|symbol|string|Y|symbol name| |
+|limit|string|N|number of records to be returned| 1~1000，default to 50|
+|start_time|string|N|start time| |
 
 
-## 成交明细
+Response：
 
-> 响应示例
+| Field | Data type | Description |
+|-----|-----|-----|
+|symbol|string|symbol name|
+|order_id|string|order id|
+|trade_type|string|trade type|
+|quantity|string|deal quantity|
+|price|string|deal price|
+|amount|string|volume|
+|fee|string|deal fee|
+|fee_currency|string|fee currency|
+|is_taker|bool|taker order or not|
+|create_time|long|deal time|
+
+
+## Deals Detail
+
+> Response example
 
 ```json
 {
@@ -1208,29 +1155,30 @@ None
 
 - **GET** ```/open/api/v2/order/deal_detail```
 
-参数：
+Request parameters：
 
-| 参数名   | 数据类型 | 是否必须 | 说明 |
-| -------- | -------- | -------- | ---- |
-| order_id | string   | 是       |      |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|
+|order_id|string|Y||
 
-响应：
+Response：
 
-| 参数名       | 数据类型 | 说明                      |
-| ------------ | -------- | ------------------------- |
-| symbol       | string   | 交易对                    |
-| order_id     | string   | 订单id                    |
-| trade_type   | string   | 交易类型                  |
-| quantity     | string   | 成交数量                  |
-| price        | string   | 成交价格                  |
-| amount       | string   | 成交金额                  |
-| fee          | string   | 成交手续费                |
-| fee_currency | string   | 手续费币种                |
-| is_taker     | bool     | 订单在成交中是否为taker单 |
-| create_time  | long     | 成交时间                  |
-## 按交易对撤销订单
+| Field | Data type | Description |
+|-----|-----|-----|
+|symbol|string|Symbol name|
+|order_id|string|order id|
+|trade_type|string|trade type|
+|quantity|string|deal quantity|
+|price|string|deal price|
+|amount|string|volume|
+|fee|string|deal fee|
+|fee_currency|string|fee currency|
+|is_taker|bool|taker order or not|
+|create_time|long|deal time|
 
-> 响应示例
+## Cancel Orders By Symbol
+
+> Response example
 
 ```json
 {
@@ -1255,428 +1203,416 @@ None
 
 - **DELETE** ```/open/api/v2/order/cancel_by_symbol```
 
-参数：
+Request parameters：
 
-| 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围 |
-| ------ | -------- | -------- | ---------- | -------- |
-| symbol | string   | 是       | 交易对名称 |          |
+| Parameter | Data type | Mandatory | Description | Allowed range |
+| ---------- | ------------ | ------------ | -------- | ----- |
+| symbol     | string       | Y | symbol name   | |
 
-响应：
+Response：
 
-| 参数名 | 数据类型 | 说明                 |
-| ------ | -------- | -------------------- |
-| data   | map      | 订单号及对应操作结果 |
+| Field | Data type | Description |
+| ---------- | ------------ | -------------------- |
+|data|map|order id and the relevant processing result|
 
 <aside class="notice">
-若订单存在对应的client_order_id，则响应参数会返回client_order_id
+Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the client_order_ids will be ignored
 </aside>
 
 <aside class="notice">
-请求返回表示服务端接收到了对应订单的撤单请求，并不表示已经撤单完成
+When client recieves response from server, it only means the cancelling request has been accepted, doesn't mean the cancellation is finished
 </aside>
-## 订单查询(单订单状态查询)
+
+## Order query (single order status query)
 
 - **GET** ```/open/api/v2/order/single_state/list```
 
-参数：
+Parameters:
 
-| 参数名     | 数据类型 | 是否必须 | 说明       | 取值范围                                                                                                |
-| ---------- | -------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------- |
-| symbol     | string   | 是       | 交易对名称 |                                                                                                         |
-| start_time | string   | 否       | 起始时间   |                                                                                                         |
-| limit      | string   | 否       | 返回条数   | 1~1000，默认值50                                                                                        |
-| trade_type | string   | 否       | 交易类型   | BID，ASK                                                                                                |
-| states     | string   | 是       | 订单状态   | NEW：未成交；FILLED：已成交；PARTIALLY_FILLED：部分成交；CANCELED：已撤单；PARTIALLY_CANCELED：部分撤单 |
+| Parameter | Data Type | Mandatory | Description | Range ｜
+|-----|-----|-----|-----|-----|
+|symbol|string|True |Trading pair| |
+|start_time|string|False |Start time| |
+|limit|string|False |Return content | 1~1000，Default 50|
+|trade_type|string|False |Trading Status | BID，ASK |
+|states|string|True |Order Status | NEW：Unfilled ；FILLED：Filled；PARTIALLY_FILLED：Partially filled；CANCELED：Canceled；PARTIALLY_CANCELED：Partially canceled |
 
-响应：
+Response:
 
-| 参数名          | 数据类型 | 说明       |
-| --------------- | -------- | ---------- |
-| symbol          | string   | 交易对名称 |
-| id              | string   | 订单id     |
-| price           | string   | 挂单价格   |
-| quantity        | string   | 挂单数量   |
-| deal_quantity   | string   | 成交数量   |
-| deal_amount     | string   | 成交金额   |
-| create_time     | string   | 下单时间   |
-| state           | string   | 订单状态   |
-| type            | string   | 订单类型   |
-| client_order_id | string   | 客户订单id |
+| Parameter | Data Type | Description |
+|-----|-----|-----|
+|symbol|string|Trading pair |
+|id|string|Order id|
+|price|string|Order price|
+|quantity|string|Order amount|
+|deal_quantity|string|Filled amount|
+|deal_amount|string|Filled total amount of money |
+|create_time|string|Order time|
+|state|string|Order Status |
+|type|string|Order type|
+|client_order_id|string|Client order id|
 
+# Asset
 
-# 资产
+Only the endpoint handling the reading of deposit and withdrawal information is open currently, the withdrawal endpoint will be made available soon (Please contact the online customer service if you wish to access it now).
 
-> 响应示例
+## Get Deposit Address
 
-```json
-{
-    "code": 200,
-    "data": {
-        "currency": "USDT",
-        "chains": [
-            {
-                "chain": "SOL",
-                "address": "xxxxxxxxx"
-            }
-        ]
-    }
-}
-```
-
-当前仅开放读取充提信息相关接口，后续会开放提现接口（仍需开通可联系在线客服）。
-
-## 获取充币地址
-
-此节点用于查询特定币种在其所在区块链中的充币地址，母子用户均可用。
+This endpoint is used to query the address of a specific currency in its block chain, which is available for both parent-account and  sub-account .
 
 - **GET** ```/open/api/v2/asset/deposit/address/list```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币读
+**API Permission:** Read
 
-**请求参数:**
+**Request Parameters:**
 
-| 参数名   | 类型   | 是否必填 | 说明 |
-| -------- | ------ | -------- | ---- |
-| currency | string | ture     | 币种 |
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency  | string  |  true  | Crypto currency |
 
-**响应参数:**
+**Response Parameters:**
 
-| 参数名   | 类型   | 说明             |
-| -------- | ------ | ---------------- |
-| code     | int    | 状态码           |
-| message  | string | 错误描述（如有） |
-| currency | string | 币种             |
-| chain    | string | 链名称           |
-| address  | string | 充币地址         |
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | int  | Status code |
+| message  | string  | Misdescription (If there has )） |
+| currency  | string  | Crypto currency |
+| chain  | string  | Block chain name |
+| address  | string   | Deposit address |
 
-注意：
-1、私有接口，需要签名认证；
-2、只返回已生成的地址；
+Note:
+ 1, Signature certification is required for the private endpoint ;
+ 2. Only return the generated address;
 
-## 充值记录查询
+## Query Deposit Records
 
 - **GET** ```/open/api/v2/asset/deposit/list```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币读
+**API Permission:** Read
 
-**请求参数:**
-       
-| 参数名     | 类型   | 是否必填 | 说明                                |
-| ---------- | ------ | -------- | ----------------------------------- |
-| currency   | string | false    | 币种                                |
-| state      | string | false    | 状态                                |
-| start_time | long   | false    | 开始时间，单位ms，默认只查询最近1天 |
-| end_time   | long   | false    | 结束时间，单位ms                    |
-| page_num   | number | false    | 页数，默认1                         |
-| page_size  | number | false    | 条数，默认20，最大50                |
+**Request Parameters:**
 
-**响应参数:**
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency  | string  | false  | Crypto currency |
+| state  | string  | false  | Status  |
+| start_time  | long  | false  | The start time, unit:ms, defult:1 day. |
+| end_time  | long  | false  | The ending time, unit:ms |
+| page_num  | number  | false  | Number of pages, default 1 |
+| page_size  | number  | false  | Size of pages, default 20, maximum 50 |
 
-| 参数名                | 类型    | 说明             |
-| --------------------- | ------- | ---------------- |
-| code                  | integer | 状态码           |
-| message               | string  | 错误描述（如有） |
-| currency              | string  | 币种             |
-| actual_amount         | number  | 到账数量         |
-| address               | string  | 充值地址         |
-| amount                | number  | 充值数量         |
-| confirmations         | number  | 区块确认数       |
-| require_confirmations | number  | 最小区块确认数   |
-| create_time           | number  | 发起提现时间     |
-| explorer_url          | string  | 区块浏览器地址   |
-| fee                   | string  | 手续费           |
-| member_id             | string  | 用户ID           |
-| state                 | string  | 状态             |
-| txid                  | string  | 交易hash         |
-| update_time           | string  | 更新时间         |
-| wallet_type           | string  | 钱包类型         |
-| current_page          | number  | 当前页           |
-| current_result        | number  | 当前页条数       |
-| total_result          | int     | 总条数           |
-| total_page            | int     | 总页数           |
+**Response Parameters:**
 
-注意：通过单次查询可检索的范围最大为10天，通过多次平移窗口查询，最多可检索到过往180天的记录。
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | integer  | Status code |
+| message  | string  | Misdescription (If there has ) |
+| currency  | string  | Crypto currency |
+| actual_amount  | number  | The actual received  amount |
+| address  | string  | Deposit  address |
+| amount  | number  | Deposit  amount |
+| confirmations  | number  | Confirmation of blocks |
+| require_confirmations  | number  | Minimum confirmation of blocks |
+| create_time  | number  | Initiate withdraw time |
+| explorer_url  | string  | Block browser address |
+| fee   | string  | Fee |
+| member_id   | string  | UserID |
+| state  | string  | Status |
+| txid  | string  | Trading hash |
+| update_time  | string  | Update time |
+| wallet_type  | string  | The wallet type |
+| current_page  | number  | The current page |
+| current_result  | number  | Size of the current page |
+| total_result  | number  | The total size |
+| total_page  | number  | The total pages |
 
+Note: A single query can retrieve a maximum range of 10 days, and maximum retrieve records is the last 180 days.
 
-## 提币地址列表查询
+## Query Withdraw Address List
 
 - **GET** ```/open/api/v2/asset/address/list```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币读
+**API Permission:**Read
 
-**请求参数:**
-       
-| 参数名    | 类型   | 是否必填 | 说明                 |
-| --------- | ------ | -------- | -------------------- |
-| currency  | string | false    | 币种                 |
-| page_num  | number | false    | 页数，默认1          |
-| page_size | number | false    | 条数，默认20，最大50 |
+**Request Parameters:**
 
-**响应参数:**
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency  | string  | false  | Crypto currency |
+| page_num  | number  | false  | Number of pages, default 1 |
+| page_size  | number  | false  | Size of pages, default 20, maximum 50 |
 
-| 参数名         | 类型    | 说明             |
-| -------------- | ------- | ---------------- |
-| code           | integer | 状态码           |
-| message        | string  | 错误描述（如有） |
-| currency       | string  | 币种             |
-| chain          | string  | 链名称           |
-| address        | string  | 地址             |
-| address_tab    | string  | 地址标签         |
-| current_page   | number  | 当前页           |
-| current_result | number  | 当前页条数       |
-| total_result   | int     | 总条数           |
-| total_page     | int     | 总页数           |
+**Response Parameters:**
 
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | integer  | Status code |
+| message  | string  | Misdescription (If there has )） |
+| chain  | string  | Block chain name |
+| currency  | string  |Crypto currency |
+| address  | string  | Address  |
+| address_tab  | string  | Address tags | 
+| current_page  | number  | The current page |
+| current_result  | number  | Size of the current page |
+| total_result  | number  | The total size |
+| total_page  | number  | The total pages |
 
-## 提现记录查询
+## Query Withdraw Records
 
 - **GET** ```/open/api/v2/asset/withdraw/list```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币读
+**API Permission:**Read
 
-**请求参数:**
-       
-| 参数名      | 类型   | 是否必填 | 说明                                |
-| ----------- | ------ | -------- | ----------------------------------- |
-| currency    | string | false    | 币种                                |
-| withdraw_id | string | false    | 提现ID                              |
-| state       | string | false    | 状态                                |
-| start_time  | long   | false    | 开始时间，单位ms，默认只查询最近1天 |
-| end_time    | long   | false    | 结束时间，单位ms                    |
-| page_num    | number | false    | 页数，默认1                         |
-| page_size   | number | false    | 条数，默认20，最大50                |
+**Request Parameters:**
 
-**响应参数:**
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency  | string  | false  | Crypto currency |
+| withdraw_id  | string  | false  | Withdraw ID |
+| state  | string  | false  | Status |
+| start_time  | long  | false  | The start time, unit:ms, defult:1 day. |
+| end_time  | long  | false  | The ending time, unit:ms |
+| page_num  | number  | false  | Number of pages, default 1 |
+| page_size  | number  | false  | Size of pages, default 20, maximum 50 |
 
-| 参数名       | 类型    | 说明             |
-| ------------ | ------- | ---------------- |
-| code         | integer | 状态码           |
-| msg          | string  | 错误描述（如有） |
-| result_list  | object  |                  |
-| currency     | string  | 币种             |
-| amount       | number  | 提现数量         |
-| create_time  | number  | 发起提现时间     |
-| explorer_url | string  | 区块浏览器地址   |
-| fee          | string  | 手续费           |
-| id           | string  | 提现ID           |
-| remark       | string  | 提现备注         |
-| state        | string  | 状态             |
-| tx_id        | string  | 交易hash         |
-| update_time  | string  | 更新时间         |
-| page_num     | number  | 当前页           |
-| page_size    | number  | 当前页条数       |
-| total_size   | int     | 总条数           |
-| total_page   | int     | 总页数           |
+**Response Parameters:**
 
-注意：通过单次查询可检索的范围最大为10天，通过多次平移窗口查询，最多可检索到过往180天的记录。
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | integer  | Status code |
+| msg | string  | Misdescription (If there has ) |
+| currency  | string  | Crypto currency |
+| actual_amount  | number  | The actual received amount |
+| actual_fee  | number  | Withdraw fee |
+| amount  | number  | Withdraw amount |
+| create_time  | number  | Initiate withdraw time |
+| explorer_url  | string  | Block browser address |
+| fee   | string  | Fee |
+| id  | string  | Withdraw ID |
+| member_id   | string  | UserID |
+| remark  | string  | Withdraw notes  |
+| state  | string  | Status |
+| txid  | string  | Trading hash |
+| update_time  | string  | Update time |
+| wallet_type  | string  | The wallet type |
+| current_page  | number  | The current page |
+| current_result  | number  | Size of the current page |
+| total_result  | number  | The total size |
+| total_page  | number  | The total pages |
 
-## 提币
+Note: A single query can retrieve a maximum range of 10 days, and maximum retrieve records is the last 180 days.
+
+## Withdraw
 
 - **POST** ```/open/api/v2/asset/withdraw```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币写
+**API Permission:** Write 
 
-**请求参数:**
+**Request Parameters:**
 
-| 参数名   | 类型   | 是否必填 | 说明                                                                                                                                                                                                                                                     |
-| -------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency | string | true     | 币种                                                                                                                                                                                                                                                     |
-| chain    | string | false    | 链名称，取值参考GET /open/api/v2/market/coin/list(币种信息查询) ，多链时必填（例如提USDT至OMNI时须设置此参数为"OMNI"，提USDT至TRX时须设置此参数为"TRC-20"，提USDT至ERC20时须设置此参数为"ERC-20"），非多链时无须设置此参数，具体取值参考币种信息查询接口 |
-| amount   | number | true     | 提现数量                                                                                                                                                                                                                                                 |
-| address  | string | true     | 提现地址                                                                                                                                                                                                                                                 |
-| remark   | string | false    | 备注                                                                                                                                                                                                                                                     |
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency  | string  | true  | Crypto currency |
+| chain | string  | false  | Chain name, reference the GET/open/API/v2 / market/coin/list (Get currency information), multiple chain required (such as withdraw  USDT to OMNI must set this parameter to "OMNI",  withdraw  USDT to TRX must set this parameter to  "TRC - 20", withdraw  USDT to ERC20 must set this parameter to  "ERC - 20"), do not need to set this parameter if there is single chain, when the more details reference to the endpoint of  “Get currency information”. |
+| amount  | number  | true  | Withdraw amount  |
+| address | string  | true  | withdraw address  |
+| remark  | string  | false  | Note |
 
-**响应参数:**
 
-| 参数名     | 类型   | 说明             |
-| ---------- | ------ | ---------------- |
-| code       | number | 状态码           |
-| msg        | string | 错误描述（如有） |
-| data       | object |                  |
-| withdrawId | string | 提现ID           |
+**Response Parameters:**
 
-## 取消提币
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | number  | Status code  |
+| msg | string  | Misdescription (If there has ) |
+| data  | object  |  |
+| withdrawId  | string  | Withdraw ID |
+
+## Cancel a withdraw request
 
 - **DELETE** ```/open/api/v2/asset/withdraw```
 
 <aside>
-限速规则: 20次/2秒
+Rate Limit : 20times/2s
 </aside>
 
-**需要权限:** 提币写
+**API Permission:** Write
 
-**请求参数:**
+**Request Parameters:**
 
-| 参数名      | 类型   | 是否必填 | 说明   |
-| ----------- | ------ | -------- | ------ |
-| withdraw_id | string | true     | 提币ID |
+| Parameter  | Data Type   | Mandatory  |  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| withdraw_id  | string  | true  | Withdraw ID |
 
-**响应参数:**
+**Response Parameters:**
 
-| 参数名 | 类型   | 说明             |
-| ------ | ------ | ---------------- |
-| code   | number | 状态码           |
-| msg    | string | 错误描述（如有） |
+| Parameter  | Data Type | Description  |
+| ------------ | ------------ | ------------ |
+| code  | number  | Status code |
+| msg | string  | Misdescription (If there has ) |
 
-## 内部资金划转 
+## Internal assets transfer
 
-支持母账号币币账户与合约账户间划转。 
+Support the transfer between Spot and Contract accounts in parent-account.
 
-支持子账号币币账户与合约账户间划转。 
+Support the transfer between Spot and Contract accounts in sub-account.
 
-- **POST** ```/open/api/v2/asset/internal/transfer``` 
+- **POST** ```/open/api/v2/asset/internal/transfer```
 
-<aside> 
-限速规则: 2 次/1 秒 
-</aside> 
+<aside>
+Rate Limit : 2 times/s
+</aside>
 
-**需要权限:** 划转写 
+**API Permission:** Write
 
-**请求参数:** 
+**Request Parameters:**
 
-| 参数名   | 类型   | 是否必填 | 说明                                       |
-| -------- | ------ | -------- | ------------------------------------------ |
-| currency | string | true     | 币种，如 usdt                              |
-| amount   | number | true     | 划转数量                                   |
-| from     | string | true     | 出账账户，币币账户 MAIN，合约账户 CONTRACT |
-| to       | string | true     | 入账账户，币币账户 MAIN，合约账户 CONTRACT |
+| Parameter | Data Type | Mandatory  | Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency | string | true | Currency，Ex. usdt|
+| amount | number | true | Transfer amount |
+| from | string | true | Transfer-out account，spot account MAIN，Contract account CONTRACT|
+| to | string | true | Transfer-in account，spot account MAIN，futures account CONTRACT|
 
-**响应参数:** 
+**Response Parameters:**
 
-| 参数名         | 类型   | 说明             |
-| -------------- | ------ | ---------------- |
-| code           | number | 状态码           |
-| msg            | string | 错误描述（如有） |
-| result_list    | object |                  |
-| transact_id    | string | 划转交易 id      |
-| currency       | string | 币种             |
-| amount         | string | 金额             |
-| from           | string | 出账账户         |
-| to             | string | 入账账户         |
-| transact_state | string | 交易状态         |
+| Parameter | Data Type | Description |
+| ------------ | ------------ | ------------ |
+| code | number  | Status code |
+| msg | string | Error message (if any) |
+| result_list | object |  | 
+| transact_id | string | Transfer id |
+| currency | string | Currency  |
+| amount | string | Amount  |
+| from | string | Transfer-out account |
+| to | string | Transfer-in account |
+| transact_state | string | Transaction status |
 
-备注： 
 
-1. 当前暂未开放逐仓杠杆账户。 
+Note：
 
-2. 提交成功不代表划转成功，可通过划转订单查询接口查询是否划转成功。
+1.Transfer is not available for isolated-margin account. 
 
-## 内部资金划转记录 
+2. Successful submission does not mean successful transfer. You can check whether the transfer is successful through the transfer order query endpoint. 
 
-支持查询内部资金划转记录，且通过单次查询可检索的范围最大为 10 天，通过多次平移窗口查询，最多可检索到过往 180 天的记录。 
+## Get internal assets transfer records
 
-- **GET** ```/open/api/v2/asset/internal/transfer/record``` 
+It supports the query of internal asset transfer records, and up to 10 days through a single query, and records of the past 180 days can be inquired.
 
-<aside> 
-限速规则: 2 次/1 秒 
-</aside> 
+- **GET** ```/open/api/v2/asset/internal/transfer/record```
 
-**需要权限:** 划转读 
+<aside>
+Rate Limit : 2 times/s
+</aside>
 
-**请求参数:** 
+**API Permission:** Read
 
-| 参数名     | 类型   | 是否必填 | 说明                                                   |
-| ---------- | ------ | -------- | ------------------------------------------------------ |
-| currency   | string | false    | 币种 （缺省值所有币种）                                |
-| from       | string | false    | 出账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有 |
-| to         | string | false    | 入账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有 |
-| start_time | long   | false    | 开始时间                                               |
-| end_time   | long   | false    | 结束时间                                               |
-| page_num   | number | false    | 页数，默认 1                                           |
-| page_size  | number | false    | 条数，默认 20，最大 50                                 |
+**Request Parameters:**
 
-**响应参数:**
+| Parameter | Data Type | Mandatory  | Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency | string | false | Currency  （Return all currencies without filling）|(delete space)
+| from | string | false | Transfer-out account ，spot account 、isolated-margin account 、futures account ，return all without filling |
+| to | string | false | Transfer-in account，spot account, isolated-margin account, futures account，return all without filling |
+| start_time | long | false | Start time|
+| end_time | long | false | End time
+| page_num | number | false | default 1 |
+| page_size | number | false | Page size，default 20, maximum 50 |
 
-| 参数名         | 类型    | 说明                                            |
-| -------------- | ------- | ----------------------------------------------- |
-| code           | integer | 状态码                                          |
-| msg            | string  | 错误描述（如有）                                |
-| currency       | string  | 币种                                            |
-| amount         | string  | 金额                                            |
-| from           | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户      |
-| to             | string  | 入账账户，币币账户、逐仓杠杆账户、合约账户      |
-| transact_state | string  | 划转状态 成功 SUCCESS、失败 FAILED、划转中 WAIT |
-| transact_id    | string  | 划转交易 id                                     |
-| total_size     | int     | 总条数                                          |
-| total_page     | int     | 总页数                                          |
+**Response Parameters:**
 
-## 获取可划转资金 
+| Parameter | Data Type | Description |
+| code | number  | Status code |
+| msg | string | Error message (if any) |
+| currency | string | Currency  |
+| amount | string| Amount  |
+| from | string | Transfer-out account，spot account, isolated-margin account, contract account |
+| to | string | Transfer-in account ，spot account、isolated-margin account、futures account  |
+| transact_state | string | Transfer status  Success SUCCESS、Fail  FAILED、Transferring WAIT|
+| transact_id | string | Transfer id |
+| total_size | int | The total size |
+| total_page | int | The total pages |
 
-此接口可获取指定账户和币种下的可划转的资金。 
+## Get transferable assets
 
-- **GET** ```/open/api/v2/account/balance``` 
+This endpoint can obtain transferable assets in a specified account and currency.
 
-<aside> 
-限速规则: 2 次/1 秒 
-</aside> 
+- **GET** ```/open/api/v2/account/balance```
 
-**需要权限:** 划转读 
+<aside>
+Rate Limit : 2 times/s
+</aside>
 
-**请求参数:** 
+**API Permission:** Read
 
-| 参数名       | 类型   | 是否必填 | 说明                                 |
-| ------------ | ------ | -------- | ------------------------------------ |
-| currency     | string | true     | 币种                                 |
-| account_type | string | false    | 账户类型：所有、币币、合约，默认币币 |
-| sub_uid      | long   | false    | 子账号 uid，传了则 type 无效         |
+**Request Parameters:**
 
-**响应参数:** 
+| Parameter | Data Type | Mandatory  | Description |
+| ------------ | ------------ | ------------ | ------------ |
+| currency | string | true | Currency  |
+| account_type | string | false |  Account type：All、spot account 、futures account ，default spot account  |
+| sub_uid | long | false | Sub- account uid，type is invalid with any filling|
 
-| 参数名       | 类型   | 说明             |
-| ------------ | ------ | ---------------- |
-| code         | number | 状态码           |
-| msg          | string | 错误描述（如有） |
-| data         | object |                  |
-| account_type | string | 账户类型         |
-| currency     | string | 币种             |
-| balance      | string | 资金总额         |
-| available    | string | 可用资金         |
-| frozen       | string | 冻结资金         |
+**Response Parameters:**
 
-## 内部资金划转订单查询 
+| Parameter | Data Type | Description |
+| ------------ | ------------ | ------------ |
+| code  | number  | Status code  |
+| msg | string  | Misdescription (If there has ) |
+| data  | object  |  |
+| account_type| string | Account  type |
+| currency | string | Currency  |
+| balance | string | Asset amount  |
+| available | string | Available asset |
+| frozen| string | Frozen asset |
 
-通过划转交易 id 查询，内部资金划转订单详情。 
+## Internal assets transfer order inquiry
 
-- **GET** ```/open/api/v2/asset/internal/transfer/info``` 
+Through transfer ID query internal asset transfer order details.
 
-<aside> 
-限速规则: 2 次/1 秒 
-</aside> 
+- **GET** ```/open/api/v2/asset/internal/transfer/info```
 
-**需要权限:** 划转读 
+<aside>
+Rate Limit : 2 times/s
+</aside>
 
-**请求参数:** 
+**API Permission:** Read
 
-| 参数名      | 类型   | 是否必填 | 说明        |
-| ----------- | ------ | -------- | ----------- |
-| transact_id | String | ture     | 划转交易 id |
+**Request Parameters:**
 
-**响应参数:** 
+| Parameter | Data Type | Mandatory  | Description |
+| ------------ | ------------ | ------------ | ------------ |
+| transact_id | String| ture | Transfer id |
 
-| 参数名      | 类型    | 说明                                       |
-| ----------- | ------- | ------------------------------------------ |
-| code        | integer | 状态码                                     |
-| msg         | string  | 错误描述（如有）                           |
-| transact_id | string  | 划转交易 id                                |
-| currency    | string  | 币种                                       |  | amount | String | 划转数量 |
-| from        | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户 |
+**Response Parameters:**
+
+| Parameter | Data Type | Description |
+| ------------ | ------------ | ------------ |
+| code | number  | Status code |
+| msg | string | Error message (if any) |
+| transact_id | string | Transfer id |
+| currency | String | Currency  |
+| amount | String | Transfer amount  |
+| from | string | Transfer-out account ，spot account 、isolated-margin account 、futures account  |
+| to | string | Transfer-in account ，spot account 、isolated-margin account 、futures account  |
+| transact_state | string | Transfer status  Success 、Fail  、Transferring |
