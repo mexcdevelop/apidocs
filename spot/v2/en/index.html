@@ -1,0 +1,3859 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="description"
+            content="Documentation for the mexc global API"
+        >
+    <title>API 文档</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-89aa6cae.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-b12a2749.js"></script>
+
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <header>
+      <div class="flex_box">
+        <img src="images/mexc-logo.svg" class="logo" alt="" />
+        <div class="nav_box">
+          <span class="nav_cell" style="display: none">
+            <a href="javascript:;" class="nav_first">v1<i class="icon_nav"></i></a>
+            <ul class="nav_ul">
+              <li>
+                <a href="/docs/spot/v1/en/" id="v1_url">v1</a>
+              </li>
+            </ul>
+          </span>
+          <span class="nav_cell nav_tab">
+            <a href="/docs/spot/v2/cn/" id="btn_spot">现货</a>
+          </span>
+          <span class="nav_cell nav_tab">
+            <a href="/docs/contract/v1/cn/" id="btn_dm">合约</a>
+          </span>
+        </div>
+      </div>
+      <a href="/docs/spot/v1/cn/" class="lang" id="lang_box">简体中文</a>
+    </header>
+    <div class="toc-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#what-is-api" class="toc-h2 toc-link" data-title="What is API？">What is API？</a>
+                  </li>
+                  <li>
+                    <a href="#instructions" class="toc-h2 toc-link" data-title="Instructions">Instructions</a>
+                  </li>
+                  <li>
+                    <a href="#interface-type-rest-api" class="toc-h2 toc-link" data-title="Interface type REST API">Interface type REST API</a>
+                  </li>
+                  <li>
+                    <a href="#api-v1-or-api-v2" class="toc-h2 toc-link" data-title="API V1 or API V2">API V1 or API V2</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change log">Change log</a>
+          </li>
+          <li>
+            <a href="#integration-guide" class="toc-h1 toc-link" data-title="Integration guide">Integration guide</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#access-urls" class="toc-h2 toc-link" data-title="Access URLs">Access URLs</a>
+                  </li>
+                  <li>
+                    <a href="#request-format" class="toc-h2 toc-link" data-title="Request Format">Request Format</a>
+                  </li>
+                  <li>
+                    <a href="#response-format" class="toc-h2 toc-link" data-title="Response Format">Response Format</a>
+                  </li>
+                  <li>
+                    <a href="#signature" class="toc-h2 toc-link" data-title="Signature">Signature</a>
+                  </li>
+                  <li>
+                    <a href="#time-security" class="toc-h2 toc-link" data-title="Time Security">Time Security</a>
+                  </li>
+                  <li>
+                    <a href="#signature-parameters" class="toc-h2 toc-link" data-title="Signature Parameters">Signature Parameters</a>
+                  </li>
+                  <li>
+                    <a href="#creating-api-key" class="toc-h2 toc-link" data-title="Creating API key">Creating API key</a>
+                  </li>
+                  <li>
+                    <a href="#signature-method" class="toc-h2 toc-link" data-title="Signature Method">Signature Method</a>
+                  </li>
+                  <li>
+                    <a href="#error-code" class="toc-h2 toc-link" data-title="Error Code">Error Code</a>
+                  </li>
+                  <li>
+                    <a href="#rate-limit" class="toc-h2 toc-link" data-title="Rate Limit">Rate Limit</a>
+                  </li>
+                  <li>
+                    <a href="#enum-definition" class="toc-h2 toc-link" data-title="ENUM Definition">ENUM Definition</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#general-data" class="toc-h1 toc-link" data-title="General data">General data</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#all-symbols" class="toc-h2 toc-link" data-title="All symbols">All symbols</a>
+                  </li>
+                  <li>
+                    <a href="#rate-limit-info" class="toc-h2 toc-link" data-title="Rate Limit Info">Rate Limit Info</a>
+                  </li>
+                  <li>
+                    <a href="#current-system-time" class="toc-h2 toc-link" data-title="Current System Time">Current System Time</a>
+                  </li>
+                  <li>
+                    <a href="#ping" class="toc-h2 toc-link" data-title="Ping">Ping</a>
+                  </li>
+                  <li>
+                    <a href="#obtain-the-transaction-pairs-that-supports-api-transactions-on-the-platform" class="toc-h2 toc-link" data-title="Obtain the transaction pairs that supports API transactions on the platform.">Obtain the transaction pairs that supports API transactions on the platform.</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#market-data" class="toc-h1 toc-link" data-title="Market Data">Market Data</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#ticker-information" class="toc-h2 toc-link" data-title="Ticker Information">Ticker Information</a>
+                  </li>
+                  <li>
+                    <a href="#market-depth" class="toc-h2 toc-link" data-title="Market depth">Market depth</a>
+                  </li>
+                  <li>
+                    <a href="#latest-deals" class="toc-h2 toc-link" data-title="Latest Deals">Latest Deals</a>
+                  </li>
+                  <li>
+                    <a href="#candlestick-data" class="toc-h2 toc-link" data-title="Candlestick Data">Candlestick Data</a>
+                  </li>
+                  <li>
+                    <a href="#get-currency-information" class="toc-h2 toc-link" data-title="Get currency information">Get currency information</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#account-information" class="toc-h1 toc-link" data-title="Account Information">Account Information</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#balance" class="toc-h2 toc-link" data-title="Balance">Balance</a>
+                  </li>
+                  <li>
+                    <a href="#obtain-the-trading-pairs-of-the-accounts-that-can-trade-through-the-api" class="toc-h2 toc-link" data-title="Obtain the trading pairs of the accounts that can trade through the API">Obtain the trading pairs of the accounts that can trade through the API</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#spot-trading" class="toc-h1 toc-link" data-title="Spot Trading">Spot Trading</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#place-order" class="toc-h2 toc-link" data-title="Place Order">Place Order</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-order" class="toc-h2 toc-link" data-title="Cancel Order">Cancel Order</a>
+                  </li>
+                  <li>
+                    <a href="#place-order-in-batch" class="toc-h2 toc-link" data-title="Place Order In Batch">Place Order In Batch</a>
+                  </li>
+                  <li>
+                    <a href="#open-orders" class="toc-h2 toc-link" data-title="Open Orders">Open Orders</a>
+                  </li>
+                  <li>
+                    <a href="#all-orders" class="toc-h2 toc-link" data-title="All Orders">All Orders</a>
+                  </li>
+                  <li>
+                    <a href="#query-orders" class="toc-h2 toc-link" data-title="Query Orders">Query Orders</a>
+                  </li>
+                  <li>
+                    <a href="#deals-history" class="toc-h2 toc-link" data-title="Deals History">Deals History</a>
+                  </li>
+                  <li>
+                    <a href="#deals-detail" class="toc-h2 toc-link" data-title="Deals Detail">Deals Detail</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-orders-by-symbol" class="toc-h2 toc-link" data-title="Cancel Orders By Symbol">Cancel Orders By Symbol</a>
+                  </li>
+                  <li>
+                    <a href="#order-query-single-order-status-query" class="toc-h2 toc-link" data-title="Order query (single order status query)">Order query (single order status query)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#asset" class="toc-h1 toc-link" data-title="Asset">Asset</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-deposit-address" class="toc-h2 toc-link" data-title="Get Deposit Address">Get Deposit Address</a>
+                  </li>
+                  <li>
+                    <a href="#query-deposit-records" class="toc-h2 toc-link" data-title="Query Deposit Records">Query Deposit Records</a>
+                  </li>
+                  <li>
+                    <a href="#query-withdraw-address-list" class="toc-h2 toc-link" data-title="Query Withdraw Address List">Query Withdraw Address List</a>
+                  </li>
+                  <li>
+                    <a href="#query-withdraw-records" class="toc-h2 toc-link" data-title="Query Withdraw Records">Query Withdraw Records</a>
+                  </li>
+                  <li>
+                    <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-a-withdraw-request" class="toc-h2 toc-link" data-title="Cancel a withdraw request">Cancel a withdraw request</a>
+                  </li>
+                  <li>
+                    <a href="#internal-assets-transfer" class="toc-h2 toc-link" data-title="Internal assets transfer">Internal assets transfer</a>
+                  </li>
+                  <li>
+                    <a href="#get-internal-assets-transfer-records" class="toc-h2 toc-link" data-title="Get internal assets transfer records">Get internal assets transfer records</a>
+                  </li>
+                  <li>
+                    <a href="#get-transferable-assets" class="toc-h2 toc-link" data-title="Get transferable assets">Get transferable assets</a>
+                  </li>
+                  <li>
+                    <a href="#internal-assets-transfer-order-inquiry" class="toc-h2 toc-link" data-title="Internal assets transfer order inquiry">Internal assets transfer order inquiry</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to use MEXC API! This document provides you with REST API related information to help you obtain market information, manage account information, and conduct trading.</p>
+<h2 id='what-is-api'>What is API？</h2>
+<p>API is an Application Programming Interface, abbreviated as API, which is a settlement interface. It defines the interaction between multiple applications, the types of calls or requests that can be made, how to make calls or requests, the data format that should be used, the conventions that should be followed, etc. The API document describes how the application interacts with our exchange.</p>
+<h2 id='instructions'>Instructions</h2>
+<p>Step: if the developer needs to use the API, please first <a href="https://www.mexc.io/user/openapi" target="_blank">create APIKey</a> and then carry out the development of trading according to the details of this document. If you have any problems or suggestions in the process of using it, please let us know in time.</p>
+
+<ul>
+<li>Please refer to <a href="https://support.mxc-exchange.com/hc/en-001/articles/360055933652" target="_blank">this page</a> to set the API Key.</li>
+<li>When setting API key, it is recommended to set IP access whitelist for security.</li>
+<li>Never tell anyone your API key/secret.</li>
+</ul>
+<h2 id='interface-type-rest-api'>Interface type REST API</h2>
+<p>REST, the abbreviation of Representational State Transfer, is a popular communication mechanism based on HTTP. Its structure is clear, standard, easy to understand, easy to expand, and is being adopted by more and more websites. Its advantages are as follows:</p>
+
+<ul>
+<li>Each URL represents a resource in RESTful structure;</li>
+<li>Some presentation layer of the resource is passed between the client and the server;</li>
+<li>It is suggested that developers use Rest API for currency trading or asset withdrawal;</li>
+<li>The client uses four HTTP instructions to operate the server-side resources to achieve &quot;Representational State Transfer&quot;;</li>
+</ul>
+<h2 id='api-v1-or-api-v2'>API V1 or API V2</h2>
+<aside class="notice">
+API V1 will no longer be maintained starting from the end of June 2021. Please prepare in advance.
+</aside>
+
+<p>We recommend that all users build their applications on V2 of the API. Using V2 has the following advantages:</p>
+
+<ul>
+<li>Compared with API V1, the security and rationality of API V2 signature are better.</li>
+<li>Improved performance for particular endpoints / channels.</li>
+<li>Our official customer base provides a wider range of support.</li>
+</ul>
+<h1 id='change-log'>Change log</h1>
+<table><thead>
+<tr>
+<th>Effective Time（UTC+8)</th>
+<th>Interface</th>
+<th>Update Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2020-01-09</td>
+<td>*</td>
+<td>Add</td>
+<td>REST API V2 released</td>
+</tr>
+<tr>
+<td>2020-02-24</td>
+<td>/open/api/v2/order/place<br/>/open/api/v2/order/place_batch<br/>/open/api/v2/order/cancel</td>
+<td>Update</td>
+<td>Add support for client order id</td>
+</tr>
+<tr>
+<td>2020-07-20</td>
+<td>/open/api/v2/order/cancel_by_symbol</td>
+<td>Add</td>
+<td>New API for canceling orders</td>
+</tr>
+<tr>
+<td>2021-03-01</td>
+<td>/open/api/v2/order/list</td>
+<td>change</td>
+<td>Parameter states change to the mandatory than optional, and only single statu query supported; Parameter start_time default queries in last 7 days, maximum is 30 days; Fixed the situation of incorrect time about parameter start_time</td>
+</tr>
+<tr>
+<td>2021-08-27</td>
+<td>/open/api/v2/market/api_default_symbols</td>
+<td>Add</td>
+<td>The newly acquired platform supports the trading pair endpoint of API transactions; Cancel the display of signature method 2 and retain the signature method of the same futures.</td>
+</tr>
+</tbody></table>
+<h1 id='integration-guide'>Integration guide</h1><h2 id='access-urls'>Access URLs</h2>
+<p>Please make API requests with the following base urls:</p>
+
+<ul>
+<li><code>https://www.mexc.com</code></li>
+</ul>
+<h2 id='request-format'>Request Format</h2>
+<p>The APIs accept GET, POST or DELETE request, as will be described in later sections</p>
+
+<ul>
+<li>For a GET or DELETE reqeust, all parameters are path paremeters (query string)</li>
+<li>For a POST reqeust, business parameters are to be put in request body and of JSON format(with<code>content-type</code>set to<code>application/json</code>), they will not be used for signing of the request. To calculate signature, params <code>api_key</code>、<code>req_time</code>、<code>recv_window</code>(optional)、<code>sign</code> need to be sent as path parameter</li>
+</ul>
+<h2 id='response-format'>Response Format</h2>
+<p>Response is of JSON format for all APIs</p>
+<h2 id='signature'>Signature</h2>
+<p>Public APIs (for market data) and private APIs (for account and order operations) are provided.<br/><br/>Signature is not required for public APIs.<br/><br/>And for private APIs, signature is required and will be used for checking the validity of each request.<br/><br/>Please refer to <a href="#signature-method">Signature Method</a> for detail</p>
+<h2 id='time-security'>Time Security</h2><div class="highlight"><pre class="highlight plaintext"><code> if (req_time &gt; (server_time + 2 ) || req_time &lt; (server_time - recv_window)) {
+   // reject request     
+ }else{
+  // process request
+ }
+
+</code></pre></div>
+<p>Parameter <code>req_time</code> is required for each private API, After API server receives a request, timestamp validation will be conducted to make sure the requesting time from client is valid.</p>
+
+<p>The request is considered invalid if the received req_time is less or more than 10 seconds (the default value) (the time window can be adjusted by sending an optional header parameter <code>recv-window</code> with a maximum value of 60, <code>recv_window</code> of 30 seconds or more is not recommended)</p>
+<h2 id='signature-parameters'>Signature Parameters</h2>
+<p>Parameters related to request signature</p>
+
+<table><thead>
+<tr>
+<th>Components</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>param <code>api_key</code></td>
+<td>access key from API key</td>
+</tr>
+<tr>
+<td>param <code>req_time</code></td>
+<td>the timestamp when sending the request, string of 10 digits stands for the seconds since Unix epoch, for instance <code>1572537600</code></td>
+</tr>
+<tr>
+<td>param <code>sign</code></td>
+<td>calculated signature</td>
+</tr>
+<tr>
+<td>HTTP request method</td>
+<td>GET, POST or DELETE as described in later sections for each API</td>
+</tr>
+<tr>
+<td>URI</td>
+<td>URI of the API</td>
+</tr>
+<tr>
+<td>business parameters</td>
+<td>business parameters required by each API, only the business parameters of <code>GET</code> and <code>DELETE</code> requests will be included in the signature calulation</td>
+</tr>
+</tbody></table>
+<h2 id='creating-api-key'>Creating API key</h2>
+<p>API key can be created in the <code>User Center</code> of MEXC site. There are two parts of API key, <code>Access key</code> and <code>Secret key</code>，both of them will be used for calculating and validating a signature. Please grant appropriate permissions for the created API key, before using it. </p>
+
+<aside class="warning">
+Secret key will ONLY be displayed in the page when API key is generated, please make records accordingly
+</aside>
+<h2 id='signature-method'>Signature Method</h2>
+<blockquote>
+<p>java example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight java tab-java"><code><span class="cm">/**
+ * Gets the get request parameter string
+ *
+ * @param param get/delete Request parameters map
+ * @return
+ */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">getRequestParamString</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">param</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nc">MapUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">param</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="mi">1024</span><span class="o">);</span>
+    <span class="nc">SortedMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TreeMap</span><span class="o">&lt;&gt;(</span><span class="n">param</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">map</span><span class="o">.</span><span class="na">entrySet</span><span class="o">())</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+        <span class="nc">String</span> <span class="n">value</span> <span class="o">=</span> <span class="nc">StringUtils</span><span class="o">.</span><span class="na">isBlank</span><span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">())</span> <span class="o">?</span> <span class="s">""</span> <span class="o">:</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="sc">'='</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">urlEncode</span><span class="o">(</span><span class="n">value</span><span class="o">)).</span><span class="na">append</span><span class="o">(</span><span class="sc">'&amp;'</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="n">sb</span><span class="o">.</span><span class="na">deleteCharAt</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">urlEncode</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="s">"UTF-8"</span><span class="o">).</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"\\+"</span><span class="o">,</span> <span class="s">"%20"</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">UnsupportedEncodingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="s">"UTF-8 encoding not supported!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+ * signature
+ */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">sign</span><span class="o">(</span><span class="nc">SignVo</span> <span class="n">signVo</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">signVo</span><span class="o">.</span><span class="na">getRequestParam</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">signVo</span><span class="o">.</span><span class="na">setRequestParam</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">signVo</span><span class="o">.</span><span class="na">getAccessKey</span><span class="o">()</span> <span class="o">+</span> <span class="n">signVo</span><span class="o">.</span><span class="na">getReqTime</span><span class="o">()</span> <span class="o">+</span> <span class="n">signVo</span><span class="o">.</span><span class="na">getRequestParam</span><span class="o">();</span>
+    <span class="k">return</span> <span class="nf">actualSignature</span><span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="n">signVo</span><span class="o">.</span><span class="na">getSecretKey</span><span class="o">());</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">actualSignature</span><span class="o">(</span><span class="nc">String</span> <span class="n">inputStr</span><span class="o">,</span> <span class="nc">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Mac</span> <span class="n">hmacSha256</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">hmacSha256</span> <span class="o">=</span> <span class="nc">Mac</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"HmacSHA256"</span><span class="o">);</span>
+        <span class="nc">SecretKeySpec</span> <span class="n">secKey</span> <span class="o">=</span>
+                <span class="k">new</span> <span class="nf">SecretKeySpec</span><span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">),</span> <span class="s">"HmacSHA256"</span><span class="o">);</span>
+        <span class="n">hmacSha256</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">secKey</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">NoSuchAlgorithmException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"No such algorithm: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InvalidKeyException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"Invalid key: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kt">byte</span><span class="o">[]</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">hmacSha256</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">inputStr</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+    <span class="k">return</span> <span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="n">hash</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">SignVo</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">reqTime</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">accessKey</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">secretKey</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">requestParam</span><span class="o">;</span> <span class="c1">//get the request parameters are sorted in dictionary order, with &amp; concatenated strings, POST should be a JSON string</span>
+<span class="o">}</span>
+</code></pre></div>
+<ol>
+<li><p>Signature is not required for public endpoint.</p></li>
+<li><p>For private endpoint, ApiKey, Request-Time(Timestamp string displayed in milliseconds
+), Signature and Content-Type need to be passed into the header, must be specified as application / JSON, Recv-Window (optional) parameters, Signature is a signature string. The signature rules are as follows:</p>
+
+<p>1) When signing, you need to get the request parameter string first. It is &quot;&quot; if there is no parameter:</p>
+
+<p>For GET/DELETE requests, the service parameters are spliced in dictionary order with &amp; interval, and finally the signature target string is obtained (in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).</p>
+
+<p>For POST requests, the signature parameter is a JSON string (dictionary sorting is not required).</p>
+
+<p>2) After obtaining the parameter string, the signature target string is spliced. The rule is: accessKey + timestamp + obtained parameter string.</p>
+
+<p>3) The HMAC SHA256 algorithm is used to sign the target string, and finally the signature is passed into the header as a parameter.</p></li>
+</ol>
+
+<p>Note：</p>
+
+<p>1) When the service parameter participating in the signature is null, it does not participate in the signature. For the path parameter, it does not participate in the signature; note that when get request stitches the parameter and pass it in the URL, if the parameter is null, it will be parsed into &quot;&quot; in the background parsing, fixed post request, when the parameter is null, do not pass the parameter, or set the value of the parameter to &quot;&quot; when signing, otherwise signature verification will fail.</p>
+
+<p>2) When requesting, put the value of Request-Time used in signing into the Request-Time parameter of the header, put the obtained signature string into the signature parameter of the header, put the Access Key of APIKEY into the ApiKey parameter of the header, and pass the other service parameters.</p>
+
+<p>3) The obtained signature string does not need to be base64 encoded.</p>
+<h2 id='error-code'>Error Code</h2>
+<p>The following error information can be returend</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Invalid parameter</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Invalid signature, fail to pass the validation</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too many requests, rate limit rule is violated</td>
+</tr>
+<tr>
+<td>10072</td>
+<td>Invalid access key</td>
+</tr>
+<tr>
+<td>10073</td>
+<td>Invalid request time</td>
+</tr>
+<tr>
+<td>30000</td>
+<td>Trading is suspended for the requested symbol</td>
+</tr>
+<tr>
+<td>30001</td>
+<td>Current trading type (bid or ask) is not allowed</td>
+</tr>
+<tr>
+<td>30002</td>
+<td>Invalid trading amount, smaller than the symbol minimum trading amount</td>
+</tr>
+<tr>
+<td>30003</td>
+<td>Invalid trading amount, greater than the symbol maximum trading amount</td>
+</tr>
+<tr>
+<td>30004</td>
+<td>Insufficient balance</td>
+</tr>
+<tr>
+<td>30005</td>
+<td>Oversell error</td>
+</tr>
+<tr>
+<td>30010</td>
+<td>Price out of allowed range</td>
+</tr>
+<tr>
+<td>30016</td>
+<td>Market is closed</td>
+</tr>
+<tr>
+<td>30019</td>
+<td>Orders count over limit for batch processing</td>
+</tr>
+<tr>
+<td>30020</td>
+<td>Restricted symbol, API access is not allowed for the time being</td>
+</tr>
+<tr>
+<td>30021</td>
+<td>Invalid symbol</td>
+</tr>
+</tbody></table>
+<h2 id='rate-limit'>Rate Limit</h2>
+<p>There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests.</p>
+
+<p>The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.</p>
+
+<p>The default rate limiting rule for an endpoint is 20 times per second.</p>
+<h2 id='enum-definition'>ENUM Definition</h2><h3 id='order-state'>Order State</h3>
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>NEW</td>
+<td>New order, waiting to be filled</td>
+</tr>
+<tr>
+<td>FILLED</td>
+<td>Order fully filled</td>
+</tr>
+<tr>
+<td>PARTIALLY_FILLED</td>
+<td>Order partially filled</td>
+</tr>
+<tr>
+<td>CANCELED</td>
+<td>Order canceled</td>
+</tr>
+<tr>
+<td>PARTIALLY_CANCELED</td>
+<td>Order filled partially, and then the rest of the order is canceled</td>
+</tr>
+</tbody></table>
+<h3 id='order-type'>Order Type</h3>
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>LIMIT_ORDER</td>
+<td>Limit price order</td>
+</tr>
+<tr>
+<td>POST_ONLY</td>
+<td>Post only maker order</td>
+</tr>
+<tr>
+<td>IMMEDIATE_OR_CANCEL</td>
+<td>Immediate or cancel</td>
+</tr>
+</tbody></table>
+<h3 id='trade-type'>Trade Type</h3>
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>BID</td>
+<td>Buy</td>
+</tr>
+<tr>
+<td>ASK</td>
+<td>Sell</td>
+</tr>
+</tbody></table>
+<h3 id='time-interval'>Time Interval</h3>
+<p>m -&gt; minute; h -&gt; hour; d -&gt; day; M -&gt; month</p>
+
+<ul>
+<li>1m</li>
+<li>5m</li>
+<li>15m</li>
+<li>30m</li>
+<li>60m</li>
+<li>4h</li>
+<li>1M</li>
+</ul>
+<h1 id='general-data'>General data</h1><h2 id='all-symbols'>All symbols</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QTUM_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENABLED"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"price_scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity_scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"min_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"max_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maker_fee_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"taker_fee_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"limited"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"etf_mark"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol_partition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAIN"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/symbols</code></li>
+</ul>
+
+<p>Request parameters：None</p>
+
+<p>Response</p>
+
+<table><thead>
+<tr>
+<th>Feild</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>symbol status, whether available for trading</td>
+</tr>
+<tr>
+<td>price_scale</td>
+<td>integer</td>
+<td>price precision</td>
+</tr>
+<tr>
+<td>quantity_scale</td>
+<td>integer</td>
+<td>quantity precision</td>
+</tr>
+<tr>
+<td>min_amount</td>
+<td>string</td>
+<td>minimum amount</td>
+</tr>
+<tr>
+<td>max_amount</td>
+<td>string</td>
+<td>maximum amount</td>
+</tr>
+<tr>
+<td>maker_fee_rate</td>
+<td>string</td>
+<td>maker fee</td>
+</tr>
+<tr>
+<td>taker_fee_rate</td>
+<td>string</td>
+<td>taker fee</td>
+</tr>
+<tr>
+<td>limited</td>
+<td>string</td>
+<td>API trading enables marking (Valid values: true, false)</td>
+</tr>
+<tr>
+<td>etf_mark</td>
+<td>integer</td>
+<td>Etf identification, 0 represents not ETF, and positive and negative integers represent ETF</td>
+</tr>
+<tr>
+<td>symbol-partition</td>
+<td>string</td>
+<td>Trading areas, such as the Main</td>
+</tr>
+</tbody></table>
+<h2 id='rate-limit-info'>Rate Limit Info</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"request_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"/api/v2/market/symbols"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"/api/v2/market/depth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/common/rate_limit</code></li>
+</ul>
+
+<p>Request parameters：None</p>
+
+<p>Response</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>total_limit</td>
+<td>string</td>
+<td>Maximum request count per access key per second</td>
+</tr>
+<tr>
+<td>request_limit</td>
+<td>map</td>
+<td>Maximum request count per interface per access key per second</td>
+</tr>
+</tbody></table>
+<h2 id='current-system-time'>Current System Time</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573542414480</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/common/timestamp</code></li>
+</ul>
+
+<p>Request parameters：None</p>
+
+<p>Response</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>long</td>
+<td>System timestamp, milliseconds since Unix epoch</td>
+</tr>
+</tbody></table>
+<h2 id='ping'>Ping</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/common/ping</code></li>
+</ul>
+
+<p>Request parameters：None</p>
+
+<p>Response</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>int</td>
+<td>With response indicates server OK</td>
+</tr>
+</tbody></table>
+<h2 id='obtain-the-transaction-pairs-that-supports-api-transactions-on-the-platform'>Obtain the transaction pairs that supports API transactions on the platform.</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ALEPH_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"XFI_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ETH3S_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"OGN_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"HC_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"PAX_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"BNU_USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Obtain the transaction pairs that supports API transactions on the platform.</p>
+
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/api_default_symbols</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>Request Parameters:</strong></p>
+
+<p>None</p>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>integer</td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>Misdescription (If there has )）</td>
+</tr>
+<tr>
+<td><data></td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td></data></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id='market-data'>Market Data</h1><h2 id='ticker-information'>Ticker Information</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.0017985"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1983186"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574668200000</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"change_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00027307"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/ticker</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>string</td>
+<td>deal total amount of this period</td>
+</tr>
+<tr>
+<td>high</td>
+<td>string</td>
+<td>the highest price of this period</td>
+</tr>
+<tr>
+<td>low</td>
+<td>string</td>
+<td>the lowest price of this period</td>
+</tr>
+<tr>
+<td>bid</td>
+<td>string</td>
+<td>current highest bid price</td>
+</tr>
+<tr>
+<td>ask</td>
+<td>string</td>
+<td>current lowest ask price</td>
+</tr>
+<tr>
+<td>open</td>
+<td>string</td>
+<td>open price of this period</td>
+</tr>
+<tr>
+<td>last</td>
+<td>string</td>
+<td>the latest deal price</td>
+</tr>
+<tr>
+<td>time</td>
+<td>string</td>
+<td>timestamp of the latest quote</td>
+</tr>
+<tr>
+<td>change_rate</td>
+<td>string</td>
+<td>price change rate of this period</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The module is refreshed according to a 24-hour cycle.
+</aside>
+<h2 id='market-depth'>Market depth</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1683154"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128.5"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1983186"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101.6"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4417544"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"115.5"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4217568"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"135.7"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/depth</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>depth</td>
+<td>string</td>
+<td>Y</td>
+<td>number of depth to be returned</td>
+<td>1~2000</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bids</td>
+<td>object</td>
+<td>bids data, including the fields of price and quantity</td>
+</tr>
+<tr>
+<td>asks</td>
+<td>object</td>
+<td>asks data, including the fields of price and quantity</td>
+</tr>
+</tbody></table>
+<h2 id='latest-deals'>Latest Deals</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"trade_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573267931530</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1683154"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"trade_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573266717841</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1683154"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"trade_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573013871967</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1183105"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128.6"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/deals</code></li>
+</ul>
+
+<p>Request paramters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>integer</td>
+<td>N</td>
+<td>Number of records to be returned</td>
+<td>1~1000，default to 100</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>trade_time</td>
+<td>long</td>
+<td>deal time</td>
+</tr>
+<tr>
+<td>trade_price</td>
+<td>string</td>
+<td>deal price</td>
+</tr>
+<tr>
+<td>trade_quantity</td>
+<td>string</td>
+<td>volume</td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>trade type, BID or ASK</td>
+</tr>
+</tbody></table>
+<h2 id='candlestick-data'>Candlestick Data</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+            </span><span class="mi">1557728040</span><span class="p">,</span><span class="w">    </span><span class="err">//timestamp</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">seconds</span><span class="w">
+            </span><span class="s2">"7054.7"</span><span class="p">,</span><span class="w">      </span><span class="err">//open</span><span class="w">
+            </span><span class="s2">"7056.26"</span><span class="p">,</span><span class="w">     </span><span class="err">//close</span><span class="w">
+            </span><span class="s2">"7056.29"</span><span class="p">,</span><span class="w">     </span><span class="err">//high</span><span class="w">
+            </span><span class="s2">"7054.16"</span><span class="p">,</span><span class="w">     </span><span class="err">//low</span><span class="w">
+            </span><span class="s2">"9.817734"</span><span class="p">,</span><span class="w">    </span><span class="err">//vol</span><span class="w">
+            </span><span class="s2">"6926.521"</span><span class="w">     </span><span class="err">//amount</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+            </span><span class="mi">1557728100</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"7056.26"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"7042.17"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"7056.98"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"7042.16"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"23.69423"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"1677.931"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/kline</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>interval</td>
+<td>string</td>
+<td>Y</td>
+<td>inteval</td>
+<td>of minutes: 1m, 5m, 15m, 30m, 60m. of hour: 4h, of day: 1d, of month: 1M</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>long</td>
+<td>N</td>
+<td>start time, string of 10 digits stands for the seconds since Unix epoch</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>integer</td>
+<td>N</td>
+<td>number of records to be returned</td>
+<td>1~1000，default to 100</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>time</td>
+<td>start time, string of 10 digits stands for seconds since Unit epoch</td>
+</tr>
+<tr>
+<td>open</td>
+<td>opening price</td>
+</tr>
+<tr>
+<td>close</td>
+<td>closing price</td>
+</tr>
+<tr>
+<td>high</td>
+<td>highest price</td>
+</tr>
+<tr>
+<td>low</td>
+<td>lowest price</td>
+</tr>
+<tr>
+<td>vol</td>
+<td>volume</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>trading volume in the pricing currency</td>
+</tr>
+</tbody></table>
+<h2 id='get-currency-information'>Get currency information</h2>
+<p>This endpoint returns a list of currency details.</p>
+
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/market/coin/list</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong> Read(for public )</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>  false </td>
+<td>Crypto currency</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>int </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>message </td>
+<td>string </td>
+<td>  Misdescription (If there has )</td>
+</tr>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>full_name </td>
+<td>string </td>
+<td>Crypto currency name</td>
+</tr>
+<tr>
+<td>chain </td>
+<td>string </td>
+<td>Block chain name</td>
+</tr>
+<tr>
+<td>precision </td>
+<td>string </td>
+<td>Currency precision</td>
+</tr>
+<tr>
+<td>is_withdraw_enabled </td>
+<td>string </td>
+<td>Withdrawable  or not</td>
+</tr>
+<tr>
+<td>is_deposit_enabled </td>
+<td>string </td>
+<td>Deposit or not </td>
+</tr>
+<tr>
+<td>deposit_minConfirm  </td>
+<td>number  </td>
+<td>Minimum confirmation of blocks</td>
+</tr>
+<tr>
+<td>withdraw_limit_max  </td>
+<td>number  </td>
+<td>Maximum withdraw amount in each request</td>
+</tr>
+<tr>
+<td>withdraw_limit_min </td>
+<td>number  </td>
+<td>Minimum withdraw amount in each request </td>
+</tr>
+<tr>
+<td>fee </td>
+<td>string  </td>
+<td>Withdraw fee</td>
+</tr>
+</tbody></table>
+
+<p>Note: 
+the hidden currencies and off shelve currencies does not display; </p>
+<h1 id='account-information'>Account Information</h1><h2 id='balance'>Balance</h2>
+<blockquote>
+<p>Resposne example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"BTC"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"frozen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"140"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"ETH"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"frozen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8471.296525048"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"483280.9653659222035"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"USDT"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"frozen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.3629"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"MX"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"frozen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30.9863"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="s2">"450.0137"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/account/info</code></li>
+</ul>
+
+<p>Request parameters：None</p>
+
+<p>Response：</p>
+
+<p>Balance information of each currency</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>frozen</td>
+<td>string</td>
+<td>frozen balance</td>
+</tr>
+<tr>
+<td>available</td>
+<td>string</td>
+<td>available balance</td>
+</tr>
+</tbody></table>
+<h2 id='obtain-the-trading-pairs-of-the-accounts-that-can-trade-through-the-api'>Obtain the trading pairs of the accounts that can trade through the API</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ALEPH_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"XFI_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ETH3S_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"OGN_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"HC_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"PAX_USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"BNU_USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Obtain the transaction pairs where the API transactions and private endpoint are enabled by the account. </p>
+
+<ul>
+<li><strong>POST</strong> <code>/open/api/v2/market/api_symbols</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>Request Parameters:</strong></p>
+
+<p>None</p>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>integer</td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>Misdescription (If there has )）</td>
+</tr>
+<tr>
+<td><data></td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td></data></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id='spot-trading'>Spot Trading</h1><h2 id='place-order'>Place Order</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c8663a12a2fc457fbfdd55307b463495"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/open/api/v2/order/place</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>Y</td>
+<td>price</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>Y</td>
+<td>quantity</td>
+<td></td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>Y</td>
+<td>trade type</td>
+<td>BID，ASK</td>
+</tr>
+<tr>
+<td>order_type</td>
+<td>string</td>
+<td>Y</td>
+<td>order type</td>
+<td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>N</td>
+<td>client order id</td>
+<td>With maximum length of 32 characters</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+It's the user's responsibility to maintain the uniqueness of the client order id
+</aside>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>new order id</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-order'>Cancel Order</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"504feca6ba6349e39c82262caf0be3f4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>DELETE</strong> <code>/open/api/v2/order/cancel</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_ids</td>
+<td>string</td>
+<td>N</td>
+<td>order id. Cancel in batch is supported, the ids should be separated by comma. The maximum order count in a batch is 20</td>
+</tr>
+<tr>
+<td>client_order_ids</td>
+<td>string</td>
+<td>N</td>
+<td>Client order id of orders to be canceled. Cancel in batch is supported, the ids should be separated by comma. The maximum order count in a batch is 20</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>map</td>
+<td>order id and the relevant processing result</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the client_order_ids will be ignored
+</aside>
+
+<aside class="notice">
+When client recieves response from server, it only means the cancelling request has been accepted, doesn't mean the cancellation is finished
+</aside>
+<h2 id='place-order-in-batch'>Place Order In Batch</h2>
+<blockquote>
+<p>Response example</p>
+
+<p>response when requesting with client_order_id</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"1572936"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c8663a12a2fc457fbfdd55307b463495"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"1572937"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ec42569b4f4349f7aabe26f78b0f8bd2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"1572938"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70669675cac2414c90493be2dcfaf7e3"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>response when requesting without client_order_id</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"e3e1ee06916c462eb8cd0349ff9ab242"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"4d1f8c13f4cc40bcbfbac4da2a26d3a5"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/open/api/v2/order/place_batch</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>Y</td>
+<td>price</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>Y</td>
+<td>quantity of the order</td>
+<td></td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>Y</td>
+<td>trade type</td>
+<td>BID，ASK</td>
+</tr>
+<tr>
+<td>order_type</td>
+<td>string</td>
+<td>Y</td>
+<td>order type</td>
+<td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>N</td>
+<td>client order id</td>
+<td>With maximum length of 32 characters</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>map</td>
+<td>client order id and the corresponding new order id</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+It's the user's responsibility to maintain the uniqueness of the client order id
+</aside>
+
+<aside class="notice">
+For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
+</aside>
+<h2 id='open-orders'>Open Orders</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e5bb6963250146edb2f8677fcfcc97aa"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_ETH"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000907"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"remain_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"remain_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"272.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574338341797</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/order/open_orders</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>string</td>
+<td>N</td>
+<td>start time</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>string</td>
+<td>N</td>
+<td>number of records to be returned</td>
+<td>1~1000，default to 50</td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>N</td>
+<td>order type</td>
+<td>BID，ASK</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>order price</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>order quantity</td>
+</tr>
+<tr>
+<td>remain_quantity</td>
+<td>string</td>
+<td>remaining quantity</td>
+</tr>
+<tr>
+<td>remain_amount</td>
+<td>string</td>
+<td>remaining volume</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>string</td>
+<td>order create time</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>order state</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>order type</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>client order id</td>
+</tr>
+</tbody></table>
+<h2 id='all-orders'>All Orders</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70669675cac2414c90493be2dcfaf7e3"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_ETH"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000901"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573217964000</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ec42569b4f4349f7aabe26f78b0f8bd2"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_ETH"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000907"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573217963000</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/order/list</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>string</td>
+<td>N</td>
+<td>start time</td>
+<td>the default is the last 7 days, and the maximum query is 30 days.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>string</td>
+<td>N</td>
+<td>number of records to be returned</td>
+<td>1~1000，default to 50</td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>Y</td>
+<td>order type</td>
+<td>BID，ASK</td>
+</tr>
+<tr>
+<td>states</td>
+<td>string</td>
+<td>Y</td>
+<td>state to be quired</td>
+<td>NEW：Unfilled ；FILLED：Filled；PARTIALLY_FILLED：Partially filled；CANCELED：Canceled；PARTIALLY_CANCELED：Partially canceled</td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>order price</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>order quantity</td>
+</tr>
+<tr>
+<td>deal_quantity</td>
+<td>string</td>
+<td>deal quantity</td>
+</tr>
+<tr>
+<td>deal_amount</td>
+<td>string</td>
+<td>volume</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>string</td>
+<td>order create time</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>order state</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>order type</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>client order id</td>
+</tr>
+</tbody></table>
+<h2 id='query-orders'>Query Orders</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"504feca6ba6349e39c82262caf0be3f4"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_ETH"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000901"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573117266000</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72872b6ae721480ca4fe0f265d29dfee"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_ETH"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000907"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"deal_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1573117267000</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/order/query</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_ids</td>
+<td>string</td>
+<td>Y</td>
+<td>order id, batch process is supported. There can be 20 ids in one batch at most</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>order price</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>order quantity</td>
+</tr>
+<tr>
+<td>deal_quantity</td>
+<td>string</td>
+<td>deal quantity</td>
+</tr>
+<tr>
+<td>deal_amount</td>
+<td>string</td>
+<td>volume</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>string</td>
+<td>order create time</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>order state</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>order type</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>client order id</td>
+</tr>
+</tbody></table>
+<h2 id='deals-history'>Deals History</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39ea6b7afcf4f5cbba1e515210ff827"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.6317377"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9880.37700957"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.88037700957"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fee_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1572693911000</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/order/deals</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>string</td>
+<td>N</td>
+<td>number of records to be returned</td>
+<td>1~1000，default to 50</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>string</td>
+<td>N</td>
+<td>start time</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>symbol name</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>string</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>trade type</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>deal quantity</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>deal price</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>volume</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>string</td>
+<td>deal fee</td>
+</tr>
+<tr>
+<td>fee_currency</td>
+<td>string</td>
+<td>fee currency</td>
+</tr>
+<tr>
+<td>is_taker</td>
+<td>bool</td>
+<td>taker order or not</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>long</td>
+<td>deal time</td>
+</tr>
+</tbody></table>
+<h2 id='deals-detail'>Deals Detail</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39ea6b7afcf4f5cbba1e515210ff827"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.6317377"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9880.37700957"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.88037700957"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fee_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1572693911000</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/order/deal_detail</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<p>| Parameter | Data type | Mandatory | Description | Allowed range |
+|-----|-----|-----|-----|
+|order_id|string|Y||</p>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Symbol name</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>string</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>trade type</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>deal quantity</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>deal price</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>volume</td>
+</tr>
+<tr>
+<td>fee</td>
+<td>string</td>
+<td>deal fee</td>
+</tr>
+<tr>
+<td>fee_currency</td>
+<td>string</td>
+<td>fee currency</td>
+</tr>
+<tr>
+<td>is_taker</td>
+<td>bool</td>
+<td>taker order or not</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>long</td>
+<td>deal time</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-orders-by-symbol'>Cancel Orders By Symbol</h2>
+<blockquote>
+<p>Response example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75ecf99feef04538b78e4622beaba6eb"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"client_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a9329e86f2094b0d8b58e92c25029554"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"139413c48f8b4c018f452ce796586bcf"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b58ef34c570e4917981f276d44091484"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>DELETE</strong> <code>/open/api/v2/order/cancel_by_symbol</code></li>
+</ul>
+
+<p>Request parameters：</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Y</td>
+<td>symbol name</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>Response：</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>map</td>
+<td>order id and the relevant processing result</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the client_order_ids will be ignored
+</aside>
+
+<aside class="notice">
+When client recieves response from server, it only means the cancelling request has been accepted, doesn't mean the cancellation is finished
+</aside>
+<h2 id='order-query-single-order-status-query'>Order query (single order status query)</h2>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/order/single_state/list</code></li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Range ｜</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>True</td>
+<td>Trading pair</td>
+<td></td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>string</td>
+<td>False</td>
+<td>Start time</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>string</td>
+<td>False</td>
+<td>Return content</td>
+<td>1~1000，Default 50</td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>False</td>
+<td>Trading Status</td>
+<td>BID，ASK</td>
+</tr>
+<tr>
+<td>states</td>
+<td>string</td>
+<td>True</td>
+<td>Order Status</td>
+<td>NEW：Unfilled ；FILLED：Filled；PARTIALLY_FILLED：Partially filled；CANCELED：Canceled；PARTIALLY_CANCELED：Partially canceled</td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Order id</td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>Order price</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>Order amount</td>
+</tr>
+<tr>
+<td>deal_quantity</td>
+<td>string</td>
+<td>Filled amount</td>
+</tr>
+<tr>
+<td>deal_amount</td>
+<td>string</td>
+<td>Filled total amount of money</td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>string</td>
+<td>Order time</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>Client order id</td>
+</tr>
+</tbody></table>
+<h1 id='asset'>Asset</h1>
+<p>Only the endpoint handling the reading of deposit and withdrawal information is open currently, the withdrawal endpoint will be made available soon (Please contact the online customer service if you wish to access it now).</p>
+<h2 id='get-deposit-address'>Get Deposit Address</h2>
+<p>This endpoint is used to query the address of a specific currency in its block chain, which is available for both parent-account and  sub-account .</p>
+
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/asset/deposit/address/list</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong> Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>  true </td>
+<td>Crypto currency</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>int </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>message </td>
+<td>string </td>
+<td>Misdescription (If there has )）</td>
+</tr>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>chain </td>
+<td>string </td>
+<td>Block chain name</td>
+</tr>
+<tr>
+<td>address </td>
+<td>string  </td>
+<td>Deposit address</td>
+</tr>
+</tbody></table>
+
+<p>Note:
+ 1, Signature certification is required for the private endpoint ;
+ 2. Only return the generated address;</p>
+<h2 id='query-deposit-records'>Query Deposit Records</h2>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/asset/deposit/list</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong> Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>false </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>state </td>
+<td>string </td>
+<td>false </td>
+<td>Status </td>
+</tr>
+<tr>
+<td>start_time </td>
+<td>long </td>
+<td>false </td>
+<td>The start time, unit:ms, defult:1 day.</td>
+</tr>
+<tr>
+<td>end_time </td>
+<td>long </td>
+<td>false </td>
+<td>The ending time, unit:ms</td>
+</tr>
+<tr>
+<td>page_num </td>
+<td>number </td>
+<td>false </td>
+<td>Number of pages, default 1</td>
+</tr>
+<tr>
+<td>page_size </td>
+<td>number </td>
+<td>false </td>
+<td>Size of pages, default 20, maximum 50</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>integer </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>message </td>
+<td>string </td>
+<td> Misdescription (If there has )</td>
+</tr>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>actual_amount </td>
+<td>number </td>
+<td>The actual received  amount</td>
+</tr>
+<tr>
+<td>address </td>
+<td>string </td>
+<td>Deposit  address</td>
+</tr>
+<tr>
+<td>amount </td>
+<td>number </td>
+<td>Deposit  amount</td>
+</tr>
+<tr>
+<td>confirmations </td>
+<td>number </td>
+<td>Confirmation of blocks</td>
+</tr>
+<tr>
+<td>require_confirmations </td>
+<td>number </td>
+<td>Minimum confirmation of blocks</td>
+</tr>
+<tr>
+<td>create_time </td>
+<td>number </td>
+<td>Initiate withdraw time</td>
+</tr>
+<tr>
+<td>explorer_url </td>
+<td>string </td>
+<td>Block browser address</td>
+</tr>
+<tr>
+<td>fee  </td>
+<td>string </td>
+<td>Fee</td>
+</tr>
+<tr>
+<td>member_id  </td>
+<td>string </td>
+<td>UserID</td>
+</tr>
+<tr>
+<td>state </td>
+<td>string </td>
+<td>Status</td>
+</tr>
+<tr>
+<td>txid </td>
+<td>string </td>
+<td>Trading hash</td>
+</tr>
+<tr>
+<td>update_time </td>
+<td>string </td>
+<td>Update time</td>
+</tr>
+<tr>
+<td>wallet_type </td>
+<td>string </td>
+<td>The wallet type</td>
+</tr>
+<tr>
+<td>current_page </td>
+<td>number </td>
+<td>The current page</td>
+</tr>
+<tr>
+<td>current_result </td>
+<td>number </td>
+<td>Size of the current page</td>
+</tr>
+<tr>
+<td>total_result </td>
+<td>number </td>
+<td>The total size</td>
+</tr>
+<tr>
+<td>total_page </td>
+<td>number </td>
+<td>The total pages</td>
+</tr>
+</tbody></table>
+
+<p>Note: A single query can retrieve a maximum range of 10 days, and maximum retrieve records is the last 180 days.</p>
+<h2 id='query-withdraw-address-list'>Query Withdraw Address List</h2>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/asset/address/list</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong>Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>false </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>page_num </td>
+<td>number </td>
+<td>false </td>
+<td>Number of pages, default 1</td>
+</tr>
+<tr>
+<td>page_size </td>
+<td>number </td>
+<td>false </td>
+<td>Size of pages, default 20, maximum 50</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>integer </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>message </td>
+<td>string </td>
+<td> Misdescription (If there has )）</td>
+</tr>
+<tr>
+<td>chain</td>
+<td>string</td>
+<td>Block chain name</td>
+</tr>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>address </td>
+<td>string </td>
+<td>Address </td>
+</tr>
+<tr>
+<td>address_tab </td>
+<td>string </td>
+<td>Address tags</td>
+</tr>
+<tr>
+<td>current_page </td>
+<td>number </td>
+<td>The current page</td>
+</tr>
+<tr>
+<td>current_result </td>
+<td>number </td>
+<td>Size of the current page</td>
+</tr>
+<tr>
+<td>total_result </td>
+<td>number </td>
+<td>The total size</td>
+</tr>
+<tr>
+<td>total_page </td>
+<td>number </td>
+<td>The total pages</td>
+</tr>
+</tbody></table>
+<h2 id='query-withdraw-records'>Query Withdraw Records</h2>
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/asset/withdraw/list</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong>Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>false </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>withdraw_id </td>
+<td>string </td>
+<td>false </td>
+<td>Withdraw ID</td>
+</tr>
+<tr>
+<td>state </td>
+<td>string </td>
+<td>false </td>
+<td>Status</td>
+</tr>
+<tr>
+<td>start_time </td>
+<td>long </td>
+<td>false </td>
+<td>The start time, unit:ms, defult:1 day.</td>
+</tr>
+<tr>
+<td>end_time </td>
+<td>long </td>
+<td>false </td>
+<td>The ending time, unit:ms</td>
+</tr>
+<tr>
+<td>page_num </td>
+<td>number </td>
+<td>false </td>
+<td>Number of pages, default 1</td>
+</tr>
+<tr>
+<td>page_size </td>
+<td>number </td>
+<td>false </td>
+<td>Size of pages, default 20, maximum 50</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>integer </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string </td>
+<td> Misdescription (If there has )</td>
+</tr>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>actual_amount </td>
+<td>number </td>
+<td>The actual received amount</td>
+</tr>
+<tr>
+<td>actual_fee </td>
+<td>number </td>
+<td>Withdraw fee</td>
+</tr>
+<tr>
+<td>amount </td>
+<td>number </td>
+<td>Withdraw amount</td>
+</tr>
+<tr>
+<td>create_time </td>
+<td>number </td>
+<td>Initiate withdraw time</td>
+</tr>
+<tr>
+<td>explorer_url </td>
+<td>string </td>
+<td>Block browser address</td>
+</tr>
+<tr>
+<td>fee  </td>
+<td>string </td>
+<td>Fee</td>
+</tr>
+<tr>
+<td>id </td>
+<td>string </td>
+<td>Withdraw ID</td>
+</tr>
+<tr>
+<td>member_id  </td>
+<td>string </td>
+<td>UserID</td>
+</tr>
+<tr>
+<td>remark </td>
+<td>string </td>
+<td>Withdraw notes </td>
+</tr>
+<tr>
+<td>state </td>
+<td>string </td>
+<td>Status</td>
+</tr>
+<tr>
+<td>txid </td>
+<td>string </td>
+<td>Trading hash</td>
+</tr>
+<tr>
+<td>update_time </td>
+<td>string </td>
+<td>Update time</td>
+</tr>
+<tr>
+<td>wallet_type </td>
+<td>string </td>
+<td>The wallet type</td>
+</tr>
+<tr>
+<td>current_page </td>
+<td>number </td>
+<td>The current page</td>
+</tr>
+<tr>
+<td>current_result </td>
+<td>number </td>
+<td>Size of the current page</td>
+</tr>
+<tr>
+<td>total_result </td>
+<td>number </td>
+<td>The total size</td>
+</tr>
+<tr>
+<td>total_page </td>
+<td>number </td>
+<td>The total pages</td>
+</tr>
+</tbody></table>
+
+<p>Note: A single query can retrieve a maximum range of 10 days, and maximum retrieve records is the last 180 days.</p>
+<h2 id='withdraw'>Withdraw</h2>
+<ul>
+<li><strong>POST</strong> <code>/open/api/v2/asset/withdraw</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong> Write </p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency </td>
+<td>string </td>
+<td>true </td>
+<td>Crypto currency</td>
+</tr>
+<tr>
+<td>chain</td>
+<td>string </td>
+<td>false </td>
+<td>Chain name, reference the GET/open/API/v2 / market/coin/list (Get currency information), multiple chain required (such as withdraw  USDT to OMNI must set this parameter to &quot;OMNI&quot;,  withdraw  USDT to TRX must set this parameter to  &quot;TRC - 20&quot;, withdraw  USDT to ERC20 must set this parameter to  &quot;ERC - 20&quot;), do not need to set this parameter if there is single chain, when the more details reference to the endpoint of  “Get currency information”.</td>
+</tr>
+<tr>
+<td>amount </td>
+<td>number </td>
+<td>true </td>
+<td>Withdraw amount </td>
+</tr>
+<tr>
+<td>address</td>
+<td>string </td>
+<td>true </td>
+<td>withdraw address </td>
+</tr>
+<tr>
+<td>remark  </td>
+<td>string  </td>
+<td>false  </td>
+<td>Note</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>number </td>
+<td>Status code </td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string </td>
+<td>Misdescription (If there has )</td>
+</tr>
+<tr>
+<td>data  </td>
+<td>object  </td>
+<td> </td>
+</tr>
+<tr>
+<td>withdrawId </td>
+<td>string </td>
+<td>Withdraw ID</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-a-withdraw-request'>Cancel a withdraw request</h2>
+<ul>
+<li><strong>DELETE</strong> <code>/open/api/v2/asset/withdraw</code></li>
+</ul>
+
+<aside>
+Rate Limit : 20times/2s
+</aside>
+
+<p><strong>API Permission:</strong> Write</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type  </th>
+<th>Mandatory </th>
+<th>  Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>withdraw_id </td>
+<td>string </td>
+<td>true </td>
+<td>Withdraw ID</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter </th>
+<th>Data Type</th>
+<th>Description </th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>number </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string </td>
+<td>Misdescription (If there has )</td>
+</tr>
+</tbody></table>
+<h2 id='internal-assets-transfer'>Internal assets transfer</h2>
+<p>Support the transfer between Spot and Contract accounts in parent-account.</p>
+
+<p>Support the transfer between Spot and Contract accounts in sub-account.</p>
+
+<ul>
+<li><strong>POST</strong> <code>/open/api/v2/asset/internal/transfer</code></li>
+</ul>
+
+<aside>
+Rate Limit : 2 times/s
+</aside>
+
+<p><strong>API Permission:</strong> Write</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory </th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>true</td>
+<td>Currency，Ex. usdt</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>number</td>
+<td>true</td>
+<td>Transfer amount</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>true</td>
+<td>Transfer-out account，spot account MAIN，Contract account CONTRACT</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>true</td>
+<td>Transfer-in account，spot account MAIN，futures account CONTRACT</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Error message (if any)</td>
+</tr>
+<tr>
+<td>result_list</td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td>transact_id</td>
+<td>string</td>
+<td>Transfer id</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Currency </td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>Amount </td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>Transfer-out account</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>Transfer-in account</td>
+</tr>
+<tr>
+<td>transact_state</td>
+<td>string</td>
+<td>Transaction status</td>
+</tr>
+</tbody></table>
+
+<p>Note：</p>
+
+<p>1.Transfer is not available for isolated-margin account. </p>
+
+<ol>
+<li>Successful submission does not mean successful transfer. You can check whether the transfer is successful through the transfer order query endpoint. </li>
+</ol>
+<h2 id='get-internal-assets-transfer-records'>Get internal assets transfer records</h2>
+<p>It supports the query of internal asset transfer records, and up to 10 days through a single query, and records of the past 180 days can be inquired.</p>
+
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/asset/internal/transfer/record</code></li>
+</ul>
+
+<aside>
+Rate Limit : 2 times/s
+</aside>
+
+<p><strong>API Permission:</strong> Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory </th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>false</td>
+<td>Currency  （Return all currencies without filling）</td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>false</td>
+<td>Transfer-out account ，spot account 、isolated-margin account 、futures account ，return all without filling</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>false</td>
+<td>Transfer-in account，spot account, isolated-margin account, futures account，return all without filling</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>long</td>
+<td>false</td>
+<td>Start time</td>
+</tr>
+<tr>
+<td>end_time</td>
+<td>long</td>
+<td>false</td>
+<td>End time</td>
+</tr>
+<tr>
+<td>page_num</td>
+<td>number</td>
+<td>false</td>
+<td>default 1</td>
+</tr>
+<tr>
+<td>page_size</td>
+<td>number</td>
+<td>false</td>
+<td>Page size，default 20, maximum 50</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<p>| Parameter | Data Type | Description |
+| code | number  | Status code |
+| msg | string | Error message (if any) |
+| currency | string | Currency  |
+| amount | string| Amount  |
+| from | string | Transfer-out account，spot account, isolated-margin account, contract account |
+| to | string | Transfer-in account ，spot account、isolated-margin account、futures account  |
+| transact_state | string | Transfer status  Success SUCCESS、Fail  FAILED、Transferring WAIT|
+| transact_id | string | Transfer id |
+| total_size | int | The total size |
+| total_page | int | The total pages |</p>
+<h2 id='get-transferable-assets'>Get transferable assets</h2>
+<p>This endpoint can obtain transferable assets in a specified account and currency.</p>
+
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/account/balance</code></li>
+</ul>
+
+<aside>
+Rate Limit : 2 times/s
+</aside>
+
+<p><strong>API Permission:</strong> Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory </th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>true</td>
+<td>Currency </td>
+</tr>
+<tr>
+<td>account_type</td>
+<td>string</td>
+<td>false</td>
+<td>Account type：All、spot account 、futures account ，default spot account </td>
+</tr>
+<tr>
+<td>sub_uid</td>
+<td>long</td>
+<td>false</td>
+<td>Sub- account uid，type is invalid with any filling</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code </td>
+<td>number </td>
+<td>Status code </td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string </td>
+<td>Misdescription (If there has )</td>
+</tr>
+<tr>
+<td>data  </td>
+<td>object  </td>
+<td> </td>
+</tr>
+<tr>
+<td>account_type</td>
+<td>string</td>
+<td>Account  type</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Currency </td>
+</tr>
+<tr>
+<td>balance</td>
+<td>string</td>
+<td>Asset amount </td>
+</tr>
+<tr>
+<td>available</td>
+<td>string</td>
+<td>Available asset</td>
+</tr>
+<tr>
+<td>frozen</td>
+<td>string</td>
+<td>Frozen asset</td>
+</tr>
+</tbody></table>
+<h2 id='internal-assets-transfer-order-inquiry'>Internal assets transfer order inquiry</h2>
+<p>Through transfer ID query internal asset transfer order details.</p>
+
+<ul>
+<li><strong>GET</strong> <code>/open/api/v2/asset/internal/transfer/info</code></li>
+</ul>
+
+<aside>
+Rate Limit : 2 times/s
+</aside>
+
+<p><strong>API Permission:</strong> Read</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory </th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transact_id</td>
+<td>String</td>
+<td>ture</td>
+<td>Transfer id</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Error message (if any)</td>
+</tr>
+<tr>
+<td>transact_id</td>
+<td>string</td>
+<td>Transfer id</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td>Currency </td>
+</tr>
+<tr>
+<td>amount</td>
+<td>String</td>
+<td>Transfer amount </td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>Transfer-out account ，spot account 、isolated-margin account 、futures account </td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>Transfer-in account ，spot account 、isolated-margin account 、futures account </td>
+</tr>
+<tr>
+<td>transact_state</td>
+<td>string</td>
+<td>Transfer status  Success 、Fail  、Transferring</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+  <script>
+
+  </script>
+</html>
