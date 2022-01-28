@@ -1,7 +1,7 @@
 @charset "utf-8";
-@import 'normalize';
-@import 'variables';
-@import 'icon-font';
+@import "normalize";
+@import "variables";
+@import "icon-font";
 // @import 'rtl'; // uncomment to switch to RTL format
 
 /*
@@ -24,7 +24,8 @@ under the License.
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
 
-html, body {
+html,
+body {
   color: $main-text;
   padding: 0;
   margin: 0;
@@ -42,11 +43,11 @@ html, body {
 
 #toc > ul > li > a > span {
   float: right;
-  background-color: #2484FF;
+  background-color: #2484ff;
   border-radius: 40px;
   width: 20px;
 }
-header{
+header {
   position: fixed;
   display: flex;
   align-items: center;
@@ -59,7 +60,7 @@ header{
   background: #333333;
   box-shadow: 0 1px 0 0 #000;
   z-index: 100;
-  .flex_box{
+  .flex_box {
     flex: 1;
     display: flex;
     align-items: center;
@@ -69,22 +70,22 @@ header{
     display: block;
     max-width: 100%;
   }
-  .nav_box{
+  .nav_box {
     position: relative;
     margin-left: 56px;
-    .nav_cell{
+    .nav_cell {
       position: relative;
-      .nav_first{
+      .nav_first {
         display: inline-block;
         height: 32px;
         line-height: 32px;
         min-width: 50px;
         text-align: left;
-        color: #9EB5CA;
+        color: #9eb5ca;
         font-size: 14px;
         text-decoration: none;
 
-        i.icon_nav{
+        i.icon_nav {
           display: inline-block;
           width: 10px;
           height: 10px;
@@ -97,7 +98,7 @@ header{
         }
       }
 
-      .nav_ul{
+      .nav_ul {
         display: none;
         position: absolute;
         left: 0;
@@ -109,49 +110,51 @@ header{
         margin: 0;
         box-shadow: 0 0 20px 0 rgba($color: #456189, $alpha: 0.2);
         border-radius: 3px;
-        li{
+        li {
           width: 100%;
           transition: all 300ms linear;
-          a{
+          a {
             display: block;
             width: 100%;
             height: 40px;
             line-height: 10px;
             box-sizing: border-box;
             padding: 0 16px;
-            color: #2B3D4A;
+            color: #2b3d4a;
             text-decoration: none;
             transition: all 300ms linear;
             font-size: 12px;
           }
-          &.active,&:hover{
-            background-color: #F2F6FA;
-            a{
+          &.active,
+          &:hover {
+            background-color: #f2f6fa;
+            a {
               color: #16b979;
             }
           }
         }
       }
-      &:hover{
-        .icon_nav{
+      &:hover {
+        .icon_nav {
           transform: rotate(180deg);
         }
-        .nav_ul{
+        .nav_ul {
           display: block;
         }
       }
     }
-    .nav_tab{
+    .nav_tab {
       font-size: 16px;
       line-height: 59px;
-      a{
-        color: #B0B8DB;
+      a {
+        color: #b0b8db;
         display: inline-block;
         padding: 0 20px;
         border-bottom: 2px solid transparent;
         text-decoration: none;
-        &:hover, &.current {
-          color: #FFF;
+        &:hover,
+        &.current {
+          color: #fff;
         }
         &.current {
           border-color: #16b979;
@@ -159,7 +162,7 @@ header{
       }
     }
   }
-  .lang{
+  .lang {
     width: 78px;
     height: 26px;
     line-height: 26px;
@@ -169,12 +172,11 @@ header{
     text-decoration: none;
     border-radius: 3px;
     transition: all 300ms;
-    &:hover{
+    &:hover {
       color: #16b979;
       border-color: #16b979;
     }
   }
-
 }
 .toc-wrapper {
   transition: left 0.3s ease-in-out;
@@ -200,7 +202,7 @@ header{
     }
   }
 
-  &>.search {
+  & > .search {
     position: relative;
 
     input {
@@ -210,17 +212,18 @@ header{
       padding: 6px 0 6px 30px;
       box-sizing: border-box;
       margin: $nav-v-padding $nav-padding;
-      width: $nav-width - ($nav-padding*2);
+      width: $nav-width - ($nav-padding * 2);
       outline: none;
       color: $nav-text;
       font-weight: normal;
       border-radius: 0; /* ios has a default border radius */
       transition: all 300ms;
       margin-top: 35px;
-      &::placeholder{
+      &::placeholder {
         color: #16b979;
       }
-      &:active,&:focus{
+      &:active,
+      &:focus {
         border-color: #fff;
       }
     }
@@ -259,17 +262,17 @@ header{
       color: $nav-text;
       text-decoration: none;
       transition: all 300ms;
-      &:hover{
+      &:hover {
         color: $nav-active-text;
       }
     }
   }
 
-
   // The Table of Contents is composed of multiple nested
   // unordered lists.  These styles remove the default
   // styling of an unordered list because it is ugly.
-  ul, li {
+  ul,
+  li {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -297,12 +300,12 @@ header{
 
   .toc-list-h2 {
     display: none;
-    background-color: #1E2224;
+    background-color: #1e2224;
     font-weight: 500;
 
-    .toc-h2{
+    .toc-h2 {
       color: #ffffff;
-      &.active{
+      &.active {
         color: #ffffff;
       }
     }
@@ -318,7 +321,8 @@ header{
     margin-top: 1em;
     border-top: 1px dashed $nav-footer-border-color;
 
-    li,a {
+    li,
+    a {
       color: $nav-text;
       text-decoration: none;
     }
@@ -335,7 +339,8 @@ header{
   }
 }
 
-.toc-link, .toc-footer li {
+.toc-link,
+.toc-footer li {
   padding: 0 $nav-padding 0 $nav-padding;
   display: block;
   overflow-x: hidden;
@@ -354,7 +359,7 @@ header{
     display: block;
     $side-pad: $main-padding / 2 - 8px;
     padding: $side-pad $side-pad $side-pad;
-    background-color: rgba(243,247,249,0.7);
+    background-color: rgba(243, 247, 249, 0.7);
     transform-origin: 0 0;
     transform: rotate(-90deg) translate(-100%, 0);
     border-radius: 0 0 0 5px;
@@ -377,10 +382,13 @@ header{
 
   transition: left 0.3s ease-in-out;
 
-  &:hover { opacity: 1; }
-  &.open {left: $nav-width}
+  &:hover {
+    opacity: 1;
+  }
+  &.open {
+    left: $nav-width;
+  }
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
@@ -415,20 +423,33 @@ header{
   }
 }
 
+.toc-nav-dropdown {
+  display: none;
+  outline: none;
+  color: #fff;
+  border-radius: 4px;
+  margin-left: 15px;
+  padding: 4px 8px;
+  border: thin solid #555e71;
+  background: #181e2a;
+  box-shadow: 0 0 0 0 transparent;
+}
+
 .lang-selector {
   background-color: $lang-select-bg;
   width: 100%;
   font-weight: bold;
   a {
     display: block;
-    float:left;
+    float: left;
     color: $lang-select-text;
     text-decoration: none;
     padding: 0 10px;
     line-height: 30px;
     outline: 0;
 
-    &:active, &:focus {
+    &:active,
+    &:focus {
       background-color: $lang-select-pressed-bg;
       color: $lang-select-pressed-text;
     }
@@ -440,7 +461,7 @@ header{
   }
 
   &:after {
-    content: '';
+    content: "";
     clear: both;
     display: block;
   }
@@ -457,17 +478,28 @@ header{
   // to place content above the dark box
   position: relative;
   z-index: 30;
-  a{
+  a {
     color: #16b979;
     text-decoration: none;
   }
   &:after {
-    content: '';
+    content: "";
     display: block;
     clear: both;
   }
 
-  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
+  & > h1,
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5,
+  & > h6,
+  & > p,
+  & > table,
+  & > ul,
+  & > ol,
+  & > aside,
+  & > dl {
     margin-right: $examples-width;
     padding: 0 $main-padding 8px;
     box-sizing: border-box;
@@ -476,28 +508,36 @@ header{
     @extend %left-col;
   }
 
-  &>ul, &>ol {
+  & > ul,
+  & > ol {
     padding-left: $main-padding + 15px;
   }
 
   // the div is the tocify hidden div for placeholding stuff
-  &>h1, &>h2, &>div {
-    clear:both;
+  & > h1,
+  & > h2,
+  & > div {
+    clear: both;
   }
-  &>h1[id],&>h2[id],&>h3[id],&>h4[id],&>h5[id],&>h6[id]{
+  & > h1[id],
+  & > h2[id],
+  & > h3[id],
+  & > h4[id],
+  & > h5[id],
+  & > h6[id] {
     margin-top: -60px;
     z-index: 1;
-    &::before{
+    &::before {
       position: relative;
       display: block;
-      content: '';
+      content: "";
       height: 60px;
       width: calc(100% + 56px);
       margin-left: -28px;
       margin-bottom: 8px;
     }
   }
-  &>h1[id] {
+  & > h1[id] {
     margin-top: -40px;
   }
   h1 {
@@ -505,19 +545,20 @@ header{
     font-size: 14px;
     line-height: 1.5em;
     margin-bottom: $h1-margin-bottom;
-    box-shadow: 0 1px 0 0 #E6ECF2;
-    background-color: #F2F5FA;
-    color: #1C242C;
-    &::before{
+    box-shadow: 0 1px 0 0 #e6ecf2;
+    background-color: #f2f5fa;
+    color: #1c242c;
+    &::before {
       background-color: $main-bg;
     }
   }
 
-  *:not(h1){
+  *:not(h1) {
     position: relative;
     z-index: 2;
   }
-  h1:first-child, div:first-child + h1 {
+  h1:first-child,
+  div:first-child + h1 {
     border-top-width: 0;
     margin-top: 0;
   }
@@ -526,7 +567,7 @@ header{
     @extend %header-font;
     font-size: 14px;
     margin-bottom: 8px;
-    color: #1C242C;
+    color: #1c242c;
   }
 
   // h2s right after h1s should bump right up
@@ -536,23 +577,28 @@ header{
   //   border-top: none;
   // }
 
-  h3, h4, h5, h6 {
+  h3,
+  h4,
+  h5,
+  h6 {
     @extend %header-font;
     font-size: 12px;
     margin-top: 24px;
     margin-bottom: 8px;
     line-height: 18px;
-    color: #1C242C;
+    color: #1c242c;
   }
 
-  h4, h5, h6 {
+  h4,
+  h5,
+  h6 {
     font-size: 10px;
   }
 
   hr {
     margin: 2em 0;
     height: 1px;
-    background: #E6ECF2;
+    background: #e6ecf2;
     border: none;
     margin-left: 28px;
     margin-right: calc(50% + 28px);
@@ -561,7 +607,8 @@ header{
   table {
     margin-bottom: 1em;
     overflow: auto;
-    th,td {
+    th,
+    td {
       text-align: left;
       vertical-align: top;
       line-height: 1.6;
@@ -572,20 +619,20 @@ header{
 
     th {
       padding: 5px 10px;
-      border-top: 1px solid #E6ECF2;
+      border-top: 1px solid #e6ecf2;
       vertical-align: bottom;
     }
 
     td {
       padding: 10px;
-      border-bottom: 1px solid #E6ECF2;
+      border-bottom: 1px solid #e6ecf2;
     }
 
-    tr:nth-child(odd)>td {
+    tr:nth-child(odd) > td {
       background-color: #ffffff;
     }
 
-    tr:nth-child(even)>td {
+    tr:nth-child(even) > td {
       background-color: #fbfcfd;
     }
   }
@@ -598,7 +645,10 @@ header{
     margin-left: 15px;
   }
 
-  p, li, dt, dd {
+  p,
+  li,
+  dt,
+  dd {
     line-height: 1.6;
     margin-top: 0;
   }
@@ -608,14 +658,14 @@ header{
   }
 
   code {
-    background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
     padding: 3px;
     border-radius: 3px;
     @extend %break-words;
     @extend %code-font;
   }
 
-  pre>code {
+  pre > code {
     background-color: transparent;
     padding: 0;
   }
@@ -625,19 +675,19 @@ header{
     margin-bottom: 1.5em;
     background: rgba($color: $aside-notice-bg, $alpha: 0.05);
     line-height: 1.6;
-    color: #1C242C;
+    color: #1c242c;
     margin-left: 28px;
     margin-right: calc(50% + 28px);
     padding: 0.8em 1.2em;
     border: 1px solid;
     border-color: rgba($color: $aside-notice-bg, $alpha: 0.3);
-    &::before{
+    &::before {
       color: $aside-notice-bg;
     }
     &.warning {
       background-color: rgba($color: $aside-warning-bg, $alpha: 0.05);
       border-color: rgba($color: $aside-warning-bg, $alpha: 0.3);
-      &::before{
+      &::before {
         color: $aside-warning-bg;
       }
     }
@@ -645,7 +695,7 @@ header{
     &.success {
       background-color: rgba($color: $aside-success-bg, $alpha: 0.05);
       border-color: rgba($color: $aside-success-bg, $alpha: 0.3);
-      &::before{
+      &::before {
         color: $aside-success-bg;
       }
     }
@@ -683,21 +733,24 @@ header{
 // This is all the stuff that appears in the right half of the page
 
 .content {
-  pre, blockquote {
-    background-color: #1E2224;
+  pre,
+  blockquote {
+    background-color: #1e2224;
     color: #fff;
 
     margin: 0;
     width: $examples-width;
 
-    float:right;
-    clear:right;
+    float: right;
+    clear: right;
 
     box-sizing: border-box;
 
     @extend %right-col;
 
-    &>p { margin: 0; }
+    & > p {
+      margin: 0;
+    }
 
     a {
       color: #fff;
@@ -714,7 +767,7 @@ header{
   }
 
   blockquote {
-    &>p {
+    & > p {
       background-color: $code-annotation-bg;
       padding: $code-annotation-padding 2em;
       color: #eee;
@@ -755,7 +808,12 @@ header{
   .dark-box {
     display: none;
   }
-
+  .nav_box{
+    display: none;
+  }
+  .toc-nav-dropdown{
+    display: inline-block;
+  }
   %left-col {
     margin-right: 0;
   }
@@ -778,10 +836,14 @@ header{
   }
 }
 
-.highlight .c, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs {
   color: #909090;
 }
 
-.highlight, .highlight .w {
-  background-color: #1E2224;
+.highlight,
+.highlight .w {
+  background-color: #1e2224;
 }
