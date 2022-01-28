@@ -3636,9 +3636,9 @@ Login successful (channel = rs.login)
   
 **How is incremental depth information maintained:**
 
-1. Though https://contract.mexc.com/api/v1/contract/depth/BTC_USDT to get full amount of depth information, save the current version.
+1. Though /api/v1/contract/depth/BTC_USDT to get full amount of depth information, save the current version.
 2. Subscribe to ws depth information, if the received data version more than the current version after update,  the later received update cover the previous one at the same price.
-3. Through https://contract.mexc.com/api/v1/contract/depth_commits/BTC_USDT/1000 get  the latest 1000 depth snapshots.
+3. Through /api/v1/contract/depth_commits/BTC_USDT/1000 get  the latest 1000 depth snapshots.
 4. Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information
 5. Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS
 6. The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.
