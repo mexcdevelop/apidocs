@@ -1,5 +1,5 @@
 ---
-title: API 文档
+title: API 合约文档
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
