@@ -3955,11 +3955,11 @@ Secret key仅在申请时展示，请做好记录留存
       const currentLang = /cn/.test(window.location.pathname);
       const toggleBtn = $("#lang_box");
       const currentSystem = /contract/.test(window.location.pathname);
-      const spot_btn =  $("#spot_v2");
-      const contract_btn =  $("#contract_v1");
-      toggleBtn.html(currentLang ? 'english': '简体中文')
-      spot_btn.html(!currentLang ? 'Spot': '现货')
-      contract_btn.html(!currentLang ? 'Contract': '合约')
+      const spot_btn =  $(".spot_v2");
+      const contract_btn =  $(".contract_v1");
+      toggleBtn.html(currentLang ? 'english': '中文')
+      spot_btn.html(currentLang ? '现货': 'Spot' )
+      contract_btn.html(currentLang ? '合约': 'Contract')
       if(currentSystem){
         contract_btn.addClass('current');
       } else{
@@ -3968,20 +3968,16 @@ Secret key仅在申请时展示，请做好记录留存
     })
 
     function changeMenuLink(menu) {
-        const targetPath = menu.replace(/_/g,'/');
-        window.location.href = targetPath
+        window.location.href = menu;
     }
 
     function changeHyperLink() {
-        const currentPath = window.location.pathname;
-        const langsMap = {
-          '/': '/spot/v2/cn',
-          '/spot/v2/cn': '/spot/v2/en',
-          '/spot/v2/en': '/spot/v2/cn',
-          '/contract/v1/cn': '/spot/v2/en',
-          '/contract/v1/en': '/spot/v2/cn'
+        const isEnglish = /en/.test(window.location.pathname);
+        if(isEnglish){
+          window.location.path = window.location.origin + window.location.pathname.replace(/en/,'cn')
+        }else{
+          window.location.path = window.location.origin + window.location.pathname.replace(/cn/,'en')
         }
-        window.location.path = langsMap[currentPath]
       }
   </script>
 </html>
