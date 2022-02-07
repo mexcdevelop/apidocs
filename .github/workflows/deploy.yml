@@ -40,7 +40,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        destination_dir: spot/v2/cn
+        destination_dir: spot_v2_cn
         publish_dir: ./build
         keep_files: true
 
