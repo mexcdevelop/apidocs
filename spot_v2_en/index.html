@@ -304,15 +304,15 @@
         <img src="images/mexc-logo.svg" class="logo" alt="" />
         <div class="nav_box">
           <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('spot_v2_cn')" class="spot_v2" href="javascript:void(0);">Spot</a>
+            <a onClick="javascript:changeMenuLink('spot_v2')" class="spot_v2" href="javascript:void(0);">Spot</a>
           </span>
           <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('contract_v1_cn')" class="contract_v1" href="javascript:void(0);">Contract</a>
+            <a onClick="javascript:changeMenuLink('contract_v1')" class="contract_v1" href="javascript:void(0);">Contract</a>
           </span>
         </div>
         <select class="toc-nav-dropdown" onChange="javascript:changeMenuLink(options[selectedIndex].value)">
-          <option class="spot_v2" value="spot_v2_cn">Spot</option>
-          <option class="contract_v1" value="contract_v1_cn">Contract</option>
+          <option class="spot_v2" value="spot_v2">Spot</option>
+          <option class="contract_v1" value="contract_v1">Contract</option>
         </select>
       </div>
       <a onClick="javascript:changeHyperLink()" class="lang" href="javascript:void(0);" id="lang_box">english</a>
@@ -3867,15 +3867,16 @@ Rate Limit : 2 times/s
     })
 
     function changeMenuLink(menu) {
-        window.location.href = menu;
+        const currentLang = /cn/.test(window.location.pathname);
+        window.location.href = window.location.origin + '/new_doc/' + menu + '_' + (currentLang? 'cn': 'en');
     }
 
     function changeHyperLink() {
         const isEnglish = /en/.test(window.location.pathname);
         if(isEnglish){
-          window.location.path = window.location.origin + window.location.pathname.replace(/en/,'cn')
+          window.location.href = window.location.origin + window.location.pathname.replace(/en/,'cn')
         }else{
-          window.location.path = window.location.origin + window.location.pathname.replace(/cn/,'en')
+          window.location.href = window.location.origin + window.location.pathname.replace(/cn/,'en')
         }
       }
   </script>
