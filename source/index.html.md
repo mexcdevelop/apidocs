@@ -81,23 +81,138 @@ meta:
 
 所有接口的返回数据均为JSON形式
 
-## 签名规则
+## 签名
+- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。
+- 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
+- 签名 **大小写不敏感.**
+- "totalParams"定义为与"request body"串联的"query string"。
 
-我们提供了公共接口以及私有接口
+### 时间安全
 
-对于公共接口，不需要进行签名
+> 伪代码示例
 
-而对于私有接口，需要对接口信息及相应参数进行签名操作，收到请求后服务端验证签名通过后才能进行相应的操作
-
-请参考详细的[签名方法](#8e3023a1c8)
-
-## 时间安全
+```
+ if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow)
+  {
+    // process request
+  } 
+  else 
+  {
+    // reject request
+  }
+```
 
 - 签名接口均需要传递timestamp参数，其值应当是请求发送时刻的unix时间戳(毫秒)。
 - 服务器收到请求时会判断请求中的时间戳，如果是5000毫秒之前发出的，则请求会被认为无效。这个时间空窗值可以通过发送可选参数recvWindow来定义。
 
 关于交易时效性互联网状况并不完全稳定可靠,因此你的程序本地到MEXC服务器的时延会有抖动。这是我们设置recvWindow的目的所在，如果你从事高频交易，对交易时效性有较高的要求，可以灵活设置recvWindow以达到你的要求。
 
+<aside class="notice">推荐使用5秒以下的 recvWindow! 最多不能超过 60秒!</aside>
+
+### POST /api/v3/order 举例
+
+>  Example 1
+
+```shell
+HMAC SHA256 signature:
+
+    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087" | openssl dgst -sha256 -hmac "45d0b3c26f2644f19bfb98b07741b2f5"
+    (stdin)= ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+```
+
+```shell
+curl command:
+
+    (HMAC SHA256)
+    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'
+
+```
+
+>  Example 2
+
+```shell
+HMAC SHA256 signature:
+
+    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087" | openssl dgst -sha256 -hmac "45d0b3c26f2644f19bfb98b07741b2f5"
+    (stdin)= ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+```
+
+```shell
+curl command:
+
+    (HMAC SHA256)
+    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'
+
+```
+
+
+>  Example 3
+
+```shell
+HMAC SHA256 signature:
+
+    $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMITquantity=1&price=11&recvWindow=5000&timestamp=1644489390087" | openssl dgst -sha256 -hmac "45d0b3c26f2644f19bfb98b07741b2f5"
+    (stdin)= ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+```
+
+```shell
+curl command:
+
+    (HMAC SHA256)
+    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order?symbol=BTCUSDT&side=BUY&type=LIMIT' -d 'quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'
+
+```
+
+以下是在linux bash环境下使用 echo openssl 和curl工具实现的一个调用接口下单的示例 apikey、secret仅供示范
+
+| Key       | Value                                                            |
+| --------- | ---------------------------------------------------------------- |
+| apiKey    | mx0aBYs33eIilxBWC5                                               |
+| secretKey | 45d0b3c26f2644f19bfb98b07741b2f5 |
+
+
+
+| 参数       | 取值          |
+| ---------- | ------------- |
+| symbol     | BTCUSDT       |
+| side       | BUY           |
+| type       | LIMIT         |
+| quantity   | 1             |
+| price      | 11            |
+| recvWindow | 5000          |
+| timestamp  | 1644489390087 |
+
+**示例 1: 所有参数通过 request body 发送**
+
+- requestBody:
+symbol=BTCUSDT
+&side=BUY
+&type=LIMIT
+&quantity=1
+&price=11
+&recvWindow=5000
+&timestamp=1644489390087
+
+**所有参数通过 query string 发送**
+
+- queryString:
+symbol=BTCUSDT
+&side=BUY
+&type=LIMIT
+&quantity=1
+&price=11
+&recvWindow=5000
+&timestamp=1644489390087
+
+**示例 3: 混合使用 query string 和 request body**
+
+- queryString:
+symbol=BTCUSDT&side=BUY&type=LIMIT
+
+- requestBody:
+quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
+
+请注意，签名与示例3不同。 "LIMIT"和"quantity = 1"之间没有＆。
 ## 限频规则
 
 对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁
@@ -683,16 +798,16 @@ OR
 
 参数：
 
-| 名称             | 类型    | 是否必需 | 描述                                            |
-| ---------------- | ------- | -------- | ----------------------------------------------- |
-| symbol           | STRING  | YES      | 交易对                                          |
-| side             | ENUM    | YES      | 详见枚举定义：订单方向                          |
-| type             | ENUM    | YES      | 详见枚举定义：订单类型                          |
-| quantity         | DECIMAL | NO       | 委托数量                                        |
-| price            | DECIMAL | NO       | 委托价格                                        |
-| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID。 如果未发送，则自动生成 |
-| recvWindow       | LONG    | NO       | 赋值不能大于 60000                              |
-| timestamp        | LONG    | YES      |                                                 |
+| 名称             | 类型    | 是否必需 | 描述                   |
+| ---------------- | ------- | -------- | ---------------------- |
+| symbol           | STRING  | YES      | 交易对                 |
+| side             | ENUM    | YES      | 详见枚举定义：订单方向 |
+| type             | ENUM    | YES      | 详见枚举定义：订单类型 |
+| quantity         | DECIMAL | NO       | 委托数量               |
+| price            | DECIMAL | NO       | 委托价格               |
+| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID |
+| recvWindow       | LONG    | NO       | 赋值不能大于 60000     |
+| timestamp        | LONG    | YES      |                        |
 
 枚举值
 |名称||
@@ -724,13 +839,14 @@ OR
 
 参数：
 
-| 参数名           | 数据类型 | 是否必须 | 说明                                                                               |
-| ---------------- | -------- | -------- | ---------------------------------------------------------------------------------- |
-| symbol           | string   | 是       | 交易对名称                                                                         |
-| orderId          | string   | 否       | 订单Id                                                                             |
-| newClientOrderId | string   | 否       | 用户自定义的本次撤销操作的ID(注意不是被撤销的订单的自定义ID)。如无指定会自动赋值。 |
-| recvWindow       | long     | 否       |                                                                                    |
-| timestamp        | long     | 是       |                                                                                    |
+| 参数名            | 数据类型 | 是否必须 | 说明                   |
+| ----------------- | -------- | -------- | ---------------------- |
+| symbol            | string   | 是       | 交易对名称             |
+| orderId           | string   | 否       | 订单Id                 |
+| origClientOrderId | string   | 否       | 订单Id                 |
+| newClientOrderId  | string   | NO       | 客户自定义的唯一订单ID |
+| recvWindow        | long     | 否       |                        |
+| timestamp         | long     | 是       |                        |
 
 orderId 或 origClientOrderId 必须至少发送一个
 
@@ -913,7 +1029,7 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 - **GET** ```/api/v3/openOrders```
 
-获取交易对的所有当前挂单， 请小心使用不带交易对参数的调用。
+获取交易对的所有当前挂单
 
 参数：
 
@@ -1057,22 +1173,22 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 响应：
 
-| 参数名           | 说明         |
-| ---------------- | ------------ |
-| makerCommission  | maker 费率       |
-| takerCommission  | taker 费率   |
-| buyerCommission  |  |
-| sellerCommission |    |
+| 参数名           | 说明       |
+| ---------------- | ---------- |
+| makerCommission  | maker 费率 |
+| takerCommission  | taker 费率 |
+| buyerCommission  |            |
+| sellerCommission |            |
 | canTrade         | 是否可交易 |
 | canWithdraw      | 是否可提现 |
 | canDeposit       | 是否可充值 |
-| updateTime       | 更新时间 |
-| accountType      | 账户类型 |
-| balances         | 余额 |
-| asset            | 资产币种 |
-| free             | 可用数量 |
-| locked           | 冻结数量 |
-| permissions      | 权限 |
+| updateTime       | 更新时间   |
+| accountType      | 账户类型   |
+| balances         | 余额       |
+| asset            | 资产币种   |
+| free             | 可用数量   |
+| locked           | 冻结数量   |
+| permissions      | 权限       |
 ## 账户成交历史
 
 > 响应示例
