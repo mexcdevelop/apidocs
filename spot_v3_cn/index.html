@@ -456,6 +456,14 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#api-2" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#8c6d51826c" class="toc-h2 toc-link" data-title="枚举定义">枚举定义</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -529,8 +537,9 @@
 <p>相应API接受GET，POST或DELETE类型的请求</p>
 
 <ul>
-<li>对于GET/DELETE请求，所有参数都放在路径（request param）中</li>
-<li>对于POST请求，所有参数都放在请求体（request body）中</li>
+<li>GET 方法的接口, 参数必须在 query string中发送。</li>
+<li>POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。</li>
+<li>对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。</li>
 </ul>
 <h2 id='dac673286f'>返回格式</h2>
 <p>所有接口的返回数据均为JSON形式</p>
@@ -543,11 +552,12 @@
 
 <p>请参考详细的<a href="#8e3023a1c8">签名方法</a></p>
 <h2 id='6da7f3b22a'>时间安全</h2>
-<p>所有签名接口均需要请求头中传入参数<code>Request-Time</code>，服务端接收到请求后会验证请求发出的时间范围。</p>
+<ul>
+<li>签名接口均需要传递timestamp参数，其值应当是请求发送时刻的unix时间戳(毫秒)。</li>
+<li>服务器收到请求时会判断请求中的时间戳，如果是5000毫秒之前发出的，则请求会被认为无效。这个时间空窗值可以通过发送可选参数recvWindow来定义。</li>
+</ul>
 
-<p>若接受请求时，收到的<code>Request-Time</code>小于或大于服务端时间10秒（默认值）以上（该时间窗口值可以通过发送可选header参数 <code>Recv-Window</code>来自定义，其最大值为60，不推荐使用30秒以上的<code>Recv-Window</code>），则认为该请求无效。</p>
-
-<p>请使用<a href="#97e5358548">当前系统时间</a>对本地时间进行校准。</p>
+<p>关于交易时效性互联网状况并不完全稳定可靠,因此你的程序本地到MEXC服务器的时延会有抖动。这是我们设置recvWindow的目的所在，如果你从事高频交易，对交易时效性有较高的要求，可以灵活设置recvWindow以达到你的要求。</p>
 <h2 id='c1fd2fc5ac'>限频规则</h2>
 <p>对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁</p>
 
@@ -568,8 +578,8 @@
 <td>API key中的access key</td>
 </tr>
 <tr>
-<td><code>Signature</code></td>
-<td>生成的签名字符串（使用HMAC SHA256算法对 apikey + timestamp + params 进行签名）</td>
+<td><code>Content-Type</code></td>
+<td><code>application/json</code></td>
 </tr>
 </tbody></table>
 <h2 id='8e3023a1c8'>签名方法</h2>
@@ -682,7 +692,7 @@
 </tr>
 <tr>
 <td>多个交易对</td>
-<td>curl -X GET &quot;https://api.mexc.com/api/v3/exchangeInfo?symbols=[&#39;MXUSDT&#39;,&#39;BTCUSDT&#39;]&quot;</td>
+<td>curl -X GET &quot;https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT&quot;</td>
 </tr>
 </tbody></table>
 <h2 id='38a975b802'>深度信息</h2>
@@ -726,7 +736,7 @@
 <td>integer</td>
 <td>否</td>
 <td>返回的条数</td>
-<td>默认 100; 最大 5000. 可选值:[5, 10, 20, 50, 100, 500, 1000, 5000]</td>
+<td>默认 100; 最大 5000</td>
 </tr>
 </tbody></table>
 
@@ -1221,9 +1231,52 @@
     </span><span class="nl">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1641349582808</span><span class="p">,</span><span class="w">
     </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span><span class="err">or</span><span class="w">
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceChange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"184.34"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00400048"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46263.71"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.38"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.41"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"highPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"47550.01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lowPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45555.5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1732.461487"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1641349500000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1641349582808</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceChange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"184.34"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00400048"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46263.71"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.38"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.41"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"highPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"47550.01"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lowPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45555.5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1732.461487"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1641349500000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1641349582808</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/avgPrice</code></li>
+<li><strong>GET</strong> <code>/api/v3/ticker/25hr</code></li>
 </ul>
 
 <p>参数：</p>
@@ -1414,7 +1467,7 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/avgPrice</code></li>
+<li><strong>GET</strong> <code>/api/v3/ticker/bookTicker</code></li>
 </ul>
 
 <p>返回当前最优的挂单(最高买单，最低卖单)</p>
@@ -1524,52 +1577,22 @@
 <td>详见枚举定义：订单类型</td>
 </tr>
 <tr>
-<td>timeInForce</td>
-<td>ENUM</td>
-<td>NO</td>
-<td>详见枚举定义：有效方式</td>
-</tr>
-<tr>
 <td>quantity</td>
 <td>DECIMAL</td>
 <td>NO</td>
-<td></td>
-</tr>
-<tr>
-<td>quoteOrderQty</td>
-<td>DECIMAL</td>
-<td>NO</td>
-<td></td>
+<td>委托数量</td>
 </tr>
 <tr>
 <td>price</td>
 <td>DECIMAL</td>
 <td>NO</td>
-<td></td>
+<td>委托价格</td>
 </tr>
 <tr>
 <td>newClientOrderId</td>
 <td>STRING</td>
 <td>NO</td>
 <td>客户自定义的唯一订单ID。 如果未发送，则自动生成</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>DECIMAL</td>
-<td>NO</td>
-<td>仅 STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, 和TAKE_PROFIT_LIMIT 需要此参数。</td>
-</tr>
-<tr>
-<td>icebergQty</td>
-<td>DECIMAL</td>
-<td>NO</td>
-<td>仅使用 LIMIT, STOP_LOSS_LIMIT, 和 TAKE_PROFIT_LIMIT 创建新的 iceberg 订单时需要此参数</td>
-</tr>
-<tr>
-<td>newOrderRespType</td>
-<td>ENUM</td>
-<td>NO</td>
-<td>设置响应JSON。 ACK，RESULT或FULL； &quot;MARKET&quot;和&quot; LIMIT&quot;订单类型默认为&quot;FULL&quot;，所有其他订单默认为&quot;ACK&quot;。</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -1584,6 +1607,9 @@
 <td></td>
 </tr>
 </tbody></table>
+
+<p>枚举值
+|名称||</p>
 <h2 id='4e53c0fccd'>撤销订单</h2>
 <blockquote>
 <p>响应示例</p>
@@ -1631,12 +1657,6 @@
 <td>string</td>
 <td>否</td>
 <td>订单Id</td>
-</tr>
-<tr>
-<td>origClientOrderId</td>
-<td>string</td>
-<td>否</td>
-<td></td>
 </tr>
 <tr>
 <td>newClientOrderId</td>
@@ -1694,11 +1714,11 @@
 </tr>
 <tr>
 <td>executedQty</td>
-<td>最低卖盘数量</td>
+<td>交易的订单数量</td>
 </tr>
 <tr>
 <td>cummulativeQuoteQty</td>
-<td>最低卖盘数量</td>
+<td>累计交易金额</td>
 </tr>
 <tr>
 <td>status</td>
@@ -1706,7 +1726,7 @@
 </tr>
 <tr>
 <td>timeInForce</td>
-<td>最低卖盘数量</td>
+<td>订单有效方式</td>
 </tr>
 <tr>
 <td>type</td>
@@ -1824,11 +1844,11 @@
 </tr>
 <tr>
 <td>executedQty</td>
-<td>最低卖盘数量</td>
+<td>交易的订单数量</td>
 </tr>
 <tr>
 <td>cummulativeQuoteQty</td>
-<td>最低卖盘数量</td>
+<td>累计交易金额</td>
 </tr>
 <tr>
 <td>status</td>
@@ -1836,7 +1856,7 @@
 </tr>
 <tr>
 <td>timeInForce</td>
-<td>最低卖盘数量</td>
+<td>订单有效方式</td>
 </tr>
 <tr>
 <td>type</td>
@@ -2047,7 +2067,7 @@
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>否</td>
+<td>是</td>
 <td>交易对</td>
 </tr>
 <tr>
@@ -2063,10 +2083,6 @@
 <td></td>
 </tr>
 </tbody></table>
-
-<ul>
-<li>不带symbol参数，会返回所有交易对的挂单</li>
-</ul>
 
 <p>响应：</p>
 
@@ -2220,7 +2236,7 @@
 <td>limit</td>
 <td>int</td>
 <td>否</td>
-<td></td>
+<td>默认 500; 最大 1000;</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -2322,30 +2338,25 @@
 <p>响应示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"buyerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sellerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"canTrade"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"canWithdraw"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"canDeposit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"accountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4723846.89208129"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTC"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4763368.68006011"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"SPOT"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+    </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"buyerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellerCommission"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"canTrade"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"canWithdraw"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"canDeposit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"accountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NBNTEST"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111078"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAIN"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1020000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SPOT"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
@@ -2387,24 +2398,60 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>symbol</td>
-<td>交易对</td>
+<td>makerCommission</td>
+<td>maker 费率</td>
 </tr>
 <tr>
-<td>bidPrice</td>
-<td>最高买盘价</td>
+<td>takerCommission</td>
+<td>taker 费率</td>
 </tr>
 <tr>
-<td>bidQty</td>
-<td>最高买盘数量</td>
+<td>buyerCommission</td>
+<td></td>
 </tr>
 <tr>
-<td>askPrice</td>
-<td>最低卖盘价</td>
+<td>sellerCommission</td>
+<td></td>
 </tr>
 <tr>
-<td>askQty</td>
-<td>最低卖盘数量</td>
+<td>canTrade</td>
+<td>是否可交易</td>
+</tr>
+<tr>
+<td>canWithdraw</td>
+<td>是否可提现</td>
+</tr>
+<tr>
+<td>canDeposit</td>
+<td>是否可充值</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td>accountType</td>
+<td>账户类型</td>
+</tr>
+<tr>
+<td>balances</td>
+<td>余额</td>
+</tr>
+<tr>
+<td>asset</td>
+<td>资产币种</td>
+</tr>
+<tr>
+<td>free</td>
+<td>可用数量</td>
+</tr>
+<tr>
+<td>locked</td>
+<td>冻结数量</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>权限</td>
 </tr>
 </tbody></table>
 <h2 id='1c077e2313'>账户成交历史</h2>
@@ -2415,16 +2462,16 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNBBTC"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">交易对</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28457</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">trade</span><span class="w"> </span><span class="err">ID</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100234</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">订单ID</span><span class="w">
-    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">OCO订单的ID，不然就是</span><span class="mi">-1</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.00000100"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">成交价格</span><span class="w">
-    </span><span class="nl">"qty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.00000000"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">成交量</span><span class="w">
-    </span><span class="nl">"quoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48.000012"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">成交金额</span><span class="w">
-    </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10000000"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">交易费金额</span><span class="w">
-    </span><span class="nl">"commissionAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">交易费资产类型</span><span class="w">
-    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499865549590</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">交易时间</span><span class="w">
-    </span><span class="nl">"isBuyer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">是否是买家</span><span class="w">
-    </span><span class="nl">"isMaker"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">是否是挂单方</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100234</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.00000100"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"qty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"quoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48.000012"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"commissionAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499865549590</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"isBuyer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"isMaker"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"isBestMatch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2455,7 +2502,7 @@
 <td>orderId</td>
 <td>string</td>
 <td>否</td>
-<td>必须喝symbol一起使用</td>
+<td>必须和symbol一起使用</td>
 </tr>
 <tr>
 <td>startTime</td>
@@ -2479,7 +2526,7 @@
 <td>limit</td>
 <td>int</td>
 <td>否</td>
-<td></td>
+<td>默认 500; 最大 1000;</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -2552,6 +2599,16 @@
 <td>是否为最佳匹配</td>
 </tr>
 </tbody></table>
+<h1 id='api-2'>公开API参数</h1><h2 id='8c6d51826c'>枚举定义</h2><h3 id='ba0138f8ea'>订单方向</h3>
+<ul>
+<li>BUY 买入</li>
+<li>SELL 卖出</li>
+</ul>
+<h3 id='a1d4eaf18c'>订单类型</h3>
+<ul>
+<li>LIMIT 限价单</li>
+<li>LIMIT_MAKER 限价只挂单</li>
+</ul>
 
       </div>
       <div class="dark-box">
