@@ -73,8 +73,9 @@ meta:
 
 相应API接受GET，POST或DELETE类型的请求
 
-- 对于GET/DELETE请求，所有参数都放在路径（request param）中
-- 对于POST请求，所有参数都放在请求体（request body）中
+- GET 方法的接口, 参数必须在 query string中发送。
+- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。
+- 对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。
 
 ## 返回格式
 
@@ -92,11 +93,10 @@ meta:
 
 ## 时间安全
 
-所有签名接口均需要请求头中传入参数```Request-Time```，服务端接收到请求后会验证请求发出的时间范围。
+- 签名接口均需要传递timestamp参数，其值应当是请求发送时刻的unix时间戳(毫秒)。
+- 服务器收到请求时会判断请求中的时间戳，如果是5000毫秒之前发出的，则请求会被认为无效。这个时间空窗值可以通过发送可选参数recvWindow来定义。
 
-若接受请求时，收到的```Request-Time```小于或大于服务端时间10秒（默认值）以上（该时间窗口值可以通过发送可选header参数 ```Recv-Window```来自定义，其最大值为60，不推荐使用30秒以上的```Recv-Window```），则认为该请求无效。
-
-请使用[当前系统时间](#97e5358548)对本地时间进行校准。
+关于交易时效性互联网状况并不完全稳定可靠,因此你的程序本地到MEXC服务器的时延会有抖动。这是我们设置recvWindow的目的所在，如果你从事高频交易，对交易时效性有较高的要求，可以灵活设置recvWindow以达到你的要求。
 
 ## 限频规则
 
@@ -112,10 +112,10 @@ meta:
 
 请求Header中签名相关参数
 
-| 组成部分            | 说明                                                                           |
-| ------------------- | ------------------------------------------------------------------------------ |
-| ```X-MEXC-APIKEY``` | API key中的access key                                                          |
-| ```Signature```     | 生成的签名字符串（使用HMAC SHA256算法对 apikey + timestamp + params 进行签名） |
+| 组成部分            | 说明                   |
+| ------------------- | ---------------------- |
+| ```X-MEXC-APIKEY``` | API key中的access key  |
+| ```Content-Type```  | ```application/json``` |
 
 ## 签名方法 
 
@@ -212,11 +212,11 @@ NONE
 
 三种用法
 
-| 用法         | 举例                                                                                 |
-| ------------ | ------------------------------------------------------------------------------------ |
-| 不需要交易对 | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo"                              |
-| 单个交易对   | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"                |
-| 多个交易对   | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=['MXUSDT','BTCUSDT']" |
+| 用法         | 举例                                                                          |
+| ------------ | ----------------------------------------------------------------------------- |
+| 不需要交易对 | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo"                        |
+| 单个交易对   | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"          |
+| 多个交易对   | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
 
 
 ## 深度信息
@@ -239,10 +239,10 @@ NONE
 
 参数：
 
-| 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围                                                          |
-| ------ | -------- | -------- | ---------- | ----------------------------------------------------------------- |
-| symbol | string   | 是       | 交易对名称 |                                                                   |
-| limit  | integer  | 否       | 返回的条数 | 默认 100; 最大 5000. 可选值:[5, 10, 20, 50, 100, 500, 1000, 5000] |
+| 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围            |
+| ------ | -------- | -------- | ---------- | ------------------- |
+| symbol | string   | 是       | 交易对名称 |                     |
+| limit  | integer  | 否       | 返回的条数 | 默认 100; 最大 5000 |
 
 响应：
 
@@ -482,9 +482,52 @@ NONE
     "closeTime": 1641349582808,
     "count": null
 }
+or
+[
+  {
+    "symbol": "BTCUSDT",
+    "priceChange": "184.34",
+    "priceChangePercent": "0.00400048",
+    "prevClosePrice": "46079.37",
+    "lastPrice": "46263.71",
+    "lastQty": "",
+    "bidPrice": "46260.38",
+    "bidQty": "",
+    "askPrice": "46260.41",
+    "askQty": "",
+    "openPrice": "46079.37",
+    "highPrice": "47550.01",
+    "lowPrice": "45555.5",
+    "volume": "1732.461487",
+    "quoteVolume": null,
+    "openTime": 1641349500000,
+    "closeTime": 1641349582808,
+    "count": null
+  },
+  {
+    "symbol": "ETHUSDT",
+    "priceChange": "184.34",
+    "priceChangePercent": "0.00400048",
+    "prevClosePrice": "46079.37",
+    "lastPrice": "46263.71",
+    "lastQty": "",
+    "bidPrice": "46260.38",
+    "bidQty": "",
+    "askPrice": "46260.41",
+    "askQty": "",
+    "openPrice": "46079.37",
+    "highPrice": "47550.01",
+    "lowPrice": "45555.5",
+    "volume": "1732.461487",
+    "quoteVolume": null,
+    "openTime": 1641349500000,
+    "closeTime": 1641349582808,
+    "count": null
+  }
+]
 ```
 
-- **GET** ```/api/v3/avgPrice```
+- **GET** ```/api/v3/ticker/25hr```
 
 参数：
 
@@ -517,7 +560,6 @@ NONE
 | count              |            |
 
 ## 最新价格
-
 
 > 响应示例
 
@@ -586,7 +628,7 @@ OR
 ]
 ```
 
-- **GET** ```/api/v3/avgPrice```
+- **GET** ```/api/v3/ticker/bookTicker```
 
 
 返回当前最优的挂单(最高买单，最低卖单)
@@ -641,22 +683,19 @@ OR
 
 参数：
 
-| 名称             | 类型    | 是否必需 | 描述                                                                                                 |
-| ---------------- | ------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| symbol           | STRING  | YES      | 交易对                                                                                               |
-| side             | ENUM    | YES      | 详见枚举定义：订单方向                                                                               |
-| type             | ENUM    | YES      | 详见枚举定义：订单类型                                                                               |
-| timeInForce      | ENUM    | NO       | 详见枚举定义：有效方式                                                                               |
-| quantity         | DECIMAL | NO       |                                                                                                      |
-| quoteOrderQty    | DECIMAL | NO       |                                                                                                      |
-| price            | DECIMAL | NO       |                                                                                                      |
-| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID。 如果未发送，则自动生成                                                      |
-| stopPrice        | DECIMAL | NO       | 仅 STOP_LOSS, STOP_LOSS_LIMIT, TAKE_PROFIT, 和TAKE_PROFIT_LIMIT 需要此参数。                         |
-| icebergQty       | DECIMAL | NO       | 仅使用 LIMIT, STOP_LOSS_LIMIT, 和 TAKE_PROFIT_LIMIT 创建新的 iceberg 订单时需要此参数                |
-| newOrderRespType | ENUM    | NO       | 设置响应JSON。 ACK，RESULT或FULL； "MARKET"和" LIMIT"订单类型默认为"FULL"，所有其他订单默认为"ACK"。 |
-| recvWindow       | LONG    | NO       | 赋值不能大于 60000                                                                                   |
-| timestamp        | LONG    | YES      |                                                                                                      |
+| 名称             | 类型    | 是否必需 | 描述                                            |
+| ---------------- | ------- | -------- | ----------------------------------------------- |
+| symbol           | STRING  | YES      | 交易对                                          |
+| side             | ENUM    | YES      | 详见枚举定义：订单方向                          |
+| type             | ENUM    | YES      | 详见枚举定义：订单类型                          |
+| quantity         | DECIMAL | NO       | 委托数量                                        |
+| price            | DECIMAL | NO       | 委托价格                                        |
+| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID。 如果未发送，则自动生成 |
+| recvWindow       | LONG    | NO       | 赋值不能大于 60000                              |
+| timestamp        | LONG    | YES      |                                                 |
 
+枚举值
+|名称||
 
 ## 撤销订单
 > 响应示例
@@ -685,14 +724,13 @@ OR
 
 参数：
 
-| 参数名            | 数据类型 | 是否必须 | 说明                                                                               |
-| ----------------- | -------- | -------- | ---------------------------------------------------------------------------------- |
-| symbol            | string   | 是       | 交易对名称                                                                         |
-| orderId           | string   | 否       | 订单Id                                                                             |
-| origClientOrderId | string   | 否       |                                                                                    |
-| newClientOrderId  | string   | 否       | 用户自定义的本次撤销操作的ID(注意不是被撤销的订单的自定义ID)。如无指定会自动赋值。 |
-| recvWindow        | long     | 否       |                                                                                    |
-| timestamp         | long     | 是       |                                                                                    |
+| 参数名           | 数据类型 | 是否必须 | 说明                                                                               |
+| ---------------- | -------- | -------- | ---------------------------------------------------------------------------------- |
+| symbol           | string   | 是       | 交易对名称                                                                         |
+| orderId          | string   | 否       | 订单Id                                                                             |
+| newClientOrderId | string   | 否       | 用户自定义的本次撤销操作的ID(注意不是被撤销的订单的自定义ID)。如无指定会自动赋值。 |
+| recvWindow       | long     | 否       |                                                                                    |
+| timestamp        | long     | 是       |                                                                                    |
 
 orderId 或 origClientOrderId 必须至少发送一个
 
@@ -706,10 +744,10 @@ orderId 或 origClientOrderId 必须至少发送一个
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
 | origOty             | qi shi           |
-| executedQty         | 最低卖盘数量     |
-| cummulativeQuoteQty | 最低卖盘数量     |
+| executedQty         | 交易的订单数量   |
+| cummulativeQuoteQty | 累计交易金额     |
 | status              | 状态             |
-| timeInForce         | 最低卖盘数量     |
+| timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
 | side                | 订单方向         |
 ## 撤销单一交易对所有订单
@@ -773,10 +811,10 @@ orderId 或 origClientOrderId 必须至少发送一个
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
 | origOty             | qi shi           |
-| executedQty         | 最低卖盘数量     |
-| cummulativeQuoteQty | 最低卖盘数量     |
+| executedQty         | 交易的订单数量   |
+| cummulativeQuoteQty | 累计交易金额     |
 | status              | 状态             |
-| timeInForce         | 最低卖盘数量     |
+| timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
 | side                | 订单方向         |
 
@@ -881,11 +919,10 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 | 参数名     | 数据类型 | 是否必须 | 说明   |
 | ---------- | -------- | -------- | ------ |
-| symbol     | string   | 否       | 交易对 |
+| symbol     | string   | 是       | 交易对 |
 | recvWindow | long     | 否       |        |
 | timestamp  | long     | 是       |        |
 
-- 不带symbol参数，会返回所有交易对的挂单
 
 响应：
 
@@ -945,15 +982,15 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 参数：
 
-| 参数名     | 数据类型 | 是否必须 | 说明   |
-| ---------- | -------- | -------- | ------ |
-| symbol     | string   | 是       | 交易对 |
-| orderId    | string   | 否       | 订单id |
-| startTime  | long     | 否       |        |
-| endTime    | long     | 否       |        |
-| limit      | int      | 否       |        |
-| recvWindow | long     | 否       |        |
-| timestamp  | long     | 是       |        |
+| 参数名     | 数据类型 | 是否必须 | 说明                 |
+| ---------- | -------- | -------- | -------------------- |
+| symbol     | string   | 是       | 交易对               |
+| orderId    | string   | 否       | 订单id               |
+| startTime  | long     | 否       |                      |
+| endTime    | long     | 否       |                      |
+| limit      | int      | 否       | 默认 500; 最大 1000; |
+| recvWindow | long     | 否       |                      |
+| timestamp  | long     | 是       |                      |
 
 
 响应：
@@ -984,30 +1021,25 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 ```json
 {
-  "makerCommission": 15,
-  "takerCommission": 15,
-  "buyerCommission": 0,
-  "sellerCommission": 0,
-  "canTrade": true,
-  "canWithdraw": true,
-  "canDeposit": true,
-  "updateTime": 123456789,
-  "accountType": "SPOT",
-  "balances": [
-    {
-      "asset": "BTC",
-      "free": "4723846.89208129",
-      "locked": "0.00000000"
-    },
-    {
-      "asset": "LTC",
-      "free": "4763368.68006011",
-      "locked": "0.00000000"
-    }
-  ],
-  "permissions": [
-    "SPOT"
-  ]
+    "makerCommission": 20,
+    "takerCommission": 20,
+    "buyerCommission": 0,
+    "sellerCommission": 0,
+    "canTrade": true,
+    "canWithdraw": true,
+    "canDeposit": true,
+    "updateTime": null,
+    "accountType": "SPOT",
+    "balances": [{
+        "asset": "NBNTEST",
+        "free": "1111078",
+        "locked": "33"
+    }, {
+        "asset": "MAIN",
+        "free": "1020000",
+        "locked": "0"
+    }],
+    "permissions": ["SPOT"]
 }
 ```
 
@@ -1025,13 +1057,22 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 响应：
 
-| 参数名   | 说明         |
-| -------- | ------------ |
-| symbol   | 交易对       |
-| bidPrice | 最高买盘价   |
-| bidQty   | 最高买盘数量 |
-| askPrice | 最低卖盘价   |
-| askQty   | 最低卖盘数量 |
+| 参数名           | 说明         |
+| ---------------- | ------------ |
+| makerCommission  | maker 费率       |
+| takerCommission  | taker 费率   |
+| buyerCommission  |  |
+| sellerCommission |    |
+| canTrade         | 是否可交易 |
+| canWithdraw      | 是否可提现 |
+| canDeposit       | 是否可充值 |
+| updateTime       | 更新时间 |
+| accountType      | 账户类型 |
+| balances         | 余额 |
+| asset            | 资产币种 |
+| free             | 可用数量 |
+| locked           | 冻结数量 |
+| permissions      | 权限 |
 ## 账户成交历史
 
 > 响应示例
@@ -1041,16 +1082,16 @@ orderId 或 origClientOrderId 必须至少发送一个
   {
     "symbol": "BNBBTC", // 交易对
     "id": 28457, // trade ID
-    "orderId": 100234, // 订单ID
-    "orderListId": -1, // OCO订单的ID，不然就是-1
-    "price": "4.00000100", // 成交价格
-    "qty": "12.00000000", // 成交量
-    "quoteQty": "48.000012", // 成交金额
-    "commission": "10.10000000", // 交易费金额
-    "commissionAsset": "BNB", // 交易费资产类型
-    "time": 1499865549590, // 交易时间
-    "isBuyer": true, // 是否是买家
-    "isMaker": false, // 是否是挂单方
+    "orderId": 100234, 
+    "orderListId": -1, 
+    "price": "4.00000100", 
+    "qty": "12.00000000", 
+    "quoteQty": "48.000012", 
+    "commission": "10.10000000", 
+    "commissionAsset": "BNB", 
+    "time": 1499865549590, 
+    "isBuyer": true, 
+    "isMaker": false, 
     "isBestMatch": true
   }
 ]
@@ -1066,11 +1107,11 @@ orderId 或 origClientOrderId 必须至少发送一个
 | 参数名     | 数据类型 | 是否必须 | 说明                   |
 | ---------- | -------- | -------- | ---------------------- |
 | symbol     | string   | 是       | 交易对                 |
-| orderId    | string   | 否       | 必须喝symbol一起使用   |
+| orderId    | string   | 否       | 必须和symbol一起使用   |
 | startTime  | long     | 否       |                        |
 | endTime    | long     | 否       |                        |
 | fromId     | long     | 否       | 起始Id默认查询最新交易 |
-| limit      | int      | 否       |                        |
+| limit      | int      | 否       | 默认 500; 最大 1000;   |
 | recvWindow | long     | 否       |                        |
 | timestamp  | long     | 是       |                        |
 
@@ -1091,3 +1132,18 @@ orderId 或 origClientOrderId 必须至少发送一个
 | time            | 交易时间          |
 | isBuyerMaker    | 是否为买方maker单 |
 | isBestMatch     | 是否为最佳匹配    |
+
+
+# 公开API参数
+
+## 枚举定义
+
+### 订单方向
+
+- BUY 买入
+- SELL 卖出
+
+### 订单类型
+
+- LIMIT 限价单
+- LIMIT_MAKER 限价只挂单
