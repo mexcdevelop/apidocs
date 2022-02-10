@@ -362,10 +362,7 @@
                     <a href="#dac673286f" class="toc-h2 toc-link" data-title="返回格式">返回格式</a>
                   </li>
                   <li>
-                    <a href="#ef6306a9ba" class="toc-h2 toc-link" data-title="签名规则">签名规则</a>
-                  </li>
-                  <li>
-                    <a href="#6da7f3b22a" class="toc-h2 toc-link" data-title="时间安全">时间安全</a>
+                    <a href="#8ba46c43fe" class="toc-h2 toc-link" data-title="签名">签名</a>
                   </li>
                   <li>
                     <a href="#c1fd2fc5ac" class="toc-h2 toc-link" data-title="限频规则">限频规则</a>
@@ -543,21 +540,164 @@
 </ul>
 <h2 id='dac673286f'>返回格式</h2>
 <p>所有接口的返回数据均为JSON形式</p>
-<h2 id='ef6306a9ba'>签名规则</h2>
-<p>我们提供了公共接口以及私有接口</p>
-
-<p>对于公共接口，不需要进行签名</p>
-
-<p>而对于私有接口，需要对接口信息及相应参数进行签名操作，收到请求后服务端验证签名通过后才能进行相应的操作</p>
-
-<p>请参考详细的<a href="#8e3023a1c8">签名方法</a></p>
-<h2 id='6da7f3b22a'>时间安全</h2>
+<h2 id='8ba46c43fe'>签名</h2>
+<ul>
+<li>调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。</li>
+<li>签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。</li>
+<li>签名 <strong>大小写不敏感.</strong></li>
+<li>&quot;totalParams&quot;定义为与&quot;request body&quot;串联的&quot;query string&quot;。</li>
+</ul>
+<h3 id='6da7f3b22a'>时间安全</h3>
+<blockquote>
+<p>伪代码示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> if (timestamp &lt; (serverTime + 1000) &amp;&amp; (serverTime - timestamp) &lt;= recvWindow)
+  {
+    // process request
+  } 
+  else 
+  {
+    // reject request
+  }
+</code></pre></div>
 <ul>
 <li>签名接口均需要传递timestamp参数，其值应当是请求发送时刻的unix时间戳(毫秒)。</li>
 <li>服务器收到请求时会判断请求中的时间戳，如果是5000毫秒之前发出的，则请求会被认为无效。这个时间空窗值可以通过发送可选参数recvWindow来定义。</li>
 </ul>
 
 <p>关于交易时效性互联网状况并不完全稳定可靠,因此你的程序本地到MEXC服务器的时延会有抖动。这是我们设置recvWindow的目的所在，如果你从事高频交易，对交易时效性有较高的要求，可以灵活设置recvWindow以达到你的要求。</p>
+
+<aside class="notice">推荐使用5秒以下的 recvWindow! 最多不能超过 60秒!</aside>
+<h3 id='post-api-v3-order'>POST /api/v3/order 举例</h3>
+<blockquote>
+<p>Example 1</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>HMAC SHA256 signature:
+
+    <span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087"</span> | openssl dgst <span class="nt">-sha256</span> <span class="nt">-hmac</span> <span class="s2">"45d0b3c26f2644f19bfb98b07741b2f5"</span>
+    <span class="o">(</span>stdin<span class="o">)=</span> ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nb">command</span>:
+
+    <span class="o">(</span>HMAC SHA256<span class="o">)</span>
+    <span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"X-MEXC-APIKEY: mx0aBYs33eIilxBWC5"</span> <span class="nt">-X</span> POST <span class="s1">'https://api.mexc.com/api/v3/order'</span> <span class="nt">-d</span> <span class="s1">'symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087&amp;signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'</span>
+
+</code></pre></div>
+<blockquote>
+<p>Example 2</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>HMAC SHA256 signature:
+
+    <span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087"</span> | openssl dgst <span class="nt">-sha256</span> <span class="nt">-hmac</span> <span class="s2">"45d0b3c26f2644f19bfb98b07741b2f5"</span>
+    <span class="o">(</span>stdin<span class="o">)=</span> ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nb">command</span>:
+
+    <span class="o">(</span>HMAC SHA256<span class="o">)</span>
+    <span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"X-MEXC-APIKEY: mx0aBYs33eIilxBWC5"</span> <span class="nt">-X</span> POST <span class="s1">'https://api.mexc.com/api/v3/order'</span> <span class="nt">-d</span> <span class="s1">'symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087&amp;signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'</span>
+
+</code></pre></div>
+<blockquote>
+<p>Example 3</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>HMAC SHA256 signature:
+
+    <span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"symbol=BTCUSDT&amp;side=BUY&amp;type=LIMITquantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087"</span> | openssl dgst <span class="nt">-sha256</span> <span class="nt">-hmac</span> <span class="s2">"45d0b3c26f2644f19bfb98b07741b2f5"</span>
+    <span class="o">(</span>stdin<span class="o">)=</span> ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nb">command</span>:
+
+    <span class="o">(</span>HMAC SHA256<span class="o">)</span>
+    <span class="nv">$ </span>curl <span class="nt">-H</span> <span class="s2">"X-MEXC-APIKEY: mx0aBYs33eIilxBWC5"</span> <span class="nt">-X</span> POST <span class="s1">'https://api.mexc.com/api/v3/order?symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT'</span> <span class="nt">-d</span> <span class="s1">'quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087&amp;signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'</span>
+
+</code></pre></div>
+<p>以下是在linux bash环境下使用 echo openssl 和curl工具实现的一个调用接口下单的示例 apikey、secret仅供示范</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>apiKey</td>
+<td>mx0aBYs33eIilxBWC5</td>
+</tr>
+<tr>
+<td>secretKey</td>
+<td>45d0b3c26f2644f19bfb98b07741b2f5</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>BTCUSDT</td>
+</tr>
+<tr>
+<td>side</td>
+<td>BUY</td>
+</tr>
+<tr>
+<td>type</td>
+<td>LIMIT</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>1</td>
+</tr>
+<tr>
+<td>price</td>
+<td>11</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>5000</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>1644489390087</td>
+</tr>
+</tbody></table>
+
+<p><strong>示例 1: 所有参数通过 request body 发送</strong></p>
+
+<ul>
+<li>requestBody:
+symbol=BTCUSDT
+&amp;side=BUY
+&amp;type=LIMIT
+&amp;quantity=1
+&amp;price=11
+&amp;recvWindow=5000
+&amp;timestamp=1644489390087</li>
+</ul>
+
+<p><strong>所有参数通过 query string 发送</strong></p>
+
+<ul>
+<li>queryString:
+symbol=BTCUSDT
+&amp;side=BUY
+&amp;type=LIMIT
+&amp;quantity=1
+&amp;price=11
+&amp;recvWindow=5000
+&amp;timestamp=1644489390087</li>
+</ul>
+
+<p><strong>示例 3: 混合使用 query string 和 request body</strong></p>
+
+<ul>
+<li><p>queryString:
+symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT</p></li>
+<li><p>requestBody:
+quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
+</ul>
+
+<p>请注意，签名与示例3不同。 &quot;LIMIT&quot;和&quot;quantity = 1&quot;之间没有＆。</p>
 <h2 id='c1fd2fc5ac'>限频规则</h2>
 <p>对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁</p>
 
@@ -1592,7 +1732,7 @@
 <td>newClientOrderId</td>
 <td>STRING</td>
 <td>NO</td>
-<td>客户自定义的唯一订单ID。 如果未发送，则自动生成</td>
+<td>客户自定义的唯一订单ID</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -1659,10 +1799,16 @@
 <td>订单Id</td>
 </tr>
 <tr>
-<td>newClientOrderId</td>
+<td>origClientOrderId</td>
 <td>string</td>
 <td>否</td>
-<td>用户自定义的本次撤销操作的ID(注意不是被撤销的订单的自定义ID)。如无指定会自动赋值。</td>
+<td>订单Id</td>
+</tr>
+<tr>
+<td>newClientOrderId</td>
+<td>string</td>
+<td>NO</td>
+<td>客户自定义的唯一订单ID</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -2052,7 +2198,7 @@
 <li><strong>GET</strong> <code>/api/v3/openOrders</code></li>
 </ul>
 
-<p>获取交易对的所有当前挂单， 请小心使用不带交易对参数的调用。</p>
+<p>获取交易对的所有当前挂单</p>
 
 <p>参数：</p>
 
