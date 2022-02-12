@@ -34,8 +34,9 @@ We provide developers with SDKs in five languages: Python, DotNET, Java, Javascr
 [https://github.com/mxcdevelop/mexc-api-sdk](https://github.com/mxcdevelop/mexc-api-sdk)
 
 <aside class="notice">
-使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
+Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank"> feedback</a>
 </aside>
+
 
 ## Contact us
 
