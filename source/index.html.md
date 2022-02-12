@@ -1,5 +1,5 @@
 ---
-title: API 文档
+title: API Document
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -13,23 +13,23 @@ meta:
     content: Documentation for the mexc global API
 ---
 
-# 介绍
+# Introduction
 
-## API Key 设置
+## API Key Setup
 
-- 很多接口需要API Key才可以访问. 请参考[这个页面](https://www.mexc.com/user/openapi)来设置API Key.
-- 设置API Key的同时，为了安全，建议设置IP访问白名单(未添加白名单有效期为90天).
-- 永远不要把你的API key/secret告诉给任何人
+- Some endpoints will require an API Key. Please refer to [this page](https://www.mexc.com/user/openapi) regarding API key creation.
+- Once API key is created, it is recommended to set IP restrictions on the key for security reasons.
+- Never share your API key/secret key to ANYONE.
   
-<aside class="warning">如果不小心泄露了API key，请立刻删除此Key, 并可以另外生产新的Key.</aside>
- 
-## API Key 权限设置
+<aside class="warning">If the API keys were accidentally shared, please delete them immediately and create a new key.</aside>
 
-在创建API Key时勾选所需要的权限
+## API Key Restrictions
 
-## API 代码库
+Check the required permissions when creating an API Key
 
-我们为开发者提供了Python,DotNET,Java,Javascript,Go五种语言的SDK,提供用户直接通过SDK调用API的方法。目前支持现货所有接口。
+## API Library
+
+We provide developers with SDKs in five languages: Python, DotNET, Java, Javascript, and Go, and provide users with methods to call APIs directly through the SDK. Currently supports all interfaces in spot.
 
 [https://github.com/mxcdevelop/mexc-api-sdk](https://github.com/mxcdevelop/mexc-api-sdk)
 
@@ -37,59 +37,51 @@ meta:
 使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
 </aside>
 
-## 联系我们
+## Contact us
 
-- MEXC API电报群 [MEXC API Support Group](https://t.me/MEXCAPIsupport)
-  - 咨询文档中没有提及的API问题
-  - 咨询API或者websocket性能方面的问题
-  - 咨询做市相关的问题
-- MEXC 客服 *官网、app中在线客服*
-  -  咨询关于钱包、短信、2FA等问题
+- MEXC API Telegram Grop [MEXC API Support Group](https://t.me/MEXCAPIsupport)
+  - For any general questions about the API not covered in the documentation.
+  - For any MM questions
+- MEXC Customer Support *website、app online customer server*
+  -  For cases such as missing funds, help with 2FA, etc.
 
-# 更新日志
+# Change Log
 
-| 时间       | 接口 | 更新类型 | 说明            |
-| ---------- | ---- | -------- | --------------- |
-| 2022-02-08 | *    | 新增     | REST API V3发布 |
+**2022-02-11**
+- New version api
 
+# General Info
 
-# 基本信息
+## Base endpoint
 
-## 接入URL
-
-请选用以下的baseurl进行API请求：
+The base endpoint is：
 
 - ```https://api.mexc.com```
 
-## HTTP 返回代码
+## HTTP Return Codes
 
-- HTTP 4XX 错误码用于指示错误的请求内容、行为、格式。问题在于请求者。
-- HTTP 401 表示身份认证、权限错误。
-- HTTP 403 错误码表示违反WAF限制(Web应用程序防火墙)。
-- HTTP 429 错误码表示警告访问频次超限，即将被封IP。
-- HTTP 5XX 错误码用于指示MEXC服务端的问题。
-
-## 请求格式
+- HTTP 4XX return codes are used for malformed requests; the issue is on the sender's side.
+- HTTP 403 return code is used when the WAF Limit (Web Application Firewall) has been violated.
+- HTTP 429 return code is used when breaking a request rate limit.
+- HTTP 5XX return codes are used for internal errors; the issue is on MEXC's side. It is important to NOT treat this as a failure operation; the execution status is UNKNOWN and could have been a success.
+## General Information on Endpoints
 
 相应API接受GET，POST或DELETE类型的请求
 
-- GET 方法的接口, 参数必须在 query string中发送。
-- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。
-- 对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。
+- For GET endpoints, parameters must be sent as a query string.
+- For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string or in the request body with content type application/x-www-form-urlencoded. You may mix parameters between both the query string and request body if you wish to do so.
+- Parameters may be sent in any order.
+- If a parameter sent in both the query string and request body, the query string parameter will be used.
 
-## 返回格式
+## SIGNED
+- SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body.
+- Endpoints use HMAC SHA256 signatures. The HMAC SHA256 signature is a keyed HMAC SHA256 operation. Use your secretKey as the key and totalParams as the value for the HMAC operation.
+- The signature is not case sensitive.
+- totalParams is defined as the query string concatenated with the request body.
 
-所有接口的返回数据均为JSON形式
+### Timing security
 
-## 签名
-- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。
-- 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
-- 签名 **大小写不敏感.**
-- "totalParams"定义为与"request body"串联的"query string"。
-
-### 时间安全
-
-> 伪代码示例
+> The logic is as follows:
 
 ```
  if (timestamp < (serverTime + 1000) && (serverTime - timestamp) <= recvWindow)
@@ -102,14 +94,15 @@ meta:
   }
 ```
 
-- 签名接口均需要传递timestamp参数，其值应当是请求发送时刻的unix时间戳(毫秒)。
-- 服务器收到请求时会判断请求中的时间戳，如果是5000毫秒之前发出的，则请求会被认为无效。这个时间空窗值可以通过发送可选参数recvWindow来定义。
+- A SIGNED endpoint also requires a parameter, timestamp, to be sent which should be the millisecond timestamp of when the request was created and sent.
+- An additional parameter, recvWindow, may be sent to specify the number of milliseconds after timestamp the request is valid for. If recvWindow is not sent, it defaults to 5000.
 
-关于交易时效性互联网状况并不完全稳定可靠,因此你的程序本地到MEXC服务器的时延会有抖动。这是我们设置recvWindow的目的所在，如果你从事高频交易，对交易时效性有较高的要求，可以灵活设置recvWindow以达到你的要求。
 
-<aside class="notice">推荐使用5秒以下的 recvWindow! 最多不能超过 60秒!</aside>
+Serious trading is about timing. Networks can be unstable and unreliable, which can lead to requests taking varying amounts of time to reach the servers. With recvWindow, you can specify that the request must be processed within a certain number of milliseconds or be rejected by the server.
 
-### POST /api/v3/order 举例
+<aside class="notice"> It is recommended to use a small recvWindow of 5000 or less! The max cannot go beyond 60,000!</aside>
+
+### SIGNED Endpoint Examples for POST /api/v3/order
 
 >  Example 1
 
@@ -163,16 +156,16 @@ curl command:
 
 ```
 
-以下是在linux bash环境下使用 echo openssl 和curl工具实现的一个调用接口下单的示例 apikey、secret仅供示范
+Here is a step-by-step example of how to send a vaild signed payload from the Linux command line using echo, openssl, and curl.
 
-| Key       | Value                                                            |
-| --------- | ---------------------------------------------------------------- |
-| apiKey    | mx0aBYs33eIilxBWC5                                               |
+| Key       | Value                            |
+| --------- | -------------------------------- |
+| apiKey    | mx0aBYs33eIilxBWC5               |
 | secretKey | 45d0b3c26f2644f19bfb98b07741b2f5 |
 
 
 
-| 参数       | 取值          |
+| Parameter  | Value          |
 | ---------- | ------------- |
 | symbol     | BTCUSDT       |
 | side       | BUY           |
@@ -182,7 +175,7 @@ curl command:
 | recvWindow | 5000          |
 | timestamp  | 1644489390087 |
 
-**示例 1: 所有参数通过 request body 发送**
+#### Example 1: As a request body
 
 - requestBody:
 symbol=BTCUSDT
@@ -193,7 +186,7 @@ symbol=BTCUSDT
 &recvWindow=5000
 &timestamp=1644489390087
 
-**所有参数通过 query string 发送**
+**Example 2: As a query string**
 
 - queryString:
 symbol=BTCUSDT
@@ -204,7 +197,7 @@ symbol=BTCUSDT
 &recvWindow=5000
 &timestamp=1644489390087
 
-**示例 3: 混合使用 query string 和 request body**
+**Example 3: Mixed query string and request body**
 
 - queryString:
 symbol=BTCUSDT&side=BUY&type=LIMIT
@@ -212,50 +205,30 @@ symbol=BTCUSDT&side=BUY&type=LIMIT
 - requestBody:
 quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
-请注意，签名与示例3不同。 "LIMIT"和"quantity = 1"之间没有＆。
-## 限频规则
+Note that the signature is different in example 3. There is no & between "LIMIT" and "quantity=1".
+## Limits
 
-对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁
 
-需要携带access key进行访问的接口，以账号作为限速的基本单位；不需要携带access key进行访问的接口，以IP作为限速的基本单位
+There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests.
 
-未说明限速规则的接口默认为20次/秒
+The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
 
-# 接入说明
+The default rate limiting rule for an endpoint is 20 times per second.
 
-## 签名操作的组成
+## Header
 
-请求Header中签名相关参数
+Relevant parameters in the header
 
-| 组成部分            | 说明                   |
+| key            | Description            |
 | ------------------- | ---------------------- |
-| ```X-MEXC-APIKEY``` | API key中的access key  |
+| ```X-MEXC-APIKEY``` | Access key |
 | ```Content-Type```  | ```application/json``` |
 
-## 签名方法 
+# Market Date Endpoints
 
-1. 对于公共接口,不需要签名。
+## Test Connectivity
 
-2. 对于私有接口,需要在header中传入X-MEXC-APIKEY、Signature、Content-Type 必须指定为application/json，Signature为签名字符串
-
-* 签名规则如下:
-    1. 签名时需要先获得请求参数字符串，无参时为""：<br />对于GET/DELETE请求，按Querystring拼接业务参数以&间隔，并最终获得签名目标串（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。<br />对于POST请求，签名参数为json字符串（无需进行字典排序）。
-    2. 获得参数字符串后，再拼接签名目标串，规则为：accessKey+时间戳+获取到的参数字符串
-    3. 使用HMAC SHA256算法对目标串用SecretKey进行签名，并最终将签名作为参数携带到header中
-
-注意：
-
-  1)参与签名的业务参数为null时，不参与签名；注意get请求将参数拼接至url上时，如果参数为null， 后台解析时，会解析成""，POST请求，参数为null时，不要传该参数，或者签名时，将该参数的值设置为""，否则会出现验签失败。
-
-  2)请求时将签名时用到的Request-Time的值放入header的Request-Time参数中，获得的签名字符串放入header的Signature参数中，将APIKEY的Access Key放在header的ApiKey参数中，其余业务参数按正常传递即可。
-
-  3)获得的签名字符串不需要进行base64进行编码。
-
-# 行情接口
-
-## 测试服务器连通性
-
-> 响应示例
+> Response
 
 ```json
 {}
@@ -263,15 +236,15 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 - **GET** ```/api/v3/ping```
 
-测试能否联通 Rest API。
+Test connectivity to the Rest API.
 
-参数：
+Parameter：
 
 NONE
 
-## 获取服务器时间
+## Check Server Time
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -281,13 +254,14 @@ NONE
 
 - **GET** ```/api/v3/time ```
   
-参数：
+
+Parameter：
 
 NONE
 
-## 交易规范信息
+## Exchange Information
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -320,23 +294,21 @@ NONE
 
 - **GET** ```/api/v3/exchangeInfo```
 
-获取交易规则和交易对信息。
+Current exchange trading rules and symbol information
 
+**Parameter**：
 
-参数：
+There are 3 possible options:
 
-三种用法
-
-| 用法         | 举例                                                                          |
+| Method         | **Example**                                                               |
 | ------------ | ----------------------------------------------------------------------------- |
-| 不需要交易对 | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo"                        |
-| 单个交易对   | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"          |
-| 多个交易对   | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
+| No parameter | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo"                        |
+| symbol | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"          |
+| symbols | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
 
+## Order Book
 
-## 深度信息
-
-> 响应示例
+> Response
 
 ```json
 {
@@ -352,24 +324,24 @@ NONE
 
 - **GET** ```/api/v3/depth```
 
-参数：
+Parameter：
 
-| 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围            |
-| ------ | -------- | -------- | ---------- | ------------------- |
-| symbol | string   | 是       | 交易对名称 |                     |
-| limit  | integer  | 否       | 返回的条数 | 默认 100; 最大 5000 |
+| name   | Type | Mandatory | Description | Scope      |
+| ------ | -------- | -------- | ----------- | ------------------- |
+| symbol | string   | YES       | Symbol |                     |
+| limit  | integer  | NO       | Returen  number | default 100; max 5000 |
 
-响应：
+Response：
 
-| 参数名       | 数据类型 | 说明                |
+| name         | Type | Description         |
 | ------------ | -------- | ------------------- |
-| lastUpdateId | long     | 成交时间            |
-| bids         | list     | 买盘 [价位, 挂单量] |
-| asks         | list     | 卖盘 [价位, 挂单量] |
+| lastUpdateId | long     | Deal time |
+| bids         | list     | Bid [Price, Quantity ] |
+| asks         | list     | Ask [Price, Quantity ] |
 
-## 近期成交列表
+## Recent Trades List
 
-> 响应示例
+> Response
 
 ```json
 [
@@ -387,29 +359,29 @@ NONE
 
 - **GET** ```/api/v3/trades```
 
-参数：
+Parameter：
 
-| 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围            |
-| ------ | -------- | -------- | ---------- | ------------------- |
-| symbol | string   | 是       | 交易对名称 |                     |
-| limit  | integer  | 否       | 返回的条数 | 默认 500; 最大 1000 |
+| name   | Type | Mandatory | Description | Scope       |
+| ------ | -------- | -------- | ----------- | ------------------- |
+| symbol | string   | YES       |   |                     |
+| limit  | integer  | NO       |   | Default  500; max 1000 |
 
 
-响应：
+Response:
 
-| 参数名       | 说明           |
+| name         | Description    |
 | ------------ | -------------- |
-| id           | 成交id         |
-| price        | 价格           |
-| qty          | 数量           |
-| quoteQty     | 成交额         |
-| time         | 成交时间       |
-| isBuyerMaker | 是否为maker单  |
-| isBestMatch  | 是否为最佳匹配 |
+| id           | Trade id    |
+| price        | Price       |
+| qty          | Number      |
+| quoteQty     | Trade total |
+| time         | Trade time |
+| isBuyerMaker | Was the buyer the maker? |
+| isBestMatch  | Was the trade the best price match? |
 
-## 近期成交列表
+## Old Trade Lookup
 
-> 响应示例
+> Response
 
 ```json
 [
@@ -427,30 +399,30 @@ NONE
 
 - **GET** ```/api/v3/historicalTrades```
 
-参数：
+Parameters:
 
-| 参数名 | 数据类型 | 是否必须 | 说明                                             | 取值范围            |
+| name | Type | Mandatory | Description                                      | Scope      |
 | ------ | -------- | -------- | ------------------------------------------------ | ------------------- |
-| symbol | string   | 是       | 交易对名称                                       |                     |
-| limit  | integer  | 否       | 返回的条数                                       | 默认 500; 最大 1000 |
-| fromId | integer  | 否       | 从哪一条成交id开始返回. 缺省返回最近的成交记录。 |                     |
+| symbol | string   | YES       | Symbol                                 |                     |
+| limit  | integer  | NO       | Return number                          | Default 500; max 1000 |
+| fromId | integer  | NO       | Trade id to fetch from. Default gets most recent trades. |                     |
 
 
-响应：
+Response:
 
-| 参数名       | 说明           |
+| name       | Description    |
 | ------------ | -------------- |
-| id           | 成交id         |
-| price        | 价格           |
-| qty          | 数量           |
-| quoteQty     | 成交额         |
-| time         | 成交时间       |
-| isBuyerMaker | 是否为maker单  |
-| isBestMatch  | 是否为最佳匹配 |
+| id           | Trade id                            |
+| price        | Price                               |
+| qty          | Number                              |
+| quoteQty     | Trade total                         |
+| time         | Trade time                          |
+| isBuyerMaker | Was the buyer the maker?            |
+| isBestMatch  | Was the trade the best price match? |
 
-## 近期成交(归集)
+## Compressed/Aggregate Trades List
 
-> 响应示例
+> Response
 
 ```json
 [
@@ -469,35 +441,36 @@ NONE
 
 - **GET** ```/api/v3/aggTrades```
   
-归集交易与逐笔交易的区别在于，同一价格、同一方向、同一时间的trade会被聚合为一条
 
-参数：
+Get compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
 
-| 参数名    | 数据类型 | 是否必须 | 说明                               | 取值范围            |
+Parameters:
+
+| name    | Type | Mandatory | Description                        | Scope        |
 | --------- | -------- | -------- | ---------------------------------- | ------------------- |
-| symbol    | string   | 是       | 交易对名称                         |                     |
-| fromId    | long     | 否       | 从包含fromId的成交id开始返回结果   |                     |
-| startTime | long     | 否       | 从该时刻之后的成交记录开始返回结果 |                     |
-| endTimne  | long     | 否       | 返回该时刻为止的成交记录           |                     |
-| limit     | integer  | 否       | 返回的条数                         | 默认 500; 最大 1000 |
+| symbol    | string   | YES       |                          |                     |
+| fromId    | long     | NO       | id to get aggregate trades from INCLUSIVE. |                     |
+| startTime | long     | NO       | Timestamp in ms to get aggregate trades from INCLUSIVE. |                     |
+| endTimne  | long     | NO       | Timestamp in ms to get aggregate trades until INCLUSIVE. |                     |
+| limit     | integer  | NO       |                          | Default 500; max 1000. |
 
 
-响应：
+Response:
 
-| 参数名 | 说明                                       |
+| name | Description                                |
 | ------ | ------------------------------------------ |
-| a      | 归集成交ID                                 |
-| f      | 被归集的首个成交ID                         |
-| l      | 被归集的末个成交ID                         |
-| p      | 成交价                                     |
-| q      | 成交量                                     |
-| T      | 成交时间                                   |
-| m      | 是否为主动卖出单                           |
-| M      | 是否为最优撮合单(可忽略，目前总为最优撮合) |
+| a      | Aggregate tradeId                |
+| f      | First tradeId            |
+| l      | Last tradeId            |
+| p      | Price                                |
+| q      | Quantity                             |
+| T      | Timestamp                          |
+| m      | Was the buyer the maker?   |
+| M      | Was the trade the best price match? |
 
-## K线数据
+## Kline/Candlestick Data
 
-> 响应示例
+> Response
 
 ```json
 [
@@ -516,37 +489,38 @@ NONE
 
 - **GET** ```/api/v3/kline```
   
-每根K线代表一个交易对。
-每根K线的开盘时间可视为唯一ID
 
-参数：
+Kline/candlestick bars for a symbol.
+Klines are uniquely identified by their open time.
 
-| 参数名    | 数据类型 | 是否必须 | 说明                |
+Parameters:
+
+| name    | Type | Mandatory | Description         |
 | --------- | -------- | -------- | ------------------- |
-| symbol    | string   | 是       | 交易对名称          |
-| interval  | ENUM     | 是       | 见枚举定义：K线间隔 |
-| startTime | long     | 否       |                     |
-| endTimne  | long     | 否       |                     |
-| limit     | integer  | 否       | 默认 500; 最大 1000 |
+| symbol    | string   | YES       |           |
+| interval  | ENUM     | YES       | ENUM: Kline interval |
+| startTime | long     | NO       |                     |
+| endTimne  | long     | NO       |                     |
+| limit     | integer  | NO       | Default 500; max 1000. |
 
 
-响应：
+Response:
 
-| 索引 | 说明     |
-| ---- | -------- |
-| 0    | 开盘时间 |
-| 1    | 开盘价   |
-| 2    | 最高价   |
-| 3    | 最低价   |
-| 4    | 收盘价   |
-| 5    | 成交量   |
-| 6    | 收盘时间 |
-| 7    | 成交额   |
+| Index | Description        |
+| ----- | ------------------ |
+| 0     | Open time          |
+| 1     | Open               |
+| 2     | High               |
+| 3     | Low                |
+| 4     | Close              |
+| 5     | Volume             |
+| 6     | Close time         |
+| 7     | Quote asset volume |
 
-## 当前平均价格
+## Current Average Price
 
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -557,24 +531,24 @@ NONE
 
 - **GET** ```/api/v3/avgPrice```
 
-参数：
+Parameters:
 
-| 参数名 | 数据类型 | 是否必须 | 说明       |
-| ------ | -------- | -------- | ---------- |
-| symbol | string   | 是       | 交易对名称 |
+| name | Type | Mandatory | Description |
+| ------ | -------- | -------- | ----------- |
+| symbol | string   | YES       |   |
 
 
-响应：
+Response:
 
-| 参数名 | 说明         |
+| name | Description  |
 | ------ | ------------ |
-| mins   | 均价时间范围 |
-| price  | 价格         |
+| mins   | Average price time frame |
+| price  | Price    |
 
-## 24小时价格滚动情况
+## 24hr Ticker Price Change Statistics
 
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -644,39 +618,39 @@ or
 
 - **GET** ```/api/v3/ticker/25hr```
 
-参数：
+Parameters:
 
-| 参数名 | 数据类型 | 是否必须 | 说明                              |
+| name | Type | Mandatory | Description                       |
 | ------ | -------- | -------- | --------------------------------- |
-| symbol | string   | 否       | 交易对名称 不传查全部（谨慎使用） |
+| symbol | string   | NO       | If the symbol is not sent, tickers for all symbols will be returned in an array. |
 
 
-响应：
+Response:
 
-| 参数名             | 说明       |
-| ------------------ | ---------- |
-| symbol             | 交易对     |
-| priceChange        | 价格变化   |
-| priceChangePercent | 价格变化比 |
-| prevClosePrice     | 前一收盘价 |
-| lastPrice          | 最新价     |
-| lastQty            | 最新量     |
-| bidPrice           | 买盘价格   |
-| bidQty             | 买盘数量   |
-| askPrice           | 卖盘价格   |
-| askQty             | 卖盘数量   |
-| openPrice          | 开始价     |
-| highPrice          | 最高价     |
-| lowPrice           | 最低价     |
-| volume             | 成交量     |
-| quoteVolume        | 成交额     |
-| openTime           | 开始时间   |
-| closeTime          | 结束时间   |
-| count              |            |
+| name             | Description |
+| ------------------ | ----------- |
+| symbol             | Symbol |
+| priceChange        | price Change |
+| priceChangePercent | price change percent |
+| prevClosePrice     | Previous  close price |
+| lastPrice          | Last price |
+| lastQty            | Last quantity |
+| bidPrice           | Bid best price |
+| bidQty             | Bid best quantity |
+| askPrice           | Ask best price |
+| askQty             | Ask best quantity |
+| openPrice          | Open   |
+| highPrice          | High |
+| lowPrice           | Low   |
+| volume             | Deal volume |
+| quoteVolume        | Quote asset volume |
+| openTime           | Start time |
+| closeTime          | Close time |
+| count              |             |
 
-## 最新价格
+## Symbol Price Ticker
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -698,23 +672,23 @@ or
 
 - **GET** ```/api/v3/price```
 
-参数：
+Parameters:
 
-| 参数名 | 数据类型 | 是否必须 | 说明                  |
+| name | Type | Mandatory | Description           |
 | ------ | -------- | -------- | --------------------- |
-| symbol | string   | 否       | 交易对名称 不传查全部 |
+| symbol | string   | NO       | If the symbol is not sent, all symbols will be returned in an array. |
 
 
-响应：
+Response:
 
-| 参数名 | 说明     |
-| ------ | -------- |
-| symbol | 交易对   |
-| price  | 最新价格 |
+| name | Description |
+| ------ | ----------- |
+| symbol |       |
+| price  | Last price |
 
-## 当前最优挂单
+## Symbol Order Book Ticker
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -746,29 +720,29 @@ OR
 - **GET** ```/api/v3/ticker/bookTicker```
 
 
-返回当前最优的挂单(最高买单，最低卖单)
+Best price/qty on the order book for a symbol or symbols.
 
-参数：
+Parameters:
 
-| 参数名 | 数据类型 | 是否必须 | 说明                  |
+| name | Type | Mandatory | Description           |
 | ------ | -------- | -------- | --------------------- |
-| symbol | string   | 否       | 交易对名称 不传查全部 |
+| symbol | string   | NO       | If the symbol is not sent, all symbols will be returned in an array. |
 
 
-响应：
+Response:
 
-| 参数名   | 说明         |
+| name   | Description  |
 | -------- | ------------ |
-| symbol   | 交易对       |
-| bidPrice | 最高买盘价   |
-| bidQty   | 最高买盘数量 |
-| askPrice | 最低卖盘价   |
-| askQty   | 最低卖盘数量 |
-# 现货账户和交易接口
+| symbol   | Symbol  |
+| bidPrice | Best bid price |
+| bidQty   | Best bid quantity |
+| askPrice | Best ask price |
+| askQty   | Best ask quantity |
+# Spot Account/Trade
 
-## 测试下单
+## Test New Order
 
-> 响应示例
+> Response
 
 ```json
 {}
@@ -776,15 +750,15 @@ OR
 
 - **POST** ```/api/v3/order/test```
 
-用于测试订单请求，但不会提交到撮合引擎
+Creates and validates a new order but does not send it into the matching engine.
 
-参数：
+Parameters:
 
 同于 POST /api/v3/order
 
-## 下单
+## New Order
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -796,31 +770,30 @@ OR
 
 - **POST** ```/api/v3/order```
 
-参数：
+Parameters:
 
-| 名称             | 类型    | 是否必需 | 描述                   |
+| 名称             | 类型    | YES否必需 | 描述                   |
 | ---------------- | ------- | -------- | ---------------------- |
 | symbol           | STRING  | YES      | 交易对                 |
-| side             | ENUM    | YES      | 详见枚举定义：订单方向 |
-| type             | ENUM    | YES      | 详见枚举定义：订单类型 |
-| quantity         | DECIMAL | NO       | 委托数量               |
-| price            | DECIMAL | NO       | 委托价格               |
-| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID |
-| recvWindow       | LONG    | NO       | 赋值不能大于 60000     |
+| side             | ENUM    | YES      | ENUM：Order Side |
+| type             | ENUM    | YES      | ENUM：Order Type |
+| quantity         | DECIMAL | NO       | Quantity     |
+| price            | DECIMAL | NO       | Price           |
+| newClientOrderId | STRING  | NO       |  |
+| recvWindow       | LONG    | NO       | Max 60000   |
 | timestamp        | LONG    | YES      |                        |
 
-枚举值
-|名称||
 
-## 撤销订单
-> 响应示例
+
+## Cancel Orde
+
+> Response
 
 ```json
 {
   "symbol": "LTCBTC",
   "origClientOrderId": "myOrder1",
   "orderId": 4,
-  "orderListId": -1, // OCO订单ID，否则为 -1
   "clientOrderId": "cancelMyOrder1",
   "price": "2.00000000",
   "origQty": "1.00000000",
@@ -835,39 +808,40 @@ OR
 
 - **DELETE** ```/api/v3/order```
 
-取消有效订单。
+Cancel an active order.
 
-参数：
+Parameters:
 
-| 参数名            | 数据类型 | 是否必须 | 说明                   |
+| name            | Type | Mandatory | Description            |
 | ----------------- | -------- | -------- | ---------------------- |
-| symbol            | string   | 是       | 交易对名称             |
-| orderId           | string   | 否       | 订单Id                 |
-| origClientOrderId | string   | 否       | 订单Id                 |
-| newClientOrderId  | string   | NO       | 客户自定义的唯一订单ID |
-| recvWindow        | long     | 否       |                        |
-| timestamp         | long     | 是       |                        |
+| symbol            | string   | YES       |              |
+| orderId           | string   | NO       | Order id         |
+| origClientOrderId | string   | NO       |                  |
+| newClientOrderId  | string   | NO       |  |
+| recvWindow        | long     | NO       |                        |
+| timestamp         | long     | YES       |                        |
 
-orderId 或 origClientOrderId 必须至少发送一个
+Either `orderId` or `origClientOrderId` must be sent.
 
-响应：
+Response:
 
-| 参数名              | 说明             |
+| name              | Description      |
 | ------------------- | ---------------- |
-| symbol              | 交易对           |
-| origClientOrderId   | 原始客户端订单id |
-| orderId             | 订单id           |
-| clientOrderId       | 客户端id         |
-| price               | 价格             |
-| origOty             | qi shi           |
-| executedQty         | 交易的订单数量   |
-| cummulativeQuoteQty | 累计交易金额     |
-| status              | 状态             |
-| timeInForce         | 订单有效方式     |
-| type                | 订单类型         |
-| side                | 订单方向         |
-## 撤销单一交易对所有订单
-> 响应示例
+| symbol              | Symbol                     |
+| origClientOrderId   | Original client order id   |
+| orderId             | order id                   |
+| clientOrderId       | client order id            |
+| price               | Price                      |
+| origOty             | Original order quantity    |
+| executedQty         | Executed order quantity    |
+| cummulativeQuoteQty | Cummulative quote quantity |
+| status              | Order status               |
+| timeInForce         |                            |
+| type                | Order type                 |
+| side                | Order side                 |
+## Cancel all Open Orders on a Symbol 
+
+> Response
 
 ```json
 [
@@ -908,99 +882,97 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 撤销单一交易对下所有挂单, 包括OCO的挂单。
 
-参数：
+Parameters:
 
-| 参数名     | 数据类型 | 是否必须 | 说明   |
-| ---------- | -------- | -------- | ------ |
-| symbol     | string   | 是       | 交易对 |
-| recvWindow | long     | 否       |        |
-| timestamp  | long     | 是       |        |
+| name     | Type | Mandatory | Description |
+| ---------- | -------- | -------- | ----------- |
+| symbol     | string   | YES       |       |
+| recvWindow | long     | NO       |             |
+| timestamp  | long     | YES       |             |
 
 
-响应：
+Response:
 
-| 参数名              | 说明             |
+| name              | Description      |
 | ------------------- | ---------------- |
-| symbol              | 交易对           |
-| origClientOrderId   | 原始客户端订单id |
-| orderId             | 订单id           |
-| clientOrderId       | 客户端id         |
-| price               | 价格             |
-| origOty             | qi shi           |
-| executedQty         | 交易的订单数量   |
-| cummulativeQuoteQty | 累计交易金额     |
-| status              | 状态             |
-| timeInForce         | 订单有效方式     |
-| type                | 订单类型         |
-| side                | 订单方向         |
+| symbol              | Symbol                     |
+| origClientOrderId   | Original client order id   |
+| orderId             | order id                   |
+| clientOrderId       | client order id            |
+| price               | Price                      |
+| origOty             | Original order quantity    |
+| executedQty         | Executed order quantity    |
+| cummulativeQuoteQty | Cummulative quote quantity |
+| status              | Order status               |
+| timeInForce         |                            |
+| type                | Order type                 |
+| side                | Order side                 |
 
-## 查询订单
-> 响应示例
+## Query Order
+
+> Response
 
 ```json
 {
-  "symbol": "LTCBTC", // 交易对
-  "orderId": 1, // 系统的订单ID
-  "orderListId": -1, // OCO订单的ID，不然就是-1
-  "clientOrderId": "myOrder1", // 客户自己设置的ID
-  "price": "0.1", // 订单价格
-  "origQty": "1.0", // 用户设置的原始订单数量
-  "executedQty": "0.0", // 交易的订单数量
-  "cummulativeQuoteQty": "0.0", // 累计交易的金额
-  "status": "NEW", // 订单状态
-  "timeInForce": "GTC", // 订单的时效方式
-  "type": "LIMIT", // 订单类型， 比如市价单，现价单等
-  "side": "BUY", // 订单方向，买还是卖
-  "stopPrice": "0.0", // 止损价格
-  "icebergQty": "0.0", // 冰山数量
-  "time": 1499827319559, // 订单时间
-  "updateTime": 1499827319559, // 最后更新时间
-  "isWorking": true, // 订单是否出现在orderbook中
-  "origQuoteOrderQty": "0.000000" // 原始的交易金额
+  "symbol": "LTCBTC",
+  "orderId": 1,
+  "orderListId": -1,
+  "clientOrderId": "myOrder1",
+  "price": "0.1",
+  "origQty": "1.0",
+  "executedQty": "0.0",
+  "cummulativeQuoteQty": "0.0",
+  "status": "NEW",
+  "timeInForce": "GTC",
+  "type": "LIMIT",
+  "side": "BUY",
+  "stopPrice": "0.0",
+  "time": 1499827319559,
+  "updateTime": 1499827319559,
+  "isWorking": true,
+  "origQuoteOrderQty": "0.000000"
 }
 ```
 
 - **GET** ```/api/v3/order```
 
-查询订单状态。
+Check an order's status.
 
-参数：
+Parameters:
 
-| 参数名            | 数据类型         | 是否必须 | 说明 |
-| ----------------- | ---------------- | -------- | ---- |
-| symbol            | 交易对           | 是       |      |
-| origClientOrderId | 原始客户端订单id | 否       |      |
-| orderId           | 订单id           | 否       |      |
-| recvWindow        | long             | 否       |      |
-| timestamp         | long             | 是       |      |
+| name            | Type         | Mandatory | Description |
+| ----------------- | ---------------- | -------- | ----------- |
+| symbol            | String | YES       |             |
+| origClientOrderId | String | NO       |             |
+| orderId           | String | NO       |             |
+| recvWindow        | long             | NO       |             |
+| timestamp         | long             | YES       |             |
 
 
-响应：
+Response:
 
-| 参数名              | 说明              |
+| name              | Description       |
 | ------------------- | ----------------- |
-| symbol              | 交易对            |
-| origClientOrderId   | 原始客户端订单id  |
-| orderId             | 系统订单id        |
-| clientOrderId       | 客户自定义id      |
-| price               | 价格              |
-| origOty             | 原始订单数量      |
-| executedQty         | 交易的订单数量    |
-| cummulativeQuoteQty | 累计订单金额      |
-| status              | 订单状态          |
-| timeInForce         | 订单的时效方式    |
-| type                | 订单类型          |
-| side                | 订单方向          |
-| stopPrice           | 止损价格          |
-| icebergQty          | 冰山数量          |
-| time                | 订单时间          |
-| updateTime          | 最后更新时间      |
-| isWorking           | 是否在orderbook中 |
-| origQuoteOrderQty   | 原始的交易金额    |
+| symbol              | Symbol       |
+| origClientOrderId   | Original client order id |
+| orderId             | order id |
+| clientOrderId       | client order id |
+| price               | Price       |
+| origOty             | Original order quantity |
+| executedQty         | Executed order quantity |
+| cummulativeQuoteQty | Cummulative quote quantity |
+| status              | Order status |
+| timeInForce         |  |
+| type                | Order type |
+| side                | Order side |
+| stopPrice           | stop price |
+| time                | Order created time |
+| updateTime          | Last update time |
+| isWorking           | is orderbook |
 
-## 当前挂单
+## Current Open Orders
 
-> 响应示例
+> Response
 
 ```json
 [
@@ -1029,43 +1001,22 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 - **GET** ```/api/v3/openOrders```
 
-获取交易对的所有当前挂单
+Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
-参数：
+Parameters:
 
-| 参数名     | 数据类型 | 是否必须 | 说明   |
-| ---------- | -------- | -------- | ------ |
-| symbol     | string   | 是       | 交易对 |
-| recvWindow | long     | 否       |        |
-| timestamp  | long     | 是       |        |
+| name     | Type | Mandatory | Description |
+| ---------- | -------- | -------- | ----------- |
+| symbol     | string   | YES       |       |
+| recvWindow | long     | NO       |             |
+| timestamp  | long     | YES       |             |
 
 
-响应：
+Response:
 
-| 参数名              | 说明              |
-| ------------------- | ----------------- |
-| symbol              | 交易对            |
-| origClientOrderId   | 原始客户端订单id  |
-| orderId             | 系统订单id        |
-| clientOrderId       | 客户自定义id      |
-| price               | 价格              |
-| origOty             | 原始订单数量      |
-| executedQty         | 交易的订单数量    |
-| cummulativeQuoteQty | 累计订单金额      |
-| status              | 订单状态          |
-| timeInForce         | 订单的时效方式    |
-| type                | 订单类型          |
-| side                | 订单方向          |
-| stopPrice           | 止损价格          |
-| icebergQty          | 冰山数量          |
-| time                | 订单时间          |
-| updateTime          | 最后更新时间      |
-| isWorking           | 是否在orderbook中 |
-| origQuoteOrderQty   | 原始的交易金额    |
+## All Orders
 
-## 查询所有订单
-
-> 响应示例
+> Response
 
 ```json
 [
@@ -1096,44 +1047,43 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 获取所有帐户订单； 有效，已取消或已完成。
 
-参数：
+Parameters:
 
-| 参数名     | 数据类型 | 是否必须 | 说明                 |
+| name     | Type | Mandatory | Description          |
 | ---------- | -------- | -------- | -------------------- |
-| symbol     | string   | 是       | 交易对               |
-| orderId    | string   | 否       | 订单id               |
-| startTime  | long     | 否       |                      |
-| endTime    | long     | 否       |                      |
-| limit      | int      | 否       | 默认 500; 最大 1000; |
-| recvWindow | long     | 否       |                      |
-| timestamp  | long     | 是       |                      |
+| symbol     | string   | YES       | Symbol         |
+| orderId    | string   | NO       | Order id          |
+| startTime  | long     | NO       |                      |
+| endTime    | long     | NO       |                      |
+| limit      | int      | NO       | Default  500; max 1000; |
+| recvWindow | long     | NO       |                      |
+| timestamp  | long     | YES       |                      |
 
 
-响应：
+Response:
 
-| 参数名              | 说明              |
+| name              | Description       |
 | ------------------- | ----------------- |
-| symbol              | 交易对            |
-| origClientOrderId   | 原始客户端订单id  |
-| orderId             | 系统订单id        |
-| clientOrderId       | 客户自定义id      |
-| price               | 价格              |
-| origOty             | 原始订单数量      |
-| executedQty         | 交易的订单数量    |
-| cummulativeQuoteQty | 累计订单金额      |
-| status              | 订单状态          |
-| timeInForce         | 订单的时效方式    |
-| type                | 订单类型          |
-| side                | 订单方向          |
-| stopPrice           | 止损价格          |
-| icebergQty          | 冰山数量          |
-| time                | 订单时间          |
-| updateTime          | 最后更新时间      |
-| isWorking           | 是否在orderbook中 |
-| origQuoteOrderQty   | 原始的交易金额    |
-## 账户信息
+| symbol              | Symbol                     |
+| origClientOrderId   | Original client order id   |
+| orderId             | order id                   |
+| clientOrderId       | client order id            |
+| price               | Price                      |
+| origOty             | Original order quantity    |
+| executedQty         | Executed order quantity    |
+| cummulativeQuoteQty | Cummulative quote quantity |
+| status              | Order status               |
+| timeInForce         |                            |
+| type                | Order type                 |
+| side                | Order side                 |
+| stopPrice           | stop price                 |
+| time                | Order created time         |
+| updateTime          | Last update time           |
+| isWorking           | is orderbook               |
+| origQuoteOrderQty   |     |
+## Account Information
 
-> 响应示例
+> Response
 
 ```json
 {
@@ -1163,35 +1113,35 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 获取当前账户信息
 
-参数：
+Parameters:
 
-| 参数名     | 数据类型 | 是否必须 | 说明 |
-| ---------- | -------- | -------- | ---- |
-| recvWindow | long     | 否       |      |
-| timestamp  | long     | 是       |      |
+| name     | Type | Mandatory | Description |
+| ---------- | -------- | -------- | ----------- |
+| recvWindow | long     | NO       |             |
+| timestamp  | long     | YES       |             |
 
 
-响应：
+Response:
 
-| 参数名           | 说明       |
-| ---------------- | ---------- |
-| makerCommission  | maker 费率 |
-| takerCommission  | taker 费率 |
-| buyerCommission  |            |
-| sellerCommission |            |
-| canTrade         | 是否可交易 |
-| canWithdraw      | 是否可提现 |
-| canDeposit       | 是否可充值 |
-| updateTime       | 更新时间   |
-| accountType      | 账户类型   |
-| balances         | 余额       |
-| asset            | 资产币种   |
-| free             | 可用数量   |
-| locked           | 冻结数量   |
-| permissions      | 权限       |
-## 账户成交历史
+| name           | Description |
+| ---------------- | ----------- |
+| makerCommission  | maker fee |
+| takerCommission  | taker fee |
+| buyerCommission  |             |
+| sellerCommission |             |
+| canTrade         | Can Trade |
+| canWithdraw      | Can Withdraw |
+| canDeposit       | Can Deposit |
+| updateTime       | Update Time |
+| accountType      | Account type |
+| balances         | Balance |
+| asset            | Aseet coin |
+| free             | Available  coin |
+| locked           | Forzen coin |
+| permissions      | Permission |
+## Account Trade List
 
-> 响应示例
+> Response
 
 ```json
 [
@@ -1216,50 +1166,49 @@ orderId 或 origClientOrderId 必须至少发送一个
 - **GET** ```/api/v3/myTrades```
 
 
-获取账户指定交易对的成交历史
+Get trades for a specific account and symbol.
 
-参数：
+Parameters:
 
-| 参数名     | 数据类型 | 是否必须 | 说明                   |
+| name     | Type | Mandatory | Description            |
 | ---------- | -------- | -------- | ---------------------- |
-| symbol     | string   | 是       | 交易对                 |
-| orderId    | string   | 否       | 必须和symbol一起使用   |
-| startTime  | long     | 否       |                        |
-| endTime    | long     | 否       |                        |
-| fromId     | long     | 否       | 起始Id默认查询最新交易 |
-| limit      | int      | 否       | 默认 500; 最大 1000;   |
-| recvWindow | long     | 否       |                        |
-| timestamp  | long     | 是       |                        |
+| symbol     | string   | YES       |                  |
+| orderId    | string   | NO       | order Id |
+| startTime  | long     | NO       |                        |
+| endTime    | long     | NO       |                        |
+| fromId     | long     | NO       | Start Id from Trade record |
+| limit      | int      | NO       | Default 500; max 1000; |
+| recvWindow | long     | NO       |                        |
+| timestamp  | long     | YES       |                        |
 
 
-响应：
+Response:
 
-| 参数名          | 说明              |
+| name          | Description       |
 | --------------- | ----------------- |
-| symbol          | 交易对            |
-| id              | 成交id            |
-| orderId         | 订单id            |
-| price           | 价格              |
-| qty             | 数量              |
-| quoteQty        | 成交金额          |
-| time            | 成交时间          |
-| commission      | 交易费金额        |
-| commissionAsset | 交易类资产类型    |
-| time            | 交易时间          |
-| isBuyerMaker    | 是否为买方maker单 |
-| isBestMatch     | 是否为最佳匹配    |
+| symbol          |             |
+| id              | deal id       |
+| orderId         | order id      |
+| price           | Price        |
+| qty             | Quantity     |
+| quoteQty        | Deal quantity |
+| time            | Deal time  |
+| commission      |         |
+| commissionAsset |     |
+| time            | trade time |
+| isBuyerMaker    |  |
+| isBestMatch     |     |
 
+## Public API Definitions
 
-# 公开API参数
+### ENUM definitions
 
-## 枚举定义
+### **Order side**
 
-### 订单方向
+- BUY
+- SELL
 
-- BUY 买入
-- SELL 卖出
+### Order type
 
-### 订单类型
-
-- LIMIT 限价单
-- LIMIT_MAKER 限价只挂单
+- LIMIT    Limit order
+- LIMIT_MAKER   Limit maker order
