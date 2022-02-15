@@ -19,10 +19,10 @@ meta:
 
 - 很多接口需要API Key才可以访问. 请参考[这个页面](https://www.mexc.com/user/openapi)来设置API Key.
 - 设置API Key的同时，为了安全，建议设置IP访问白名单(未添加白名单有效期为90天).
-- 永远不要把你的API key/secret告诉给任何人
+- 永远不要把你的API key/secret告诉给任何人.
   
 <aside class="warning">如果不小心泄露了API key，请立刻删除此Key, 并可以另外生产新的Key.</aside>
- 
+
 ## API Key 权限设置
 
 在创建API Key时勾选所需要的权限
@@ -281,6 +281,7 @@ NONE
 
 - **GET** ```/api/v3/time ```
   
+
 参数：
 
 NONE
@@ -469,6 +470,7 @@ NONE
 
 - **GET** ```/api/v3/aggTrades```
   
+
 归集交易与逐笔交易的区别在于，同一价格、同一方向、同一时间的trade会被聚合为一条
 
 参数：
@@ -516,6 +518,7 @@ NONE
 
 - **GET** ```/api/v3/kline```
   
+
 每根K线代表一个交易对。
 每根K线的开盘时间可视为唯一ID
 
