@@ -1218,7 +1218,6 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 - **GET** ```/api/v3/myTrades```
 
-
 获取账户指定交易对的成交历史
 
 参数：
@@ -1251,6 +1250,44 @@ orderId 或 origClientOrderId 必须至少发送一个
 | time            | 交易时间          |
 | isBuyerMaker    | 是否为买方maker单 |
 | isBestMatch     | 是否为最佳匹配    |
+
+# ETF接口
+
+## 获取杠杆ETF基础信息
+
+> 响应示例
+
+```json
+{
+
+"symbol": "BTC3LUSDT", 
+
+"netValue": "0.147", 
+
+"feeRate":" 0.00001", 
+
+"timestamp": `1507725176595`
+
+}
+
+```
+
+- **GET** ```api/v3/etf/info```
+
+获取ETF的基础信息，如可交易币对、最新净值和管理费率。
+
+参数：
+|  参数  | 数据类型 | 是否必须 | 默认值 |          描述           |
+| :----: | :------: | :------: | :----: | :---------------------: |
+| symbol |  string  |  false   |   NA   | ETF交易对，不填返回所有 |
+
+响应：
+| 字段名称  | 数据类型 |      描述       |
+| :-------: | :------: | :-------------: |
+|  symbol   |  string  | 杠杆ETF交易对 |
+|  netValue  |  string  |    最新净值     |
+|  feeRate  |  string  |    管理费率     |
+|  timestamp |   long   |    系统时间     |
 
 
 # 公开API参数
