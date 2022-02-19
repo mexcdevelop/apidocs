@@ -454,6 +454,14 @@
               </ul>
           </li>
           <li>
+            <a href="#etf" class="toc-h1 toc-link" data-title="ETF接口">ETF接口</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#etf-2" class="toc-h2 toc-link" data-title="获取杠杆ETF基础信息">获取杠杆ETF基础信息</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#api-2" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
               <ul class="toc-list-h2">
                   <li>
@@ -470,11 +478,10 @@
 <ul>
 <li>很多接口需要API Key才可以访问. 请参考<a href="https://www.mexc.com/user/openapi">这个页面</a>来设置API Key.</li>
 <li>设置API Key的同时，为了安全，建议设置IP访问白名单(未添加白名单有效期为90天).</li>
-<li>永远不要把你的API key/secret告诉给任何人</li>
+<li>永远不要把你的API key/secret告诉给任何人.</li>
 </ul>
 
 <aside class="warning">如果不小心泄露了API key，请立刻删除此Key, 并可以另外生产新的Key.</aside>
- 
 <h2 id='api-key-2'>API Key 权限设置</h2>
 <p>在创建API Key时勾选所需要的权限</p>
 <h2 id='api'>API 代码库</h2>
@@ -2745,6 +2752,41 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td>是否为最佳匹配</td>
 </tr>
 </tbody></table>
+<h1 id='etf'>ETF接口</h1><h2 id='etf-2'>获取杠杆ETF基础信息</h2>
+<blockquote>
+<p>响应示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+</span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC3LUSDT"</span><span class="p">,</span><span class="w"> 
+
+</span><span class="nl">"netValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.147"</span><span class="p">,</span><span class="w"> 
+
+</span><span class="nl">"feeRate"</span><span class="p">:</span><span class="s2">" 0.00001"</span><span class="p">,</span><span class="w"> 
+
+</span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="mi">1507725176595</span><span class="err">`</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>api/v3/etf/info</code></li>
+</ul>
+
+<p>获取ETF的基础信息，如可交易币对、最新净值和管理费率。</p>
+
+<p>参数：
+|  参数  | 数据类型 | 是否必须 | 默认值 |          描述           |
+| :----: | :------: | :------: | :----: | :---------------------: |
+| symbol |  string  |  false   |   NA   | ETF交易对，不填返回所有 |</p>
+
+<p>响应：
+| 字段名称  | 数据类型 |      描述       |
+| :-------: | :------: | :-------------: |
+|  symbol   |  string  | 杠杆ETF交易对 |
+|  netValue  |  string  |    最新净值     |
+|  feeRate  |  string  |    管理费率     |
+|  timestamp |   long   |    系统时间     |</p>
 <h1 id='api-2'>公开API参数</h1><h2 id='8c6d51826c'>枚举定义</h2><h3 id='ba0138f8ea'>订单方向</h3>
 <ul>
 <li>BUY 买入</li>
