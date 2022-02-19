@@ -437,6 +437,14 @@
                   <li>
                     <a href="#account-trade-list" class="toc-h2 toc-link" data-title="Account Trade List">Account Trade List</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#etf" class="toc-h1 toc-link" data-title="ETF">ETF</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-etf-info" class="toc-h2 toc-link" data-title="Get ETF info">Get ETF info</a>
+                  </li>
                   <li>
                     <a href="#public-api-definitions" class="toc-h2 toc-link" data-title="Public API Definitions">Public API Definitions</a>
                   </li>
@@ -480,7 +488,9 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 </ul></li>
 </ul>
 <h1 id='change-log'>Change Log</h1>
-<p><strong>2022-02-11</strong>
+<p><strong>2022-02-19</strong>
+- Add ETF 
+<strong>2022-02-11</strong>
 - New version api</p>
 <h1 id='general-info'>General Info</h1><h2 id='base-endpoint'>Base endpoint</h2>
 <p>The base endpoint is：</p>
@@ -2588,6 +2598,41 @@ Klines are uniquely identified by their open time.</p>
 <td></td>
 </tr>
 </tbody></table>
+<h1 id='etf'>ETF</h1><h2 id='get-etf-info'>Get ETF info</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+</span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC3LUSDT"</span><span class="p">,</span><span class="w"> 
+
+</span><span class="nl">"netValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.147"</span><span class="p">,</span><span class="w"> 
+
+</span><span class="nl">"feeRate"</span><span class="p">:</span><span class="s2">" 0.00001"</span><span class="p">,</span><span class="w"> 
+
+</span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="mi">1507725176595</span><span class="err">`</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>api/v3/etf/info</code></li>
+</ul>
+
+<p>Get information on ETFs, such as symbol, netValue and fund fee.</p>
+
+<p>Parameters
+| name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | string | No        | ETF symbol  |</p>
+
+<p>Response:
+| name      | Type   | Description |
+| --------- | ------ | ----------- |
+| symbol    | string | ETF symbol  |
+| netValue  | string | Net Value   |
+| feeRate   | string | Fund Fee    |
+| timestamp | long   |             |</p>
 <h2 id='public-api-definitions'>Public API Definitions</h2><h3 id='enum-definitions'>ENUM definitions</h3><h3 id='order-side'><strong>Order side</strong></h3>
 <ul>
 <li>BUY</li>
