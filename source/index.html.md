@@ -165,9 +165,9 @@ curl command:
 
 以下是在linux bash环境下使用 echo openssl 和curl工具实现的一个调用接口下单的示例 apikey、secret仅供示范
 
-| Key       | Value                                                            |
-| --------- | ---------------------------------------------------------------- |
-| apiKey    | mx0aBYs33eIilxBWC5                                               |
+| Key       | Value                            |
+| --------- | -------------------------------- |
+| apiKey    | mx0aBYs33eIilxBWC5               |
 | secretKey | 45d0b3c26f2644f19bfb98b07741b2f5 |
 
 
@@ -1277,17 +1277,17 @@ orderId 或 origClientOrderId 必须至少发送一个
 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
 
 参数：
-|  参数  | 数据类型 | 是否必须 | 默认值 |          描述           |
-| :----: | :------: | :------: | :----: | :---------------------: |
-| symbol |  string  |  false   |   NA   | ETF交易对，不填返回所有 |
+| 参数   | 数据类型 | 是否必须 | 默认值 | 描述                    |
+| ------ | -------- | -------- | ------ | ----------------------- |
+| symbol | string   | 否       | NA     | ETF交易对，不填返回所有 |
 
 响应：
-| 字段名称  | 数据类型 |      描述       |
-| :-------: | :------: | :-------------: |
-|  symbol   |  string  | 杠杆ETF交易对 |
-|  netValue  |  string  |    最新净值     |
-|  feeRate  |  string  |    管理费率     |
-|  timestamp |   long   |    系统时间     |
+| 字段名称  | 数据类型 | 描述          |
+| --------- | -------- | ------------- |
+| symbol    | string   | 杠杆ETF交易对 |
+| netValue  | string   | 最新净值      |
+| feeRate   | string   | 管理费率      |
+| timestamp | long     | 系统时间      |
 
 
 # 公开API参数
