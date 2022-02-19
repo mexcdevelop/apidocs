@@ -48,6 +48,8 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 # Change Log
 
+**2022-02-19**
+- Add ETF 
 **2022-02-11**
 - New version api
 
@@ -166,7 +168,7 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 
 
 
-| Parameter  | Value          |
+| Parameter  | Value         |
 | ---------- | ------------- |
 | symbol     | BTCUSDT       |
 | side       | BUY           |
@@ -220,9 +222,9 @@ The default rate limiting rule for an endpoint is 20 times per second.
 
 Relevant parameters in the header
 
-| key            | Description            |
+| key                 | Description            |
 | ------------------- | ---------------------- |
-| ```X-MEXC-APIKEY``` | Access key |
+| ```X-MEXC-APIKEY``` | Access key             |
 | ```Content-Type```  | ```application/json``` |
 
 # Market Date Endpoints
@@ -301,11 +303,11 @@ Current exchange trading rules and symbol information
 
 There are 3 possible options:
 
-| Method         | **Example**                                                               |
+| Method       | **Example**                                                                   |
 | ------------ | ----------------------------------------------------------------------------- |
 | No parameter | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo"                        |
-| symbol | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"          |
-| symbols | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
+| symbol       | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"          |
+| symbols      | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
 
 ## Order Book
 
@@ -327,18 +329,18 @@ There are 3 possible options:
 
 Parameter：
 
-| name   | Type | Mandatory | Description | Scope      |
-| ------ | -------- | -------- | ----------- | ------------------- |
-| symbol | string   | YES       | Symbol |                     |
-| limit  | integer  | NO       | Returen  number | default 100; max 5000 |
+| name   | Type    | Mandatory | Description     | Scope                 |
+| ------ | ------- | --------- | --------------- | --------------------- |
+| symbol | string  | YES       | Symbol          |                       |
+| limit  | integer | NO        | Returen  number | default 100; max 5000 |
 
 Response：
 
-| name         | Type | Description         |
-| ------------ | -------- | ------------------- |
-| lastUpdateId | long     | Deal time |
-| bids         | list     | Bid [Price, Quantity ] |
-| asks         | list     | Ask [Price, Quantity ] |
+| name         | Type | Description            |
+| ------------ | ---- | ---------------------- |
+| lastUpdateId | long | Deal time              |
+| bids         | list | Bid [Price, Quantity ] |
+| asks         | list | Ask [Price, Quantity ] |
 
 ## Recent Trades List
 
@@ -362,22 +364,22 @@ Response：
 
 Parameter：
 
-| name   | Type | Mandatory | Description | Scope       |
-| ------ | -------- | -------- | ----------- | ------------------- |
-| symbol | string   | YES       |   |                     |
-| limit  | integer  | NO       |   | Default  500; max 1000 |
+| name   | Type    | Mandatory | Description | Scope                  |
+| ------ | ------- | --------- | ----------- | ---------------------- |
+| symbol | string  | YES       |             |                        |
+| limit  | integer | NO        |             | Default  500; max 1000 |
 
 
 Response:
 
-| name         | Description    |
-| ------------ | -------------- |
-| id           | Trade id    |
-| price        | Price       |
-| qty          | Number      |
-| quoteQty     | Trade total |
-| time         | Trade time |
-| isBuyerMaker | Was the buyer the maker? |
+| name         | Description                         |
+| ------------ | ----------------------------------- |
+| id           | Trade id                            |
+| price        | Price                               |
+| qty          | Number                              |
+| quoteQty     | Trade total                         |
+| time         | Trade time                          |
+| isBuyerMaker | Was the buyer the maker?            |
 | isBestMatch  | Was the trade the best price match? |
 
 ## Old Trade Lookup
@@ -402,17 +404,17 @@ Response:
 
 Parameters:
 
-| name | Type | Mandatory | Description                                      | Scope      |
-| ------ | -------- | -------- | ------------------------------------------------ | ------------------- |
-| symbol | string   | YES       | Symbol                                 |                     |
-| limit  | integer  | NO       | Return number                          | Default 500; max 1000 |
-| fromId | integer  | NO       | Trade id to fetch from. Default gets most recent trades. |                     |
+| name   | Type    | Mandatory | Description                                              | Scope                 |
+| ------ | ------- | --------- | -------------------------------------------------------- | --------------------- |
+| symbol | string  | YES       | Symbol                                                   |                       |
+| limit  | integer | NO        | Return number                                            | Default 500; max 1000 |
+| fromId | integer | NO        | Trade id to fetch from. Default gets most recent trades. |                       |
 
 
 Response:
 
-| name       | Description    |
-| ------------ | -------------- |
+| name         | Description                         |
+| ------------ | ----------------------------------- |
 | id           | Trade id                            |
 | price        | Price                               |
 | qty          | Number                              |
@@ -447,27 +449,27 @@ Get compressed, aggregate trades. Trades that fill at the time, from the same or
 
 Parameters:
 
-| name    | Type | Mandatory | Description                        | Scope        |
-| --------- | -------- | -------- | ---------------------------------- | ------------------- |
-| symbol    | string   | YES       |                          |                     |
-| fromId    | long     | NO       | id to get aggregate trades from INCLUSIVE. |                     |
-| startTime | long     | NO       | Timestamp in ms to get aggregate trades from INCLUSIVE. |                     |
-| endTimne  | long     | NO       | Timestamp in ms to get aggregate trades until INCLUSIVE. |                     |
-| limit     | integer  | NO       |                          | Default 500; max 1000. |
+| name      | Type    | Mandatory | Description                                              | Scope                  |
+| --------- | ------- | --------- | -------------------------------------------------------- | ---------------------- |
+| symbol    | string  | YES       |                                                          |                        |
+| fromId    | long    | NO        | id to get aggregate trades from INCLUSIVE.               |                        |
+| startTime | long    | NO        | Timestamp in ms to get aggregate trades from INCLUSIVE.  |                        |
+| endTimne  | long    | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |                        |
+| limit     | integer | NO        |                                                          | Default 500; max 1000. |
 
 
 Response:
 
-| name | Description                                |
-| ------ | ------------------------------------------ |
-| a      | Aggregate tradeId                |
-| f      | First tradeId            |
-| l      | Last tradeId            |
-| p      | Price                                |
-| q      | Quantity                             |
-| T      | Timestamp                          |
-| m      | Was the buyer the maker?   |
-| M      | Was the trade the best price match? |
+| name | Description                         |
+| ---- | ----------------------------------- |
+| a    | Aggregate tradeId                   |
+| f    | First tradeId                       |
+| l    | Last tradeId                        |
+| p    | Price                               |
+| q    | Quantity                            |
+| T    | Timestamp                           |
+| m    | Was the buyer the maker?            |
+| M    | Was the trade the best price match? |
 
 ## Kline/Candlestick Data
 
@@ -496,13 +498,13 @@ Klines are uniquely identified by their open time.
 
 Parameters:
 
-| name    | Type | Mandatory | Description         |
-| --------- | -------- | -------- | ------------------- |
-| symbol    | string   | YES       |           |
-| interval  | ENUM     | YES       | ENUM: Kline interval |
-| startTime | long     | NO       |                     |
-| endTimne  | long     | NO       |                     |
-| limit     | integer  | NO       | Default 500; max 1000. |
+| name      | Type    | Mandatory | Description            |
+| --------- | ------- | --------- | ---------------------- |
+| symbol    | string  | YES       |                        |
+| interval  | ENUM    | YES       | ENUM: Kline interval   |
+| startTime | long    | NO        |                        |
+| endTimne  | long    | NO        |                        |
+| limit     | integer | NO        | Default 500; max 1000. |
 
 
 Response:
@@ -534,17 +536,17 @@ Response:
 
 Parameters:
 
-| name | Type | Mandatory | Description |
-| ------ | -------- | -------- | ----------- |
-| symbol | string   | YES       |   |
+| name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | string | YES       |             |
 
 
 Response:
 
-| name | Description  |
-| ------ | ------------ |
-| mins   | Average price time frame |
-| price  | Price    |
+| name  | Description              |
+| ----- | ------------------------ |
+| mins  | Average price time frame |
+| price | Price                    |
 
 ## 24hr Ticker Price Change Statistics
 
@@ -621,33 +623,33 @@ or
 
 Parameters:
 
-| name | Type | Mandatory | Description                       |
-| ------ | -------- | -------- | --------------------------------- |
-| symbol | string   | NO       | If the symbol is not sent, tickers for all symbols will be returned in an array. |
+| name   | Type   | Mandatory | Description                                                                      |
+| ------ | ------ | --------- | -------------------------------------------------------------------------------- |
+| symbol | string | NO        | If the symbol is not sent, tickers for all symbols will be returned in an array. |
 
 
 Response:
 
-| name             | Description |
-| ------------------ | ----------- |
-| symbol             | Symbol |
-| priceChange        | price Change |
-| priceChangePercent | price change percent |
+| name               | Description           |
+| ------------------ | --------------------- |
+| symbol             | Symbol                |
+| priceChange        | price Change          |
+| priceChangePercent | price change percent  |
 | prevClosePrice     | Previous  close price |
-| lastPrice          | Last price |
-| lastQty            | Last quantity |
-| bidPrice           | Bid best price |
-| bidQty             | Bid best quantity |
-| askPrice           | Ask best price |
-| askQty             | Ask best quantity |
-| openPrice          | Open   |
-| highPrice          | High |
-| lowPrice           | Low   |
-| volume             | Deal volume |
-| quoteVolume        | Quote asset volume |
-| openTime           | Start time |
-| closeTime          | Close time |
-| count              |             |
+| lastPrice          | Last price            |
+| lastQty            | Last quantity         |
+| bidPrice           | Bid best price        |
+| bidQty             | Bid best quantity     |
+| askPrice           | Ask best price        |
+| askQty             | Ask best quantity     |
+| openPrice          | Open                  |
+| highPrice          | High                  |
+| lowPrice           | Low                   |
+| volume             | Deal volume           |
+| quoteVolume        | Quote asset volume    |
+| openTime           | Start time            |
+| closeTime          | Close time            |
+| count              |                       |
 
 ## Symbol Price Ticker
 
@@ -675,17 +677,17 @@ or
 
 Parameters:
 
-| name | Type | Mandatory | Description           |
-| ------ | -------- | -------- | --------------------- |
-| symbol | string   | NO       | If the symbol is not sent, all symbols will be returned in an array. |
+| name   | Type   | Mandatory | Description                                                          |
+| ------ | ------ | --------- | -------------------------------------------------------------------- |
+| symbol | string | NO        | If the symbol is not sent, all symbols will be returned in an array. |
 
 
 Response:
 
-| name | Description |
+| name   | Description |
 | ------ | ----------- |
-| symbol |       |
-| price  | Last price |
+| symbol |             |
+| price  | Last price  |
 
 ## Symbol Order Book Ticker
 
@@ -725,19 +727,19 @@ Best price/qty on the order book for a symbol or symbols.
 
 Parameters:
 
-| name | Type | Mandatory | Description           |
-| ------ | -------- | -------- | --------------------- |
-| symbol | string   | NO       | If the symbol is not sent, all symbols will be returned in an array. |
+| name   | Type   | Mandatory | Description                                                          |
+| ------ | ------ | --------- | -------------------------------------------------------------------- |
+| symbol | string | NO        | If the symbol is not sent, all symbols will be returned in an array. |
 
 
 Response:
 
-| name   | Description  |
-| -------- | ------------ |
-| symbol   | Symbol  |
-| bidPrice | Best bid price |
+| name     | Description       |
+| -------- | ----------------- |
+| symbol   | Symbol            |
+| bidPrice | Best bid price    |
 | bidQty   | Best bid quantity |
-| askPrice | Best ask price |
+| askPrice | Best ask price    |
 | askQty   | Best ask quantity |
 # Spot Account/Trade
 
@@ -773,16 +775,16 @@ Parameters:
 
 Parameters:
 
-| 名称             | 类型    | YES否必需 | 描述                   |
-| ---------------- | ------- | -------- | ---------------------- |
-| symbol           | STRING  | YES      | 交易对                 |
-| side             | ENUM    | YES      | ENUM：Order Side |
-| type             | ENUM    | YES      | ENUM：Order Type |
-| quantity         | DECIMAL | NO       | Quantity     |
-| price            | DECIMAL | NO       | Price           |
-| newClientOrderId | STRING  | NO       |  |
-| recvWindow       | LONG    | NO       | Max 60000   |
-| timestamp        | LONG    | YES      |                        |
+| 名称             | 类型    | YES否必需 | 描述             |
+| ---------------- | ------- | --------- | ---------------- |
+| symbol           | STRING  | YES       | 交易对           |
+| side             | ENUM    | YES       | ENUM：Order Side |
+| type             | ENUM    | YES       | ENUM：Order Type |
+| quantity         | DECIMAL | NO        | Quantity         |
+| price            | DECIMAL | NO        | Price            |
+| newClientOrderId | STRING  | NO        |                  |
+| recvWindow       | LONG    | NO        | Max 60000        |
+| timestamp        | LONG    | YES       |                  |
 
 
 
@@ -813,21 +815,21 @@ Cancel an active order.
 
 Parameters:
 
-| name            | Type | Mandatory | Description            |
-| ----------------- | -------- | -------- | ---------------------- |
-| symbol            | string   | YES       |              |
-| orderId           | string   | NO       | Order id         |
-| origClientOrderId | string   | NO       |                  |
-| newClientOrderId  | string   | NO       |  |
-| recvWindow        | long     | NO       |                        |
-| timestamp         | long     | YES       |                        |
+| name              | Type   | Mandatory | Description |
+| ----------------- | ------ | --------- | ----------- |
+| symbol            | string | YES       |             |
+| orderId           | string | NO        | Order id    |
+| origClientOrderId | string | NO        |             |
+| newClientOrderId  | string | NO        |             |
+| recvWindow        | long   | NO        |             |
+| timestamp         | long   | YES       |             |
 
 Either `orderId` or `origClientOrderId` must be sent.
 
 Response:
 
-| name              | Description      |
-| ------------------- | ---------------- |
+| name                | Description                |
+| ------------------- | -------------------------- |
 | symbol              | Symbol                     |
 | origClientOrderId   | Original client order id   |
 | orderId             | order id                   |
@@ -885,17 +887,17 @@ Response:
 
 Parameters:
 
-| name     | Type | Mandatory | Description |
-| ---------- | -------- | -------- | ----------- |
-| symbol     | string   | YES       |       |
-| recvWindow | long     | NO       |             |
-| timestamp  | long     | YES       |             |
+| name       | Type   | Mandatory | Description |
+| ---------- | ------ | --------- | ----------- |
+| symbol     | string | YES       |             |
+| recvWindow | long   | NO        |             |
+| timestamp  | long   | YES       |             |
 
 
 Response:
 
-| name              | Description      |
-| ------------------- | ---------------- |
+| name                | Description                |
+| ------------------- | -------------------------- |
 | symbol              | Symbol                     |
 | origClientOrderId   | Original client order id   |
 | orderId             | order id                   |
@@ -941,35 +943,35 @@ Check an order's status.
 
 Parameters:
 
-| name            | Type         | Mandatory | Description |
-| ----------------- | ---------------- | -------- | ----------- |
+| name              | Type   | Mandatory | Description |
+| ----------------- | ------ | --------- | ----------- |
 | symbol            | String | YES       |             |
-| origClientOrderId | String | NO       |             |
-| orderId           | String | NO       |             |
-| recvWindow        | long             | NO       |             |
-| timestamp         | long             | YES       |             |
+| origClientOrderId | String | NO        |             |
+| orderId           | String | NO        |             |
+| recvWindow        | long   | NO        |             |
+| timestamp         | long   | YES       |             |
 
 
 Response:
 
-| name              | Description       |
-| ------------------- | ----------------- |
-| symbol              | Symbol       |
-| origClientOrderId   | Original client order id |
-| orderId             | order id |
-| clientOrderId       | client order id |
-| price               | Price       |
-| origOty             | Original order quantity |
-| executedQty         | Executed order quantity |
+| name                | Description                |
+| ------------------- | -------------------------- |
+| symbol              | Symbol                     |
+| origClientOrderId   | Original client order id   |
+| orderId             | order id                   |
+| clientOrderId       | client order id            |
+| price               | Price                      |
+| origOty             | Original order quantity    |
+| executedQty         | Executed order quantity    |
 | cummulativeQuoteQty | Cummulative quote quantity |
-| status              | Order status |
-| timeInForce         |  |
-| type                | Order type |
-| side                | Order side |
-| stopPrice           | stop price |
-| time                | Order created time |
-| updateTime          | Last update time |
-| isWorking           | is orderbook |
+| status              | Order status               |
+| timeInForce         |                            |
+| type                | Order type                 |
+| side                | Order side                 |
+| stopPrice           | stop price                 |
+| time                | Order created time         |
+| updateTime          | Last update time           |
+| isWorking           | is orderbook               |
 
 ## Current Open Orders
 
@@ -1006,11 +1008,11 @@ Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 Parameters:
 
-| name     | Type | Mandatory | Description |
-| ---------- | -------- | -------- | ----------- |
-| symbol     | string   | YES       |       |
-| recvWindow | long     | NO       |             |
-| timestamp  | long     | YES       |             |
+| name       | Type   | Mandatory | Description |
+| ---------- | ------ | --------- | ----------- |
+| symbol     | string | YES       |             |
+| recvWindow | long   | NO        |             |
+| timestamp  | long   | YES       |             |
 
 
 Response:
@@ -1050,21 +1052,21 @@ Response:
 
 Parameters:
 
-| name     | Type | Mandatory | Description          |
-| ---------- | -------- | -------- | -------------------- |
-| symbol     | string   | YES       | Symbol         |
-| orderId    | string   | NO       | Order id          |
-| startTime  | long     | NO       |                      |
-| endTime    | long     | NO       |                      |
-| limit      | int      | NO       | Default  500; max 1000; |
-| recvWindow | long     | NO       |                      |
-| timestamp  | long     | YES       |                      |
+| name       | Type   | Mandatory | Description             |
+| ---------- | ------ | --------- | ----------------------- |
+| symbol     | string | YES       | Symbol                  |
+| orderId    | string | NO        | Order id                |
+| startTime  | long   | NO        |                         |
+| endTime    | long   | NO        |                         |
+| limit      | int    | NO        | Default  500; max 1000; |
+| recvWindow | long   | NO        |                         |
+| timestamp  | long   | YES       |                         |
 
 
 Response:
 
-| name              | Description       |
-| ------------------- | ----------------- |
+| name                | Description                |
+| ------------------- | -------------------------- |
 | symbol              | Symbol                     |
 | origClientOrderId   | Original client order id   |
 | orderId             | order id                   |
@@ -1081,7 +1083,7 @@ Response:
 | time                | Order created time         |
 | updateTime          | Last update time           |
 | isWorking           | is orderbook               |
-| origQuoteOrderQty   |     |
+| origQuoteOrderQty   |                            |
 ## Account Information
 
 > Response
@@ -1116,30 +1118,30 @@ Response:
 
 Parameters:
 
-| name     | Type | Mandatory | Description |
-| ---------- | -------- | -------- | ----------- |
-| recvWindow | long     | NO       |             |
-| timestamp  | long     | YES       |             |
+| name       | Type | Mandatory | Description |
+| ---------- | ---- | --------- | ----------- |
+| recvWindow | long | NO        |             |
+| timestamp  | long | YES       |             |
 
 
 Response:
 
-| name           | Description |
-| ---------------- | ----------- |
-| makerCommission  | maker fee |
-| takerCommission  | taker fee |
-| buyerCommission  |             |
-| sellerCommission |             |
-| canTrade         | Can Trade |
-| canWithdraw      | Can Withdraw |
-| canDeposit       | Can Deposit |
-| updateTime       | Update Time |
-| accountType      | Account type |
-| balances         | Balance |
-| asset            | Aseet coin |
+| name             | Description     |
+| ---------------- | --------------- |
+| makerCommission  | maker fee       |
+| takerCommission  | taker fee       |
+| buyerCommission  |                 |
+| sellerCommission |                 |
+| canTrade         | Can Trade       |
+| canWithdraw      | Can Withdraw    |
+| canDeposit       | Can Deposit     |
+| updateTime       | Update Time     |
+| accountType      | Account type    |
+| balances         | Balance         |
+| asset            | Aseet coin      |
 | free             | Available  coin |
-| locked           | Forzen coin |
-| permissions      | Permission |
+| locked           | Forzen coin     |
+| permissions      | Permission      |
 ## Account Trade List
 
 > Response
@@ -1171,34 +1173,74 @@ Get trades for a specific account and symbol.
 
 Parameters:
 
-| name     | Type | Mandatory | Description            |
-| ---------- | -------- | -------- | ---------------------- |
-| symbol     | string   | YES       |                  |
-| orderId    | string   | NO       | order Id |
-| startTime  | long     | NO       |                        |
-| endTime    | long     | NO       |                        |
-| fromId     | long     | NO       | Start Id from Trade record |
-| limit      | int      | NO       | Default 500; max 1000; |
-| recvWindow | long     | NO       |                        |
-| timestamp  | long     | YES       |                        |
+| name       | Type   | Mandatory | Description                |
+| ---------- | ------ | --------- | -------------------------- |
+| symbol     | string | YES       |                            |
+| orderId    | string | NO        | order Id                   |
+| startTime  | long   | NO        |                            |
+| endTime    | long   | NO        |                            |
+| fromId     | long   | NO        | Start Id from Trade record |
+| limit      | int    | NO        | Default 500; max 1000;     |
+| recvWindow | long   | NO        |                            |
+| timestamp  | long   | YES       |                            |
 
 
 Response:
 
-| name          | Description       |
-| --------------- | ----------------- |
-| symbol          |             |
+| name            | Description   |
+| --------------- | ------------- |
+| symbol          |               |
 | id              | deal id       |
 | orderId         | order id      |
-| price           | Price        |
-| qty             | Quantity     |
+| price           | Price         |
+| qty             | Quantity      |
 | quoteQty        | Deal quantity |
-| time            | Deal time  |
-| commission      |         |
-| commissionAsset |     |
-| time            | trade time |
-| isBuyerMaker    |  |
-| isBestMatch     |     |
+| time            | Deal time     |
+| commission      |               |
+| commissionAsset |               |
+| time            | trade time    |
+| isBuyerMaker    |               |
+| isBestMatch     |               |
+
+# ETF
+
+## Get ETF info
+
+> Response
+
+```json
+{
+
+"symbol": "BTC3LUSDT", 
+
+"netValue": "0.147", 
+
+"feeRate":" 0.00001", 
+
+"timestamp": `1507725176595`
+
+}
+
+```
+
+- **GET** ```api/v3/etf/info```
+
+Get information on ETFs, such as symbol, netValue and fund fee.
+
+Parameters
+| name   | Type   | Mandatory | Description |
+| ------ | ------ | --------- | ----------- |
+| symbol | string | No        | ETF symbol  |
+
+
+Response:
+| name      | Type   | Description |
+| --------- | ------ | ----------- |
+| symbol    | string | ETF symbol  |
+| netValue  | string | Net Value   |
+| feeRate   | string | Fund Fee    |
+| timestamp | long   |             |
+
 
 ## Public API Definitions
 
