@@ -48,9 +48,9 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 # Change Log
 
-**2022-02-19**
+## **2022-02-19**
 - Add ETF 
-**2022-02-11**
+## **2022-02-11**
 - New version api
 
 # General Info
