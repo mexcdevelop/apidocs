@@ -366,21 +366,13 @@
                     <a href="#dac673286f" class="toc-h2 toc-link" data-title="返回格式">返回格式</a>
                   </li>
                   <li>
+                    <a href="#header" class="toc-h2 toc-link" data-title="Header操作的组成">Header操作的组成</a>
+                  </li>
+                  <li>
                     <a href="#8ba46c43fe" class="toc-h2 toc-link" data-title="签名">签名</a>
                   </li>
                   <li>
                     <a href="#c1fd2fc5ac" class="toc-h2 toc-link" data-title="限频规则">限频规则</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#2d07d50c97" class="toc-h1 toc-link" data-title="接入说明">接入说明</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#7cd4531da3" class="toc-h2 toc-link" data-title="签名操作的组成">签名操作的组成</a>
-                  </li>
-                  <li>
-                    <a href="#8e3023a1c8" class="toc-h2 toc-link" data-title="签名方法">签名方法</a>
                   </li>
               </ul>
           </li>
@@ -543,6 +535,24 @@
 </ul>
 <h2 id='dac673286f'>返回格式</h2>
 <p>所有接口的返回数据均为JSON形式</p>
+<h2 id='header'>Header操作的组成</h2>
+<p>请求Header中签名相关参数</p>
+
+<table><thead>
+<tr>
+<th>组成部分</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>X-MEXC-APIKEY</code></td>
+<td>API key中的access key</td>
+</tr>
+<tr>
+<td><code>Content-Type</code></td>
+<td><code>application/json</code></td>
+</tr>
+</tbody></table>
 <h2 id='8ba46c43fe'>签名</h2>
 <ul>
 <li>调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。</li>
@@ -707,47 +717,6 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <p>需要携带access key进行访问的接口，以账号作为限速的基本单位；不需要携带access key进行访问的接口，以IP作为限速的基本单位</p>
 
 <p>未说明限速规则的接口默认为20次/秒</p>
-<h1 id='2d07d50c97'>接入说明</h1><h2 id='7cd4531da3'>签名操作的组成</h2>
-<p>请求Header中签名相关参数</p>
-
-<table><thead>
-<tr>
-<th>组成部分</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>X-MEXC-APIKEY</code></td>
-<td>API key中的access key</td>
-</tr>
-<tr>
-<td><code>Content-Type</code></td>
-<td><code>application/json</code></td>
-</tr>
-</tbody></table>
-<h2 id='8e3023a1c8'>签名方法</h2>
-<ol>
-<li><p>对于公共接口,不需要签名。</p></li>
-<li><p>对于私有接口,需要在header中传入X-MEXC-APIKEY、Signature、Content-Type 必须指定为application/json，Signature为签名字符串</p></li>
-</ol>
-
-<ul>
-<li>签名规则如下:
-
-<ol>
-<li>签名时需要先获得请求参数字符串，无参时为&quot;&quot;：<br />对于GET/DELETE请求，按Querystring拼接业务参数以&amp;间隔，并最终获得签名目标串（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。<br />对于POST请求，签名参数为json字符串（无需进行字典排序）。</li>
-<li>获得参数字符串后，再拼接签名目标串，规则为：accessKey+时间戳+获取到的参数字符串</li>
-<li>使用HMAC SHA256算法对目标串用SecretKey进行签名，并最终将签名作为参数携带到header中</li>
-</ol></li>
-</ul>
-
-<p>注意：</p>
-
-<p>1)参与签名的业务参数为null时，不参与签名；注意get请求将参数拼接至url上时，如果参数为null， 后台解析时，会解析成&quot;&quot;，POST请求，参数为null时，不要传该参数，或者签名时，将该参数的值设置为&quot;&quot;，否则会出现验签失败。</p>
-
-<p>2)请求时将签名时用到的Request-Time的值放入header的Request-Time参数中，获得的签名字符串放入header的Signature参数中，将APIKEY的Access Key放在header的ApiKey参数中，其余业务参数按正常传递即可。</p>
-
-<p>3)获得的签名字符串不需要进行base64进行编码。</p>
 <h1 id='ed913b7357'>行情接口</h1><h2 id='16073bbcf1'>测试服务器连通性</h2>
 <blockquote>
 <p>响应示例</p>
