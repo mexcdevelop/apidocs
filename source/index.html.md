@@ -69,12 +69,22 @@ The base endpoint is：
 - HTTP 5XX return codes are used for internal errors; the issue is on MEXC's side. It is important to NOT treat this as a failure operation; the execution status is UNKNOWN and could have been a success.
 ## General Information on Endpoints
 
-相应API接受GET，POST或DELETE类型的请求
+The API accepts requests of type GET, POST or DELETE
 
 - For GET endpoints, parameters must be sent as a query string.
 - For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string or in the request body with content type application/x-www-form-urlencoded. You may mix parameters between both the query string and request body if you wish to do so.
 - Parameters may be sent in any order.
 - If a parameter sent in both the query string and request body, the query string parameter will be used.
+
+
+## Header
+
+Relevant parameters in the header
+
+| key                 | Description            |
+| ------------------- | ---------------------- |
+| ```X-MEXC-APIKEY``` | Access key             |
+| ```Content-Type```  | ```application/json``` |
 
 ## SIGNED
 - SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body.
@@ -217,15 +227,6 @@ There is rate limit for API access frequency, upon exceed client will get code 4
 The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
 
 The default rate limiting rule for an endpoint is 20 times per second.
-
-## Header
-
-Relevant parameters in the header
-
-| key                 | Description            |
-| ------------------- | ---------------------- |
-| ```X-MEXC-APIKEY``` | Access key             |
-| ```Content-Type```  | ```application/json``` |
 
 # Market Date Endpoints
 
@@ -673,7 +674,7 @@ or
 ]
 ```
 
-- **GET** ```/api/v3/price```
+- **GET** ```/api/v3/ticker/price```
 
 Parameters:
 
