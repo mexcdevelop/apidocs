@@ -76,15 +76,11 @@ under the License.
         <%= image_tag "mexc-logo.svg", class: 'logo' %>
         <div class="nav_box">
           <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('spot_v2')" class="spot_v2" href="javascript:void(0);">Spot</a>
-          </span>
-          <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('contract_v1')" class="contract_v1" href="javascript:void(0);">Contract</a>
+            <a onClick="javascript:changeMenuLink('spot_v3')" class="spot_v3" href="javascript:void(0);">Spot</a>
           </span>
         </div>
         <select class="toc-nav-dropdown" onChange="javascript:changeMenuLink(options[selectedIndex].value)">
-          <option class="spot_v2" value="spot_v2">Spot</option>
-          <option class="contract_v1" value="contract_v1">Contract</option>
+          <option class="spot_v3" value="spot_v3">Spot</option>
         </select>
       </div>
       <a onClick="javascript:changeHyperLink()" class="lang" href="javascript:void(0);" id="lang_box">english</a>
@@ -156,7 +152,7 @@ under the License.
       const currentLang = /cn/.test(window.location.pathname);
       const toggleBtn = $("#lang_box");
       const currentSystem = /contract/.test(window.location.pathname);
-      const spot_btn =  $(".spot_v2");
+      const spot_btn =  $(".spot_v3");
       const contract_btn =  $(".contract_v1");
       toggleBtn.html(currentLang ? 'english': '中文')
       spot_btn.html(currentLang ? '现货': 'Spot' )

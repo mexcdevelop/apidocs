@@ -701,7 +701,7 @@ or
 ]
 ```
 
-- **GET** ```/api/v3/price```
+- **GET** ```/api/v3/ticker/price```
 
 参数：
 
