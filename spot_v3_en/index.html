@@ -446,8 +446,19 @@
                   <li>
                     <a href="#get-etf-info" class="toc-h2 toc-link" data-title="Get ETF info">Get ETF info</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#public-api-definitions" class="toc-h1 toc-link" data-title="Public API Definitions">Public API Definitions</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#public-api-definitions" class="toc-h2 toc-link" data-title="Public API Definitions">Public API Definitions</a>
+                    <a href="#enum-definitions" class="toc-h2 toc-link" data-title="ENUM definitions">ENUM definitions</a>
+                  </li>
+                  <li>
+                    <a href="#order-side" class="toc-h2 toc-link" data-title="Order side"><strong>Order side</strong></a>
+                  </li>
+                  <li>
+                    <a href="#order-type" class="toc-h2 toc-link" data-title="Order type">Order type</a>
                   </li>
               </ul>
           </li>
@@ -2623,19 +2634,55 @@ Klines are uniquely identified by their open time.</p>
 
 <p>Get information on ETFs, such as symbol, netValue and fund fee.</p>
 
-<p>Parameters
-| name   | Type   | Mandatory | Description |
-| ------ | ------ | --------- | ----------- |
-| symbol | string | No        | ETF symbol  |</p>
+<p>Parameters:</p>
 
-<p>Response:
-| name      | Type   | Description |
-| --------- | ------ | ----------- |
-| symbol    | string | ETF symbol  |
-| netValue  | string | Net Value   |
-| feeRate   | string | Fund Fee    |
-| timestamp | long   |             |</p>
-<h2 id='public-api-definitions'>Public API Definitions</h2><h3 id='enum-definitions'>ENUM definitions</h3><h3 id='order-side'><strong>Order side</strong></h3>
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>ETF symbol</td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>ETF symbol</td>
+</tr>
+<tr>
+<td>netValue</td>
+<td>string</td>
+<td>Net Value</td>
+</tr>
+<tr>
+<td>feeRate</td>
+<td>string</td>
+<td>Fund Fee</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id='public-api-definitions'>Public API Definitions</h1><h3 id='enum-definitions'>ENUM definitions</h3><h3 id='order-side'><strong>Order side</strong></h3>
 <ul>
 <li>BUY</li>
 <li>SELL</li>
