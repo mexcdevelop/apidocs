@@ -83,6 +83,15 @@ meta:
 
 所有接口的返回数据均为JSON形式
 
+## Header操作的组成
+
+请求Header中签名相关参数
+
+| 组成部分            | 说明                   |
+| ------------------- | ---------------------- |
+| ```X-MEXC-APIKEY``` | API key中的access key  |
+| ```Content-Type```  | ```application/json``` |
+
 ## 签名
 - 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。
 - 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
@@ -223,35 +232,6 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 未说明限速规则的接口默认为20次/秒
 
-# 接入说明
-
-## 签名操作的组成
-
-请求Header中签名相关参数
-
-| 组成部分            | 说明                   |
-| ------------------- | ---------------------- |
-| ```X-MEXC-APIKEY``` | API key中的access key  |
-| ```Content-Type```  | ```application/json``` |
-
-## 签名方法 
-
-1. 对于公共接口,不需要签名。
-
-2. 对于私有接口,需要在header中传入X-MEXC-APIKEY、Signature、Content-Type 必须指定为application/json，Signature为签名字符串
-
-* 签名规则如下:
-    1. 签名时需要先获得请求参数字符串，无参时为""：<br />对于GET/DELETE请求，按Querystring拼接业务参数以&间隔，并最终获得签名目标串（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。<br />对于POST请求，签名参数为json字符串（无需进行字典排序）。
-    2. 获得参数字符串后，再拼接签名目标串，规则为：accessKey+时间戳+获取到的参数字符串
-    3. 使用HMAC SHA256算法对目标串用SecretKey进行签名，并最终将签名作为参数携带到header中
-
-注意：
-
-  1)参与签名的业务参数为null时，不参与签名；注意get请求将参数拼接至url上时，如果参数为null， 后台解析时，会解析成""，POST请求，参数为null时，不要传该参数，或者签名时，将该参数的值设置为""，否则会出现验签失败。
-
-  2)请求时将签名时用到的Request-Time的值放入header的Request-Time参数中，获得的签名字符串放入header的Signature参数中，将APIKEY的Access Key放在header的ApiKey参数中，其余业务参数按正常传递即可。
-
-  3)获得的签名字符串不需要进行base64进行编码。
 
 # 行情接口
 
