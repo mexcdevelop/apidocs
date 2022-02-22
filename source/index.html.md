@@ -1228,13 +1228,15 @@ Response:
 
 Get information on ETFs, such as symbol, netValue and fund fee.
 
-Parameters
+Parameters:
+
 | name   | Type   | Mandatory | Description |
 | ------ | ------ | --------- | ----------- |
 | symbol | string | No        | ETF symbol  |
 
 
 Response:
+
 | name      | Type   | Description |
 | --------- | ------ | ----------- |
 | symbol    | string | ETF symbol  |
@@ -1243,7 +1245,7 @@ Response:
 | timestamp | long   |             |
 
 
-## Public API Definitions
+# Public API Definitions
 
 ### ENUM definitions
 
