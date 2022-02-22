@@ -304,15 +304,11 @@
         <img src="images/mexc-logo-67e94f1e.svg" class="logo" alt="" />
         <div class="nav_box">
           <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('spot_v2')" class="spot_v2" href="javascript:void(0);">Spot</a>
-          </span>
-          <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('contract_v1')" class="contract_v1" href="javascript:void(0);">Contract</a>
+            <a onClick="javascript:changeMenuLink('spot_v3')" class="spot_v2" href="javascript:void(0);">Spot</a>
           </span>
         </div>
         <select class="toc-nav-dropdown" onChange="javascript:changeMenuLink(options[selectedIndex].value)">
-          <option class="spot_v2" value="spot_v2">Spot</option>
-          <option class="contract_v1" value="contract_v1">Contract</option>
+          <option class="spot_v2" value="spot_v3">Spot</option>
         </select>
       </div>
       <a onClick="javascript:changeHyperLink()" class="lang" href="javascript:void(0);" id="lang_box">english</a>
@@ -361,13 +357,13 @@
                     <a href="#http-return-codes" class="toc-h2 toc-link" data-title="HTTP Return Codes">HTTP Return Codes</a>
                   </li>
                   <li>
+                    <a href="#header" class="toc-h2 toc-link" data-title="Header">Header</a>
+                  </li>
+                  <li>
                     <a href="#signed" class="toc-h2 toc-link" data-title="SIGNED">SIGNED</a>
                   </li>
                   <li>
                     <a href="#limits" class="toc-h2 toc-link" data-title="Limits">Limits</a>
-                  </li>
-                  <li>
-                    <a href="#header" class="toc-h2 toc-link" data-title="Header">Header</a>
                   </li>
               </ul>
           </li>
@@ -513,7 +509,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 ## General Information on Endpoints</li>
 </ul>
 
-<p>相应API接受GET，POST或DELETE类型的请求</p>
+<p>The API accepts requests of type GET, POST or DELETE</p>
 
 <ul>
 <li>For GET endpoints, parameters must be sent as a query string.</li>
@@ -521,6 +517,24 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li>Parameters may be sent in any order.</li>
 <li>If a parameter sent in both the query string and request body, the query string parameter will be used.</li>
 </ul>
+<h2 id='header'>Header</h2>
+<p>Relevant parameters in the header</p>
+
+<table><thead>
+<tr>
+<th>key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>X-MEXC-APIKEY</code></td>
+<td>Access key</td>
+</tr>
+<tr>
+<td><code>Content-Type</code></td>
+<td><code>application/json</code></td>
+</tr>
+</tbody></table>
 <h2 id='signed'>SIGNED</h2>
 <ul>
 <li>SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body.</li>
@@ -683,24 +697,6 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <p>The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.</p>
 
 <p>The default rate limiting rule for an endpoint is 20 times per second.</p>
-<h2 id='header'>Header</h2>
-<p>Relevant parameters in the header</p>
-
-<table><thead>
-<tr>
-<th>key</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>X-MEXC-APIKEY</code></td>
-<td>Access key</td>
-</tr>
-<tr>
-<td><code>Content-Type</code></td>
-<td><code>application/json</code></td>
-</tr>
-</tbody></table>
 <h1 id='market-date-endpoints'>Market Date Endpoints</h1><h2 id='test-connectivity'>Test Connectivity</h2>
 <blockquote>
 <p>Response</p>
@@ -1495,7 +1491,7 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/price</code></li>
+<li><strong>GET</strong> <code>/api/v3/ticker/price</code></li>
 </ul>
 
 <p>Parameters:</p>
@@ -2663,7 +2659,7 @@ Klines are uniquely identified by their open time.</p>
       const currentLang = /cn/.test(window.location.pathname);
       const toggleBtn = $("#lang_box");
       const currentSystem = /contract/.test(window.location.pathname);
-      const spot_btn =  $(".spot_v2");
+      const spot_btn =  $(".spot_v3");
       const contract_btn =  $(".contract_v1");
       toggleBtn.html(currentLang ? 'english': '中文')
       spot_btn.html(currentLang ? '现货': 'Spot' )
