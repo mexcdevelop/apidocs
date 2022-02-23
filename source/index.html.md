@@ -620,7 +620,7 @@ or
 ]
 ```
 
-- **GET** ```/api/v3/ticker/25hr```
+- **GET** ```/api/v3/ticker/24hr```
 
 Parameters:
 
