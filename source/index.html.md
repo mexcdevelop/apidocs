@@ -196,24 +196,12 @@ curl command:
 **示例 1: 所有参数通过 request body 发送**
 
 - requestBody:
-symbol=BTCUSDT
-&side=BUY
-&type=LIMIT
-&quantity=1
-&price=11
-&recvWindow=5000
-&timestamp=1644489390087
+symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 **所有参数通过 query string 发送**
 
 - queryString:
-symbol=BTCUSDT
-&side=BUY
-&type=LIMIT
-&quantity=1
-&price=11
-&recvWindow=5000
-&timestamp=1644489390087
+symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 **示例 3: 混合使用 query string 和 request body**
 
@@ -794,8 +782,7 @@ OR
 | recvWindow       | LONG    | NO       | 赋值不能大于 60000     |
 | timestamp        | LONG    | YES      |                        |
 
-枚举值
-|名称||
+
 
 ## 撤销订单
 > 响应示例
@@ -828,7 +815,7 @@ OR
 | ----------------- | -------- | -------- | ---------------------- |
 | symbol            | string   | 是       | 交易对名称             |
 | orderId           | string   | 否       | 订单Id                 |
-| origClientOrderId | string   | 否       | 订单Id                 |
+| origClientOrderId | string   | 否       | 初始自定义订单Id       |
 | newClientOrderId  | string   | NO       | 客户自定义的唯一订单ID |
 | recvWindow        | long     | 否       |                        |
 | timestamp         | long     | 是       |                        |
@@ -844,7 +831,7 @@ orderId 或 origClientOrderId 必须至少发送一个
 | orderId             | 订单id           |
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
-| origOty             | qi shi           |
+| origOty             | 初始数量         |
 | executedQty         | 交易的订单数量   |
 | cummulativeQuoteQty | 累计交易金额     |
 | status              | 状态             |
@@ -911,7 +898,7 @@ orderId 或 origClientOrderId 必须至少发送一个
 | orderId             | 订单id           |
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
-| origOty             | qi shi           |
+| origOty             | 初始数量         |
 | executedQty         | 交易的订单数量   |
 | cummulativeQuoteQty | 累计交易金额     |
 | status              | 状态             |
@@ -1229,7 +1216,6 @@ orderId 或 origClientOrderId 必须至少发送一个
 | time            | 成交时间          |
 | commission      | 交易费金额        |
 | commissionAsset | 交易类资产类型    |
-| time            | 交易时间          |
 | isBuyerMaker    | 是否为买方maker单 |
 | isBestMatch     | 是否为最佳匹配    |
 
@@ -1259,17 +1245,22 @@ orderId 或 origClientOrderId 必须至少发送一个
 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
 
 参数：
+
 | 参数   | 数据类型 | 是否必须 | 默认值 | 描述                    |
 | ------ | -------- | -------- | ------ | ----------------------- |
 | symbol | string   | 否       | NA     | ETF交易对，不填返回所有 |
 
+
+
 响应：
+
 | 字段名称  | 数据类型 | 描述          |
 | --------- | -------- | ------------- |
 | symbol    | string   | 杠杆ETF交易对 |
 | netValue  | string   | 最新净值      |
 | feeRate   | string   | 管理费率      |
 | timestamp | long     | 系统时间      |
+
 
 
 # 公开API参数
@@ -1285,3 +1276,21 @@ orderId 或 origClientOrderId 必须至少发送一个
 
 - LIMIT 限价单
 - LIMIT_MAKER 限价只挂单
+
+### K线间隔
+
+- 1m  1分钟
+- 3m  3分钟
+- 5m  5分钟
+- 15m  15分钟
+- 30m  30分钟
+- 1h  1小时
+- 2h  2小时
+- 4h  4小时
+- 6h  6小时
+- 8h  8小时
+- 12h  12小时
+- 1d  1天
+- 3d  3天
+- 1w  1周
+- 1M  1月
