@@ -48,7 +48,12 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 # Change Log
 
+## **2022-03-09**
+
+- Add kline interval
+
 ## **2022-02-19**
+
 - Add ETF 
 ## **2022-02-11**
 - New version api
@@ -188,27 +193,15 @@ Here is a step-by-step example of how to send a vaild signed payload from the Li
 | recvWindow | 5000          |
 | timestamp  | 1644489390087 |
 
-#### Example 1: As a request body
+#### **Example 1: As a request body**
 
 - requestBody:
-symbol=BTCUSDT
-&side=BUY
-&type=LIMIT
-&quantity=1
-&price=11
-&recvWindow=5000
-&timestamp=1644489390087
+symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 **Example 2: As a query string**
 
 - queryString:
-symbol=BTCUSDT
-&side=BUY
-&type=LIMIT
-&quantity=1
-&price=11
-&recvWindow=5000
-&timestamp=1644489390087
+symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 **Example 3: Mixed query string and request body**
 
@@ -778,7 +771,7 @@ Parameters:
 
 | 名称             | 类型    | YES否必需 | 描述             |
 | ---------------- | ------- | --------- | ---------------- |
-| symbol           | STRING  | YES       | 交易对           |
+| symbol           | STRING  | YES       |                  |
 | side             | ENUM    | YES       | ENUM：Order Side |
 | type             | ENUM    | YES       | ENUM：Order Type |
 | quantity         | DECIMAL | NO        | Quantity         |
@@ -884,7 +877,7 @@ Response:
 
 - **DELETE** ```/api/v3/openOrders```
 
-撤销单一交易对下所有挂单, 包括OCO的挂单。
+Cancel all pending orders for a single  symbol, including OCO pending orders.
 
 Parameters:
 
@@ -1049,7 +1042,7 @@ Response:
 
 - **GET** ```/api/v3/allOrders```
 
-获取所有帐户订单； 有效，已取消或已完成。
+Get all account orders; active, cancelled or completed
 
 Parameters:
 
@@ -1115,7 +1108,7 @@ Response:
 
 - **GET** ```/api/v3/account```
 
-获取当前账户信息
+Get current account information
 
 Parameters:
 
@@ -1150,8 +1143,8 @@ Response:
 ```json
 [
   {
-    "symbol": "BNBBTC", // 交易对
-    "id": 28457, // trade ID
+    "symbol": "BNBBTC",
+    "id": 28457,
     "orderId": 100234, 
     "orderListId": -1, 
     "price": "4.00000100", 
@@ -1258,3 +1251,21 @@ Response:
 
 - LIMIT    Limit order
 - LIMIT_MAKER   Limit maker order
+
+### Kline Interval
+
+- 1m  1 minute
+- 3m  3 minute
+- 5m  5 minute
+- 15m  15 minute
+- 30m  30 minute
+- 1h  1 hour
+- 2h  2 hour
+- 4h  4 hour
+- 6h  6 hour
+- 8h  8 hour
+- 12h  12 hour
+- 1d  1 day
+- 3d  3 day
+- 1w  1 week
+- 1M  1 month
