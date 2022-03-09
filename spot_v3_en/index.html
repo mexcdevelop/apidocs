@@ -343,6 +343,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-09" class="toc-h2 toc-link" data-title="2022-03-09"><strong>2022-03-09</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-02-19" class="toc-h2 toc-link" data-title="2022-02-19"><strong>2022-02-19</strong></a>
                   </li>
               </ul>
@@ -460,6 +463,9 @@
                   <li>
                     <a href="#order-type" class="toc-h2 toc-link" data-title="Order type">Order type</a>
                   </li>
+                  <li>
+                    <a href="#kline-interval" class="toc-h2 toc-link" data-title="Kline Interval">Kline Interval</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -499,7 +505,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-02-19'><strong>2022-02-19</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-03-09'><strong>2022-03-09</strong></h2>
+<ul>
+<li>Add kline interval</li>
+</ul>
+<h2 id='2022-02-19'><strong>2022-02-19</strong></h2>
 <ul>
 <li>Add ETF 
 ## <strong>2022-02-11</strong></li>
@@ -667,29 +677,17 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <td>1644489390087</td>
 </tr>
 </tbody></table>
-<h4 id='example-1-as-a-request-body'>Example 1: As a request body</h4>
+<h4 id='example-1-as-a-request-body'><strong>Example 1: As a request body</strong></h4>
 <ul>
 <li>requestBody:
-symbol=BTCUSDT
-&amp;side=BUY
-&amp;type=LIMIT
-&amp;quantity=1
-&amp;price=11
-&amp;recvWindow=5000
-&amp;timestamp=1644489390087</li>
+symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</li>
 </ul>
 
 <p><strong>Example 2: As a query string</strong></p>
 
 <ul>
 <li>queryString:
-symbol=BTCUSDT
-&amp;side=BUY
-&amp;type=LIMIT
-&amp;quantity=1
-&amp;price=11
-&amp;recvWindow=5000
-&amp;timestamp=1644489390087</li>
+symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</li>
 </ul>
 
 <p><strong>Example 3: Mixed query string and request body</strong></p>
@@ -1665,7 +1663,7 @@ Klines are uniquely identified by their open time.</p>
 <td>symbol</td>
 <td>STRING</td>
 <td>YES</td>
-<td>交易对</td>
+<td></td>
 </tr>
 <tr>
 <td>side</td>
@@ -1883,7 +1881,7 @@ Klines are uniquely identified by their open time.</p>
 <li><strong>DELETE</strong> <code>/api/v3/openOrders</code></li>
 </ul>
 
-<p>撤销单一交易对下所有挂单, 包括OCO的挂单。</p>
+<p>Cancel all pending orders for a single  symbol, including OCO pending orders.</p>
 
 <p>Parameters:</p>
 
@@ -2212,7 +2210,7 @@ Klines are uniquely identified by their open time.</p>
 <li><strong>GET</strong> <code>/api/v3/allOrders</code></li>
 </ul>
 
-<p>获取所有帐户订单； 有效，已取消或已完成。</p>
+<p>Get all account orders; active, cancelled or completed</p>
 
 <p>Parameters:</p>
 
@@ -2375,7 +2373,7 @@ Klines are uniquely identified by their open time.</p>
 <li><strong>GET</strong> <code>/api/v3/account</code></li>
 </ul>
 
-<p>获取当前账户信息</p>
+<p>Get current account information</p>
 
 <p>Parameters:</p>
 
@@ -2472,8 +2470,8 @@ Klines are uniquely identified by their open time.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNBBTC"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">交易对</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28457</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">trade</span><span class="w"> </span><span class="err">ID</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNBBTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28457</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100234</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.00000100"</span><span class="p">,</span><span class="w"> 
@@ -2691,6 +2689,24 @@ Klines are uniquely identified by their open time.</p>
 <ul>
 <li>LIMIT    Limit order</li>
 <li>LIMIT_MAKER   Limit maker order</li>
+</ul>
+<h3 id='kline-interval'>Kline Interval</h3>
+<ul>
+<li>1m  1 minute</li>
+<li>3m  3 minute</li>
+<li>5m  5 minute</li>
+<li>15m  15 minute</li>
+<li>30m  30 minute</li>
+<li>1h  1 hour</li>
+<li>2h  2 hour</li>
+<li>4h  4 hour</li>
+<li>6h  6 hour</li>
+<li>8h  8 hour</li>
+<li>12h  12 hour</li>
+<li>1d  1 day</li>
+<li>3d  3 day</li>
+<li>1w  1 week</li>
+<li>1M  1 month</li>
 </ul>
 
       </div>
