@@ -492,7 +492,7 @@ NONE
 ]
 ```
 
-- **GET** ```/api/v3/kline```
+- **GET** ```/api/v3/klines```
   
 
 每根K线代表一个交易对。
