@@ -484,7 +484,7 @@ Response:
 ]
 ```
 
-- **GET** ```/api/v3/kline```
+- **GET** ```/api/v3/klines```
   
 
 Kline/candlestick bars for a symbol.
