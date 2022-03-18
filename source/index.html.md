@@ -48,6 +48,11 @@ meta:
 
 # 更新日志
 
+## **2022-03-18**
+
+- 新增订单类型：市价单
+- 新增分页说明：startTime和endTime需同时使用
+
 ## **2022-03-09**
 
 - 新增枚举类型
@@ -282,7 +287,7 @@ NONE
       "quoteAssetPrecision": 1,
       "baseCommissionPrecision": 1,
       "quoteCommissionPrecision": 1,
-      "orderTypes": ["LIMIT", "LIMIT_MAKER"],
+      "orderTypes": ["LIMIT", "LIMIT_MAKER", "MARKET"],
       "icebergAllowed": false,
       "ocoAllowed": false,
       "quoteOrderQtyMarketAllowed": false,
@@ -456,9 +461,10 @@ NONE
 | symbol    | string   | 是       | 交易对名称                         |                     |
 | fromId    | long     | 否       | 从包含fromId的成交id开始返回结果   |                     |
 | startTime | long     | 否       | 从该时刻之后的成交记录开始返回结果 |                     |
-| endTimne  | long     | 否       | 返回该时刻为止的成交记录           |                     |
+| endTime   | long     | 否       | 返回该时刻为止的成交记录           |                     |
 | limit     | integer  | 否       | 返回的条数                         | 默认 500; 最大 1000 |
 
+注意：startTime和endTime需同时使用
 
 响应：
 
@@ -508,6 +514,7 @@ NONE
 | endTimne  | long     | 否       |                     |
 | limit     | integer  | 否       | 默认 500; 最大 1000 |
 
+注意：startTime和endTime需同时使用
 
 响应：
 
@@ -1086,6 +1093,7 @@ orderId 或 origClientOrderId 必须至少发送一个
 | recvWindow | long     | 否       |                      |
 | timestamp  | long     | 是       |                      |
 
+注意：startTime和endTime需同时使用
 
 响应：
 
@@ -1281,6 +1289,7 @@ orderId 或 origClientOrderId 必须至少发送一个
 ### 订单类型
 
 - LIMIT 限价单
+- MARKET 市价单
 - LIMIT_MAKER 限价只挂单
 
 ### K线间隔
