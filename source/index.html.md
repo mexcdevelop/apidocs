@@ -276,7 +276,7 @@ NONE
       "quoteAssetPrecision": 1,
       "baseCommissionPrecision": 1,
       "quoteCommissionPrecision": 1,
-      "orderTypes": ["LIMIT", "LIMIT_MAKER"],
+      "orderTypes": ["LIMIT", "MARKET", "LIMIT_MAKER"],
       "icebergAllowed": false,
       "ocoAllowed": false,
       "quoteOrderQtyMarketAllowed": false,
@@ -448,7 +448,7 @@ Parameters:
 | symbol    | string  | YES       |                                                          |                        |
 | fromId    | long    | NO        | id to get aggregate trades from INCLUSIVE.               |                        |
 | startTime | long    | NO        | Timestamp in ms to get aggregate trades from INCLUSIVE.  |                        |
-| endTimne  | long    | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |                        |
+| endTime   | long    | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |                        |
 | limit     | integer | NO        |                                                          | Default 500; max 1000. |
 
 
@@ -497,7 +497,7 @@ Parameters:
 | symbol    | string  | YES       |                        |
 | interval  | ENUM    | YES       | ENUM: Kline interval   |
 | startTime | long    | NO        |                        |
-| endTimne  | long    | NO        |                        |
+| endTime   | long    | NO        |                        |
 | limit     | integer | NO        | Default 500; max 1000. |
 
 
@@ -1250,6 +1250,7 @@ Response:
 ### Order type
 
 - LIMIT    Limit order
+- MARKET Market order
 - LIMIT_MAKER   Limit maker order
 
 ### Kline Interval
