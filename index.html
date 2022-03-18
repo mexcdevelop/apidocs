@@ -343,6 +343,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-18" class="toc-h2 toc-link" data-title="2022-03-18"><strong>2022-03-18</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-03-09" class="toc-h2 toc-link" data-title="2022-03-09"><strong>2022-03-09</strong></a>
                   </li>
                   <li>
@@ -506,7 +509,12 @@
 <li> 咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-03-09'><strong>2022-03-09</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-03-18'><strong>2022-03-18</strong></h2>
+<ul>
+<li>新增订单类型：市价单</li>
+<li>新增分页说明：startTime和endTime需同时使用</li>
+</ul>
+<h2 id='2022-03-09'><strong>2022-03-09</strong></h2>
 <ul>
 <li>新增枚举类型</li>
 <li>修复文档问题</li>
@@ -762,7 +770,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
       </span><span class="nl">"quoteAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"baseCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"quoteCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LIMIT_MAKER"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"orderTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LIMIT_MAKER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">],</span><span class="w">
       </span><span class="nl">"icebergAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"ocoAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"quoteOrderQtyMarketAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -1104,7 +1112,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td></td>
 </tr>
 <tr>
-<td>endTimne</td>
+<td>endTime</td>
 <td>long</td>
 <td>否</td>
 <td>返回该时刻为止的成交记录</td>
@@ -1118,6 +1126,8 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td>默认 500; 最大 1000</td>
 </tr>
 </tbody></table>
+
+<p>注意：startTime和endTime需同时使用</p>
 
 <p>响应：</p>
 
@@ -1225,6 +1235,8 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td>默认 500; 最大 1000</td>
 </tr>
 </tbody></table>
+
+<p>注意：startTime和endTime需同时使用</p>
 
 <p>响应：</p>
 
@@ -2363,6 +2375,8 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 </tbody></table>
 
+<p>注意：startTime和endTime需同时使用</p>
+
 <p>响应：</p>
 
 <table><thead>
@@ -2787,6 +2801,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <h3 id='a1d4eaf18c'>订单类型</h3>
 <ul>
 <li>LIMIT 限价单</li>
+<li>MARKET 市价单</li>
 <li>LIMIT_MAKER 限价只挂单</li>
 </ul>
 <h3 id='k-2'>K线间隔</h3>
