@@ -48,6 +48,15 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 # Change Log
 
+## **2022-03-21**
+
+- Add order state
+
+## **2022-03-18**
+
+- Add new order type：Market
+- Add time page info：startTime and endTime need to the same time
+
 ## **2022-03-09**
 
 - Add kline interval
@@ -1252,6 +1261,14 @@ Response:
 - LIMIT    Limit order
 - MARKET Market order
 - LIMIT_MAKER   Limit maker order
+
+### Order State
+
+- NEW   Uncompleted
+- FIELLD  Filled
+- PARTIALLY_FILLED  Partially filled
+- CANCELED  Canceled
+- PARTIALLY_CANCELED  Partially canceled
 
 ### Kline Interval
 
