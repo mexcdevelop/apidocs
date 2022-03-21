@@ -343,6 +343,12 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-21" class="toc-h2 toc-link" data-title="2022-03-21"><strong>2022-03-21</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-03-18" class="toc-h2 toc-link" data-title="2022-03-18"><strong>2022-03-18</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-03-09" class="toc-h2 toc-link" data-title="2022-03-09"><strong>2022-03-09</strong></a>
                   </li>
                   <li>
@@ -464,6 +470,9 @@
                     <a href="#order-type" class="toc-h2 toc-link" data-title="Order type">Order type</a>
                   </li>
                   <li>
+                    <a href="#order-state" class="toc-h2 toc-link" data-title="Order State">Order State</a>
+                  </li>
+                  <li>
                     <a href="#kline-interval" class="toc-h2 toc-link" data-title="Kline Interval">Kline Interval</a>
                   </li>
               </ul>
@@ -505,7 +514,16 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-03-09'><strong>2022-03-09</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-03-21'><strong>2022-03-21</strong></h2>
+<ul>
+<li>Add order state</li>
+</ul>
+<h2 id='2022-03-18'><strong>2022-03-18</strong></h2>
+<ul>
+<li>Add new order type：Market</li>
+<li>Add time page info：startTime and endTime need to the same time</li>
+</ul>
+<h2 id='2022-03-09'><strong>2022-03-09</strong></h2>
 <ul>
 <li>Add kline interval</li>
 </ul>
@@ -2690,6 +2708,14 @@ Klines are uniquely identified by their open time.</p>
 <li>LIMIT    Limit order</li>
 <li>MARKET Market order</li>
 <li>LIMIT_MAKER   Limit maker order</li>
+</ul>
+<h3 id='order-state'>Order State</h3>
+<ul>
+<li>NEW   Uncompleted</li>
+<li>FIELLD  Filled</li>
+<li>PARTIALLY_FILLED  Partially filled</li>
+<li>CANCELED  Canceled</li>
+<li>PARTIALLY_CANCELED  Partially canceled</li>
 </ul>
 <h3 id='kline-interval'>Kline Interval</h3>
 <ul>
