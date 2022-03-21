@@ -48,6 +48,10 @@ meta:
 
 # 更新日志
 
+## **2022-03-21**
+
+- 新增订单状态枚举
+
 ## **2022-03-18**
 
 - 新增订单类型：市价单
@@ -1291,6 +1295,14 @@ orderId 或 origClientOrderId 必须至少发送一个
 - LIMIT 限价单
 - MARKET 市价单
 - LIMIT_MAKER 限价只挂单
+
+### 订单状态
+
+- NEW 未成交
+- FILLED 已成交
+- PARTIALLY_FILLED 部分成交
+- CANCELED 已撤销
+- PARTIALLY_CANCELED 部分撤销
 
 ### K线间隔
 
