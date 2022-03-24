@@ -343,6 +343,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-24" class="toc-h2 toc-link" data-title="2022-03-24"><strong>2022-03-24</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-03-21" class="toc-h2 toc-link" data-title="2022-03-21"><strong>2022-03-21</strong></a>
                   </li>
                   <li>
@@ -514,7 +517,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-03-21'><strong>2022-03-21</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-03-24'><strong>2022-03-24</strong></h2>
+<ul>
+<li>Add information of market order </li>
+</ul>
+<h2 id='2022-03-21'><strong>2022-03-21</strong></h2>
 <ul>
 <li>Add order state</li>
 </ul>
@@ -1702,6 +1709,12 @@ Klines are uniquely identified by their open time.</p>
 <td>Quantity</td>
 </tr>
 <tr>
+<td>quoteOrderQty</td>
+<td>DECIMAL</td>
+<td>NO</td>
+<td>Quote order quantity</td>
+</tr>
+<tr>
 <td>price</td>
 <td>DECIMAL</td>
 <td>NO</td>
@@ -1726,6 +1739,41 @@ Klines are uniquely identified by their open time.</p>
 <td></td>
 </tr>
 </tbody></table>
+
+<p>Additional mandatory parameters based on <code>type</code>:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Additional mandatory parameters</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>LIMIT</code></td>
+<td style="text-align: left"><code>quantity</code>, <code>price</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>MARKET</code></td>
+<td style="text-align: left"><code>quantity</code> or <code>quoteOrderQty</code></td>
+</tr>
+</tbody></table>
+
+<p>Other info:</p>
+
+<ul>
+<li><code>MARKET</code> orders using the <code>quantity</code> field specifies the amount of the <code>base asset</code> the user wants to buy or sell at the market price
+
+<ul>
+<li>For example, sending a <code>MARKET</code> order on BTCUSDT will specify how much BTC the user is buying or selling.</li>
+</ul></li>
+<li><code>MARKET</code> orders using <code>quoteOrderQty</code> specifies the amount the user wants to spend (when buying) or receive (when selling) the <code>quote</code> asset; the correct <code>quantity</code> will be determined based on the market liquidity and <code>quoteOrderQty</code>.
+
+<ul>
+<li>Using BTCUSDT as an example:</li>
+<li>On the <code>BUY</code> side, the order will buy as many BTC as <code>quoteOrderQty</code> USDT can.</li>
+<li>On the <code>SELL</code> side, the order will sell as much BTC needed to receive <code>quoteOrderQty</code> USDT.</li>
+</ul></li>
+</ul>
 <h2 id='cancel-orde'>Cancel Orde</h2>
 <blockquote>
 <p>Response</p>
