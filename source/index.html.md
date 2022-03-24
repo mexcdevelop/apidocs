@@ -48,6 +48,10 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 # Change Log
 
+## **2022-03-24**
+
+- Add information of market order 
+
 ## **2022-03-21**
 
 - Add order state
@@ -778,18 +782,33 @@ Parameters:
 
 Parameters:
 
-| 名称             | 类型    | YES否必需 | 描述             |
-| ---------------- | ------- | --------- | ---------------- |
-| symbol           | STRING  | YES       |                  |
-| side             | ENUM    | YES       | ENUM：Order Side |
-| type             | ENUM    | YES       | ENUM：Order Type |
-| quantity         | DECIMAL | NO        | Quantity         |
-| price            | DECIMAL | NO        | Price            |
-| newClientOrderId | STRING  | NO        |                  |
-| recvWindow       | LONG    | NO        | Max 60000        |
-| timestamp        | LONG    | YES       |                  |
+| 名称             | 类型    | YES否必需 | 描述                 |
+| ---------------- | ------- | --------- | -------------------- |
+| symbol           | STRING  | YES       |                      |
+| side             | ENUM    | YES       | ENUM：Order Side     |
+| type             | ENUM    | YES       | ENUM：Order Type     |
+| quantity         | DECIMAL | NO        | Quantity             |
+| quoteOrderQty    | DECIMAL | NO        | Quote order quantity |
+| price            | DECIMAL | NO        | Price                |
+| newClientOrderId | STRING  | NO        |                      |
+| recvWindow       | LONG    | NO        | Max 60000            |
+| timestamp        | LONG    | YES       |                      |
 
+Additional mandatory parameters based on `type`:
 
+| Type     | Additional mandatory parameters |
+| :------- | :------------------------------ |
+| `LIMIT`  | `quantity`, `price`             |
+| `MARKET` | `quantity` or `quoteOrderQty`   |
+
+Other info:
+
+- `MARKET` orders using the `quantity` field specifies the amount of the `base asset` the user wants to buy or sell at the market price
+  - For example, sending a `MARKET` order on BTCUSDT will specify how much BTC the user is buying or selling.
+- `MARKET` orders using `quoteOrderQty` specifies the amount the user wants to spend (when buying) or receive (when selling) the `quote` asset; the correct `quantity` will be determined based on the market liquidity and `quoteOrderQty`.
+  - Using BTCUSDT as an example:
+    - On the `BUY` side, the order will buy as many BTC as `quoteOrderQty` USDT can.
+    - On the `SELL` side, the order will sell as much BTC needed to receive `quoteOrderQty` USDT.
 
 ## Cancel Orde
 
