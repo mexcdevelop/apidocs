@@ -343,6 +343,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-24" class="toc-h2 toc-link" data-title="2022-03-24"><strong>2022-03-24</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-03-21" class="toc-h2 toc-link" data-title="2022-03-21"><strong>2022-03-21</strong></a>
                   </li>
                   <li>
@@ -512,7 +515,11 @@
 <li> 咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-03-21'><strong>2022-03-21</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-03-24'><strong>2022-03-24</strong></h2>
+<ul>
+<li>新增市价订单详细说明</li>
+</ul>
+<h2 id='2022-03-21'><strong>2022-03-21</strong></h2>
 <ul>
 <li>新增订单状态枚举</li>
 </ul>
@@ -1710,6 +1717,12 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td>委托数量</td>
 </tr>
 <tr>
+<td>quoteOrderQty</td>
+<td>DECIMAL</td>
+<td>NO</td>
+<td>委托总额</td>
+</tr>
+<tr>
 <td>price</td>
 <td>DECIMAL</td>
 <td>NO</td>
@@ -1734,6 +1747,35 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td></td>
 </tr>
 </tbody></table>
+
+<p>基于订单 <code>type</code>不同，强制要求某些参数:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">强制要求的参数</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>LIMIT</code></td>
+<td style="text-align: left"><code>quantity</code>, <code>price</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>MARKET</code></td>
+<td style="text-align: left"><code>quantity</code> or <code>quoteOrderQty</code></td>
+</tr>
+</tbody></table>
+
+<p>其他说明：</p>
+
+<p>MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数。
+若为卖单，quantity为必填参数，</p>
+
+<ul>
+<li><p>比如在<code>BTCUSDT</code>上下一个市价买单, 明确的是买入时想要花费的计价资产数量。此时的报单数量将会以市场流动性和<code>quoteOrderQty</code>被计算出来（实际成交数量以最终订单详情为准）。
+以<code>BTCUSDT</code>为例，<code>quoteOrderQty=100</code>:下买单的时候, 订单会尽可能的买进价值100USDT的BTC.</p></li>
+<li><p>比如在<code>BTCUSDT</code>上下一个市价卖单, <code>quantity</code>为用户指明能够卖出多少BTC。</p></li>
+</ul>
 <h2 id='4e53c0fccd'>撤销订单</h2>
 <blockquote>
 <p>响应示例</p>
