@@ -48,6 +48,10 @@ meta:
 
 # 更新日志
 
+## **2022-03-24**
+
+- 新增市价订单详细说明
+
 ## **2022-03-21**
 
 - 新增订单状态枚举
@@ -794,12 +798,28 @@ OR
 | side             | ENUM    | YES      | 详见枚举定义：订单方向 |
 | type             | ENUM    | YES      | 详见枚举定义：订单类型 |
 | quantity         | DECIMAL | NO       | 委托数量               |
+| quoteOrderQty    | DECIMAL | NO       | 委托总额               |
 | price            | DECIMAL | NO       | 委托价格               |
 | newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID |
 | recvWindow       | LONG    | NO       | 赋值不能大于 60000     |
 | timestamp        | LONG    | YES      |                        |
 
+基于订单 `type`不同，强制要求某些参数:
 
+| 类型     | 强制要求的参数                |
+| :------- | :---------------------------- |
+| `LIMIT`  | `quantity`, `price`           |
+| `MARKET` | `quantity` or `quoteOrderQty` |
+
+其他说明：
+
+MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数。
+若为卖单，quantity为必填参数，
+
+- 比如在`BTCUSDT`上下一个市价买单, 明确的是买入时想要花费的计价资产数量。此时的报单数量将会以市场流动性和`quoteOrderQty`被计算出来（实际成交数量以最终订单详情为准）。
+  以`BTCUSDT`为例，`quoteOrderQty=100`:下买单的时候, 订单会尽可能的买进价值100USDT的BTC.
+
+- 比如在`BTCUSDT`上下一个市价卖单, `quantity`为用户指明能够卖出多少BTC。
 
 ## 撤销订单
 > 响应示例
