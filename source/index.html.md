@@ -36,7 +36,13 @@ We provide developers with SDKs in five languages: Python, DotNET, Java, Javascr
 <aside class="notice">
 Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank"> feedback</a>
 </aside>
+### Postman Collections
 
+There is now a Postman collection containing the API endpoints for quick and easy use.
+
+This is recommended for new users who want to get a quick-start into using the API.
+
+For more information please refer to this page: [MEXC API Postman](https://github.com/mxcdevelop/mexc-api-postman)
 
 ## Contact us
 
@@ -47,6 +53,10 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
   -  For cases such as missing funds, help with 2FA, etc.
 
 # Change Log
+
+## **2022-03-25**
+
+- Add Postman collection
 
 ## **2022-03-24**
 
