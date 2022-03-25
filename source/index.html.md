@@ -36,6 +36,10 @@ meta:
 <aside class="notice">
 使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
 </aside>
+### Postman Collections
+
+现在你可以通过`Postman collection`来快速体验、使用API接口。
+如果想了解更多如何使用Postman，请访问: [Mexc API Postman](https://github.com/mxcdevelop/mexc-api-postman)
 
 ## 联系我们
 
@@ -47,6 +51,10 @@ meta:
   -  咨询关于钱包、短信、2FA等问题
 
 # 更新日志
+
+## **2022-03-25**
+
+- 新增Postman Collections
 
 ## **2022-03-24**
 
