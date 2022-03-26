@@ -151,14 +151,14 @@ Serious trading is about timing. Networks can be unstable and unreliable, which 
 HMAC SHA256 signature:
 
     $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087" | openssl dgst -sha256 -hmac "45d0b3c26f2644f19bfb98b07741b2f5"
-    (stdin)= ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+    (stdin)= 323c96ab85a745712e95e63cad28903dd8292e4a905e99c4ee3932023843a117
 ```
 
 ```shell
 curl command:
 
     (HMAC SHA256)
-    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'
+    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=323c96ab85a745712e95e63cad28903dd8292e4a905e99c4ee3932023843a117'
 
 ```
 
@@ -168,14 +168,14 @@ curl command:
 HMAC SHA256 signature:
 
     $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087" | openssl dgst -sha256 -hmac "45d0b3c26f2644f19bfb98b07741b2f5"
-    (stdin)= ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+    (stdin)= fd3e4e8543c5188531eb7279d68ae7d26a573d0fc5ab0d18eb692451654d837a
 ```
 
 ```shell
 curl command:
 
     (HMAC SHA256)
-    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'
+    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order' -d 'symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=fd3e4e8543c5188531eb7279d68ae7d26a573d0fc5ab0d18eb692451654d837a'
 
 ```
 
@@ -186,14 +186,14 @@ curl command:
 HMAC SHA256 signature:
 
     $ echo -n "symbol=BTCUSDT&side=BUY&type=LIMITquantity=1&price=11&recvWindow=5000&timestamp=1644489390087" | openssl dgst -sha256 -hmac "45d0b3c26f2644f19bfb98b07741b2f5"
-    (stdin)= ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285
+    (stdin)= d1a676610ceb39174c8039b3f548357994b2a34139a8addd33baadba65684592
 ```
 
 ```shell
 curl command:
 
     (HMAC SHA256)
-    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order?symbol=BTCUSDT&side=BUY&type=LIMIT' -d 'quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=ddbaf78eaf7abc69ce44d7781cc9e53b5aaee48c890a20d606fd825c9ee2a285'
+    $ curl -H "X-MEXC-APIKEY: mx0aBYs33eIilxBWC5" -X POST 'https://api.mexc.com/api/v3/order?symbol=BTCUSDT&side=BUY&type=LIMIT' -d 'quantity=1&price=11&recvWindow=5000&timestamp=1644489390087&signature=d1a676610ceb39174c8039b3f548357994b2a34139a8addd33baadba65684592'
 
 ```
 
