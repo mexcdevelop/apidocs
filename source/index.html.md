@@ -421,11 +421,10 @@ Response:
 
 Parameters:
 
-| name   | Type    | Mandatory | Description                                              | Scope                 |
-| ------ | ------- | --------- | -------------------------------------------------------- | --------------------- |
-| symbol | string  | YES       | Symbol                                                   |                       |
-| limit  | integer | NO        | Return number                                            | Default 500; max 1000 |
-| fromId | integer | NO        | Trade id to fetch from. Default gets most recent trades. |                       |
+| name   | Type    | Mandatory | Description   | Scope                 |
+| ------ | ------- | --------- | ------------- | --------------------- |
+| symbol | string  | YES       | Symbol        |                       |
+| limit  | integer | NO        | Return number | Default 500; max 1000 |
 
 
 Response:
@@ -469,7 +468,6 @@ Parameters:
 | name      | Type    | Mandatory | Description                                              | Scope                  |
 | --------- | ------- | --------- | -------------------------------------------------------- | ---------------------- |
 | symbol    | string  | YES       |                                                          |                        |
-| fromId    | long    | NO        | id to get aggregate trades from INCLUSIVE.               |                        |
 | startTime | long    | NO        | Timestamp in ms to get aggregate trades from INCLUSIVE.  |                        |
 | endTime   | long    | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |                        |
 | limit     | integer | NO        |                                                          | Default 500; max 1000. |
@@ -1205,16 +1203,15 @@ Get trades for a specific account and symbol.
 
 Parameters:
 
-| name       | Type   | Mandatory | Description                |
-| ---------- | ------ | --------- | -------------------------- |
-| symbol     | string | YES       |                            |
-| orderId    | string | NO        | order Id                   |
-| startTime  | long   | NO        |                            |
-| endTime    | long   | NO        |                            |
-| fromId     | long   | NO        | Start Id from Trade record |
-| limit      | int    | NO        | Default 500; max 1000;     |
-| recvWindow | long   | NO        |                            |
-| timestamp  | long   | YES       |                            |
+| name       | Type   | Mandatory | Description            |
+| ---------- | ------ | --------- | ---------------------- |
+| symbol     | string | YES       |                        |
+| orderId    | string | NO        | order Id               |
+| startTime  | long   | NO        |                        |
+| endTime    | long   | NO        |                        |
+| limit      | int    | NO        | Default 500; max 1000; |
+| recvWindow | long   | NO        |                        |
+| timestamp  | long   | YES       |                        |
 
 
 Response:
