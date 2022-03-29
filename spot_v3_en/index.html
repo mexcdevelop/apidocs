@@ -343,6 +343,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-29" class="toc-h2 toc-link" data-title="2022-03-29"><strong>2022-03-29</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-03-25" class="toc-h2 toc-link" data-title="2022-03-25"><strong>2022-03-25</strong></a>
                   </li>
                   <li>
@@ -420,6 +423,26 @@
                   </li>
                   <li>
                     <a href="#symbol-order-book-ticker" class="toc-h2 toc-link" data-title="Symbol Order Book Ticker">Symbol Order Book Ticker</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sub-account-endpoints" class="toc-h1 toc-link" data-title="Sub-Account Endpoints">Sub-Account Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Create a Sub-account(For Master Account)">Create a Sub-account(For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#query-sub-account-list-for-master-account" class="toc-h2 toc-link" data-title="Query Sub-account List (For Master Account)">Query Sub-account List (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#create-an-apikey-for-a-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Create an APIKey for a sub-account (For Master Account)">Create an APIKey for a sub-account (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#query-the-apikey-of-a-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Query the APIKey of a sub-account (For Master Account)">Query the APIKey of a sub-account (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#delete-the-apikey-of-a-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Delete the APIKey of a sub-account (For Master Account)">Delete the APIKey of a sub-account (For Master Account)</a>
                   </li>
               </ul>
           </li>
@@ -526,7 +549,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-03-25'><strong>2022-03-25</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-03-29'><strong>2022-03-29</strong></h2>
+<ul>
+<li>Add Sub-Account Endpoints</li>
+</ul>
+<h2 id='2022-03-25'><strong>2022-03-25</strong></h2>
 <ul>
 <li>Add Postman collection</li>
 </ul>
@@ -1642,6 +1669,298 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td>askQty</td>
 <td>Best ask quantity</td>
+</tr>
+</tbody></table>
+<h1 id='sub-account-endpoints'>Sub-Account Endpoints</h1><h2 id='create-a-sub-account-for-master-account'>Create a Sub-account(For Master Account)</h2>
+<p>Create a sub-account from the master account.</p>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="s2">"mexc1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>POST / api/v3/sub-account/virtualSubAccount</li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>YES</td>
+<td>Sub-account name</td>
+</tr>
+<tr>
+<td>note</td>
+<td>STRING</td>
+<td>YES</td>
+<td>Sub-account notes</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>LONG</td>
+<td>NO</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>LONG</td>
+<td>YES</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='query-sub-account-list-for-master-account'>Query Sub-account List (For Master Account)</h2>
+<p>Get details of the sub-account list</p>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"subAccounts"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="s2">"mexc666"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"isFreeze"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1544433328000</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="s2">"mexc888"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"isFreeze"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1544433328000</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>GET / api/v3/sub-account/list </li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>NO</td>
+<td>Sub-account name</td>
+</tr>
+<tr>
+<td>isFreeze</td>
+<td>STRING</td>
+<td>NO</td>
+<td>true or false</td>
+</tr>
+<tr>
+<td>page</td>
+<td>INT</td>
+<td>NO</td>
+<td>Default value: 1</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>INT</td>
+<td>NO</td>
+<td>Default value: 10, Max value: 200</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>LONG</td>
+<td>YES</td>
+<td></td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>LONG</td>
+<td>NO</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='create-an-apikey-for-a-sub-account-for-master-account'>Create an APIKey for a sub-account (For Master Account)</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arg13sdfgs"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"secretKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nkjwn21973ihi"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT_ACCOUNT_READ"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"135.181.193"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"creatTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1597026383085</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>POST /api/v3/sub-account/apiKey</li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>YES</td>
+<td>Sub-account name</td>
+</tr>
+<tr>
+<td>note</td>
+<td>STRING</td>
+<td>YES</td>
+<td>APIKey note</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>STRING</td>
+<td>YES</td>
+<td>permission of APIKey,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>STRING</td>
+<td>NO</td>
+<td>Link IP addresses, separate with commas if more than one. Support up to 20 addresses.</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>LONG</td>
+<td>NO</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>LONG</td>
+<td>YES</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='query-the-apikey-of-a-sub-account-for-master-account'>Query the APIKey of a sub-account (For Master Account)</h2>
+<p>Applies to master accounts only</p>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">   </span><span class="p">{</span><span class="w">
+       </span><span class="nl">"subAccount"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"v5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="s2">"arg13sdfgs"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"permissions"</span><span class="p">:</span><span class="s2">"SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ip"</span><span class="p">:</span><span class="s2">"1.1.1.1,2.2.2.2"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"creatTime"</span><span class="p">:</span><span class="mi">1597026383085</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"note"</span><span class="p">:</span><span class="s2">"v5.1"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="s2">"arg13sdfgs12"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"permissions"</span><span class="p">:</span><span class="s2">"SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ip"</span><span class="p">:</span><span class="s2">"1.1.1.1,2.2.2.2"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"creatTime"</span><span class="p">:</span><span class="mi">1597026383085</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>GET/api/v3/sub-account/apiKey</li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>YES</td>
+<td>Sub-account name</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>LONG</td>
+<td>NO</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>LONG</td>
+<td>YES</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='delete-the-apikey-of-a-sub-account-for-master-account'>Delete the APIKey of a sub-account (For Master Account)</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+           </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="s2">"mexc1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>DELETE /api/v3/sub-account/apiKey</li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>YES</td>
+<td>Sub-account name</td>
+</tr>
+<tr>
+<td>apiKey</td>
+<td>STRING</td>
+<td>YES</td>
+<td>API public key</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>LONG</td>
+<td>NO</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>LONG</td>
+<td>YES</td>
+<td></td>
 </tr>
 </tbody></table>
 <h1 id='spot-account-trade'>Spot Account/Trade</h1><h2 id='test-new-order'>Test New Order</h2>
