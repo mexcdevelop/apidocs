@@ -52,6 +52,10 @@ meta:
 
 # 更新日志
 
+## **2022-03-29**
+
+- 新增母子账户模块相关接口
+
 ## **2022-03-25**
 
 - 新增Postman Collections
@@ -763,6 +767,245 @@ OR
 | bidQty   | 最高买盘数量 |
 | askPrice | 最低卖盘价   |
 | askQty   | 最低卖盘数量 |
+
+
+# 母子账户接口
+
+## 创建子账户
+
+> **响应:**
+
+```
+{
+    "subAccount":"mexc1",
+    "note":"1"
+}
+
+```
+
+**HTTP请求**
+
+POST / api/v3/sub-account/virtualSubAccount
+
+**参数:**
+
+| 名称       | 类型   | 是否必需 | 描述       |
+| :--------- | :----- | :------- | :--------- |
+| subAccount | STRING | YES      | 子账户名称 |
+| note       | STRING | YES      | 备注       |
+| recvWindow | LONG   | NO       |            |
+| timestamp  | LONG   | YES      |            |
+
+- 该请求会为您的母账户生成一个虚拟子账户
+
+  
+
+## 查看子账户列表
+
+
+
+> **响应:**
+
+```
+{
+    "subAccounts":[
+        {
+            "subAccount":"mexc666",
+            "isFreeze":false,//是否冻结
+            "createTime":1544433328000
+        },
+        {
+            "subAccount":"mexc888",
+            "isFreeze":false,
+            "createTime":1544433328000
+        }
+    ]
+}
+
+```
+
+ **HTTP请求**
+
+GET / api/v3/sub-account/list 
+
+**参数:**
+
+| 名称       | 类型   | 是否必需 | 描述                |
+| :--------- | :----- | :------- | :------------------ |
+| subAccount | STRING | NO       | 子账户              |
+| isFreeze   | STRING | NO       | true or false       |
+| page       | INT    | NO       | 默认: 1             |
+| limit      | INT    | NO       | 默认: 10, 最大: 200 |
+| timestamp  | LONG   | YES      |                     |
+| recvWindow | LONG   | NO       |                     |
+
+
+
+## 创建子账户的APIkey
+
+
+
+**HTTP请求**
+
+POST /api/v3/sub-account/apiKey
+
+> 请求示例
+
+```
+POST /api/v3/sub-account/apiKey
+body
+[
+        {
+            "subAccount":"mexc1",
+            "permissions":"SPOT_ACCOUNT_READ",
+            "ip":"135.181.193",
+            "note":"1"
+        }
+]
+```
+
+**请求参数**
+
+| 参数名      | 类型   | 是否必须 | 描述                                                         |
+| ----------- | ------ | -------- | ------------------------------------------------------------ |
+| subAccount  | STRING | 是       | 子账户名称                                                   |
+| note        | STRING | 是       | APIKey的备注                                                 |
+| permissions | STRING | 是       | APIKey权限,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER |
+| ip          | STRING | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip             |
+| recvWindow  | LONG   | 否       |                                                              |
+| timestamp   | LONG   | 是       |                                                              |
+
+> 响应示例
+
+```
+    {
+        "subAccount": "mexc1",
+        "note": "1",
+        "apiKey": "arg13sdfgs",
+        "secretKey": "nkjwn21973ihi",
+        "permissions": "SPOT_ACCOUNT_READ",
+        "ip": "135.181.193",
+        "creatTime": 1597026383085
+    }
+
+```
+
+**响应参数**
+
+| 参数名      | 类型   | 描述               |
+| ----------- | ------ | ------------------ |
+| subAccount  | STRING | 子账户名称         |
+| note        | STRING | APIKey的备注       |
+| apiKey      | STRING | API公钥            |
+| secretKey   | STRING | API的私钥          |
+| permissions | STRING | APIKey权限         |
+| ip          | STRING | APIKey绑定的ip地址 |
+| creatTime   | LONG   | 创建时间           |
+
+
+
+## 查询子账户的APIKey
+
+
+
+**HTTP请求**
+
+GET /api/v3/sub-account/apiKey
+
+> 请求示例
+
+```
+GET/api/v3/sub-account/apiKey?subAccount=mexc666&timestamp=1597026383085
+```
+
+**请求参数**
+
+| 参数名     | 类型   | 是否必须 | 描述       |
+| :--------- | :----- | :------- | :--------- |
+| subAccount | STRING | 是       | 子账户名称 |
+| recvWindow | LONG   | 否       |            |
+| timestamp  | LONG   | 是       |            |
+
+> 响应示例
+
+```
+{
+       "subAccount":[
+        {
+            "note":"v5",
+            "apiKey":"arg13sdfgs",
+            "permissions":"SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE",
+            "ip":"1.1.1.1,2.2.2.2",
+            "creatTime":1597026383085
+        },
+        {
+            "note":"v5.1",
+            "apiKey":"arg13sdfgs",
+            "permissions":"read_only",
+            "ip":"1.1.1.1,2.2.2.2",
+            "creatTime":1597026383085
+        }
+        ]
+}
+```
+
+**响应参数**
+
+| **参数名**  | **类型** | **描述**           |
+| :---------- | :------- | :----------------- |
+| note        | STRING   | APIKey的备注       |
+| apiKey      | STRING   | API公钥            |
+| permissions | STRING   | APIKey权限         |
+| ip          | STRING   | APIKey绑定的ip地址 |
+| creatTime   | LONG     | 创建时间           |
+
+
+
+## 删除子账户的APIKey
+
+**HTTP请求**
+
+DELETE /api/v3/sub-account/apiKey
+
+> 请求示例
+
+```
+DELETE /api/v3/sub-account/apiKey
+body
+[
+        {
+            "subAccount":"mexc1",
+            "apiKey":"ghytfugy2168hjksaj"
+        }
+]
+```
+
+**请求参数**
+
+| 参数名     | 类型   | 是否必须 | 描述       |
+| :--------- | :----- | :------- | :--------- |
+| subAccount | STRING | 是       | 子账户名称 |
+| apiKey     | STRING | 是       | API的公钥  |
+| recvWindow | LONG   | 否       |            |
+| timestamp  | LONG   | 是       |            |
+
+> 响应示例
+
+```
+{
+           "subAccount":"mexc1"
+}
+
+```
+
+**响应参数**
+
+| **参数名** | **类型** | **描述**   |
+| :--------- | :------- | :--------- |
+| subAccount | STRING   | 子账户名称 |
+
+
+
 # 现货账户和交易接口
 
 ## 测试下单
