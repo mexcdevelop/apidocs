@@ -17,7 +17,7 @@ meta:
 
 ## API Key 设置
 
-- 很多接口需要API Key才可以访问. 请参考[这个页面](https://www.mexc.com/user/openapi)来设置API Key.
+- 私有接口需要API Key才可以访问. 请参考[这个页面](https://www.mexc.com/user/openapi)来设置API Key.
 - 设置API Key的同时，为了安全，建议设置IP访问白名单(未添加白名单有效期为90天).
 - 永远不要把你的API key/secret告诉给任何人
   
