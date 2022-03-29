@@ -343,6 +343,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-03-29" class="toc-h2 toc-link" data-title="2022-03-29"><strong>2022-03-29</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-03-25" class="toc-h2 toc-link" data-title="2022-03-25"><strong>2022-03-25</strong></a>
                   </li>
                   <li>
@@ -429,6 +432,26 @@
                   </li>
                   <li>
                     <a href="#5393cd07b4" class="toc-h2 toc-link" data-title="当前最优挂单">当前最优挂单</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#86382eac44" class="toc-h1 toc-link" data-title="母子账户接口">母子账户接口</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#c6789f6fd9" class="toc-h2 toc-link" data-title="创建子账户">创建子账户</a>
+                  </li>
+                  <li>
+                    <a href="#efa0aed0d6" class="toc-h2 toc-link" data-title="查看子账户列表">查看子账户列表</a>
+                  </li>
+                  <li>
+                    <a href="#apikey" class="toc-h2 toc-link" data-title="创建子账户的APIkey">创建子账户的APIkey</a>
+                  </li>
+                  <li>
+                    <a href="#apikey-2" class="toc-h2 toc-link" data-title="查询子账户的APIKey">查询子账户的APIKey</a>
+                  </li>
+                  <li>
+                    <a href="#apikey-3" class="toc-h2 toc-link" data-title="删除子账户的APIKey">删除子账户的APIKey</a>
                   </li>
               </ul>
           </li>
@@ -521,7 +544,11 @@
 <li> 咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-03-25'><strong>2022-03-25</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-03-29'><strong>2022-03-29</strong></h2>
+<ul>
+<li>新增母子账户模块相关接口</li>
+</ul>
+<h2 id='2022-03-25'><strong>2022-03-25</strong></h2>
 <ul>
 <li>新增Postman Collections</li>
 </ul>
@@ -1647,6 +1674,429 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <tr>
 <td>askQty</td>
 <td>最低卖盘数量</td>
+</tr>
+</tbody></table>
+<h1 id='86382eac44'>母子账户接口</h1><h2 id='c6789f6fd9'>创建子账户</h2>
+<blockquote>
+<p><strong>响应:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "subAccount":"mexc1",
+    "note":"1"
+}
+
+</code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<p>POST / api/v3/sub-account/virtualSubAccount</p>
+
+<p><strong>参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">名称</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">是否必需</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">子账户名称</td>
+</tr>
+<tr>
+<td style="text-align: left">note</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">备注</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>该请求会为您的母账户生成一个虚拟子账户</li>
+</ul>
+<h2 id='efa0aed0d6'>查看子账户列表</h2>
+<blockquote>
+<p><strong>响应:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "subAccounts":[
+        {
+            "subAccount":"mexc666",
+            "isFreeze":false,//是否冻结
+            "createTime":1544433328000
+        },
+        {
+            "subAccount":"mexc888",
+            "isFreeze":false,
+            "createTime":1544433328000
+        }
+    ]
+}
+
+</code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<p>GET / api/v3/sub-account/list </p>
+
+<p><strong>参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">名称</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">是否必需</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">子账户</td>
+</tr>
+<tr>
+<td style="text-align: left">isFreeze</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">INT</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">默认: 1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">INT</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">默认: 10, 最大: 200</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+<h2 id='apikey'>创建子账户的APIkey</h2>
+<p><strong>HTTP请求</strong></p>
+
+<p>POST /api/v3/sub-account/apiKey</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/sub-account/apiKey
+body
+[
+        {
+            "subAccount":"mexc1",
+            "permissions":"SPOT_ACCOUNT_READ",
+            "ip":"135.181.193",
+            "note":"1"
+        }
+]
+</code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>是</td>
+<td>子账户名称</td>
+</tr>
+<tr>
+<td>note</td>
+<td>STRING</td>
+<td>是</td>
+<td>APIKey的备注</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>STRING</td>
+<td>是</td>
+<td>APIKey权限,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>STRING</td>
+<td>否</td>
+<td>绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>LONG</td>
+<td>否</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>LONG</td>
+<td>是</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>响应示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>    {
+        "subAccount": "mexc1",
+        "note": "1",
+        "apiKey": "arg13sdfgs",
+        "secretKey": "nkjwn21973ihi",
+        "permissions": "SPOT_ACCOUNT_READ",
+        "ip": "135.181.193",
+        "creatTime": 1597026383085
+    }
+
+</code></pre></div>
+<p><strong>响应参数</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>STRING</td>
+<td>子账户名称</td>
+</tr>
+<tr>
+<td>note</td>
+<td>STRING</td>
+<td>APIKey的备注</td>
+</tr>
+<tr>
+<td>apiKey</td>
+<td>STRING</td>
+<td>API公钥</td>
+</tr>
+<tr>
+<td>secretKey</td>
+<td>STRING</td>
+<td>API的私钥</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>STRING</td>
+<td>APIKey权限</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>STRING</td>
+<td>APIKey绑定的ip地址</td>
+</tr>
+<tr>
+<td>creatTime</td>
+<td>LONG</td>
+<td>创建时间</td>
+</tr>
+</tbody></table>
+<h2 id='apikey-2'>查询子账户的APIKey</h2>
+<p><strong>HTTP请求</strong></p>
+
+<p>GET /api/v3/sub-account/apiKey</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET/api/v3/sub-account/apiKey?subAccount=mexc666&amp;timestamp=1597026383085
+</code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">子账户名称</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>响应示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+       "subAccount":[
+        {
+            "note":"v5",
+            "apiKey":"arg13sdfgs",
+            "permissions":"SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE",
+            "ip":"1.1.1.1,2.2.2.2",
+            "creatTime":1597026383085
+        },
+        {
+            "note":"v5.1",
+            "apiKey":"arg13sdfgs",
+            "permissions":"read_only",
+            "ip":"1.1.1.1,2.2.2.2",
+            "creatTime":1597026383085
+        }
+        ]
+}
+</code></pre></div>
+<p><strong>响应参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"><strong>参数名</strong></th>
+<th style="text-align: left"><strong>类型</strong></th>
+<th style="text-align: left"><strong>描述</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">note</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">APIKey的备注</td>
+</tr>
+<tr>
+<td style="text-align: left">apiKey</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">API公钥</td>
+</tr>
+<tr>
+<td style="text-align: left">permissions</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">APIKey权限</td>
+</tr>
+<tr>
+<td style="text-align: left">ip</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">APIKey绑定的ip地址</td>
+</tr>
+<tr>
+<td style="text-align: left">creatTime</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">创建时间</td>
+</tr>
+</tbody></table>
+<h2 id='apikey-3'>删除子账户的APIKey</h2>
+<p><strong>HTTP请求</strong></p>
+
+<p>DELETE /api/v3/sub-account/apiKey</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>DELETE /api/v3/sub-account/apiKey
+body
+[
+        {
+            "subAccount":"mexc1",
+            "apiKey":"ghytfugy2168hjksaj"
+        }
+]
+</code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">子账户名称</td>
+</tr>
+<tr>
+<td style="text-align: left">apiKey</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">API的公钥</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>响应示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+           "subAccount":"mexc1"
+}
+
+</code></pre></div>
+<p><strong>响应参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"><strong>参数名</strong></th>
+<th style="text-align: left"><strong>类型</strong></th>
+<th style="text-align: left"><strong>描述</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">子账户名称</td>
 </tr>
 </tbody></table>
 <h1 id='c15d2e6b39'>现货账户和交易接口</h1><h2 id='711c4ca31b'>测试下单</h2>
