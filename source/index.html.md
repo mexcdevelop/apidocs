@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-03-29**
+
+- Add Sub-Account Endpoints
+
 ## **2022-03-25**
 
 - Add Postman collection
@@ -756,6 +760,180 @@ Response:
 | bidQty   | Best bid quantity |
 | askPrice | Best ask price    |
 | askQty   | Best ask quantity |
+
+
+# Sub-Account Endpoints
+
+## Create a Sub-account(For Master Account)
+
+Create a sub-account from the master account.
+
+> Response
+
+```json
+{
+    "subAccount":"mexc1",
+    "note":"1"
+}
+```
+
+- POST / api/v3/sub-account/virtualSubAccount
+
+
+
+Parameters:
+
+| name       | Type   | Mandatory | Description       |
+| ---------- | ------ | --------- | ----------------- |
+| subAccount | STRING | YES       | Sub-account name  |
+| note       | STRING | YES       | Sub-account notes |
+| recvWindow | LONG   | NO        |                   |
+| timestamp  | LONG   | YES       |                   |
+
+
+
+## Query Sub-account List (For Master Account)
+
+Get details of the sub-account list
+
+> Response
+
+```json
+{
+    "subAccounts":[
+        {
+            "subAccount":"mexc666",
+            "isFreeze":false,
+            "createTime":1544433328000
+        },
+        {
+            "subAccount":"mexc888",
+            "isFreeze":false,
+            "createTime":1544433328000
+        }
+    ]
+}
+```
+
+- GET / api/v3/sub-account/list 
+
+
+
+Parameters:
+
+| name       | Type   | Mandatory | Description                       |
+| ---------- | ------ | --------- | --------------------------------- |
+| subAccount | STRING | NO        | Sub-account name                  |
+| isFreeze   | STRING | NO        | true or false                     |
+| page       | INT    | NO        | Default value: 1                  |
+| limit      | INT    | NO        | Default value: 10, Max value: 200 |
+| timestamp  | LONG   | YES       |                                   |
+| recvWindow | LONG   | NO        |                                   |
+
+
+
+
+## Create an APIKey for a sub-account (For Master Account)
+
+> Response
+
+```json
+    {
+        "subAccount": "mexc1",
+        "note": "1",
+        "apiKey": "arg13sdfgs",
+        "secretKey": "nkjwn21973ihi",
+        "permissions": "SPOT_ACCOUNT_READ",
+        "ip": "135.181.193",
+        "creatTime": 1597026383085
+    }
+```
+
+- POST /api/v3/sub-account/apiKey
+
+
+
+Parameters:
+
+| name        | Type   | Mandatory | Description                                                  |
+| ----------- | ------ | --------- | ------------------------------------------------------------ |
+| subAccount  | STRING | YES       | Sub-account name                                             |
+| note        | STRING | YES       | APIKey note                                                  |
+| permissions | STRING | YES       | permission of APIKey,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER |
+| ip          | STRING | NO        | Link IP addresses, separate with commas if more than one. Support up to 20 addresses. |
+| recvWindow  | LONG   | NO        |                                                              |
+| timestamp   | LONG   | YES       |                                                              |
+
+
+
+
+## Query the APIKey of a sub-account (For Master Account)
+
+Applies to master accounts only
+
+> Response
+
+```json
+   {
+       "subAccount":[
+        {
+            "note":"v5",
+            "apiKey":"arg13sdfgs",
+            "permissions":"SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE",
+            "ip":"1.1.1.1,2.2.2.2",
+            "creatTime":1597026383085
+        },
+        {
+            "note":"v5.1",
+            "apiKey":"arg13sdfgs12",
+            "permissions":"SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE",
+            "ip":"1.1.1.1,2.2.2.2",
+            "creatTime":1597026383085
+        }
+        ]
+   }
+```
+
+- GET/api/v3/sub-account/apiKey
+
+Parameters:
+
+| name       | Type   | Mandatory | Description      |
+| ---------- | ------ | --------- | ---------------- |
+| subAccount | STRING | YES       | Sub-account name |
+| recvWindow | LONG   | NO        |                  |
+| timestamp  | LONG   | YES       |                  |
+
+
+
+
+## Delete the APIKey of a sub-account (For Master Account)
+
+> Response
+
+```json
+  {
+           "subAccount":"mexc1"
+}
+```
+
+- DELETE /api/v3/sub-account/apiKey
+
+
+
+Parameters:
+
+| name       | Type   | Mandatory | Description      |
+| ---------- | ------ | --------- | ---------------- |
+| subAccount | STRING | YES       | Sub-account name |
+| apiKey     | STRING | YES       | API public key   |
+| recvWindow | LONG   | NO        |                  |
+| timestamp  | LONG   | YES       |                  |
+
+
+
+
+
 # Spot Account/Trade
 
 ## Test New Order
