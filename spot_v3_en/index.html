@@ -2078,18 +2078,20 @@ Klines are uniquely identified by their open time.</p>
 
 <p>Other info:</p>
 
-<ul>
-<li><code>MARKET</code> orders using the <code>quantity</code> field specifies the amount of the <code>base asset</code> the user wants to buy or sell at the market price
+<p>MARKET: When type is market, if it is a buy order, <code>quoteOrderQty</code> is a required. If it is a sell order, <code>quantity</code> is a required.</p>
 
 <ul>
-<li>For example, sending a <code>MARKET</code> order on BTCUSDT will specify how much BTC the user is buying or selling.</li>
+<li><code>MARKET</code> orders using the <code>quantity</code> field specifies the amount of the <code>base asset</code> the user wants to sell at the market price
+
+<ul>
+<li>For example, sending a <code>MARKET</code> order on BTCUSDT will specify how much BTC the user is selling.</li>
 </ul></li>
-<li><code>MARKET</code> orders using <code>quoteOrderQty</code> specifies the amount the user wants to spend (when buying) or receive (when selling) the <code>quote</code> asset; the correct <code>quantity</code> will be determined based on the market liquidity and <code>quoteOrderQty</code>.
+<li><code>MARKET</code> orders using <code>quoteOrderQty</code> specifies the amount the user wants to spend (when buying) the <code>quote</code> asset; the correct <code>quantity</code> will be determined based on the market liquidity 
 
 <ul>
 <li>Using BTCUSDT as an example:</li>
 <li>On the <code>BUY</code> side, the order will buy as many BTC as <code>quoteOrderQty</code> USDT can.</li>
-<li>On the <code>SELL</code> side, the order will sell as much BTC needed to receive <code>quoteOrderQty</code> USDT.</li>
+<li>On the <code>SELL</code> side, the order will sell the <code>quantity</code> of  BTC.</li>
 </ul></li>
 </ul>
 <h2 id='cancel-orde'>Cancel Orde</h2>
