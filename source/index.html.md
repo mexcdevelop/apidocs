@@ -989,12 +989,14 @@ Additional mandatory parameters based on `type`:
 
 Other info:
 
-- `MARKET` orders using the `quantity` field specifies the amount of the `base asset` the user wants to buy or sell at the market price
-  - For example, sending a `MARKET` order on BTCUSDT will specify how much BTC the user is buying or selling.
-- `MARKET` orders using `quoteOrderQty` specifies the amount the user wants to spend (when buying) or receive (when selling) the `quote` asset; the correct `quantity` will be determined based on the market liquidity and `quoteOrderQty`.
+MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required. If it is a sell order, `quantity` is a required.
+
+- `MARKET` orders using the `quantity` field specifies the amount of the `base asset` the user wants to sell at the market price
+  - For example, sending a `MARKET` order on BTCUSDT will specify how much BTC the user is selling.
+- `MARKET` orders using `quoteOrderQty` specifies the amount the user wants to spend (when buying) the `quote` asset; the correct `quantity` will be determined based on the market liquidity 
   - Using BTCUSDT as an example:
     - On the `BUY` side, the order will buy as many BTC as `quoteOrderQty` USDT can.
-    - On the `SELL` side, the order will sell as much BTC needed to receive `quoteOrderQty` USDT.
+    - On the `SELL` side, the order will sell the `quantity` of  BTC.
 
 ## Cancel Orde
 
