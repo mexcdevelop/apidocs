@@ -301,18 +301,12 @@
     </a>
     <header>
       <div class="flex_box">
-        <img src="images/mexc-logo-67e94f1e.svg" class="logo" alt="" />
+        <a href="https://www.mexc.com">
+          <img src="images/mexc-logo-67e94f1e.svg" class="logo" alt="" />
+        </a>
         <div class="nav_box">
-          <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('spot_v2')" class="spot_v2" href="javascript:void(0);">Spot</a>
-          </span>
-          <span class="nav_cell nav_tab">
-            <a onClick="javascript:changeMenuLink('contract_v1')" class="contract_v1" href="javascript:void(0);">Contract</a>
-          </span>
         </div>
         <select class="toc-nav-dropdown" onChange="javascript:changeMenuLink(options[selectedIndex].value)">
-          <option class="spot_v2" value="spot_v2">Spot</option>
-          <option class="contract_v1" value="contract_v1">Contract</option>
         </select>
       </div>
       <a onClick="javascript:changeHyperLink()" class="lang" href="javascript:void(0);" id="lang_box">english</a>
@@ -3851,19 +3845,34 @@ Rate Limit : 2 times/s
   </body>
   <script>
     $(function(){
+      const menuObj = [
+        ['spot_v3', 'SpotV3', 'spot_v3_en', '现货V3' ,'spot_v3_cn'],
+        ['spot_v2', 'SpotV2', 'spot_v2_en', '现货V2' ,'spot_v2_cn'],
+        ['contract_v1', 'Futures', 'contract_v1_en', '合约' ,'contract_v1_cn']
+      ];
+      const navBox = $('.nav_box');
+      const navOptions = $('.toc-nav-dropdown');
       const currentLang = /cn/.test(window.location.pathname);
+      menuObj.forEach(item => {
+        const _item = `
+          <span class="nav_cell nav_tab">
+            <a onClick="javascript:changeMenuLink('${item[0]}')" class="${item[0]}" href="javascript:void(0);">${currentLang?item[3]:item[1]}</a>
+          </span>
+        `;
+        const _option = `<option class="${item[0]}" value="${item[0]}">${currentLang?item[3]:item[1]}</option>`;
+        navOptions.append(_option);
+        navBox.append(_item);
+      })
       const toggleBtn = $("#lang_box");
-      const currentSystem = /contract/.test(window.location.pathname);
-      const spot_btn =  $(".spot_v2");
-      const contract_btn =  $(".contract_v1");
-      toggleBtn.html(currentLang ? 'english': '中文')
-      spot_btn.html(currentLang ? '现货': 'Spot' )
-      contract_btn.html(currentLang ? '合约': 'Contract')
-      if(currentSystem){
-        contract_btn.addClass('current');
-      } else{
-        spot_btn.addClass('current');
-      }
+      console.log(window.location.pathname)
+      const currentSystem = menuObj.map(i=> i[0]).find(j => {
+        return new RegExp(j).test(window.location.pathname);
+      }) || 'spot_v3';
+      const current_btn =  $(`a.${currentSystem}`);
+      const current_option =  $(`option.${currentSystem}`);
+      toggleBtn.html(currentLang ? 'english': '中文');
+      current_btn.addClass('current');
+      current_option.attr('selected', 'selected');
     })
 
     function changeMenuLink(menu) {
