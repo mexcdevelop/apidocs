@@ -81,7 +81,7 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 ## 返回格式
 
 所有接口的返回数据均为JSON形式
-
+****
 ## 签名规则
 
 我们提供了公共接口（市场信息，交易行情数据），以及私有接口（账户信息，订单操作，资产操作等）<br/><br/>对于公共接口，不需要进行签名<br/><br/>而对于私有接口，需要对接口信息及相应参数进行签名操作，收到请求后服务端验证签名通过后才能进行相应的操作<br/><br/>请参考详细的[签名方法](#8e3023a1c8)
@@ -320,6 +320,14 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 | state          | string   | 交易对状态，当前是否可以进行交易 |
 | price_scale    | integer  | 价格精度                         |
 | quantity_scale | integer  | 数量精度                         | ## 各接口限速信息 |
+| min_amount       | string   | 最小交易金额                             |
+| max_amount       | string   | 最大交易金额                             |
+| maker_fee_rate   | string   | Maker费率                                |
+| taker_fee_rate   | string   | Taker费率                                |
+| limited          | string   | API交易使能标记（有效值：true, false）   |
+| etf_mark         | integer  | Etf标识，0代表不是ETF，正负整数代表是ETF |
+| symbol-partition | string   | 交易区，如主板区                         |
+
 
 > 响应示例
 
@@ -346,13 +354,7 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 | ---------------- | -------- | ---------------------------------------- |
 | total_limit      | string   | 用户每秒最大请求阈值                     |
 | request_limit    | map      | 用户每秒每个API最大请求阈值              |
-| min_amount       | string   | 最小交易金额                             |
-| max_amount       | string   | 最大交易金额                             |
-| maker_fee_rate   | string   | Maker费率                                |
-| taker_fee_rate   | string   | Taker费率                                |
-| limited          | string   | API交易使能标记（有效值：true, false）   |
-| etf_mark         | integer  | Etf标识，0代表不是ETF，正负整数代表是ETF |
-| symbol-partition | string   | 交易区，如主板区                         |
+
 
 
 
