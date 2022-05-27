@@ -196,7 +196,7 @@ public static class SignVo {
 1. Signature is not required for public endpoint.
 
 2. For private endpoint, ApiKey, Request-Time(Timestamp string displayed in milliseconds
-), Signature and Content-Type need to be passed into the header, must be specified as application / JSON, Recv-Window (optional) parameters, Signature is a signature string. The signature rules are as follows:
+	), Signature and Content-Type need to be passed into the header, must be specified as application / JSON, Recv-Window (optional) parameters, Signature is a signature string. The signature rules are as follows:
 
 	1) When signing, you need to get the request parameter string first. It is "" if there is no parameter:
 
@@ -211,9 +211,9 @@ public static class SignVo {
 Note：
 
 	1) When the service parameter participating in the signature is null, it does not participate in the signature. For the path parameter, it does not participate in the signature; note that when get request stitches the parameter and pass it in the URL, if the parameter is null, it will be parsed into "" in the background parsing, fixed post request, when the parameter is null, do not pass the parameter, or set the value of the parameter to "" when signing, otherwise signature verification will fail.
-
+	
 	2) When requesting, put the value of Request-Time used in signing into the Request-Time parameter of the header, put the obtained signature string into the signature parameter of the header, put the Access Key of APIKEY into the ApiKey parameter of the header, and pass the other service parameters.
-
+	
 	3) The obtained signature string does not need to be base64 encoded.
 
 ## Error Code
@@ -334,34 +334,6 @@ Response
 |limited|string|API trading enables marking (Valid values: true, false)|
 |etf_mark|integer|Etf identification, 0 represents not ETF, and positive and negative integers represent ETF|
 |symbol-partition|string|Trading areas, such as the Main|
-
-## Rate Limit Info
-
-> Response example
-
-```json
-{
-    "code": 200,
-    "data": {
-        "total_limit": "100",
-        "request_limit": {
-            "/api/v2/market/symbols": "5",
-            "/api/v2/market/depth": "5"
-        }
-    }
-}
-```
-
-- **GET** ```/open/api/v2/common/rate_limit```
-
-Request parameters：None
-
-Response
-
-| Field | Data type | Description |
-|----------|------------|------------|
-|total_limit|string|Maximum request count per access key per second|
-|request_limit|map|Maximum request count per interface per access key per second|
 
 ## Current System Time
 
@@ -1222,36 +1194,6 @@ Either order_ids or client_order_ids have to be picked as parameter. When both o
 <aside class="notice">
 When client recieves response from server, it only means the cancelling request has been accepted, doesn't mean the cancellation is finished
 </aside>
-
-## Order query (single order status query)
-
-- **GET** ```/open/api/v2/order/single_state/list```
-
-Parameters:
-
-| Parameter | Data Type | Mandatory | Description | Range ｜
-|-----|-----|-----|-----|-----|
-|symbol|string|True |Trading pair| |
-|start_time|string|False |Start time| |
-|limit|string|False |Return content | 1~1000，Default 50|
-|trade_type|string|False |Trading Status | BID，ASK |
-|states|string|True |Order Status | NEW：Unfilled ；FILLED：Filled；PARTIALLY_FILLED：Partially filled；CANCELED：Canceled；PARTIALLY_CANCELED：Partially canceled |
-
-Response:
-
-| Parameter | Data Type | Description |
-|-----|-----|-----|
-|symbol|string|Trading pair |
-|id|string|Order id|
-|price|string|Order price|
-|quantity|string|Order amount|
-|deal_quantity|string|Filled amount|
-|deal_amount|string|Filled total amount of money |
-|create_time|string|Order time|
-|state|string|Order Status |
-|type|string|Order type|
-|client_order_id|string|Client order id|
-
 # Asset
 
 Only the endpoint handling the reading of deposit and withdrawal information is open currently, the withdrawal endpoint will be made available soon (Please contact the online customer service if you wish to access it now).
@@ -1435,7 +1377,7 @@ Rate Limit : 20times/2s
 | currency  | string  | true  | Crypto currency |
 | chain | string  | false  | Chain name, reference the GET/open/API/v2 / market/coin/list (Get currency information), multiple chain required (such as withdraw  USDT to OMNI must set this parameter to "OMNI",  withdraw  USDT to TRX must set this parameter to  "TRC - 20", withdraw  USDT to ERC20 must set this parameter to  "ERC - 20"), do not need to set this parameter if there is single chain, when the more details reference to the endpoint of  “Get currency information”. |
 | amount  | number  | true  | Withdraw amount  |
-| address | string  | true  | withdraw address  |
+| address | string  | true  | withdraw address   Note: memo please use : for splicing |
 | remark  | string  | false  | Note |
 
 
