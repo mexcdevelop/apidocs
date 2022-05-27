@@ -950,7 +950,7 @@ Creates and validates a new order but does not send it into the matching engine.
 
 Parameters:
 
-同于 POST /api/v3/order
+equaled POST /api/v3/order
 
 ## New Order
 
@@ -968,7 +968,7 @@ Parameters:
 
 Parameters:
 
-| 名称             | 类型    | YES否必需 | 描述                 |
+| name             | type    | Mandatory | Description          |
 | ---------------- | ------- | --------- | -------------------- |
 | symbol           | STRING  | YES       |                      |
 | side             | ENUM    | YES       | ENUM：Order Side     |
