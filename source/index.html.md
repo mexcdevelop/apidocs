@@ -1,5 +1,5 @@
 ---
-title: API 合约文档
+title: API 文档
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -135,11 +135,11 @@ public static class SignVo {
   1)签名时需要先获得请求参数字符串，无参时为""：
 
     对于GET/DELETE请求，按字典序拼接业务参数以&间隔，并最终获得签名目标串（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
-
+    
     对于POST请求，签名参数为json字符串（无需进行字典排序）。
-  
+
   2)获得参数字符串后，再拼接签名目标串，规则为：accessKey+时间戳+获取到的参数字符串
-  
+
   3)使用HMAC SHA256算法对目标串进行签名，并最终将签名作为参数携带到header中
 
 注意：
@@ -304,6 +304,9 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
 | priceCoefficientVariation  | decimal  | 合理价格偏离指数价格系数 |
 | indexOrigin  | List<String>  | 指数来源 |
 | state  | int  | 状态,0:启用,1:交割,2:交割完成,3:下线,4: 暂停|
+| conceptPlate  |  List<String> | 归属板块，与板块列表entryKey字段对应 |
+| riskLimitType  |  string | 风险限额类型，BY_VOLUME: 按张数 ，BY_VALUE：按仓位价值 |
+
 
 ## 获取可划转币种
 
@@ -2190,13 +2193,13 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
 </aside>
 
 **请求参数:**
-   
+
 | 参数名  | 类型  | 是否必填  |  说明 |
 | ------------ | ------------ | ------------ | ------------ |
 | stop_order_id  | long  | true  | 止盈止损订单id|
 
 **响应参数:**
-   
+
 | 参数名  | 类型  | 说明  |
 | ------------ | ------------ | ------------ |
 | id  | long  | 明细id |
@@ -2352,16 +2355,34 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
 
 公共参数,success: true成功,false失败
 
+## 获取持仓杠杆倍数
+
+- **GET** ```api/v1/private/position/leverage```
+
+**需要权限:** 合约交易权限
+
+<aside class="notice">
+限速规则: 20次/2秒
+</aside>
+
+**请求参数:**
+
+| 参数名  | 类型  | 是否必填  |  说明 |
+| ------------ | ------------ | ------------ | ------------ |
+| symbol  | string  | true  | 合约名称|
+
+
+**响应参数:**
+
+| 参数名  | 类型  | 说明  |
+| ------------ | ------------ | ------------ |
+| positionType  | int  |  仓位类型， 1多 2空 |
+| level  | int  | 杠杆风险限额等级 |
+| imr  | decimal  | 杠杆风险限额等级对应初始保证金率|
+| mmr  | decimal   | 杠杆风险限额等级对应维持保证金率 |
+| leverage  | int  | 杠杆倍数|
+
 ## 修改杠杆倍数
-
-> 响应示例
-
-```json
-{
-    "success": true,
-    "code": 0
-}
-```
 
 - **POST** ```api/v1/private/position/change_leverage```
 
@@ -2375,12 +2396,87 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
     
 | 参数名  | 类型  | 是否必填  |  说明 |
 | ------------ | ------------ | ------------ | ------------ |
-| positionId  | long  | true  | 仓位id|
+| positionId  | long  | false  | 仓位id，当存在仓位时，传入|
 | leverage  | int  | true  | 杠杆倍数|
+| openType  | int  | false  | 当不存在仓位时必需，开仓类型,1:逐仓,2:全仓|
+| symbol  | string  | false  | 当不存在仓位时必需，合约名称 |
+| positionType  | int  | false  |当不存在仓位时必需，  仓位类型， 1多 2空|
 
 **响应参数:**
 
 公共参数,success: true成功,false失败
+
+**请求参数示例:**
+   - 有仓位时：
+    ```
+    {
+      "positionId": 1,
+      "leverage": 20
+    }
+    ```
+   - 无仓位时：
+    ```
+    {
+      "openType": 1,
+      "leverage": 20,
+      "symbol": "BTC_USDT",
+      "positionType": 1 
+    }
+    ```
+
+## 获取用户仓位模式
+
+- **GET** ```api/v1/private/position/position_mode```
+
+**需要权限:** 合约交易权限
+
+<aside class="notice">
+限速规则: 20次/2秒
+</aside>
+
+**请求参数:**
+    
+无
+
+
+**响应参数:**
+
+公共参数,success: true成功,false失败
+1:双向持仓模式,2:单向持仓模式
+
+**请求参数示例:**
+
+    ```
+    {"success":true,"code":0,"data":1}
+    {"success":true,"code":0,"data":2}
+    ```
+
+
+## 修改用户仓位模式
+
+- **POST** ```api/v1/private/position/change_position_mode```
+
+**需要权限:** 合约交易权限
+
+<aside class="notice">
+限速规则: 20次/2秒
+</aside>
+
+**请求参数:**
+    
+| 参数名  | 类型  | 是否必填  |  说明 |
+| ------------ | ------------ | ------------ | ------------ |
+| positionMode  | int  | true  | 1:双向，2：单向，修改仓位模式必须保证没有活跃订单、计划委托单、未完成仓位，否则无法修改。双向切换单向模式时，风险限额等级会重置为等级1，如需更改调用接口修改|
+
+
+**响应参数:**
+
+公共参数,success: true成功,false失败
+
+**请求参数示例:**
+    ```
+    {"success":true,"code":0}
+    ```
 
 ## 下单
 
@@ -2418,7 +2514,9 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | positionId  | long  | false  | 仓位id，平仓时建议传入该参数|
 | externalOid  | string  | false  | 外部订单号|
 | stopLossPrice  | decimal  | false  | 止损价|
-| takeProfitPrice  | decimal  | false  | 止盈价|
+| takeProfitPrice  | decimal  | false  | 止盈价 |
+| positionMode  | int  | false  | 1:双向持仓，2:单向持仓，默认为1|
+| reduceOnly  | boolean  | false  | 默认为false,单向持仓如果需要只减仓时传入true，双向持仓不受理此参数|
 
 **响应参数:**
 
@@ -2558,7 +2656,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 <aside class="notice">
 限速规则: 20次/2秒
 </aside>
- 
+
 **请求参数:**
 
 | 参数名  | 类型  | 是否必填  |  说明 |
@@ -2590,34 +2688,9 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 ## 修改风险等级
 
-> 响应示例
+\- **POST** ```api/v1/private/account/change_risk_level```
 
-```json
-{
-    "success": true,
-    "code": 0
-}
-```
-
-- **POST** ```api/v1/private/account/change_risk_level```
-
-**需要权限:** 合约交易权限
-
-<aside>
-限速规则: 20次/2秒
-</aside>
-
-**请求参数:**
-    
-| 参数名  | 类型  | 是否必填  |  说明 |
-| ------------ | ------------ | ------------ | ------------ |
-| symbol  | string  | true  | 合约名|
-| level  | int  | true  | 等级|
-| positionType  | int  | true  | 1:多仓，2:空仓|
- 
-**响应参数:**
-
-公共参数,success: true成功,false失败
+\- 已禁用 调用是返回错误码 8817 提示信息：风险限制功能已升级，详情请前往web端查看
 
 ## 计划委托下单
 
@@ -2662,7 +2735,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
     "orderId": 2
   }
 ]
-``` 
+```
 
 - **POST** ```api/v1/private/planorder/cancel```
 
@@ -2708,7 +2781,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 ## 取消止盈止损委托单
 
 > 示例:
-  
+
 ```json
 [
   {
@@ -2725,7 +2798,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 <aside class="notice">
 限速规则: 20次/2秒
 </aside>
- 
+
 **请求参数:**
 
 | 参数名  | 类型  | 是否必填  |  说明 |
@@ -2756,7 +2829,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | ------------ | ------------ | ------------ | ------------ |
 | positionId  | long  | false  | 仓位id,传入positionId，只取消对应仓位的委托单，不传则判断symbol|
 | symbol  | string  | false  | 合约名,传入symbol只取消该合约下的委托单，不传取消所有合约下的委托单|
-  
+
 **响应参数:**
 
 公共参数,success: true成功,false失败
@@ -2770,7 +2843,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 </aside>
 
 **请求参数:**
-   
+
 | 参数名  | 类型  | 是否必填  |  说明 |
 | ------------ | ------------ | ------------ | ------------ |
 | orderId  | long  | true  | 限价单订单id|
@@ -2796,7 +2869,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | stopPlanOrderId  | long  | true  | 止盈止损委托单订单id|
 | stopLossPrice  | decimal  | false  | 止损价,和止盈价至少有一个不为空，且必须大于0|
 | takeProfitPrice  | decimal  | false  | 止盈价,和止损价至少有一个不为空，且必须大于0|
-   
+
 **响应参数:**
 
 公共参数,success: true成功,false失败
@@ -3682,6 +3755,7 @@ interval可选参数:  Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day
 | ------------ | ------------ | ------------ |
 | symbol  | string  | 合约名 |
 | positionType  | int  | 持仓类型 1:多仓，2:空仓|
+| riskSource| int | 风险限制来源 0:其它 1:爆仓服务| 
 | level  | int   | 当前风险等级 |
 | maxVol  | decimal   | 最大可持仓数量 |
 | maxLeverage  | int   | 最大杠杆倍数 |
@@ -3711,7 +3785,7 @@ interval可选参数:  Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day
 | positionId  | long   | 仓位id |
 
 ## 如何维护深度信息
-  
+
 > 例如订阅成交信息
 
 ```json
@@ -3739,7 +3813,27 @@ interval可选参数:  Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day
 "ts":"1587442022003"
 }
 ```
-  
+### 仓位模式
+
+> 数据示例
+
+```json
+{
+    "channel":"push.personal.position.mode",
+    "data":{
+        positionMode: 1
+    },
+    "ts":1610005070157
+}
+```
+
+```channel = push.personal.position.mode```
+ 	
+| 参数名  | 类型  | 说明  |
+| ------------ | ------------ | ------------ |
+|positionMode|int|仓位模式,1:双向，2:单向|
+
+
 **如何维护增量深度信息:**
 
 1. 通过接口 https://contract.mexc.com/api/v1/contract/depth/BTC_USDT获取全量深度信息，保存当前version
@@ -3752,7 +3846,7 @@ interval可选参数:  Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day
 7. 如果某个价格对应的挂单量为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
 
 **订阅类事件，订阅成功响应:**  
-   
+
 channel 为 rs. + 订阅的method，
 data为 "success"
 
