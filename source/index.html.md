@@ -135,7 +135,7 @@ public static class SignVo {
   1) When signing, you need to get the request parameter string first. It is "" if there is no parameter:
 
     For GET/DELETE requests, the service parameters are spliced in dictionary order with & interval, and finally the signature target string is obtained (in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
-
+    
     For POST requests, the signature parameter is a JSON string (dictionary sorting is not required).
 
   2) After obtaining the parameter string, the signature target string is spliced. The rule is: accessKey + timestamp + obtained parameter string.
@@ -336,7 +336,7 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
 - **GET** ```api/v1/contract/detail```
 
 <aside class="notice">
-Rate limit: 20 times / 2 seconds
+Rate limit: 1 times / 5 seconds
 </aside>
 
 **Request parameters:**
@@ -380,6 +380,8 @@ Rate limit: 20 times / 2 seconds
 | priceCoefficientVariation  | decimal  |fair price coefficient variation  |
 | indexOrigin  | List  | index origin |
 | state  | int  | status, 0:enabled,1:delivery, 2:completed, 3: offline, 4: pause|
+| conceptPlate  | List  | The zone, corresponding to the entryKey field of the section list |
+| riskLimitType  | List  | Risk limit type, BY_VOLUME: by the volume, BY_VALUE: by the position |
 
 ## Get the transferable currencies
 
@@ -600,13 +602,14 @@ curl "https://contract.mexc.com/api/v1/contract/fair_price/BTC_USDT"
 
 <aside class="notice">
 Rate limit:20 times/2 seconds
-</aside>>
+</aside>
 
 **Request parameters:**
     
 | Parameter  | Data Type  | Mandatory |  Description |
 | ------------ | ------------ | ------------ | ------------ |
 | symbol  | string  | true  | the name of the contract  |
+
 
 **Response parameters:**
     
@@ -616,7 +619,9 @@ Rate limit:20 times/2 seconds
 | fairPrice  | decimal  | fair price|
 | timestamp  | long   | system timestamp|
 
+
 ## Get contract funding rate
+
 
 > Request
 
@@ -2395,16 +2400,37 @@ Rate limit:20 times/2 seconds
 public parameters, success: true, success, false ,failure
 
 
+
+## Get leverage
+
+- **GET** ```api/v1/private/position/leverage```
+
+**Required permissions:** Trading permission
+
+<aside class="notice">
+Rate limit:20 times/2 seconds
+</aside>
+
+**Request parameters:**
+    
+| Parameter  | Data Type   | Mandatory|  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| symbol  | string  | true  | symbol|
+
+
+**Response parameters:**
+
+| Parameter | Type  | Description  |
+| ------------ | ------------ | ------------ |
+| positionType  | int  |  positon type， 1:long 2:short |
+| level  | int  | risk level |
+| imr  | decimal  | The leverage risk limit level corresponds to initial margin rate|
+| mmr  | decimal   | Leverage risk limit level corresponds to maintenance margin rate |
+| leverage  | int  | leverage|
+
+
+
 ## Switch leverage
-
-> Response
-
-```json
-{
-    "success": true,
-    "code": 0
-}
-```
 
 - **POST** ```api/v1/private/position/change_leverage```
 
@@ -2420,10 +2446,91 @@ Rate limit:20 times/2 seconds
 | ------------ | ------------ | ------------ | ------------ |
 | positionId  | long  | true  | position id|
 | leverage  | int  | true  | leverage|
+| openType  | int  | false  | Required when there is no position, openType, 1: isolated position, 2: full position|
+| symbol  | string  | false  | equired when there is no position，symbol |
+| positionType  | int  | false  |equired when there is no position,  positionType: 1 Long 2:short|
 
 **Response parameters:**
 
 public parameters, success: true, success, false ,failure
+
+**request parameters example:**
+   - Has positon:
+
+    ```
+    {
+      "positionId": 1,
+      "leverage": 20
+    }
+    ```
+   - no positon:
+
+    ```
+    {
+      "openType": 1,
+      "leverage": 20,
+      "symbol": "BTC_USDT",
+      "positionType": 1 
+    }
+    ```
+
+
+
+## Get position mode
+
+- **GET** ```api/v1/private/position/position_mode```
+
+**Required permissions:** Trading permission
+
+<aside class="notice">
+Rate limit:20 times/2 seconds
+</aside>
+
+**Request parameters:**
+    
+None
+
+
+**Response parameters:**
+
+public parameters, success: true, success, false ,failure
+
+position mode,1:hedge，2:one-way
+
+**request parameters example:**
+    ```
+    {"success":true,"code":0,"data":2}
+    ```
+
+
+
+## Change position mode
+
+- **POST** ```api/v1/private/position/change_position_mode```
+
+**Required permissions:** Trading permission
+
+<aside class="notice">
+Rate limit:20 times/2 seconds
+</aside>
+
+**Request parameters:**
+    
+| Parameter  | Data Type   | Mandatory|  Description |
+| ------------ | ------------ | ------------ | ------------ |
+| positionMode  | int  | true  | 1: Hedge，2, 2: One-way, the modification of the position mode must ensure that there are no active orders, planned orders, or unfinished positions, otherwise it cannot be modified. When switching the one-way mode in both directions, the risk limit level will be reset to level 1. If you need to change the call interface, modify|
+
+
+**Response parameters:**
+
+public parameters, success: true, success, false ,failure
+
+**request parameters example:**
+    ```
+    {"success":true,"code":0}
+    ```
+
+
 
 ## Order
 
@@ -2462,6 +2569,8 @@ Rate limit:20 times/2 seconds
 | externalOid  | string  | false  | external order ID|
 | stopLossPrice  | decimal  | false  | stop-loss price|
 | takeProfitPrice  | decimal  | false  | take-profit price|
+| positionMode  | int  | false  |  position mode,1:hedge，2:one-way|
+| reduceOnly  | boolean  | false  | Default false,For one-way positions, if you need to only reduce positions, pass in true, and two-way positions will not accept this parameter.|
 
 **Response parameters:**
 
@@ -2602,7 +2711,7 @@ Cancel  the uncompleted order under a contract according to the specified extern
 <aside class="notice">
 Rate limit:20 times/2 seconds
 </aside>
- 
+
 **Request parameters:**
 
 | Parameter | Data Type   | Mandatory  |  Description |
@@ -2632,36 +2741,15 @@ Rate limit:20 times/2 seconds
 
 public parameters , success: true success, false failure
 
+
+
 ## Switch the risk level
 
-> Response
+\- **POST** ```api/v1/private/account/change_risk_level```
 
-```json
-{
-    "success": true,
-    "code": 0
-}
-```
+\- Disabled The call returns the error code 8817 Prompt information: The risk restriction function has been upgraded. For details, please go to the web to view
 
-- **POST** ```api/v1/private/account/change_risk_level```
 
-**Required permissions:** Trading permission
-
-<aside>
-Rate limit:20 times/2 seconds
-</aside>
-
-**Request parameters:**
-    
-| Parameter   | Data Type   | Mandatory  |  Description |
-| ------------ | ------------ | ------------ | ------------ |
-| symbol  | string  | true  | the name of the contract |
-| level  | int  | true  | level|
-| positionType  | int  | true  | 1:long，2:short |
- 
-**Response parameters:**
-
-public parameters , success: true success, false failure
 
 ## Trigger order
 
@@ -2706,7 +2794,7 @@ success, success =true, data value is the order ID, success =false, failure data
     "orderId": 2
   }
 ]
-``` 
+```
 
 - **POST** ```api/v1/private/planorder/cancel```
 
@@ -2752,7 +2840,7 @@ public parameters, Success: true success, false failure
 ## Cancel the Stop-Limit trigger order
 
 > Response
-  
+
 ```json
 [
   {
@@ -2769,7 +2857,7 @@ public parameters, Success: true success, false failure
 <aside class="notice">
 Rate limit:20 times/2 seconds
 </aside>
- 
+
 **Request parameters:**
 
 | Parameter | Data Type | Mandatory | Description |
@@ -2796,7 +2884,7 @@ Rate limit:20 times/2 seconds
 | ------------ | ------------ | ------------ | ------------ |
 | positionId  | long  | false  | position id, fill in positionId，only cancel the trigger order of the corresponding position, and check the symbol without filling |
 | symbol  | string  | false  |the name of the contact ,only cancels the delegate  order under this contract based on the symbol,  cancel all orders without filling the symbol|
-  
+
 **Response parameters:**
 
 public parameters, success: true success ,false failure
@@ -2810,7 +2898,7 @@ Rate limit:20 times/2 seconds
 </aside>
 
 **Request parameters:**
-   
+
 | Parameter   | Data Type   | Mandatory  |  Description |
 | ------------ | ------------ | ------------ | ------------ |
 | orderId  | long  | true  | limit order id|
@@ -2836,7 +2924,7 @@ Rate limit:20 times/2 seconds
 | stopPlanOrderId  | long  | true  | the Stop-Limit price of trigger order id|
 | stopLossPrice  | decimal  | false  | at least one stop-loss price and one take-profit  price is not empty and must be more than 0|
 | takeProfitPrice  | decimal  | false  | at least one take-profit price and  stop-loss price is not empty and must be more than 0|
-   
+
 **Response parameters:**
 
 public parameters, success: true success ,false failure
@@ -3571,11 +3659,12 @@ Login successful (channel = rs.login)
 ### Risk limitation
 
 ```channel = push.personal.risk.limit```
- 	
+
 | Parameter   | Data Type   | Description  |
 | ------------ | ------------ | ------------ |
 | symbol  | string  | the name of the contract |
 | positionType  | int  | position type 1:long，2:short|
+| riskSource| int | Source of risk 0:other 1:Liquidation Service|
 | level  | int   | current risk level |
 | maxVol  | decimal   | maximum position volume |
 | maxLeverage  | int   | maximum leverage ratio |
@@ -3599,13 +3688,33 @@ Login successful (channel = rs.login)
 
 ```channel = push.personal.adl.level```
  	
+
 | Parameter   | Data Type  | Description |
 | ------------ | ------------ | ------------ |
 | adlLevel| int   | the current adl level ：1-5|
 | positionId  | long   | position id |
 
+### Position Mode
+
+
+```json
+{
+    "channel":"push.personal.position.mode",
+    "data":{
+        positionMode: 1
+    },
+    "ts":1610005070157
+}
+```
+
+```channel = push.personal.position.mode```
+
+| Parameter   | Data Type   | Description  |
+| ------------ | ------------ | ------------ |
+|positionMode|int|position mode,1:hedge，2:one-way|
+
 ## How is depth information maintained
-  
+
 > Example: Submit subscription information
 
 ```json
@@ -3633,7 +3742,7 @@ Login successful (channel = rs.login)
 "ts":"1587442022003"
 }
 ```
-  
+
 **How is incremental depth information maintained:**
 
 1. Though /api/v1/contract/depth/BTC_USDT to get full amount of depth information, save the current version.
@@ -3646,6 +3755,6 @@ Login successful (channel = rs.login)
 8. If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.
 
 **Subscriptions，subscribe succeed response:**  
-   
+
 channel : rs. +  subscription method，
 data is "success"
