@@ -376,6 +376,9 @@
                     <a href="#get-contract-fair-price" class="toc-h2 toc-link" data-title="Get contract fair price">Get contract fair price</a>
                   </li>
                   <li>
+                    <a href="#get-contract-funding-rate" class="toc-h2 toc-link" data-title="Get contract funding rate">Get contract funding rate</a>
+                  </li>
+                  <li>
                     <a href="#k-line-data" class="toc-h2 toc-link" data-title="K-line data">K-line data</a>
                   </li>
                   <li>
@@ -459,7 +462,16 @@
                     <a href="#increase-or-decrease-margin" class="toc-h2 toc-link" data-title="Increase or decrease margin">Increase or decrease margin</a>
                   </li>
                   <li>
+                    <a href="#get-leverage" class="toc-h2 toc-link" data-title="Get leverage">Get leverage</a>
+                  </li>
+                  <li>
                     <a href="#switch-leverage" class="toc-h2 toc-link" data-title="Switch leverage">Switch leverage</a>
+                  </li>
+                  <li>
+                    <a href="#get-position-mode" class="toc-h2 toc-link" data-title="Get position mode">Get position mode</a>
+                  </li>
+                  <li>
+                    <a href="#change-position-mode" class="toc-h2 toc-link" data-title="Change position mode">Change position mode</a>
                   </li>
                   <li>
                     <a href="#order" class="toc-h2 toc-link" data-title="Order">Order</a>
@@ -1063,7 +1075,7 @@ rate limit: 20 times / 2 seconds
 </ul>
 
 <aside class="notice">
-Rate limit: 20 times / 2 seconds
+Rate limit: 1 times / 5 seconds
 </aside>
 
 <p><strong>Request parameters:</strong></p>
@@ -1247,6 +1259,16 @@ Rate limit: 20 times / 2 seconds
 <td>state</td>
 <td>int</td>
 <td>status, 0:enabled,1:delivery, 2:completed, 3: offline, 4: pause</td>
+</tr>
+<tr>
+<td>conceptPlate</td>
+<td>List</td>
+<td>The zone, corresponding to the entryKey field of the section list</td>
+</tr>
+<tr>
+<td>riskLimitType</td>
+<td>List</td>
+<td>Risk limit type, BY_VOLUME: by the volume, BY_VALUE: by the position</td>
 </tr>
 </tbody></table>
 <h2 id='get-the-transferable-currencies'>Get the transferable currencies</h2>
@@ -1563,49 +1585,77 @@ Rate limit: 20 times /2 seconds
 
 <aside class="notice">
 Rate limit:20 times/2 seconds
-</aside>>
+</aside>
 
-**Request parameters:**
-    
-| Parameter  | Data Type  | Mandatory |  Description |
-| ------------ | ------------ | ------------ | ------------ |
-| symbol  | string  | true  | the name of the contract  |
+<p><strong>Request parameters:</strong></p>
 
-**Response parameters:**
-    
-| Parameter | Data Type   | Description  |
-| ------------ | ------------ | ------------ |
-| symbol | string | the name of the contract |
-| fairPrice  | decimal  | fair price|
-| timestamp  | long   | system timestamp|
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>the name of the contract</td>
+</tr>
+</tbody></table>
 
-## Get contract funding rate
+<p><strong>Response parameters:</strong></p>
 
-> Request
-
-```
-curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
-```
-
-> Response
-
-```json
-{
-    "success": true,
-    "code": 0,
-    "data": {
-        "symbol": "BTC_USDT",
-        "fundingRate": -0.000489,
-        "maxFundingRate": 0.001,
-        "minFundingRate": -0.001,
-        "collectCycle": 8,
-        "nextSettleTime": 1609833600000,
-        "timestamp": 1609829807577
-    }
-}
-```
-
-- **GET** ```api/v1/contract/funding_rate/{symbol}```
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>the name of the contract</td>
+</tr>
+<tr>
+<td>fairPrice</td>
+<td>decimal</td>
+<td>fair price</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td>system timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='get-contract-funding-rate'>Get contract funding rate</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.000489</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maxFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"minFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"collectCycle"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nextSettleTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1609833600000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1609829807577</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>api/v1/contract/funding_rate/{symbol}</code></li>
+</ul>
 
 <aside class="notice">
 Rate limit:20 times/2 seconds
@@ -5443,15 +5493,71 @@ Rate limit:20 times/2 seconds
 <p><strong>Response parameters:</strong></p>
 
 <p>public parameters, success: true, success, false ,failure</p>
+<h2 id='get-leverage'>Get leverage</h2>
+<ul>
+<li><strong>GET</strong> <code>api/v1/private/position/leverage</code></li>
+</ul>
+
+<p><strong>Required permissions:</strong> Trading permission</p>
+
+<aside class="notice">
+Rate limit:20 times/2 seconds
+</aside>
+
+<p><strong>Request parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>symbol</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>positionType</td>
+<td>int</td>
+<td>positon type， 1:long 2:short</td>
+</tr>
+<tr>
+<td>level</td>
+<td>int</td>
+<td>risk level</td>
+</tr>
+<tr>
+<td>imr</td>
+<td>decimal</td>
+<td>The leverage risk limit level corresponds to initial margin rate</td>
+</tr>
+<tr>
+<td>mmr</td>
+<td>decimal</td>
+<td>Leverage risk limit level corresponds to maintenance margin rate</td>
+</tr>
+<tr>
+<td>leverage</td>
+<td>int</td>
+<td>leverage</td>
+</tr>
+</tbody></table>
 <h2 id='switch-leverage'>Switch leverage</h2>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
 <ul>
 <li><strong>POST</strong> <code>api/v1/private/position/change_leverage</code></li>
 </ul>
@@ -5484,11 +5590,111 @@ Rate limit:20 times/2 seconds
 <td>true</td>
 <td>leverage</td>
 </tr>
+<tr>
+<td>openType</td>
+<td>int</td>
+<td>false</td>
+<td>Required when there is no position, openType, 1: isolated position, 2: full position</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>false</td>
+<td>equired when there is no position，symbol</td>
+</tr>
+<tr>
+<td>positionType</td>
+<td>int</td>
+<td>false</td>
+<td>equired when there is no position,  positionType: 1 Long 2:short</td>
+</tr>
 </tbody></table>
 
 <p><strong>Response parameters:</strong></p>
 
 <p>public parameters, success: true, success, false ,failure</p>
+
+<p><strong>request parameters example:</strong>
+   - Has positon:</p>
+
+<p><code>
+    {
+      &quot;positionId&quot;: 1,
+      &quot;leverage&quot;: 20
+    }
+</code>
+   - no positon:</p>
+
+<p><code>
+    {
+      &quot;openType&quot;: 1,
+      &quot;leverage&quot;: 20,
+      &quot;symbol&quot;: &quot;BTC_USDT&quot;,
+      &quot;positionType&quot;: 1 
+    }
+</code></p>
+<h2 id='get-position-mode'>Get position mode</h2>
+<ul>
+<li><strong>GET</strong> <code>api/v1/private/position/position_mode</code></li>
+</ul>
+
+<p><strong>Required permissions:</strong> Trading permission</p>
+
+<aside class="notice">
+Rate limit:20 times/2 seconds
+</aside>
+
+<p><strong>Request parameters:</strong></p>
+
+<p>None</p>
+
+<p><strong>Response parameters:</strong></p>
+
+<p>public parameters, success: true, success, false ,failure</p>
+
+<p>position mode,1:hedge，2:one-way</p>
+
+<p><strong>request parameters example:</strong>
+    <code>
+    {&quot;success&quot;:true,&quot;code&quot;:0,&quot;data&quot;:2}
+</code></p>
+<h2 id='change-position-mode'>Change position mode</h2>
+<ul>
+<li><strong>POST</strong> <code>api/v1/private/position/change_position_mode</code></li>
+</ul>
+
+<p><strong>Required permissions:</strong> Trading permission</p>
+
+<aside class="notice">
+Rate limit:20 times/2 seconds
+</aside>
+
+<p><strong>Request parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>positionMode</td>
+<td>int</td>
+<td>true</td>
+<td>1: Hedge，2, 2: One-way, the modification of the position mode must ensure that there are no active orders, planned orders, or unfinished positions, otherwise it cannot be modified. When switching the one-way mode in both directions, the risk limit level will be reset to level 1. If you need to change the call interface, modify</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response parameters:</strong></p>
+
+<p>public parameters, success: true, success, false ,failure</p>
+
+<p><strong>request parameters example:</strong>
+    <code>
+    {&quot;success&quot;:true,&quot;code&quot;:0}
+</code></p>
 <h2 id='order'>Order</h2>
 <blockquote>
 <p>Response</p>
@@ -5586,6 +5792,18 @@ Rate limit:20 times/2 seconds
 <td>decimal</td>
 <td>false</td>
 <td>take-profit price</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>int</td>
+<td>false</td>
+<td>position mode,1:hedge，2:one-way</td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>boolean</td>
+<td>false</td>
+<td>Default false,For one-way positions, if you need to only reduce positions, pass in true, and two-way positions will not accept this parameter.</td>
 </tr>
 </tbody></table>
 
@@ -5838,7 +6056,6 @@ Rate limit:20 times/2 seconds
 <aside class="notice">
 Rate limit:20 times/2 seconds
 </aside>
- 
 
 <p><strong>Request parameters:</strong></p>
 
@@ -5898,57 +6115,9 @@ Rate limit:20 times/2 seconds
 
 <p>public parameters , success: true success, false failure</p>
 <h2 id='switch-the-risk-level'>Switch the risk level</h2>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<ul>
-<li><strong>POST</strong> <code>api/v1/private/account/change_risk_level</code></li>
-</ul>
+<p>- <strong>POST</strong> <code>api/v1/private/account/change_risk_level</code></p>
 
-<p><strong>Required permissions:</strong> Trading permission</p>
-
-<aside>
-Rate limit:20 times/2 seconds
-</aside>
-
-<p><strong>Request parameters:</strong></p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Mandatory</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>true</td>
-<td>the name of the contract</td>
-</tr>
-<tr>
-<td>level</td>
-<td>int</td>
-<td>true</td>
-<td>level</td>
-</tr>
-<tr>
-<td>positionType</td>
-<td>int</td>
-<td>true</td>
-<td>1:long，2:short</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response parameters:</strong></p>
-
-<p>public parameters , success: true success, false failure</p>
+<p>- Disabled The call returns the error code 8817 Prompt information: The risk restriction function has been upgraded. For details, please go to the web to view</p>
 <h2 id='trigger-order'>Trigger order</h2>
 <ul>
 <li><strong>POST</strong> <code>api/v1/private/planorder/place</code></li>
@@ -6157,7 +6326,6 @@ Rate limit:20 times/2 seconds
 <aside class="notice">
 Rate limit:20 times/2 seconds
 </aside>
- 
 
 <p><strong>Request parameters:</strong></p>
 
@@ -7425,6 +7593,11 @@ Rate limit:20 times/2 seconds
 <td>position type 1:long，2:short</td>
 </tr>
 <tr>
+<td>riskSource</td>
+<td>int</td>
+<td>Source of risk 0:other 1:Liquidation Service</td>
+</tr>
+<tr>
 <td>level</td>
 <td>int</td>
 <td>current risk level</td>
@@ -7481,6 +7654,29 @@ Rate limit:20 times/2 seconds
 <td>positionId</td>
 <td>long</td>
 <td>position id</td>
+</tr>
+</tbody></table>
+<h3 id='position-mode'>Position Mode</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.position.mode"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+        </span><span class="err">positionMode:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"ts"</span><span class="p">:</span><span class="mi">1610005070157</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>channel = push.personal.position.mode</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>positionMode</td>
+<td>int</td>
+<td>position mode,1:hedge，2:one-way</td>
 </tr>
 </tbody></table>
 <h2 id='how-is-depth-information-maintained'>How is depth information maintained</h2>
