@@ -9,7 +9,7 @@
             name="description"
             content="Documentation for the mexc global API"
         >
-    <title>API 合约文档</title>
+    <title>API 文档</title>
     <link href="images/favicon-7465a6e0.png" rel="icon" type="image/png" />
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -454,7 +454,16 @@
                     <a href="#d07adee54e" class="toc-h2 toc-link" data-title="增加或减少仓位保证金">增加或减少仓位保证金</a>
                   </li>
                   <li>
+                    <a href="#8c41f1268e" class="toc-h2 toc-link" data-title="获取持仓杠杆倍数">获取持仓杠杆倍数</a>
+                  </li>
+                  <li>
                     <a href="#d253b08756" class="toc-h2 toc-link" data-title="修改杠杆倍数">修改杠杆倍数</a>
+                  </li>
+                  <li>
+                    <a href="#6dc6e14a7e" class="toc-h2 toc-link" data-title="获取用户仓位模式">获取用户仓位模式</a>
+                  </li>
+                  <li>
+                    <a href="#741cfaccff" class="toc-h2 toc-link" data-title="修改用户仓位模式">修改用户仓位模式</a>
                   </li>
                   <li>
                     <a href="#fd6ce2a756" class="toc-h2 toc-link" data-title="下单">下单</a>
@@ -961,6 +970,16 @@ Recv-Window来自定义，其最大值为60，不推荐使用30秒以上的recv_
 <td>state</td>
 <td>int</td>
 <td>状态,0:启用,1:交割,2:交割完成,3:下线,4: 暂停</td>
+</tr>
+<tr>
+<td>conceptPlate</td>
+<td>List<String></td>
+<td>归属板块，与板块列表entryKey字段对应</td>
+</tr>
+<tr>
+<td>riskLimitType</td>
+<td>string</td>
+<td>风险限额类型，BY_VOLUME: 按张数 ，BY_VALUE：按仓位价值</td>
 </tr>
 </tbody></table>
 <h2 id='94591cc092'>获取可划转币种</h2>
@@ -5272,15 +5291,71 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <p><strong>响应参数:</strong></p>
 
 <p>公共参数,success: true成功,false失败</p>
+<h2 id='8c41f1268e'>获取持仓杠杆倍数</h2>
+<ul>
+<li><strong>GET</strong> <code>api/v1/private/position/leverage</code></li>
+</ul>
+
+<p><strong>需要权限:</strong> 合约交易权限</p>
+
+<aside class="notice">
+限速规则: 20次/2秒
+</aside>
+
+<p><strong>请求参数:</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>合约名称</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应参数:</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>positionType</td>
+<td>int</td>
+<td>仓位类型， 1多 2空</td>
+</tr>
+<tr>
+<td>level</td>
+<td>int</td>
+<td>杠杆风险限额等级</td>
+</tr>
+<tr>
+<td>imr</td>
+<td>decimal</td>
+<td>杠杆风险限额等级对应初始保证金率</td>
+</tr>
+<tr>
+<td>mmr</td>
+<td>decimal</td>
+<td>杠杆风险限额等级对应维持保证金率</td>
+</tr>
+<tr>
+<td>leverage</td>
+<td>int</td>
+<td>杠杆倍数</td>
+</tr>
+</tbody></table>
 <h2 id='d253b08756'>修改杠杆倍数</h2>
-<blockquote>
-<p>响应示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
 <ul>
 <li><strong>POST</strong> <code>api/v1/private/position/change_leverage</code></li>
 </ul>
@@ -5304,8 +5379,8 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <tr>
 <td>positionId</td>
 <td>long</td>
-<td>true</td>
-<td>仓位id</td>
+<td>false</td>
+<td>仓位id，当存在仓位时，传入</td>
 </tr>
 <tr>
 <td>leverage</td>
@@ -5313,11 +5388,110 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <td>true</td>
 <td>杠杆倍数</td>
 </tr>
+<tr>
+<td>openType</td>
+<td>int</td>
+<td>false</td>
+<td>当不存在仓位时必需，开仓类型,1:逐仓,2:全仓</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>false</td>
+<td>当不存在仓位时必需，合约名称</td>
+</tr>
+<tr>
+<td>positionType</td>
+<td>int</td>
+<td>false</td>
+<td>当不存在仓位时必需，  仓位类型， 1多 2空</td>
+</tr>
 </tbody></table>
 
 <p><strong>响应参数:</strong></p>
 
 <p>公共参数,success: true成功,false失败</p>
+
+<p><strong>请求参数示例:</strong>
+   - 有仓位时：
+    <code>
+    {
+      &quot;positionId&quot;: 1,
+      &quot;leverage&quot;: 20
+    }
+</code>
+   - 无仓位时：
+    <code>
+    {
+      &quot;openType&quot;: 1,
+      &quot;leverage&quot;: 20,
+      &quot;symbol&quot;: &quot;BTC_USDT&quot;,
+      &quot;positionType&quot;: 1 
+    }
+</code></p>
+<h2 id='6dc6e14a7e'>获取用户仓位模式</h2>
+<ul>
+<li><strong>GET</strong> <code>api/v1/private/position/position_mode</code></li>
+</ul>
+
+<p><strong>需要权限:</strong> 合约交易权限</p>
+
+<aside class="notice">
+限速规则: 20次/2秒
+</aside>
+
+<p><strong>请求参数:</strong></p>
+
+<p>无</p>
+
+<p><strong>响应参数:</strong></p>
+
+<p>公共参数,success: true成功,false失败
+1:双向持仓模式,2:单向持仓模式</p>
+
+<p><strong>请求参数示例:</strong></p>
+
+<p><code>
+    {&quot;success&quot;:true,&quot;code&quot;:0,&quot;data&quot;:1}
+    {&quot;success&quot;:true,&quot;code&quot;:0,&quot;data&quot;:2}
+</code></p>
+<h2 id='741cfaccff'>修改用户仓位模式</h2>
+<ul>
+<li><strong>POST</strong> <code>api/v1/private/position/change_position_mode</code></li>
+</ul>
+
+<p><strong>需要权限:</strong> 合约交易权限</p>
+
+<aside class="notice">
+限速规则: 20次/2秒
+</aside>
+
+<p><strong>请求参数:</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>positionMode</td>
+<td>int</td>
+<td>true</td>
+<td>1:双向，2：单向，修改仓位模式必须保证没有活跃订单、计划委托单、未完成仓位，否则无法修改。双向切换单向模式时，风险限额等级会重置为等级1，如需更改调用接口修改</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应参数:</strong></p>
+
+<p>公共参数,success: true成功,false失败</p>
+
+<p><strong>请求参数示例:</strong>
+    <code>
+    {&quot;success&quot;:true,&quot;code&quot;:0}
+</code></p>
 <h2 id='fd6ce2a756'>下单</h2>
 <blockquote>
 <p>响应示例</p>
@@ -5415,6 +5589,18 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <td>decimal</td>
 <td>false</td>
 <td>止盈价</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>int</td>
+<td>false</td>
+<td>1:双向持仓，2:单向持仓，默认为1</td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>boolean</td>
+<td>false</td>
+<td>默认为false,单向持仓如果需要只减仓时传入true，双向持仓不受理此参数</td>
 </tr>
 </tbody></table>
 
@@ -5667,7 +5853,6 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <aside class="notice">
 限速规则: 20次/2秒
 </aside>
- 
 
 <p><strong>请求参数:</strong></p>
 
@@ -5727,57 +5912,9 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 
 <p>公共参数,success: true成功,false失败</p>
 <h2 id='fe718a672c'>修改风险等级</h2>
-<blockquote>
-<p>响应示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<ul>
-<li><strong>POST</strong> <code>api/v1/private/account/change_risk_level</code></li>
-</ul>
+<p>- <strong>POST</strong> <code>api/v1/private/account/change_risk_level</code></p>
 
-<p><strong>需要权限:</strong> 合约交易权限</p>
-
-<aside>
-限速规则: 20次/2秒
-</aside>
-
-<p><strong>请求参数:</strong></p>
-
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>是否必填</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>true</td>
-<td>合约名</td>
-</tr>
-<tr>
-<td>level</td>
-<td>int</td>
-<td>true</td>
-<td>等级</td>
-</tr>
-<tr>
-<td>positionType</td>
-<td>int</td>
-<td>true</td>
-<td>1:多仓，2:空仓</td>
-</tr>
-</tbody></table>
-
-<p><strong>响应参数:</strong></p>
-
-<p>公共参数,success: true成功,false失败</p>
+<p>- 已禁用 调用是返回错误码 8817 提示信息：风险限制功能已升级，详情请前往web端查看</p>
 <h2 id='03b4e6fa59'>计划委托下单</h2>
 <ul>
 <li><strong>POST</strong> <code>api/v1/private/planorder/place</code></li>
@@ -5986,7 +6123,6 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <aside class="notice">
 限速规则: 20次/2秒
 </aside>
- 
 
 <p><strong>请求参数:</strong></p>
 
@@ -7394,6 +7530,11 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <td>持仓类型 1:多仓，2:空仓</td>
 </tr>
 <tr>
+<td>riskSource</td>
+<td>int</td>
+<td>风险限制来源 0:其它 1:爆仓服务</td>
+</tr>
+<tr>
 <td>level</td>
 <td>int</td>
 <td>当前风险等级</td>
@@ -7477,7 +7618,34 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 </span><span class="nl">"data"</span><span class="p">:</span><span class="s2">"合约不存在!"</span><span class="p">,</span><span class="w">
 </span><span class="nl">"ts"</span><span class="p">:</span><span class="s2">"1587442022003"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='5bfa8eb0f4'>仓位模式</h3>
+<blockquote>
+<p>数据示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.position.mode"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+        </span><span class="err">positionMode:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"ts"</span><span class="p">:</span><span class="mi">1610005070157</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p><code>channel = push.personal.position.mode</code></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>positionMode</td>
+<td>int</td>
+<td>仓位模式,1:双向，2:单向</td>
+</tr>
+</tbody></table>
+
 <p><strong>如何维护增量深度信息:</strong></p>
 
 <ol>
