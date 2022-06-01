@@ -527,21 +527,29 @@ curl "https://contract.mexc.com/api/v1/contract/fair_price/BTC_USDT"
 
 <aside class="notice">
 限速规则: 20次/2秒
-</aside>>
+</aside>
+
+
 
 **请求参数:**
     
+
 | 参数名  | 类型  | 是否必填  |  说明 |
 | ------------ | ------------ | ------------ | ------------ |
 | symbol  | string  | true  | 合约名  |
 
+
+
 **响应参数:**
     
+
 | 参数名  | 类型  | 说明  |
 | ------------ | ------------ | ------------ |
 | symbol | string| 合约名 |
 | fairPrice  | decimal  | 合理价格 |
 | timestamp  | long   | 系统时间戳 |
+
+
 
 ## 获取合约资金费率
 
@@ -2408,6 +2416,7 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
 
 **请求参数示例:**
    - 有仓位时：
+
     ```
     {
       "positionId": 1,
@@ -2415,6 +2424,7 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
     }
     ```
    - 无仓位时：
+
     ```
     {
       "openType": 1,
