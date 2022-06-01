@@ -375,25 +375,27 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| timezone | 1 | 1 |
-| serverTime | 1 | 1 |
-| rateLimits | 1 | 1 |
-| exchangeFilters | 1 | 1 |
-| symbol | 1 | 1 |
-| status | 1 | 1 |
-| baseAsset | 1 | 1 |
-| baseAssetPrecision | 1 | 1 |
-| quoteAsset | 1 | 1 |
-| quotePrecision | 1 | 1 |
-| quoteAssetPrecision | 1 | 1 |
-| quoteCommissionPrecision | 1 | 1 |
-| orderTypes | 1 | 1 |
-| icebergAllowed | 1 | 1 |
-| ocoAllowed | 1 | 1 |
-| quoteOrderQtyMarketAllowed | 1 | 1 |
-| isSpotTradingAllowed | 1 | 1 |
-| isMarginTradingAllowed | 1 | 1 |
-| permissions | 1 | 1 |
+| timezone | string | 时区 |
+| serverTime | long | 服务器时间 |
+| rateLimits | Array | 频率限制 |
+| exchangeFilters | Array | 过滤器 |
+| symbol | String | 交易对 |
+| status | String | 状态 |
+| baseAsset | String | 交易币 |
+| baseAssetPrecision | Int | 交易币精度 |
+| quoteAsset | String | 计价币 |
+| quotePrecision | Int | 计价币价格精度 |
+| quoteAssetPrecision | Int | 计价币资产精度 |
+| baseCommissionPrecision | Int | 交易币手续费精度 |
+| quoteCommissionPrecision | Int | 计价币手续费精度 |
+| orderTypes | Array | 订单类型 |
+| quoteOrderQtyMarketAllowed | Boolean | 是否允许市价委托 |
+| isSpotTradingAllowed | Boolean | 是否允许现货交易 |
+| isMarginTradingAllowed | Boolean | 是否允许杠杆交易 |
+| permissions | Array | 权限 |
+| maxQuoteAmount | String | 最大委托数量 |
+| makerCommission | String | marker手续费 |
+| takerCommission | String | taker手续费 |
 
 
 
