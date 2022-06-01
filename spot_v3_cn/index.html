@@ -900,98 +900,108 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </thead><tbody>
 <tr>
 <td style="text-align: left">timezone</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">时区</td>
 </tr>
 <tr>
 <td style="text-align: left">serverTime</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">服务器时间</td>
 </tr>
 <tr>
 <td style="text-align: left">rateLimits</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Array</td>
+<td style="text-align: left">频率限制</td>
 </tr>
 <tr>
 <td style="text-align: left">exchangeFilters</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Array</td>
+<td style="text-align: left">过滤器</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">交易对</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">状态</td>
 </tr>
 <tr>
 <td style="text-align: left">baseAsset</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">交易币</td>
 </tr>
 <tr>
 <td style="text-align: left">baseAssetPrecision</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Int</td>
+<td style="text-align: left">交易币精度</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteAsset</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">计价币</td>
 </tr>
 <tr>
 <td style="text-align: left">quotePrecision</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Int</td>
+<td style="text-align: left">计价币价格精度</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteAssetPrecision</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Int</td>
+<td style="text-align: left">计价币资产精度</td>
+</tr>
+<tr>
+<td style="text-align: left">baseCommissionPrecision</td>
+<td style="text-align: left">Int</td>
+<td style="text-align: left">交易币手续费精度</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteCommissionPrecision</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Int</td>
+<td style="text-align: left">计价币手续费精度</td>
 </tr>
 <tr>
 <td style="text-align: left">orderTypes</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
-</tr>
-<tr>
-<td style="text-align: left">icebergAllowed</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
-</tr>
-<tr>
-<td style="text-align: left">ocoAllowed</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Array</td>
+<td style="text-align: left">订单类型</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteOrderQtyMarketAllowed</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Boolean</td>
+<td style="text-align: left">是否允许市价委托</td>
 </tr>
 <tr>
 <td style="text-align: left">isSpotTradingAllowed</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Boolean</td>
+<td style="text-align: left">是否允许现货交易</td>
 </tr>
 <tr>
 <td style="text-align: left">isMarginTradingAllowed</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Boolean</td>
+<td style="text-align: left">是否允许杠杆交易</td>
 </tr>
 <tr>
 <td style="text-align: left">permissions</td>
-<td style="text-align: left">1</td>
-<td style="text-align: left">1</td>
+<td style="text-align: left">Array</td>
+<td style="text-align: left">权限</td>
+</tr>
+<tr>
+<td style="text-align: left">maxQuoteAmount</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">最大委托数量</td>
+</tr>
+<tr>
+<td style="text-align: left">makerCommission</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">marker手续费</td>
+</tr>
+<tr>
+<td style="text-align: left">takerCommission</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">taker手续费</td>
 </tr>
 </tbody></table>
 <h2 id='38a975b802'>深度信息</h2>
