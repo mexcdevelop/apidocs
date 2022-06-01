@@ -1156,14 +1156,19 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 - 比如在`BTCUSDT`上下一个市价卖单, `quantity`为用户指明能够卖出多少BTC。
 
 **返回参数**
+
+
+
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| symbol | 1 | 1 |
-| orderId | 1 | 1 |
-| orderListId | 1 | 1 |
+| symbol | STRING | 交易对 |
+| orderId | STRING | 订单类型 |
+| orderListId |          |          |
+
 
 
 ## 撤销订单
+
 取消有效订单。
 
 > 请求示例
