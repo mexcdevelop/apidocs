@@ -368,6 +368,9 @@
                     <a href="#a54153ed4d" class="toc-h2 toc-link" data-title="获取合约合理价格">获取合约合理价格</a>
                   </li>
                   <li>
+                    <a href="#3194efda37" class="toc-h2 toc-link" data-title="获取合约资金费率">获取合约资金费率</a>
+                  </li>
+                  <li>
                     <a href="#46c200bb79" class="toc-h2 toc-link" data-title="获取蜡烛图数据">获取蜡烛图数据</a>
                   </li>
                   <li>
@@ -1296,49 +1299,77 @@ Recv-Window来自定义，其最大值为60，不推荐使用30秒以上的recv_
 
 <aside class="notice">
 限速规则: 20次/2秒
-</aside>>
+</aside>
 
-**请求参数:**
-    
-| 参数名  | 类型  | 是否必填  |  说明 |
-| ------------ | ------------ | ------------ | ------------ |
-| symbol  | string  | true  | 合约名  |
+<p><strong>请求参数:</strong></p>
 
-**响应参数:**
-    
-| 参数名  | 类型  | 说明  |
-| ------------ | ------------ | ------------ |
-| symbol | string| 合约名 |
-| fairPrice  | decimal  | 合理价格 |
-| timestamp  | long   | 系统时间戳 |
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>true</td>
+<td>合约名</td>
+</tr>
+</tbody></table>
 
-## 获取合约资金费率
+<p><strong>响应参数:</strong></p>
 
-> 请求示例
-
-```
-curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
-```
-
-> 响应示例
-
-```json
-{
-    "success": true,
-    "code": 0,
-    "data": {
-        "symbol": "BTC_USDT",
-        "fundingRate": -0.000489,
-        "maxFundingRate": 0.001,
-        "minFundingRate": -0.001,
-        "collectCycle": 8,
-        "nextSettleTime": 1609833600000,
-        "timestamp": 1609829807577
-    }
-}
-```
-
-- **GET** ```api/v1/contract/funding_rate/{symbol}```
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>合约名</td>
+</tr>
+<tr>
+<td>fairPrice</td>
+<td>decimal</td>
+<td>合理价格</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td>系统时间戳</td>
+</tr>
+</tbody></table>
+<h2 id='3194efda37'>获取合约资金费率</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
+</code></pre></div>
+<blockquote>
+<p>响应示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.000489</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maxFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"minFundingRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"collectCycle"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"nextSettleTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1609833600000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1609829807577</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>api/v1/contract/funding_rate/{symbol}</code></li>
+</ul>
 
 <aside class="notice">
 限速规则: 20次/2秒
@@ -5413,15 +5444,17 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/BTC_USDT"
 <p>公共参数,success: true成功,false失败</p>
 
 <p><strong>请求参数示例:</strong>
-   - 有仓位时：
-    <code>
+   - 有仓位时：</p>
+
+<p><code>
     {
       &quot;positionId&quot;: 1,
       &quot;leverage&quot;: 20
     }
 </code>
-   - 无仓位时：
-    <code>
+   - 无仓位时：</p>
+
+<p><code>
     {
       &quot;openType&quot;: 1,
       &quot;leverage&quot;: 20,
