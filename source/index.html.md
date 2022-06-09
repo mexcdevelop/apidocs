@@ -107,9 +107,9 @@ Parameters related to request signature
 
 |   Components   |   Description  |
 | ------------ | -------------------------- |
-|   param ```api_key```  |  access key from API key    |
-|   param ```req_time```  |  the timestamp when sending the request, string of 10 digits stands for the seconds since Unix epoch, for instance ```1572537600```    |
-|   param ```sign```  |  calculated signature    |
+| ApiKey  |  access key from API key    |
+| Request-Time  | the timestamp when sending the request, string of 13 digits stands for the seconds since Unix epoch, for instance ```1572537600000``` |
+| Signature  | calculated signature SHA256(apikey + timestamp + params) |
 |   HTTP request method  |  GET, POST or DELETE as described in later sections for each API    |
 |   URI  |  URI of the API    |
 |   business parameters  |  business parameters required by each API, only the business parameters of ```GET``` and ```DELETE``` requests will be included in the signature calulation |
