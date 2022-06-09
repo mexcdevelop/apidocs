@@ -611,16 +611,16 @@ API V1 will no longer be maintained starting from the end of June 2021. Please p
 </tr>
 </thead><tbody>
 <tr>
-<td>param <code>api_key</code></td>
+<td>ApiKey</td>
 <td>access key from API key</td>
 </tr>
 <tr>
-<td>param <code>req_time</code></td>
-<td>the timestamp when sending the request, string of 10 digits stands for the seconds since Unix epoch, for instance <code>1572537600</code></td>
+<td>Request-Time</td>
+<td>the timestamp when sending the request, string of 13 digits stands for the seconds since Unix epoch, for instance <code>1572537600000</code></td>
 </tr>
 <tr>
-<td>param <code>sign</code></td>
-<td>calculated signature</td>
+<td>Signature</td>
+<td>calculated signature SHA256(apikey + timestamp + params)</td>
 </tr>
 <tr>
 <td>HTTP request method</td>
