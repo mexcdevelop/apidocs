@@ -1736,7 +1736,7 @@ POST /api/v3/margin/tradeMode
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 | timestamp | 时间戳 | 是| string|1655143087012|
-| signature | 签名 |是|string||
+| signature | 签名 |是|string|
 | tradeMode | 交易模式 |是|string|0: 手动模式  1:自动借还模式|
 | symbol | 交易对 |是|string|BTCUSDT|
 
@@ -1783,23 +1783,23 @@ POST /api/v3/margin/tradeMode
 |symbol| 交易对 |是|[string]|BTCUSDT|
 |isIsolated|是否逐仓杠杆，"TRUE", "FALSE", 默认 "TRUE"|否|[string]|TRUE|
 |side|BUY SELL|是|[string]|BUY|
-|type|详见枚举定义：订单类型  市价单参见现货市价配置|是|[string]|| 
-|quantity|订单总额|否|[string]|| 
-|quoteOrderQty|订单数量|否|[string]|| 
-|price|买入价|否|[string]|| 
-|newClientOrderId|客户自定义的唯一订单ID|否|[string]|| 
-|recvWindow| |否|[string]|| 
+|type|详见枚举定义：订单类型  市价单参见现货市价配置|是|[string]| 
+|quantity|订单总额|否|[string]| 
+|quoteOrderQty|订单数量|否|[string]| 
+|price|买入价|否|[string]| 
+|newClientOrderId|客户自定义的唯一订单ID|否|[string]| 
+|recvWindow| |否|[string]| 
 
 
 **返回参数**
 
 | 参数名 | 说明  |数据类型 | 示例 |
 | :------------ | :-------- | :-------- |:-------------- |
-|symbol| |是|[string]||BTCUSDT|
-|orderId| |是|[string]||693471305432961024|
-|clientOrderId| |是|[string]||6gCrw2kRUAF9CvJDGP16IP|
-|isIsolated| 是否是逐仓symbol交易|是|[boolean]||true|
-|transactTime| |是|[number]||1507725176595|
+|symbol| |[string]|BTCUSDT|
+|orderId| |[string]|693471305432961024|
+|clientOrderId| |[string]|6gCrw2kRUAF9CvJDGP16IP|
+|isIsolated| 是否是逐仓symbol交易|[boolean]|true|
+|transactTime| |[number]|1507725176595|
 
 
 ## 借贷 
@@ -1812,7 +1812,9 @@ POST /api/v3/margin/tradeMode
 
 ```json
 [
-
+  {
+    "tranId": 100000001
+  }
 ]
 ```
 **HTTP请求**
@@ -1826,24 +1828,1014 @@ POST /api/v3/margin/tradeMode
 |timestamp|时间戳 |是|[string]|{{timestamp}}|
 |signature|签名 |是|[string]|{{signature}}|
 |asset|资产名称|是|[string]|BTC| 
-|isIsolated|是否逐仓杠杆，"TRUE", 默认 "TRUE"|否|[string]|| 
-|symbol|逐仓交易对，配合逐仓使用|否|[string]|| 
-|amount| 数量|是|[string]|| 
-|recvWindow| |否|[string]|| 
+|isIsolated|是否逐仓杠杆，"TRUE", 默认 "TRUE"|否|[string]| 
+|symbol|逐仓交易对，配合逐仓使用|否|[string]| 
+|amount| 数量|是|[string]| 
+|recvWindow| |否|[string]| 
 
 
 **返回参数**
 
-| 参数名 | 说明  |数据类型 | 示例|
-
-| :------------ | :-------- | :------------------- |
-|tranId|借款记录id|是|[number]||100000001|
+| 参数名 | 说明  |数据类型 | 示例 |
+| :------------ | :-------- | :-------- | :------------------- |
+| tranId | 借款记录id |[number]|100000001|
 
 **详细说明**：
 
-如果 isIsolated = “TRUE”, 表示逐仓借贷，此时 symbol 必填
+如果 isIsolated = “TRUE”, 表示逐仓借贷，此时 symbol 必填。
 
-####################################
+
+## 归还借贷
+说明
+> 请求示例
+
+```post /api/v3/margin/repay&resultType=failure
+```
+> 返回示例
+
+```json
+[
+  {
+    "tranId": 100000001
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/margin/repay```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|asset|资产/btc|是|[string]|
+|isIsolated|是否逐仓杠杆，"TRUE",  默认 "TRUE"|否|[string]|
+|symbol|逐仓交易对，配合逐仓使用|是|[string]|
+|amount|amount和isAllRepay，二选一|否|[string]|
+|borrowId|借款订单id|是|[string]|
+|isAllRepay|true or false，全不全还|否|[string]|
+|recvWindow| |是|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|tranId|还款id|[number]|100000001|
+
+**详细说明**：
+
+如果 isIsolated = “TRUE”, 表示逐仓还款，此时 symbol 必填。
+
+
+## 撤销单一交易对的所有挂单
+说明
+> 请求示例
+
+```post /api/v3/1111
+```
+> 返回示例
+
+```json
+[
+  [
+  {
+    "symbol": "BTCUSDT",
+    "isIsolated": true,      
+    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",
+    "price": "0.089853",
+    "origQty": "0.178622",
+    "executedQty": "0.000000",
+    "cummulativeQuoteQty": "0.000000",
+    "status": "CANCELED",
+    "type": "LIMIT",
+    "side": "BUY"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "isIsolated": false,      
+    "orderId": 13,
+    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",
+    "price": "0.090430",
+    "origQty": "0.178622",
+    "executedQty": "0.000000",
+    "cummulativeQuoteQty": "0.000000",
+    "status": "CANCELED",
+    "type": "LIMIT",
+    "side": "BUY"
+  }
+  ]
+]
+```
+**HTTP请求**
+
+- **DELETE** ```/api/v3/margin/openOrders```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|
+|isIsolated|是否逐仓杠杆，"TRUE", 默认 "TRUE"|否|[string]|
+|recvWindow|赋值不能大于 `60000`|否|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|isIsolated| 是否是逐仓symbol交易 |[boolean]|true|
+|clientOrderId||[string]|pXLV6Hz6mprAcVYpVMTGgx|
+|price| |[string]|0.089853|
+|origQty| |[string]|0.178622|
+|executedQty||[string]|0.000000|
+|cummulativeQuoteQty| |[string]|0.000000|
+|status| |[string]|CANCELED|
+|type| |[string]|LIMIT|
+|side| |[string]|BUY|
+|orderId||[string]| |
+|orderListId|-1|[string]||
+
+
+
+## 撤销订单
+说明
+> 请求示例
+
+```delete /api/v3/margin/order&resultType=failure
+```
+> 返回示例
+
+```json
+[
+  {
+  "symbol": "LTCBTC",
+  "orderId": "693471305432961024",
+  "clientOrderId": "cancelMyOrder1",
+  "price": "1.00000000",
+  "origQty": "10.00000000",
+  "executedQty": "8.00000000",
+  "cummulativeQuoteQty": "8.00000000",//累计成交金额
+  "status": "CANCELED",
+  "type": "LIMIT",
+  "side": "SELL",
+  "isIsolated": true       // 是否是逐仓symbol交易 
+  }
+]
+```
+**HTTP请求**
+
+- **DELETE** ```/api/v3/margin/order```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|
+|isIsolated|是否逐仓杠杆，"TRUE", "FALSE", 默认 "FALSE"|否|[string]|
+|orderId| |否|[string]|
+|origClientOrderId|下单时，用户传入的自定义id|否|[string]|
+|recvWindow| |否|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|LTCBTC|
+|orderId| |[string]|693471305432961024|
+|clientOrderId| |[string]|cancelMyOrder1|
+|price| |[string]|1.00000000|
+|origQty| |[string]|10.00000000|
+|executedQty| |[string]|8.00000000|
+|cummulativeQuoteQty|累计成交金额|[string]|8.00000000|
+|status| |[string]|CANCELED|
+|type| |[string]|LIMIT|
+|side| |[string]|SELL|
+|isIsolated| 是否是逐仓symbol交易 |[boolean]|true|
+
+**详细说明**：
+
+必须发送 orderId 或 origClientOrderId 其中一个。
+
+
+## 查询借贷记录
+说明
+> 请求示例
+
+```get /api/v3/margin/loan
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/loan```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|asset|资产，如BTC|是|[string]|
+|symbol|逐仓symbol|否|[string]|
+|tranId|`借贷id` in POST /api/v3/margin/loan|否|[string]|
+|startTime| |否|[string]|
+|endTime| |否|[string]|
+|current|当前查询页。 开始值 1。 默认:1|否|[string]|
+|size|默认:10 最大:100|否|[string]|
+|recvWindow| |是|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|rows| |[array]| |
+|rows>>symbol| 逐仓借贷 返回逐仓symbol; 若是全仓不会返回此字段|[string]|MXUSDT|
+|rows>>tranId| |[number]|12807067523|
+|rows>>asset| |[string]|MX|
+|rows>>principal|借款金额|[string]|0.84624403|
+|rows>>timestamp| |[number]|1555056425000|
+|rows>>remainAmount|待还金额|[string]| |
+|rows>>remainInterest|待还利息|[string]| |
+|rows>>repayAmount|已还金额|[string]|300|
+|rows>>repayInterest|已还利息|[string]|1.96249686|
+|rows>>status|状态: PENDING (等待执行), CONFIRMED (成功借贷), FAILED (执行失败);|[string]|CONFIRMED|
+|total| |[number]|1|
+
+**详细说明**：
+
+必须发送tranId 或 startTime，tranId 优先。响应返回为降序排列。如果发送isolatedSymbol，返回指定逐仓symbol指定asset的借贷记录。
+
+
+## 查询历史委托记录
+说明
+> 请求示例
+
+```get /api/v3/margin/allOrders
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/allOrders```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|
+|isIsolated|是否逐仓杠杆，"TRUE", "FALSE",默认 "TRUE"|否|[string]|
+|orderId| |否|[string]|
+|startTime| |否|[string]|
+|endTime| |否|[string]|
+|limit|默认 500;最大500.|否|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|clientOrderId| |[string]|D2KDy4DIeS56PvkM13f8cP|
+|cummulativeQuoteQty| |[string]|0.00000000|
+|executedQty| |[string]|0.00000000|
+|isWorking| |[boolean]|false|
+|orderId| |[number]|41295|
+|origQty| |[string]|5.31000000|
+|price| |[string]|0.22500000|
+|side| |[string]|SELL|
+|status| |[string]|CANCELED|
+|symbol| |[string]|MXBTC|
+|isIsolated| 是否是逐仓symbol交易 |[boolean]|false|
+|time| |[number]|1565769338806|
+|type| |[string]|TAKE_PROFIT_LIMIT|
+|updateTime| |[number]|1565769342148|
+
+**详细说明**：
+
+如果设置 orderId , 获取订单 &gt;= orderId， 否则返回近期订单历史。一些历史订单的 cummulativeQuoteQty &lt; 0, 是指当前数据不存在。
+
+
+
+## 查询历史成交记录
+说明
+> 请求示例
+
+```get /api/v3/margin/myTrades
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/myTrades```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|
+|isIsolated|是否逐仓杠杆，"TRUE", "FALSE",默认 "TRUE"|否|[string]|
+|startTime| |否|[string]|
+|endTime| |否|[string]|
+|fromId|获取TradeId，默认获取近期交易历史。|否|[string]|
+|limit|默认 500; 最大 1000.|否|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|commission|手续费|[string]|0.00006000|
+|commissionAsset|手续费币种|[string]|BTC|
+|id|trade-id|[number]|34|
+|isBuyer| |[boolean]|false|
+|orderId| |[number]|39324|
+|price| |[string]|0.02000000|
+|qty| |[string]|3.00000000|
+|symbol| |[string]|MXBTC|
+|isIsolated| 是否是逐仓symbol交易|[boolean]|false|
+|time| |[number]|1561973357171|
+
+**详细说明**：
+
+如果设置 fromId , 获取订单 id &gt;= fromId， 否则返回近期订单历史。
+
+
+## 查询当前挂单记录
+说明
+> 请求示例
+
+```get /api/v3/margin/openOrders
+```
+> 返回示例
+
+```json
+[
+  {
+  "rows": [
+    {
+        "isolatedSymbol": "MXUSDT", // 逐仓借贷 返回逐仓symbol; 【统一参数】
+        "id": "12807067523",//order id 
+        "asset": "MX",
+        "timestamp": 1555056425000,
+        "amount": "315.53307675",
+        "dealAmount": "319.26088158",//成交金额
+        "dealQuantity": "23768.97",//成交数量
+        "fee": "0",
+        "feeCurrency": "USDT",
+        "orderType": "STOP_OUT",
+        "price": "0.013275",
+        "quantity": "23768.97",
+				"remainQuantity": "0",//未成交数量
+        "remainAmount": "300",//未成交金额
+				"side": "SELL",
+				"status": "FILLED"
+    }
+  ],
+  "total": 1
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/openOrders```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol|逐仓symbol|否|[string]| 
+|isIsolated|是否逐仓杠杆，"TRUE", "FALSE",默认 "TRUE"|否|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|clientOrderId| |[string]|qhcZw71gAkCCTv0t0k8LUK|
+|cummulativeQuoteQty|成交金额|[string]|0.00000000|
+|executedQty| |[string]|0.00000000|
+|isWorking| |[boolean]|true|
+|orderId| |[number]|211842552|
+|origQty| |[string]|0.30000000|
+|price| |[string]|0.00475010|
+|side| |[string]|SELL|
+|status| |[string]|NEW|
+|symbol| |[string]|MXBTC|
+|isIsolated| 是否是逐仓symbol交易|[boolean]|true|
+|time| |[number]|1562040170089|
+|timeInForce| |[string]|GTC|
+|type| |[string]|LIMIT|
+|updateTime| |[number]|1562040170089|
+
+**详细说明**：
+
+如未发送symbol，返回所有 symbols 订单记录。【能支持吗？？？】如果 isIsolated = “TRUE”, symbol 为必填
+
+
+
+## 查询最大可转出额
+说明
+> 请求示例
+
+```get /api/v3/margin/maxTransferable
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/maxTransferableh```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|asset| |是|[string]| 
+|symbol|逐仓交易对，适用于逐仓查询|是|[string]| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|amount| |[string]|3.59498107|
+
+
+## 查询杠杆价格指数
+说明
+> 请求示例
+
+```get /api/v3/margin/priceIndex
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/priceIndex```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|   
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|calcTime| |[number]|1562046418000|
+|price| |[string]|0.00333930|
+|symbol| |[string]|MXBTC|
+
+
+
+## 查询杠杆账户订单详情
+说明
+> 请求示例
+
+```get /api/v3/margin/order
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/order```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |否|[string]|
+|isIsolated|是否逐仓杠杆，"TRUE", "FALSE",默认 "TRUE"|否|[string]| |
+|orderId| |否|[string]| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|clientOrderId| |[string]|ZwfQzuDIGpceVhKW5DvCmO|
+|cummulativeQuoteQty|累计交易货币数量？？|[string]|0.00000000|
+|executedQty|实际数量|[string]|0.00000000|
+|isWorking| |[boolean]|true|
+|orderId| |[number]|213205622|
+|origQty|原始数量|[string]|0.30000000|
+|price| |[string]|0.00493630|
+|side| |[string]|SELL|
+|status| |[string]|NEW|
+|symbol| |[string]|MXBTC|
+|isIsolated| 是否是逐仓symbol交易|[boolean]|true|
+|time| |[number]|1562133008725|
+|type| |[string]|LIMIT|
+|updateTime| |[number]|1562133008725|
+
+**详细说明**：
+
+必须发送 orderId 或 origClientOrderId 其中一个。一些历史订单的 cummulativeQuoteQty &lt; 0, 是指当前数据不存在。
+
+
+## 查询杠杆逐仓账户信息
+说明
+> 请求示例
+
+```get /api/v3/margin/isolated/account
+```
+> 返回示例
+
+```json
+[
+  {
+   "assets":[
+      {
+        "baseAsset": 
+          {
+          "asset": "BTC",
+          "borrowEnabled": true,//是否可借
+          "borrowed": "0.00000000",//已借
+          "free": "0.00000000",//
+          "interest": "0.00000000",//
+          "locked": "0.00000000",//
+          "netAsset": "0.00000000",//【待确认】
+          "repayEnabled": true,//是否可还
+          "totalAsset": "0.00000000"//
+        },
+        "quoteAsset": 
+        {
+          "asset": "USDT",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",//【待确认】
+          "repayEnabled": true,
+          "totalAsset": "0.00000000"
+        },
+        "symbol": "BTCUSDT",
+        "enabled": true, // 账户是否启用，true-启用，false-停用
+        "tradeMode": 0, // 0: 手动模式  1:自动借还模式
+        "marginLevel": "0.00000000", //杠杆倍数
+        "riskRate": "0.00000000",//风险率
+        "indexPrice": "10000.00000000",//指数价格
+        "liquidatePrice": "1000.00000000",//强平价
+        "liquidateRate": "1.00000000",//强平率
+        "tradeEnabled": true,//是否可交易
+        "totalUsdtValue": 100//usdt总计
+      }
+    ]
+  }
+]
+传"symbols"的返回内容:
+{
+   "assets":[
+      {
+        "baseAsset": 
+          {
+          "asset": "BTC",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",
+          "repayEnabled": true,
+          "totalAsset": "0.00000000"
+        },
+        "quoteAsset": 
+        {
+          "asset": "USDT",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",
+          "repayEnabled": true,
+          "totalAsset": "0.00000000"
+        },
+        "symbol": "BTCUSDT"
+        "enabled": true, // 账户是否启用，true-启用，false-停用
+        "tradeMode": 0, // 0: 手动模式  1:自动借还模式
+        "marginLevel": "0.00000000", 
+        "riskRate": "0.00000000",
+        "indexPrice": "10000.00000000",
+        "liquidatePrice": "1000.00000000",
+        "liquidateRate": "1.00000000",
+        "tradeEnabled": true,
+        "totalUsdtValue": 100
+      }
+    ]
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/isolated/account```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbols|最多可以传5个symbol; 由","分隔的字符串表示. e.g. "BTCUSDT,MXUSDT,ADAUSDT"|是|[string]|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|assets| |[array]| |
+|assets>>baseAsset| |[object]| |
+|assets>>baseAsset>>asset| |[string]|BTC|
+|assets>>baseAsset>>borrowEnabled| |[boolean]|true|
+|assets>>baseAsset>>borrowed| |[string]|0.00000000|
+|assets>>baseAsset>>free| |[string]|0.00000000|
+|assets>>baseAsset>>interest| |[string]|0.00000000|
+|assets>>baseAsset>>locked| |[string]|0.00000000|
+|assets>>baseAsset>>netAsset| |[string]|0.00000000|
+|assets>>baseAsset>>netAssetOfBtc| |[string]|0.00000000|
+|assets>>baseAsset>>repayEnabled| |[boolean]|true|
+|assets>>baseAsset>>totalAsset| |[string]|0.00000000|
+|assets>>quoteAsset| |[object]| | |
+|assets>>quoteAsset>>asset| |[string]|USDT|
+|assets>>quoteAsset>>borrowEnabled| |[boolean]|true|
+|assets>>quoteAsset>>borrowed| |[string]|0.00000000|
+|assets>>quoteAsset>>free| |[string]|0.00000000|
+|assets>>quoteAsset>>interest| |[string]|0.00000000|
+|assets>>quoteAsset>>locked| |[string]|0.00000000|
+|assets>>quoteAsset>>netAsset| |[string]|0.00000000|
+|assets>>quoteAsset>>netAssetOfBtc| |[string]|0.00000000|
+|assets>>quoteAsset>>repayEnabled| |[boolean]|true|
+|assets>>quoteAsset>>totalAsset| |[string]|0.00000000|
+|assets>>symbol| |[string]|BTCUSDT|
+|assets>>isolatedCreated| |[boolean]|true|
+|assets>>enabled| 账户是否启用，true-启用，false-停用|[boolean]|true|
+|assets>>marginLevel| |[string]|0.00000000|
+|assets>>marginRatio| |[string]|0.00000000|
+|assets>>indexPrice| |[string]|10000.00000000|
+|assets>>liquidatePrice| |[string]|1000.00000000|
+|assets>>liquidateRate| |[string]|1.00000000|
+|assets>>tradeEnabled| |[boolean]|true|
+
+
+**详细说明**：
+
+传”symbols”, 将只会返回制定symbol的杠杆逐仓资产
+
+
+## 查询止盈止损订单
+说明
+> 请求示例
+
+```get /api/v3/margin/trigerOrder
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/trigerOrder```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+
+
+
+## 查询账户最大可借贷额度
+说明
+> 请求示例
+
+```get /api/v3/margin/maxBorrowable
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/maxBorrowable```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|asset| |是|[string]| 
+|symbol|逐仓交易对，适用于逐仓查询|否|[string]| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|amount| 系统可借充足情况下，用户账户当前最大可借额度|[string]|1.69248805|
+|borrowLimit| 平台限制的用户当前等级可以借的额度【二者选最小返回？？？】|[string]|60|
+
+
+## 查询还贷记录
+说明
+> 请求示例
+
+```get /api/v3/margin/repay
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/repay```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|asset| |是|[string]| |
+|symbol|逐仓symbol|否|[string]| |
+|tranId|返回 /api/v3/margin/repay|是|[string]| |
+|startTime| |否|[string]| |
+|endTime| |否|[string]| |
+|current|当前查询页。开始值 1. 默认:1|否|[string]| |
+|size|默认:10 最大:100|否|[string]| |
+|recvWindow| |否|[string]| |
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|rows| |[array]| |
+|rows>>symbol| 逐仓还款 返回逐仓symbol; 若是全仓不会返回此字段|[string]|MXUSDT|
+|rows>>amount| 还款总额|[string]|14.00000000|
+|rows>>asset| |[string]|MX|
+|rows>>interest| 支付的利息|[string]|0.01866667|
+|rows>>principal| 支付的本金|[string]|13.98133333|
+|rows>>timestamp| |[number]|1563438204000|
+|rows>>tranId| |[number]|2970933056|
+|total| |[number]|1|
+
+**详细说明**：
+
+必须发送tranId 或 startTime，tranId 优先。响应返回为降序排列。如果发送symbol，返回指定逐仓symbol指定asset的还贷记录。
+
+
+
+## 查询逐仓杠杆交易对
+说明
+> 请求示例
+
+```get /api/v3/margin/isolated/pair
+```
+> 返回示例
+
+```json
+[
+  {
+   "symbol":"BTCUSDT",
+   "base":"BTC",
+   "quote":"USDT",
+   "isMarginTrade":true//能不能杠杆交易   
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/isolated/pair```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|base| |[string]|BTC|
+|quote| |[string]|USDT|
+|isMarginTrade|能不能杠杆交易   |[boolean]|true|
+
+
+
+## 获取账户强制平仓记录
+说明
+> 请求示例
+
+```get /api/v3/margin/forceLiquidationRec
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/forceLiquidationRec```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|startTime| |否|[string]| |
+|endTime| |否|[string]|| 
+|symbol| |否|[string]|| 
+|current|当前查询页。 开始值 1. 默认:1|否|[string]|| 
+|size|默认:10 最大:100|否|[string]|| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|rows| |[array]|  |
+|rows>>avgPrice| |[string]|0.00388359|
+|rows>>executedQty| |[string]|31.39000000|
+|rows>>orderId|没有order id 为系统还|[string]|180015097|
+|rows>>price|没有price 为直接还|[string]|0.00388110|
+|rows>>qty| |[string]|31.39000000|
+|rows>>side| |[string]|SELL|
+|rows>>symbol| |[string]|MXBTC|
+|rows>>isIsolated| 是否是逐仓|[boolean]|true|
+|rows>>updatedTime| |[number]|1558941374745|
+|total| |[number]|1|
+
+**详细说明**：
+
+响应返回为降序排列。
+
+
+
+## 获取逐仓杠杆利率及限额
+说明
+> 请求示例
+
+```get /api/v3/margin/isolatedMarginData
+```
+> 返回示例
+
+```json
+[
+  [
+    {
+        "symbol": "BTCUSDT",
+        "leverage": "10",
+        "data": [
+            {
+                "coin": "BTC",
+                "hourInterest": "0.00026125",//每小时利息
+                "borrowLimit": "270"//借贷限额
+            },
+            {
+                "coin": "USDT",
+                "hourInterest": "0.000475",
+                "borrowLimit": "2100000"
+            }
+        ]
+    }
+] 
+
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/isolatedMarginData```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string]|{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |否|[string]|| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|leverage| |[string]|10|
+|data| |[array]|  |
+|data>>coin| |[string]|BTC|
+|data>>hourInterest|小时利息|[string]|0.00026125|
+|data>>borrowLimit|【当前剩余限额？待确认】|[string]|270|
+
+
+
+## 获取逐仓档位信息
+说明
+> 请求示例
+
+```get /api/v3/margin/isolatedMarginTier
+```
+> 返回示例
+
+```json
+[
+  [
+    {
+        "symbol": "BTCUSDT",
+        "tier": 1,//仓位等级
+        "effectiveMultiple": "10",//【有效倍数】
+        "initialRiskRatio": "1.111",【初始风险比】
+        "liquidationRiskRatio": "1.05",【清算风险比】
+        "baseAssetMaxBorrowable": "9",【基础货币最大可借】
+        "quoteAssetMaxBorrowable": "70000"【计价货币最大可借】
+    }
+  ]
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/margin/isolatedMarginTier```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|[string||{{timestamp}}|
+|signature| |是|[string]|{{signature}}|
+|symbol| |是|[string]|| 
+|tier|不传则返回所有逐仓杠杆档位|否|[string]|| 
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|tier|仓位等级|[number]|1|
+|effectiveMultiple|【有效倍数】|[string]|10|
+|initialRiskRatio|【初始风险比】|[string]|1.111|
+|liquidationRiskRatio|【清算风险比】|[string]|1.05|
+|baseAssetMaxBorrowable|【基础货币最大可借】|[string]|9|
+|quoteAssetMaxBorrowable|【计价货币最大可借】|[string]|70000|
+
 # 公开API参数
 
 ## 枚举定义
