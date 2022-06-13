@@ -1806,7 +1806,7 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/1111
+```post /api/v3/margin/loan&resultType=failure
 ```
 > 返回示例
 
@@ -1838,6 +1838,10 @@ POST /api/v3/margin/tradeMode
 
 | :------------ | :-------- | :------------------- |
 |tranId|借款记录id|是|[number]||100000001|
+
+**详细说明**：
+
+如果 isIsolated = “TRUE”, 表示逐仓借贷，此时 symbol 必填
 
 ####################################
 # 公开API参数
