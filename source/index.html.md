@@ -540,7 +540,53 @@ None
 <aside class="notice">
 阶段是以当前时间的滚动24小时计。
 </aside>
+## 深度信息
 
+> 响应示例
+
+```json
+{
+    "code": 200,
+    "data": {
+        "asks": [
+            {
+                "price": "183.1683154",
+                "quantity": "128.5"
+            },
+            {
+                "price": "183.1983186",
+                "quantity": "101.6"
+            }
+        ],
+        "bids": [
+            {
+                "price": "182.4417544",
+                "quantity": "115.5"
+            },
+            {
+                "price": "182.4217568",
+                "quantity": "135.7"
+            }
+        ]
+    }
+}
+```
+
+- **GET** ```/open/api/v2/market/depth ```
+
+参数：
+
+| 参数名 | 数据类型 | 是否必须 | 说明 | 取值范围 |
+|-----|-----|-----|-----|-----|
+|symbol|string|是|交易对名称| |
+|depth|string|是|返回的深度数| 1~2000|
+
+响应：
+
+| 参数名 | 数据类型 | 说明 |
+|-----|-----|-----|
+|bids|object|买单，包含字段[price, quantity] 价格及数量|
+|asks|object|卖单，包含字段[price, quantity] 价格及数量|
 
 ## 成交记录
 
@@ -737,7 +783,22 @@ None
 }
 ```
 
-- **GET** ```/open/api/v2/account/info```## 获取账户可接口交易的交易对
+**GET** ```/open/api/v2/account/info```
+
+参数：None
+
+响应：
+
+币种对应的冻结余额和可用余额
+
+| 参数名    | 数据类型 | 说明     |
+| --------- | -------- | -------- |
+| frozen    | string   | 冻结余额 |
+| available | string   | 可用余额 |
+
+
+
+## 获取账户可接口交易的交易对
 
 > 响应示例
 
@@ -781,17 +842,6 @@ None
 | </data> |         |                  |
 
 
-
-参数：None
-
-响应：
-
-币种对应的冻结余额和可用余额
-
-| 参数名    | 数据类型 | 说明     |
-| --------- | -------- | -------- |
-| frozen    | string   | 冻结余额 |
-| available | string   | 可用余额 |
 
 # 现货交易
 
@@ -1274,35 +1324,6 @@ None
 <aside class="notice">
 请求返回表示服务端接收到了对应订单的撤单请求，并不表示已经撤单完成
 </aside>
-## 订单查询(单订单状态查询)
-
-- **GET** ```/open/api/v2/order/single_state/list```
-
-参数：
-
-| 参数名     | 数据类型 | 是否必须 | 说明       | 取值范围                                                                                                |
-| ---------- | -------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------- |
-| symbol     | string   | 是       | 交易对名称 |                                                                                                         |
-| start_time | string   | 否       | 起始时间   |                                                                                                         |
-| limit      | string   | 否       | 返回条数   | 1~1000，默认值50                                                                                        |
-| trade_type | string   | 否       | 交易类型   | BID，ASK                                                                                                |
-| states     | string   | 是       | 订单状态   | NEW：未成交；FILLED：已成交；PARTIALLY_FILLED：部分成交；CANCELED：已撤单；PARTIALLY_CANCELED：部分撤单 |
-
-响应：
-
-| 参数名          | 数据类型 | 说明       |
-| --------------- | -------- | ---------- |
-| symbol          | string   | 交易对名称 |
-| id              | string   | 订单id     |
-| price           | string   | 挂单价格   |
-| quantity        | string   | 挂单数量   |
-| deal_quantity   | string   | 成交数量   |
-| deal_amount     | string   | 成交金额   |
-| create_time     | string   | 下单时间   |
-| state           | string   | 订单状态   |
-| type            | string   | 订单类型   |
-| client_order_id | string   | 客户订单id |
-
 
 # 资产
 
@@ -1499,13 +1520,13 @@ None
 
 **请求参数:**
 
-| 参数名   | 类型   | 是否必填 | 说明                                                                                                                                                                                                                                                     |
-| -------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| currency | string | true     | 币种                                                                                                                                                                                                                                                     |
+| 参数名   | 类型   | 是否必填 | 说明                                                         |
+| -------- | ------ | -------- | ------------------------------------------------------------ |
+| currency | string | true     | 币种                                                         |
 | chain    | string | false    | 链名称，取值参考GET /open/api/v2/market/coin/list(币种信息查询) ，多链时必填（例如提USDT至OMNI时须设置此参数为"OMNI"，提USDT至TRX时须设置此参数为"TRC-20"，提USDT至ERC20时须设置此参数为"ERC-20"），非多链时无须设置此参数，具体取值参考币种信息查询接口 |
-| amount   | number | true     | 提现数量                                                                                                                                                                                                                                                 |
-| address  | string | true     | 提现地址                                                                                                                                                                                                                                                 |
-| remark   | string | false    | 备注                                                                                                                                                                                                                                                     |
+| amount   | number | true     | 提现数量                                                     |
+| address  | string | true     | 提现地址 memo请使用:进行拼接                                 |
+| remark   | string | false    | 备注                                                         |
 
 **响应参数:**
 
