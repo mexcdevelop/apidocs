@@ -1706,7 +1706,140 @@ GET /api/v3/etf/info
 | timestamp | long     | 系统时间      |
 
 
+# 杠杆账户和交易接口
 
+## 切换杠杆账户模式
+切换杠杆账户的交易模式
+
+> 请求示例
+
+```
+POST /api/v3/margin/tradeMode
+```
+> 返回示例
+
+```json
+[
+  {
+  "tradeMode": 0,
+  "symbol": "BTCUSDT"
+  }
+]
+```
+
+**HTTP请求**
+
+- **POST** ```/api/v3/margin/tradeMode```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+| timestamp | 时间戳 | 是| string|1655143087012|
+| signature | 签名 |是|string||
+| tradeMode | 交易模式 |是|string|0: 手动模式  1:自动借还模式|
+| symbol | 交易对 |是|string|BTCUSDT|
+
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :-------| :------ |
+|tradeMode|交易模式|number|0|
+|symbol|交易对|string|BTCUSDT|
+
+
+
+## 下单
+进行杠杆账户下单操作
+
+> 请求示例
+
+```POST /api/v3/margin/order
+```
+> 返回示例
+
+```json
+[
+  {
+  "symbol": "BTCUSDT",
+  "orderId": "693471305432961024",
+  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
+  "isIsolated": true,       
+  "transactTime": 1507725176595
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/margin/order```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例  | 
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| 时间戳 |是|[string]|{{timestamp}}|
+|signature| 签名 |是|[string]|{{signature}}|
+|symbol| 交易对 |是|[string]|BTCUSDT|
+|isIsolated|是否逐仓杠杆，"TRUE", "FALSE", 默认 "TRUE"|否|[string]|TRUE|
+|side|BUY SELL|是|[string]|BUY|
+|type|详见枚举定义：订单类型  市价单参见现货市价配置|是|[string]|| 
+|quantity|订单总额|否|[string]|| 
+|quoteOrderQty|订单数量|否|[string]|| 
+|price|买入价|否|[string]|| 
+|newClientOrderId|客户自定义的唯一订单ID|否|[string]|| 
+|recvWindow| |否|[string]|| 
+
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例 |
+| :------------ | :-------- | :-------- |:-------------- |
+|symbol| |是|[string]||BTCUSDT|
+|orderId| |是|[string]||693471305432961024|
+|clientOrderId| |是|[string]||6gCrw2kRUAF9CvJDGP16IP|
+|isIsolated| 是否是逐仓symbol交易|是|[boolean]||true|
+|transactTime| |是|[number]||1507725176595|
+
+
+## 借贷 
+说明
+> 请求示例
+
+```get /api/v3/1111
+```
+> 返回示例
+
+```json
+[
+
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/margin/loan```
+
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例 |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp|时间戳 |是|[string]|{{timestamp}}|
+|signature|签名 |是|[string]|{{signature}}|
+|asset|资产名称|是|[string]|BTC| 
+|isIsolated|是否逐仓杠杆，"TRUE", 默认 "TRUE"|否|[string]|| 
+|symbol|逐仓交易对，配合逐仓使用|否|[string]|| 
+|amount| 数量|是|[string]|| 
+|recvWindow| |否|[string]|| 
+
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+
+| :------------ | :-------- | :------------------- |
+|tranId|借款记录id|是|[number]||100000001|
+
+####################################
 # 公开API参数
 
 ## 枚举定义
