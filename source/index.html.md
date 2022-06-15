@@ -1944,8 +1944,8 @@ None
 | :------ | :-------- | :-------- |
 |p|decimal|价格|
 |r|decimal|涨跌幅|
-|v|decimal|交易金额|
-|q|decimal|交易数量|
+|v|decimal|24小时滚动成交金额|
+|q|decimal|24小时滚动成交数量|
 |percentChangeVolume24h|decimal|涨跌幅:滚动24小时|
 |percentChangeVolumeUtc0|decimal|涨跌幅:UTC 0|
 
