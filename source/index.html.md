@@ -1505,7 +1505,8 @@ None
 | total_size   | int     | 总条数           |
 | total_page   | int     | 总页数           |
 
-注意：通过单次查询可检索的范围最大为10天，通过多次平移窗口查询，最多可检索到过往180天的记录。
+注意：通过单次查询可检索的范围最大为10天，通过多次平移窗口查询，最多可检索到过往180天的记录。  
+提币状态为：MANUAL、APPLY、AUDITING、FAILED，均为提币处中，请耐心等待到账，请勿重复发起提币。
 
 ## 提币
 
@@ -1701,3 +1702,429 @@ None
 | transact_id | string  | 划转交易 id                                |
 | currency    | string  | 币种                                       |  | amount | String | 划转数量 |
 | from        | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户 |
+
+# WebSocket API
+
+## 原生ws连接地址
+
+原生WSS接口 Base url: wss://wbs.mexc.com/raw/ws
+
+## 数据交互命令详解
+
+订阅/取消订阅数据命令列表（除个人相关命令列表之外，其余都不需要做ws认证  
+1分钟以内未收到客户端ping，将断开该客户端连接，建议10~20秒发送一次ping  
+发送ping消息及服务端返回见右侧
+
+## 公共接口
+
+## 订阅K线
+获取增量的k线，interval可选参数: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1
+
+**频道：**`sub.kline`
+
+> 请求示例
+
+```json
+{
+  "op":"sub.kline", 
+
+  "symbol":"BTC_USDT",
+
+  "interval":"Min5"
+}
+```
+> 返回示例
+
+```json
+{
+    "symbol": "BTC_USDT",
+    "data": {
+        "symbol": "BTC_USDT",
+        "interval": "Min5",
+        "t": 1655159100,
+        "o": 22959.42,
+        "c": 22931.03,
+        "h": 22963.58,
+        "l": 22884.25,
+        "v": 2898013.27196548,
+        "q": 126.485995,
+        "e": 22963.58,
+        "rh": 22963.58,
+        "rl": 22884.25,
+        "tdt": 1655159223641
+    },
+    "channel": "push.kline",
+    "symbol_display": "BTC_USDT"
+}
+```
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op|string|订阅频道|
+|symbol|string|交易对|
+|interval|string|k线间隔|
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|symbol|string|交易对|
+|interval|string|k线间隔|
+|t|long|交易时间，单位：秒（s），为窗口的开始时间（windowStart）|
+|o|decimal|开盘价|
+|c|decimal|收盘价|
+|h|decimal|最高价|
+|l|decimal|最低价|
+|v|decimal|总成交量|
+|q|decimal|总成交额|
+|e|||
+|rh|||
+|el|||
+|tdt|||
+
+
+## 订阅交易信息
+订阅指定交易对的交易信息
+
+**频道：**`sub.symbol`
+
+> 请求示例
+
+```json
+{
+
+  "op":"sub.symbol", 
+
+  "symbol":"BTC_USDT"
+}
+```
+> 返回示例
+
+```json
+{
+    "symbol": "BTC_USDT",
+     "data":{
+        "bids": [
+            {
+                "p": "22864.93",
+                "q": "0.098000",
+                "a": "2240.76314"
+            }],
+        "asks": [
+            {
+                "p": "22932.06",
+                "q": "0.229614",
+                "a": "5265.52202"
+            }],
+        "deals": [
+            {
+                "t": 1655160066177,
+                "p": "22906.11",
+                "q": "1.331410",
+                "T": 2
+            }]
+    },
+    "channel": "push.symbol",
+}
+```
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op|string|订阅频道|
+|symbol|string|交易对|
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|bids||买单|
+|asks||卖单|
+|deals||成交信息|
+|p|decimal|价格|
+|q|decimal|数量|
+|a|decimal|总量|
+|t|long|成交时间|
+|T|number|成交类型:1买、2卖|
+
+
+
+## 订阅交易对有限档位深度
+订阅指定交易对有限档位深度，有效档位为: 5, 10, 20，推送频率: 1次/300ms.
+
+**频道：**`sub.limit.depth`
+
+> 请求示例
+
+```json
+{
+  "op":"sub.limit.depth",
+  "symbol":"BTC_USDT", 
+  "depth": 5
+}
+```
+
+> 返回示例
+
+```json
+{
+    "channel": "push.limit.depth",
+    "data": {
+    "asks": [
+        [
+            "2.5784",
+            "1994.917" 
+        ],
+    ],
+  "bids": [
+        [
+            "2.5767",
+            "588"
+        ],
+    ]
+    },
+    "symbol": "EOS_USDT",
+    "depth": 5
+}
+```
+
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op|string|订阅频道|
+|symbol|string|交易对|
+|depth|number|深度档位|
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|bids||买单|
+|asks||卖单|
+|depth|number|深度档位|
+
+## 订阅overview
+
+**频道：**`sub.overview`
+
+
+> 请求示例
+
+```json
+{
+  "op": "sub.overview"
+}
+```
+> 返回示例
+
+```json
+{
+    "data": {
+        "T_USDT": {
+            "p": 0.03464,
+            "r": -0.0334,
+            "v": 12568354.71,
+            "q": 467650.93812,
+            "percentChangeVolume24h": -0.2134,
+            "percentChangeVolumeUtc0": -0.1955
+       }  
+    },
+    "channel": "push.overview"
+}
+```
+
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op|string|订阅频道|
+
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+
+
+## 订阅增量深度信息
+订阅指定交易对的增量深度信息
+
+**频道：**`sub.depth`
+
+
+> 请求示例
+
+```json
+{
+
+  "op":"sub.depth",
+
+  "symbol": "BTC_USDT"
+
+}
+```
+
+> 返回示例
+
+```json
+{
+    "symbol": "BTC_USDT",
+    "data": {
+        "version": "1628997165",
+        "bids": [
+            {
+                "p": "22134.08",
+                "q": "0.506088",
+                "a": "11201.7922"
+            }
+        ]
+    },
+    "channel": "push.depth"
+}
+```
+
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op|string|订阅频道|
+|symbol|string|交易对|
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+
+## 私有接口
+私有接口需要先进行签名操作，才能正常进行订阅。
+
+**签名方式：**
+
+api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的参数字符串用MD5进行加密。  
+签名字符串： api_key=api_key&op=sub.personal&req_time=req_time&api_secret=api_secret。
+
+## 获取账户订单状态推送
+
+**频道：**`sub.personal`
+
+> 请求示例
+
+```json
+{
+  "op":"sub.personal",  
+  "api_key": "api_key",
+  "sign": "b8d2ff6432798ef858782d7fd109ab41",
+  "req_time": "1561433613583"	
+}
+```
+
+> 返回示例
+
+```json
+订阅成功返回
+{
+  "channel": "sub.personal",
+  "msg": "OK"
+}
+订单状态推送
+{
+  "channel":"push.personal.order",    
+  "symbol":"ETH_USDT",        
+  "data":{
+    "price":1,          
+    "quantity":5,        
+    "amount":5.01,          
+    "remainAmount":5.01,        
+    "remainQuantity":5,         
+    "id":"069e29f4-8870-489f-aebf", 
+    "status":1,             
+    "tradeType":1,           
+    "createTime":1561518653000     
+  }
+}
+```
+
+```json
+订阅错误返回
+{
+  "channel":"sub.personal",//push key
+  "msg":"signature validation failed",	//error message
+}
+```
+
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op||订阅频道|
+|api_key||apikey|
+|sign||签名|
+|req_time||时间戳|
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+
+## 获取订单成交推送
+
+获取本账户下订单成交的逐笔推送信息
+
+**频道：**`sub.personal.deals`
+
+> 请求示例
+
+```json
+{
+  "op":"sub.personal.deals",  
+  "api_key": "api_key",
+  "sign": "b8d2ff6432798ef858782d7fd109ab41",
+  "req_time": "1561433613583"	
+}
+```
+
+> 返回示例
+
+```json
+订阅成功返回
+{
+  "channel": "sub.personal.deals",
+  "msg": "OK"
+}
+订单成交信息推送
+{
+  "channel":"push.personal.deals",   
+  "symbol":"ETH_USDT", 
+  "data": {
+    "t":1561465233455,
+    "p":"4.2003",
+    "q":"86.68",
+    "T":1,	
+    "M":1, 
+    "id":"8659ba6653ff462ebb9cf274dc616cc9" 
+  }
+}
+```
+**请求参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|op||订阅频道|
+|api_key||apikey|
+|sign||签名|
+|req_time||时间戳|
+
+
+**返回参数**
+
+| 参数名 |  数据类型 |  说明|
+| :------ | :-------- | :-------- |
+|t|||
+|p|||
+|q|||
+|T|||
+|M|||
+|id|||
+
