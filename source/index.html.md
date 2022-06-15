@@ -2038,8 +2038,7 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
   "msg": "OK"
 }
 订单状态推送
-{
-  "channel":"push.personal.order",    
+{  
   "symbol":"MX_USDT",
   "data":{"price":1,
           "quantity":9.93,
