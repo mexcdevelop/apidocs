@@ -1943,9 +1943,9 @@ None
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
 |p|decimal|价格|
-|r|decimal||
-|v|decimal||
-|q|decimal||
+|r|decimal|涨跌幅|
+|v|decimal|交易金额|
+|q|decimal|交易数量|
 |percentChangeVolume24h|decimal|涨跌幅:滚动24小时|
 |percentChangeVolumeUtc0|decimal|涨跌幅:UTC 0|
 
