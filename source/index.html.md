@@ -2040,18 +2040,25 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 订单状态推送
 {
   "channel":"push.personal.order",    
-  "symbol":"ETH_USDT",        
-  "data":{
-    "price":1,          
-    "quantity":5,        
-    "amount":5.01,          
-    "remainAmount":5.01,        
-    "remainQuantity":5,         
-    "id":"069e29f4-8870-489f-aebf", 
-    "status":1,             
-    "tradeType":1,           
-    "createTime":1561518653000     
-  }
+  "symbol":"MX_USDT",
+  "data":{"price":1,
+          "quantity":9.93,
+          "amount":9.93,
+          "remainAmount":9.93,
+          "remainQuantity":9.93,
+          "remainQ":9.93,
+          "remainA":9.93,
+          "id":"fdcc7f3b26fb43038b1900fb9516f272",
+          "status":1,
+          "tradeType":1,
+          "orderType":1,
+          "createTime":1655293205000,
+          "isTaker":1,
+          "symbolDisplay":"MX_USDT",
+          "clientOrderId":""},
+  "channel":"push.personal.order",
+  "eventTime":1655293205804,
+  "symbol_display":"MX_USDT"
 }
 ```
 
@@ -2114,16 +2121,19 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 }
 订单成交信息推送
 {
-  "channel":"push.personal.deals",   
-  "symbol":"ETH_USDT", 
-  "data": {
-    "t":1561465233455,
-    "p":"4.2003",
-    "q":"86.68",
-    "T":1,	
-    "M":1, 
-    "id":"8659ba6653ff462ebb9cf274dc616cc9" 
-  }
+  "symbol":"MX_USDT",
+  "data":{
+    "clientOrderId":"",
+    "tradeId":"7b3183ad980b4dadba35fdd9259a292e",
+    "isTaker":1,
+    "t":1655293962027,
+    "p":"1.2404",
+    "q":"4.18",
+    "T":2,
+    "M":0,
+    "id":"4731dca8b2dd44379efd68aad162618e"
+  },
+  "channel":"push.personal.deals"
 }
 ```
 **请求参数**
