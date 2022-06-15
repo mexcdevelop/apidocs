@@ -2121,13 +2121,13 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 
 获取本账户下订单成交的逐笔推送信息
 
-**频道：**`sub.personal`
+**频道：**`sub.personal.deals`
 
 > 请求示例
 
 ```json
 {
-  "op":"sub.personal",  
+  "op":"sub.personal.deals",  
   "api_key": "api_key",
   "sign": "b8d2ff6432798ef858782d7fd109ab41",
   "req_time": "1561433613583"	
