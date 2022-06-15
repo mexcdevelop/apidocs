@@ -1779,10 +1779,10 @@ None
 |l|decimal|最低价|
 |v|decimal|总成交金额|
 |q|decimal|总成交数量|
-|e|||
-|rh|||
-|el|||
-|tdt|||
+|e|decimal|最早成交价，即：当前周期内第一条成交价格|
+|rh|decimal|真实最高价|
+|el|decimal|真实最低价|
+|tdt|decimal|订单交易时间戳|
 
 
 ## 订阅交易信息
@@ -1946,8 +1946,8 @@ None
 |r|decimal||
 |v|decimal||
 |q|decimal||
-|percentChangeVolume24h|decimal||
-|percentChangeVolumeUtc0|decimal||
+|percentChangeVolume24h|decimal|涨跌幅:滚动24小时|
+|percentChangeVolumeUtc0|decimal|涨跌幅:UTC 0|
 
 ## 订阅增量深度信息
 订阅指定交易对的增量深度信息
@@ -1997,7 +1997,7 @@ None
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|version|long||
+|version|long|深度变化版本序号|
 |p|decimal|价格|
 |q|decimal|数量|
 |a|decimal|总量|
@@ -2067,10 +2067,10 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|op||订阅频道|
-|api_key||apikey|
-|sign||签名|
-|req_time||时间戳|
+|op|string|订阅频道|
+|api_key|string|apikey|
+|sign|string|签名|
+|req_time|long|时间戳|
 
 **返回参数**
 
@@ -2130,10 +2130,10 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|op||订阅频道|
-|api_key||apikey|
-|sign||签名|
-|req_time||时间戳|
+|op|srting|订阅频道|
+|api_key|srting|apikey|
+|sign|srting|签名|
+|req_time|long|时间戳|
 
 
 **返回参数**
