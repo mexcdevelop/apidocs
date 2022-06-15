@@ -496,6 +496,44 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#websocket-api" class="toc-h1 toc-link" data-title="WebSocket API">WebSocket API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#ws" class="toc-h2 toc-link" data-title="原生ws连接地址">原生ws连接地址</a>
+                  </li>
+                  <li>
+                    <a href="#c9b1eae804" class="toc-h2 toc-link" data-title="数据交互命令详解">数据交互命令详解</a>
+                  </li>
+                  <li>
+                    <a href="#495cebdeec" class="toc-h2 toc-link" data-title="公共接口">公共接口</a>
+                  </li>
+                  <li>
+                    <a href="#k-2" class="toc-h2 toc-link" data-title="订阅K线">订阅K线</a>
+                  </li>
+                  <li>
+                    <a href="#0a1b9dbd8b" class="toc-h2 toc-link" data-title="订阅交易信息">订阅交易信息</a>
+                  </li>
+                  <li>
+                    <a href="#1afba5748a" class="toc-h2 toc-link" data-title="订阅交易对有限档位深度">订阅交易对有限档位深度</a>
+                  </li>
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="订阅overview">订阅overview</a>
+                  </li>
+                  <li>
+                    <a href="#4a0f902155" class="toc-h2 toc-link" data-title="订阅增量深度信息">订阅增量深度信息</a>
+                  </li>
+                  <li>
+                    <a href="#6115959cbb" class="toc-h2 toc-link" data-title="私有接口">私有接口</a>
+                  </li>
+                  <li>
+                    <a href="#2ed9ec0b06" class="toc-h2 toc-link" data-title="获取账户订单状态推送">获取账户订单状态推送</a>
+                  </li>
+                  <li>
+                    <a href="#a34c13a4f2" class="toc-h2 toc-link" data-title="获取订单成交推送">获取订单成交推送</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -3369,7 +3407,8 @@ Secret key仅在申请时展示，请做好记录留存
 </tr>
 </tbody></table>
 
-<p>注意：通过单次查询可检索的范围最大为10天，通过多次平移窗口查询，最多可检索到过往180天的记录。</p>
+<p>注意：通过单次查询可检索的范围最大为10天，通过多次平移窗口查询，最多可检索到过往180天的记录。<br>
+提币状态为：MANUAL、APPLY、AUDITING、FAILED，均为提币处中，请耐心等待到账，请勿重复发起提币。</p>
 <h2 id='096be69702'>提币</h2>
 <ul>
 <li><strong>POST</strong> <code>/open/api/v2/asset/withdraw</code></li>
@@ -3899,6 +3938,673 @@ Secret key仅在申请时展示，请做好记录留存
 <td>from</td>
 <td>string</td>
 <td>出账账户，币币账户、逐仓杠杆账户、合约账户</td>
+</tr>
+</tbody></table>
+<h1 id='websocket-api'>WebSocket API</h1><h2 id='ws'>原生ws连接地址</h2>
+<p>原生WSS接口 Base url: wss://wbs.mexc.com/raw/ws</p>
+<h2 id='c9b1eae804'>数据交互命令详解</h2>
+<p>订阅/取消订阅数据命令列表（除个人相关命令列表之外，其余都不需要做ws认证<br>
+1分钟以内未收到客户端ping，将断开该客户端连接，建议10~20秒发送一次ping<br>
+发送ping消息及服务端返回见右侧</p>
+<h2 id='495cebdeec'>公共接口</h2><h2 id='k-2'>订阅K线</h2>
+<p>获取增量的k线，interval可选参数: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1</p>
+
+<p><strong>频道：</strong><code>sub.kline</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"sub.kline"</span><span class="p">,</span><span class="w"> 
+
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+
+  </span><span class="nl">"interval"</span><span class="p">:</span><span class="s2">"Min5"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Min5"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1655159100</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"o"</span><span class="p">:</span><span class="w"> </span><span class="mf">22959.42</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"c"</span><span class="p">:</span><span class="w"> </span><span class="mf">22931.03</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"h"</span><span class="p">:</span><span class="w"> </span><span class="mf">22963.58</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"l"</span><span class="p">:</span><span class="w"> </span><span class="mf">22884.25</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"v"</span><span class="p">:</span><span class="w"> </span><span class="mf">2898013.27196548</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"q"</span><span class="p">:</span><span class="w"> </span><span class="mf">126.485995</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"e"</span><span class="p">:</span><span class="w"> </span><span class="mf">22963.58</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rh"</span><span class="p">:</span><span class="w"> </span><span class="mf">22963.58</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rl"</span><span class="p">:</span><span class="w"> </span><span class="mf">22884.25</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tdt"</span><span class="p">:</span><span class="w"> </span><span class="mi">1655159223641</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push.kline"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol_display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">interval</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">k线间隔</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">interval</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">k线间隔</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">交易时间，单位：秒（s），为窗口的开始时间（windowStart）</td>
+</tr>
+<tr>
+<td style="text-align: left">o</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">开盘价</td>
+</tr>
+<tr>
+<td style="text-align: left">c</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">收盘价</td>
+</tr>
+<tr>
+<td style="text-align: left">h</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">最高价</td>
+</tr>
+<tr>
+<td style="text-align: left">l</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">最低价</td>
+</tr>
+<tr>
+<td style="text-align: left">v</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">总成交量</td>
+</tr>
+<tr>
+<td style="text-align: left">q</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">总成交额</td>
+</tr>
+<tr>
+<td style="text-align: left">e</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">rh</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">el</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">tdt</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+<h2 id='0a1b9dbd8b'>订阅交易信息</h2>
+<p>订阅指定交易对的交易信息</p>
+
+<p><strong>频道：</strong><code>sub.symbol</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"sub.symbol"</span><span class="p">,</span><span class="w"> 
+
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"BTC_USDT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"p"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22864.93"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"q"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.098000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2240.76314"</span><span class="w">
+            </span><span class="p">}],</span><span class="w">
+        </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"p"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22932.06"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"q"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.229614"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5265.52202"</span><span class="w">
+            </span><span class="p">}],</span><span class="w">
+        </span><span class="nl">"deals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"t"</span><span class="p">:</span><span class="w"> </span><span class="mi">1655160066177</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"p"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22906.11"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"q"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.331410"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"T"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+            </span><span class="p">}]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push.symbol"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">bids</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">买单</td>
+</tr>
+<tr>
+<td style="text-align: left">asks</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">卖单</td>
+</tr>
+<tr>
+<td style="text-align: left">deals</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">成交信息</td>
+</tr>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">价格</td>
+</tr>
+<tr>
+<td style="text-align: left">q</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">a</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">总量</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">成交时间</td>
+</tr>
+<tr>
+<td style="text-align: left">T</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">成交类型:1买、2卖</td>
+</tr>
+</tbody></table>
+<h2 id='1afba5748a'>订阅交易对有限档位深度</h2>
+<p>订阅指定交易对有限档位深度，有效档位为: 5, 10, 20，推送频率: 1次/300ms.</p>
+
+<p><strong>频道：</strong><code>sub.limit.depth</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"sub.limit.depth"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push.limit.depth"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"2.5784"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"1994.917"</span><span class="w"> 
+        </span><span class="p">],</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"2.5767"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"588"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS_USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">depth</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">深度档位</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">bids</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">买单</td>
+</tr>
+<tr>
+<td style="text-align: left">asks</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">卖单</td>
+</tr>
+<tr>
+<td style="text-align: left">depth</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">深度档位</td>
+</tr>
+</tbody></table>
+<h2 id='overview'>订阅overview</h2>
+<p><strong>频道：</strong><code>sub.overview</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub.overview"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"T_USDT"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"p"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03464</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0334</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"v"</span><span class="p">:</span><span class="w"> </span><span class="mf">12568354.71</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"q"</span><span class="p">:</span><span class="w"> </span><span class="mf">467650.93812</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"percentChangeVolume24h"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.2134</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"percentChangeVolumeUtc0"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1955</span><span class="w">
+       </span><span class="p">}</span><span class="w">  
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push.overview"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h2 id='4a0f902155'>订阅增量深度信息</h2>
+<p>订阅指定交易对的增量深度信息</p>
+
+<p><strong>频道：</strong><code>sub.depth</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"sub.depth"</span><span class="p">,</span><span class="w">
+
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1628997165"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"p"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22134.08"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"q"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.506088"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11201.7922"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push.depth"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h2 id='6115959cbb'>私有接口</h2>
+<p>私有接口需要先进行签名操作，才能正常进行订阅。</p>
+
+<p><strong>签名方式：</strong></p>
+
+<p>api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的参数字符串用MD5进行加密。<br>
+签名字符串： api_key=api_key&amp;op=sub.personal&amp;req_time=req_time&amp;api_secret=api_secret。</p>
+<h2 id='2ed9ec0b06'>获取账户订单状态推送</h2>
+<p><strong>频道：</strong><code>sub.personal</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"sub.personal"</span><span class="p">,</span><span class="w">  
+  </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api_key"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d2ff6432798ef858782d7fd109ab41"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"req_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1561433613583"</span><span class="w">   
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="err">订阅成功返回</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub.personal"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="err">订单状态推送</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.order"</span><span class="p">,</span><span class="w">    
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">        
+  </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">          
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">        
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="mf">5.01</span><span class="p">,</span><span class="w">          
+    </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="mf">5.01</span><span class="p">,</span><span class="w">        
+    </span><span class="nl">"remainQuantity"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">         
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"069e29f4-8870-489f-aebf"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">             
+    </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">           
+    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1561518653000</span><span class="w">     
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">订阅错误返回</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"sub.personal"</span><span class="p">,</span><span class="err">//push</span><span class="w"> </span><span class="err">key</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="s2">"signature validation failed"</span><span class="p">,</span><span class="w">  </span><span class="err">//error</span><span class="w"> </span><span class="err">message</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+<tr>
+<td style="text-align: left">api_key</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">apikey</td>
+</tr>
+<tr>
+<td style="text-align: left">sign</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
+</tr>
+<tr>
+<td style="text-align: left">req_time</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">时间戳</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h2 id='a34c13a4f2'>获取订单成交推送</h2>
+<p>获取本账户下订单成交的逐笔推送信息</p>
+
+<p><strong>频道：</strong><code>sub.personal.deals</code></p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"sub.personal.deals"</span><span class="p">,</span><span class="w">  
+  </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api_key"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b8d2ff6432798ef858782d7fd109ab41"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"req_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1561433613583"</span><span class="w">   
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="err">订阅成功返回</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub.personal.deals"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="err">订单成交信息推送</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.deals"</span><span class="p">,</span><span class="w">   
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"t"</span><span class="p">:</span><span class="mi">1561465233455</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"p"</span><span class="p">:</span><span class="s2">"4.2003"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"q"</span><span class="p">:</span><span class="s2">"86.68"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"T"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">  
+    </span><span class="nl">"M"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"8659ba6653ff462ebb9cf274dc616cc9"</span><span class="w"> 
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">op</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">订阅频道</td>
+</tr>
+<tr>
+<td style="text-align: left">api_key</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">apikey</td>
+</tr>
+<tr>
+<td style="text-align: left">sign</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
+</tr>
+<tr>
+<td style="text-align: left">req_time</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">时间戳</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">q</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">T</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">M</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left"></td>
+<td style="text-align: left"></td>
 </tr>
 </tbody></table>
 
