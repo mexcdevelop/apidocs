@@ -62,6 +62,7 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 | 2020-07-20 | /open/api/v2/order/cancel_by_symbol                                                       | 新增     | 按交易对撤单                                                                                                                        |
 | 2021-03-01 | /open/api/v2/order/list                                                                   | 修改     | 入参states由非必填改为必填，且只能单状态查询；入参start_time修改为默认查询最近7天，最多查询30天；修复入参start_time时间不准确的情况 |
 | 2021-08-27 | /open/api/v2/market/api_default_symbols                                                   | 新增     | 新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式                                                       |
+|2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
 
 # 接入说明
 
