@@ -3935,6 +3935,11 @@ Secret key仅在申请时展示，请做好记录留存
 <td>币种</td>
 </tr>
 <tr>
+<td>amount</td>
+<td>String</td>
+<td>划转数量</td>
+</tr>
+<tr>
 <td>from</td>
 <td>string</td>
 <td>出账账户，币币账户、逐仓杠杆账户、合约账户</td>
@@ -4059,32 +4064,32 @@ Secret key仅在申请时展示，请做好记录留存
 <tr>
 <td style="text-align: left">v</td>
 <td style="text-align: left">decimal</td>
-<td style="text-align: left">总成交量</td>
+<td style="text-align: left">总成交金额</td>
 </tr>
 <tr>
 <td style="text-align: left">q</td>
 <td style="text-align: left">decimal</td>
-<td style="text-align: left">总成交额</td>
+<td style="text-align: left">总成交数量</td>
 </tr>
 <tr>
 <td style="text-align: left">e</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">最早成交价，即：当前周期内第一条成交价格</td>
 </tr>
 <tr>
 <td style="text-align: left">rh</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">真实最高价</td>
 </tr>
 <tr>
 <td style="text-align: left">el</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">真实最低价</td>
 </tr>
 <tr>
 <td style="text-align: left">tdt</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">订单交易时间戳</td>
 </tr>
 </tbody></table>
 <h2 id='0a1b9dbd8b'>订阅交易信息</h2>
@@ -4162,21 +4167,6 @@ Secret key仅在申请时展示，请做好记录留存
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">bids</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">买单</td>
-</tr>
-<tr>
-<td style="text-align: left">asks</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">卖单</td>
-</tr>
-<tr>
-<td style="text-align: left">deals</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">成交信息</td>
-</tr>
-<tr>
 <td style="text-align: left">p</td>
 <td style="text-align: left">decimal</td>
 <td style="text-align: left">价格</td>
@@ -4189,7 +4179,7 @@ Secret key仅在申请时展示，请做好记录留存
 <tr>
 <td style="text-align: left">a</td>
 <td style="text-align: left">decimal</td>
-<td style="text-align: left">总量</td>
+<td style="text-align: left">买/卖单总量</td>
 </tr>
 <tr>
 <td style="text-align: left">t</td>
@@ -4275,16 +4265,6 @@ Secret key仅在申请时展示，请做好记录留存
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">bids</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">买单</td>
-</tr>
-<tr>
-<td style="text-align: left">asks</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">卖单</td>
-</tr>
-<tr>
 <td style="text-align: left">depth</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">深度档位</td>
@@ -4305,7 +4285,7 @@ Secret key仅在申请时展示，请做好记录留存
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"T_USDT"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"EB_USDT"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"p"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03464</span><span class="p">,</span><span class="w">
             </span><span class="nl">"r"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.0334</span><span class="p">,</span><span class="w">
             </span><span class="nl">"v"</span><span class="p">:</span><span class="w"> </span><span class="mf">12568354.71</span><span class="p">,</span><span class="w">
@@ -4342,6 +4322,36 @@ Secret key仅在申请时展示，请做好记录留存
 <th style="text-align: left">说明</th>
 </tr>
 </thead><tbody>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">价格</td>
+</tr>
+<tr>
+<td style="text-align: left">r</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">涨跌幅</td>
+</tr>
+<tr>
+<td style="text-align: left">v</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">24小时滚动成交金额</td>
+</tr>
+<tr>
+<td style="text-align: left">q</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">24小时滚动成交数量</td>
+</tr>
+<tr>
+<td style="text-align: left">percentChangeVolume24h</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">涨跌幅:滚动24小时</td>
+</tr>
+<tr>
+<td style="text-align: left">percentChangeVolumeUtc0</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">涨跌幅:UTC 0</td>
+</tr>
 </tbody></table>
 <h2 id='4a0f902155'>订阅增量深度信息</h2>
 <p>订阅指定交易对的增量深度信息</p>
@@ -4407,14 +4417,37 @@ Secret key仅在申请时展示，请做好记录留存
 <th style="text-align: left">说明</th>
 </tr>
 </thead><tbody>
+<tr>
+<td style="text-align: left">version</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">深度变化版本序号</td>
+</tr>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">价格</td>
+</tr>
+<tr>
+<td style="text-align: left">q</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">a</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">总量</td>
+</tr>
 </tbody></table>
 <h2 id='6115959cbb'>私有接口</h2>
 <p>私有接口需要先进行签名操作，才能正常进行订阅。</p>
 
 <p><strong>签名方式：</strong></p>
 
-<p>api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的参数字符串用MD5进行加密。<br>
-签名字符串： api_key=api_key&amp;op=sub.personal&amp;req_time=req_time&amp;api_secret=api_secret。</p>
+<p>api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的参数字符串用MD5进行加密。api_key和sec_key分别为申请api时的ACCESS KEY 和SECRET KEY。</p>
+
+<p><strong>签名字符串:</strong>  </p>
+
+<p><code>&quot;api_key=api_key&amp;op=sub.personal&amp;req_time=req_time&amp;api_secret=api_secret&quot;</code></p>
 <h2 id='2ed9ec0b06'>获取账户订单状态推送</h2>
 <p><strong>频道：</strong><code>sub.personal</code></p>
 
@@ -4437,20 +4470,26 @@ Secret key仅在申请时展示，请做好记录留存
   </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span><span class="err">订单状态推送</span><span class="w">
-</span><span class="p">{</span><span class="w">
-  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.order"</span><span class="p">,</span><span class="w">    
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">        
-  </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">          
-    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">        
-    </span><span class="nl">"amount"</span><span class="p">:</span><span class="mf">5.01</span><span class="p">,</span><span class="w">          
-    </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="mf">5.01</span><span class="p">,</span><span class="w">        
-    </span><span class="nl">"remainQuantity"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">         
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"069e29f4-8870-489f-aebf"</span><span class="p">,</span><span class="w"> 
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">             
-    </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">           
-    </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1561518653000</span><span class="w">     
-  </span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">  
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"MX_USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:{</span><span class="nl">"price"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"remainQuantity"</span><span class="p">:</span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"remainQ"</span><span class="p">:</span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"remainA"</span><span class="p">:</span><span class="mf">9.93</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"fdcc7f3b26fb43038b1900fb9516f272"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"tradeType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"orderType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1655293205000</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isTaker"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"symbolDisplay"</span><span class="p">:</span><span class="s2">"MX_USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="s2">""</span><span class="p">},</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.order"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"eventTime"</span><span class="p">:</span><span class="mi">1655293205804</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol_display"</span><span class="p">:</span><span class="s2">"MX_USDT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">订阅错误返回</span><span class="w">
 </span><span class="p">{</span><span class="w">
@@ -4469,22 +4508,22 @@ Secret key仅在申请时展示，请做好记录留存
 </thead><tbody>
 <tr>
 <td style="text-align: left">op</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">订阅频道</td>
 </tr>
 <tr>
 <td style="text-align: left">api_key</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">apikey</td>
 </tr>
 <tr>
 <td style="text-align: left">sign</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">签名</td>
 </tr>
 <tr>
 <td style="text-align: left">req_time</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">时间戳</td>
 </tr>
 </tbody></table>
@@ -4498,6 +4537,51 @@ Secret key仅在申请时展示，请做好记录留存
 <th style="text-align: left">说明</th>
 </tr>
 </thead><tbody>
+<tr>
+<td style="text-align: left">price</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">下单价格</td>
+</tr>
+<tr>
+<td style="text-align: left">quantity</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">下单数量</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">下单总金额</td>
+</tr>
+<tr>
+<td style="text-align: left">remainAmount</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">剩余交易金额</td>
+</tr>
+<tr>
+<td style="text-align: left">remainQuantity</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">剩余交易数量</td>
+</tr>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订单id</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">订单状态,1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeType</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">订单类型,1：买单 2：卖单</td>
+</tr>
+<tr>
+<td style="text-align: left">createTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">订单创建时间戳</td>
+</tr>
 </tbody></table>
 <h2 id='a34c13a4f2'>获取订单成交推送</h2>
 <p>获取本账户下订单成交的逐笔推送信息</p>
@@ -4524,16 +4608,19 @@ Secret key仅在申请时展示，请做好记录留存
 </span><span class="p">}</span><span class="w">
 </span><span class="err">订单成交信息推送</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.deals"</span><span class="p">,</span><span class="w">   
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"t"</span><span class="p">:</span><span class="mi">1561465233455</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"p"</span><span class="p">:</span><span class="s2">"4.2003"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"q"</span><span class="p">:</span><span class="s2">"86.68"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"T"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">  
-    </span><span class="nl">"M"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"8659ba6653ff462ebb9cf274dc616cc9"</span><span class="w"> 
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"MX_USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="s2">"7b3183ad980b4dadba35fdd9259a292e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isTaker"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"t"</span><span class="p">:</span><span class="mi">1655293962027</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"p"</span><span class="p">:</span><span class="s2">"1.2404"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"q"</span><span class="p">:</span><span class="s2">"4.18"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"T"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"M"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"4731dca8b2dd44379efd68aad162618e"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.deals"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>请求参数</strong></p>
@@ -4547,22 +4634,22 @@ Secret key仅在申请时展示，请做好记录留存
 </thead><tbody>
 <tr>
 <td style="text-align: left">op</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">srting</td>
 <td style="text-align: left">订阅频道</td>
 </tr>
 <tr>
 <td style="text-align: left">api_key</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">srting</td>
 <td style="text-align: left">apikey</td>
 </tr>
 <tr>
 <td style="text-align: left">sign</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">srting</td>
 <td style="text-align: left">签名</td>
 </tr>
 <tr>
 <td style="text-align: left">req_time</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">时间戳</td>
 </tr>
 </tbody></table>
@@ -4578,33 +4665,33 @@ Secret key仅在申请时展示，请做好记录留存
 </thead><tbody>
 <tr>
 <td style="text-align: left">t</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">成交时间戳</td>
 </tr>
 <tr>
 <td style="text-align: left">p</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">交易价格</td>
 </tr>
 <tr>
 <td style="text-align: left">q</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">成交数量</td>
 </tr>
 <tr>
 <td style="text-align: left">T</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">成交类型 1:买 2:卖</td>
 </tr>
 <tr>
 <td style="text-align: left">M</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">自成交标记 0:否  1:是</td>
 </tr>
 <tr>
 <td style="text-align: left">id</td>
-<td style="text-align: left"></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">成交订单id</td>
 </tr>
 </tbody></table>
 
