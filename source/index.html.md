@@ -1700,7 +1700,8 @@ None
 | code        | integer | 状态码                                     |
 | msg         | string  | 错误描述（如有）                           |
 | transact_id | string  | 划转交易 id                                |
-| currency    | string  | 币种                                       |  | amount | String | 划转数量 |
+| currency    | string  | 币种                                       | 
+| amount      | String | 划转数量 |
 | from        | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户 |
 
 # WebSocket API
@@ -1776,12 +1777,12 @@ None
 |c|decimal|收盘价|
 |h|decimal|最高价|
 |l|decimal|最低价|
-|v|decimal|总成交量|
-|q|decimal|总成交额|
-|e|||
-|rh|||
-|el|||
-|tdt|||
+|v|decimal|总成交金额|
+|q|decimal|总成交数量|
+|e|decimal|最早成交价，即：当前周期内第一条成交价格|
+|rh|decimal|真实最高价|
+|el|decimal|真实最低价|
+|tdt|decimal|订单交易时间戳|
 
 
 ## 订阅交易信息
@@ -1839,12 +1840,9 @@ None
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|bids||买单|
-|asks||卖单|
-|deals||成交信息|
 |p|decimal|价格|
 |q|decimal|数量|
-|a|decimal|总量|
+|a|decimal|买/卖单总量|
 |t|long|成交时间|
 |T|number|成交类型:1买、2卖|
 
@@ -1901,8 +1899,6 @@ None
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|bids||买单|
-|asks||卖单|
 |depth|number|深度档位|
 
 ## 订阅overview
@@ -1922,7 +1918,7 @@ None
 ```json
 {
     "data": {
-        "T_USDT": {
+        "EB_USDT": {
             "p": 0.03464,
             "r": -0.0334,
             "v": 12568354.71,
@@ -1946,7 +1942,12 @@ None
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-
+|p|decimal|价格|
+|r|decimal|涨跌幅|
+|v|decimal|24小时滚动成交金额|
+|q|decimal|24小时滚动成交数量|
+|percentChangeVolume24h|decimal|涨跌幅:滚动24小时|
+|percentChangeVolumeUtc0|decimal|涨跌幅:UTC 0|
 
 ## 订阅增量深度信息
 订阅指定交易对的增量深度信息
@@ -1996,14 +1997,22 @@ None
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
+|version|long|深度变化版本序号|
+|p|decimal|价格|
+|q|decimal|数量|
+|a|decimal|总量|
+
 
 ## 私有接口
 私有接口需要先进行签名操作，才能正常进行订阅。
 
 **签名方式：**
 
-api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的参数字符串用MD5进行加密。  
-签名字符串： api_key=api_key&op=sub.personal&req_time=req_time&api_secret=api_secret。
+api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的参数字符串用MD5进行加密。api_key和sec_key分别为申请api时的ACCESS KEY 和SECRET KEY。
+
+**签名字符串:**  
+
+`"api_key=api_key&op=sub.personal&req_time=req_time&api_secret=api_secret"`
 
 ## 获取账户订单状态推送
 
@@ -2029,20 +2038,26 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
   "msg": "OK"
 }
 订单状态推送
-{
-  "channel":"push.personal.order",    
-  "symbol":"ETH_USDT",        
-  "data":{
-    "price":1,          
-    "quantity":5,        
-    "amount":5.01,          
-    "remainAmount":5.01,        
-    "remainQuantity":5,         
-    "id":"069e29f4-8870-489f-aebf", 
-    "status":1,             
-    "tradeType":1,           
-    "createTime":1561518653000     
-  }
+{  
+  "symbol":"MX_USDT",
+  "data":{"price":1,
+          "quantity":9.93,
+          "amount":9.93,
+          "remainAmount":9.93,
+          "remainQuantity":9.93,
+          "remainQ":9.93,
+          "remainA":9.93,
+          "id":"fdcc7f3b26fb43038b1900fb9516f272",
+          "status":1,
+          "tradeType":1,
+          "orderType":1,
+          "createTime":1655293205000,
+          "isTaker":1,
+          "symbolDisplay":"MX_USDT",
+          "clientOrderId":""},
+  "channel":"push.personal.order",
+  "eventTime":1655293205804,
+  "symbol_display":"MX_USDT"
 }
 ```
 
@@ -2058,15 +2073,25 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|op||订阅频道|
-|api_key||apikey|
-|sign||签名|
-|req_time||时间戳|
+|op|string|订阅频道|
+|api_key|string|apikey|
+|sign|string|签名|
+|req_time|long|时间戳|
 
 **返回参数**
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
+|price|decimal|下单价格|
+|quantity|decimal|下单数量|
+|amount|decimal|下单总金额|
+|remainAmount|decimal|剩余交易金额|
+|remainQuantity|decimal|剩余交易数量|
+|id|string|订单id|
+|status|int|订单状态,1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单|
+|tradeType|int|订单类型,1：买单 2：卖单|
+|createTime|long|订单创建时间戳|
+
 
 ## 获取订单成交推送
 
@@ -2095,36 +2120,39 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 }
 订单成交信息推送
 {
-  "channel":"push.personal.deals",   
-  "symbol":"ETH_USDT", 
-  "data": {
-    "t":1561465233455,
-    "p":"4.2003",
-    "q":"86.68",
-    "T":1,	
-    "M":1, 
-    "id":"8659ba6653ff462ebb9cf274dc616cc9" 
-  }
+  "symbol":"MX_USDT",
+  "data":{
+    "clientOrderId":"",
+    "tradeId":"7b3183ad980b4dadba35fdd9259a292e",
+    "isTaker":1,
+    "t":1655293962027,
+    "p":"1.2404",
+    "q":"4.18",
+    "T":2,
+    "M":0,
+    "id":"4731dca8b2dd44379efd68aad162618e"
+  },
+  "channel":"push.personal.deals"
 }
 ```
 **请求参数**
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|op||订阅频道|
-|api_key||apikey|
-|sign||签名|
-|req_time||时间戳|
+|op|srting|订阅频道|
+|api_key|srting|apikey|
+|sign|srting|签名|
+|req_time|long|时间戳|
 
 
 **返回参数**
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
-|t|||
-|p|||
-|q|||
-|T|||
-|M|||
-|id|||
+|t|long|成交时间戳|
+|p|decimal|交易价格|
+|q|decimal|成交数量|
+|T|int|成交类型 1:买 2:卖|
+|M|int|自成交标记 0:否  1:是|
+|id|string|成交订单id|
 
