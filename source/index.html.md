@@ -1737,7 +1737,7 @@ POST /api/v3/margin/tradeMode
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 | timestamp | 时间戳 | 是| string|1655143087012|
 | signature | 签名 |是|string|
-| tradeMode | 交易模式 |是|string|0: 手动模式  1:自动借还模式|
+| tradeMode | 交易模式 |是|int|0: 手动模式  1:自动借还模式|
 | symbol | 交易对 |是|string|BTCUSDT|
 
 
@@ -1745,7 +1745,7 @@ POST /api/v3/margin/tradeMode
 
 | 参数名 | 说明  |数据类型 | 示例|
 | :------------ | :-------- | :-------| :------ |
-|tradeMode|交易模式|number|0|
+|tradeMode|交易模式|int|0|
 |symbol|交易对|string|BTCUSDT|
 
 
