@@ -1181,6 +1181,9 @@ None
 | type            | string   | 订单类型   |
 | client_order_id | string   | 客户订单id |
 
+<aside class="notice">
+最多查询7天内的订单记录，超过7天的可在web客户端查看和导出
+</aside>
 
 ## 个人成交记录
 
