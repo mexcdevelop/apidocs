@@ -1307,7 +1307,7 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 
 ## 查询订单
 
-查询指定交易对订单状态。
+查询指定交易对订单状态，最多查询7天内的订单记录，超过7天的可在web客户端查看和导出。
 
 > 请求示例
 
