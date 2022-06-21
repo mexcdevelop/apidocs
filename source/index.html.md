@@ -1449,7 +1449,7 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 | origQuoteOrderQty   | 原始的交易金额    |
 
 ## 查询所有订单
-获取所有帐户订单； 有效，已取消或已完成。
+获取所有帐户订单； 有效，已取消或已完成，最多查询最近7天数据。
 
 > 请求示例
 
