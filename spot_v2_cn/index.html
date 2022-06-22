@@ -611,6 +611,12 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 <td>新增</td>
 <td>新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式</td>
 </tr>
+<tr>
+<td>2022-06-16</td>
+<td>wss://wbs.mexc.com/raw/ws</td>
+<td>更新</td>
+<td>添加现货websocket文档</td>
+</tr>
 </tbody></table>
 <h1 id='2d07d50c97'>接入说明</h1><h2 id='url'>接入URL</h2>
 <p>请选用以下的baseurl进行API请求：</p>
@@ -2391,7 +2397,7 @@ Secret key仅在申请时展示，请做好记录留存
 <td>string</td>
 <td>否</td>
 <td>起始时间</td>
-<td>默认查询最近7天，最多查询30天</td>
+<td>最多查询最近7天的数据天</td>
 </tr>
 <tr>
 <td>limit</td>
@@ -2592,6 +2598,10 @@ Secret key仅在申请时展示，请做好记录留存
 <td>客户订单id</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+最多查询7天内的订单记录，超过7天的可在web客户端查看和导出
+</aside>
 <h2 id='6792cd1b85'>个人成交记录</h2>
 <blockquote>
 <p>响应示例</p>
