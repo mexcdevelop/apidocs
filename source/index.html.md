@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-06-16**
+
+- Add Margin Account and Trading Endpoints
+
 ## **2022-03-29**
 
 - Add Sub-Account Endpoints
