@@ -1323,7 +1323,7 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 
 ## 查询订单
 
-查询指定交易对订单状态。
+查询指定交易对订单状态，最多查询7天内的订单记录，超过7天的可在web客户端查看和导出。
 
 > 请求示例
 
@@ -1465,7 +1465,7 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 | origQuoteOrderQty   | 原始的交易金额    |
 
 ## 查询所有订单
-获取所有帐户订单； 有效，已取消或已完成。
+获取所有帐户订单； 有效，已取消或已完成，最多查询最近7天数据。
 
 > 请求示例
 
@@ -1753,7 +1753,7 @@ POST /api/v3/margin/tradeMode
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 | timestamp | 时间戳 | 是| string|1655143087012|
 | signature | 签名 |是|string|
-| tradeMode | 交易模式 |是|string|0: 手动模式  1:自动借还模式|
+| tradeMode | 交易模式 |是|int|0: 手动模式  1:自动借还模式|
 | symbol | 交易对 |是|string|BTCUSDT|
 
 
@@ -1761,7 +1761,7 @@ POST /api/v3/margin/tradeMode
 
 | 参数名 | 说明  |数据类型 | 示例|
 | :------------ | :-------- | :-------| :------ |
-|tradeMode|交易模式|number|0|
+|tradeMode|交易模式|int|0|
 |symbol|交易对|string|BTCUSDT|
 
 
