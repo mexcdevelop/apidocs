@@ -62,6 +62,7 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 | 2020-07-20 | /open/api/v2/order/cancel_by_symbol                                                       | 新增     | 按交易对撤单                                                                                                                        |
 | 2021-03-01 | /open/api/v2/order/list                                                                   | 修改     | 入参states由非必填改为必填，且只能单状态查询；入参start_time修改为默认查询最近7天，最多查询30天；修复入参start_time时间不准确的情况 |
 | 2021-08-27 | /open/api/v2/market/api_default_symbols                                                   | 新增     | 新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式                                                       |
+|2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
 
 # 接入说明
 
@@ -1102,7 +1103,7 @@ None
 | 参数名     | 数据类型 | 是否必须 | 说明         | 取值范围                                                                                                |
 | ---------- | -------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------- |
 | symbol     | string   | 是       | 交易对名称   |                                                                                                         |
-| start_time | string   | 否       | 起始时间     | 默认查询最近7天，最多查询30天                                                                           |
+| start_time | string   | 否       | 起始时间     | 最多查询最近7天的数据天                                                                           |
 | limit      | string   | 否       | 返回条数     | 1~1000，默认值50                                                                                        |
 | trade_type | string   | 是       | 交易类型     | BID，ASK                                                                                                |
 | states     | string   | 是       | 查询订单状态 | NEW：未成交；FILLED：已成交；PARTIALLY_FILLED：部分成交；CANCELED：已撤单；PARTIALLY_CANCELED：部分撤单 |
@@ -1180,6 +1181,9 @@ None
 | type            | string   | 订单类型   |
 | client_order_id | string   | 客户订单id |
 
+<aside class="notice">
+最多查询7天内的订单记录，超过7天的可在web客户端查看和导出
+</aside>
 
 ## 个人成交记录
 
