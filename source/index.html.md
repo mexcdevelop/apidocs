@@ -62,6 +62,8 @@ We recommend that all users build their applications on V2 of the API. Using V2 
 |2020-07-20|/open/api/v2/order/cancel_by_symbol|Add|New API for canceling orders|
 |2021-03-01|/open/api/v2/order/list| change | Parameter states change to the mandatory than optional, and only single statu query supported; Parameter start_time default queries in last 7 days, maximum is 30 days; Fixed the situation of incorrect time about parameter start_time|
 |2021-08-27|/open/api/v2/market/api_default_symbols|Add|The newly acquired platform supports the trading pair endpoint of API transactions; Cancel the display of signature method 2 and retain the signature method of the same futures.|
+|2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
+
 
 # Integration guide
 
