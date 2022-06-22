@@ -2776,7 +2776,7 @@ body
 </tr>
 </tbody></table>
 <h2 id='90376e83a0'>查询订单</h2>
-<p>查询指定交易对订单状态。</p>
+<p>查询指定交易对订单状态，最多查询7天内的订单记录，超过7天的可在web客户端查看和导出。</p>
 
 <blockquote>
 <p>请求示例</p>
@@ -3088,7 +3088,7 @@ body
 </tr>
 </tbody></table>
 <h2 id='881e865963'>查询所有订单</h2>
-<p>获取所有帐户订单； 有效，已取消或已完成。</p>
+<p>获取所有帐户订单； 有效，已取消或已完成，最多查询最近7天数据。</p>
 
 <blockquote>
 <p>请求示例</p>
@@ -3672,7 +3672,7 @@ body
 <td style="text-align: left">tradeMode</td>
 <td style="text-align: left">交易模式</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">string</td>
+<td style="text-align: left">int</td>
 <td style="text-align: left">0: 手动模式  1:自动借还模式</td>
 </tr>
 <tr>
@@ -3697,7 +3697,7 @@ body
 <tr>
 <td style="text-align: left">tradeMode</td>
 <td style="text-align: left">交易模式</td>
-<td style="text-align: left">number</td>
+<td style="text-align: left">int</td>
 <td style="text-align: left">0</td>
 </tr>
 <tr>
