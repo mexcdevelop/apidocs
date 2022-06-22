@@ -1452,6 +1452,1126 @@ Response:
 | feeRate   | string | Fund Fee    |
 | timestamp | long   |             |
 
+# Margin Account and Trading Interface
+
+## TradeMode
+switch trademode of margin account
+
+> request
+
+```
+POST /api/v3/margin/tradeMode
+```
+> response
+
+```json
+[
+  {
+  "tradeMode": 0,
+  "symbol": "BTCUSDT"
+  }
+]
+```
+
+**Http Request**
+
+- **POST** ```/api/v3/margin/tradeMode```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+| timestamp | time | YES| string|1655143087012|
+| signature | signature |YES|string|
+| tradeMode | tradeMode |YES|int|0: Normal 1:Auto|
+| symbol | symbol |YES|string|BTCUSDT|
+
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :-------| :------ |
+|tradeMode|tradeMode|int|0|
+|symbol|symbol|string|BTCUSDT|
+
+
+
+## Place Order
+
+> request
+
+```POST /api/v3/margin/order
+```
+> response
+
+```json
+[
+  {
+  "symbol": "BTCUSDT",
+  "orderId": "693471305432961024",
+  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
+  "isIsolated": true,       
+  "transactTime": 1507725176595
+  }
+]
+```
+**Http Request**
+
+- **POST** ```/api/v3/margin/order```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample  | 
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| time |YES|[string]|{{timestamp}}|
+|signature| signature |YES|[string]|{{signature}}|
+|symbol| symbol |YES|[string]|BTCUSDT|
+|isIsolated|is Isolated，"TRUE", "FALSE", Default "TRUE"|NO|[string]|TRUE|
+|side|BUY SELL|YES|[string]|BUY|
+|type|API Definitions：order type |YES|[string]| 
+|quantity|quantity|NO|[string]| 
+|quoteOrderQty|order quantity |NO|[string]| 
+|price|price|NO|[string]| 
+|newClientOrderId|newClientOrderId|NO|[string]| 
+|recvWindow| |NO|[string]| 
+
+
+**Response Parameter**
+
+| name | Description  |Type | Sample |
+| :------------ | :-------- | :-------- |:-------------- |
+|symbol| |[string]|BTCUSDT|
+|orderId| |[string]|693471305432961024|
+|clientOrderId| |[string]|6gCrw2kRUAF9CvJDGP16IP|
+|isIsolated| is Isolated|[boolean]|true|
+|transactTime| |[number]|1507725176595|
+
+
+## Loan
+
+> request
+
+```post /api/v3/margin/loan&resultType=failure
+```
+> response
+
+```json
+[
+  {
+    "tranId": 100000001
+  }
+]
+```
+**Http Request**
+
+- **POST** ```/api/v3/margin/loan```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp|time |YES|[string]|{{timestamp}}|
+|signature|signature |YES|[string]|{{signature}}|
+|asset|asset|YES|[string]|BTC| 
+|isIsolated|is Isolated，"TRUE", Default "TRUE"|NO|[string]| 
+|symbol|Isolated symbol|NO|[string]| 
+|amount| amount|YES|[string]| 
+|recvWindow| |NO|[string]| 
+
+
+**Response Parameter**
+
+| name | Description  |Type | Sample |
+| :------------ | :-------- | :-------- | :------------------- |
+| tranId |transfer id |[number]|100000001|
+
+**Description**：
+
+If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
+
+
+## Repayment
+Description
+> request
+
+```post /api/v3/margin/repay&resultType=failure
+```
+> response
+
+```json
+[
+  {
+    "tranId": 100000001
+  }
+]
+```
+**Http Request**
+
+- **POST** ```/api/v3/margin/repay```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|asset|asset/btc|YES|[string]||
+|isIsolated|is Isolated，"TRUE",  Default "TRUE"|NO|[string]||
+|symbol|isolated symbol|YES|[string]||
+|amount|amount or isAllRepay|NO|[string]||
+|borrowId|loan order id|YES|[string]||
+|isAllRepay|all repay or portion repay|NO|[string]||
+|recvWindow| |YES|[string]||
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|tranId|repay id|[number]|100000001|
+
+**Description**：
+
+If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
+
+
+## Cancel all Open Orders on a Symbol
+
+> request
+
+```delete /api/v3/1111
+```
+> response
+
+```json
+[
+  [
+  {
+    "symbol": "BTCUSDT",
+    "isIsolated": true,      
+    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",
+    "price": "0.089853",
+    "origQty": "0.178622",
+    "executedQty": "0.000000",
+    "cummulativeQuoteQty": "0.000000",
+    "status": "CANCELED",
+    "type": "LIMIT",
+    "side": "BUY"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "isIsolated": false,      
+    "orderId": 13,
+    "clientOrderId": "pXLV6Hz6mprAcVYpVMTGgx",
+    "price": "0.090430",
+    "origQty": "0.178622",
+    "executedQty": "0.000000",
+    "cummulativeQuoteQty": "0.000000",
+    "status": "CANCELED",
+    "type": "LIMIT",
+    "side": "BUY"
+  }
+  ]
+]
+```
+**Http Request**
+
+- **DELETE** ```/api/v3/margin/openOrders```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]||
+|isIsolated|is Isolated，"TRUE", Default "TRUE"|NO|[string]||
+|recvWindow|less than `60000`|NO|[string]||
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|isIsolated| is isolated symbol |[boolean]|true|
+|clientOrderId||[string]|pXLV6Hz6mprAcVYpVMTGgx|
+|price| |[string]|0.089853|
+|origQty| |[string]|0.178622|
+|executedQty||[string]|0.000000|
+|cummulativeQuoteQty| |[string]|0.000000|
+|status| |[string]|CANCELED|
+|type| |[string]|LIMIT|
+|side| |[string]|BUY|
+|orderId||[string]| |
+|orderListId|-1|[string]||
+
+
+
+## Cancel Order
+Description
+> request
+
+```delete /api/v3/margin/order&resultType=failure
+```
+> response
+
+```json
+[
+  {
+  "symbol": "LTCBTC",
+  "orderId": "693471305432961024",
+  "clientOrderId": "cancelMyOrder1",
+  "price": "1.00000000",
+  "origQty": "10.00000000",
+  "executedQty": "8.00000000",
+  "cummulativeQuoteQty": "8.00000000",
+  "status": "CANCELED",
+  "type": "LIMIT",
+  "side": "SELL",
+  "isIsolated": true       
+  }
+]
+```
+**Http Request**
+
+- **DELETE** ```/api/v3/margin/order```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]|
+|isIsolated|is Isolated，"TRUE", "FALSE", Default "FALSE"|NO|[string]|
+|orderId| |NO|[string]|
+|origClientOrderId|origClientOrderId|NO|[string]|
+|recvWindow| |NO|[string]|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|LTCBTC|
+|orderId| |[string]|693471305432961024|
+|clientOrderId| |[string]|cancelMyOrder1|
+|price| |[string]|1.00000000|
+|origQty| |[string]|10.00000000|
+|executedQty| |[string]|8.00000000|
+|cummulativeQuoteQty|cummulativeQuoteQty|[string]|8.00000000|
+|status| |[string]|CANCELED|
+|type| |[string]|LIMIT|
+|side| |[string]|SELL|
+|isIsolated| is isolated symbol |[boolean]|true|
+
+**Description**：
+
+must send any one of orderId or origClientOrderId .
+
+
+## Query Loan List
+Description
+> request
+
+```get /api/v3/margin/loan
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/loan```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|asset|asset|YES|[string]|BTC|
+|symbol|symbol|NO|[string]|
+|tranId|tranId |NO|[string]|
+|startTime| |NO|[string]|
+|endTime| |NO|[string]|
+|current|current page. Default:1|NO|[string]|
+|size|Default:10 max:100|NO|[string]|
+|recvWindow| |YES|[string]|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|rows| |[array]| |
+|rows>>symbol| symbol|[string]|MXUSDT|
+|rows>>tranId| |[number]|12807067523|
+|rows>>asset| |[string]|MX|
+|rows>>principal|principal|[string]|0.84624403|
+|rows>>timestamp|time |[number]|1555056425000|
+|rows>>remainAmount|remainAmount|[string]| |
+|rows>>remainInterest|remainInterest|[string]| |
+|rows>>repayAmount|repayAmount|[string]|300|
+|rows>>repayInterest|repayInterest|[string]|1.96249686|
+|rows>>status|status: PENDING , CONFIRMED, FAILED;|[string]|CONFIRMED|
+|total| |[number]|1|
+
+**Description**：
+
+TranId or startTime must be sent, tranId takes precedence. Responses are returned in descending order. If you send isolatedSymbol, return the credit record for the specified store-by-store symbol specified asset.
+
+
+## All Order
+Description
+> request
+
+```get /api/v3/margin/allOrders
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/allOrders```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]|
+|isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|[string]|
+|orderId| |NO|[string]|
+|startTime| |NO|[string]|
+|endTime| |NO|[string]|
+|limit|Default 500;max 500.|NO|[string]|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|clientOrderId| |[string]|D2KDy4DIeS56PvkM13f8cP|
+|cummulativeQuoteQty| |[string]|0.00000000|
+|executedQty| |[string]|0.00000000|
+|isWorking| |[boolean]|false|
+|orderId| |[number]|41295|
+|origQty| |[string]|5.31000000|
+|price| |[string]|0.22500000|
+|side| |[string]|SELL|
+|status| |[string]|CANCELED|
+|symbol| |[string]|MXBTC|
+|isIsolated| is isolated symbol |[boolean]|false|
+|time| |[number]|1565769338806|
+|type| |[string]|TAKE_PROFIT_LIMIT|
+|updateTime| |[number]|1565769342148|
+
+**Description**：
+
+If orderId is set, get the order &gt;= orderId, NO returns the recent order history. Some historical orders of cummulativeQuoteQty  &lt; 0: YES Indicates that the current data does not exist.
+
+
+
+## Account Trade List
+Description
+> request
+
+```get /api/v3/margin/myTrades
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/myTrades```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]|
+|isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|[string]|
+|startTime| |NO|[string]|
+|endTime| |NO|[string]|
+|fromId|TradeId|NO|[string]|
+|limit|Default 500; max 1000.|NO|[string]|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|commission|commission|[string]|0.00006000|
+|commissionAsset|commissionAsset|[string]|BTC|
+|id|trade-id|[number]|34|
+|isBuyer| |[boolean]|false|
+|orderId| |[number]|39324|
+|price| |[string]|0.02000000|
+|qty| |[string]|3.00000000|
+|symbol| |[string]|MXBTC|
+|isIsolated| is isolated symbol|[boolean]|false|
+|time| |[number]|1561973357171|
+
+**Description**：
+
+If fromId is set, get the order ID &gt; = fromId, NO Returns the recent order history.
+
+
+## Current Open Orders
+Description
+> request
+
+```get /api/v3/margin/openOrders
+```
+> response
+
+```json
+[
+  {
+  "rows": [
+    {
+        "isolatedSymbol": "MXUSDT", 
+        "id": "12807067523",
+        "asset": "MX",
+        "timestamp": 1555056425000,
+        "amount": "315.53307675",
+        "dealAmount": "319.26088158",
+        "dealQuantity": "23768.97",
+        "fee": "0",
+        "feeCurrency": "USDT",
+        "orderType": "STOP_OUT",
+        "price": "0.013275",
+        "quantity": "23768.97",
+				"remainQuantity": "0",
+        "remainAmount": "300",
+				"side": "SELL",
+				"status": "FILLED"
+    }
+  ],
+  "total": 1
+  }
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/openOrders```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol|symbol|NO|[string]| 
+|isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|[string]|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|clientOrderId| |[string]|qhcZw71gAkCCTv0t0k8LUK|
+|cummulativeQuoteQty|cummulativeQuoteQty|[string]|0.00000000|
+|executedQty| |[string]|0.00000000|
+|isWorking| |[boolean]|true|
+|orderId| |[number]|211842552|
+|origQty| |[string]|0.30000000|
+|price| |[string]|0.00475010|
+|side| |[string]|SELL|
+|status| |[string]|NEW|
+|symbol| |[string]|MXBTC|
+|isIsolated| is isolated symbol|[boolean]|true|
+|time| |[number]|1562040170089|
+|timeInForce| |[string]|GTC|
+|type| |[string]|LIMIT|
+|updateTime| |[number]|1562040170089|
+
+
+
+
+## Account Max Transferable
+
+> request
+
+```get /api/v3/margin/maxTransferable
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/maxTransferableh```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|asset| |YES|[string]| 
+|symbol|symbol|YES|[string]| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|amount| |[string]|3.59498107|
+
+
+## Margin PriceIndex
+
+> request
+
+```get /api/v3/margin/priceIndex
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/priceIndex```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]|   
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|calcTime| |[number]|1562046418000|
+|price| |[string]|0.00333930|
+|symbol| |[string]|MXBTC|
+
+
+
+## Query Order
+
+> request
+
+```get /api/v3/margin/order
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/order```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |NO|[string]|
+|isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|[string]| |
+|orderId| |NO|[string]| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|clientOrderId| |[string]|ZwfQzuDIGpceVhKW5DvCmO|
+|cummulativeQuoteQty|cummulativeQuoteQty|[string]|0.00000000|
+|executedQty|amount|[string]|0.00000000|
+|isWorking| |[boolean]|true|
+|orderId| |[number]|213205622|
+|origQty|orign amount|[string]|0.30000000|
+|price| |[string]|0.00493630|
+|side| |[string]|SELL|
+|status| |[string]|NEW|
+|symbol| |[string]|MXBTC|
+|isIsolated| is isolated symbol|[boolean]|true|
+|time| |[number]|1562133008725|
+|type| |[string]|LIMIT|
+|updateTime| |[number]|1562133008725|
+
+**Description**：
+
+You must send either orderId or origClientOrderId. Some historical orders of cummulativeQuoteQty < 0: YES Indicates that the current data does not exist.
+
+
+## Isolated Account
+
+> request
+
+```get /api/v3/margin/isolated/account
+```
+> response
+
+```json
+[
+  {
+   "assets":[
+      {
+        "baseAsset": 
+          {
+          "asset": "BTC",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",
+          "repayEnabled": true,
+          "totalAsset": "0.00000000"
+        },
+        "quoteAsset": 
+        {
+          "asset": "USDT",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",
+          "totalAsset": "0.00000000"
+        },
+        "symbol": "BTCUSDT",
+        "enabled": true, 
+        "tradeMode": 0, 
+        "marginLevel": "0.00000000", 
+        "riskRate": "0.00000000",
+        "indexPrice": "10000.00000000",
+        "liquidatePrice": "1000.00000000",
+        "liquidateRate": "1.00000000",
+        "tradeEnabled": true,
+        "totalUsdtValue": 100
+      }
+    ]
+  }
+]
+response with symbol:
+{
+   "assets":[
+      {
+        "baseAsset": 
+          {
+          "asset": "BTC",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",
+          "repayEnabled": true,
+          "totalAsset": "0.00000000"
+        },
+        "quoteAsset": 
+        {
+          "asset": "USDT",
+          "borrowEnabled": true,
+          "borrowed": "0.00000000",
+          "free": "0.00000000",
+          "interest": "0.00000000",
+          "locked": "0.00000000",
+          "netAsset": "0.00000000",
+          "repayEnabled": true,
+          "totalAsset": "0.00000000"
+        },
+        "symbol": "BTCUSDT"
+        "enabled": true, 
+        "tradeMode": 0, 
+        "marginLevel": "0.00000000", 
+        "riskRate": "0.00000000",
+        "indexPrice": "10000.00000000",
+        "liquidatePrice": "1000.00000000",
+        "liquidateRate": "1.00000000",
+        "tradeEnabled": true,
+        "totalUsdtValue": 100
+      }
+    ]
+}
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/isolated/account```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbols|max 5 symbols; String delimited by ",".|YES|[string]|"BTCUSDT,MXUSDT,ADAUSDT"|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|assets| |[array]| |
+|assets>>baseAsset| |[object]| |
+|assets>>baseAsset>>asset| |[string]|BTC|
+|assets>>baseAsset>>borrowEnabled| |[boolean]|true|
+|assets>>baseAsset>>borrowed| |[string]|0.00000000|
+|assets>>baseAsset>>free| |[string]|0.00000000|
+|assets>>baseAsset>>interest| |[string]|0.00000000|
+|assets>>baseAsset>>locked| |[string]|0.00000000|
+|assets>>baseAsset>>netAsset| |[string]|0.00000000|
+|assets>>baseAsset>>netAssetOfBtc| |[string]|0.00000000|
+|assets>>baseAsset>>repayEnabled| |[boolean]|true|
+|assets>>baseAsset>>totalAsset| |[string]|0.00000000|
+|assets>>quoteAsset| |[object]| | |
+|assets>>quoteAsset>>asset| |[string]|USDT|
+|assets>>quoteAsset>>borrowEnabled| |[boolean]|true|
+|assets>>quoteAsset>>borrowed| |[string]|0.00000000|
+|assets>>quoteAsset>>free| |[string]|0.00000000|
+|assets>>quoteAsset>>interest| |[string]|0.00000000|
+|assets>>quoteAsset>>locked| |[string]|0.00000000|
+|assets>>quoteAsset>>netAsset| |[string]|0.00000000|
+|assets>>quoteAsset>>netAssetOfBtc| |[string]|0.00000000|
+|assets>>quoteAsset>>repayEnabled| |[boolean]|true|
+|assets>>quoteAsset>>totalAsset| |[string]|0.00000000|
+|assets>>symbol| |[string]|BTCUSDT|
+|assets>>isolatedCreated| |[boolean]|true|
+|assets>>enabled| enabled|[boolean]|true|
+|assets>>marginLevel| |[string]|0.00000000|
+|assets>>marginRatio| |[string]|0.00000000|
+|assets>>indexPrice| |[string]|10000.00000000|
+|assets>>liquidatePrice| |[string]|1000.00000000|
+|assets>>liquidateRate| |[string]|1.00000000|
+|assets>>tradeEnabled| |[boolean]|true|
+
+
+
+
+## Query TrigerOrder
+
+> request
+
+```get /api/v3/margin/trigerOrder
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/trigerOrder```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+
+
+
+## MaxBorrowable
+
+> request
+
+```get /api/v3/margin/maxBorrowable
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/maxBorrowable```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|asset| |YES|[string]| 
+|symbol|is isolated symbol|NO|[string]| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|amount| max borrowable amount|[string]|1.69248805|
+|borrowLimit| borrowLimit |[string]|60|
+
+
+## Repay
+Description
+> request
+
+```get /api/v3/margin/repay
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/repay```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|asset| |YES|[string]| |
+|symbol|symbol|NO|[string]| |
+|tranId|transfer id|YES|[string]| |
+|startTime| |NO|[string]| |
+|endTime| |NO|[string]| |
+|current|current page Default:1|NO|[string]| |
+|size|Default:10 max:100|NO|[string]| |
+|recvWindow| |NO|[string]| |
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|rows| |[array]| |
+|rows>>symbol| symbol|[string]|MXUSDT|
+|rows>>amount| amount|[string]|14.00000000|
+|rows>>asset| |[string]|MX|
+|rows>>interest| interest|[string]|0.01866667|
+|rows>>principal| principal|[string]|13.98133333|
+|rows>>timestamp| |[number]|1563438204000|
+|rows>>tranId| |[number]|2970933056|
+|total| |[number]|1|
+
+**Description**：
+
+TranId or startTime must be sent, tranId takes precedence. Responses are returned in descending order. If a symbol is sent, returns the repayment record for the specified symbol specified asset on a store-by-store basis.
+
+
+
+## Isolated Symbol
+
+> request
+
+```get /api/v3/margin/isolated/pair
+```
+> response
+
+```json
+[
+  {
+   "symbol":"BTCUSDT",
+   "base":"BTC",
+   "quote":"USDT",
+   "isMarginTrade":true
+  }
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/isolated/pair```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]|| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|base| |[string]|BTC|
+|quote| |[string]|USDT|
+|isMarginTrade|isMarginTrade   |[boolean]|true|
+
+
+
+## Force Liquidation Record
+
+> request
+
+```get /api/v3/margin/forceLiquidationRec
+```
+> response
+
+```json
+[
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/forceLiquidationRec```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|startTime| |NO|[string]| |
+|endTime| |NO|[string]|| 
+|symbol| |NO|[string]|| 
+|current|current page Default:1|NO|[string]|| 
+|size|Default:10 max:100|NO|[string]|| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|rows| |[array]|  |
+|rows>>avgPrice| |[string]|0.00388359|
+|rows>>executedQty| |[string]|31.39000000|
+|rows>>orderId|order id|[string]|180015097|
+|rows>>price|price|[string]|0.00388110|
+|rows>>qty| |[string]|31.39000000|
+|rows>>side| |[string]|SELL|
+|rows>>symbol| |[string]|MXBTC|
+|rows>>isIsolated| is isolated|[boolean]|true|
+|rows>>updatedTime| |[number]|1558941374745|
+|total| |[number]|1|
+
+**Description**：
+
+Responses are returned in descending order.
+
+
+## Isolated MarginData
+
+> request
+
+```get /api/v3/margin/isolatedMarginData
+```
+> response
+
+```json
+[
+  [
+    {
+        "symbol": "BTCUSDT",
+        "leverage": "10",
+        "data": [
+            {
+                "coin": "BTC",
+                "hourInterest": "0.00026125",
+                "borrowLimit": "270"
+            },
+            {
+                "coin": "USDT",
+                "hourInterest": "0.000475",
+                "borrowLimit": "2100000"
+            }
+        ]
+    }
+] 
+
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/isolatedMarginData```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string]|{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |NO|[string]|| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|leverage| |[string]|10|
+|data| |[array]|  |
+|data>>coin| |[string]|BTC|
+|data>>hourInterest|hourInterest|[string]|0.00026125|
+|data>>borrowLimit|borrowLimit|[string]|270|
+
+
+
+## Isolated MarginTier
+
+> request
+
+```get /api/v3/margin/isolatedMarginTier
+```
+> response
+
+```json
+[
+  [
+    {
+        "symbol": "BTCUSDT",
+        "tier": 1,
+        "effectiveMultiple": "10",
+        "initialRiskRatio": "1.111",
+        "liquidationRiskRatio": "1.05",
+        "baseAssetMaxBorrowable": "9",
+        "quoteAssetMaxBorrowable": "70000"
+    }
+  ]
+]
+```
+**Http Request**
+
+- **GET** ```/api/v3/margin/isolatedMarginTier```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|[string||{{timestamp}}|
+|signature| |YES|[string]|{{signature}}|
+|symbol| |YES|[string]|| 
+|tier||NO|[string]|| 
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+|symbol| |[string]|BTCUSDT|
+|tier|tier|[number]|1|
+|effectiveMultiple|effectiveMultiple|[string]|10|
+|initialRiskRatio|initialRiskRatio|[string]|1.111|
+|liquidationRiskRatio|liquidationRiskRatio|[string]|1.05|
+|baseAssetMaxBorrowable|baseAssetMaxBorrowable】|[string]|9|
+|quoteAssetMaxBorrowable|quoteAssetMaxBorrowable|[string]|70000|
 
 # Public API Definitions
 
