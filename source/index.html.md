@@ -738,7 +738,7 @@ curl "https://contract.mexc.com/api/v1/contract/kline/index_price/BTC_USDT?inter
 > 请求示例
 
 ```
-curl "https://contract.mexc.com/api/v1/contract/kline/fair_price/BTC_USDT?interval=Min15&start=1609992674000&end=1609992694000"
+curl "https://contract.mexc.com/api/v1/contract/kline/index_price/BTC_USDT?interval=Min15&start=1609992674&end=1610113500"
 ```
 
 > 响应示例
