@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-07-03**
+
+- Add Query the currency info Endpoints
+
 ## **2022-06-16**
 
 - Add Margin Account and Trading Endpoints
@@ -1414,6 +1418,79 @@ Response:
 | time            | trade time    |
 | isBuyerMaker    |               |
 | isBestMatch     |               |
+
+## Query the currency information
+
+> Request
+
+```
+Get /api/v3/capital/config/getall
+```
+> Response
+
+```json
+[
+  {
+    "coin": "BTC",
+    "name": "Bitcoin",
+    "networkList": [
+      {
+          "coin": "BTC",
+          "depositDesc": null,
+          "depositEnable": true,
+          "minConfirm": 0,
+          "name": "BTC-TRX",
+          "network": "TRC20",
+          "withdrawEnable": false,
+          "withdrawFee": "0.000100000000000000",
+          "withdrawIntegerMultiple": null,
+          "withdrawMax": "40.000000000000000000",
+          "withdrawMin": "0.001000000000000000",
+          "sameAddress": false,
+          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+      },
+      {
+          "coin": "BTC",
+          "depositDesc": null,
+          "depositEnable": true,
+          "minConfirm": 0,
+          "name": "BTC-BSC",
+          "network": "BEP20(BSC)",
+          "withdrawEnable": true,
+          "withdrawFee": "0.000010000000000000",
+          "withdrawIntegerMultiple": null,
+          "withdrawMax": "100.000000000000000000",
+          "withdrawMin": "0.000100000000000000",
+          "sameAddress": false,
+          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"
+      }
+    ]
+  },
+]
+```
+
+- **GET** ```/api/v3/capital/config/getall```
+
+Query currency details and the smart contract address
+
+
+Parameters:  
+
+  None
+
+
+Response:
+
+| name | Description  | 
+| :------------ | :-------- | 
+|depositEnable||
+|network||
+|withdrawEnable||
+|withdrawFee||
+|withdrawMax||
+|withdrawMin||
+|contract||
+
 
 # ETF
 
