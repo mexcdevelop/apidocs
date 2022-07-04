@@ -341,6 +341,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-07-03" class="toc-h2 toc-link" data-title="2022-07-03"><strong>2022-07-03</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-06-16" class="toc-h2 toc-link" data-title="2022-06-16"><strong>2022-06-16</strong></a>
                   </li>
                   <li>
@@ -476,6 +479,9 @@
                   </li>
                   <li>
                     <a href="#account-trade-list" class="toc-h2 toc-link" data-title="Account Trade List">Account Trade List</a>
+                  </li>
+                  <li>
+                    <a href="#query-the-currency-information" class="toc-h2 toc-link" data-title="Query the currency information">Query the currency information</a>
                   </li>
               </ul>
           </li>
@@ -618,7 +624,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-06-16'><strong>2022-06-16</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-07-03'><strong>2022-07-03</strong></h2>
+<ul>
+<li>Add Query the currency info Endpoints</li>
+</ul>
+<h2 id='2022-06-16'><strong>2022-06-16</strong></h2>
 <ul>
 <li>Add Margin Account and Trading Endpoints</li>
 </ul>
@@ -3060,6 +3070,101 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td>isBestMatch</td>
 <td></td>
+</tr>
+</tbody></table>
+<h2 id='query-the-currency-information'>Query the currency information</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>Get /api/v3/capital/config/getall
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"networkList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositDesc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"minConfirm"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-TRX"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRC20"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000100000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawIntegerMultiple"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.000000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositDesc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"minConfirm"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-BSC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEP20(BSC)"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000010000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawIntegerMultiple"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.000000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000100000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/config/getall</code></li>
+</ul>
+
+<p>Query currency details and the smart contract address</p>
+
+<p>Parameters:  </p>
+
+<p>None</p>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">depositEnable</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawEnable</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawFee</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawMax</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawMin</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">contract</td>
+<td style="text-align: left"></td>
 </tr>
 </tbody></table>
 <h1 id='etf'>ETF</h1><h2 id='get-etf-info'>Get ETF info</h2>
