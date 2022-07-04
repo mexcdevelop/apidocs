@@ -344,10 +344,16 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#2022-06-21" class="toc-h2 toc-link" data-title="2022-06-21"><strong>2022-06-21</strong></a>
+                    <a href="#2022-07-03" class="toc-h2 toc-link" data-title="2022-07-03"><strong>2022-07-03</strong></a>
                   </li>
                   <li>
                     <a href="#2022-06-16" class="toc-h2 toc-link" data-title="2022-06-16"><strong>2022-06-16</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-06-21" class="toc-h2 toc-link" data-title="2022-06-21"><strong>2022-06-21</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-06-16-2" class="toc-h2 toc-link" data-title="2022-06-16"><strong>2022-06-16</strong></a>
                   </li>
                   <li>
                     <a href="#2022-03-29" class="toc-h2 toc-link" data-title="2022-03-29"><strong>2022-03-29</strong></a>
@@ -489,6 +495,9 @@
                   <li>
                     <a href="#1c077e2313" class="toc-h2 toc-link" data-title="账户成交历史">账户成交历史</a>
                   </li>
+                  <li>
+                    <a href="#2a7110133d" class="toc-h2 toc-link" data-title="查询币种信息">查询币种信息</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -622,11 +631,19 @@
 <li> 咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-06-21'><strong>2022-06-21</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-07-03'><strong>2022-07-03</strong></h2>
+<ul>
+<li>新增现货账号模块查询币种信息接口，该接口可返回币种在所支持的网络中的智能合约地址</li>
+</ul>
+<h2 id='2022-06-16'><strong>2022-06-16</strong></h2>
+<ul>
+<li> 新增杠杆账户和交易接口</li>
+</ul>
+<h2 id='2022-06-21'><strong>2022-06-21</strong></h2>
 <ul>
 <li>新增demo</li>
 </ul>
-<h2 id='2022-06-16'><strong>2022-06-16</strong></h2>
+<h2 id='2022-06-16-2'><strong>2022-06-16</strong></h2>
 <ul>
 <li>新增杠杆接口</li>
 </ul>
@@ -1916,11 +1933,26 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 </tbody></table>
 
-<p><strong>返回参数</strong>
-| 参数名       | 数据类型 | 说明                |
-| :------------ | :-------- | :------------------- |
-| subAccount | STRING | 子账户名称（8-32个字母加数字）如：subAccount1 |
-| note       | STRING | 备注  如：1     |</p>
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">子账户名称（8-32个字母加数字）如：subAccount1</td>
+</tr>
+<tr>
+<td style="text-align: left">note</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">备注  如：1</td>
+</tr>
+</tbody></table>
 <h2 id='efa0aed0d6'>查看子账户列表</h2>
 <p>获取您的母账户下所有子账户信息</p>
 
@@ -3537,6 +3569,119 @@ body
 <tr>
 <td style="text-align: left">isBestMatch</td>
 <td style="text-align: left">是否为最佳匹配</td>
+</tr>
+</tbody></table>
+<h2 id='2a7110133d'>查询币种信息</h2>
+<p>返回币种详细信息以及智能合约地址</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>Get /api/v3/capital/config/getall
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"networkList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositDesc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"minConfirm"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-TRX"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRC20"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000100000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawIntegerMultiple"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.000000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositDesc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"depositEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"minConfirm"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-BSC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEP20(BSC)"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000010000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawIntegerMultiple"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMax"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.000000000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"withdrawMin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000100000000000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/config/getall</code></li>
+</ul>
+
+<p><strong>请求参数</strong></p>
+
+<p>无</p>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">示例</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">depositEnable</td>
+<td style="text-align: left">是否可充值</td>
+<td style="text-align: left">bool</td>
+<td style="text-align: left">true</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">币种所支持的网络</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">TRC20</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawEnable</td>
+<td style="text-align: left">是否可提币</td>
+<td style="text-align: left">bool</td>
+<td style="text-align: left">true</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawFee</td>
+<td style="text-align: left">提币手续费</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">0.0001</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawMax</td>
+<td style="text-align: left">最大提币限额</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">40.00</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawMin</td>
+<td style="text-align: left">最大提币限额</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">0.001</td>
+</tr>
+<tr>
+<td style="text-align: left">contract</td>
+<td style="text-align: left">币种智能合约地址</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c</td>
 </tr>
 </tbody></table>
 <h1 id='etf'>ETF接口</h1><h2 id='etf-2'>获取杠杆ETF基础信息</h2>
