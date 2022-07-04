@@ -59,6 +59,13 @@ https://github.com/mxcdevelop/mexc-api-demo
   -  咨询关于钱包、短信、2FA等问题
 
 # 更新日志
+## **2022-07-03**
+
+- 新增现货账号模块查询币种信息接口，该接口可返回币种在所支持的网络中的智能合约地址
+
+## **2022-06-16**
+
+-  新增杠杆账户和交易接口
 
 ## **2022-06-21**
 
@@ -872,6 +879,7 @@ POST /api/v3/sub-account/virtualSubAccount?subAccount=subAccount1&note=1&timesta
 | timestamp  | LONG   | YES      |     |
 
 **返回参数**
+
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
 | subAccount | STRING | 子账户名称（8-32个字母加数字）如：subAccount1 |
@@ -1672,6 +1680,77 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | commissionAsset | 交易类资产类型    |
 | isBuyerMaker    | 是否为买方maker单 |
 | isBestMatch     | 是否为最佳匹配    |
+
+## 查询币种信息
+返回币种详细信息以及智能合约地址
+
+> 请求示例
+
+```
+Get /api/v3/capital/config/getall
+```
+> 返回示例
+
+```json
+[
+  {
+    "coin": "BTC",
+    "name": "Bitcoin",
+    "networkList": [
+      {
+          "coin": "BTC",
+          "depositDesc": null,
+          "depositEnable": true,
+          "minConfirm": 0,
+          "name": "BTC-TRX",
+          "network": "TRC20",
+          "withdrawEnable": false,
+          "withdrawFee": "0.000100000000000000",
+          "withdrawIntegerMultiple": null,
+          "withdrawMax": "40.000000000000000000",
+          "withdrawMin": "0.001000000000000000",
+          "sameAddress": false,
+          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+      },
+      {
+          "coin": "BTC",
+          "depositDesc": null,
+          "depositEnable": true,
+          "minConfirm": 0,
+          "name": "BTC-BSC",
+          "network": "BEP20(BSC)",
+          "withdrawEnable": true,
+          "withdrawFee": "0.000010000000000000",
+          "withdrawIntegerMultiple": null,
+          "withdrawMax": "100.000000000000000000",
+          "withdrawMin": "0.000100000000000000",
+          "sameAddress": false,
+          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"
+      }
+    ]
+  },
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/config/getall```
+
+**请求参数**
+
+无
+
+
+**返回参数**
+
+| 参数名 | 说明  | 数据类型 | 示例|
+| :------------ | :-------- | :------------| :------------------- |
+|depositEnable|是否可充值| bool |true|
+|network|币种所支持的网络| string |TRC20|
+|withdrawEnable|是否可提币| bool |true|
+|withdrawFee|提币手续费| number |0.0001|
+|withdrawMax|最大提币限额|number|40.00|
+|withdrawMin|最大提币限额|number|0.001|
+|contract|币种智能合约地址|string|0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c|
 
 # ETF接口
 
