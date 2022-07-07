@@ -3410,6 +3410,14 @@ subscribe , unsubscribe, example is shown on the right.
 
 ## Private Channels
 
+**Signature:**
+
+The signature target string is: accessKey + timestamp,The HMAC SHA256 algorithm is used to sign the target string.
+
+**Signature String:**  
+
+`"mx0aBYs33eIilxBW5C1657186536762"`
+
 ### Login authentication
 
 > Payload
