@@ -22,6 +22,7 @@ meta:
 |-----|-----|-----|-----|
 |2021-01-15|*|Add|Release of contract API|
 | change | | 2021-03-30 | * adjust ｜ the following endpoints to access the paths and the data return format (the original paths still supported, but will gradually abandoned) : get the user’s all history orders, get the user’s ongoing orders, get the user’s history position information, get the stop-limit orders list, get the trigger orders list, get the user’s all transaction details |
+|2022-07-07|*|Add||
 
 # Integration guide
 
