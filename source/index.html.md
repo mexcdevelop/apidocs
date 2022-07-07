@@ -22,6 +22,7 @@ meta:
 |-----|-----|-----|-----|
 |2021-01-15|*|新增|合约API发布|
 |2021-03-30|*|修改|调整如下接口访问路径及数据返回格式（原路径仍支持，但会逐步废弃）：获取用户所有历史订单、获取用户当前未结束订单、获取用户历史持仓信息、获取止盈止损订单列表、获取计划委托订单列表、获取用户所有订单成交明细|
+|2022-07-07|*|新增|获取合约详细信息接口新增返回字段:apiAllowed: true|false,表示是否支持api交易|
 
 # 接入说明
 
@@ -251,7 +252,24 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
             "state":0,
             "isNew":false,
             "isHot":true,
-            "isHidden":false
+            "isHidden":false,
+            "conceptPlate": [
+                "mc-trade-zone-grey",
+                "mc-trade-zone-pow"
+            ],
+            "riskLimitType": "BY_VOLUME",
+            "maxNumOrders": [
+                200,
+                50
+            ],
+            "marketOrderMaxLevel": 15,
+            "marketOrderPriceLimitRate1": 0.03,
+            "marketOrderPriceLimitRate2": 0.005,
+            "triggerProtect": 0.05,
+            "appraisal": 0,
+            "showAppraisalCountdown": 0,
+            "automaticDelivery": 0,
+            "apiAllowed": false
         },
     ]
 }
@@ -304,6 +322,7 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
 | priceCoefficientVariation  | decimal  | 合理价格偏离指数价格系数 |
 | indexOrigin  | List<String>  | 指数来源 |
 | state  | int  | 状态,0:启用,1:交割,2:交割完成,3:下线,4: 暂停|
+|apiAllowed|bool| 是否支持api交易|
 
 ## 获取可划转币种
 
