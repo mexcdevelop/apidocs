@@ -1848,6 +1848,9 @@ POST /api/v3/margin/tradeMode
 ## 下单
 进行杠杆账户下单操作
 
+<aside class="warning">杠杆账户下单暂时不支持市价单</aside>
+
+
 > 请求示例
 
 ```POST /api/v3/margin/order
@@ -1878,7 +1881,7 @@ POST /api/v3/margin/tradeMode
 |symbol| 交易对 |是|[string]|BTCUSDT|
 |isIsolated|是否逐仓杠杆，"TRUE", "FALSE", 默认 "TRUE"|否|[string]|TRUE|
 |side|BUY SELL|是|[string]|BUY|
-|type|详见枚举定义：订单类型  市价单参见现货市价配置|是|[string]| 
+|type|详见枚举定义：订单类型  (暂不支持市价单)|是|[string]| 
 |quantity|订单总额|否|[string]| 
 |quoteOrderQty|订单数量|否|[string]| 
 |price|买入价|否|[string]| 
@@ -2957,18 +2960,11 @@ POST /api/v3/margin/tradeMode
 ### K线间隔
 
 - 1m  1分钟
-- 3m  3分钟
 - 5m  5分钟
 - 15m  15分钟
 - 30m  30分钟
-- 1h  1小时
-- 2h  2小时
+- 60m  1小时
 - 4h  4小时
-- 6h  6小时
-- 8h  8小时
-- 12h  12小时
 - 1d  1天
-- 3d  3天
-- 1w  1周
 - 1M  1月
 
