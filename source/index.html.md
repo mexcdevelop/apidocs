@@ -1569,6 +1569,16 @@ Base url: wss://wbs.mexc.com/raw/ws
 
 ## Detailed data interaction commands
 
+> Request Payload
+
+```
+ping //string
+```
+> Response Payload
+
+```
+pong //string
+```
 List of subscribe/unsubscribe data commands ( ws identification is not required except the list of personal related commands)
 
 If no ping is received within 1 minute, the connection will be disconnected. It is recommended to send a ping for 10-20 seconds
