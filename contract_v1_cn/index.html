@@ -566,6 +566,12 @@
 <td>修改</td>
 <td>调整如下接口访问路径及数据返回格式（原路径仍支持，但会逐步废弃）：获取用户所有历史订单、获取用户当前未结束订单、获取用户历史持仓信息、获取止盈止损订单列表、获取计划委托订单列表、获取用户所有订单成交明细</td>
 </tr>
+<tr>
+<td>2022-07-07</td>
+<td>*</td>
+<td>新增</td>
+<td>获取合约详细信息接口新增返回字段:apiAllowed: true</td>
+</tr>
 </tbody></table>
 <h1 id='2d07d50c97'>接入说明</h1><h2 id='url'>接入url</h2>
 <blockquote>
@@ -779,7 +785,24 @@ Recv-Window来自定义，其最大值为60，不推荐使用30秒以上的recv_
             </span><span class="nl">"state"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
             </span><span class="nl">"isNew"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="nl">"isHot"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"isHidden"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+            </span><span class="nl">"isHidden"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"conceptPlate"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"mc-trade-zone-grey"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mc-trade-zone-pow"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"riskLimitType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BY_VOLUME"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxNumOrders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">200</span><span class="p">,</span><span class="w">
+                </span><span class="mi">50</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"marketOrderMaxLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"marketOrderPriceLimitRate1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"marketOrderPriceLimitRate2"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.005</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"triggerProtect"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"appraisal"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"showAppraisalCountdown"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"automaticDelivery"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"apiAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="p">},</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -973,6 +996,11 @@ Recv-Window来自定义，其最大值为60，不推荐使用30秒以上的recv_
 <td>state</td>
 <td>int</td>
 <td>状态,0:启用,1:交割,2:交割完成,3:下线,4: 暂停</td>
+</tr>
+<tr>
+<td>apiAllowed</td>
+<td>boolean</td>
+<td>是否支持api交易</td>
 </tr>
 <tr>
 <td>conceptPlate</td>
