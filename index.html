@@ -3855,6 +3855,8 @@ body
 <h2 id='fd6ce2a756-2'>下单</h2>
 <p>进行杠杆账户下单操作</p>
 
+<aside class="warning">杠杆账户下单暂时不支持市价单</aside>
+
 <blockquote>
 <p>请求示例</p>
 </blockquote>
@@ -3929,7 +3931,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left">详见枚举定义：订单类型  市价单参见现货市价配置</td>
+<td style="text-align: left">详见枚举定义：订单类型  (暂不支持市价单)</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">[string]</td>
 <td style="text-align: left"></td>
@@ -6880,19 +6882,12 @@ body
 <h3 id='k-2'>K线间隔</h3>
 <ul>
 <li>1m  1分钟</li>
-<li>3m  3分钟</li>
 <li>5m  5分钟</li>
 <li>15m  15分钟</li>
 <li>30m  30分钟</li>
-<li>1h  1小时</li>
-<li>2h  2小时</li>
+<li>60m  1小时</li>
 <li>4h  4小时</li>
-<li>6h  6小时</li>
-<li>8h  8小时</li>
-<li>12h  12小时</li>
 <li>1d  1天</li>
-<li>3d  3天</li>
-<li>1w  1周</li>
 <li>1M  1月</li>
 </ul>
 
