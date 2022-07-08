@@ -1204,14 +1204,35 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 ```json
 { //成功返回：
   [
-    {   "symbol": "BTCUSDT",   "orderId": "1196315350023612316",   "orderListId": -1 },
-    {   "symbol": "BTCUSDT",   "orderId": "1196315350023612318",   "orderListId": -1 }
+    {   
+      "symbol": "BTCUSDT",   
+      "orderId": "1196315350023612316",   
+      "orderListId": -1 
+    },
+    {   
+      "symbol": "BTCUSDT",   
+      "orderId": "1196315350023612318",   
+      "orderListId": -1 
+    }
   ],
   //有失败的返回：
   [
-    { "symbol": "BTCUSDT", "orderId": "1196315350023612316", "newClientOrderId": "hio8279hbdsds", "orderListId": -1 },
-    { "newClientOrderId": "123456","msg": "The minimum transaction volume cannot be less than：0.5USDT", "code": 30002},
-    { "symbol": "BTCUSDT", "orderId": "1196315350023612318", "orderListId": -1 }
+    { 
+      "symbol": "BTCUSDT", 
+      "orderId": "1196315350023612316", 
+      "newClientOrderId": "hio8279hbdsds", 
+      "orderListId": -1 
+    },
+    { 
+      "newClientOrderId": "123456",
+      "msg": "The minimum transaction volume cannot be less than：0.5USDT", 
+      "code": 30002
+    },
+    { 
+      "symbol": "BTCUSDT", 
+      "orderId": "1196315350023612318", 
+      "orderListId": -1 
+    }
   ] 
 }
 ```
@@ -1293,7 +1314,9 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 | recvWindow        | long     | 否       |                        |
 | timestamp         | long     | 是       |                        |
 
-orderId 或 origClientOrderId 必须至少发送一个
+
+<aside class="notice">orderId 或 origClientOrderId 必须至少发送一个.</aside>
+
 
 **返回参数**
 
@@ -1582,7 +1605,9 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 | recvWindow | long     | 否       |                      |
 | timestamp  | long     | 是       |                      |
 
-注意：startTime和endTime需同时使用
+<aside class="notice">startTime和endTime需同时使用.</aside>
+
+
 
 **返回参数**
 
