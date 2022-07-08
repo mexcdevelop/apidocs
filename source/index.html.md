@@ -51,13 +51,27 @@ meta:
   -  咨询关于钱包、短信、2FA等问题
 
 # 更新日志
+## **2022-07-08**
+
+- 新增批量下单接口
+
 ## **2022-07-03**
 
 - 新增现货账号模块查询币种信息接口，该接口可返回币种在所支持的网络中的智能合约地址
 
 ## **2022-06-16**
 
--  新增杠杆账户和交易接口
+- 新增杠杆账户和交易接口
+
+## **2022-05-22**
+
+- 交易规范信息接口优化
+- 下单接口优化，统一返回order id
+
+## **2022-04-25**
+
+- 新增"允许API现货/杠杆交易"返回参数
+- 当前挂单接口优化，支持多交易对查询
 
 ## **2022-03-29**
 
@@ -330,35 +344,38 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 ```json
 {
     "timezone": "CST",
-    "serverTime": 1652841934502,
+    "serverTime": 1657256965785,
     "rateLimits": [],
     "exchangeFilters": [],
-    "symbols": [
-        {
-            "symbol": "BTCUSDT",
+    "symbols": 
+{
+            "symbol": "TOMO3LUSDT",
             "status": "ENABLED",
-            "baseAsset": "BTC",
-            "baseAssetPrecision": 6,
+            "baseAsset": "TOMO3L",
+            "baseAssetPrecision": 2,
             "quoteAsset": "USDT",
-            "quotePrecision": 2,
-            "quoteAssetPrecision": 2,
-            "baseCommissionPrecision": 6,
-            "quoteCommissionPrecision": 2,
+            "quotePrecision": 3,
+            "quoteAssetPrecision": 3,
+            "baseCommissionPrecision": 2,
+            "quoteCommissionPrecision": 3,
             "orderTypes": [
                 "LIMIT",
-                "MARKET",
                 "LIMIT_MAKER"
             ],
-            "icebergAllowed": false,
-            "ocoAllowed": false,
             "quoteOrderQtyMarketAllowed": false,
-            "isSpotTradingAllowed": true,
+            "isSpotTradingAllowed": false,
             "isMarginTradingAllowed": false,
+            "quoteAmountPrecision": "5",
+            "baseSizePrecision": "0.0001",
             "permissions": [
-                "SPOT"
+                "SPOT",
+                "MARGIN"
             ],
+            "filters": [],
+            "maxQuoteAmount": "5000000",
+            "makerCommission": "0.002",
+            "takerCommission": "0.002"
         }
-    ]
 }
 
 ```
@@ -397,12 +414,14 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 | quoteCommissionPrecision | Int | 计价币手续费精度 |
 | orderTypes | Array | 订单类型 |
 | quoteOrderQtyMarketAllowed | Boolean | 是否允许市价委托 |
-| isSpotTradingAllowed | Boolean | 是否允许现货交易 |
-| isMarginTradingAllowed | Boolean | 是否允许杠杆交易 |
+| isSpotTradingAllowed | Boolean | 是否允许api现货交易 |
+| isMarginTradingAllowed | Boolean | 是否允许api杠杆交易 |
 | permissions | Array | 权限 |
 | maxQuoteAmount | String | 最大委托数量 |
 | makerCommission | String | marker手续费 |
 | takerCommission | String | taker手续费 |
+|quoteAmountPrecision|string|最小下单金额|
+|baseSizePrecision|string|最小下单数量|
 
 
 
@@ -696,22 +715,21 @@ GET /api/v3/ticker/24hr?symbol=BTCUSDT
 ```json
 {
     "symbol": "BTCUSDT",
-    "priceChange": "-505.45",
-    "priceChangePercent": "-0.01663754",
-    "prevClosePrice": "30380.09",
-    "lastPrice": "29874.64",
-    "lastQty": "",
-    "bidPrice": "29873.15",
-    "bidQty": "",
-    "askPrice": "29873.18",
-    "askQty": "",
-    "openPrice": "30380.09",
-    "highPrice": "30784.98",
-    "lowPrice": "29455.16",
-    "volume": "13968.018463",
-    "quoteVolume": null,
-    "openTime": 1652849400000,
-    "closeTime": 1652849570299,
+    "priceChange": "1588.47",
+    "priceChangePercent": "0.07791949",
+    "prevClosePrice": "20386.04",
+    "lastPrice": "21974.51",
+    "bidPrice": "21974.48",
+    "bidQty": "0.645732",
+    "askPrice": "21974.51",
+    "askQty": "5.801688",
+    "openPrice": "20386.04",
+    "highPrice": "22508.06",
+    "lowPrice": "20269.12",
+    "volume": "6381.884246",
+    "quoteVolume": "135594952.21",
+    "openTime": 1657258200000,
+    "closeTime": 1657258407860,
     "count": null
 }
 ```
@@ -1124,7 +1142,7 @@ POST /api/v3/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&price=2000
 ```json
 {
     "symbol": "BTCUSDT",
-    "orderId": "1196315350023612316",
+    "orderId": "0a3b6af38f7a4f2e9bea9a5782321ddc",
     "orderListId": -1
 }
 ```
@@ -1173,7 +1191,62 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 | orderId | STRING | 订单类型 |
 | orderListId |          |          |
 
+## 批量下单
+支持单次批量下20单。
 
+> 请求示例
+
+```
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+```
+> 返回示例
+
+```json
+{ //成功返回：
+  [
+    {   "symbol": "BTCUSDT",   "orderId": "1196315350023612316",   "orderListId": -1 },
+    {   "symbol": "BTCUSDT",   "orderId": "1196315350023612318",   "orderListId": -1 }
+  ],
+  //有失败的返回：
+  [
+    { "symbol": "BTCUSDT", "orderId": "1196315350023612316", "newClientOrderId": "hio8279hbdsds", "orderListId": -1 },
+    { "newClientOrderId": "123456","msg": "The minimum transaction volume cannot be less than：0.5USDT", "code": 30002},
+    { "symbol": "BTCUSDT", "orderId": "1196315350023612318", "orderListId": -1 }
+  ] 
+}
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/batchOrders```
+
+**请求参数**
+
+| 名称             | 类型    | 是否必需 | 说明                   |
+| :--------------- | :------ | :------- | :--------------------- |
+| batchOrders      | LIST  | YES      | 订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例) |
+| symbol           | STRING  | YES      | 交易对                 |
+| side             | ENUM    | YES      | 详见枚举定义：订单方向 |
+| type             | ENUM    | YES      | 详见枚举定义：订单类型 |
+| quantity         | DECIMAL | NO       | 委托数量               |
+| quoteOrderQty    | DECIMAL | NO       | 委托总额               |
+| price            | DECIMAL | NO       | 委托价格               |
+| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID |
+| recvWindow       | LONG    | NO       | 赋值不能大于 60000     |
+| timestamp        | LONG    | YES      |                        |
+
+基于订单 `type`不同，强制要求某些参数:
+
+| 类型     | 强制要求的参数                |
+| :------- | :---------------------------- |
+| `LIMIT`  | `quantity`, `price`           |
+| `MARKET` | `quantity` or `quoteOrderQty` |
+
+**返回参数**
+
+| 参数名       | 数据类型 | 说明                |
+| :------------ | :-------- | :------------------- |
+| symbol | STRING | 交易对 |
+| orderId | STRING | 订单类型 |
 
 ## 撤销订单
 
@@ -1238,6 +1311,7 @@ orderId 或 origClientOrderId 必须至少发送一个
 | timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
 | side                | 订单方向         |
+
 ## 撤销单一交易对所有订单
 撤销单一交易对下所有挂单, 包括OCO的挂单。
 > 请求示例
@@ -1386,7 +1460,8 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 | origQuoteOrderQty   | 原始的交易金额    |
 
 ## 当前挂单
-获取指定交易对的所有当前挂单
+获取当前挂单支持查询多交易对，每次最多可以传5个symbol。  
+若批量查5个交易对，最多也只返回1000条挂单
 
 > 请求示例
 
@@ -1428,7 +1503,7 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 
 | 参数名     | 数据类型 | 是否必须 | 说明   |
 | :---------- | :-------- | :-------- | :------ |
-| symbol     | string   | 是       | 交易对 |
+| symbol     | string   | 是       | 交易对,【最多可以传5个symbol, 由","分隔的字符串表示. e.g. "BTCUSDT,MXUSDT,ADAUSDT"】 |
 | recvWindow | long     | 否       |        |
 | timestamp  | long     | 是       |        |
 
@@ -1501,7 +1576,6 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 | 参数名     | 数据类型 | 是否必须 | 说明                 |
 | :---------- | :-------- | :-------- | :-------------------- |
 | symbol     | string   | 是       | 交易对               |
-| orderId    | string   | 否       | 订单id               |
 | startTime  | long     | 否       |                      |
 | endTime    | long     | 否       |                      |
 | limit      | int      | 否       | 默认 500; 最大 1000; |
@@ -1532,6 +1606,7 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 | updateTime          | 最后更新时间      |
 | isWorking           | 是否在orderbook中 |
 | origQuoteOrderQty   | 原始的交易金额    |
+
 ## 账户信息
 获取当前账户信息
 
@@ -1837,7 +1912,8 @@ POST /api/v3/margin/tradeMode
 
 > 请求示例
 
-```POST /api/v3/margin/order
+```
+POST /api/v3/margin/order
 ```
 > 返回示例
 
@@ -1888,7 +1964,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```post /api/v3/margin/loan&resultType=failure
+```
+post /api/v3/margin/loan
 ```
 > 返回示例
 
@@ -1931,7 +2008,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```post /api/v3/margin/repay&resultType=failure
+```
+post /api/v3/margin/repay
 ```
 > 返回示例
 
@@ -1975,7 +2053,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```post /api/v3/1111
+```
+post /api/v3/margin/openOrders
 ```
 > 返回示例
 
@@ -2047,7 +2126,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```delete /api/v3/margin/order&resultType=failure
+```
+delete /api/v3/margin/order&resultType=failure
 ```
 > 返回示例
 
@@ -2109,7 +2189,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/loan
+```
+get /api/v3/margin/loan
 ```
 > 返回示例
 
@@ -2163,7 +2244,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/allOrders
+```
+get /api/v3/margin/allOrders
 ```
 > 返回示例
 
@@ -2218,7 +2300,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/myTrades
+```
+get /api/v3/margin/myTrades
 ```
 > 返回示例
 
@@ -2268,7 +2351,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/openOrders
+```
+get /api/v3/margin/openOrders
 ```
 > 返回示例
 
@@ -2334,7 +2418,7 @@ POST /api/v3/margin/tradeMode
 
 **详细说明**：
 
-如未发送symbol，返回所有 symbols 订单记录。【能支持吗？？？】如果 isIsolated = “TRUE”, symbol 为必填
+如未发送symbol，返回所有 symbols 订单记录。如果 isIsolated = “TRUE”, symbol 为必填
 
 
 
@@ -2342,7 +2426,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/maxTransferable
+```
+get /api/v3/margin/maxTransferable
 ```
 > 返回示例
 
@@ -2353,7 +2438,7 @@ POST /api/v3/margin/tradeMode
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/maxTransferableh```
+- **GET** ```/api/v3/margin/maxTransferable```
 
 **请求参数**
 
@@ -2375,7 +2460,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/priceIndex
+```
+get /api/v3/margin/priceIndex
 ```
 > 返回示例
 
@@ -2410,7 +2496,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/order
+```
+get /api/v3/margin/order
 ```
 > 返回示例
 
@@ -2461,7 +2548,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/isolated/account
+```
+get /api/v3/margin/isolated/account
 ```
 > 返回示例
 
@@ -2607,9 +2695,11 @@ POST /api/v3/margin/tradeMode
 
 ## 查询止盈止损订单
 说明
+
 > 请求示例
 
-```get /api/v3/margin/trigerOrder
+```
+get /api/v3/margin/trigerOrder
 ```
 > 返回示例
 
@@ -2640,7 +2730,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/maxBorrowable
+```
+get /api/v3/margin/maxBorrowable
 ```
 > 返回示例
 
@@ -2674,7 +2765,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/repay
+```
+get /api/v3/margin/repay
 ```
 > 返回示例
 
@@ -2726,7 +2818,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/isolated/pair
+```
+get /api/v3/margin/isolated/pair
 ```
 > 返回示例
 
@@ -2767,7 +2860,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/forceLiquidationRec
+```
+get /api/v3/margin/forceLiquidationRec
 ```
 > 返回示例
 
@@ -2818,7 +2912,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/isolatedMarginData
+```
+get /api/v3/margin/isolatedMarginData
 ```
 > 返回示例
 
@@ -2874,7 +2969,8 @@ POST /api/v3/margin/tradeMode
 说明
 > 请求示例
 
-```get /api/v3/margin/isolatedMarginTier
+```
+get /api/v3/margin/isolatedMarginTier
 ```
 > 返回示例
 
