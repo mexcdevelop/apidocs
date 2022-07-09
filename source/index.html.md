@@ -62,6 +62,8 @@ We recommend that all users build their applications on V2 of the API. Using V2 
 |2020-07-20|/open/api/v2/order/cancel_by_symbol|Add|New API for canceling orders|
 |2021-03-01|/open/api/v2/order/list| change | Parameter states change to the mandatory than optional, and only single statu query supported; Parameter start_time default queries in last 7 days, maximum is 30 days; Fixed the situation of incorrect time about parameter start_time|
 |2021-08-27|/open/api/v2/market/api_default_symbols|Add|The newly acquired platform supports the trading pair endpoint of API transactions; Cancel the display of signature method 2 and retain the signature method of the same futures.|
+|2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|Update| add parameter: client_order_id and trade_id and order_id|
+|2022-04-14|operation sub.personal<br/>operation sub.personal.deals|Update|add parameter: eventTime and isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
 
 
@@ -417,9 +419,7 @@ None
 | ------------ | ------------ | ------------ |
 | code | integer | Status code | 
 | message | string | Misdescription (If there has )） | 
-| <data> | array |  | 
 | symbol  | string  | symbol name |
-| </data> |  |  | 
 
 # Market Data
 
@@ -897,7 +897,9 @@ For each batch request, the parameter client_order_id should be consistent, mean
             "type": "BID",
             "remain_quantity": "300000",
             "remain_amount": "272.1",
-            "create_time": 1574338341797
+            "create_time": 1574338341797,
+            "client_order_id": "",
+            "order_type": "LIMIT_ORDER"
         }
     ]
 }
@@ -1061,16 +1063,17 @@ Response：
     "code": 200,
     "data": [
         {
-            "symbol": "ETH_USDT",
-            "order_id": "a39ea6b7afcf4f5cbba1e515210ff827",
-            "quantity": "54.1",
-            "price": "182.6317377",
-            "amount": "9880.37700957",
-            "fee": "9.88037700957",
-            "trade_type": "BID",
-            "fee_currency": "USDT",
-            "is_taker": true,
-            "create_time": 1572693911000
+          "id": "4ab9700a077d403f8c144c981ff3464b",
+          "symbol": "MX_USDT",
+          "quantity": "5",
+          "price": "1.328",
+          "amount": "6.64",
+          "fee": "0.01328",
+          "trade_type": "ASK",
+          "order_id": "d4991cd4296f4138a5b02b2aea8bde8d",
+          "is_taker": true,
+          "fee_currency": "USDT",
+          "create_time": 1657173950000
         }
     ]
 }
@@ -1092,6 +1095,7 @@ Response：
 | Field | Data type | Description |
 |-----|-----|-----|
 |symbol|string|symbol name|
+|  id | string   | tradeId |
 |order_id|string|order id|
 |trade_type|string|trade type|
 |quantity|string|deal quantity|
@@ -1112,16 +1116,17 @@ Response：
     "code": 200,
     "data": [
         {
-            "symbol": "ETH_USDT",
-            "order_id": "a39ea6b7afcf4f5cbba1e515210ff827",
-            "quantity": "54.1",
-            "price": "182.6317377",
-            "amount": "9880.37700957",
-            "fee": "9.88037700957",
-            "trade_type": "BID",
-            "fee_currency": "USDT",
-            "is_taker": true,
-            "create_time": 1572693911000
+          "id": "4ab9700a077d403f8c144c981ff3464b",
+          "symbol": "MX_USDT",
+          "quantity": "5",
+          "price": "1.328",
+          "amount": "6.64",
+          "fee": "0.01328",
+          "trade_type": "ASK",
+          "order_id": "d4991cd4296f4138a5b02b2aea8bde8d",
+          "is_taker": true,
+          "fee_currency": "USDT",
+          "create_time": 1657173950000
         }
     ]
 }
@@ -1133,13 +1138,14 @@ Request parameters：
 
 | Parameter | Data type | Mandatory | Description | Allowed range |
 |-----|-----|-----|-----|
-|order_id|string|Y||
+|order_id|string|Y|order id|
 
 Response：
 
 | Field | Data type | Description |
 |-----|-----|-----|
-|symbol|string|Symbol name|
+|symbol|string|symbol name|
+|  id  | string   | tradeId |
 |order_id|string|order id|
 |trade_type|string|trade type|
 |quantity|string|deal quantity|
@@ -1960,6 +1966,8 @@ error response payload
 |status|int|order state,1:New order 2:Filled 3:Partially filled 4:Order canceled 5:Order filled partially, and then the rest of the order is canceled|
 |tradeType|int|orderType,1：buy 2：sell|
 |createTime|long|createTime|
+|eventTime|long|order push time|
+|isTaker|int|whether is taker order,0:false 1:true|
 
 
 ## Get account order deal push
@@ -2018,10 +2026,12 @@ deal order push
 
 | Parameter |  Data Type |  Description|
 | :------ | :-------- | :-------- |
+|tradeId|string|tradeId|
+|isTaker|bool|whether is taker order,0:false 1:true|
 |t|long|dealTimestamp|
 |p|decimal|dealPrice|
 |q|decimal|quantity|
 |T|int|dealType 1:buy 2:sell|
 |M|int|isBuySelf 0:false  1:true|
-|id|string|dealOrderId|
+|id|string|orderId|
 
