@@ -3598,6 +3598,14 @@ interval可选参数:  Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day
 
 ## 私有频道
 
+**签名方式：**
+
+api_key和op和req_time拼接，将得到的参数字符串用HMAC SHA256进行加密。api_key和sec_key分别为申请api时的ACCESS KEY 和SECRET KEY。
+
+**签名字符串:**  
+
+`"mx0aBYs33eIilxBW5C1657186536762"`
+
 ### 登录认证
 
 > 示例
