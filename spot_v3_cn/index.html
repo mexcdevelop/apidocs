@@ -344,10 +344,19 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-07-08" class="toc-h2 toc-link" data-title="2022-07-08"><strong>2022-07-08</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-07-03" class="toc-h2 toc-link" data-title="2022-07-03"><strong>2022-07-03</strong></a>
                   </li>
                   <li>
                     <a href="#2022-06-16" class="toc-h2 toc-link" data-title="2022-06-16"><strong>2022-06-16</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-05-22" class="toc-h2 toc-link" data-title="2022-05-22"><strong>2022-05-22</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-04-25" class="toc-h2 toc-link" data-title="2022-04-25"><strong>2022-04-25</strong></a>
                   </li>
                   <li>
                     <a href="#2022-06-21" class="toc-h2 toc-link" data-title="2022-06-21"><strong>2022-06-21</strong></a>
@@ -473,6 +482,9 @@
                   </li>
                   <li>
                     <a href="#fd6ce2a756" class="toc-h2 toc-link" data-title="下单">下单</a>
+                  </li>
+                  <li>
+                    <a href="#de93fae07b" class="toc-h2 toc-link" data-title="批量下单">批量下单</a>
                   </li>
                   <li>
                     <a href="#4e53c0fccd" class="toc-h2 toc-link" data-title="撤销订单">撤销订单</a>
@@ -631,13 +643,27 @@
 <li> 咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-07-03'><strong>2022-07-03</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-07-08'><strong>2022-07-08</strong></h2>
+<ul>
+<li>新增批量下单接口</li>
+</ul>
+<h2 id='2022-07-03'><strong>2022-07-03</strong></h2>
 <ul>
 <li>新增现货账号模块查询币种信息接口，该接口可返回币种在所支持的网络中的智能合约地址</li>
 </ul>
 <h2 id='2022-06-16'><strong>2022-06-16</strong></h2>
 <ul>
-<li> 新增杠杆账户和交易接口</li>
+<li>新增杠杆账户和交易接口</li>
+</ul>
+<h2 id='2022-05-22'><strong>2022-05-22</strong></h2>
+<ul>
+<li>交易规范信息接口优化</li>
+<li>下单接口优化，统一返回order id</li>
+</ul>
+<h2 id='2022-04-25'><strong>2022-04-25</strong></h2>
+<ul>
+<li>新增&quot;允许API现货/杠杆交易&quot;返回参数</li>
+<li>当前挂单接口优化，支持多交易对查询</li>
 </ul>
 <h2 id='2022-06-21'><strong>2022-06-21</strong></h2>
 <ul>
@@ -935,35 +961,38 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CST"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"serverTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1652841934502</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"serverTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1657256965785</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rateLimits"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"exchangeFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="nl">"symbols"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbols"</span><span class="p">:</span><span class="w"> 
+</span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOMO3LUSDT"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENABLED"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"baseAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOMO3L"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"baseAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
             </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"quotePrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"quoteAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"baseCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"quoteCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quotePrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quoteAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"baseCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quoteCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
             </span><span class="nl">"orderTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"LIMIT_MAKER"</span><span class="w">
             </span><span class="p">],</span><span class="w">
-            </span><span class="nl">"icebergAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"ocoAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="nl">"quoteOrderQtyMarketAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"isSpotTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"isSpotTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="nl">"isMarginTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quoteAmountPrecision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"baseSizePrecision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"SPOT"</span><span class="w">
+                </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"MARGIN"</span><span class="w">
             </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nl">"maxQuoteAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -1084,12 +1113,12 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <tr>
 <td style="text-align: left">isSpotTradingAllowed</td>
 <td style="text-align: left">Boolean</td>
-<td style="text-align: left">是否允许现货交易</td>
+<td style="text-align: left">是否允许api现货交易</td>
 </tr>
 <tr>
 <td style="text-align: left">isMarginTradingAllowed</td>
 <td style="text-align: left">Boolean</td>
-<td style="text-align: left">是否允许杠杆交易</td>
+<td style="text-align: left">是否允许api杠杆交易</td>
 </tr>
 <tr>
 <td style="text-align: left">permissions</td>
@@ -1110,6 +1139,16 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td style="text-align: left">takerCommission</td>
 <td style="text-align: left">String</td>
 <td style="text-align: left">taker手续费</td>
+</tr>
+<tr>
+<td style="text-align: left">quoteAmountPrecision</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">最小下单金额</td>
+</tr>
+<tr>
+<td style="text-align: left">baseSizePrecision</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">最小下单数量</td>
 </tr>
 </tbody></table>
 <h2 id='38a975b802'>深度信息</h2>
@@ -1621,22 +1660,21 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"priceChange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-505.45"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.01663754"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30380.09"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29874.64"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29873.15"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29873.18"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"askQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"openPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30380.09"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"highPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30784.98"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lowPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29455.16"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13968.018463"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1652849400000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1652849570299</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceChange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1588.47"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07791949"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20386.04"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21974.51"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21974.48"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.645732"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21974.51"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"askQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.801688"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20386.04"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"highPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22508.06"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lowPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20269.12"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6381.884246"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"135594952.21"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"openTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1657258200000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1657258407860</span><span class="p">,</span><span class="w">
     </span><span class="nl">"count"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2400,7 +2438,7 @@ body
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612316"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a3b6af38f7a4f2e9bea9a5782321ddc"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2530,6 +2568,167 @@ body
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
+<h2 id='de93fae07b'>批量下单</h2>
+<p>支持单次批量下20单。</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> </span><span class="err">//成功返回：</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err"> </span><span class="w"> 
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> 
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612316"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> 
+      </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="err"> </span><span class="w"> 
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> 
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612318"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> 
+      </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="err">//有失败的返回：</span><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> 
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612316"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"newClientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hio8279hbdsds"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> 
+      </span><span class="nl">"newClientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The minimum transaction volume cannot be less than：0.5USDT"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">30002</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> 
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612318"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="err"> </span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>POST</strong> <code>/api/v3/batchOrders</code></li>
+</ul>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">名称</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">是否必需</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">batchOrders</td>
+<td style="text-align: left">LIST</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">side</td>
+<td style="text-align: left">ENUM</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">详见枚举定义：订单方向</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">ENUM</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">详见枚举定义：订单类型</td>
+</tr>
+<tr>
+<td style="text-align: left">quantity</td>
+<td style="text-align: left">DECIMAL</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">委托数量</td>
+</tr>
+<tr>
+<td style="text-align: left">quoteOrderQty</td>
+<td style="text-align: left">DECIMAL</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">委托总额</td>
+</tr>
+<tr>
+<td style="text-align: left">price</td>
+<td style="text-align: left">DECIMAL</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">委托价格</td>
+</tr>
+<tr>
+<td style="text-align: left">newClientOrderId</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">客户自定义的唯一订单ID</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">赋值不能大于 60000</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p>基于订单 <code>type</code>不同，强制要求某些参数:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">强制要求的参数</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>LIMIT</code></td>
+<td style="text-align: left"><code>quantity</code>, <code>price</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>MARKET</code></td>
+<td style="text-align: left"><code>quantity</code> or <code>quoteOrderQty</code></td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">orderId</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">订单类型</td>
+</tr>
+</tbody></table>
 <h2 id='4e53c0fccd'>撤销订单</h2>
 <p>取消有效订单。</p>
 
@@ -2611,7 +2810,7 @@ body
 </tr>
 </tbody></table>
 
-<p>orderId 或 origClientOrderId 必须至少发送一个</p>
+<aside class="notice">orderId 或 origClientOrderId 必须至少发送一个.</aside>
 
 <p><strong>返回参数</strong></p>
 
@@ -2969,7 +3168,8 @@ body
 </tr>
 </tbody></table>
 <h2 id='066ca582c9'>当前挂单</h2>
-<p>获取指定交易对的所有当前挂单</p>
+<p>获取当前挂单支持查询多交易对，每次最多可以传5个symbol。<br>
+若批量查5个交易对，最多也只返回1000条挂单</p>
 
 <blockquote>
 <p>请求示例</p>
@@ -3022,7 +3222,7 @@ body
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">交易对</td>
+<td style="text-align: left">交易对,【最多可以传5个symbol, 由&quot;,&quot;分隔的字符串表示. e.g. &quot;BTCUSDT,MXUSDT,ADAUSDT&quot;】</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
@@ -3176,12 +3376,6 @@ body
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">orderId</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">订单id</td>
-</tr>
-<tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">否</td>
@@ -3213,7 +3407,7 @@ body
 </tr>
 </tbody></table>
 
-<p>注意：startTime和endTime需同时使用</p>
+<aside class="notice">startTime和endTime需同时使用.</aside>
 
 <p><strong>返回参数</strong></p>
 
@@ -3860,10 +4054,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>POST /api/v3/margin/order
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/order
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4020,10 +4212,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>post /api/v3/margin/loan&amp;resultType=failure
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/loan
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4128,10 +4318,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>post /api/v3/margin/repay&amp;resultType=failure
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/repay
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4250,10 +4438,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>post /api/v3/1111
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/openOrders
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4430,10 +4616,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>delete /api/v3/margin/order&amp;resultType=failure
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/order&amp;resultType=failure
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4608,10 +4792,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/loan
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/loan
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4801,10 +4983,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/allOrders
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/allOrders
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -4992,10 +5172,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/myTrades
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/myTrades
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -5159,10 +5337,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/openOrders
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/openOrders
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -5343,17 +5519,15 @@ body
 
 <p><strong>详细说明</strong>：</p>
 
-<p>如未发送symbol，返回所有 symbols 订单记录。【能支持吗？？？】如果 isIsolated = “TRUE”, symbol 为必填</p>
+<p>如未发送symbol，返回所有 symbols 订单记录。如果 isIsolated = “TRUE”, symbol 为必填</p>
 <h2 id='a82525af45'>查询最大可转出额</h2>
 <p>说明</p>
 
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/maxTransferable
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxTransferable
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -5364,7 +5538,7 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/maxTransferableh</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/maxTransferable</code></li>
 </ul>
 
 <p><strong>请求参数</strong></p>
@@ -5431,10 +5605,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/priceIndex
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/priceIndex
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -5517,10 +5689,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/order
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/order
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -5687,10 +5857,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolated/account
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/account
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6031,10 +6199,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/trigerOrder
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/trigerOrder
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6092,10 +6258,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/maxBorrowable
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxBorrowable
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6179,10 +6343,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/repay
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/repay
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6354,10 +6516,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolated/pair
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/pair
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6451,10 +6611,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/forceLiquidationRec
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/forceLiquidationRec
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6617,10 +6775,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolatedMarginData
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginData
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
@@ -6739,10 +6895,8 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolatedMarginTier
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginTier
+</code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
