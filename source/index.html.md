@@ -62,6 +62,8 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 | 2020-07-20 | /open/api/v2/order/cancel_by_symbol                                                       | 新增     | 按交易对撤单                                                                                                                        |
 | 2021-03-01 | /open/api/v2/order/list                                                                   | 修改     | 入参states由非必填改为必填，且只能单状态查询；入参start_time修改为默认查询最近7天，最多查询30天；修复入参start_time时间不准确的情况 |
 | 2021-08-27 | /open/api/v2/market/api_default_symbols                                                   | 新增     | 新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式                                                       |
+|2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|更新| 接口/推送增加client_order_id和trade_id和order_id|
+|2022-04-14|operation sub.personal<br/>operation sub.personal.deals|更新|订单推送和rest增加eventTime和isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
 
 # 接入说明
@@ -439,9 +441,7 @@ None
 | ------- | ------- | ---------------- |
 | code    | integer | 状态码           |
 | message | string  | 错误描述（如有） |
-| <data>  | array   |                  |
 | symbol  | string  | 交易对           |
-| </data> |         |                  |
 
 # 行情数据
 
@@ -1028,7 +1028,9 @@ None
             "type": "BID",
             "remain_quantity": "300000",
             "remain_amount": "272.1",
-            "create_time": 1574338341797
+            "create_time": 1574338341797,
+            "client_order_id": "",
+            "order_type": "LIMIT_ORDER"
         }
     ]
 }
@@ -1194,16 +1196,17 @@ None
     "code": 200,
     "data": [
         {
-            "symbol": "ETH_USDT",
-            "order_id": "a39ea6b7afcf4f5cbba1e515210ff827",
-            "quantity": "54.1",
-            "price": "182.6317377",
-            "amount": "9880.37700957",
-            "fee": "9.88037700957",
-            "trade_type": "BID",
-            "fee_currency": "USDT",
-            "is_taker": true,
-            "create_time": 1572693911000
+          "id": "4ab9700a077d403f8c144c981ff3464b",
+          "symbol": "MX_USDT",
+          "quantity": "5",
+          "price": "1.328",
+          "amount": "6.64",
+          "fee": "0.01328",
+          "trade_type": "ASK",
+          "order_id": "d4991cd4296f4138a5b02b2aea8bde8d",
+          "is_taker": true,
+          "fee_currency": "USDT",
+          "create_time": 1657173950000
         }
     ]
 }
@@ -1225,6 +1228,7 @@ None
 | 参数名       | 数据类型 | 说明                      |
 | ------------ | -------- | ------------------------- |
 | symbol       | string   | 交易对                    |
+|    id        | string   | 成交id                    |
 | order_id     | string   | 订单id                    |
 | trade_type   | string   | 交易类型                  |
 | quantity     | string   | 成交数量                  |
@@ -1245,16 +1249,17 @@ None
     "code": 200,
     "data": [
         {
-            "symbol": "ETH_USDT",
-            "order_id": "a39ea6b7afcf4f5cbba1e515210ff827",
-            "quantity": "54.1",
-            "price": "182.6317377",
-            "amount": "9880.37700957",
-            "fee": "9.88037700957",
-            "trade_type": "BID",
-            "fee_currency": "USDT",
-            "is_taker": true,
-            "create_time": 1572693911000
+          "id": "4ab9700a077d403f8c144c981ff3464b",
+          "symbol": "MX_USDT",
+          "quantity": "5",
+          "price": "1.328",
+          "amount": "6.64",
+          "fee": "0.01328",
+          "trade_type": "ASK",
+          "order_id": "d4991cd4296f4138a5b02b2aea8bde8d",
+          "is_taker": true,
+          "fee_currency": "USDT",
+          "create_time": 1657173950000
         }
     ]
 }
@@ -1266,13 +1271,14 @@ None
 
 | 参数名   | 数据类型 | 是否必须 | 说明 |
 | -------- | -------- | -------- | ---- |
-| order_id | string   | 是       |      |
+| order_id | string   | 是       |  订单id    |
 
 响应：
 
 | 参数名       | 数据类型 | 说明                      |
 | ------------ | -------- | ------------------------- |
 | symbol       | string   | 交易对                    |
+|    id        | string   | 成交id                    |
 | order_id     | string   | 订单id                    |
 | trade_type   | string   | 交易类型                  |
 | quantity     | string   | 成交数量                  |
@@ -1716,9 +1722,20 @@ None
 
 ## 数据交互命令详解
 
+> 请求示例
+
+```
+ping  //字符串格式
+```
+> 返回示例
+
+```
+pong  //字符串格式
+```
+
 订阅/取消订阅数据命令列表（除个人相关命令列表之外，其余都不需要做ws认证  
 1分钟以内未收到客户端ping，将断开该客户端连接，建议10~20秒发送一次ping  
-发送ping消息及服务端返回见右侧
+发送的ping为字符串格式
 
 ## 公共接口
 
@@ -2095,6 +2112,8 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 |status|int|订单状态,1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单|
 |tradeType|int|订单类型,1：买单 2：卖单|
 |createTime|long|订单创建时间戳|
+|eventTime|long|订单推送时间戳|
+|isTaker|int|是否为taker单,0:否 1:是|
 
 
 ## 获取订单成交推送
@@ -2153,10 +2172,12 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 
 | 参数名 |  数据类型 |  说明|
 | :------ | :-------- | :-------- |
+|tradeId|string|成交id|
+|isTaker|bool|是否为taker单,0:否 1:是|
 |t|long|成交时间戳|
 |p|decimal|交易价格|
 |q|decimal|成交数量|
 |T|int|成交类型 1:买 2:卖|
 |M|int|自成交标记 0:否  1:是|
-|id|string|成交订单id|
+|id|string|订单id|
 
