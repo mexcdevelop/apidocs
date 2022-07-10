@@ -341,10 +341,19 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-07-08" class="toc-h2 toc-link" data-title="2022-07-08"><strong>2022-07-08</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-07-03" class="toc-h2 toc-link" data-title="2022-07-03"><strong>2022-07-03</strong></a>
                   </li>
                   <li>
                     <a href="#2022-06-16" class="toc-h2 toc-link" data-title="2022-06-16"><strong>2022-06-16</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-05-22" class="toc-h2 toc-link" data-title="2022-05-22"><strong>2022-05-22</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-04-25" class="toc-h2 toc-link" data-title="2022-04-25"><strong>2022-04-25</strong></a>
                   </li>
                   <li>
                     <a href="#2022-03-29" class="toc-h2 toc-link" data-title="2022-03-29"><strong>2022-03-29</strong></a>
@@ -366,6 +375,9 @@
                   </li>
                   <li>
                     <a href="#2022-02-19" class="toc-h2 toc-link" data-title="2022-02-19"><strong>2022-02-19</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-02-11" class="toc-h2 toc-link" data-title="2022-02-11"><strong>2022-02-11</strong></a>
                   </li>
               </ul>
           </li>
@@ -458,6 +470,9 @@
                   </li>
                   <li>
                     <a href="#new-order" class="toc-h2 toc-link" data-title="New Order">New Order</a>
+                  </li>
+                  <li>
+                    <a href="#batch-orders" class="toc-h2 toc-link" data-title="Batch Orders">Batch Orders</a>
                   </li>
                   <li>
                     <a href="#cancel-orde" class="toc-h2 toc-link" data-title="Cancel Orde">Cancel Orde</a>
@@ -624,13 +639,27 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-07-03'><strong>2022-07-03</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-07-08'><strong>2022-07-08</strong></h2>
+<ul>
+<li>Add batchOrders Endpoints</li>
+</ul>
+<h2 id='2022-07-03'><strong>2022-07-03</strong></h2>
 <ul>
 <li>Add Query the currency info Endpoints</li>
 </ul>
 <h2 id='2022-06-16'><strong>2022-06-16</strong></h2>
 <ul>
 <li>Add Margin Account and Trading Endpoints</li>
+</ul>
+<h2 id='2022-05-22'><strong>2022-05-22</strong></h2>
+<ul>
+<li>optimize exchangeInfo Endpoints</li>
+<li>optimize order Endpoints,add parameter: order id</li>
+</ul>
+<h2 id='2022-04-25'><strong>2022-04-25</strong></h2>
+<ul>
+<li>optimize exchangeInfo Endpoints,add parameters: isSpotTradingAllowed and isMarginTradingAllowed</li>
+<li>optimize openOrders Endpoints</li>
 </ul>
 <h2 id='2022-03-29'><strong>2022-03-29</strong></h2>
 <ul>
@@ -659,8 +688,10 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 </ul>
 <h2 id='2022-02-19'><strong>2022-02-19</strong></h2>
 <ul>
-<li>Add ETF 
-## <strong>2022-02-11</strong></li>
+<li>Add ETF </li>
+</ul>
+<h2 id='2022-02-11'><strong>2022-02-11</strong></h2>
+<ul>
 <li>New version api</li>
 </ul>
 <h1 id='general-info'>General Info</h1><h2 id='base-endpoint'>Base endpoint</h2>
@@ -889,29 +920,32 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"serverTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1642403250139</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"rateLimits"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"exchangeFilters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"symbols"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABCDEFGSSSUSDT"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DISABLED"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABCDEFGSSS"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"baseAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"quotePrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"quoteAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"baseCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"quoteCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LIMIT_MAKER"</span><span class="p">],</span><span class="w">
-      </span><span class="nl">"icebergAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"ocoAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"quoteOrderQtyMarketAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"isSpotTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"isMarginTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SPOT"</span><span class="p">],</span><span class="w">
-      </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-  </span><span class="p">}]</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOMO3LUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ENABLED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOMO3L"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"baseAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quotePrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteAssetPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"baseCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteCommissionPrecision"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"LIMIT_MAKER"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"quoteOrderQtyMarketAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isSpotTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isMarginTradingAllowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quoteAmountPrecision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"baseSizePrecision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"MARGIN"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"maxQuoteAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -1452,7 +1486,6 @@ Klines are uniquely identified by their open time.</p>
     </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00400048"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46263.71"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.38"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.41"</span><span class="p">,</span><span class="w">
@@ -1474,7 +1507,6 @@ Klines are uniquely identified by their open time.</p>
     </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00400048"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46263.71"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.38"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.41"</span><span class="p">,</span><span class="w">
@@ -1494,7 +1526,6 @@ Klines are uniquely identified by their open time.</p>
     </span><span class="nl">"priceChangePercent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00400048"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"prevClosePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46079.37"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"lastPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46263.71"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lastQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bidPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.38"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bidQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"askPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46260.41"</span><span class="p">,</span><span class="w">
@@ -2067,7 +2098,7 @@ Klines are uniquely identified by their open time.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612316"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a3b6af38f7a4f2e9bea9a5782321ddc"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2177,6 +2208,167 @@ Klines are uniquely identified by their open time.</p>
 <li>On the <code>SELL</code> side, the order will sell the <code>quantity</code> of  BTC.</li>
 </ul></li>
 </ul>
+<h2 id='batch-orders'>Batch Orders</h2>
+<p>Supports 20 orders in a batch.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="err">//success</span><span class="w"> </span><span class="err">response：</span><span class="w">
+   </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">   
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">   
+       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612316"</span><span class="p">,</span><span class="w">   
+       </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">   
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">   
+       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612318"</span><span class="p">,</span><span class="w">   
+       </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="err">//error</span><span class="w"> </span><span class="err">response：</span><span class="w">
+   </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w"> 
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> 
+       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612316"</span><span class="p">,</span><span class="w"> 
+       </span><span class="nl">"newClientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hio8279hbdsds"</span><span class="p">,</span><span class="w"> 
+       </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w"> 
+       </span><span class="nl">"newClientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The minimum transaction volume cannot be less than：0.5USDT"</span><span class="p">,</span><span class="w"> 
+       </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">30002</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w"> 
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> 
+       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1196315350023612318"</span><span class="p">,</span><span class="w"> 
+       </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w"> 
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w"> 
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/batchOrders</code></li>
+</ul>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">batchOrders</td>
+<td style="text-align: left">LIST</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">list of batchOrders,supports max 20 orders</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">side</td>
+<td style="text-align: left">ENUM</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">order side</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">ENUM</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">order type</td>
+</tr>
+<tr>
+<td style="text-align: left">quantity</td>
+<td style="text-align: left">DECIMAL</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">quoteOrderQty</td>
+<td style="text-align: left">DECIMAL</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">quoteOrderQty</td>
+</tr>
+<tr>
+<td style="text-align: left">price</td>
+<td style="text-align: left">DECIMAL</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">order price</td>
+</tr>
+<tr>
+<td style="text-align: left">newClientOrderId</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">ClientOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">less than 60000</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">LONG</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">order time</td>
+</tr>
+</tbody></table>
+
+<p>base on different<code>type</code>,some params are mandatory:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">type</th>
+<th style="text-align: left">Mandatory   params</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>LIMIT</code></td>
+<td style="text-align: left"><code>quantity</code>, <code>price</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>MARKET</code></td>
+<td style="text-align: left"><code>quantity</code> or <code>quoteOrderQty</code></td>
+</tr>
+</tbody></table>
+
+<p>Response</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">orderId</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">orderId</td>
+</tr>
+</tbody></table>
 <h2 id='cancel-orde'>Cancel Orde</h2>
 <blockquote>
 <p>Response</p>
@@ -2366,7 +2558,7 @@ Klines are uniquely identified by their open time.</p>
 <td>symbol</td>
 <td>string</td>
 <td>YES</td>
-<td></td>
+<td>maximum input 5 symbols,separated by &quot;,&quot;. e.g. &quot;BTCUSDT,MXUSDT,ADAUSDT&quot;</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -2696,12 +2888,6 @@ Klines are uniquely identified by their open time.</p>
 <td>string</td>
 <td>YES</td>
 <td>Symbol</td>
-</tr>
-<tr>
-<td>orderId</td>
-<td>string</td>
-<td>NO</td>
-<td>Order id</td>
 </tr>
 <tr>
 <td>startTime</td>
@@ -3330,10 +3516,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>POST /api/v3/margin/order
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/order
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -3488,10 +3672,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>post /api/v3/margin/loan&amp;resultType=failure
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/loan
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -3596,10 +3778,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>post /api/v3/margin/repay&amp;resultType=failure
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/repay
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -3716,10 +3896,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>delete /api/v3/1111
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/openOrders
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -3896,10 +4074,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>delete /api/v3/margin/order&amp;resultType=failure
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/order
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4074,10 +4250,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/loan
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/loan
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4267,10 +4441,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/allOrders
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/allOrders
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4458,10 +4630,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/myTrades
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/myTrades
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4625,10 +4795,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/openOrders
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/openOrders
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4810,10 +4978,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/maxTransferable
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxTransferable
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4824,7 +4990,7 @@ Klines are uniquely identified by their open time.</p>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/maxTransferableh</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/maxTransferable</code></li>
 </ul>
 
 <p><strong>Request Parameter</strong></p>
@@ -4889,10 +5055,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/priceIndex
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/priceIndex
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -4973,10 +5137,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/order
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/order
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -5141,10 +5303,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolated/account
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/account
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -5217,8 +5377,8 @@ Klines are uniquely identified by their open time.</p>
           </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
           </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="w">
-        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w"> 
         </span><span class="nl">"tradeMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
         </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
         </span><span class="nl">"riskRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
@@ -5478,10 +5638,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/trigerOrder
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/trigerOrder
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -5537,10 +5695,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/maxBorrowable
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxBorrowable
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -5624,10 +5780,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/repay
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/repay
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -5797,10 +5951,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolated/pair
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/pair
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -5892,10 +6044,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/forceLiquidationRec
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/forceLiquidationRec
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -6056,10 +6206,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolatedMarginData
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginData
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -6176,10 +6324,8 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-
-<p><code>get /api/v3/margin/isolatedMarginTier
-</code></p>
-
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginTier
+</code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
@@ -6319,19 +6465,12 @@ Klines are uniquely identified by their open time.</p>
 <h3 id='kline-interval'>Kline Interval</h3>
 <ul>
 <li>1m  1 minute</li>
-<li>3m  3 minute</li>
 <li>5m  5 minute</li>
 <li>15m  15 minute</li>
 <li>30m  30 minute</li>
-<li>1h  1 hour</li>
-<li>2h  2 hour</li>
+<li>60m  60 minute</li>
 <li>4h  4 hour</li>
-<li>6h  6 hour</li>
-<li>8h  8 hour</li>
-<li>12h  12 hour</li>
 <li>1d  1 day</li>
-<li>3d  3 day</li>
-<li>1w  1 week</li>
 <li>1M  1 month</li>
 </ul>
 
