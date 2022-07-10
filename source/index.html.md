@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-07-08**
+
+ - Add batchOrders Endpoints
+
 ## **2022-07-03**
 
 - Add Query the currency info Endpoints
@@ -61,6 +65,16 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 ## **2022-06-16**
 
 - Add Margin Account and Trading Endpoints
+
+## **2022-05-22**
+
+- optimize exchangeInfo Endpoints
+- optimize order Endpoints,add parameter: order id
+
+## **2022-04-25**
+
+- optimize exchangeInfo Endpoints,add parameters: isSpotTradingAllowed and isMarginTradingAllowed
+- optimize openOrders Endpoints
 
 ## **2022-03-29**
 
@@ -90,7 +104,9 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 ## **2022-02-19**
 
 - Add ETF 
+
 ## **2022-02-11**
+
 - New version api
 
 # General Info
@@ -297,29 +313,32 @@ NONE
 
 ```json
 {
-  "timezone": "UTC",
-  "serverTime": 1642403250139,
-  "rateLimits": [],
-  "exchangeFilters": [],
-  "symbols": [{
-      "symbol": "ABCDEFGSSSUSDT",
-      "status": "DISABLED",
-      "baseAsset": "ABCDEFGSSS",
-      "baseAssetPrecision": 1,
-      "quoteAsset": "USDT",
-      "quotePrecision": 1,
-      "quoteAssetPrecision": 1,
-      "baseCommissionPrecision": 1,
-      "quoteCommissionPrecision": 1,
-      "orderTypes": ["LIMIT", "MARKET", "LIMIT_MAKER"],
-      "icebergAllowed": false,
-      "ocoAllowed": false,
-      "quoteOrderQtyMarketAllowed": false,
-      "isSpotTradingAllowed": true,
-      "isMarginTradingAllowed": false,
-      "permissions": ["SPOT"],
-      "filters": []
-  }]
+    "symbol": "TOMO3LUSDT",
+    "status": "ENABLED",
+    "baseAsset": "TOMO3L",
+    "baseAssetPrecision": 2,
+    "quoteAsset": "USDT",
+    "quotePrecision": 3,
+    "quoteAssetPrecision": 3,
+    "baseCommissionPrecision": 2,
+    "quoteCommissionPrecision": 3,
+    "orderTypes": [
+        "LIMIT",
+        "LIMIT_MAKER"
+    ],
+    "quoteOrderQtyMarketAllowed": false,
+    "isSpotTradingAllowed": false,
+    "isMarginTradingAllowed": false,
+    "quoteAmountPrecision": "5",
+    "baseSizePrecision": "0.0001",
+    "permissions": [
+        "SPOT",
+        "MARGIN"
+    ],
+    "filters": [],
+    "maxQuoteAmount": "5000000",
+    "makerCommission": "0.002",
+    "takerCommission": "0.002"
 }
 
 ```
@@ -587,7 +606,6 @@ Response:
     "priceChangePercent": "0.00400048",
     "prevClosePrice": "46079.37",
     "lastPrice": "46263.71",
-    "lastQty": "",
     "bidPrice": "46260.38",
     "bidQty": "",
     "askPrice": "46260.41",
@@ -609,7 +627,6 @@ or
     "priceChangePercent": "0.00400048",
     "prevClosePrice": "46079.37",
     "lastPrice": "46263.71",
-    "lastQty": "",
     "bidPrice": "46260.38",
     "bidQty": "",
     "askPrice": "46260.41",
@@ -629,7 +646,6 @@ or
     "priceChangePercent": "0.00400048",
     "prevClosePrice": "46079.37",
     "lastPrice": "46263.71",
-    "lastQty": "",
     "bidPrice": "46260.38",
     "bidQty": "",
     "askPrice": "46260.41",
@@ -967,7 +983,7 @@ equaled POST /api/v3/order
 ```json
 {
     "symbol": "BTCUSDT",
-    "orderId": "1196315350023612316",
+    "orderId": "0a3b6af38f7a4f2e9bea9a5782321ddc",
     "orderListId": -1
 }
 ```
@@ -1005,6 +1021,87 @@ MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required
   - Using BTCUSDT as an example:
     - On the `BUY` side, the order will buy as many BTC as `quoteOrderQty` USDT can.
     - On the `SELL` side, the order will sell the `quantity` of  BTC.
+
+## Batch Orders
+
+Supports 20 orders in a batch.
+
+> Request
+
+```
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+```
+
+> Response
+
+```json
+{
+  { //success response：
+   [
+     {   
+       "symbol": "BTCUSDT",   
+       "orderId": "1196315350023612316",   
+       "orderListId": -1 
+     },
+     {   
+       "symbol": "BTCUSDT",   
+       "orderId": "1196315350023612318",   
+       "orderListId": -1 
+     }
+   ],
+   //error response：
+   [
+     { 
+       "symbol": "BTCUSDT", 
+       "orderId": "1196315350023612316", 
+       "newClientOrderId": "hio8279hbdsds", 
+       "orderListId": -1 
+     },
+     { 
+       "newClientOrderId": "123456",
+       "msg": "The minimum transaction volume cannot be less than：0.5USDT", 
+       "code": 30002
+     },
+     { 
+       "symbol": "BTCUSDT", 
+       "orderId": "1196315350023612318", 
+       "orderListId": -1 
+     }
+   ] 
+ }
+}
+```
+
+- **POST** ```/api/v3/batchOrders```
+
+Parameters:
+
+| name             | type    | Mandatory | Description           |
+| :--------------- | :------ | :------- | :--------------------- |
+| batchOrders      | LIST  | YES      |list of batchOrders,supports max 20 orders|
+| symbol           | STRING  | YES      |symbol                |
+| side             | ENUM    | YES      | order side |
+| type             | ENUM    | YES      | order type |
+| quantity         | DECIMAL | NO       | quantity  |
+| quoteOrderQty    | DECIMAL | NO       | quoteOrderQty   |
+| price            | DECIMAL | NO       | order price  |
+| newClientOrderId | STRING  | NO       | ClientOrderId |
+| recvWindow       | LONG    | NO       | less than 60000     |
+| timestamp        | LONG    | YES      |  order time  |
+
+base on different`type`,some params are mandatory:
+
+| type     | Mandatory   params      |
+| :------- | :---------------------------- |
+| `LIMIT`  | `quantity`, `price`           |
+| `MARKET` | `quantity` or `quoteOrderQty` |
+
+Response
+
+| name       | type | Description       |
+| :------------ | :-------- | :------------------- |
+| symbol | STRING | symbol |
+| orderId | STRING | orderId |
 
 ## Cancel Orde
 
@@ -1060,6 +1157,7 @@ Response:
 | timeInForce         |                            |
 | type                | Order type                 |
 | side                | Order side                 |
+
 ## Cancel all Open Orders on a Symbol 
 
 > Response
@@ -1107,7 +1205,7 @@ Parameters:
 
 | name       | Type   | Mandatory | Description |
 | ---------- | ------ | --------- | ----------- |
-| symbol     | string | YES       |             |
+| symbol     | string | YES       | maximum input 5 symbols,separated by ",". e.g. "BTCUSDT,MXUSDT,ADAUSDT"|
 | recvWindow | long   | NO        |             |
 | timestamp  | long   | YES       |             |
 
@@ -1273,7 +1371,6 @@ Parameters:
 | name       | Type   | Mandatory | Description             |
 | ---------- | ------ | --------- | ----------------------- |
 | symbol     | string | YES       | Symbol                  |
-| orderId    | string | NO        | Order id                |
 | startTime  | long   | NO        |                         |
 | endTime    | long   | NO        |                         |
 | limit      | int    | NO        | Default  500; max 1000; |
@@ -1302,6 +1399,7 @@ Response:
 | updateTime          | Last update time           |
 | isWorking           | is orderbook               |
 | origQuoteOrderQty   |                            |
+
 ## Account Information
 
 > Response
@@ -1581,7 +1679,8 @@ POST /api/v3/margin/tradeMode
 
 > request
 
-```POST /api/v3/margin/order
+```
+POST /api/v3/margin/order
 ```
 > response
 
@@ -1632,7 +1731,8 @@ POST /api/v3/margin/tradeMode
 
 > request
 
-```post /api/v3/margin/loan&resultType=failure
+```
+post /api/v3/margin/loan
 ```
 > response
 
@@ -1673,9 +1773,11 @@ If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
 
 ## Repayment
 Description
+
 > request
 
-```post /api/v3/margin/repay&resultType=failure
+```
+post /api/v3/margin/repay
 ```
 > response
 
@@ -1719,7 +1821,8 @@ If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
 
 > request
 
-```delete /api/v3/1111
+```
+delete /api/v3/margin/openOrders
 ```
 > response
 
@@ -1791,7 +1894,8 @@ If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
 Description
 > request
 
-```delete /api/v3/margin/order&resultType=failure
+```
+delete /api/v3/margin/order
 ```
 > response
 
@@ -1851,9 +1955,11 @@ must send any one of orderId or origClientOrderId .
 
 ## Query Loan List
 Description
+
 > request
 
-```get /api/v3/margin/loan
+```
+get /api/v3/margin/loan
 ```
 > response
 
@@ -1907,7 +2013,8 @@ TranId or startTime must be sent, tranId takes precedence. Responses are returne
 Description
 > request
 
-```get /api/v3/margin/allOrders
+```
+get /api/v3/margin/allOrders
 ```
 > response
 
@@ -1960,9 +2067,11 @@ If orderId is set, get the order &gt;= orderId, NO returns the recent order hist
 
 ## Account Trade List
 Description
+
 > request
 
-```get /api/v3/margin/myTrades
+```
+get /api/v3/margin/myTrades
 ```
 > response
 
@@ -2012,7 +2121,8 @@ If fromId is set, get the order ID &gt; = fromId, NO Returns the recent order hi
 Description
 > request
 
-```get /api/v3/margin/openOrders
+```
+get /api/v3/margin/openOrders
 ```
 > response
 
@@ -2083,7 +2193,8 @@ Description
 
 > request
 
-```get /api/v3/margin/maxTransferable
+```
+get /api/v3/margin/maxTransferable
 ```
 > response
 
@@ -2094,7 +2205,7 @@ Description
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/maxTransferableh```
+- **GET** ```/api/v3/margin/maxTransferable```
 
 **Request Parameter**
 
@@ -2116,7 +2227,8 @@ Description
 
 > request
 
-```get /api/v3/margin/priceIndex
+```
+get /api/v3/margin/priceIndex
 ```
 > response
 
@@ -2151,7 +2263,8 @@ Description
 
 > request
 
-```get /api/v3/margin/order
+```
+get /api/v3/margin/order
 ```
 > response
 
@@ -2202,7 +2315,8 @@ You must send either orderId or origClientOrderId. Some historical orders of cum
 
 > request
 
-```get /api/v3/margin/isolated/account
+```
+get /api/v3/margin/isolated/account
 ```
 > response
 
@@ -2276,8 +2390,8 @@ response with symbol:
           "repayEnabled": true,
           "totalAsset": "0.00000000"
         },
-        "symbol": "BTCUSDT"
-        "enabled": true, 
+        "symbol": "BTCUSDT",
+        "enabled":true, 
         "tradeMode": 0, 
         "marginLevel": "0.00000000", 
         "riskRate": "0.00000000",
@@ -2346,7 +2460,8 @@ response with symbol:
 
 > request
 
-```get /api/v3/margin/trigerOrder
+```
+get /api/v3/margin/trigerOrder
 ```
 > response
 
@@ -2377,7 +2492,8 @@ response with symbol:
 
 > request
 
-```get /api/v3/margin/maxBorrowable
+```
+get /api/v3/margin/maxBorrowable
 ```
 > response
 
@@ -2409,9 +2525,11 @@ response with symbol:
 
 ## Repay
 Description
+
 > request
 
-```get /api/v3/margin/repay
+```
+get /api/v3/margin/repay
 ```
 > response
 
@@ -2463,7 +2581,8 @@ TranId or startTime must be sent, tranId takes precedence. Responses are returne
 
 > request
 
-```get /api/v3/margin/isolated/pair
+```
+get /api/v3/margin/isolated/pair
 ```
 > response
 
@@ -2504,7 +2623,8 @@ TranId or startTime must be sent, tranId takes precedence. Responses are returne
 
 > request
 
-```get /api/v3/margin/forceLiquidationRec
+```
+get /api/v3/margin/forceLiquidationRec
 ```
 > response
 
@@ -2554,7 +2674,8 @@ Responses are returned in descending order.
 
 > request
 
-```get /api/v3/margin/isolatedMarginData
+```
+get /api/v3/margin/isolatedMarginData
 ```
 > response
 
@@ -2610,7 +2731,8 @@ Responses are returned in descending order.
 
 > request
 
-```get /api/v3/margin/isolatedMarginTier
+```
+get /api/v3/margin/isolatedMarginTier
 ```
 > response
 
@@ -2680,17 +2802,11 @@ Responses are returned in descending order.
 ### Kline Interval
 
 - 1m  1 minute
-- 3m  3 minute
 - 5m  5 minute
 - 15m  15 minute
 - 30m  30 minute
-- 1h  1 hour
-- 2h  2 hour
+- 60m  60 minute
 - 4h  4 hour
-- 6h  6 hour
-- 8h  8 hour
-- 12h  12 hour
 - 1d  1 day
-- 3d  3 day
-- 1w  1 week
 - 1M  1 month
+
