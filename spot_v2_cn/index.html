@@ -612,6 +612,18 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 <td>新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式</td>
 </tr>
 <tr>
+<td>2022-03-17</td>
+<td>/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail</td>
+<td>更新</td>
+<td>接口/推送增加client_order_id和trade_id和order_id</td>
+</tr>
+<tr>
+<td>2022-04-14</td>
+<td>operation sub.personal<br/>operation sub.personal.deals</td>
+<td>更新</td>
+<td>订单推送和rest增加eventTime和isTaker</td>
+</tr>
+<tr>
 <td>2022-06-16</td>
 <td>wss://wbs.mexc.com/raw/ws</td>
 <td>更新</td>
@@ -1189,19 +1201,9 @@ Secret key仅在申请时展示，请做好记录留存
 <td>错误描述（如有）</td>
 </tr>
 <tr>
-<td><data></td>
-<td>array</td>
-<td></td>
-</tr>
-<tr>
 <td>symbol</td>
 <td>string</td>
 <td>交易对</td>
-</tr>
-<tr>
-<td></data></td>
-<td></td>
-<td></td>
 </tr>
 </tbody></table>
 <h1 id='d9d514d202'>行情数据</h1><h2 id='ticker'>Ticker行情</h2>
@@ -2228,7 +2230,9 @@ Secret key仅在申请时展示，请做好记录留存
             </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"remain_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300000"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"remain_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"272.1"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574338341797</span><span class="w">
+            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574338341797</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"client_order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT_ORDER"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2610,16 +2614,17 @@ Secret key仅在申请时展示，请做好记录留存
     </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39ea6b7afcf4f5cbba1e515210ff827"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54.1"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.6317377"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9880.37700957"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.88037700957"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"fee_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1572693911000</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4ab9700a077d403f8c144c981ff3464b"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.328"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6.64"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01328"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d4991cd4296f4138a5b02b2aea8bde8d"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fee_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1657173950000</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2677,6 +2682,11 @@ Secret key仅在申请时展示，请做好记录留存
 <td>交易对</td>
 </tr>
 <tr>
+<td>id</td>
+<td>string</td>
+<td>成交id</td>
+</tr>
+<tr>
 <td>order_id</td>
 <td>string</td>
 <td>订单id</td>
@@ -2730,16 +2740,17 @@ Secret key仅在申请时展示，请做好记录留存
     </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a39ea6b7afcf4f5cbba1e515210ff827"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54.1"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.6317377"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9880.37700957"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9.88037700957"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"fee_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1572693911000</span><span class="w">
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4ab9700a077d403f8c144c981ff3464b"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX_USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.328"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6.64"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01328"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d4991cd4296f4138a5b02b2aea8bde8d"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"is_taker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fee_currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"create_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1657173950000</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2762,7 +2773,7 @@ Secret key仅在申请时展示，请做好记录留存
 <td>order_id</td>
 <td>string</td>
 <td>是</td>
-<td></td>
+<td>订单id</td>
 </tr>
 </tbody></table>
 
@@ -2779,6 +2790,11 @@ Secret key仅在申请时展示，请做好记录留存
 <td>symbol</td>
 <td>string</td>
 <td>交易对</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>成交id</td>
 </tr>
 <tr>
 <td>order_id</td>
@@ -3958,9 +3974,19 @@ Secret key仅在申请时展示，请做好记录留存
 <h1 id='websocket-api'>WebSocket API</h1><h2 id='ws'>原生ws连接地址</h2>
 <p>原生WSS接口 Base url: wss://wbs.mexc.com/raw/ws</p>
 <h2 id='c9b1eae804'>数据交互命令详解</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>ping  //字符串格式
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>pong  //字符串格式
+</code></pre></div>
 <p>订阅/取消订阅数据命令列表（除个人相关命令列表之外，其余都不需要做ws认证<br>
 1分钟以内未收到客户端ping，将断开该客户端连接，建议10~20秒发送一次ping<br>
-发送ping消息及服务端返回见右侧</p>
+发送的ping为字符串格式</p>
 <h2 id='495cebdeec'>公共接口</h2><h2 id='k-2'>订阅K线</h2>
 <p>获取增量的k线，interval可选参数: Min1、Min5、Min15、Min30、Min60、Hour4、Hour8、Day1、Week1、Month1</p>
 
@@ -4592,6 +4618,16 @@ Secret key仅在申请时展示，请做好记录留存
 <td style="text-align: left">long</td>
 <td style="text-align: left">订单创建时间戳</td>
 </tr>
+<tr>
+<td style="text-align: left">eventTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">订单推送时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">isTaker</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">是否为taker单,0:否 1:是</td>
+</tr>
 </tbody></table>
 <h2 id='a34c13a4f2'>获取订单成交推送</h2>
 <p>获取本账户下订单成交的逐笔推送信息</p>
@@ -4674,6 +4710,16 @@ Secret key仅在申请时展示，请做好记录留存
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: left">tradeId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">成交id</td>
+</tr>
+<tr>
+<td style="text-align: left">isTaker</td>
+<td style="text-align: left">bool</td>
+<td style="text-align: left">是否为taker单,0:否 1:是</td>
+</tr>
+<tr>
 <td style="text-align: left">t</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">成交时间戳</td>
@@ -4701,7 +4747,7 @@ Secret key仅在申请时展示，请做好记录留存
 <tr>
 <td style="text-align: left">id</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">成交订单id</td>
+<td style="text-align: left">订单id</td>
 </tr>
 </tbody></table>
 
