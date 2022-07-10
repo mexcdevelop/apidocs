@@ -21,7 +21,8 @@ meta:
 | Effective Time（UTC+8) | Endpoint | Update Type | Description |
 |-----|-----|-----|-----|
 |2021-01-15|*|Add|Release of contract API|
-| change | | 2021-03-30 | * adjust ｜ the following endpoints to access the paths and the data return format (the original paths still supported, but will gradually abandoned) : get the user’s all history orders, get the user’s ongoing orders, get the user’s history position information, get the stop-limit orders list, get the trigger orders list, get the user’s all transaction details |
+|2021-03-30|*|adjust | the following endpoints to access the paths and the data return format (the original paths still supported, but will gradually abandoned) : get the user’s all history orders, get the user’s ongoing orders, get the user’s history position information, get the stop-limit orders list, get the trigger orders list, get the user’s all transaction details |
+|2022-07-07|/contract/detail|Add|Get the contract information endpoint add a new field: apiAllowed(true or false),means Whether support API|
 
 # Integration guide
 
@@ -327,7 +328,24 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
             "state":0,
             "isNew":false,
             "isHot":true,
-            "isHidden":false
+            "isHidden":false,
+            "conceptPlate": [
+                "mc-trade-zone-grey",
+                "mc-trade-zone-pow"
+            ],
+            "riskLimitType": "BY_VOLUME",
+            "maxNumOrders": [
+                200,
+                50
+            ],
+            "marketOrderMaxLevel": 15,
+            "marketOrderPriceLimitRate1": 0.03,
+            "marketOrderPriceLimitRate2": 0.005,
+            "triggerProtect": 0.05,
+            "appraisal": 0,
+            "showAppraisalCountdown": 0,
+            "automaticDelivery": 0,
+            "apiAllowed": false
         },
     ]
 }
@@ -380,6 +398,7 @@ Rate limit: 1 times / 5 seconds
 | priceCoefficientVariation  | decimal  |fair price coefficient variation  |
 | indexOrigin  | List  | index origin |
 | state  | int  | status, 0:enabled,1:delivery, 2:completed, 3: offline, 4: pause|
+|apiAllowed|bool|whether support api|
 | conceptPlate  | List  | The zone, corresponding to the entryKey field of the section list |
 | riskLimitType  | List  | Risk limit type, BY_VOLUME: by the volume, BY_VALUE: by the position |
 
@@ -3478,6 +3497,14 @@ subscribe , unsubscribe, example is shown on the right.
 | price  | decimal  | price |
 
 ## Private Channels
+
+**Signature:**
+
+The signature target string is: accessKey + timestamp,The HMAC SHA256 algorithm is used to sign the target string.
+
+**Signature String:**  
+
+`"mx0aBYs33eIilxBW5C1657186536762"`
 
 ### Login authentication
 
