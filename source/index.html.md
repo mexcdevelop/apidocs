@@ -883,7 +883,7 @@ Parameters:
 | ----------- | ------ | --------- | ------------------------------------------------------------ |
 | subAccount  | STRING | YES       | Sub-account name                                             |
 | note        | STRING | YES       | APIKey note                                                  |
-| permissions | STRING | YES       | permission of APIKey,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER |
+| permissions | STRING | YES       | permission of APIKey,SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE,SPOT_DEAL_READ,SPOT_DEAL_WRITE,ISOLATED_MARGIN_ACCOUNT_READ,ISOLATED_MARGIN_ACCOUNT_WRITE,ISOLATED_MARGIN_DEAL_READ,ISOLATED_MARGIN_DEAL_WRITE,CONTRACT_ACCOUNT_READ,CONTRACT_ACCOUNT_WRITE,CONTRACT_DEAL_READ,CONTRACT_DEAL_WRITE,SPOT_TRANSFER_READ,SPOT_TRANSFER_WRITE |
 | ip          | STRING | NO        | Link IP addresses, separate with commas if more than one. Support up to 20 addresses. |
 | recvWindow  | LONG   | NO        |                                                              |
 | timestamp   | LONG   | YES       |                                                              |
