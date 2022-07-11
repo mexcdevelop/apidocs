@@ -983,7 +983,7 @@ body
 | :----------- | :------ | :-------- | :------------------------------------------------------------ |
 | subAccount  | STRING | 是       | 子账户名称 如：subAccount1                                   |
 | note        | STRING | 是       | APIKey的备注                                                 |
-| permissions | STRING | 是       | APIKey权限,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER |
+| permissions | STRING | 是       | APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE|
 | ip          | STRING | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193    |
 | recvWindow  | LONG   | 否       |                                                              |
 | timestamp   | LONG   | 是       |                                                              |
