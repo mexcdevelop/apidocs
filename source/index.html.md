@@ -36,6 +36,14 @@ meta:
 <aside class="notice">
 使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
 </aside>
+## Demo示例
+
+我们提供了5种语言的demo，用户可以参考，目前支持了现货，推送等示例，后续会持续更新。
+
+https://github.com/mxcdevelop/mexc-api-demo
+
+使用中遇到问题请通过[提交问题](https://github.com/mxcdevelop/mexc-api-demo/issues)反馈
+
 ### Postman Collections
 
 现在你可以通过`Postman collection`来快速体验、使用API接口。
@@ -72,6 +80,14 @@ meta:
 
 - 新增"允许API现货/杠杆交易"返回参数
 - 当前挂单接口优化，支持多交易对查询
+
+## **2022-06-21**
+
+- 新增demo
+
+## **2022-06-16**
+
+- 新增杠杆接口
 
 ## **2022-03-29**
 
