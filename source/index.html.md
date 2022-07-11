@@ -999,7 +999,7 @@ body
 | :----------- | :------ | :-------- | :------------------------------------------------------------ |
 | subAccount  | STRING | 是       | 子账户名称 如：subAccount1                                   |
 | note        | STRING | 是       | APIKey的备注                                                 |
-| permissions | STRING | 是       | APIKey权限,SPOT_ACCOUNT_READ,SPOT_ORDER_READ,SPOT_ORDER, ,SPOT_WITHDRAW_READ,SPOT_WITHDRAW,SPOT_TRANSFER_READ,SPOT_TRANSFER,FUTURES_ACCOUNT_READ,FUTURES_ORDER_READ,FUTURES_ORDER |
+| permissions | STRING | 是       | APIKey权限SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE,SPOT_DEAL_READ,SPOT_DEAL_WRITE,ISOLATED_MARGIN_ACCOUNT_READ,ISOLATED_MARGIN_ACCOUNT_WRITE,ISOLATED_MARGIN_DEAL_READ,ISOLATED_MARGIN_DEAL_WRITE,CONTRACT_ACCOUNT_READ,CONTRACT_ACCOUNT_WRITE,CONTRACT_DEAL_READ,CONTRACT_DEAL_WRITE,SPOT_TRANSFER_READ,SPOT_TRANSFER_WRITE |
 | ip          | STRING | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193    |
 | recvWindow  | LONG   | 否       |                                                              |
 | timestamp   | LONG   | 是       |                                                              |
