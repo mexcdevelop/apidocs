@@ -128,7 +128,7 @@ meta:
 相应API接受GET，POST或DELETE类型的请求
 
 - GET 方法的接口, 参数必须在 query string中发送。
-- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
+- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。
 - 对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。
 
 ## 返回格式
@@ -145,7 +145,7 @@ meta:
 | ```Content-Type```  | ```application/json``` |
 
 ## 签名
-- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。
+- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
 - 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
 - 签名 **大小写不敏感.**
 - "totalParams"定义为与"request body"串联的"query string"。
