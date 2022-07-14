@@ -143,7 +143,7 @@ Relevant parameters in the header
 | ```Content-Type```  | ```application/json``` |
 
 ## SIGNED
-- SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body.
+- SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body(in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
 - Endpoints use HMAC SHA256 signatures. The HMAC SHA256 signature is a keyed HMAC SHA256 operation. Use your secretKey as the key and totalParams as the value for the HMAC operation.
 - The signature is not case sensitive.
 - totalParams is defined as the query string concatenated with the request body.
@@ -883,7 +883,7 @@ Parameters:
 | ----------- | ------ | --------- | ------------------------------------------------------------ |
 | subAccount  | STRING | YES       | Sub-account name                                             |
 | note        | STRING | YES       | APIKey note                                                  |
-| permissions | STRING | YES       | permission of APIKey,SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE,SPOT_DEAL_READ,SPOT_DEAL_WRITE,ISOLATED_MARGIN_ACCOUNT_READ,ISOLATED_MARGIN_ACCOUNT_WRITE,ISOLATED_MARGIN_DEAL_READ,ISOLATED_MARGIN_DEAL_WRITE,CONTRACT_ACCOUNT_READ,CONTRACT_ACCOUNT_WRITE,CONTRACT_DEAL_READ,CONTRACT_DEAL_WRITE,SPOT_TRANSFER_READ,SPOT_TRANSFER_WRITE |
+| permissions | STRING | YES       | Permission of APIKey:<br/>SPOT_ACCOUNT_READ,<br/>SPOT_ACCOUNT_WRITE,<br/>SPOT_DEAL_READ,<br/>SPOT_DEAL_WRITE,<br/>ISOLATED_MARGIN_ACCOUNT_READ,<br/>ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>ISOLATED_MARGIN_DEAL_READ,<br/>ISOLATED_MARGIN_DEAL_WRITE,<br/>CONTRACT_ACCOUNT_READ,<br/>CONTRACT_ACCOUNT_WRITE,<br/>CONTRACT_DEAL_READ,<br/>CONTRACT_DEAL_WRITE,<br/>SPOT_TRANSFER_READ,<br/>SPOT_TRANSFER_WRITE| 
 | ip          | STRING | NO        | Link IP addresses, separate with commas if more than one. Support up to 20 addresses. |
 | recvWindow  | LONG   | NO        |                                                              |
 | timestamp   | LONG   | YES       |                                                              |
