@@ -161,7 +161,7 @@ https://github.com/mxcdevelop/mexc-api-demo
 | ```Content-Type```  | ```application/json``` |
 
 ## 签名
-- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。
+- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
 - 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
 - 签名 **大小写不敏感.**
 - "totalParams"定义为与"request body"串联的"query string"。
@@ -999,7 +999,7 @@ body
 | :----------- | :------ | :-------- | :------------------------------------------------------------ |
 | subAccount  | STRING | 是       | 子账户名称 如：subAccount1                                   |
 | note        | STRING | 是       | APIKey的备注                                                 |
-| permissions | STRING | 是       | APIKey权限SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE,SPOT_DEAL_READ,SPOT_DEAL_WRITE,ISOLATED_MARGIN_ACCOUNT_READ,ISOLATED_MARGIN_ACCOUNT_WRITE,ISOLATED_MARGIN_DEAL_READ,ISOLATED_MARGIN_DEAL_WRITE,CONTRACT_ACCOUNT_READ,CONTRACT_ACCOUNT_WRITE,CONTRACT_DEAL_READ,CONTRACT_DEAL_WRITE,SPOT_TRANSFER_READ,SPOT_TRANSFER_WRITE |
+| permissions | STRING | 是       | APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE|
 | ip          | STRING | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193    |
 | recvWindow  | LONG   | 否       |                                                              |
 | timestamp   | LONG   | 是       |                                                              |
