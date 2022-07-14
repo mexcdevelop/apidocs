@@ -751,7 +751,7 @@
 </tbody></table>
 <h2 id='8ba46c43fe'>签名</h2>
 <ul>
-<li>调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数。</li>
+<li>调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。</li>
 <li>签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。</li>
 <li>签名 <strong>大小写不敏感.</strong></li>
 <li>&quot;totalParams&quot;定义为与&quot;request body&quot;串联的&quot;query string&quot;。</li>
@@ -2160,7 +2160,7 @@ body
 <td style="text-align: left">permissions</td>
 <td style="text-align: left">STRING</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">APIKey权限SPOT_ACCOUNT_READ,SPOT_ACCOUNT_WRITE,SPOT_DEAL_READ,SPOT_DEAL_WRITE,ISOLATED_MARGIN_ACCOUNT_READ,ISOLATED_MARGIN_ACCOUNT_WRITE,ISOLATED_MARGIN_DEAL_READ,ISOLATED_MARGIN_DEAL_WRITE,CONTRACT_ACCOUNT_READ,CONTRACT_ACCOUNT_WRITE,CONTRACT_DEAL_READ,CONTRACT_DEAL_WRITE,SPOT_TRANSFER_READ,SPOT_TRANSFER_WRITE</td>
+<td style="text-align: left">APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE</td>
 </tr>
 <tr>
 <td style="text-align: left">ip</td>
