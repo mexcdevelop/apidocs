@@ -2077,7 +2077,7 @@ post /api/v3/margin/repay
 |amount|amount和isAllRepay，二选一|否|[string]|
 |borrowId|借款订单id|是|[string]|
 |isAllRepay|true or false，全不全还|否|[string]|
-|recvWindow| |是|[string]|
+|recvWindow| |否[string]|
 
 **返回参数**
 
@@ -2251,13 +2251,13 @@ get /api/v3/margin/loan
 |timestamp| |是|[string]|{{timestamp}}|
 |signature| |是|[string]|{{signature}}|
 |asset|资产，如BTC|是|[string]|
-|symbol|逐仓symbol|否|[string]|
+|symbol|逐仓symbol|是|[string]|
 |tranId|`借贷id` in POST /api/v3/margin/loan|否|[string]|
 |startTime| |否|[string]|
 |endTime| |否|[string]|
 |current|当前查询页。 开始值 1。 默认:1|否|[string]|
 |size|默认:10 最大:100|否|[string]|
-|recvWindow| |是|[string]|
+|recvWindow| |否|[string]|
 
 **返回参数**
 
