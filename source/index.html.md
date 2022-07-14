@@ -3595,7 +3595,7 @@ Login successful (channel = rs.login)
 | feeCurrency  | string   | fee currency |
 | openType  | int   | open type,1:isolated,2:cross| 
 | state  | int   | order state,1 uninformed,2 uncompleted,3 completed,4 cancelled,5 invalid |
-| errorCode  | int   |error code,0:normal,1:param_invalid,2:insufficient_balance,3:position_not_exists,4:position_not_enough,5:position_liq,6:order_liq,7:risk_level_limit,8:sys_cancel,9:position_mode_not_match,10:reduce_only_liq,11:contract_not_enable,12:delivery_cancel,13:position_liq_cancel,14:adl_cancel,15:black_user_cancel,16:settle_funding_cancel,17:position_im_change_cancel,18:ioc_cancel,19:fok_cancel,20:post_only_cancel,21:market_cancel |
+| errorCode  | int   |error code, 0:normal, 1:param_invalid, 2:insufficient_balance, 3:position_not_exists, 4:position_not_enough, 5:position_liq, 6:order_liq, 7:risk_level_limit, 8:sys_cancel, 9:position_mode_not_match, 10:reduce_only_liq, 11:contract_not_enable, 12:delivery_cancel, 13:position_liq_cancel, 14:adl_cancel, 15:black_user_cancel, 16:settle_funding_cancel, 17:position_im_change_cancel, 18:ioc_cancel, 19:fok_cancel, 20:post_only_cancel, 21:market_cancel |
 | externalOid  | string   |external order id |
 | createTime  | date   | create time |
 | updateTime  | date   | update time |
