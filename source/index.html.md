@@ -65,6 +65,8 @@ We recommend that all users build their applications on V2 of the API. Using V2 
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|Update| add parameter: client_order_id and trade_id and order_id|
 |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|Update|add parameter: eventTime and isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
+|2022-07-15|operation sub.personal|Update||add parameter: avgPrice, executedQty and cumulativeQuoteQty|
+
 
 
 # Integration guide
@@ -1918,6 +1920,9 @@ order status push
   "data":{"price":1,
           "quantity":9.93,
           "amount":9.93,
+          "avgPrice":1.88,
+          "executedQty":0.93,
+          "cumulativeQuoteQty":0.93,
           "remainAmount":9.93,
           "remainQuantity":9.93,
           "remainQ":9.93,
@@ -1960,6 +1965,9 @@ error response payload
 |price|decimal|price|
 |quantity|decimal|quantity|
 |amount|decimal|amount|
+|avgPrice|decimal|averageDealPrice|
+|executedQty|decimal|executedQuantity|
+|cumulativeQuoteQty|decimal|cumulativeQuoteQuantity|
 |remainAmount|decimal|remainAmount|
 |remainQuantity|decimal|remainQuantity|
 |id|string|orderId|
