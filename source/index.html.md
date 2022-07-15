@@ -1533,7 +1533,7 @@ None
 | 参数名   | 类型   | 是否必填 | 说明                                                         |
 | -------- | ------ | -------- | ------------------------------------------------------------ |
 | currency | string | true     | 币种                                                         |
-| chain    | string | false    | 链名称，取值参考GET /open/api/v2/market/coin/list(币种信息查询) ，多链时必填（例如提USDT至OMNI时须设置此参数为"OMNI"，提USDT至TRX时须设置此参数为"TRC-20"，提USDT至ERC20时须设置此参数为"ERC-20"），非多链时无须设置此参数，具体取值参考币种信息查询接口 |
+| chain    | string | false    | 链名称，取值参考GET /open/api/v2/market/coin/list(币种信息查询) ，多链时必填（例如提USDT至OMNI时须设置此参数为"OMNI"，提USDT至TRX时须设置此参数为"TRC20"，提USDT至ERC20时须设置此参数为"ERC20"），非多链时无须设置此参数，具体取值参考币种信息查询接口 |
 | amount   | number | true     | 提现数量                                                     |
 | address  | string | true     | 提现地址 memo请使用:进行拼接                                 |
 | remark   | string | false    | 备注                                                         |
