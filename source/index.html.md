@@ -65,6 +65,7 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|更新| 接口/推送增加client_order_id和trade_id和order_id|
 |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|更新|订单推送和rest增加eventTime和isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
+|2022-07-15|operation sub.personal|更新|订单推送增加参数：”已成交额“、”已成交量“、“平均成交价”|
 
 # 接入说明
 
@@ -1533,7 +1534,7 @@ None
 | 参数名   | 类型   | 是否必填 | 说明                                                         |
 | -------- | ------ | -------- | ------------------------------------------------------------ |
 | currency | string | true     | 币种                                                         |
-| chain    | string | false    | 链名称，取值参考GET /open/api/v2/market/coin/list(币种信息查询) ，多链时必填（例如提USDT至OMNI时须设置此参数为"OMNI"，提USDT至TRX时须设置此参数为"TRC-20"，提USDT至ERC20时须设置此参数为"ERC-20"），非多链时无须设置此参数，具体取值参考币种信息查询接口 |
+| chain    | string | false    | 链名称，取值参考GET /open/api/v2/market/coin/list(币种信息查询) ，多链时必填（例如提USDT至OMNI时须设置此参数为"OMNI"，提USDT至TRX时须设置此参数为"TRC20"，提USDT至ERC20时须设置此参数为"ERC20"），非多链时无须设置此参数，具体取值参考币种信息查询接口 |
 | amount   | number | true     | 提现数量                                                     |
 | address  | string | true     | 提现地址 memo请使用:进行拼接                                 |
 | remark   | string | false    | 备注                                                         |
@@ -2064,6 +2065,9 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
   "data":{"price":1,
           "quantity":9.93,
           "amount":9.93,
+          "avgPrice":1.88,
+          "executedQty":0.93,
+          "cumulativeQuoteQty":0.93,
           "remainAmount":9.93,
           "remainQuantity":9.93,
           "remainQ":9.93,
@@ -2106,6 +2110,9 @@ api_key和op和req_time按字典排序然后再拼接上sec_key，将得到的�
 |price|decimal|下单价格|
 |quantity|decimal|下单数量|
 |amount|decimal|下单总金额|
+|avgPrice|decimal|平均成交价|
+|executedQty|decimal|累计交易数量|
+|cumulativeQuoteQty|decimal|累计交易金额|
 |remainAmount|decimal|剩余交易金额|
 |remainQuantity|decimal|剩余交易数量|
 |id|string|订单id|
