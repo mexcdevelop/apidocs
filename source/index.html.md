@@ -1383,7 +1383,7 @@ Rate Limit : 20times/2s
 | Parameter  | Data Type   | Mandatory  |  Description |
 | ------------ | ------------ | ------------ | ------------ |
 | currency  | string  | true  | Crypto currency |
-| chain | string  | false  | Chain name, reference the GET/open/API/v2 / market/coin/list (Get currency information), multiple chain required (such as withdraw  USDT to OMNI must set this parameter to "OMNI",  withdraw  USDT to TRX must set this parameter to  "TRC - 20", withdraw  USDT to ERC20 must set this parameter to  "ERC - 20"), do not need to set this parameter if there is single chain, when the more details reference to the endpoint of  “Get currency information”. |
+| chain | string  | false  | Chain name, reference the GET/open/API/v2 / market/coin/list (Get currency information), multiple chain required (such as withdraw  USDT to OMNI must set this parameter to "OMNI",  withdraw  USDT to TRX must set this parameter to  "TRC20", withdraw  USDT to ERC20 must set this parameter to  "ERC20"), do not need to set this parameter if there is single chain, when the more details reference to the endpoint of  “Get currency information”. |
 | amount  | number  | true  | Withdraw amount  |
 | address | string  | true  | withdraw address   Note: memo please use : for splicing |
 | remark  | string  | false  | Note |
