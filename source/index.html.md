@@ -65,7 +65,7 @@ We recommend that all users build their applications on V2 of the API. Using V2 
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|Update| add parameter: client_order_id and trade_id and order_id|
 |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|Update|add parameter: eventTime and isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
-|2022-07-15|operation sub.personal|Update||add parameter: avgPrice, executedQty and cumulativeQuoteQty|
+|2022-07-15|operation sub.personal|Update|add parameter: avgPrice, executedQty and cumulativeQuoteQty|
 
 
 
