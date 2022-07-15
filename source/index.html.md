@@ -272,7 +272,7 @@ The account is used as the basic unit of speed limit for the endpoints that need
 
 The default rate limiting rule for an endpoint is 20 times per second.
 
-# Market Date Endpoints
+# Market Data Endpoints
 
 ## Test Connectivity
 
