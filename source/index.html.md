@@ -1139,8 +1139,8 @@ Response：
 Request parameters：
 
 | Parameter | Data type | Mandatory | Description | Allowed range |
-|-----|-----|-----|-----|
-|order_id|string|Y|order id|
+|-----|-----|-----|-----|-----|
+|order_id|string|Y|order id||
 
 Response：
 
@@ -1494,6 +1494,7 @@ Rate Limit : 2 times/s
 **Response Parameters:**
 
 | Parameter | Data Type | Description |
+| ------------ | ------------ | ------------ |
 | code | number  | Status code |
 | msg | string | Error message (if any) |
 | currency | string | Currency  |
