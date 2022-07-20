@@ -633,7 +633,7 @@ API V1 will no longer be maintained starting from the end of June 2021. Please p
 <td>2022-07-15</td>
 <td>operation sub.personal</td>
 <td>Update</td>
-<td></td>
+<td>add parameter: avgPrice, executedQty and cumulativeQuoteQty</td>
 </tr>
 </tbody></table>
 <h1 id='integration-guide'>Integration guide</h1><h2 id='access-urls'>Access URLs</h2>
@@ -2577,9 +2577,23 @@ For each batch request, the parameter client_order_id should be consistent, mean
 
 <p>Request parameters：</p>
 
-<p>| Parameter | Data type | Mandatory | Description | Allowed range |
-|-----|-----|-----|-----|
-|order_id|string|Y|order id|</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_id</td>
+<td>string</td>
+<td>Y</td>
+<td>order id</td>
+<td></td>
+</tr>
+</tbody></table>
 
 <p>Response：</p>
 
@@ -3552,17 +3566,64 @@ Rate Limit : 2 times/s
 
 <p><strong>Response Parameters:</strong></p>
 
-<p>| Parameter | Data Type | Description |
-| code | number  | Status code |
-| msg | string | Error message (if any) |
-| currency | string | Currency  |
-| amount | string| Amount  |
-| from | string | Transfer-out account，spot account, isolated-margin account, contract account |
-| to | string | Transfer-in account ，spot account、isolated-margin account、futures account  |
-| transact_state | string | Transfer status  Success SUCCESS、Fail  FAILED、Transferring WAIT|
-| transact_id | string | Transfer id |
-| total_size | int | The total size |
-| total_page | int | The total pages |</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number </td>
+<td>Status code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Error message (if any)</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Currency </td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>Amount </td>
+</tr>
+<tr>
+<td>from</td>
+<td>string</td>
+<td>Transfer-out account，spot account, isolated-margin account, contract account</td>
+</tr>
+<tr>
+<td>to</td>
+<td>string</td>
+<td>Transfer-in account ，spot account、isolated-margin account、futures account </td>
+</tr>
+<tr>
+<td>transact_state</td>
+<td>string</td>
+<td>Transfer status  Success SUCCESS、Fail  FAILED、Transferring WAIT</td>
+</tr>
+<tr>
+<td>transact_id</td>
+<td>string</td>
+<td>Transfer id</td>
+</tr>
+<tr>
+<td>total_size</td>
+<td>int</td>
+<td>The total size</td>
+</tr>
+<tr>
+<td>total_page</td>
+<td>int</td>
+<td>The total pages</td>
+</tr>
+</tbody></table>
 <h2 id='get-transferable-assets'>Get transferable assets</h2>
 <p>This endpoint can obtain transferable assets in a specified account and currency.</p>
 
