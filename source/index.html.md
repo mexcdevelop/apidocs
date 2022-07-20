@@ -2987,6 +2987,148 @@ If no ping is received within 1 minute, the connection will be disconnected. It 
 
 The ping message and server return are shown on the right
 
+## Filter Subscription
+
+> cancel default push
+
+```json
+{
+    "subscribe": false,
+    "method": "login",
+    "param": {
+        "apiKey": "mxU1TzSmRDW1o5AsE",
+        "signature": "8c957a757ea31672eca05cb652d26bab7f46a41364adb714dda5475264aff120",
+        "reqTime": "1611038237237"
+    }
+}
+```
+> asset only
+
+```json
+{
+    "method":"personal.filter",
+    "param":{
+        "filters":[
+            {
+                "filter":"asset"
+            }
+        ]
+    }
+}
+```
+
+> ADLlevel only
+
+```json
+{
+    "method":"personal.filter",
+    "param":{
+        "filters":[
+            {
+                "filter":"adl.level"
+            }
+        ]
+    }
+}
+```
+> deals only
+
+```json
+{
+    "method":"personal.filter",
+    "param":{
+        "filters":[
+            {
+                "filter":"order.deal",
+                "rules":[]
+            }
+        ]
+    }
+}
+```
+
+> or
+
+```json
+{
+    "method":"personal.filter",
+    "param":{
+        "filters":[
+            {
+                "filter":"order.deal"
+            }
+        ]
+    }
+}
+```
+> deal for symbol
+
+```json
+{
+    "method":"personal.filter",
+    "param":{
+        "filters":[
+            {
+                "filter":"order.deal",
+                "rules":[
+                    "BTC_USDT"
+                ]
+            }
+        ]
+    }
+}
+```
+
+> coordinate
+
+```json
+{
+    "method":"personal.filter",
+    "param":{
+        "filters":[
+            {
+                "filter":"order",
+                "rules":[
+                    "BTC_USDT"
+                ]
+            },
+            {
+                "filter":"order.deal",
+                "rules":[
+                    "EOS_USDT",
+                    "ETH_USDT",
+                    "BTC_USDT"
+                ]
+            },
+            {
+                "filter":"position",
+                "rules":[
+                    "EOS_USDT",
+                    "BTC_USDT"
+                ]
+            },
+            {
+                "filter":"asset"
+            }
+        ]
+    }
+}
+```
+
+All private data will be pushed after login:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.
+
+1. If want to cancel the default push,add params when login: `"subscribe":false`.
+
+2. after login sucess,send "personal.filter" to filter the subscription，if want all data be pushed,send: `{"method":"personal.filter"} `or `{"method":"personal.filter","param":{"filters":[]}}`.
+
+3. available key for filter:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.
+
+only asset and adl.level not support for filter single currency or single future.  
+
+The filter event sent later will overwrites the previous one.
+
+
+
 ## Public Channels
 
 ### Tickers
