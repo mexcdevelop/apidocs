@@ -3870,7 +3870,7 @@ Login successful (channel = rs.login)
 {
     "channel":"push.personal.position.mode",
     "data":{
-        positionMode: 1
+        "positionMode": 1
     },
     "ts":1610005070157
 }
