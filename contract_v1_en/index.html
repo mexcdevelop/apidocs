@@ -524,6 +524,9 @@
                     <a href="#detailed-data-interaction-commands" class="toc-h2 toc-link" data-title="Detailed data interaction commands">Detailed data interaction commands</a>
                   </li>
                   <li>
+                    <a href="#filter-subscription" class="toc-h2 toc-link" data-title="Filter Subscription">Filter Subscription</a>
+                  </li>
+                  <li>
                     <a href="#public-channels" class="toc-h2 toc-link" data-title="Public Channels">Public Channels</a>
                   </li>
                   <li>
@@ -6545,6 +6548,140 @@ Rate limit:20 times/2 seconds
 <p>If no ping is received within 1 minute, the connection will be disconnected. It is recommended to send a ping for 10-20 seconds</p>
 
 <p>The ping message and server return are shown on the right</p>
+<h2 id='filter-subscription'>Filter Subscription</h2>
+<blockquote>
+<p>cancel default push</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"subscribe"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"apiKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mxU1TzSmRDW1o5AsE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8c957a757ea31672eca05cb652d26bab7f46a41364adb714dda5475264aff120"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"reqTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1611038237237"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>asset only</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="s2">"personal.filter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"asset"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>ADLlevel only</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="s2">"personal.filter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"adl.level"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>deals only</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="s2">"personal.filter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"order.deal"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rules"</span><span class="p">:[]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>or</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="s2">"personal.filter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"order.deal"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>deal for symbol</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="s2">"personal.filter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"order.deal"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rules"</span><span class="p">:[</span><span class="w">
+                    </span><span class="s2">"BTC_USDT"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>coordinate</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="s2">"personal.filter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"param"</span><span class="p">:{</span><span class="w">
+        </span><span class="nl">"filters"</span><span class="p">:[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"order"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rules"</span><span class="p">:[</span><span class="w">
+                    </span><span class="s2">"BTC_USDT"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"order.deal"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rules"</span><span class="p">:[</span><span class="w">
+                    </span><span class="s2">"EOS_USDT"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"BTC_USDT"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"position"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rules"</span><span class="p">:[</span><span class="w">
+                    </span><span class="s2">"EOS_USDT"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"BTC_USDT"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"filter"</span><span class="p">:</span><span class="s2">"asset"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>All private data will be pushed after login:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.</p>
+
+<ol>
+<li><p>If want to cancel the default push,add params when login: <code>&quot;subscribe&quot;:false</code>.</p></li>
+<li><p>after login sucess,send &quot;personal.filter&quot; to filter the subscription，if want all data be pushed,send: <code>{&quot;method&quot;:&quot;personal.filter&quot;}</code>or <code>{&quot;method&quot;:&quot;personal.filter&quot;,&quot;param&quot;:{&quot;filters&quot;:[]}}</code>.</p></li>
+<li><p>available key for filter:order、order.deal、position、plan.order、stop.order、stop.planorder、risk.limit、adl.level、asset.</p></li>
+</ol>
+
+<p>only asset and adl.level not support for filter single currency or single future.  </p>
+
+<p>The filter event sent later will overwrites the previous one.</p>
 <h2 id='public-channels'>Public Channels</h2><h3 id='tickers'>Tickers</h3>
 <blockquote>
 <p>Subscribe</p>
@@ -7695,7 +7832,7 @@ Rate limit:20 times/2 seconds
 <h3 id='position-mode'>Position Mode</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"channel"</span><span class="p">:</span><span class="s2">"push.personal.position.mode"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
-        </span><span class="err">positionMode:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"ts"</span><span class="p">:</span><span class="mi">1610005070157</span><span class="w">
 </span><span class="p">}</span><span class="w">
