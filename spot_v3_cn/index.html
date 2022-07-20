@@ -566,9 +566,6 @@
                     <a href="#5345df6f90" class="toc-h2 toc-link" data-title="查询杠杆逐仓账户信息">查询杠杆逐仓账户信息</a>
                   </li>
                   <li>
-                    <a href="#52f8ad9da8" class="toc-h2 toc-link" data-title="查询止盈止损订单">查询止盈止损订单</a>
-                  </li>
-                  <li>
                     <a href="#b063522e7b" class="toc-h2 toc-link" data-title="查询账户最大可借贷额度">查询账户最大可借贷额度</a>
                   </li>
                   <li>
@@ -3750,11 +3747,11 @@ body
 </tr>
 <tr>
 <td style="text-align: left">commission</td>
-<td style="text-align: left">交易费金额</td>
+<td style="text-align: left">手续费</td>
 </tr>
 <tr>
 <td style="text-align: left">commissionAsset</td>
-<td style="text-align: left">交易类资产类型</td>
+<td style="text-align: left">手续费币种</td>
 </tr>
 <tr>
 <td style="text-align: left">isBuyerMaker</td>
@@ -3964,7 +3961,7 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/tradeMode
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/tradeMode?tradeMode=0&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -4054,7 +4051,7 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/order
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/order?symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=0.0003&amp;price=20000&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -4090,78 +4087,78 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">时间戳</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">TRUE</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left">BUY SELL</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BUY</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left">详见枚举定义：订单类型  (暂不支持市价单)</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">quantity</td>
-<td style="text-align: left">订单总额</td>
+<td style="text-align: left">订单数量</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">10</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteOrderQty</td>
-<td style="text-align: left">订单数量</td>
+<td style="text-align: left">订单总额</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">200000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left">买入价</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">20000</td>
 </tr>
 <tr>
 <td style="text-align: left">newClientOrderId</td>
 <td style="text-align: left">客户自定义的唯一订单ID</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6gCrw2kRUAF9CvJDGP16IP</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -4177,49 +4174,47 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">交易对</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">693471305432961024</td>
 </tr>
 <tr>
 <td style="text-align: left">clientOrderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">客户自定义订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">6gCrw2kRUAF9CvJDGP16IP</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">transactTime</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">下单时间</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1507725176595</td>
 </tr>
 </tbody></table>
 <h2 id='176a7a1019'>借贷</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/loan
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/loan?asset=BTC&amp;amount=0.002&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000001</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">746784754145301480</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4244,50 +4239,50 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">时间戳</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">资产名称</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, 默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">逐仓交易对，配合逐仓使用</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">数量</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">10</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -4304,8 +4299,8 @@ body
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">借款记录id</td>
-<td style="text-align: left">[number]</td>
-<td style="text-align: left">100000001</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">746784754145301480</td>
 </tr>
 </tbody></table>
 
@@ -4313,19 +4308,17 @@ body
 
 <p>如果 isIsolated = “TRUE”, 表示逐仓借贷，此时 symbol 必填。</p>
 <h2 id='48aa7c8199'>归还借贷</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/repay
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/repay?asset=BTC&amp;symbol=BTCUSDT&amp;isAllRepay=true&amp;borrowId=746784754145300480&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000001</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2597392</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4350,64 +4343,64 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left">资产/btc</td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;,  默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">amount和isAllRepay，二选一</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">10</td>
 </tr>
 <tr>
 <td style="text-align: left">borrowId</td>
 <td style="text-align: left">借款订单id</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">746784754145301480</td>
 </tr>
 <tr>
 <td style="text-align: left">isAllRepay</td>
-<td style="text-align: left">true or false，全不全还</td>
+<td style="text-align: left">全不全还</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">true or false</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -4424,8 +4417,8 @@ body
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">还款id</td>
-<td style="text-align: left">[number]</td>
-<td style="text-align: left">100000001</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">2597392</td>
 </tr>
 </tbody></table>
 
@@ -4433,43 +4426,33 @@ body
 
 <p>如果 isIsolated = “TRUE”, 表示逐仓还款，此时 symbol 必填。</p>
 <h2 id='967863229a'>撤销单一交易对的所有挂单</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/openOrders
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/openOrders?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">      
-    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pXLV6Hz6mprAcVYpVMTGgx"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.089853"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.178622"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">      
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pXLV6Hz6mprAcVYpVMTGgx"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.090430"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.178622"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746779360689786880"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4494,36 +4477,36 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, 默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">赋值不能大于 <code>60000</code></td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
 <td style="text-align: left"></td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -4540,101 +4523,104 @@ body
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">clientOrderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">客户自定义订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">pXLV6Hz6mprAcVYpVMTGgx</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.089853</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.178622</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.000000</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.000000</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BUY</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">orderListId</td>
 <td style="text-align: left">-1</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
 <h2 id='4e53c0fccd-2'>撤销订单</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/order&amp;resultType=failure
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/order?symbol=BTCUSDT&amp;orderId=746777776866070528&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCBTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"693471305432961024"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelMyOrder1"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.00000000"</span><span class="p">,</span><span class="err">//累计成交金额</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">       </span><span class="err">//</span><span class="w"> </span><span class="err">是否是逐仓symbol交易</span><span class="w"> 
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746777776866070528"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212162000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212162000</span><span class="w">
   </span><span class="p">}</span><span class="w">
+
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -4658,50 +4644,50 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">isIsolated</td>
+<td style="text-align: left">是否逐仓杠杆</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
-<td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;FALSE&quot;</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">746777776866070528</td>
 </tr>
 <tr>
 <td style="text-align: left">origClientOrderId</td>
 <td style="text-align: left">下单时，用户传入的自定义id</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -4718,67 +4704,67 @@ body
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LTCBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">693471305432961024</td>
 </tr>
 <tr>
 <td style="text-align: left">clientOrderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">客户自定义订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">cancelMyOrder1</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">8.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left">累计成交金额</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">8.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 </tbody></table>
@@ -4787,18 +4773,27 @@ body
 
 <p>必须发送 orderId 或 origClientOrderId 其中一个。</p>
 <h2 id='1617fb1431'>查询借贷记录</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/loan
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/loan?asset=BTC&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746784754145300480"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"principal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"repayAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"repayInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPAID"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658213826000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -4822,71 +4817,71 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left">资产，如BTC</td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">逐仓symbol</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left"><code>借贷id</code> in POST /api/v3/margin/loan</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">746784754145300480</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">current</td>
-<td style="text-align: left">当前查询页。 开始值 1。 默认:1</td>
+<td style="text-align: left">当前查询页</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">开始值 1, 默认:1</td>
 </tr>
 <tr>
 <td style="text-align: left">size</td>
-<td style="text-align: left">默认:10 最大:100</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
 <td style="text-align: left"></td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">默认:10 最大:100</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -4901,75 +4896,69 @@ body
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">rows</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">rows&gt;&gt;symbol</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">逐仓借贷 返回逐仓symbol; 若是全仓不会返回此字段</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">MXUSDT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;tranId</td>
+<td style="text-align: left">tranId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">12807067523</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;asset</td>
+<td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">MX</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTC</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;principal</td>
+<td style="text-align: left">principal</td>
 <td style="text-align: left">借款金额</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.84624403</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;timestamp</td>
+<td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1555056425000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;remainAmount</td>
+<td style="text-align: left">remainAmount</td>
 <td style="text-align: left">待还金额</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;remainInterest</td>
+<td style="text-align: left">remainInterest</td>
 <td style="text-align: left">待还利息</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;repayAmount</td>
+<td style="text-align: left">repayAmount</td>
 <td style="text-align: left">已还金额</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">300</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;repayInterest</td>
+<td style="text-align: left">repayInterest</td>
 <td style="text-align: left">已还利息</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.96249686</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;status</td>
+<td style="text-align: left">status</td>
 <td style="text-align: left">状态: PENDING (等待执行), CONFIRMED (成功借贷), FAILED (执行失败);</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CONFIRMED</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">总数</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 </tbody></table>
@@ -4978,18 +4967,32 @@ body
 
 <p>必须发送tranId 或 startTime，tranId 优先。响应返回为降序排列。如果发送isolatedSymbol，返回指定逐仓symbol指定asset的借贷记录。</p>
 <h2 id='6caed3126a'>查询历史委托记录</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/allOrders
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/allOrders?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746779360689786880"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212551000</span><span class="w">
+  </span><span class="p">},</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -5013,56 +5016,56 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, &quot;FALSE&quot;,默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">746779360689786880</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">limit</td>
 <td style="text-align: left">默认 500;最大500.</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5079,86 +5082,86 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">clientOrderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">客户自定义订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">D2KDy4DIeS56PvkM13f8cP</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">41295</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">5.31000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.22500000</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1565769338806</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">TAKE_PROFIT_LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1565769342148</td>
 </tr>
 </tbody></table>
@@ -5167,12 +5170,10 @@ body
 
 <p>如果设置 orderId , 获取订单 &gt;= orderId， 否则返回近期订单历史。一些历史订单的 cummulativeQuoteQty &lt; 0, 是指当前数据不存在。</p>
 <h2 id='1c2b157ceb'>查询历史成交记录</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/myTrades
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/myTrades?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -5202,56 +5203,56 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, &quot;FALSE&quot;,默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">fromId</td>
 <td style="text-align: left">获取TradeId，默认获取近期交易历史。</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">limit</td>
 <td style="text-align: left">默认 500; 最大 1000.</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5269,61 +5270,61 @@ body
 <tr>
 <td style="text-align: left">commission</td>
 <td style="text-align: left">手续费</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00006000</td>
 </tr>
 <tr>
 <td style="text-align: left">commissionAsset</td>
 <td style="text-align: left">手续费币种</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">id</td>
 <td style="text-align: left">trade-id</td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">34</td>
 </tr>
 <tr>
 <td style="text-align: left">isBuyer</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">39324</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.02000000</td>
 </tr>
 <tr>
 <td style="text-align: left">qty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">3.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1561973357171</td>
 </tr>
 </tbody></table>
@@ -5332,12 +5333,10 @@ body
 
 <p>如果设置 fromId , 获取订单 id &gt;= fromId， 否则返回近期订单历史。</p>
 <h2 id='0e779cea5c'>查询当前挂单记录</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/openOrders
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/openOrders?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -5389,29 +5388,29 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓symbol</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, &quot;FALSE&quot;,默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 </tbody></table>
 
@@ -5427,92 +5426,92 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">clientOrderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">客户自定义订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">qhcZw71gAkCCTv0t0k8LUK</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left">成交金额</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">211842552</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.30000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00475010</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">NEW</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562040170089</td>
 </tr>
 <tr>
 <td style="text-align: left">timeInForce</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">GTC</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562040170089</td>
 </tr>
 </tbody></table>
@@ -5521,18 +5520,18 @@ body
 
 <p>如未发送symbol，返回所有 symbols 订单记录。如果 isIsolated = “TRUE”, symbol 为必填</p>
 <h2 id='a82525af45'>查询最大可转出额</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxTransferable
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxTransferable?asset=BTC&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> 
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -5556,29 +5555,29 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，适用于逐仓查询</td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 </tbody></table>
 
@@ -5595,8 +5594,8 @@ body
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">3.59498107</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">0.00022998</td>
 </tr>
 </tbody></table>
 <h2 id='efcdde18d1'>查询杠杆价格指数</h2>
@@ -5605,13 +5604,17 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/priceIndex
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/priceIndex?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21823.45"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"calcTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658215048128</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -5635,22 +5638,22 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 </tbody></table>
 
@@ -5667,35 +5670,49 @@ body
 <tr>
 <td style="text-align: left">calcTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562046418000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00333930</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">21823.45</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">MXBTC</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 </tbody></table>
 <h2 id='80d4a3fd79'>查询杠杆账户订单详情</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/order
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/order?symbol=BTCUSDT&amp;orderId=746779360689786880&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746779360689786880"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212551000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -5719,36 +5736,36 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否逐仓杠杆，&quot;TRUE&quot;, &quot;FALSE&quot;,默认 &quot;TRUE&quot;</td>
+<td style="text-align: left">是否逐仓杠杆</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;TRUE&quot;, &quot;FALSE&quot;, 默认 &quot;TRUE&quot;</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">746779360689786880</td>
 </tr>
 </tbody></table>
 
@@ -5764,86 +5781,86 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">clientOrderId</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">客户自定义订单id</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">ZwfQzuDIGpceVhKW5DvCmO</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left">累计交易货币数量？？</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left">实际数量</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">213205622</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left">原始数量</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.30000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00493630</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">NEW</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓symbol交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562133008725</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562133008725</td>
 </tr>
 </tbody></table>
@@ -5852,99 +5869,55 @@ body
 
 <p>必须发送 orderId 或 origClientOrderId 其中一个。一些历史订单的 cummulativeQuoteQty &lt; 0, 是指当前数据不存在。</p>
 <h2 id='5345df6f90'>查询杠杆逐仓账户信息</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/account
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/account?symbols=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-   </span><span class="nl">"assets"</span><span class="p">:[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> 
-          </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="err">//是否可借</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//已借</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//【待确认】</span><span class="w">
-          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="err">//是否可还</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="err">//</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> 
+    </span><span class="nl">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//【待确认】</span><span class="w">
-          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">账户是否启用，</span><span class="kc">true</span><span class="err">-启用，</span><span class="kc">false</span><span class="err">-停用</span><span class="w">
-        </span><span class="nl">"tradeMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="err">手动模式</span><span class="w">  </span><span class="mi">1</span><span class="err">:自动借还模式</span><span class="w">
-        </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> </span><span class="err">//杠杆倍数</span><span class="w">
-        </span><span class="nl">"riskRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="err">//风险率</span><span class="w">
-        </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000.00000000"</span><span class="p">,</span><span class="err">//指数价格</span><span class="w">
-        </span><span class="nl">"liquidatePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.00000000"</span><span class="p">,</span><span class="err">//强平价</span><span class="w">
-        </span><span class="nl">"liquidateRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="err">//强平率</span><span class="w">
-        </span><span class="nl">"tradeEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="err">//是否可交易</span><span class="w">
-        </span><span class="nl">"totalUsdtValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="err">//usdt总计</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+            </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"netAssetOfBtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"netAssetOfBtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000458278339932541"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"isolatedCreated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00006882"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"marginRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21804.199655172413793103"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"liquidatePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"--"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"liquidateRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"--"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tradeEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">  
 </span><span class="p">]</span><span class="w">
-</span><span class="err">传</span><span class="s2">"symbols"</span><span class="err">的返回内容:</span><span class="w">
-</span><span class="p">{</span><span class="w">
-   </span><span class="nl">"assets"</span><span class="p">:[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> 
-          </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> 
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="w">
-        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">账户是否启用，</span><span class="kc">true</span><span class="err">-启用，</span><span class="kc">false</span><span class="err">-停用</span><span class="w">
-        </span><span class="nl">"tradeMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="err">手动模式</span><span class="w">  </span><span class="mi">1</span><span class="err">:自动借还模式</span><span class="w">
-        </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"riskRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"liquidatePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"liquidateRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tradeEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"totalUsdtValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
 
@@ -5967,21 +5940,21 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbols</td>
 <td style="text-align: left">最多可以传5个symbol; 由&quot;,&quot;分隔的字符串表示. e.g. &quot;BTCUSDT,MXUSDT,ADAUSDT&quot;</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5997,195 +5970,177 @@ body
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">assets</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[object]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;asset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">资产</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;borrowEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">borrowEnabled</td>
+<td style="text-align: left">是否可借</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;borrowed</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">borrowed</td>
+<td style="text-align: left">已借</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;free</td>
+<td style="text-align: left">free</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;interest</td>
+<td style="text-align: left">interest</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;locked</td>
+<td style="text-align: left">locked</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;netAsset</td>
+<td style="text-align: left">netAsset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;netAssetOfBtc</td>
+<td style="text-align: left">netAssetOfBtc</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;repayEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">repayEnabled</td>
+<td style="text-align: left">是否可还</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;totalAsset</td>
+<td style="text-align: left">totalAsset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset</td>
+<td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[object]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;asset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">USDT</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;borrowEnabled</td>
+<td style="text-align: left">borrowEnabled</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;borrowed</td>
+<td style="text-align: left">borrowed</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;free</td>
+<td style="text-align: left">free</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;interest</td>
+<td style="text-align: left">interest</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;locked</td>
+<td style="text-align: left">locked</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;netAsset</td>
+<td style="text-align: left">netAsset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;netAssetOfBtc</td>
+<td style="text-align: left">netAssetOfBtc</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;repayEnabled</td>
+<td style="text-align: left">repayEnabled</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;totalAsset</td>
+<td style="text-align: left">totalAsset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;symbol</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;isolatedCreated</td>
+<td style="text-align: left">isolatedCreated</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;enabled</td>
+<td style="text-align: left">enabled</td>
 <td style="text-align: left">账户是否启用，true-启用，false-停用</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;marginLevel</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">marginLevel</td>
+<td style="text-align: left">杠杆倍数</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;marginRatio</td>
+<td style="text-align: left">marginRatio</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;indexPrice</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">indexPrice</td>
+<td style="text-align: left">指数价格</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10000.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;liquidatePrice</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">liquidatePrice</td>
+<td style="text-align: left">强平价</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1000.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;liquidateRate</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">liquidateRate</td>
+<td style="text-align: left">强平率</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;tradeEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">tradeEnabled</td>
+<td style="text-align: left">是否可交易</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 </tbody></table>
@@ -6193,78 +6148,53 @@ body
 <p><strong>详细说明</strong>：</p>
 
 <p>传”symbols”, 将只会返回制定symbol的杠杆逐仓资产</p>
-<h2 id='52f8ad9da8'>查询止盈止损订单</h2>
-<p>说明</p>
 
-<blockquote>
-<p>请求示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/trigerOrder
-</code></pre></div>
-<blockquote>
-<p>返回示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+<!-- ## 查询止盈止损订单
+说明
 
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p><strong>HTTP请求</strong></p>
+> 请求示例
 
-<ul>
-<li><strong>GET</strong> <code>/api/v3/margin/trigerOrder</code></li>
-</ul>
+```
+get /api/v3/margin/trigerOrder
+```
+> 返回示例
 
-<p><strong>请求参数</strong></p>
+```json
+[
 
-<table><thead>
-<tr>
-<th style="text-align: left">参数名</th>
-<th style="text-align: left">说明</th>
-<th style="text-align: left">是否必须</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">示例</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-</tbody></table>
+]
+```
+**HTTP请求**
 
-<p><strong>返回参数</strong></p>
+- **GET** ```/api/v3/margin/trigerOrder```
 
-<table><thead>
-<tr>
-<th style="text-align: left">参数名</th>
-<th style="text-align: left">说明</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">示例</th>
-</tr>
-</thead><tbody>
-</tbody></table>
+**请求参数**
+
+| 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |是|string|{{timestamp}}|
+|signature| |是|string|{{signature}}|
+
+**返回参数**
+
+| 参数名 | 说明  |数据类型 | 示例|
+| :------------ | :-------- | :--------| :------------------- |
+
+ -->
 <h2 id='b063522e7b'>查询账户最大可借贷额度</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxBorrowable
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxBorrowable?asset=BTC&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00618914"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"borrowLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -6288,29 +6218,29 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，适用于逐仓查询</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 </tbody></table>
 
@@ -6327,23 +6257,21 @@ body
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">系统可借充足情况下，用户账户当前最大可借额度</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.69248805</td>
 </tr>
 <tr>
 <td style="text-align: left">borrowLimit</td>
-<td style="text-align: left">平台限制的用户当前等级可以借的额度【二者选最小返回？？？】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">平台限制的用户当前等级可以借的额度</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">60</td>
 </tr>
 </tbody></table>
 <h2 id='5c7500a46f'>查询还贷记录</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/repay
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/repay?asset=BTC&amp;symbol=BTCUSDT&amp;tranId=2597392&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -6373,71 +6301,71 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓symbol</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">返回 /api/v3/margin/repay</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">current</td>
 <td style="text-align: left">当前查询页。开始值 1. 默认:1</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">size</td>
 <td style="text-align: left">默认:10 最大:100</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">6000</td>
 </tr>
 </tbody></table>
 
@@ -6452,57 +6380,51 @@ body
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">rows</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">rows&gt;&gt;symbol</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">逐仓还款 返回逐仓symbol; 若是全仓不会返回此字段</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXUSDT</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;amount</td>
+<td style="text-align: left">amount</td>
 <td style="text-align: left">还款总额</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">14.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;asset</td>
+<td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MX</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;interest</td>
+<td style="text-align: left">interest</td>
 <td style="text-align: left">支付的利息</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.01866667</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;principal</td>
+<td style="text-align: left">principal</td>
 <td style="text-align: left">支付的本金</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">13.98133333</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;timestamp</td>
+<td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1563438204000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;tranId</td>
+<td style="text-align: left">tranId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">2970933056</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 </tbody></table>
@@ -6511,12 +6433,10 @@ body
 
 <p>必须发送tranId 或 startTime，tranId 优先。响应返回为降序排列。如果发送symbol，返回指定逐仓symbol指定asset的还贷记录。</p>
 <h2 id='2d9ab66508'>查询逐仓杠杆交易对</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/pair
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/pair?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -6526,7 +6446,7 @@ body
    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
    </span><span class="nl">"base"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
    </span><span class="nl">"quote"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-   </span><span class="nl">"isMarginTrade"</span><span class="p">:</span><span class="kc">true</span><span class="err">//能不能杠杆交易</span><span class="w">   
+   </span><span class="nl">"isMarginTrade"</span><span class="p">:</span><span class="kc">true</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -6551,22 +6471,22 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 </tbody></table>
 
@@ -6583,35 +6503,33 @@ body
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">base</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">quote</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">USDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isMarginTrade</td>
 <td style="text-align: left">能不能杠杆交易</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 </tbody></table>
 <h2 id='0077c258b2'>获取账户强制平仓记录</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/forceLiquidationRec
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -6641,49 +6559,49 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">current</td>
 <td style="text-align: left">当前查询页。 开始值 1. 默认:1</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">size</td>
 <td style="text-align: left">默认:10 最大:100</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -6699,69 +6617,63 @@ body
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">rows</td>
+<td style="text-align: left">avgPrice</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">rows&gt;&gt;avgPrice</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00388359</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;executedQty</td>
+<td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">31.39000000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;orderId</td>
+<td style="text-align: left">orderId</td>
 <td style="text-align: left">没有order id 为系统还</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">180015097</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;price</td>
+<td style="text-align: left">price</td>
 <td style="text-align: left">没有price 为直接还</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00388110</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;qty</td>
+<td style="text-align: left">qty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">31.39000000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;side</td>
+<td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;symbol</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;isIsolated</td>
+<td style="text-align: left">isIsolated</td>
 <td style="text-align: left">是否是逐仓</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;updatedTime</td>
+<td style="text-align: left">updatedTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1558941374745</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 </tbody></table>
@@ -6770,12 +6682,10 @@ body
 
 <p>响应返回为降序排列。</p>
 <h2 id='b467769ef7'>获取逐仓杠杆利率及限额</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginData
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -6788,8 +6698,8 @@ body
         </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"hourInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00026125"</span><span class="p">,</span><span class="err">//每小时利息</span><span class="w">
-                </span><span class="nl">"borrowLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"270"</span><span class="err">//借贷限额</span><span class="w">
+                </span><span class="nl">"hourInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00026125"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"borrowLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"270"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
@@ -6823,22 +6733,22 @@ body
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 </tbody></table>
 
@@ -6855,47 +6765,39 @@ body
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">leverage</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10</td>
 </tr>
 <tr>
-<td style="text-align: left">data</td>
+<td style="text-align: left">coin</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">data&gt;&gt;coin</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
-<td style="text-align: left">data&gt;&gt;hourInterest</td>
+<td style="text-align: left">hourInterest</td>
 <td style="text-align: left">小时利息</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00026125</td>
 </tr>
 <tr>
-<td style="text-align: left">data&gt;&gt;borrowLimit</td>
-<td style="text-align: left">【当前剩余限额？待确认】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">borrowLimit</td>
+<td style="text-align: left">借贷限额</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">270</td>
 </tr>
 </tbody></table>
 <h2 id='55cda2e3ef'>获取逐仓档位信息</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginTier
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -6904,12 +6806,12 @@ body
   </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="err">//仓位等级</span><span class="w">
-        </span><span class="nl">"effectiveMultiple"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="err">//【有效倍数】</span><span class="w">
-        </span><span class="nl">"initialRiskRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.111"</span><span class="p">,</span><span class="err">【初始风险比】</span><span class="w">
-        </span><span class="nl">"liquidationRiskRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.05"</span><span class="p">,</span><span class="err">【清算风险比】</span><span class="w">
-        </span><span class="nl">"baseAssetMaxBorrowable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="err">【基础货币最大可借】</span><span class="w">
-        </span><span class="nl">"quoteAssetMaxBorrowable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70000"</span><span class="err">【计价货币最大可借】</span><span class="w">
+        </span><span class="nl">"tier"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"effectiveMultiple"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"initialRiskRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.111"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationRiskRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.05"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"baseAssetMaxBorrowable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quoteAssetMaxBorrowable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70000"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -6942,21 +6844,21 @@ body
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">tier</td>
 <td style="text-align: left">不传则返回所有逐仓杠杆档位</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -6974,43 +6876,43 @@ body
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">tier</td>
 <td style="text-align: left">仓位等级</td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 <tr>
 <td style="text-align: left">effectiveMultiple</td>
-<td style="text-align: left">【有效倍数】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">有效倍数</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10</td>
 </tr>
 <tr>
 <td style="text-align: left">initialRiskRatio</td>
-<td style="text-align: left">【初始风险比】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">初始风险比</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.111</td>
 </tr>
 <tr>
 <td style="text-align: left">liquidationRiskRatio</td>
-<td style="text-align: left">【清算风险比】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">清算风险比</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.05</td>
 </tr>
 <tr>
 <td style="text-align: left">baseAssetMaxBorrowable</td>
-<td style="text-align: left">【基础货币最大可借】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">基础货币最大可借</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">9</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteAssetMaxBorrowable</td>
-<td style="text-align: left">【计价货币最大可借】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">计价货币最大可借</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">70000</td>
 </tr>
 </tbody></table>
