@@ -1777,7 +1777,7 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 |signature|signature |YES|string|{{signature}}|
 |asset|asset|YES|string|BTC| 
 |isIsolated|is Isolated，"TRUE", Default "TRUE"|NO|string| 
-|symbol|Isolated symbol|NO|string| 
+|symbol|symbol|YES|string| 
 |amount| amount|YES|string| 
 |recvWindow| |NO|string| 
 
@@ -1821,7 +1821,7 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 |signature| |YES|string|{{signature}}|
 |asset|asset/btc|YES|string||
 |isIsolated|is Isolated，"TRUE",  Default "TRUE"|NO|string||
-|symbol|isolated symbol|YES|string||
+|symbol|symbol|YES|string||
 |amount|amount or isAllRepay|NO|string||
 |borrowId|loan order id|YES|string||
 |isAllRepay|all repay or portion repay|NO|string||
@@ -1943,7 +1943,7 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 |signature| |YES|string|{{signature}}|
 |symbol| |YES|string|
 |isIsolated|is Isolated，"TRUE", "FALSE", Default "FALSE"|NO|string|
-|orderId| |NO|string|
+|orderId| |YES|string|
 |origClientOrderId|origClientOrderId|NO|string|
 |recvWindow| |NO|string|
 
@@ -2005,13 +2005,13 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
 |asset|asset|YES|string|BTC|
-|symbol|symbol|NO|string|
+|symbol|symbol|YES|string|
 |tranId|tranId |NO|string|
 |startTime| |NO|string|
 |endTime| |NO|string|
 |current|current page. Default:1|NO|string|
 |size|Default:10 max:100|NO|string|
-|recvWindow| |YES|string|
+|recvWindow| |NO|string|
 
 **Response Parameter**
 
@@ -2204,7 +2204,7 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
-|symbol|symbol|NO|string| 
+|symbol|symbol|YES|string| 
 |isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|string|
 
 **Response Parameter**
@@ -2346,7 +2346,7 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
-|symbol| |NO|string|
+|symbol| |YES|string|
 |isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|string| |
 |orderId| |NO|string| 
 
@@ -2524,7 +2524,7 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
 |asset| |YES|string| 
-|symbol|is isolated symbol|NO|string| 
+|symbol| symbol|YES|string| 
 
 **Response Parameter**
 
@@ -2560,7 +2560,7 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
 |asset| |YES|string| |
-|symbol|symbol|NO|string| |
+|symbol|symbol|YES|string| |
 |tranId|transfer id|YES|string| |
 |startTime| |NO|string| |
 |endTime| |NO|string| |
@@ -2655,7 +2655,7 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 |signature| |YES|string|{{signature}}|
 |startTime| |NO|string| |
 |endTime| |NO|string|| 
-|symbol| |NO|string|| 
+|symbol| |YES|string|| 
 |current|current page Default:1|NO|string|| 
 |size|Default:10 max:100|NO|string|| 
 
@@ -2721,7 +2721,7 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
-|symbol| |NO|string|| 
+|symbol| |YES|string|| 
 
 **Response Parameter**
 
