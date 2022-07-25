@@ -2561,7 +2561,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">orderListId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">客户端订单列表</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -4085,17 +4085,17 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">时间戳</td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
@@ -4113,7 +4113,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left">BUY SELL</td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BUY</td>
@@ -4141,7 +4141,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left">买入价</td>
+<td style="text-align: left">下单价格买入价</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">20000</td>
@@ -4155,7 +4155,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -4192,7 +4192,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
@@ -4237,21 +4237,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">时间戳</td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left">资产名称</td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
@@ -4265,7 +4265,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -4279,7 +4279,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -4341,17 +4341,17 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
@@ -4369,7 +4369,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -4397,7 +4397,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -4475,21 +4475,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -4503,7 +4503,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -4522,13 +4522,13 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
@@ -4540,55 +4540,55 @@ body
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.089853</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.178622</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">成交数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.000000</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">累计成交金额</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.000000</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单状态</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单类型</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BUY</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">orderListId</td>
-<td style="text-align: left">-1</td>
+<td style="text-align: left">客户端订单列表</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
@@ -4642,17 +4642,17 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
@@ -4663,14 +4663,14 @@ body
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">746777776866070528</td>
@@ -4684,7 +4684,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -4703,13 +4703,13 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">LTCBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">693471305432961024</td>
 </tr>
@@ -4721,49 +4721,49 @@ body
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">1.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">10.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">成交数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">8.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left">累计成交金额</td>
+<td style="text-align: left">累计成交金额累计成交金额</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">8.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单状态</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单类型</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
@@ -4815,17 +4815,17 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
@@ -4850,14 +4850,14 @@ body
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">开始时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">截止时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
@@ -4878,7 +4878,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -4903,13 +4903,13 @@ body
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">借贷id</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">12807067523</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
@@ -4921,7 +4921,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1555056425000</td>
 </tr>
@@ -4951,7 +4951,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left">状态: PENDING (等待执行), CONFIRMED (成功借贷), FAILED (执行失败);</td>
+<td style="text-align: left">订单状态: PENDING (等待执行), CONFIRMED (成功借贷), FAILED (执行失败);</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">CONFIRMED</td>
 </tr>
@@ -5014,21 +5014,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -5042,21 +5042,21 @@ body
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left">订单id</td>
+<td style="text-align: left">订单id 订单id</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">746779360689786880</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">开始时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">截止时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
@@ -5088,79 +5088,79 @@ body
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">累计成交金额</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">成交数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是否正常工作</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">41295</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">5.31000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.22500000</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单状态</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1565769338806</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单类型</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">TAKE_PROFIT_LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">更新时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1565769342148</td>
 </tr>
@@ -5201,21 +5201,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -5229,14 +5229,14 @@ body
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">开始时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">截止时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
@@ -5287,43 +5287,43 @@ body
 </tr>
 <tr>
 <td style="text-align: left">isBuyer</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是否自成交</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">39324</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.02000000</td>
 </tr>
 <tr>
 <td style="text-align: left">qty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">3.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1561973357171</td>
 </tr>
@@ -5386,21 +5386,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -5432,85 +5432,85 @@ body
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left">成交金额</td>
+<td style="text-align: left">累计成交金额成交金额</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">成交数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是否正常工作</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">211842552</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.30000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00475010</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单状态</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NEW</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1562040170089</td>
 </tr>
 <tr>
 <td style="text-align: left">timeInForce</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">生效时间</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">GTC</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单类型</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">更新时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1562040170089</td>
 </tr>
@@ -5553,17 +5553,17 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
@@ -5574,7 +5574,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -5593,7 +5593,7 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">amount</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">可转出数额</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00022998</td>
 </tr>
@@ -5636,21 +5636,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -5669,19 +5669,19 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">calcTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">查询时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1562046418000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">21823.45</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
@@ -5734,21 +5734,21 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -5787,79 +5787,79 @@ body
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left">累计交易货币数量？？</td>
+<td style="text-align: left">累计成交金额累计交易货币数量？？</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
-<td style="text-align: left">实际数量</td>
+<td style="text-align: left">成交数量实际数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">是否正常工作</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单id</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">213205622</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
-<td style="text-align: left">原始数量</td>
+<td style="text-align: left">下单数量原始数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.30000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单价格</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00493630</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单状态</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NEW</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
-<td style="text-align: left">是否是逐仓symbol交易</td>
+<td style="text-align: left">是否是逐仓</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">下单时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1562133008725</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">订单类型</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">更新时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1562133008725</td>
 </tr>
@@ -5938,17 +5938,17 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbols</td>
@@ -5983,39 +5983,39 @@ body
 </tr>
 <tr>
 <td style="text-align: left">borrowed</td>
-<td style="text-align: left">已借</td>
+<td style="text-align: left">已借金额</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">0</td>
 </tr>
 <tr>
 <td style="text-align: left">free</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">可用金额</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">1</td>
 </tr>
 <tr>
 <td style="text-align: left">interest</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">利息金额</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">0</td>
 </tr>
 <tr>
 <td style="text-align: left">locked</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">冻结金额</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">0</td>
 </tr>
 <tr>
 <td style="text-align: left">netAsset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">净资产</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">1</td>
 </tr>
 <tr>
 <td style="text-align: left">netAssetOfBtc</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">净资产折合BTC</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">0.0002</td>
 </tr>
 <tr>
 <td style="text-align: left">repayEnabled</td>
@@ -6025,79 +6025,19 @@ body
 </tr>
 <tr>
 <td style="text-align: left">totalAsset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">总资产</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">asset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">USDT</td>
-</tr>
-<tr>
-<td style="text-align: left">borrowEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">boolean</td>
-<td style="text-align: left">true</td>
-</tr>
-<tr>
-<td style="text-align: left">borrowed</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">free</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">interest</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">locked</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">netAsset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">netAssetOfBtc</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">repayEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">boolean</td>
-<td style="text-align: left">true</td>
-</tr>
-<tr>
-<td style="text-align: left">totalAsset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">1</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isolatedCreated</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">该逐仓账户创建状态</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
@@ -6109,15 +6049,15 @@ body
 </tr>
 <tr>
 <td style="text-align: left">marginLevel</td>
-<td style="text-align: left">杠杆倍数</td>
+<td style="text-align: left">实际杠杆倍数</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">1</td>
 </tr>
 <tr>
 <td style="text-align: left">marginRatio</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">支持杠杠倍数</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">0.00000000</td>
+<td style="text-align: left">9</td>
 </tr>
 <tr>
 <td style="text-align: left">indexPrice</td>
@@ -6172,8 +6112,8 @@ get /api/v3/margin/trigerOrder
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |是|string|{{timestamp}}|
-|signature| |是|string|{{signature}}|
+|timestamp|时间 |是|string|1507725176595|
+|signature|签名 |是|string|signature|
 
 **返回参数**
 
@@ -6216,17 +6156,17 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
@@ -6237,7 +6177,7 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -6299,17 +6239,17 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
@@ -6320,28 +6260,28 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
-<td style="text-align: left">返回 /api/v3/margin/repay</td>
+<td style="text-align: left">还款id</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">开始时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">截止时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
@@ -6362,7 +6302,7 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">6000</td>
@@ -6393,7 +6333,7 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">资产</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">MX</td>
 </tr>
@@ -6411,19 +6351,19 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1563438204000</td>
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">还款id</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">2970933056</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">总数</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
@@ -6469,21 +6409,21 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -6502,19 +6442,19 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">base</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易币种</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">quote</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">计价币种</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">USDT</td>
 </tr>
@@ -6557,35 +6497,35 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">开始时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">截止时间</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -6624,37 +6564,37 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">成交数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">31.39000000</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left">没有order id 为系统还</td>
+<td style="text-align: left">订单id没有order id 为系统还</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">180015097</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left">没有price 为直接还</td>
+<td style="text-align: left">下单价格没有price 为直接还</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">0.00388110</td>
 </tr>
 <tr>
 <td style="text-align: left">qty</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">数量</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">31.39000000</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">方向</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
@@ -6666,13 +6606,13 @@ get /api/v3/margin/trigerOrder
 </tr>
 <tr>
 <td style="text-align: left">updatedTime</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">更新时间</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1558941374745</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">总数</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
@@ -6731,21 +6671,21 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">1507725176595</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -6764,19 +6704,19 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">leverage</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">杠杆倍率</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">10</td>
 </tr>
 <tr>
 <td style="text-align: left">coin</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">币种</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
@@ -6835,21 +6775,21 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">时间</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">[string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">签名</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
+<td style="text-align: left">signature</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">逐仓交易对，配合逐仓使用</td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
@@ -6875,7 +6815,7 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">交易对</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
