@@ -554,9 +554,6 @@
                     <a href="#isolated-account" class="toc-h2 toc-link" data-title="Isolated Account">Isolated Account</a>
                   </li>
                   <li>
-                    <a href="#query-trigerorder" class="toc-h2 toc-link" data-title="Query TrigerOrder">Query TrigerOrder</a>
-                  </li>
-                  <li>
                     <a href="#maxborrowable" class="toc-h2 toc-link" data-title="MaxBorrowable">MaxBorrowable</a>
                   </li>
                   <li>
@@ -2840,6 +2837,78 @@ Klines are uniquely identified by their open time.</p>
 </tbody></table>
 
 <p>Response:</p>
+
+<table><thead>
+<tr>
+<th>name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>Symbol</td>
+</tr>
+<tr>
+<td>origClientOrderId</td>
+<td>Original client order id</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>client order id</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Price</td>
+</tr>
+<tr>
+<td>origOty</td>
+<td>Original order quantity</td>
+</tr>
+<tr>
+<td>executedQty</td>
+<td>Executed order quantity</td>
+</tr>
+<tr>
+<td>cummulativeQuoteQty</td>
+<td>Cummulative quote quantity</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Order status</td>
+</tr>
+<tr>
+<td>timeInForce</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>Order type</td>
+</tr>
+<tr>
+<td>side</td>
+<td>Order side</td>
+</tr>
+<tr>
+<td>stopPrice</td>
+<td>stop price</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Order created time</td>
+</tr>
+<tr>
+<td>updateTime</td>
+<td>Last update time</td>
+</tr>
+<tr>
+<td>isWorking</td>
+<td>is orderbook</td>
+</tr>
+</tbody></table>
 <h2 id='all-orders'>All Orders</h2>
 <blockquote>
 <p>Response</p>
@@ -3072,11 +3141,11 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>buyerCommission</td>
-<td></td>
+<td>buyer fee</td>
 </tr>
 <tr>
 <td>sellerCommission</td>
-<td></td>
+<td>seller fee</td>
 </tr>
 <tr>
 <td>canTrade</td>
@@ -3430,7 +3499,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/tradeMode
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/tradeMode?tradeMode=0&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -3513,10 +3582,12 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </tbody></table>
 <h2 id='place-order'>Place Order</h2>
+<aside class="warning">not support market order yet</aside>
+
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/order
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/margin/order?symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=0.0003&amp;price=20000&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -3552,77 +3623,77 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">time</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, &quot;FALSE&quot;, Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">TRUE</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left">BUY SELL</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BUY</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left">API Definitions：order type</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">quantity</td>
 <td style="text-align: left">quantity</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">quoteOrderQty</td>
 <td style="text-align: left">order quantity</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left">price</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">newClientOrderId</td>
 <td style="text-align: left">newClientOrderId</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -3640,31 +3711,31 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">693471305432961024</td>
 </tr>
 <tr>
 <td style="text-align: left">clientOrderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">6gCrw2kRUAF9CvJDGP16IP</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">transactTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1507725176595</td>
 </tr>
 </tbody></table>
@@ -3672,14 +3743,14 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/loan
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/loan?asset=BTC&amp;amount=0.002&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000001</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">746784754145301480</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3704,49 +3775,49 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">time</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">signature</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">Isolated symbol</td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -3764,8 +3835,8 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">transfer id</td>
-<td style="text-align: left">[number]</td>
-<td style="text-align: left">100000001</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">746784754145301480</td>
 </tr>
 </tbody></table>
 
@@ -3773,19 +3844,17 @@ Klines are uniquely identified by their open time.</p>
 
 <p>If isIsolated = &quot;TRUE&quot;, means isolated mode,symbol must be filled in.</p>
 <h2 id='repayment'>Repayment</h2>
-<p>Description</p>
-
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/repay
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/margin/repay?asset=BTC&amp;symbol=BTCUSDT&amp;isAllRepay=true&amp;borrowId=746784754145300480&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000001</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2597392</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3810,63 +3879,63 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset/btc</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;,  Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">isolated symbol</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">amount or isAllRepay</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">borrowId</td>
 <td style="text-align: left">loan order id</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isAllRepay</td>
 <td style="text-align: left">all repay or portion repay</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -3884,8 +3953,8 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">repay id</td>
-<td style="text-align: left">[number]</td>
-<td style="text-align: left">100000001</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">2597392</td>
 </tr>
 </tbody></table>
 
@@ -3896,39 +3965,29 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/openOrders
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/openOrders?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">      
-    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pXLV6Hz6mprAcVYpVMTGgx"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.089853"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.178622"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">      
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pXLV6Hz6mprAcVYpVMTGgx"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.090430"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.178622"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000000"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="w">
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746779360689786880"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="w">
   </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -3952,35 +4011,35 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left">less than <code>60000</code></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -3998,100 +4057,102 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">clientOrderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">pXLV6Hz6mprAcVYpVMTGgx</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.089853</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.178622</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.000000</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.000000</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BUY</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">orderListId</td>
 <td style="text-align: left">-1</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
 <h2 id='cancel-order'>Cancel Order</h2>
-<p>Description</p>
-
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/order
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/margin/order?symbol=BTCUSDT&amp;orderId=746777776866070528&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCBTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"693471305432961024"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelMyOrder1"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">       
+     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746777776866070528"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212162000</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212162000</span><span class="w">     
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4116,49 +4177,49 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, &quot;FALSE&quot;, Default &quot;FALSE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">origClientOrderId</td>
 <td style="text-align: left">origClientOrderId</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -4176,67 +4237,67 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LTCBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">693471305432961024</td>
 </tr>
 <tr>
 <td style="text-align: left">clientOrderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">cancelMyOrder1</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">8.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">8.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 </tbody></table>
@@ -4245,18 +4306,27 @@ Klines are uniquely identified by their open time.</p>
 
 <p>must send any one of orderId or origClientOrderId .</p>
 <h2 id='query-loan-list'>Query Loan List</h2>
-<p>Description</p>
-
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/loan
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/loan?asset=BTC&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746784754145300480"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"principal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"remainInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"repayAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"repayInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000001"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REPAID"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658213826000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -4280,70 +4350,70 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">current</td>
 <td style="text-align: left">current page. Default:1</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">size</td>
 <td style="text-align: left">Default:10 max:100</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -4359,75 +4429,69 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">rows</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">rows&gt;&gt;symbol</td>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXUSDT</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;tranId</td>
+<td style="text-align: left">tranId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">12807067523</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;asset</td>
+<td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MX</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;principal</td>
 <td style="text-align: left">principal</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">principal</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.84624403</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;timestamp</td>
+<td style="text-align: left">timestamp</td>
 <td style="text-align: left">time</td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1555056425000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;remainAmount</td>
 <td style="text-align: left">remainAmount</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">remainAmount</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;remainInterest</td>
 <td style="text-align: left">remainInterest</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">remainInterest</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;repayAmount</td>
 <td style="text-align: left">repayAmount</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">repayAmount</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">300</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;repayInterest</td>
 <td style="text-align: left">repayInterest</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">repayInterest</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.96249686</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;status</td>
+<td style="text-align: left">status</td>
 <td style="text-align: left">status: PENDING , CONFIRMED, FAILED;</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CONFIRMED</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 </tbody></table>
@@ -4436,18 +4500,32 @@ Klines are uniquely identified by their open time.</p>
 
 <p>TranId or startTime must be sent, tranId takes precedence. Responses are returned in descending order. If you send isolatedSymbol, return the credit record for the specified store-by-store symbol specified asset.</p>
 <h2 id='all-order'>All Order</h2>
-<p>Description</p>
-
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/allOrders
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/allOrders?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746779360689786880"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="p">,</span><span class="w">
+       </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212551000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -4471,56 +4549,56 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, &quot;FALSE&quot;,Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">limit</td>
 <td style="text-align: left">Default 500;max 500.</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -4538,85 +4616,85 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">clientOrderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">D2KDy4DIeS56PvkM13f8cP</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">41295</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">5.31000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.22500000</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">CANCELED</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1565769338806</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">TAKE_PROFIT_LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1565769342148</td>
 </tr>
 </tbody></table>
@@ -4625,12 +4703,10 @@ Klines are uniquely identified by their open time.</p>
 
 <p>If orderId is set, get the order &gt;= orderId, NO returns the recent order history. Some historical orders of cummulativeQuoteQty  &lt; 0: YES Indicates that the current data does not exist.</p>
 <h2 id='account-trade-list-2'>Account Trade List</h2>
-<p>Description</p>
-
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/myTrades
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/myTrades?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -4660,56 +4736,56 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, &quot;FALSE&quot;,Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">fromId</td>
 <td style="text-align: left">TradeId</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">limit</td>
 <td style="text-align: left">Default 500; max 1000.</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -4727,61 +4803,61 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">commission</td>
 <td style="text-align: left">commission</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00006000</td>
 </tr>
 <tr>
 <td style="text-align: left">commissionAsset</td>
 <td style="text-align: left">commissionAsset</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">id</td>
 <td style="text-align: left">trade-id</td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">34</td>
 </tr>
 <tr>
 <td style="text-align: left">isBuyer</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">39324</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.02000000</td>
 </tr>
 <tr>
 <td style="text-align: left">qty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">3.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">false</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1561973357171</td>
 </tr>
 </tbody></table>
@@ -4790,39 +4866,37 @@ Klines are uniquely identified by their open time.</p>
 
 <p>If fromId is set, get the order ID &gt; = fromId, NO Returns the recent order history.</p>
 <h2 id='current-open-orders-2'>Current Open Orders</h2>
-<p>Description</p>
-
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/openOrders
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/openOrders?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"isolatedSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXUSDT"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12807067523"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1555056425000</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"315.53307675"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"dealAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"319.26088158"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"dealQuantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23768.97"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP_OUT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.013275"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23768.97"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"isolatedSymbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXUSDT"</span><span class="p">,</span><span class="w"> 
+          </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12807067523"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1555056425000</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"315.53307675"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dealAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"319.26088158"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"dealQuantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23768.97"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP_OUT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.013275"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23768.97"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"remainQuantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"remainAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FILLED"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4847,28 +4921,28 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, &quot;FALSE&quot;,Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -4886,91 +4960,91 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">clientOrderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">qhcZw71gAkCCTv0t0k8LUK</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">211842552</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.30000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00475010</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">NEW</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562040170089</td>
 </tr>
 <tr>
 <td style="text-align: left">timeInForce</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">GTC</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562040170089</td>
 </tr>
 </tbody></table>
@@ -4978,13 +5052,15 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxTransferable
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxTransferable?asset=BTC&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="w">
+  </span><span class="p">}</span><span class="w"> 
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -5008,28 +5084,28 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5047,21 +5123,25 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">3.59498107</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">0.00022998</td>
 </tr>
 </tbody></table>
 <h2 id='margin-priceindex'>Margin PriceIndex</h2>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/priceIndex
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/priceIndex?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21823.45"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"calcTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658215048128</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -5085,21 +5165,21 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5117,19 +5197,19 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">calcTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562046418000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00333930</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 </tbody></table>
@@ -5137,13 +5217,29 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/order
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/order?symbol=BTCUSDT&amp;orderId=746779360689786880&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"746779360689786880"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20000"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"executedQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"cummulativeQuoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELED"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"isWorking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212540000</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658212551000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -5167,35 +5263,35 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is Isolated，&quot;TRUE&quot;, &quot;FALSE&quot;,Default &quot;TRUE&quot;</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5213,85 +5309,85 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">clientOrderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">ZwfQzuDIGpceVhKW5DvCmO</td>
 </tr>
 <tr>
 <td style="text-align: left">cummulativeQuoteQty</td>
 <td style="text-align: left">cummulativeQuoteQty</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">executedQty</td>
 <td style="text-align: left">amount</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
 <td style="text-align: left">isWorking</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">213205622</td>
 </tr>
 <tr>
 <td style="text-align: left">origQty</td>
 <td style="text-align: left">orign amount</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.30000000</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00493630</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">NEW</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
 <td style="text-align: left">time</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562133008725</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">LIMIT</td>
 </tr>
 <tr>
 <td style="text-align: left">updateTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1562133008725</td>
 </tr>
 </tbody></table>
@@ -5303,7 +5399,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/account
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/account?symbols=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -5312,84 +5408,43 @@ Klines are uniquely identified by their open time.</p>
   </span><span class="p">{</span><span class="w">
    </span><span class="nl">"assets"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> 
-          </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netAssetOfBtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00022998"</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> 
-        </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netAssetOfBtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000458278339932541"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"tradeMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"riskRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"liquidatePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"liquidateRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tradeEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"totalUsdtValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="nl">"isolatedCreated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00006882"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marginRatio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21804.199655172413793103"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidatePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"--"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidateRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"--"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tradeEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+   </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
-</span><span class="err">response</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">symbol:</span><span class="w">
-</span><span class="p">{</span><span class="w">
-   </span><span class="nl">"assets"</span><span class="p">:[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"baseAsset"</span><span class="p">:</span><span class="w"> 
-          </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"quoteAsset"</span><span class="p">:</span><span class="w"> 
-        </span><span class="p">{</span><span class="w">
-          </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"borrowed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"interest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"netAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"repayEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"totalAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"enabled"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"tradeMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"marginLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"riskRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"indexPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"liquidatePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"liquidateRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.00000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"tradeEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"totalUsdtValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
 
@@ -5412,21 +5467,21 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbols</td>
 <td style="text-align: left">max 5 symbols; String delimited by &quot;,&quot;.</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">&quot;BTCUSDT,MXUSDT,ADAUSDT&quot;</td>
 </tr>
 </tbody></table>
@@ -5442,266 +5497,160 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">assets</td>
+<td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[object]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;asset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;borrowEnabled</td>
+<td style="text-align: left">borrowEnabled</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;borrowed</td>
+<td style="text-align: left">borrowed</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;free</td>
+<td style="text-align: left">free</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;interest</td>
+<td style="text-align: left">interest</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;locked</td>
+<td style="text-align: left">locked</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;netAsset</td>
+<td style="text-align: left">netAsset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;netAssetOfBtc</td>
+<td style="text-align: left">netAssetOfBtc</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;repayEnabled</td>
+<td style="text-align: left">repayEnabled</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;baseAsset&gt;&gt;totalAsset</td>
+<td style="text-align: left">totalAsset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset</td>
+<td style="text-align: left">isolatedCreated</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[object]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;asset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">USDT</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;borrowEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;borrowed</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;free</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;interest</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;locked</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;netAsset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;netAssetOfBtc</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;repayEnabled</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
-<td style="text-align: left">true</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;quoteAsset&gt;&gt;totalAsset</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">0.00000000</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">BTCUSDT</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;isolatedCreated</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
-<td style="text-align: left">true</td>
-</tr>
-<tr>
-<td style="text-align: left">assets&gt;&gt;enabled</td>
 <td style="text-align: left">enabled</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">enabled</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;marginLevel</td>
+<td style="text-align: left">marginLevel</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;marginRatio</td>
+<td style="text-align: left">marginRatio</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;indexPrice</td>
+<td style="text-align: left">indexPrice</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10000.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;liquidatePrice</td>
+<td style="text-align: left">liquidatePrice</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1000.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;liquidateRate</td>
+<td style="text-align: left">liquidateRate</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">assets&gt;&gt;tradeEnabled</td>
+<td style="text-align: left">tradeEnabled</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 </tbody></table>
-<h2 id='query-trigerorder'>Query TrigerOrder</h2>
-<blockquote>
-<p>request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/trigerOrder
-</code></pre></div>
-<blockquote>
-<p>response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
 
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p><strong>Http Request</strong></p>
+<!-- ## Query TrigerOrder
 
-<ul>
-<li><strong>GET</strong> <code>/api/v3/margin/trigerOrder</code></li>
-</ul>
+> request
 
-<p><strong>Request Parameter</strong></p>
+```
+get /api/v3/margin/trigerOrder
+```
+> response
 
-<table><thead>
-<tr>
-<th style="text-align: left">name</th>
-<th style="text-align: left">Description</th>
-<th style="text-align: left">Mandatory</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Sample</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-</tbody></table>
+```json
+[
 
-<p><strong>Response Parameter</strong></p>
+]
+```
+**Http Request**
 
-<table><thead>
-<tr>
-<th style="text-align: left">name</th>
-<th style="text-align: left">Description</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Sample</th>
-</tr>
-</thead><tbody>
-</tbody></table>
+- **GET** ```/api/v3/margin/trigerOrder```
+
+**Request Parameter**
+
+| name | Description| Mandatory  | Type |  Sample            |
+| :------ | :-------- | :-------- | :---------- | :------------------- |
+|timestamp| |YES|string|{{timestamp}}|
+|signature| |YES|string|{{signature}}|
+
+**Response Parameter**
+
+| name | Description  |Type | Sample|
+| :------------ | :-------- | :--------| :------------------- |
+
+ -->
 <h2 id='maxborrowable'>MaxBorrowable</h2>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxBorrowable
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/maxBorrowable?asset=BTC&amp;symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-
+  </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00618914"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"borrowLimit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>Http Request</strong></p>
@@ -5725,28 +5674,28 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">is isolated symbol</td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5764,13 +5713,13 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">amount</td>
 <td style="text-align: left">max borrowable amount</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.69248805</td>
 </tr>
 <tr>
 <td style="text-align: left">borrowLimit</td>
 <td style="text-align: left">borrowLimit</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">60</td>
 </tr>
 </tbody></table>
@@ -5780,7 +5729,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/repay
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/repay?asset=BTC&amp;symbol=BTCUSDT&amp;tranId=2597392&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -5810,70 +5759,70 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">tranId</td>
 <td style="text-align: left">transfer id</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">current</td>
 <td style="text-align: left">current page Default:1</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">size</td>
 <td style="text-align: left">Default:10 max:100</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -5889,57 +5838,51 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">rows</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">rows&gt;&gt;symbol</td>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXUSDT</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;amount</td>
 <td style="text-align: left">amount</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">14.00000000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;asset</td>
+<td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MX</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;interest</td>
 <td style="text-align: left">interest</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">interest</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.01866667</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;principal</td>
 <td style="text-align: left">principal</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">principal</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">13.98133333</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;timestamp</td>
+<td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1563438204000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;tranId</td>
+<td style="text-align: left">tranId</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">2970933056</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 </tbody></table>
@@ -5951,7 +5894,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/pair
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolated/pair?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -5986,21 +5929,21 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -6018,25 +5961,25 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">base</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
 <td style="text-align: left">quote</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">USDT</td>
 </tr>
 <tr>
 <td style="text-align: left">isMarginTrade</td>
 <td style="text-align: left">isMarginTrade</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 </tbody></table>
@@ -6044,7 +5987,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/forceLiquidationRec
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -6074,49 +6017,49 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">current</td>
 <td style="text-align: left">current page Default:1</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">size</td>
 <td style="text-align: left">Default:10 max:100</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -6132,69 +6075,63 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">rows</td>
+<td style="text-align: left">avgPrice</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">rows&gt;&gt;avgPrice</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00388359</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;executedQty</td>
+<td style="text-align: left">executedQty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">31.39000000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;orderId</td>
+<td style="text-align: left">orderId</td>
 <td style="text-align: left">order id</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">180015097</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;price</td>
 <td style="text-align: left">price</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">price</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00388110</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;qty</td>
+<td style="text-align: left">qty</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">31.39000000</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;side</td>
+<td style="text-align: left">side</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">SELL</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;symbol</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">MXBTC</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;isIsolated</td>
+<td style="text-align: left">isIsolated</td>
 <td style="text-align: left">is isolated</td>
-<td style="text-align: left">[boolean]</td>
+<td style="text-align: left">boolean</td>
 <td style="text-align: left">true</td>
 </tr>
 <tr>
-<td style="text-align: left">rows&gt;&gt;updatedTime</td>
+<td style="text-align: left">updatedTime</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1558941374745</td>
 </tr>
 <tr>
 <td style="text-align: left">total</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 </tbody></table>
@@ -6206,7 +6143,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginData
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -6254,21 +6191,21 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{timestamp}}</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -6286,37 +6223,31 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">leverage</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10</td>
 </tr>
 <tr>
-<td style="text-align: left">data</td>
+<td style="text-align: left">coin</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[array]</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">data&gt;&gt;coin</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTC</td>
 </tr>
 <tr>
-<td style="text-align: left">data&gt;&gt;hourInterest</td>
 <td style="text-align: left">hourInterest</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">hourInterest</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">0.00026125</td>
 </tr>
 <tr>
-<td style="text-align: left">data&gt;&gt;borrowLimit</td>
 <td style="text-align: left">borrowLimit</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">borrowLimit</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">270</td>
 </tr>
 </tbody></table>
@@ -6324,7 +6255,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginTier
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>response</p>
@@ -6371,21 +6302,21 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">{{signature}}</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">tier</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -6403,43 +6334,43 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
 </tr>
 <tr>
 <td style="text-align: left">tier</td>
 <td style="text-align: left">tier</td>
-<td style="text-align: left">[number]</td>
+<td style="text-align: left">number</td>
 <td style="text-align: left">1</td>
 </tr>
 <tr>
 <td style="text-align: left">effectiveMultiple</td>
 <td style="text-align: left">effectiveMultiple</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">10</td>
 </tr>
 <tr>
 <td style="text-align: left">initialRiskRatio</td>
 <td style="text-align: left">initialRiskRatio</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.111</td>
 </tr>
 <tr>
 <td style="text-align: left">liquidationRiskRatio</td>
 <td style="text-align: left">liquidationRiskRatio</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">1.05</td>
 </tr>
 <tr>
 <td style="text-align: left">baseAssetMaxBorrowable</td>
-<td style="text-align: left">baseAssetMaxBorrowable】</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">baseAssetMaxBorrowable</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">9</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteAssetMaxBorrowable</td>
 <td style="text-align: left">quoteAssetMaxBorrowable</td>
-<td style="text-align: left">[string]</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">70000</td>
 </tr>
 </tbody></table>
