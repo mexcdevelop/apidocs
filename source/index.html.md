@@ -1491,9 +1491,9 @@ Response:
 [
   {
     "symbol": "BNBBTC",
-    "id": 28457,
-    "orderId": 100234, 
-    "orderListId": -1, 
+    "id": "fad2af9e942049b6adbda1a271f990c6",
+    "orderId": "bb41e5663e124046bd9497a3f5692f39",
+    "orderListId": -1,
     "price": "4.00000100", 
     "qty": "12.00000000", 
     "quoteQty": "48.000012", 
@@ -1544,7 +1544,7 @@ Response:
 | isBuyerMaker    |               |
 | isBestMatch     |               |
 | isSelfTrade     |   isSelfTrade |
-
+| clientOrderId   | clientOrderId |
 ## Query the currency information
 
 > Request
