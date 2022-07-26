@@ -54,6 +54,11 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+
+ ## **2022-07-15**
+
+ - v3/myTrades add params:"isSelfTrade"
+
 ## **2022-07-08**
 
  - Add batchOrders Endpoints
@@ -1497,7 +1502,9 @@ Response:
     "time": 1499865549590, 
     "isBuyer": true, 
     "isMaker": false, 
-    "isBestMatch": true
+    "isBestMatch": true,
+    "isSelfTrade": true,
+    "clientOrderId": null
   }
 ]
 ```
@@ -1536,6 +1543,7 @@ Response:
 | time            | trade time    |
 | isBuyerMaker    |               |
 | isBestMatch     |               |
+| isSelfTrade     |   isSelfTrade |
 
 ## Query the currency information
 
