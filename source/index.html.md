@@ -59,6 +59,11 @@ https://github.com/mxcdevelop/mexc-api-demo
   -  咨询关于钱包、短信、2FA等问题
 
 # 更新日志
+
+## **2022-07-15**
+
+- 成交历史接口增加“是否自成交”参数
+
 ## **2022-07-08**
 
 - 新增批量下单接口
@@ -1743,7 +1748,9 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
       "time": 1651980451000,
       "isBuyer": true,
       "isMaker": false,
-      "isBestMatch": true
+      "isBestMatch": true,
+      "isSelfTrade": null,
+      "clientOrderId": null
   }
 ]
 ```
@@ -1774,12 +1781,13 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | orderId         | 订单id            |
 | price           | 价格              |
 | qty             | 数量              |
-| quoteQty        | 成交金额          |
-| time            | 成交时间          |
-| commission      | 手续费        |
-| commissionAsset | 手续费币种    |
-| isBuyerMaker    | 是否为买方maker单 |
-| isBestMatch     | 是否为最佳匹配    |
+| quoteQty        | 成交金额           |
+| time            | 成交时间           |
+| commission      | 手续费             |
+| commissionAsset | 手续费币种          |
+| isBuyerMaker    | 是否为买方maker单    |
+| isBestMatch     | 是否为最佳匹配       |
+|isSelfTrade      | 是否自成交           |
 
 ## 查询币种信息
 返回币种详细信息以及智能合约地址
