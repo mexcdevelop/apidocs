@@ -1349,9 +1349,9 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
 | origOty             | 初始数量         |
-| executedQty         | 交易的订单数量   |
-| cummulativeQuoteQty | 累计交易金额     |
-| status              | 状态             |
+| executedQty         | 已成交数量   |
+| cummulativeQuoteQty | 已成交金额     |
+| status              | 当前状态       |
 | timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
 | side                | 订单方向         |
@@ -1424,8 +1424,8 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
 | origOty             | 初始数量         |
-| executedQty         | 交易的订单数量   |
-| cummulativeQuoteQty | 累计交易金额     |
+| executedQty         | 已成交数量   |
+| cummulativeQuoteQty | 已成交金额     |
 | status              | 状态             |
 | timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
@@ -1737,8 +1737,8 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 [
   {
       "symbol": "MXUSDT",
-      "id": "151826318319693825",
-      "orderId": "151826317925433344",
+      "id": "fad2af9e942049b6adbda1a271f990c6",
+      "orderId": "bb41e5663e124046bd9497a3f5692f39",
       "orderListId": -1,
       "price": "2.044",
       "qty": "3",
@@ -1787,7 +1787,8 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | commissionAsset | 手续费币种          |
 | isBuyerMaker    | 是否为买方maker单    |
 | isBestMatch     | 是否为最佳匹配       |
-|isSelfTrade      | 是否自成交           |
+| isSelfTrade     | 是否自成交           |
+| clientOrderId   | 用户自定义id|
 
 ## 查询币种信息
 返回币种详细信息以及智能合约地址
