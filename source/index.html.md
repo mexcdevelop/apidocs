@@ -59,6 +59,15 @@ https://github.com/mxcdevelop/mexc-api-demo
   -  咨询关于钱包、短信、2FA等问题
 
 # 更新日志
+
+## **2022-07-27**
+
+- 下单类型新增IOC单和FOK单
+
+## **2022-07-15**
+
+- 成交历史接口增加“是否自成交”参数
+
 ## **2022-07-08**
 
 - 新增批量下单接口
@@ -1344,9 +1353,9 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
 | origOty             | 初始数量         |
-| executedQty         | 交易的订单数量   |
-| cummulativeQuoteQty | 累计交易金额     |
-| status              | 状态             |
+| executedQty         | 已成交数量   |
+| cummulativeQuoteQty | 已成交金额     |
+| status              | 当前状态       |
 | timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
 | side                | 订单方向         |
@@ -1419,8 +1428,8 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 | clientOrderId       | 客户端id         |
 | price               | 价格             |
 | origOty             | 初始数量         |
-| executedQty         | 交易的订单数量   |
-| cummulativeQuoteQty | 累计交易金额     |
+| executedQty         | 已成交数量   |
+| cummulativeQuoteQty | 已成交金额     |
 | status              | 状态             |
 | timeInForce         | 订单有效方式     |
 | type                | 订单类型         |
@@ -1732,8 +1741,8 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 [
   {
       "symbol": "MXUSDT",
-      "id": "151826318319693825",
-      "orderId": "151826317925433344",
+      "id": "fad2af9e942049b6adbda1a271f990c6",
+      "orderId": "bb41e5663e124046bd9497a3f5692f39",
       "orderListId": -1,
       "price": "2.044",
       "qty": "3",
@@ -1743,7 +1752,9 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
       "time": 1651980451000,
       "isBuyer": true,
       "isMaker": false,
-      "isBestMatch": true
+      "isBestMatch": true,
+      "isSelfTrade": null,
+      "clientOrderId": null
   }
 ]
 ```
@@ -1774,12 +1785,14 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | orderId         | 订单id            |
 | price           | 价格              |
 | qty             | 数量              |
-| quoteQty        | 成交金额          |
-| time            | 成交时间          |
-| commission      | 手续费        |
-| commissionAsset | 手续费币种    |
-| isBuyerMaker    | 是否为买方maker单 |
-| isBestMatch     | 是否为最佳匹配    |
+| quoteQty        | 成交金额           |
+| time            | 成交时间           |
+| commission      | 手续费             |
+| commissionAsset | 手续费币种          |
+| isBuyerMaker    | 是否为买方maker单    |
+| isBestMatch     | 是否为最佳匹配       |
+| isSelfTrade     | 是否自成交           |
+| clientOrderId   | 用户自定义id|
 
 ## 查询币种信息
 返回币种详细信息以及智能合约地址
@@ -3061,6 +3074,8 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 - LIMIT 限价单
 - MARKET 市价单
 - LIMIT_MAKER 限价只挂单
+- IMMEDIATE_OR_CANCEL IOC单 (无法立即成交的部分就撤销,订单在失效前会尽量多的成交。)
+- FILL_OR_KILL FOK单 (无法全部立即成交就撤销,如果无法全部成交,订单会失效。)
 
 ### 订单状态
 
