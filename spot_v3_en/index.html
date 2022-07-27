@@ -341,6 +341,12 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-07-27" class="toc-h2 toc-link" data-title="2022-07-27"><strong>2022-07-27</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-07-15" class="toc-h2 toc-link" data-title="2022-07-15"><strong>2022-07-15</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-07-08" class="toc-h2 toc-link" data-title="2022-07-08"><strong>2022-07-08</strong></a>
                   </li>
                   <li>
@@ -636,7 +642,15 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-07-08'><strong>2022-07-08</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-07-27'><strong>2022-07-27</strong></h2>
+<ul>
+<li>Order type add IOC and FOK</li>
+</ul>
+<h2 id='2022-07-15'><strong>2022-07-15</strong></h2>
+<ul>
+<li>V3/myTrades add params:&quot;isSelfTrade&quot;</li>
+</ul>
+<h2 id='2022-07-08'><strong>2022-07-08</strong></h2>
 <ul>
 <li>Add batchOrders Endpoints</li>
 </ul>
@@ -650,13 +664,13 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 </ul>
 <h2 id='2022-05-22'><strong>2022-05-22</strong></h2>
 <ul>
-<li>optimize exchangeInfo Endpoints</li>
-<li>optimize order Endpoints,add parameter: order id</li>
+<li>Optimize exchangeInfo Endpoints</li>
+<li>Optimize order Endpoints,add parameter: order id</li>
 </ul>
 <h2 id='2022-04-25'><strong>2022-04-25</strong></h2>
 <ul>
-<li>optimize exchangeInfo Endpoints,add parameters: isSpotTradingAllowed and isMarginTradingAllowed</li>
-<li>optimize openOrders Endpoints</li>
+<li>Optimize exchangeInfo Endpoints,add parameters: isSpotTradingAllowed and isMarginTradingAllowed</li>
+<li>Optimize openOrders Endpoints</li>
 </ul>
 <h2 id='2022-03-29'><strong>2022-03-29</strong></h2>
 <ul>
@@ -3195,9 +3209,9 @@ Klines are uniquely identified by their open time.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNBBTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28457</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">100234</span><span class="p">,</span><span class="w"> 
-    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fad2af9e942049b6adbda1a271f990c6"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bb41e5663e124046bd9497a3f5692f39"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.00000100"</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"qty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.00000000"</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"quoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48.000012"</span><span class="p">,</span><span class="w"> 
@@ -3206,7 +3220,9 @@ Klines are uniquely identified by their open time.</p>
     </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499865549590</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"isBuyer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"isMaker"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
-    </span><span class="nl">"isBestMatch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="nl">"isBestMatch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isSelfTrade"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3325,6 +3341,14 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td>isBestMatch</td>
 <td></td>
+</tr>
+<tr>
+<td>isSelfTrade</td>
+<td>isSelfTrade</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>clientOrderId</td>
 </tr>
 </tbody></table>
 <h2 id='query-the-currency-information'>Query the currency information</h2>
@@ -6381,9 +6405,11 @@ get /api/v3/margin/trigerOrder
 </ul>
 <h3 id='order-type'>Order type</h3>
 <ul>
-<li>LIMIT    Limit order</li>
-<li>MARKET Market order</li>
-<li>LIMIT_MAKER   Limit maker order</li>
+<li>LIMIT (Limit order)<br></li>
+<li>MARKET (Market order)</li>
+<li>LIMIT_MAKER   (Limit maker order)</li>
+<li>IMMEDIATE_OR_CANCEL (Immediate or cancel order)</li>
+<li>FILL_OR_KILL (Fill or kill order)</li>
 </ul>
 <h3 id='order-state'>Order State</h3>
 <ul>
