@@ -54,14 +54,17 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-07-27**
 
- ## **2022-07-15**
+- Order type add IOC and FOK
 
- - v3/myTrades add params:"isSelfTrade"
+## **2022-07-15**
+
+- V3/myTrades add params:"isSelfTrade"
 
 ## **2022-07-08**
 
- - Add batchOrders Endpoints
+- Add batchOrders Endpoints
 
 ## **2022-07-03**
 
@@ -73,13 +76,13 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 ## **2022-05-22**
 
-- optimize exchangeInfo Endpoints
-- optimize order Endpoints,add parameter: order id
+- Optimize exchangeInfo Endpoints
+- Optimize order Endpoints,add parameter: order id
 
 ## **2022-04-25**
 
-- optimize exchangeInfo Endpoints,add parameters: isSpotTradingAllowed and isMarginTradingAllowed
-- optimize openOrders Endpoints
+- Optimize exchangeInfo Endpoints,add parameters: isSpotTradingAllowed and isMarginTradingAllowed
+- Optimize openOrders Endpoints
 
 ## **2022-03-29**
 
@@ -2803,9 +2806,11 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 ### Order type
 
-- LIMIT    Limit order
-- MARKET Market order
-- LIMIT_MAKER   Limit maker order
+- LIMIT (Limit order)   
+- MARKET (Market order)
+- LIMIT_MAKER   (Limit maker order)
+- IMMEDIATE_OR_CANCEL (Immediate or cancel order)
+- FILL_OR_KILL (Fill or kill order)
 
 ### Order State
 
