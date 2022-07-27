@@ -60,6 +60,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-07-27**
+
+- 下单类型新增IOC单和FOK单
+
 ## **2022-07-15**
 
 - 成交历史接口增加“是否自成交”参数
@@ -3070,6 +3074,8 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 - LIMIT 限价单
 - MARKET 市价单
 - LIMIT_MAKER 限价只挂单
+- IMMEDIATE_OR_CANCEL IOC单 (无法立即成交的部分就撤销,订单在失效前会尽量多的成交。)
+- FILL_OR_KILL FOK单 (无法全部立即成交就撤销,如果无法全部成交,订单会失效。)
 
 ### 订单状态
 
