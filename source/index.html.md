@@ -489,7 +489,7 @@ GET /api/v3/depth?symbol=BTCUSDT&limit=200
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| lastUpdateId | long     | 成交时间            |
+| lastUpdateId | long     | 最新更新ID            |
 | bids         | list     | 买盘 [价位, 挂单量] |
 | asks         | list     | 卖盘 [价位, 挂单量] |
 
@@ -960,9 +960,9 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| subAccount | 1 | 1 |
-| isFreeze | 1 | 1 |
-| createTime | 1 | 1 |
+| subAccount | STRING | 子账户名称 |
+| isFreeze | STRING | 是否冻结 |
+| createTime | LONG | 创建时间 |
 
 
 ## 创建子账户的APIkey
@@ -1217,7 +1217,7 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 | orderListId|客户端订单列表          |          |
 
 ## 批量下单
-支持单次批量下20单。
+支持单次批量下20单,限频2次/秒。
 
 > 请求示例
 
