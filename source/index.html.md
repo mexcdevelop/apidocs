@@ -1658,7 +1658,7 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 | origQuoteOrderQty   | 原始的交易金额    |
 
 ## 账户信息
-获取当前账户信息
+获取当前账户信息，限速2次每秒。
 
 > 请求示例
 
@@ -1874,7 +1874,7 @@ Get /api/v3/capital/config/getall
 > 请求示例
 
 ```
-post /api/v3/capital/withdraw/apply
+post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amount=3&signature={{signature}}&timestamp={{timestamp}}
 ```
 > 返回示例
 
@@ -1916,13 +1916,24 @@ post /api/v3/capital/withdraw/apply
 > 请求示例
 
 ```
-get /api/v3/capital/deposit/hisrec
+get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
-
+  {
+        "amount": "128",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "status": 5,
+        "address": "0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b",
+        "addressTag": null,
+        "txId": "0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0",
+        "insertTime": 1657952043000,
+        "unlockConfirm": "16",
+        "confirmTimes": "24"
+  }
 ]
 ```
 **HTTP请求**
@@ -1936,7 +1947,7 @@ get /api/v3/capital/deposit/hisrec
 |timestamp|string|是|时间戳|
 |signature|string|是|签名|
 |coin|string|是|币种|
-|status|string|否|0(0:pending,6: credited but cannot withdraw, 1:success)【枚举值】|
+|status|string|否|状态|
 |startTime|string|否|默认当前时间90天前的时间|
 |endTime|string|否|默认当前时间戳，13位|
 |limit|string|否|默认：1000，最大1000|
@@ -1950,7 +1961,7 @@ get /api/v3/capital/deposit/hisrec
 |amount|数量|
 |coin|币种|
 |network|链类型|
-|status|状态|
+|status|充值状态，1:小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回|
 |address|地址|
 |addressTag|地址标签|
 |txId|交易编号|
@@ -1963,13 +1974,26 @@ get /api/v3/capital/deposit/hisrec
 > 请求示例
 
 ```
-get /api/v3/capital/withdraw/history
+get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
-
+  {
+        "id": "17bc9f68c3b740c5947c074748d42c3",
+        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
+        "amount": "1501",
+        "transferType": 0,
+        "status": 7,
+        "transactionFee": "1",
+        "confirmNo": null,
+        "applyTime": 1658625828000,
+        "remark": ""
+  }
 ]
 ```
 **HTTP请求**
@@ -1983,7 +2007,7 @@ get /api/v3/capital/withdraw/history
 |timestamp|string|是|时间戳|
 |signature|string|是|签名|
 |coin|string|是|币种|
-|status|string|否|0(2:等待确认 4:处理中 6 提现完成)【与前端确认，保持一致】|
+|status|string|否|提币状态|
 |limit|string|否|默认：1000， 最大：1000|
 |startTime|string|否|默认当前时间90天前的时间戳|
 |endTime|string|否|默认当前时间戳|
@@ -1997,13 +2021,13 @@ get /api/v3/capital/withdraw/history
 | :------------ | :-------- | 
 |address|地址|
 |amount| 提现转出金额|
-|applyTime| UTC 时间，申请时间【改成时间戳？？？】|
+|applyTime| 申请时间|
 |coin|币种|
 |id|该笔提现的id|
-|withdrawOrderId| 自定义ID, 如果没有则不返回该字段|
+|withdrawOrderId| 自定义ID，如果没有则不返回该字段|
 |network|链类型|
-|transferType| 1: 站内转账, 0: 站外转账    |
-|status|状态|
+|transferType| 0: 站外转账，1: 站内转账  |
+|status|提币状态，1:提交申请，2:审核中，3:等待处理，4:处理中，5:等待打包，6:等待确认，7:提现成功，8:提现失败，9:已取消，10:手动入账|
 |transactionFee| 手续费|
 |confirmNo| 提现确认数|
 |txId| 提现交易id|
@@ -2014,17 +2038,29 @@ get /api/v3/capital/withdraw/history
 > 请求示例
 
 ```
-get /api/v3/capital/deposit/address
+get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
   {
-    "address": "1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv",//地址
-    "coin": "BTC",//币种
-    "tag": "",//标签
-    "url": "https://btc.com/1HPn8Rx2y6nNSfagQBKy27GB99Vbzg89wv"// 区块浏览器的查询地址，没有删掉
+      "coin": "USDT",
+      "network": "TRC20",
+      "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
+      "tag": null
+  },
+  {
+      "coin": "USDT",
+      "network": "BEP20(BSC)",
+      "address": "0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b",
+      "tag": null
+  },
+  {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0x3f4d1f43761b52fd594e5a77cd83cab6955e85b",
+      "tag": null
   }
 ]
 ```
@@ -2055,14 +2091,14 @@ get /api/v3/capital/deposit/address
 > 请求示例
 
 ```
-post /api/v3/capital/transfer
+post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=USDT&amount=1&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
   {
-    "tranId":13526853623//划转ID
+    "tranId": "c45d800a47ba4cbc876a5cd29388319"
   }
 ]
 ```
@@ -2080,7 +2116,7 @@ post /api/v3/capital/transfer
 |toAccountType|string|是|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
 |asset|string|是|资产|
 |amount|string|是|数量|
-|symbol|string|是|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
+|symbol|string|否|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
 
 当类型为 `ISOLATEDMARGIN`,`fromSymbol`和`toSymbol` 必须要发送.
 
@@ -2102,7 +2138,6 @@ get /api/v3/capital/transfer
 ```json
 [
   {
-    "total":2,//总数
     "rows":[
     {
       "tranId":"11945860693",//划转ID
@@ -2127,7 +2162,8 @@ get /api/v3/capital/transfer
       "toSymbol":"FUTURE",//划入交易对
       "status":"SUCCESS",//划转状态
       "timestamp":1544433325000//划转时间
-    }]
+    }],
+    "total": 2,//总数
   }
 ]
 ```
@@ -2147,7 +2183,7 @@ get /api/v3/capital/transfer
 |endTime|string|否||
 |page|string|否|默认1|
 |size|string|否|默认 10, 最大 100|
-|symbol|string|是|交易对|
+|symbol|string|是|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，如:ETHUSDT|
 
 1. 仅支持查询最近半年（6个月）数据
 2. 若`startTime`和`endTime`没传，则默认返回最近7天数据
