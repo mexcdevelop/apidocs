@@ -60,6 +60,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-08-03**
+
+- 新增钱包接口
+
 ## **2022-07-27**
 
 - 下单类型新增IOC单和FOK单
