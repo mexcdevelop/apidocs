@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-08-03**
+
+- Add wallet endpoints
+
 ## **2022-07-27**
 
 - Order type add IOC and FOK
@@ -394,7 +398,7 @@ Response：
 
 | name         | Type | Description            |
 | ------------ | ---- | ---------------------- |
-| lastUpdateId | long | Deal time              |
+| lastUpdateId | long | Last Update Id       |
 | bids         | list | Bid [Price, Quantity ] |
 | asks         | list | Ask [Price, Quantity ] |
 
@@ -1032,7 +1036,7 @@ MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required
 
 ## Batch Orders
 
-Supports 20 orders in a batch.
+Supports 20 orders in a batch,rate limit:2 times/s.
 
 > Request
 
@@ -1457,7 +1461,7 @@ Response:
 
 - **GET** ```/api/v3/account```
 
-Get current account information
+Get current account information,rate limit:2 times/s.
 
 Parameters:
 
@@ -1548,6 +1552,10 @@ Response:
 | isBestMatch     |               |
 | isSelfTrade     |   isSelfTrade |
 | clientOrderId   | clientOrderId |
+
+
+# Wallet Endpoints
+
 ## Query the currency information
 
 > Request
@@ -1619,6 +1627,7 @@ Response:
 |withdrawMax||
 |withdrawMin||
 |contract||
+
 
 
 # ETF
