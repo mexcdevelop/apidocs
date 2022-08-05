@@ -1620,13 +1620,13 @@ Response:
 
 | name | Description  | 
 | :------------ | :-------- | 
-|depositEnable||
-|network||
-|withdrawEnable||
-|withdrawFee||
-|withdrawMax||
-|withdrawMin||
-|contract||
+|depositEnable|depositEnable|
+|network|withdraw network|
+|withdrawEnable|withdrawEnable|
+|withdrawFee|withdrawFee|
+|withdrawMax|Max withdraw amount|
+|withdrawMin|Min withdraw amount|
+|contract|coin contract|
 
 
 ## Withdraw
@@ -1662,8 +1662,8 @@ Parameters:
 |amount|string|YES|withdraw amount|
 |remark|string|NO|remark|
  
-1. 如果不发送`network`,将按该coin 默认网络返回结果;
-2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某coin 的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
+1. If `network` is not sent, will return default network in that currency.
+2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
 
 Response:
 
@@ -1707,27 +1707,27 @@ Parameters:
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 |coin|string|YES|coin |
-|status|string|NO|状态|
-|startTime|string|NO|默认当前时间90天前的时间|
-|endTime|string|NO|默认当前timestamp，13位|
-|limit|string|NO|默认：1000，最大1000|
+|status|string|NO|status|
+|startTime|string|NO|default: 90 days ago from current time|
+|endTime|string|NO|default:current time|
+|limit|string|NO|default:1000,max:1000|
 
-请注意`startTime` 与 `endTime` 的默认timestamp，保证请求时间间隔不超过90天.
+Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
 
 Response:
 
 | name | Description  |
 | :------------ | :-------- |
-|amount|数量|
+|amount|deposit amount|
 |coin|coin |
-|network|链类型|
-|status|充值状态，1:小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回|
-|address|地址|
-|addressTag|地址标签|
-|txId|交易编号|
-|insertTime|插入时间/创建时间|
-|unlockConfirm| 解锁需要的网络确认次数|
-|confirmTimes|已解锁次数|
+|network|deposit network|
+|status|deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY,<br/>4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED|
+|address|deposit adress|
+|addressTag|addressTag|
+|txId|txId|
+|insertTime|insertTime|
+|unlockConfirm| unlockConfirm|
+|confirmTimes|confirmTimes|
 
 ## Withdraw History (supporting network) 
 
@@ -1767,31 +1767,32 @@ Parameters:
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 |coin|string|YES|coin |
-|status|string|NO|提币状态|
-|limit|string|NO|默认：1000， 最大：1000|
-|startTime|string|NO|默认当前时间90天前的timestamp|
-|endTime|string|NO|默认当前timestamp|
+|status|string|NO|withdraw status|
+|limit|string|NO|default:1000, max:1000|
+|startTime|string|NO|default: 90 days ago from current time|
+|endTime|string|NO|default:current time|
 
-1. 支持多网络提币前的历史记录可能不会返回`network`字段.
-2. 请注意`startTime` 与 `endTime` 的默认timestamp，保证请求时间间隔不超过90天.
+1. Supported multiple network coins'  withdraw history may not return the 'network' field.
+2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+
 
 Response:
 
 | name | Description  |
 | :------------ | :-------- | 
-|address|地址|
-|amount| 提现转出金额|
-|applyTime| 申请时间|
+|address|withdraw address|
+|amount| withdraw amount|
+|applyTime| apply time||
 |coin|coin |
-|id|该笔提现的id|
-|withdrawOrderId| 自定义ID，如果没有则不返回该字段|
-|network|链类型|
-|transferType| 0: 站外转账，1: 站内转账  |
-|status|提币状态，1:提交申请，2:审核中，3:等待处理，4:处理中，5:等待打包，6:等待确认，7:提现成功，8:提现失败，9:已取消，10:手动入账|
-|transactionFee| 手续费|
-|confirmNo| 提现确认数|
-|txId| 提现交易id|
-|remark|提现记录备注|
+|id|withdraw id|
+|withdrawOrderId| withdrawOrderId|
+|network|withdraw network|
+|transferType|transferType, 0: outside transfer，1: inside transfer  |
+|status|withdraw status,1:APPLY,2:AUDITING,3:WAIT,4:PROCESSING,5:WAIT_PACKAGING,<br/>6:WAIT_CONFIRM,7:SUCCESS,8:FAILED,9:CANCEL,10:MANUAL|
+|transactionFee| transactionFee|
+|confirmNo| confirmNo|
+|txId|txId|
+|remark|remark|
 
 ## Deposit Address (supporting network) 
 
@@ -1835,16 +1836,16 @@ Parameters:
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 |coin|string|YES|coin |
-|network|string|NO||
+|network|string|NO|deposit network|
 
 Response:
 
 | name | Description  |
 | :------------ | :-------- |
-|address|地址|
+|address|deposit address|
 |coin|coin |
-|tag|标签|
-|network||
+|tag|tag|
+|network|network|
 
 ## User Universal Transfer
 
@@ -1872,19 +1873,19 @@ Parameters:
 | :------ | :-------- | :-------- | :---------- |
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
-|fromAccountType|string|YES|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|YES|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|asset|string|YES|资产|
-|amount|string|YES|数量|
-|symbol|string|NO|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|asset|string|YES|asset|
+|amount|string|YES|amount|
+|symbol|string|NO|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
 
-当类型为 `ISOLATEDMARGIN`,`fromSymbol`和`toSymbol` 必须要发送.
+When type is`ISOLATEDMARGIN`, `fromSymbol` and `toSymbol` must be sent.
 
 Response:
 
 | name | Description  |
 | :------------ | :-------- | 
-|tranId|划转ID|
+|tranId|tranId|
 
 ## Query User Universal Transfer History 
 
@@ -1900,30 +1901,30 @@ get /api/v3/capital/transfer
   {
     "rows":[
     {
-      "tranId":"11945860693",//划转ID
-      "clientTranId":"test",//client ID
-      "asset":"BTC",//coin 
-      "amount":"0.1",//划转数量
-      "fromAccountType":"SPOT",//转出业务账户
-      "toAccountType":"FUTURE",//划入业务账户
-      "fromSymbol":"SPOT",//转出交易对
-      "toSymbol":"FUTURE",//划入交易对
-      "status":"SUCCESS",//划转状态
-      "timestamp":1544433325000//划转时间
+      "tranId":"11945860693",
+      "clientTranId":"test",
+      "asset":"BTC",
+      "amount":"0.1",
+      "fromAccountType":"SPOT",
+      "toAccountType":"FUTURE",
+      "fromSymbol":"SPOT",
+      "toSymbol":"FUTURE",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
     },
     {
-      "tranId":"11945860693",//划转ID
-      "clientTranId":"test",//client ID
-      "asset":"BTC",//coin 
-      "amount":"0.1",//划转数量
-      "fromAccountType":"SPOT",//转出业务账户
-      "toAccountType":"FUTURE",//划入业务账户
-      "fromSymbol":"SPOT",//转出交易对
-      "toSymbol":"FUTURE",//划入交易对
-      "status":"SUCCESS",//划转状态
-      "timestamp":1544433325000//划转时间
+      "tranId":"11945860693",
+      "clientTranId":"test",
+      "asset":"BTC",
+      "amount":"0.1",
+      "fromAccountType":"SPOT",
+      "toAccountType":"FUTURE",
+      "fromSymbol":"SPOT",
+      "toSymbol":"FUTURE",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
     }],
-    "total": 2,//总数
+    "total": 2,
   }
 ]
 ```
@@ -1937,30 +1938,30 @@ Parameters:
 | :------ | :-------- | :-------- | :---------- |
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
-|fromAccountType|string|YES|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|YES|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|startTime|string|NO||
-|endTime|string|NO||
-|page|string|NO|默认1|
-|size|string|NO|默认 10, 最大 100|
-|symbol|string|YES|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，如:ETHUSDT|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|startTime|string|NO|startTime|
+|endTime|string|NO|endTime|
+|page|string|NO|default:1|
+|size|string|NO|default:10, max:100|
+|symbol|string|YES|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
 
-1. 仅支持查询最近半年（6个月）数据
-2. 若`startTime`和`endTime`没传，则默认返回最近7天数据
+1. Only can quary the data for the last six months
+2. If 'startTime' and 'endTime' are not send, will return the last seven days' data by default
 Response:
 
 | name | Description  |
 | :------------ | :-------- | 
-|total|总数|
-|tranId|划转ID|
+|total|total|
+|tranId|tranId|
 |clientTranId|client ID|
 |asset|coin |
-|amount|划转数量|
-|fromAccountType|转出业务账户|
-|toAccountType|划入业务账户|
-|symbol|转出交易对|
-|status|划转状态|
-|timestamp|划转时间|
+|amount|amount|
+|fromAccountType|fromAccountType|
+|toAccountType|toAccountType|
+|symbol|symbol|
+|status|status|
+|timestamp|timestamp|
 
 # ETF
 
