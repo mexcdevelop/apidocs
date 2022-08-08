@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-08-03**
+
+- Add wallet endpoints
+
 ## **2022-07-27**
 
 - Order type add IOC and FOK
@@ -394,7 +398,7 @@ Response：
 
 | name         | Type | Description            |
 | ------------ | ---- | ---------------------- |
-| lastUpdateId | long | Deal time              |
+| lastUpdateId | long | Last Update Id       |
 | bids         | list | Bid [Price, Quantity ] |
 | asks         | list | Ask [Price, Quantity ] |
 
@@ -1032,7 +1036,7 @@ MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required
 
 ## Batch Orders
 
-Supports 20 orders in a batch.
+Supports 20 orders in a batch,rate limit:2 times/s.
 
 > Request
 
@@ -1457,7 +1461,7 @@ Response:
 
 - **GET** ```/api/v3/account```
 
-Get current account information
+Get current account information,rate limit:2 times/s.
 
 Parameters:
 
@@ -1548,6 +1552,10 @@ Response:
 | isBestMatch     |               |
 | isSelfTrade     |   isSelfTrade |
 | clientOrderId   | clientOrderId |
+
+
+# Wallet Endpoints
+
 ## Query the currency information
 
 > Request
@@ -1612,14 +1620,348 @@ Response:
 
 | name | Description  | 
 | :------------ | :-------- | 
-|depositEnable||
-|network||
-|withdrawEnable||
-|withdrawFee||
-|withdrawMax||
-|withdrawMin||
-|contract||
+|depositEnable|depositEnable|
+|network|withdraw network|
+|withdrawEnable|withdrawEnable|
+|withdrawFee|withdrawFee|
+|withdrawMax|Max withdraw amount|
+|withdrawMin|Min withdraw amount|
+|contract|coin contract|
 
+
+## Withdraw
+
+> Request
+
+```
+post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amount=3&signature={{signature}}&timestamp={{timestamp}}
+```
+> Response
+
+```json
+[
+  {
+    "id":"7213fea8e94b4a5593d507237e5a555b"
+  }
+]
+```
+
+
+- **POST** ```/api/v3/capital/withdraw/apply```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+|coin|string|YES|coin |
+|withdrawOrderId|string|NO|withdrawOrderId|
+|network|string|NO|withdraw network|
+|address|string|YES|withdraw address|
+|amount|string|YES|withdraw amount|
+|remark|string|NO|remark|
+ 
+1. If `network` is not sent, will return default network in that currency.
+2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
+
+Response:
+
+| name | Description  |
+| :------------ | :-------- | 
+|id|withdraw ID|
+
+## Deposit History(supporting network) 
+
+> Request
+
+```
+get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+  {
+        "amount": "128",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "status": 5,
+        "address": "0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b",
+        "addressTag": null,
+        "txId": "0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0",
+        "insertTime": 1657952043000,
+        "unlockConfirm": "16",
+        "confirmTimes": "24"
+  }
+]
+```
+
+
+- **GET** ```/api/v3/capital/deposit/hisrec```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+|coin|string|YES|coin |
+|status|string|NO|status|
+|startTime|string|NO|default: 90 days ago from current time|
+|endTime|string|NO|default:current time|
+|limit|string|NO|default:1000,max:1000|
+
+Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+
+Response:
+
+| name | Description  |
+| :------------ | :-------- |
+|amount|deposit amount|
+|coin|coin |
+|network|deposit network|
+|status|deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY,<br/>4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED|
+|address|deposit adress|
+|addressTag|addressTag|
+|txId|txId|
+|insertTime|insertTime|
+|unlockConfirm| unlockConfirm|
+|confirmTimes|confirmTimes|
+
+## Withdraw History (supporting network) 
+
+> Request
+
+```
+get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+  {
+        "id": "17bc9f68c3b740c5947c074748d42c3",
+        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
+        "amount": "1501",
+        "transferType": 0,
+        "status": 7,
+        "transactionFee": "1",
+        "confirmNo": null,
+        "applyTime": 1658625828000,
+        "remark": ""
+  }
+]
+```
+
+
+- **GET** ```/api/v3/capital/withdraw/history```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+|coin|string|YES|coin |
+|status|string|NO|withdraw status|
+|limit|string|NO|default:1000, max:1000|
+|startTime|string|NO|default: 90 days ago from current time|
+|endTime|string|NO|default:current time|
+
+1. Supported multiple network coins'  withdraw history may not return the 'network' field.
+2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+
+
+Response:
+
+| name | Description  |
+| :------------ | :-------- | 
+|address|withdraw address|
+|amount| withdraw amount|
+|applyTime| apply time||
+|coin|coin |
+|id|withdraw id|
+|withdrawOrderId| withdrawOrderId|
+|network|withdraw network|
+|transferType|transferType, 0: outside transfer，1: inside transfer  |
+|status|withdraw status,1:APPLY,2:AUDITING,3:WAIT,4:PROCESSING,5:WAIT_PACKAGING,<br/>6:WAIT_CONFIRM,7:SUCCESS,8:FAILED,9:CANCEL,10:MANUAL|
+|transactionFee| transactionFee|
+|confirmNo| confirmNo|
+|txId|txId|
+|remark|remark|
+
+## Deposit Address (supporting network) 
+
+> Request
+
+```
+get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+  {
+      "coin": "USDT",
+      "network": "TRC20",
+      "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
+      "tag": null
+  },
+  {
+      "coin": "USDT",
+      "network": "BEP20(BSC)",
+      "address": "0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b",
+      "tag": null
+  },
+  {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0x3f4d1f43761b52fd594e5a77cd83cab6955e85b",
+      "tag": null
+  }
+]
+```
+
+
+- **GET** ```/api/v3/capital/deposit/address```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+|coin|string|YES|coin |
+|network|string|NO|deposit network|
+
+Response:
+
+| name | Description  |
+| :------------ | :-------- |
+|address|deposit address|
+|coin|coin |
+|tag|tag|
+|network|network|
+
+## User Universal Transfer
+
+> Request
+
+```
+post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=USDT&amount=1&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+  {
+    "tranId": "c45d800a47ba4cbc876a5cd29388319"
+  }
+]
+```
+
+
+- **POST** ```/api/v3/capital/transfer```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|asset|string|YES|asset|
+|amount|string|YES|amount|
+|symbol|string|NO|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
+
+When type is`ISOLATEDMARGIN`, `fromSymbol` and `toSymbol` must be sent.
+
+Response:
+
+| name | Description  |
+| :------------ | :-------- | 
+|tranId|tranId|
+
+## Query User Universal Transfer History 
+
+> Request
+
+```
+get /api/v3/capital/transfer
+```
+> Response
+
+```json
+[
+  {
+    "rows":[
+    {
+      "tranId":"11945860693",
+      "clientTranId":"test",
+      "asset":"BTC",
+      "amount":"0.1",
+      "fromAccountType":"SPOT",
+      "toAccountType":"FUTURE",
+      "fromSymbol":"SPOT",
+      "toSymbol":"FUTURE",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
+    },
+    {
+      "tranId":"11945860693",
+      "clientTranId":"test",
+      "asset":"BTC",
+      "amount":"0.1",
+      "fromAccountType":"SPOT",
+      "toAccountType":"FUTURE",
+      "fromSymbol":"SPOT",
+      "toSymbol":"FUTURE",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
+    }],
+    "total": 2,
+  }
+]
+```
+
+
+- **GET** ```/api/v3/capital/transfer```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|startTime|string|NO|startTime|
+|endTime|string|NO|endTime|
+|page|string|NO|default:1|
+|size|string|NO|default:10, max:100|
+|symbol|string|YES|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
+
+1. Only can quary the data for the last six months
+2. If 'startTime' and 'endTime' are not send, will return the last seven days' data by default
+Response:
+
+| name | Description  |
+| :------------ | :-------- | 
+|total|total|
+|tranId|tranId|
+|clientTranId|client ID|
+|asset|coin |
+|amount|amount|
+|fromAccountType|fromAccountType|
+|toAccountType|toAccountType|
+|symbol|symbol|
+|status|status|
+|timestamp|timestamp|
 
 # ETF
 
