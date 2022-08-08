@@ -341,6 +341,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-08-03" class="toc-h2 toc-link" data-title="2022-08-03"><strong>2022-08-03</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-07-27" class="toc-h2 toc-link" data-title="2022-07-27"><strong>2022-07-27</strong></a>
                   </li>
                   <li>
@@ -501,8 +504,31 @@
                   <li>
                     <a href="#account-trade-list" class="toc-h2 toc-link" data-title="Account Trade List">Account Trade List</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#wallet-endpoints" class="toc-h1 toc-link" data-title="Wallet Endpoints">Wallet Endpoints</a>
+              <ul class="toc-list-h2">
                   <li>
                     <a href="#query-the-currency-information" class="toc-h2 toc-link" data-title="Query the currency information">Query the currency information</a>
+                  </li>
+                  <li>
+                    <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
+                  </li>
+                  <li>
+                    <a href="#deposit-history-supporting-network" class="toc-h2 toc-link" data-title="Deposit History(supporting network)">Deposit History(supporting network)</a>
+                  </li>
+                  <li>
+                    <a href="#withdraw-history-supporting-network" class="toc-h2 toc-link" data-title="Withdraw History (supporting network)">Withdraw History (supporting network)</a>
+                  </li>
+                  <li>
+                    <a href="#deposit-address-supporting-network" class="toc-h2 toc-link" data-title="Deposit Address (supporting network)">Deposit Address (supporting network)</a>
+                  </li>
+                  <li>
+                    <a href="#user-universal-transfer" class="toc-h2 toc-link" data-title="User Universal Transfer">User Universal Transfer</a>
+                  </li>
+                  <li>
+                    <a href="#query-user-universal-transfer-history" class="toc-h2 toc-link" data-title="Query User Universal Transfer History">Query User Universal Transfer History</a>
                   </li>
               </ul>
           </li>
@@ -642,7 +668,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-07-27'><strong>2022-07-27</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-08-03'><strong>2022-08-03</strong></h2>
+<ul>
+<li>Add wallet endpoints</li>
+</ul>
+<h2 id='2022-07-27'><strong>2022-07-27</strong></h2>
 <ul>
 <li>Order type add IOC and FOK</li>
 </ul>
@@ -1046,7 +1076,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <tr>
 <td>lastUpdateId</td>
 <td>long</td>
-<td>Deal time</td>
+<td>Last Update Id</td>
 </tr>
 <tr>
 <td>bids</td>
@@ -2220,7 +2250,7 @@ Klines are uniquely identified by their open time.</p>
 </ul></li>
 </ul>
 <h2 id='batch-orders'>Batch Orders</h2>
-<p>Supports 20 orders in a batch.</p>
+<p>Supports 20 orders in a batch,rate limit:2 times/s.</p>
 
 <blockquote>
 <p>Request</p>
@@ -3111,7 +3141,7 @@ Klines are uniquely identified by their open time.</p>
 <li><strong>GET</strong> <code>/api/v3/account</code></li>
 </ul>
 
-<p>Get current account information</p>
+<p>Get current account information,rate limit:2 times/s.</p>
 
 <p>Parameters:</p>
 
@@ -3351,7 +3381,7 @@ Klines are uniquely identified by their open time.</p>
 <td>clientOrderId</td>
 </tr>
 </tbody></table>
-<h2 id='query-the-currency-information'>Query the currency information</h2>
+<h1 id='wallet-endpoints'>Wallet Endpoints</h1><h2 id='query-the-currency-information'>Query the currency information</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -3419,31 +3449,757 @@ Klines are uniquely identified by their open time.</p>
 </thead><tbody>
 <tr>
 <td style="text-align: left">depositEnable</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">depositEnable</td>
 </tr>
 <tr>
 <td style="text-align: left">network</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">withdraw network</td>
 </tr>
 <tr>
 <td style="text-align: left">withdrawEnable</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">withdrawEnable</td>
 </tr>
 <tr>
 <td style="text-align: left">withdrawFee</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">withdrawFee</td>
 </tr>
 <tr>
 <td style="text-align: left">withdrawMax</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">Max withdraw amount</td>
 </tr>
 <tr>
 <td style="text-align: left">withdrawMin</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">Min withdraw amount</td>
 </tr>
 <tr>
 <td style="text-align: left">contract</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">coin contract</td>
+</tr>
+</tbody></table>
+<h2 id='withdraw'>Withdraw</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw/apply?coin=USDT&amp;network=TRC20&amp;address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amp;amount=3&amp;signature={{signature}}&amp;timestamp={{timestamp}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"7213fea8e94b4a5593d507237e5a555b"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code></li>
+</ul>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawOrderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">withdrawOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">withdraw network</td>
+</tr>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">withdraw address</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">withdraw amount</td>
+</tr>
+<tr>
+<td style="text-align: left">remark</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">remark</td>
+</tr>
+</tbody></table>
+
+<ol>
+<li>If <code>network</code> is not sent, will return default network in that currency.</li>
+<li>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code> and check whether is default network by response params<code>isDefault</code></li>
+</ol>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">withdraw ID</td>
+</tr>
+</tbody></table>
+<h2 id='deposit-history-supporting-network'>Deposit History(supporting network)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT-BSC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"insertTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1657952043000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/deposit/hisrec</code></li>
+</ul>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">status</td>
+</tr>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default: 90 days ago from current time</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default:current time</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default:1000,max:1000</td>
+</tr>
+</tbody></table>
+
+<p>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 90 days.</p>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">deposit amount</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">deposit network</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY,<br/>4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED</td>
+</tr>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">deposit adress</td>
+</tr>
+<tr>
+<td style="text-align: left">addressTag</td>
+<td style="text-align: left">addressTag</td>
+</tr>
+<tr>
+<td style="text-align: left">txId</td>
+<td style="text-align: left">txId</td>
+</tr>
+<tr>
+<td style="text-align: left">insertTime</td>
+<td style="text-align: left">insertTime</td>
+</tr>
+<tr>
+<td style="text-align: left">unlockConfirm</td>
+<td style="text-align: left">unlockConfirm</td>
+</tr>
+<tr>
+<td style="text-align: left">confirmTimes</td>
+<td style="text-align: left">confirmTimes</td>
+</tr>
+</tbody></table>
+<h2 id='withdraw-history-supporting-network'>Withdraw History (supporting network)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/withdraw/history?coin=USDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17bc9f68c3b740c5947c074748d42c3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT-BSC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BSC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1501"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transferType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transactionFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confirmNo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"applyTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1658625828000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remark"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/withdraw/history</code></li>
+</ul>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">withdraw status</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default:1000, max:1000</td>
+</tr>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default: 90 days ago from current time</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default:current time</td>
+</tr>
+</tbody></table>
+
+<ol>
+<li>Supported multiple network coins&#39;  withdraw history may not return the &#39;network&#39; field.</li>
+<li>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 90 days.</li>
+</ol>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">withdraw address</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">withdraw amount</td>
+</tr>
+<tr>
+<td style="text-align: left">applyTime</td>
+<td style="text-align: left">apply time</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">withdraw id</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawOrderId</td>
+<td style="text-align: left">withdrawOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">withdraw network</td>
+</tr>
+<tr>
+<td style="text-align: left">transferType</td>
+<td style="text-align: left">transferType, 0: outside transfer，1: inside transfer</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">withdraw status,1:APPLY,2:AUDITING,3:WAIT,4:PROCESSING,5:WAIT_PACKAGING,<br/>6:WAIT_CONFIRM,7:SUCCESS,8:FAILED,9:CANCEL,10:MANUAL</td>
+</tr>
+<tr>
+<td style="text-align: left">transactionFee</td>
+<td style="text-align: left">transactionFee</td>
+</tr>
+<tr>
+<td style="text-align: left">confirmNo</td>
+<td style="text-align: left">confirmNo</td>
+</tr>
+<tr>
+<td style="text-align: left">txId</td>
+<td style="text-align: left">txId</td>
+</tr>
+<tr>
+<td style="text-align: left">remark</td>
+<td style="text-align: left">remark</td>
+</tr>
+</tbody></table>
+<h2 id='deposit-address-supporting-network'>Deposit Address (supporting network)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/deposit/address?coin=USDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRC20"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TXobiKkdciupZrhdvZyTSSLjE8CmZAufS"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEP20(BSC)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERC20"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x3f4d1f43761b52fd594e5a77cd83cab6955e85b"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/deposit/address</code></li>
+</ul>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">deposit network</td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">deposit address</td>
+</tr>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">tag</td>
+<td style="text-align: left">tag</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">network</td>
+</tr>
+</tbody></table>
+<h2 id='user-universal-transfer'>User Universal Transfer</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/transfer?fromAccountType=FUTURES&amp;toAccountType=SPOT&amp;asset=USDT&amp;amount=1&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c45d800a47ba4cbc876a5cd29388319"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/transfer</code></li>
+</ul>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">fromAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,<br/>&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">toAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,<br/>&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">symbol,needed when<code>fromAccountType</code>is ISOLATED_MARGIN.eg:ETHUSDT</td>
+</tr>
+</tbody></table>
+
+<p>When type is<code>ISOLATEDMARGIN</code>, <code>fromSymbol</code> and <code>toSymbol</code> must be sent.</p>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">tranId</td>
+</tr>
+</tbody></table>
+<h2 id='query-user-universal-transfer-history'>Query User Universal Transfer History</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/transfer
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"rows"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">"11945860693"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clientTranId"</span><span class="p">:</span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fromAccountType"</span><span class="p">:</span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"FUTURE"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fromSymbol"</span><span class="p">:</span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toSymbol"</span><span class="p">:</span><span class="s2">"FUTURE"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">"11945860693"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"clientTranId"</span><span class="p">:</span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fromAccountType"</span><span class="p">:</span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"FUTURE"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fromSymbol"</span><span class="p">:</span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toSymbol"</span><span class="p">:</span><span class="s2">"FUTURE"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer</code></li>
+</ul>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">fromAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,<br/>&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">toAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,<br/>&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default:1</td>
+</tr>
+<tr>
+<td style="text-align: left">size</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default:10, max:100</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">symbol,needed when<code>fromAccountType</code>is ISOLATED_MARGIN.eg:ETHUSDT</td>
+</tr>
+</tbody></table>
+
+<ol>
+<li>Only can quary the data for the last six months</li>
+<li>If &#39;startTime&#39; and &#39;endTime&#39; are not send, will return the last seven days&#39; data by default
+Response:</li>
+</ol>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">total</td>
+<td style="text-align: left">total</td>
+</tr>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">tranId</td>
+</tr>
+<tr>
+<td style="text-align: left">clientTranId</td>
+<td style="text-align: left">client ID</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">fromAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">toAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">status</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">timestamp</td>
 </tr>
 </tbody></table>
 <h1 id='etf'>ETF</h1><h2 id='get-etf-info'>Get ETF info</h2>
