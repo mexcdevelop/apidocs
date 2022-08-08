@@ -60,6 +60,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-08-03**
+
+- 新增钱包接口
+
 ## **2022-07-27**
 
 - 下单类型新增IOC单和FOK单
@@ -489,7 +493,7 @@ GET /api/v3/depth?symbol=BTCUSDT&limit=200
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| lastUpdateId | long     | 成交时间            |
+| lastUpdateId | long     | 最新更新ID            |
 | bids         | list     | 买盘 [价位, 挂单量] |
 | asks         | list     | 卖盘 [价位, 挂单量] |
 
@@ -960,9 +964,9 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| subAccount | 1 | 1 |
-| isFreeze | 1 | 1 |
-| createTime | 1 | 1 |
+| subAccount | STRING | 子账户名称 |
+| isFreeze | STRING | 是否冻结 |
+| createTime | LONG | 创建时间 |
 
 
 ## 创建子账户的APIkey
@@ -1217,7 +1221,7 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 | orderListId|客户端订单列表          |          |
 
 ## 批量下单
-支持单次批量下20单。
+支持单次批量下20单,限频2次/秒。
 
 > 请求示例
 
@@ -1658,7 +1662,7 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 | origQuoteOrderQty   | 原始的交易金额    |
 
 ## 账户信息
-获取当前账户信息
+获取当前账户信息，限速2次每秒。
 
 > 请求示例
 
@@ -1726,6 +1730,7 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 | free             | 可用数量   |
 | locked           | 冻结数量   |
 | permissions      | 权限       |
+
 ## 账户成交历史
 获取账户指定交易对的成交历史
 
@@ -1794,6 +1799,9 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | isSelfTrade     | 是否自成交           |
 | clientOrderId   | 用户自定义id|
 
+
+# 钱包接口
+
 ## 查询币种信息
 返回币种详细信息以及智能合约地址
 
@@ -1855,15 +1863,348 @@ Get /api/v3/capital/config/getall
 
 **返回参数**
 
-| 参数名 | 说明  | 数据类型 | 示例|
-| :------------ | :-------- | :------------| :------------------- |
-|depositEnable|是否可充值| bool |true|
-|network|币种所支持的网络| string |TRC20|
-|withdrawEnable|是否可提币| bool |true|
-|withdrawFee|提币手续费| number |0.0001|
-|withdrawMax|最大提币限额|number|40.00|
-|withdrawMin|最大提币限额|number|0.001|
-|contract|币种智能合约地址|string|0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c|
+| 参数名 | 说明  | 
+| :------------ | :------------ |
+|depositEnable|是否可充值|
+|network|币种所支持的网络| 
+|withdrawEnable|是否可提币|
+|withdrawFee|提币手续费| 
+|withdrawMax|最大提币限额|
+|withdrawMin|最大提币限额|
+|contract|币种智能合约地址|
+
+## 提币
+
+> 请求示例
+
+```
+post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amount=3&signature={{signature}}&timestamp={{timestamp}}
+```
+> 返回示例
+
+```json
+[
+  {
+    "id":"7213fea8e94b4a5593d507237e5a555b"
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/withdraw/apply```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|coin|string|是|币种|
+|withdrawOrderId|string|否|自定义提币ID(目前不支持)|
+|network|string|否|提币网络|
+|address|string|是|提币地址|
+|amount|string|是|数量|
+|remark|string|否|备注|
+ 
+1. 如果不发送`network`,将按该币种默认网络返回结果;
+2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|id|提币ID|
+
+## 获取充值历史(支持多网络)
+
+> 请求示例
+
+```
+get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+[
+  {
+        "amount": "128",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "status": 5,
+        "address": "0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b",
+        "addressTag": null,
+        "txId": "0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0",
+        "insertTime": 1657952043000,
+        "unlockConfirm": "16",
+        "confirmTimes": "24"
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/deposit/hisrec```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|coin|string|是|币种|
+|status|string|否|状态|
+|startTime|string|否|默认当前时间90天前的时间|
+|endTime|string|否|默认当前时间戳，13位|
+|limit|string|否|默认：1000，最大1000|
+
+请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- |
+|amount|数量|
+|coin|币种|
+|network|链类型|
+|status|充值状态，1:小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回|
+|address|地址|
+|addressTag|地址标签|
+|txId|交易编号|
+|insertTime|插入时间/创建时间|
+|unlockConfirm| 解锁需要的网络确认次数|
+|confirmTimes|已解锁次数|
+
+## 获取提币历史 (支持多网络)
+
+> 请求示例
+
+```
+get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+[
+  {
+        "id": "17bc9f68c3b740c5947c074748d42c3",
+        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
+        "coin": "USDT-BSC",
+        "network": "BSC",
+        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
+        "amount": "1501",
+        "transferType": 0,
+        "status": 7,
+        "transactionFee": "1",
+        "confirmNo": null,
+        "applyTime": 1658625828000,
+        "remark": ""
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/withdraw/history```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|coin|string|是|币种|
+|status|string|否|提币状态|
+|limit|string|否|默认：1000， 最大：1000|
+|startTime|string|否|默认当前时间90天前的时间戳|
+|endTime|string|否|默认当前时间戳|
+
+1. 支持多网络提币前的历史记录可能不会返回`network`字段.
+2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|address|地址|
+|amount| 提现转出金额|
+|applyTime| 申请时间|
+|coin|币种|
+|id|该笔提现的id|
+|withdrawOrderId| 自定义ID，如果没有则不返回该字段|
+|network|链类型|
+|transferType| 0: 站外转账，1: 站内转账  |
+|status|提币状态，1:提交申请，2:审核中，3:等待处理，4:处理中，5:等待打包，6:等待确认，7:提现成功，8:提现失败，9:已取消，10:手动入账|
+|transactionFee| 手续费|
+|confirmNo| 提现确认数|
+|txId| 提现交易id|
+|remark|提现记录备注|
+
+## 获取充值地址 (支持多网络)
+
+> 请求示例
+
+```
+get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+[
+  {
+      "coin": "USDT",
+      "network": "TRC20",
+      "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
+      "tag": null
+  },
+  {
+      "coin": "USDT",
+      "network": "BEP20(BSC)",
+      "address": "0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b",
+      "tag": null
+  },
+  {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0x3f4d1f43761b52fd594e5a77cd83cab6955e85b",
+      "tag": null
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/deposit/address```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|coin|string|是|币种|
+|network|string|否||
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- |
+|address|地址|
+|coin|币种|
+|tag|标签|
+|network||
+
+## 用户万向划转【母母账户】
+
+> 请求示例
+
+```
+post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=USDT&amount=1&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+[
+  {
+    "tranId": "c45d800a47ba4cbc876a5cd29388319"
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/transfer```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|是|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|asset|string|是|资产|
+|amount|string|是|数量|
+|symbol|string|否|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
+
+当类型为 `ISOLATEDMARGIN`,`fromSymbol`和`toSymbol` 必须要发送.
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|tranId|划转ID|
+
+## 查询用户万向划转历史
+
+> 请求示例
+
+```
+get /api/v3/capital/transfer
+```
+> 返回示例
+
+```json
+[
+  {
+    "rows":[
+    {
+      "tranId":"11945860693",//划转ID
+      "clientTranId":"test",//client ID
+      "asset":"BTC",//币种
+      "amount":"0.1",//划转数量
+      "fromAccountType":"SPOT",//转出业务账户
+      "toAccountType":"FUTURE",//划入业务账户
+      "fromSymbol":"SPOT",//转出交易对
+      "toSymbol":"FUTURE",//划入交易对
+      "status":"SUCCESS",//划转状态
+      "timestamp":1544433325000//划转时间
+    },
+    {
+      "tranId":"11945860693",//划转ID
+      "clientTranId":"test",//client ID
+      "asset":"BTC",//币种
+      "amount":"0.1",//划转数量
+      "fromAccountType":"SPOT",//转出业务账户
+      "toAccountType":"FUTURE",//划入业务账户
+      "fromSymbol":"SPOT",//转出交易对
+      "toSymbol":"FUTURE",//划入交易对
+      "status":"SUCCESS",//划转状态
+      "timestamp":1544433325000//划转时间
+    }],
+    "total": 2,//总数
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/transfer```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|是|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|startTime|string|否||
+|endTime|string|否||
+|page|string|否|默认1|
+|size|string|否|默认 10, 最大 100|
+|symbol|string|是|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，如:ETHUSDT|
+
+1. 仅支持查询最近半年（6个月）数据
+2. 若`startTime`和`endTime`没传，则默认返回最近7天数据
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|total|总数|
+|tranId|划转ID|
+|clientTranId|client ID|
+|asset|币种|
+|amount|划转数量|
+|fromAccountType|转出业务账户|
+|toAccountType|划入业务账户|
+|symbol|转出交易对|
+|status|划转状态|
+|timestamp|划转时间|
 
 # ETF接口
 
