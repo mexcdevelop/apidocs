@@ -1902,13 +1902,13 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 |coin|string|是|币种|
 |withdrawOrderId|string|否|自定义提币ID(目前不支持)|
 |network|string|否|提币网络|
-|address|string|是|提币地址|
+|address|string|是|提币地址(memo请使用:进行拼接)|
 |amount|string|是|数量|
 |remark|string|否|备注|
  
 1. 如果不发送`network`,将按该币种默认网络返回结果;
 2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
-
+3. 提币地址只支持web端添加到提币地址管理中的地址。
 **返回参数**
 
 | 参数名 | 说明  |
