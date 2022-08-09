@@ -1658,13 +1658,13 @@ Parameters:
 |coin|string|YES|coin |
 |withdrawOrderId|string|NO|withdrawOrderId|
 |network|string|NO|withdraw network|
-|address|string|YES|withdraw address|
+|address|string|YES|withdraw address( memo please use : for splicing) |
 |amount|string|YES|withdraw amount|
 |remark|string|NO|remark|
  
 1. If `network` is not sent, will return default network in that currency.
 2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
-
+3. Withdraw address only support address which added in withdrawal settings on website.
 Response:
 
 | name | Description  |
