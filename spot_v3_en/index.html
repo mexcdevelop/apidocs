@@ -3539,7 +3539,7 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">address</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">withdraw address</td>
+<td style="text-align: left">withdraw address( memo please use : for splicing)</td>
 </tr>
 <tr>
 <td style="text-align: left">amount</td>
@@ -3558,9 +3558,9 @@ Klines are uniquely identified by their open time.</p>
 <ol>
 <li>If <code>network</code> is not sent, will return default network in that currency.</li>
 <li>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code> and check whether is default network by response params<code>isDefault</code></li>
+<li>Withdraw address only support address which added in withdrawal settings on website.
+Response:</li>
 </ol>
-
-<p>Response:</p>
 
 <table><thead>
 <tr>
