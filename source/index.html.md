@@ -434,16 +434,17 @@ None
     "code": 200,
     "data": [
         {
-             "symbol": "ETH_USDT",
-             "volume": "0",
-             "high": "182.4117576",
-             "low": "182.4117576",
-             "bid": "182.0017985",
-             "ask": "183.1983186",
-             "open": "182.4117576",
-             "last": "182.4117576",
-             "time": 1574668200000,
-             "change_rate": "0.00027307"
+          "symbol": "BTC_USDT",
+          "volume": "47876.096755",
+          "amount": "1161420469.76",
+          "high": "24902.08",
+          "low": "23494.28",
+          "bid": "24684.48",
+          "ask": "24685.6",
+          "open": "24018.6",
+          "last": "24681.71",
+          "time": 1660226100000,
+          "change_rate": "0.02760818"
         }
     ]
 }
@@ -463,6 +464,7 @@ Response：
 |-----|-----|-----|
 |symbol|string|symbol name|
 |volume|string|deal total amount of this period|
+|amount|string|total amount|
 |high|string|the highest price of this period|
 |low|string|the lowest price of this period|
 |bid|string|current highest bid price|
@@ -1351,7 +1353,6 @@ Rate Limit : 20times/2s
 | msg | string  | Misdescription (If there has ) |
 | currency  | string  | Crypto currency |
 | actual_amount  | number  | The actual received amount |
-| actual_fee  | number  | Withdraw fee |
 | amount  | number  | Withdraw amount |
 | create_time  | number  | Initiate withdraw time |
 | explorer_url  | string  | Block browser address |
