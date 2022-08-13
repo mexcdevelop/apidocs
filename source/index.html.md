@@ -1134,6 +1134,200 @@ body
 | :--------- | :------- | :--------- |
 | subAccount | STRING   | 子账户名称 |
 
+## 母子用户万向划转
+
+> 请求示例
+
+```
+post /api/v3/capital/sub-account/universalTransfer
+```
+> 返回示例
+
+```json
+[
+  {
+    "tranId":11945860693 
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/sub-account/universalTransfer```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
+|toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
+|toAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
+|symbol|string|否|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
+|asset|string|是|资产，eg：USDT|
+|amount|string|是|数量，eg：1.82938475|
+
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|tranId|string|划转ID|
+
+## 查询母子万向划转历史
+
+> 请求示例
+
+```
+get /api/v3/capital/sub-account/universalTransfer
+```
+> 返回示例
+
+```json
+[
+  {
+    "tranId":"11945860693",
+    "fromAccount":"master@test.com",
+    "toAccount":"subaccount1@test.com",
+    "clientTranId":"test",
+    "asset":"BTC",
+    "amount":"0.1",
+    "fromAccountType":"SPOT",
+    "toAccountType":"FUTURE",
+    "fromSymbol":"SPOT",
+    "toSymbol":"FUTURE",
+    "status":"SUCCESS",
+    "timestamp":1544433325000
+  }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/sub-account/universalTransfer```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+|fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
+|toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
+|toAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
+|startTime|string|否|起始时间|
+|endTime|string|否|截止时间|
+|page|string|否|默认 1|
+|limit|string|否|默认 500, 最大 500|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|tranId|string|划转ID|
+|fromAccount|string|划出账户|
+|toAccount|string|划入账户|
+|clientTranId|string|客户自定义划转ID|
+|asset|string|币种|
+|amount|string|划转数量|
+|fromAccountType|string|转出业务账户|
+|toAccountType|string|划入业务账户|
+|fromSymbol|string|杠杆转入交易对|
+|toSymbol|string|杠杆转出交易对|
+|status|string|划转状态:成功，失败，划转中，中断|
+|timestamp|number|划转时间|
+|totalCount|number||
+
+## 开通子账户的合约业务
+
+> 请求示例
+
+```
+post /api/v3/sub-account/futures
+```
+> 返回示例
+
+```json
+[
+  {
+    "code": "0",
+    "message": "",
+    "data": [{
+        "subAccount": "mexc1",
+        "isFuturesEnabled": true,
+        "timestamp": "1597026383085"
+    }]
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/sub-account/futures```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|subAccount|string|是|子账户|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|subAccount|string|子账户名称|
+|isFuturesEnabled|boolean|开通合约业务，开通：true|
+|timestamp|string|返回时间|
+
+
+
+## 开通子账户的杠杆业务
+
+> 请求示例
+
+```
+post /api/v3/sub-account/margin
+```
+> 返回示例
+
+```json
+[
+  {
+    "code": "0",
+    "message": "",
+    "data": [{
+        "subAccount": "mexc1",
+        "isMarginEnabled": true,
+        "timestamp": "1597026383085"
+    }]
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/sub-account/margin```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|subAccount|string|是|子账户名称|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|subAccount|string|子账户名称|
+|isMarginEnabled|boolean|是否开通杠杆业务：true or false|
+|timestamp|string|返回时间|
 
 
 # 现货账户和交易接口
