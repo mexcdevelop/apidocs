@@ -133,6 +133,7 @@ https://github.com/mxcdevelop/mexc-api-demo
 - 新增ETF接口
 
 ## **2022-02-11**
+
 - 新版API
 
 
@@ -293,20 +294,34 @@ symbol=BTCUSDT&side=BUY&type=LIMIT
 quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 请注意，签名与示例3不同。 "LIMIT"和"quantity = 1"之间没有＆。
-## 限频规则
 
-对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁
+## 访问限制
 
-需要携带access key进行访问的接口，以账号作为限速的基本单位；不需要携带access key进行访问的接口，以IP作为限速的基本单位
+### 限频说明
 
-未说明限速规则的接口默认为20次/秒
+- 每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。
+- **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。**
+
+### 限频使用
+
+- 按照IP统计的接口, 请求返回头里面会包含`X-MBX-USED-WEIGHT-(intervalNum)(intervalLetter)`的头，代表了当前账户所有已用的IP权重。
+- 按照UID统计的接口, 请求返回头里面会包含`X-SAPI-USED-UID-WEIGHT-1M=<value>`, 代表了当前账户所有已用的UID权重。
+
+### 超频报错
+
+- 收到429时，您有责任停止发送请求，不得滥用API。
+- **收到429后仍然继续违反访问限制，会被封禁IP。**
+- 频繁违反限制，封禁时间会逐渐延长，**从最短2分钟到最长3天**。
+- `Retry-After`的头会与带有418或429的响应发送，并且会给出**以秒为单位**的等待时长(如果是429)以防止禁令，或者如果是418，直到禁令结束。
+
 
 
 # 行情接口
 
 ## 测试服务器连通性
-
 测试能否联通 Rest API。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -318,7 +333,8 @@ GET /api/v3/ping
 ```json
 {}
 ```
-**HTTP请求**
+**HTTP请求**  
+
 - **GET** ```/api/v3/ping```
 
 
@@ -330,9 +346,11 @@ NONE
 **返回参数**
 
 NONE
-## 获取服务器时间
 
-获得服务器当前时间戳
+## 获取服务器时间
+获得服务器当前时间戳  
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -358,8 +376,9 @@ NONE
 
 
 ## 交易规范信息
+获取交易规则和交易对信息。  
 
-获取交易规则和交易对信息。
+**权重(IP):** 10
 
 > 请求示例
 
@@ -455,7 +474,9 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 
 
 ## 深度信息
-获取指定交易对的深度信息，默认返回买卖盘各100条信息
+获取指定交易对的深度信息，默认返回买卖盘各100条信息。  
+
+**权重(IP):** 基于限制调整
 
 > 请求示例
 
@@ -497,8 +518,10 @@ GET /api/v3/depth?symbol=BTCUSDT&limit=200
 | bids         | list     | 买盘 [价位, 挂单量] |
 | asks         | list     | 卖盘 [价位, 挂单量] |
 
-## 近期成交列表
-获取指定交易对的近期成交信息，默认返回最近500条成交信息。
+## 近期成交列表  
+获取指定交易对的近期成交信息，默认返回最近500条成交信息。  
+
+**权重(IP):** 5
 
 > 请求示例
 
@@ -584,8 +607,10 @@ GET /api/v3/trades?symbol=BTCUSDT&limit=600
 | isBuyerMaker | 是否为maker单  |
 | isBestMatch  | 是否为最佳匹配 | :-->
 
-## 近期成交(归集)
-归集交易与逐笔交易的区别在于，同一价格、同一方向、同一时间的trade会被聚合为一条
+## 近期成交(归集)  
+归集交易与逐笔交易的区别在于，同一价格、同一方向、同一时间的trade会被聚合为一条。  
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -639,8 +664,10 @@ GET /api/v3/aggTrades?symbol=BTCUSDT
 | m      | 是否为主动卖出单                           |
 | M      | 是否为最优撮合单(可忽略，目前总为最优撮合) |
 
-## K线数据
-获取指定交易对的k线数据，每根K线代表一个交易对。每根K线的开盘时间可视为唯一ID。
+## K线数据  
+获取指定交易对的k线数据，每根K线代表一个交易对。每根K线的开盘时间可视为唯一ID。  
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -694,8 +721,10 @@ GET /api/v3/klines?symbol=BTCUSDT&interval=1m&startTime=1652848049876&endTimne=1
 | 6    | 收盘时间 |
 | 7    | 成交额   |
 
-## 当前平均价格
+## 当前平均价格  
 获取指定交易对在一定时间范围内的平均价格。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -730,7 +759,9 @@ GET /api/v3/avgPrice?symbol=BTCUSDT
 | price  | 价格         |
 
 ## 24小时价格滚动情况
-获取指定交易对或者所有交易对在24小时内的价格滚动（5分钟为单位）
+获取指定交易对或者所有交易对在24小时内的价格滚动（5分钟为单位）。
+
+**权重(IP):** 1（单交易对）；40（所有交易对）
 
 > 请求示例
 
@@ -799,6 +830,8 @@ GET /api/v3/ticker/24hr?symbol=BTCUSDT
 ## 最新价格
 获取指定交易对或者所有交易对的最新价格
 
+**权重(IP):**1（单一交易对）;2（交易对参数缺失）
+
 > 请求示例
 
 ```
@@ -832,7 +865,9 @@ GET /api/v3/ticker/price?symbol=BTCUSDT
 | price  | 最新价格 |
 
 ## 当前最优挂单
-获取当前最优的挂单(最高买单，最低卖单)
+获取当前最优的挂单(最高买单，最低卖单)。
+
+**权重(IP):**1（单一交易对）；2（交易对参数缺失）
 
 > 请求示例
 
@@ -878,7 +913,9 @@ GET /api/v3/ticker/bookTicker?symbol=BTCUSDT
 # 母子账户接口
 
 ## 创建子账户
-获取您的母账户生成一个虚拟子账户
+获取您的母账户生成一个虚拟子账户。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -917,7 +954,9 @@ POST /api/v3/sub-account/virtualSubAccount?subAccount=subAccount1&note=1&timesta
 | note       | STRING | 备注  如：1     |
 
 ## 查看子账户列表
-获取您的母账户下所有子账户信息
+获取您的母账户下所有子账户信息。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -970,7 +1009,9 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 
 
 ## 创建子账户的APIkey
-为子账户创建APIkey
+为子账户创建APIkey。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -1034,7 +1075,9 @@ body
 
 
 ## 查询子账户的APIKey
-获取指定子账户的APIkey信息
+获取指定子账户的APIkey信息。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -1090,6 +1133,8 @@ GET/api/v3/sub-account/apiKey?subAccount=subAccount1&timestamp=1597026383085
 
 
 ## 删除子账户的APIKey
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -1333,7 +1378,9 @@ post /api/v3/sub-account/margin
 # 现货账户和交易接口
 
 ## 测试下单
-用于测试订单请求，但不会提交到撮合引擎
+用于测试订单请求，但不会提交到撮合引擎。
+
+**权重(IP):** 1（无IP）
 
 > 请求示例
 
@@ -1354,6 +1401,9 @@ POST /api/v3/order/test
 
 ## 下单
 只有当您的账户有足够的资金才能下单。
+
+**权重(IP):** 1
+**权重(UID):** 1
 
 > 请求示例
 
@@ -1493,8 +1543,9 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 | orderId | STRING | 订单类型 |
 
 ## 撤销订单
-
 取消有效订单。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -1560,6 +1611,9 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 
 ## 撤销单一交易对所有订单
 撤销单一交易对下所有挂单, 包括OCO的挂单。
+
+**权重(IP):** 1
+
 > 请求示例
 
 ```
@@ -1634,8 +1688,9 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 | side                | 订单方向         |
 
 ## 查询订单
-
 查询指定交易对订单状态，最多查询7天内的订单记录，超过7天的可在web客户端查看和导出。
+
+**权重(IP):** 2
 
 > 请求示例
 
@@ -1707,7 +1762,9 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 
 ## 当前挂单
 获取当前挂单支持查询多交易对，每次最多可以传5个symbol。  
-若批量查5个交易对，最多也只返回1000条挂单
+若批量查5个交易对，最多也只返回1000条挂单。
+
+**权重(IP):** 3
 
 > 请求示例
 
@@ -1779,6 +1836,8 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 
 ## 查询所有订单
 获取所有帐户订单； 有效，已取消或已完成，最多查询最近7天数据。
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -1858,6 +1917,8 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 ## 账户信息
 获取当前账户信息，限速2次每秒。
 
+**权重(IP):** 10
+
 > 请求示例
 
 ```
@@ -1926,8 +1987,9 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 | permissions      | 权限       |
 
 ## 账户成交历史
-获取账户指定交易对的成交历史
+获取账户指定交易对的成交历史。
 
+**权重(IP):** 10
 
 > 请求示例
 
@@ -1997,7 +2059,9 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 # 钱包接口
 
 ## 查询币种信息
-返回币种详细信息以及智能合约地址
+返回币种详细信息以及智能合约地址。
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -2111,6 +2175,8 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 
 ## 获取充值历史(支持多网络)
 
+**权重(IP):** 1
+
 > 请求示例
 
 ```
@@ -2168,6 +2234,8 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 |confirmTimes|已解锁次数|
 
 ## 获取提币历史 (支持多网络)
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -2233,6 +2301,8 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 ## 获取充值地址 (支持多网络)
 
+**权重(IP):** 10
+
 > 请求示例
 
 ```
@@ -2286,6 +2356,8 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 ## 用户万向划转【母母账户】
 
+**权重(IP):** 1
+
 > 请求示例
 
 ```
@@ -2325,6 +2397,8 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 |tranId|划转ID|
 
 ## 查询用户万向划转历史
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -2405,6 +2479,8 @@ get /api/v3/capital/transfer
 ## 获取杠杆ETF基础信息
 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
 
+**权重(IP):** 1
+
 > 请求示例
 
 ```
@@ -2452,7 +2528,9 @@ GET /api/v3/etf/info
 # 杠杆账户和交易接口
 
 ## 切换杠杆账户模式
-切换杠杆账户的交易模式
+切换杠杆账户的交易模式。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -2494,11 +2572,11 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 
 ## 下单
+进行杠杆账户下单操作。
 
-进行杠杆账户下单操作
+<aside class="warning">杠杆账户下单暂时不支持市价单。</aside>
 
-<aside class="warning">杠杆账户下单暂时不支持市价单</aside>
-
+**权重(UID):** 6
 
 > 请求示例
 
@@ -2552,6 +2630,8 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 ## 借贷 
 
+**权重(UID):** 1000
+
 > 请求示例
 
 ```
@@ -2595,6 +2675,8 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 
 
 ## 归还借贷
+
+**权重(UID):** 1000
 
 > 请求示例
 
@@ -2640,6 +2722,8 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 
 
 ## 撤销单一交易对的所有挂单
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -2705,6 +2789,8 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 
 ## 撤销订单
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -2774,6 +2860,8 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 
 ## 查询借贷记录
 
+**权重(IP):** 10
+
 > 请求示例
 
 ```
@@ -2838,6 +2926,8 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 
 
 ## 查询历史委托记录
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -2911,6 +3001,8 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 
 ## 查询历史成交记录
 
+**权重(IP):** 10
+
 > 请求示例
 
 ```
@@ -2961,6 +3053,8 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 
 
 ## 查询当前挂单记录
+
+**权重(IP):** 3
 
 > 请求示例
 
@@ -3038,6 +3132,8 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 ## 查询最大可转出额
 
+**权重(IP):** 50
+
 > 请求示例
 
 ```
@@ -3073,7 +3169,9 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 
 ## 查询杠杆价格指数
-说明
+
+**权重(IP):** 10
+
 > 请求示例
 
 ```
@@ -3113,6 +3211,8 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 
 ## 查询杠杆账户订单详情
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -3181,6 +3281,8 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 
 
 ## 查询杠杆逐仓账户信息
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -3309,6 +3411,8 @@ get /api/v3/margin/trigerOrder
 
 ## 查询账户最大可借贷额度
 
+**权重(IP):** 50
+
 > 请求示例
 
 ```
@@ -3346,6 +3450,8 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 
 ## 查询还贷记录
+
+**权重(IP):** 10
 
 > 请求示例
 
@@ -3399,6 +3505,8 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 
 ## 查询逐仓杠杆交易对
 
+**权重(IP):** 10
+
 > 请求示例
 
 ```
@@ -3440,6 +3548,8 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 
 ## 获取账户强制平仓记录
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -3491,6 +3601,8 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 
 
 ## 获取逐仓杠杆利率及限额
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -3547,6 +3659,8 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 
 ## 获取逐仓档位信息
+
+**权重(IP):** 1
 
 > 请求示例
 
