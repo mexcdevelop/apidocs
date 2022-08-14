@@ -54,6 +54,11 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-08-15**
+
+- 更新访问说明和限速规则
+- 新增母子用户万向划转、查询母子万向划转、开通子账户合约业务、开通子账户杠杆业务接口
+
 ## **2022-08-03**
 
 - Add wallet endpoints
@@ -275,14 +280,25 @@ symbol=BTCUSDT&side=BUY&type=LIMIT
 quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 Note that the signature is different in example 3. There is no & between "LIMIT" and "quantity=1".
-## Limits
+## Access Limits
 
 
-There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests.
+### 限频说明
 
-The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
+- 每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。
+- **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。**
 
-The default rate limiting rule for an endpoint is 20 times per second.
+### 限频使用
+
+- 按照IP统计的接口, 请求返回头里面会包含`X-MBX-USED-WEIGHT-(intervalNum)(intervalLetter)`的头，代表了当前账户所有已用的IP权重。
+- 按照UID统计的接口, 请求返回头里面会包含`X-SAPI-USED-UID-WEIGHT-1M=<value>`, 代表了当前账户所有已用的UID权重。
+
+### 超频报错
+
+- 收到429时，您有责任停止发送请求，不得滥用API。
+- **收到429后仍然继续违反访问限制，会被封禁IP。**
+- 频繁违反限制，封禁时间会逐渐延长，**从最短2分钟到最长3天**。
+- `Retry-After`的头会与带有418或429的响应发送，并且会给出**以秒为单位**的等待时长(如果是429)以防止禁令，或者如果是418，直到禁令结束。
 
 # Market Data Endpoints
 
