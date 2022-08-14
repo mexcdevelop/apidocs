@@ -300,7 +300,7 @@ Note that the signature is different in example 3. There is no & between "LIMIT"
 - When a 429 is received, it's your obligation as an API to back off and not spam the API.
 - **Repeatedly violating rate limits and/or failing to back off after receiving 429s will result in an automated IP ban.**
 - IP bans are tracked and scale in duration for repeat offenders,**from 2 minutes to 3 days.**
-- A `Retry-After` header is sent with a 418 or 429 responses and will give **the number of seconds**required to wait, in the case of a 429, to prevent a ban, or, in the case of a 418, until the ban is over.
+- A `Retry-After` header is sent with a 418 or 429 responses and will give **the number of seconds** required to wait, in the case of a 429, to prevent a ban, or, in the case of a 418, until the ban is over.
 
 # Market Data Endpoints
 
