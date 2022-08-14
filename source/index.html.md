@@ -59,6 +59,10 @@ https://github.com/mxcdevelop/mexc-api-demo
   -  咨询关于钱包、短信、2FA等问题
 
 # 更新日志
+## **2022-08-15**
+
+- 更新访问说明和限速规则
+- 新增母子用户万向划转、查询母子万向划转、开通子账户合约业务、开通子账户杠杆业务接口
 
 ## **2022-08-03**
 
@@ -1181,6 +1185,8 @@ body
 
 ## 母子用户万向划转
 
+**权重(IP):** 1
+
 > 请求示例
 
 ```
@@ -1222,6 +1228,8 @@ post /api/v3/capital/sub-account/universalTransfer
 |tranId|string|划转ID|
 
 ## 查询母子万向划转历史
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -1288,6 +1296,8 @@ get /api/v3/capital/sub-account/universalTransfer
 
 ## 开通子账户的合约业务
 
+**权重(IP):** 1
+
 > 请求示例
 
 ```
@@ -1332,6 +1342,8 @@ post /api/v3/sub-account/futures
 
 
 ## 开通子账户的杠杆业务
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -1466,6 +1478,8 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 
 ## 批量下单
 支持单次批量下20单,限频2次/秒。
+
+**权重(IP):** 1
 
 > 请求示例
 
@@ -2132,6 +2146,8 @@ Get /api/v3/capital/config/getall
 |contract|币种智能合约地址|
 
 ## 提币
+
+**权重(IP):** 1
 
 > 请求示例
 
