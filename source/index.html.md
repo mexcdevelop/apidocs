@@ -56,8 +56,8 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 ## **2022-08-15**
 
-- 更新访问说明和限速规则
-- 新增母子用户万向划转、查询母子万向划转、开通子账户合约业务、开通子账户杠杆业务接口
+- Update the access limit rules
+- Add Universal Transfer,Query Universal Transfer History,Enable Futures for Sub-account,Enable Margin for Sub-account endpoints.
 
 ## **2022-08-03**
 
@@ -159,7 +159,7 @@ Relevant parameters in the header
 | ```X-MEXC-APIKEY``` | Access key             |
 | ```Content-Type```  | ```application/json``` |
 
-## SIGNED
+## Signed
 - SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body(in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
 - Endpoints use HMAC SHA256 signatures. The HMAC SHA256 signature is a keyed HMAC SHA256 operation. Use your secretKey as the key and totalParams as the value for the HMAC operation.
 - The signature is not case sensitive.
@@ -280,29 +280,33 @@ symbol=BTCUSDT&side=BUY&type=LIMIT
 quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 Note that the signature is different in example 3. There is no & between "LIMIT" and "quantity=1".
+
 ## Access Limits
 
+### Limits Introduction
 
-### 限频说明
+- Endpoints are marked according to IP or UID limit and their corresponding weight value.An interface that consumes more resources has a larger weight.
+- **According to the two modes of IP and UID (account) limit, each are independent.**
+- **Endpoints share the 20000 per minute limit based on IP.**
+- **Each endpoint with UID limits has an independent 240000 per minute limit.**
 
-- 每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。
-- **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。**
+### Limits Using
 
-### 限频使用
+- Responses from endpoints with IP limits contain the header`X-MBX-USED-WEIGHT-(intervalNum)(intervalLetter)`,defining the weight used by the current IP.
+- Responses from endpoints with UID limits contain the header`X-SAPI-USED-UID-WEIGHT-1M=<value>`,defining the weight used by the current UID.
 
-- 按照IP统计的接口, 请求返回头里面会包含`X-MBX-USED-WEIGHT-(intervalNum)(intervalLetter)`的头，代表了当前账户所有已用的IP权重。
-- 按照UID统计的接口, 请求返回头里面会包含`X-SAPI-USED-UID-WEIGHT-1M=<value>`, 代表了当前账户所有已用的UID权重。
+### Limits Error
 
-### 超频报错
-
-- 收到429时，您有责任停止发送请求，不得滥用API。
-- **收到429后仍然继续违反访问限制，会被封禁IP。**
-- 频繁违反限制，封禁时间会逐渐延长，**从最短2分钟到最长3天**。
-- `Retry-After`的头会与带有418或429的响应发送，并且会给出**以秒为单位**的等待时长(如果是429)以防止禁令，或者如果是418，直到禁令结束。
+- When a 429 is received, it's your obligation as an API to back off and not spam the API.
+- **Repeatedly violating rate limits and/or failing to back off after receiving 429s will result in an automated IP ban.**
+- IP bans are tracked and scale in duration for repeat offenders,**from 2 minutes to 3 days.**
+- A `Retry-After` header is sent with a 418 or 429 responses and will give **the number of seconds**required to wait, in the case of a 429, to prevent a ban, or, in the case of a 418, until the ban is over.
 
 # Market Data Endpoints
 
 ## Test Connectivity
+
+**Weight(IP):** 1
 
 > Response
 
@@ -314,11 +318,13 @@ Note that the signature is different in example 3. There is no & between "LIMIT"
 
 Test connectivity to the Rest API.
 
-Parameter：
+**Parameter:**
 
 NONE
 
 ## Check Server Time
+
+**Weight(IP):** 1
 
 > Response
 
@@ -331,11 +337,13 @@ NONE
 - **GET** ```/api/v3/time ```
   
 
-Parameter：
+**Parameter:**
 
 NONE
 
 ## Exchange Information
+
+**Weight(IP):** 10
 
 > Response
 
@@ -375,7 +383,7 @@ NONE
 
 Current exchange trading rules and symbol information
 
-**Parameter**：
+**Parameter:**
 
 There are 3 possible options:
 
@@ -386,6 +394,8 @@ There are 3 possible options:
 | symbols      | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
 
 ## Order Book
+
+**Weight(IP):** Adjusted based on the limit
 
 > Response
 
@@ -403,14 +413,14 @@ There are 3 possible options:
 
 - **GET** ```/api/v3/depth```
 
-Parameter：
+**Parameter:**
 
 | name   | Type    | Mandatory | Description     | Scope                 |
 | ------ | ------- | --------- | --------------- | --------------------- |
 | symbol | string  | YES       | Symbol          |                       |
 | limit  | integer | NO        | Returen  number | default 100; max 5000 |
 
-Response：
+**Response:**
 
 | name         | Type | Description            |
 | ------------ | ---- | ---------------------- |
@@ -419,6 +429,8 @@ Response：
 | asks         | list | Ask [Price, Quantity ] |
 
 ## Recent Trades List
+
+**Weight(IP):** 5
 
 > Response
 
@@ -438,7 +450,7 @@ Response：
 
 - **GET** ```/api/v3/trades```
 
-Parameter：
+**Parameter:**
 
 | name   | Type    | Mandatory | Description | Scope                  |
 | ------ | ------- | --------- | ----------- | ---------------------- |
@@ -446,7 +458,7 @@ Parameter：
 | limit  | integer | NO        |             | Default  500; max 1000 |
 
 
-Response:
+**Response:**
 
 | name         | Description                         |
 | ------------ | ----------------------------------- |
@@ -459,6 +471,8 @@ Response:
 | isBestMatch  | Was the trade the best price match? |
 
 ## Old Trade Lookup
+
+**Weight(IP):** 1
 
 > Response
 
@@ -478,7 +492,7 @@ Response:
 
 - **GET** ```/api/v3/historicalTrades```
 
-Parameters:
+**Parameters:**
 
 | name   | Type    | Mandatory | Description   | Scope                 |
 | ------ | ------- | --------- | ------------- | --------------------- |
@@ -486,7 +500,7 @@ Parameters:
 | limit  | integer | NO        | Return number | Default 500; max 1000 |
 
 
-Response:
+**Response:**
 
 | name         | Description                         |
 | ------------ | ----------------------------------- |
@@ -499,6 +513,8 @@ Response:
 | isBestMatch  | Was the trade the best price match? |
 
 ## Compressed/Aggregate Trades List
+
+**Weight(IP):** 1
 
 > Response
 
@@ -522,7 +538,7 @@ Response:
 
 Get compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
 
-Parameters:
+**Parameters:**
 
 | name      | Type    | Mandatory | Description                                              | Scope                  |
 | --------- | ------- | --------- | -------------------------------------------------------- | ---------------------- |
@@ -532,7 +548,7 @@ Parameters:
 | limit     | integer | NO        |                                                          | Default 500; max 1000. |
 
 
-Response:
+**Response:**
 
 | name | Description                         |
 | ---- | ----------------------------------- |
@@ -546,6 +562,8 @@ Response:
 | M    | Was the trade the best price match? |
 
 ## Kline/Candlestick Data
+
+**Weight(IP):** 1
 
 > Response
 
@@ -570,7 +588,7 @@ Response:
 Kline/candlestick bars for a symbol.
 Klines are uniquely identified by their open time.
 
-Parameters:
+**Parameters:**
 
 | name      | Type    | Mandatory | Description            |
 | --------- | ------- | --------- | ---------------------- |
@@ -581,7 +599,7 @@ Parameters:
 | limit     | integer | NO        | Default 500; max 1000. |
 
 
-Response:
+**Response:**
 
 | Index | Description        |
 | ----- | ------------------ |
@@ -596,6 +614,7 @@ Response:
 
 ## Current Average Price
 
+**Weight(IP):** 1
 
 > Response
 
@@ -608,14 +627,14 @@ Response:
 
 - **GET** ```/api/v3/avgPrice```
 
-Parameters:
+**Parameters:**
 
 | name   | Type   | Mandatory | Description |
 | ------ | ------ | --------- | ----------- |
 | symbol | string | YES       |             |
 
 
-Response:
+**Response:**
 
 | name  | Description              |
 | ----- | ------------------------ |
@@ -624,6 +643,8 @@ Response:
 
 ## 24hr Ticker Price Change Statistics
 
+**Weight(IP):** 1(single symbol)
+**Weight(IP):** 40(symbols parameter is omitted)
 
 > Response
 
@@ -692,14 +713,14 @@ or
 
 - **GET** ```/api/v3/ticker/24hr```
 
-Parameters:
+**Parameters:**
 
 | name   | Type   | Mandatory | Description                                                                      |
 | ------ | ------ | --------- | -------------------------------------------------------------------------------- |
 | symbol | string | NO        | If the symbol is not sent, tickers for all symbols will be returned in an array. |
 
 
-Response:
+**Response:**
 
 | name               | Description           |
 | ------------------ | --------------------- |
@@ -724,6 +745,9 @@ Response:
 
 ## Symbol Price Ticker
 
+**Weight(IP):** 1(single symbol)
+**Weight(IP):** 2(symbol parameter is omitted)
+
 > Response
 
 ```json
@@ -746,14 +770,14 @@ or
 
 - **GET** ```/api/v3/ticker/price```
 
-Parameters:
+**Parameters:**
 
 | name   | Type   | Mandatory | Description                                                          |
 | ------ | ------ | --------- | -------------------------------------------------------------------- |
 | symbol | string | NO        | If the symbol is not sent, all symbols will be returned in an array. |
 
 
-Response:
+**Response:**
 
 | name   | Description |
 | ------ | ----------- |
@@ -761,6 +785,9 @@ Response:
 | price  | Last price  |
 
 ## Symbol Order Book Ticker
+
+**Weight(IP):** 1(single symbol)
+**Weight(IP):** 2(symbol parameter is omitted)
 
 > Response
 
@@ -796,14 +823,14 @@ OR
 
 Best price/qty on the order book for a symbol or symbols.
 
-Parameters:
+**Parameters:**
 
 | name   | Type   | Mandatory | Description                                                          |
 | ------ | ------ | --------- | -------------------------------------------------------------------- |
 | symbol | string | NO        | If the symbol is not sent, all symbols will be returned in an array. |
 
 
-Response:
+**Response:**
 
 | name     | Description       |
 | -------- | ----------------- |
@@ -820,6 +847,8 @@ Response:
 
 Create a sub-account from the master account.
 
+**Weight(IP):** 1
+
 > Response
 
 ```json
@@ -833,7 +862,7 @@ Create a sub-account from the master account.
 
 
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description       |
 | ---------- | ------ | --------- | ----------------- |
@@ -847,6 +876,8 @@ Parameters:
 ## Query Sub-account List (For Master Account)
 
 Get details of the sub-account list
+
+**Weight(IP):** 1
 
 > Response
 
@@ -871,7 +902,7 @@ Get details of the sub-account list
 
 
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description                       |
 | ---------- | ------ | --------- | --------------------------------- |
@@ -886,6 +917,8 @@ Parameters:
 
 
 ## Create an APIKey for a sub-account (For Master Account)
+
+**Weight(IP):** 1
 
 > Response
 
@@ -905,7 +938,7 @@ Parameters:
 
 
 
-Parameters:
+**Parameters:**
 
 | name        | Type   | Mandatory | Description                                                  |
 | ----------- | ------ | --------- | ------------------------------------------------------------ |
@@ -920,6 +953,8 @@ Parameters:
 
 
 ## Query the APIKey of a sub-account (For Master Account)
+
+**Weight(IP):** 1
 
 Applies to master accounts only
 
@@ -948,7 +983,7 @@ Applies to master accounts only
 
 - GET/api/v3/sub-account/apiKey
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description      |
 | ---------- | ------ | --------- | ---------------- |
@@ -961,19 +996,21 @@ Parameters:
 
 ## Delete the APIKey of a sub-account (For Master Account)
 
+**Weight(IP):** 1
+
 > Response
 
 ```json
   {
-           "subAccount":"mexc1"
-}
+    "subAccount":"mexc1"
+  }
 ```
 
 - DELETE /api/v3/sub-account/apiKey
 
 
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description      |
 | ---------- | ------ | --------- | ---------------- |
@@ -982,13 +1019,208 @@ Parameters:
 | recvWindow | LONG   | NO        |                  |
 | timestamp  | LONG   | YES       |                  |
 
+## Universal Transfer (For Master Account)
 
+**Weight(IP):** 1
+
+> Request
+
+```
+post /api/v3/capital/sub-account/universalTransfer
+```
+> Response
+
+```json
+
+ {
+    "tranId":11945860693 
+ }
+
+```
+- **POST** ```/api/v3/capital/sub-account/universalTransfer```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description |  
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+|fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
+|toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|symbol|string|NO|Only supported under ISOLATED_MARGIN type,eg:ETHUSDT|
+|asset|string|YES|asset,eg:USDT|
+|amount|string|YES|amount,eg:1.82938475|
+
+
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|tranId|string|transfer ID|
+
+## Query Universal Transfer History (For Master Account)
+
+**Weight(IP):** 1
+
+> Request
+
+```
+get /api/v3/capital/sub-account/universalTransfer
+```
+> Response
+
+```json
+
+  {
+    "tranId":"11945860693",
+    "fromAccount":"master@test.com",
+    "toAccount":"subaccount1@test.com",
+    "clientTranId":"test",
+    "asset":"BTC",
+    "amount":"0.1",
+    "fromAccountType":"SPOT",
+    "toAccountType":"FUTURE",
+    "fromSymbol":"SPOT",
+    "toSymbol":"FUTURE",
+    "status":"SUCCESS",
+    "timestamp":1544433325000
+  }
+
+```
+
+
+- **GET** ```/api/v3/capital/sub-account/universalTransfer```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+|fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
+|toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|startTime|string|NO|startTime|
+|endTime|string|NO|endTime|
+|page|string|NO|default 1|
+|limit|string|NO|default 500, max 500|
+
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|tranId|string|transfer ID|
+|fromAccount|string|fromAccount|
+|toAccount|string|toAccount|
+|clientTranId|string|clientTranId|
+|asset|string|asset|
+|amount|string|transfer amount|
+|fromAccountType|string|fromAccountType|
+|toAccountType|string|toAccountType|
+|fromSymbol|string|fromSymbol|
+|toSymbol|string|toSymbol|
+|status|string|status|
+|timestamp|number|timestamp|
+|totalCount|number|total transfer|
+
+## Enable Futures for Sub-account (For Master Account)
+
+**Weight(IP):** 1
+
+> Request
+
+```
+post /api/v3/sub-account/futures
+```
+> Response
+
+```json
+
+  {
+    "code": "0",
+    "message": "",
+    "data": [{
+        "subAccount": "mexc1",
+        "isFuturesEnabled": true,
+        "timestamp": "1597026383085"
+    }]
+  }
+
+```
+- **POST** ```/api/v3/sub-account/futures```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|subAccount|string|YES|subaccount name|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|subAccount|string|subaccount name|
+|isFuturesEnabled|boolean|isFuturesEnabled:true|
+|timestamp|string|response time|
+
+
+
+## Enable Margin for Sub-account (For Master Account)
+
+**Weight(IP):** 1
+
+> Request
+
+```
+post /api/v3/sub-account/margin
+```
+> Response
+
+```json
+
+{
+  "code": "0",
+  "message": "",
+  "data": [{
+      "subAccount": "mexc1",
+      "isMarginEnabled": true,
+      "timestamp": "1597026383085"
+  }]
+}
+
+```
+- **POST** ```/api/v3/sub-account/margin```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|subAccount|string|YES|subaccount name|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|subAccount|string|subaccount name|
+|isMarginEnabled|booleanisMarginEnabled:true or false|
+|timestamp|string|response time|
 
 
 
 # Spot Account/Trade
 
 ## Test New Order
+
+**Weight(IP):** 1
 
 > Response
 
@@ -1000,11 +1232,14 @@ Parameters:
 
 Creates and validates a new order but does not send it into the matching engine.
 
-Parameters:
+**Parameters:**
 
 equaled POST /api/v3/order
 
 ## New Order
+
+**Weight(IP):** 1
+**Weight(UID):** 1
 
 > Response
 
@@ -1018,7 +1253,7 @@ equaled POST /api/v3/order
 
 - **POST** ```/api/v3/order```
 
-Parameters:
+**Parameters:**
 
 | name             | type    | Mandatory | Description          |
 | ---------------- | ------- | --------- | -------------------- |
@@ -1053,6 +1288,8 @@ MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required
 ## Batch Orders
 
 Supports 20 orders in a batch,rate limit:2 times/s.
+
+**Weight(IP):** 1
 
 > Request
 
@@ -1102,7 +1339,7 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 - **POST** ```/api/v3/batchOrders```
 
-Parameters:
+**Parameters:**
 
 | name             | type    | Mandatory | Description           |
 | :--------------- | :------ | :------- | :--------------------- |
@@ -1133,6 +1370,8 @@ Response
 
 ## Cancel Orde
 
+**Weight(IP):** 1
+
 > Response
 
 ```json
@@ -1156,7 +1395,7 @@ Response
 
 Cancel an active order.
 
-Parameters:
+**Parameters:**
 
 | name              | Type   | Mandatory | Description |
 | ----------------- | ------ | --------- | ----------- |
@@ -1169,7 +1408,7 @@ Parameters:
 
 Either `orderId` or `origClientOrderId` must be sent.
 
-Response:
+**Response:**
 
 | name                | Description                |
 | ------------------- | -------------------------- |
@@ -1187,6 +1426,8 @@ Response:
 | side                | Order side                 |
 
 ## Cancel all Open Orders on a Symbol 
+
+**Weight(IP):** 1
 
 > Response
 
@@ -1229,7 +1470,7 @@ Response:
 
 Cancel all pending orders for a single  symbol, including OCO pending orders.
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description |
 | ---------- | ------ | --------- | ----------- |
@@ -1238,7 +1479,7 @@ Parameters:
 | timestamp  | long   | YES       |             |
 
 
-Response:
+**Response:**
 
 | name                | Description                |
 | ------------------- | -------------------------- |
@@ -1256,6 +1497,8 @@ Response:
 | side                | Order side                 |
 
 ## Query Order
+
+**Weight(IP):** 2
 
 > Response
 
@@ -1285,7 +1528,7 @@ Response:
 
 Check an order's status.
 
-Parameters:
+**Parameters:**
 
 | name              | Type   | Mandatory | Description |
 | ----------------- | ------ | --------- | ----------- |
@@ -1296,7 +1539,7 @@ Parameters:
 | timestamp         | long   | YES       |             |
 
 
-Response:
+**Response:**
 
 | name                | Description                |
 | ------------------- | -------------------------- |
@@ -1318,6 +1561,8 @@ Response:
 | isWorking           | is orderbook               |
 
 ## Current Open Orders
+
+**Weight(IP):** 3
 
 > Response
 
@@ -1350,7 +1595,7 @@ Response:
 
 Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description |
 | ---------- | ------ | --------- | ----------- |
@@ -1359,7 +1604,7 @@ Parameters:
 | timestamp  | long   | YES       |             |
 
 
-Response:
+**Response:**
 
 | name                | Description                |
 | ------------------- | -------------------------- |
@@ -1381,6 +1626,8 @@ Response:
 | isWorking           | is orderbook               |
 
 ## All Orders
+
+**Weight(IP):** 10
 
 > Response
 
@@ -1413,7 +1660,7 @@ Response:
 
 Get all account orders; active, cancelled or completed
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description             |
 | ---------- | ------ | --------- | ----------------------- |
@@ -1425,7 +1672,7 @@ Parameters:
 | timestamp  | long   | YES       |                         |
 
 
-Response:
+**Response:**
 
 | name                | Description                |
 | ------------------- | -------------------------- |
@@ -1448,6 +1695,8 @@ Response:
 | origQuoteOrderQty   |                            |
 
 ## Account Information
+
+**Weight(IP):** 10
 
 > Response
 
@@ -1479,7 +1728,7 @@ Response:
 
 Get current account information,rate limit:2 times/s.
 
-Parameters:
+**Parameters:**
 
 | name       | Type | Mandatory | Description |
 | ---------- | ---- | --------- | ----------- |
@@ -1487,7 +1736,7 @@ Parameters:
 | timestamp  | long | YES       |             |
 
 
-Response:
+**Response:**
 
 | name             | Description     |
 | ---------------- | --------------- |
@@ -1507,6 +1756,8 @@ Response:
 | permissions      | Permission      |
 
 ## Account Trade List
+
+**Weight(IP):** 10
 
 > Response
 
@@ -1537,7 +1788,7 @@ Response:
 
 Get trades for a specific account and symbol.
 
-Parameters:
+**Parameters:**
 
 | name       | Type   | Mandatory | Description            |
 | ---------- | ------ | --------- | ---------------------- |
@@ -1550,7 +1801,7 @@ Parameters:
 | timestamp  | long   | YES       |                        |
 
 
-Response:
+**Response:**
 
 | name            | Description   |
 | --------------- | ------------- |
@@ -1573,6 +1824,8 @@ Response:
 # Wallet Endpoints
 
 ## Query the currency information
+
+**Weight(IP):** 10
 
 > Request
 
@@ -1627,12 +1880,12 @@ Get /api/v3/capital/config/getall
 Query currency details and the smart contract address
 
 
-Parameters:  
+**Parameters:**  
 
   None
 
 
-Response:
+**Response:**
 
 | name | Description  | 
 | :------------ | :-------- | 
@@ -1646,6 +1899,8 @@ Response:
 
 
 ## Withdraw
+
+**Weight(IP):** 1
 
 > Request
 
@@ -1665,7 +1920,7 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 
 - **POST** ```/api/v3/capital/withdraw/apply```
 
-Parameters: 
+**Parameters:** 
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
@@ -1681,13 +1936,15 @@ Parameters:
 1. If `network` is not sent, will return default network in that currency.
 2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
 3. Withdraw address only support address which added in withdrawal settings on website.
-Response:
+**Response:**
 
 | name | Description  |
 | :------------ | :-------- | 
 |id|withdraw ID|
 
 ## Deposit History(supporting network) 
+
+**Weight(IP):** 1
 
 > Request
 
@@ -1716,7 +1973,7 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 
 - **GET** ```/api/v3/capital/deposit/hisrec```
 
-Parameters: 
+**Parameters:** 
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
@@ -1730,7 +1987,7 @@ Parameters:
 
 Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
 
-Response:
+**Response:**
 
 | name | Description  |
 | :------------ | :-------- |
@@ -1746,6 +2003,8 @@ Response:
 |confirmTimes|confirmTimes|
 
 ## Withdraw History (supporting network) 
+
+**Weight(IP):** 1
 
 > Request
 
@@ -1776,7 +2035,7 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 - **GET** ```/api/v3/capital/withdraw/history```
 
-Parameters: 
+**Parameters:** 
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
@@ -1792,7 +2051,7 @@ Parameters:
 2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
 
 
-Response:
+**Response:**
 
 | name | Description  |
 | :------------ | :-------- | 
@@ -1811,6 +2070,8 @@ Response:
 |remark|remark|
 
 ## Deposit Address (supporting network) 
+
+**Weight(IP):** 10
 
 > Request
 
@@ -1845,7 +2106,7 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 - **GET** ```/api/v3/capital/deposit/address```
 
-Parameters: 
+**Parameters:** 
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
@@ -1854,7 +2115,7 @@ Parameters:
 |coin|string|YES|coin |
 |network|string|NO|deposit network|
 
-Response:
+**Response:**
 
 | name | Description  |
 | :------------ | :-------- |
@@ -1864,6 +2125,8 @@ Response:
 |network|network|
 
 ## User Universal Transfer
+
+**Weight(IP):** 1
 
 > Request
 
@@ -1883,7 +2146,7 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 
 - **POST** ```/api/v3/capital/transfer```
 
-Parameters: 
+**Parameters:** 
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
@@ -1897,13 +2160,15 @@ Parameters:
 
 When type is`ISOLATEDMARGIN`, `fromSymbol` and `toSymbol` must be sent.
 
-Response:
+**Response:**
 
 | name | Description  |
 | :------------ | :-------- | 
 |tranId|tranId|
 
 ## Query User Universal Transfer History 
+
+**Weight(IP):** 1
 
 > Request
 
@@ -1948,7 +2213,7 @@ get /api/v3/capital/transfer
 
 - **GET** ```/api/v3/capital/transfer```
 
-Parameters: 
+**Parameters:** 
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
@@ -1964,7 +2229,7 @@ Parameters:
 
 1. Only can quary the data for the last six months
 2. If 'startTime' and 'endTime' are not send, will return the last seven days' data by default
-Response:
+**Response:**
 
 | name | Description  |
 | :------------ | :-------- | 
@@ -1982,6 +2247,8 @@ Response:
 # ETF
 
 ## Get ETF info
+
+**Weight(IP):** 1
 
 > Response
 
@@ -2004,14 +2271,14 @@ Response:
 
 Get information on ETFs, such as symbol, netValue and fund fee.
 
-Parameters:
+**Parameters:**
 
 | name   | Type   | Mandatory | Description |
 | ------ | ------ | --------- | ----------- |
 | symbol | string | No        | ETF symbol  |
 
 
-Response:
+**Response:**
 
 | name      | Type   | Description |
 | --------- | ------ | ----------- |
@@ -2024,6 +2291,8 @@ Response:
 
 ## TradeMode
 switch trademode of margin account
+
+**Weight(IP):** 1
 
 > request
 
@@ -2067,6 +2336,8 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 ## Place Order
 
 <aside class="warning">not support market order yet</aside>
+
+**Weight(UID):** 6
 
 > request
 
@@ -2120,6 +2391,8 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 ## Loan
 
+**Weight(UID):** 1000
+
 > request
 
 ```
@@ -2163,6 +2436,8 @@ If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
 
 
 ## Repayment
+
+**Weight(UID):** 1000
 
 > request
 
@@ -2208,6 +2483,8 @@ If isIsolated = "TRUE", means isolated mode,symbol must be filled in.
 
 
 ## Cancel all Open Orders on a Symbol
+
+**Weight(IP):** 1
 
 > request
 
@@ -2271,6 +2548,8 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 
 ## Cancel Order
+
+**Weight(IP):** 10
 
 > request
 
@@ -2339,6 +2618,7 @@ must send any one of orderId or origClientOrderId .
 
 ## Query Loan List
 
+**Weight(IP):** 10
 
 > request
 
@@ -2404,6 +2684,8 @@ TranId or startTime must be sent, tranId takes precedence. Responses are returne
 
 
 ## All Order
+
+**Weight(IP):** 10
 
 > request
 
@@ -2477,6 +2759,7 @@ If orderId is set, get the order &gt;= orderId, NO returns the recent order hist
 
 ## Account Trade List
 
+**Weight(IP):** 10
 
 > request
 
@@ -2528,6 +2811,8 @@ If fromId is set, get the order ID &gt; = fromId, NO Returns the recent order hi
 
 
 ## Current Open Orders
+
+**Weight(IP):** 3
 
 > request
 
@@ -2601,6 +2886,8 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 ## Account Max Transferable
 
+**Weight(IP):** 50
+
 > request
 
 ```
@@ -2636,6 +2923,8 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 
 ## Margin PriceIndex
+
+**Weight(IP):** 10
 
 > request
 
@@ -2676,6 +2965,8 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 
 ## Query Order
+
+**Weight(IP):** 10
 
 > request
 
@@ -2744,6 +3035,8 @@ You must send either orderId or origClientOrderId. Some historical orders of cum
 
 
 ## Isolated Account
+
+**Weight(IP):** 10
 
 > request
 
@@ -2867,6 +3160,8 @@ get /api/v3/margin/trigerOrder
 
 ## MaxBorrowable
 
+**Weight(IP):** 50
+
 > request
 
 ```
@@ -2904,7 +3199,8 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 
 ## Repay
-Description
+
+**Weight(IP):** 10
 
 > request
 
@@ -2958,6 +3254,8 @@ TranId or startTime must be sent, tranId takes precedence. Responses are returne
 
 ## Isolated Symbol
 
+**Weight(IP):** 10
+
 > request
 
 ```
@@ -2999,6 +3297,8 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 
 ## Force Liquidation Record
+
+**Weight(IP):** 1
 
 > request
 
@@ -3049,6 +3349,8 @@ Responses are returned in descending order.
 
 
 ## Isolated MarginData
+
+**Weight(IP):** 1
 
 > request
 
@@ -3105,6 +3407,8 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 
 ## Isolated MarginTier
+
+**Weight(IP):** 1
 
 > request
 
