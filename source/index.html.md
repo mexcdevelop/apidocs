@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-08-15**
+
+- Add Universal Transfer,Query Universal Transfer History,Enable Futures for Sub-account,Enable Margin for Sub-account endpoints.
+
 ## **2022-08-03**
 
 - Add wallet endpoints
@@ -967,6 +971,184 @@ Parameters:
 | timestamp  | LONG   | YES       |                  |
 
 
+## Universal Transfer (For Master Account)
+
+> Request
+
+```
+post /api/v3/capital/sub-account/universalTransfer
+```
+
+> Response
+
+```json
+ {
+    "tranId":11945860693 
+ }
+```
+
+- **POST** ```/api/v3/capital/sub-account/universalTransfer```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description |  
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+|fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
+|toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|symbol|string|NO|Only supported under ISOLATED_MARGIN type,eg:ETHUSDT|
+|asset|string|YES|asset,eg:USDT|
+|amount|string|YES|amount,eg:1.82938475|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|tranId|string|transfer ID|
+
+## Query Universal Transfer History (For Master Account)
+
+> Request
+
+```
+get /api/v3/capital/sub-account/universalTransfer
+```
+
+> Response
+
+```json
+  {
+    "tranId":"11945860693",
+    "fromAccount":"master@test.com",
+    "toAccount":"subaccount1@test.com",
+    "clientTranId":"test",
+    "asset":"BTC",
+    "amount":"0.1",
+    "fromAccountType":"SPOT",
+    "toAccountType":"FUTURE",
+    "fromSymbol":"SPOT",
+    "toSymbol":"FUTURE",
+    "status":"SUCCESS",
+    "timestamp":1544433325000
+  }
+```
+- **GET** ```/api/v3/capital/sub-account/universalTransfer```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+|fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
+|toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|startTime|string|NO|startTime|
+|endTime|string|NO|endTime|
+|page|string|NO|default 1|
+|limit|string|NO|default 500, max 500|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|tranId|string|transfer ID|
+|fromAccount|string|fromAccount|
+|toAccount|string|toAccount|
+|clientTranId|string|clientTranId|
+|asset|string|asset|
+|amount|string|transfer amount|
+|fromAccountType|string|fromAccountType|
+|toAccountType|string|toAccountType|
+|fromSymbol|string|fromSymbol|
+|toSymbol|string|toSymbol|
+|status|string|status|
+|timestamp|number|timestamp|
+|totalCount|number|total transfer|
+
+## Enable Futures for Sub-account (For Master Account)
+
+> Request
+
+```
+post /api/v3/sub-account/futures
+```
+
+> Response
+
+```json
+  {
+    "code": "0",
+    "message": "",
+    "data": [{
+        "subAccount": "mexc1",
+        "isFuturesEnabled": true,
+        "timestamp": "1597026383085"
+    }]
+  }
+```
+
+- **POST** ```/api/v3/sub-account/futures```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|subAccount|string|YES|subaccount name|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|subAccount|string|subaccount name|
+|isFuturesEnabled|boolean|isFuturesEnabled:true|
+|timestamp|string|response time|
+
+## Enable Margin for Sub-account (For Master Account)
+
+> Request
+
+```
+post /api/v3/sub-account/margin
+```
+
+> Response
+
+```json
+{
+  "code": "0",
+  "message": "",
+  "data": [{
+      "subAccount": "mexc1",
+      "isMarginEnabled": true,
+      "timestamp": "1597026383085"
+  }]
+}
+```
+
+- **POST** ```/api/v3/sub-account/margin```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|subAccount|string|YES|subaccount name|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|subAccount|string|subaccount name|
+|isMarginEnabled|booleanisMarginEnabled:true or false|
+|timestamp|string|response time|
 
 
 
@@ -1395,7 +1577,7 @@ Response:
 
 - **GET** ```/api/v3/allOrders```
 
-Get all account orders; active, cancelled or completed
+Get all account orders including active, cancelled or completed orders(the query period is the latest 24 hours by default). You can query a maximum of the latest 7 days.
 
 Parameters:
 
