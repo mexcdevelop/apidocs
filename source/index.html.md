@@ -60,6 +60,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-08-15**
+
+- 新增母子用户万向划转、查询母子万向划转、开通子账户合约业务、开通子账户杠杆业务接口
+
 ## **2022-08-03**
 
 - 新增钱包接口
@@ -1778,7 +1782,7 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 | origQuoteOrderQty   | 原始的交易金额    |
 
 ## 查询所有订单
-获取所有帐户订单； 有效，已取消或已完成，最多查询最近7天数据。
+获取所有有效，已取消或已完成的帐户订单(查询时间段默认最近24小时)，最多查询最近7天数据。
 
 > 请求示例
 
