@@ -341,6 +341,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-08-15" class="toc-h2 toc-link" data-title="2022-08-15"><strong>2022-08-15</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-08-03" class="toc-h2 toc-link" data-title="2022-08-03"><strong>2022-08-03</strong></a>
                   </li>
                   <li>
@@ -468,6 +471,18 @@
                   </li>
                   <li>
                     <a href="#delete-the-apikey-of-a-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Delete the APIKey of a sub-account (For Master Account)">Delete the APIKey of a sub-account (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#universal-transfer-for-master-account" class="toc-h2 toc-link" data-title="Universal Transfer (For Master Account)">Universal Transfer (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#query-universal-transfer-history-for-master-account" class="toc-h2 toc-link" data-title="Query Universal Transfer History (For Master Account)">Query Universal Transfer History (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#enable-futures-for-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Enable Futures for Sub-account (For Master Account)">Enable Futures for Sub-account (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#enable-margin-for-sub-account-for-master-account" class="toc-h2 toc-link" data-title="Enable Margin for Sub-account (For Master Account)">Enable Margin for Sub-account (For Master Account)</a>
                   </li>
               </ul>
           </li>
@@ -668,7 +683,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-08-03'><strong>2022-08-03</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-08-15'><strong>2022-08-15</strong></h2>
+<ul>
+<li>Add Universal Transfer,Query Universal Transfer History,Enable Futures for Sub-account,Enable Margin for Sub-account endpoints.</li>
+</ul>
+<h2 id='2022-08-03'><strong>2022-08-03</strong></h2>
 <ul>
 <li>Add wallet endpoints</li>
 </ul>
@@ -2118,6 +2137,435 @@ Klines are uniquely identified by their open time.</p>
 <td></td>
 </tr>
 </tbody></table>
+<h2 id='universal-transfer-for-master-account'>Universal Transfer (For Master Account)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/sub-account/universalTransfer
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="mi">11945860693</span><span class="w"> 
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/sub-account/universalTransfer</code></li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">sign</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">Transfer from master account by default if fromAccount is not sent</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">Transfer to master account by default if toAccount is not sent</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">fromAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">toAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">Only supported under ISOLATED_MARGIN type,eg:ETHUSDT</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">asset,eg:USDT</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">amount,eg:1.82938475</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">transfer ID</td>
+</tr>
+</tbody></table>
+<h2 id='query-universal-transfer-history-for-master-account'>Query Universal Transfer History (For Master Account)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/sub-account/universalTransfer
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">"11945860693"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromAccount"</span><span class="p">:</span><span class="s2">"master@test.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toAccount"</span><span class="p">:</span><span class="s2">"subaccount1@test.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clientTranId"</span><span class="p">:</span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromAccountType"</span><span class="p">:</span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"FUTURE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromSymbol"</span><span class="p">:</span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toSymbol"</span><span class="p">:</span><span class="s2">"FUTURE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/sub-account/universalTransfer</code></li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">sign</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">Transfer from master account by default if fromAccount is not sent</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">Transfer to master account by default if toAccount is not sent</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">fromAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">toAccountType:&quot;SPOT&quot;,&quot;FUTURES&quot;,&quot;ISOLATED_MARGIN&quot;&quot;FIAT&quot;</td>
+</tr>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default 500, max 500</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">transfer ID</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">fromAccount</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">toAccount</td>
+</tr>
+<tr>
+<td style="text-align: left">clientTranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">clientTranId</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">transfer amount</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">fromAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">toAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">fromSymbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">fromSymbol</td>
+</tr>
+<tr>
+<td style="text-align: left">toSymbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">toSymbol</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">status</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">totalCount</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">total transfer</td>
+</tr>
+</tbody></table>
+<h2 id='enable-futures-for-sub-account-for-master-account'>Enable Futures for Sub-account (For Master Account)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/sub-account/futures
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isFuturesEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1597026383085"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/sub-account/futures</code></li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">subaccount name</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">sign</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">subaccount name</td>
+</tr>
+<tr>
+<td style="text-align: left">isFuturesEnabled</td>
+<td style="text-align: left">boolean</td>
+<td style="text-align: left">isFuturesEnabled:true</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">response time</td>
+</tr>
+</tbody></table>
+<h2 id='enable-margin-for-sub-account-for-master-account'>Enable Margin for Sub-account (For Master Account)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/sub-account/margin
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isMarginEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1597026383085"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/sub-account/margin</code></li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">subaccount name</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">sign</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">subaccount name</td>
+</tr>
+<tr>
+<td style="text-align: left">isMarginEnabled</td>
+<td style="text-align: left">booleanisMarginEnabled:true or false</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">response time</td>
+</tr>
+</tbody></table>
 <h1 id='spot-account-trade'>Spot Account/Trade</h1><h2 id='test-new-order'>Test New Order</h2>
 <blockquote>
 <p>Response</p>
@@ -2984,7 +3432,7 @@ Klines are uniquely identified by their open time.</p>
 <li><strong>GET</strong> <code>/api/v3/allOrders</code></li>
 </ul>
 
-<p>Get all account orders; active, cancelled or completed</p>
+<p>Get all account orders including active, cancelled or completed orders(the query period is the latest 24 hours by default). You can query a maximum of the latest 7 days.</p>
 
 <p>Parameters:</p>
 
