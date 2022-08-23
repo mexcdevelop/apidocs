@@ -65,7 +65,8 @@ We recommend that all users build their applications on V2 of the API. Using V2 
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|Update| add parameter: client_order_id and trade_id and order_id|
 |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|Update|add parameter: eventTime and isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
-|2022-07-15|operation sub.personal|Update|add parameter: avgPrice, executedQty and cumulativeQuoteQty|
+|2022-07-15|operation sub.personal|Update|Add parameter: avgPrice, executedQty and cumulativeQuoteQty|
+|2022-08-23|/open/api/v2/order/advanced/place_batch|ADD|Add Place Order In Batch(enhanced) endpoint|
 
 
 
@@ -829,7 +830,7 @@ When client recieves response from server, it only means the cancelling request 
 
 ## Place Order In Batch
 
-> Response example
+> Response example:
 
 > response when requesting with client_order_id
 
@@ -884,6 +885,68 @@ It's the user's responsibility to maintain the uniqueness of the client order id
 For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
 </aside>
 
+## Place Order In Batch(enhanced)
+
+<aside class="notice">
+ This version of batch ordering is about 8-10 times faster than the previous batch ordering interface `/open/ API/V2 /order/place_batch` with a response time of 20 orders per batch, but use with caution if in doubt about the following differences:<br/>
+
+1. The interface will succeed or fail the whole batch according to the trade_type dimension. For example, there are 8 buy and 10 sell orders in the batch, but if one of the assets is not enough to buy, all the 8 buy orders will fail, and the sell orders will succeed (if the corresponding currency asset of the sell order is sufficient).<br/>
+2. Client_order_id must be passed.<br/>
+3. Transaction pairs within batches must be the same.<br/>
+</aside>
+
+> Request Payload
+
+```json
+[
+    {
+        "order_type": "LIMIT_ORDER",
+        "price": "40000",
+        "quantity": "0.0002",
+        "symbol": "RACA_USDT",
+        "trade_type": "BID",
+        "client_order_id":  9588234
+    },
+    {
+        "order_type": "LIMIT_ORDER",
+        "price": "0.00846945",
+        "quantity": "1",
+        "symbol": "RACA_USDT",
+        "trade_type": "ASK"
+    }
+]
+```
+> Response Payload
+
+```json
+{
+    "code": 200,
+    "data": {
+        "1572936": "c8663a12a2fc457fbfdd55307b463495",
+        "1572937": "ec42569b4f4349f7aabe26f78b0f8bd2",
+        "1572938": "70669675cac2414c90493be2dcfaf7e3"
+    }
+}
+```
+- **POST** ```/open/api/v2/order/advanced/place_batch```
+
+**Request Parameters:**
+
+| Parameter       | Data type | Mandatory | Description  | Allowed range                            |
+| --------------- | -------- | -------- | ---------- | ------------------------------------------- |
+| symbol          | string   | YES       | symbol |                                               |
+| price           | string   | YES       | order price  |                                               |
+| quantity        | string   | YES       | quantity     |                                               |
+| trade_type      | string   | YES       | trade_type   | BID，ASK                                       |
+| order_type      | string   | YES       | order_type   | LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL     |
+| client_order_id | string   | YES       | clientOrderId |  maximum 32 characters. The user must maintain theuniqueness of the clientOrderID |
+
+**Response Parameters:**
+
+| Parameter | Data type | Description                                  |
+| ------ | -------- | ------------------------------------------------- |
+| data   | map      | client_order_id:order_id|
+
 ## Open Orders
 
 > Response example
@@ -935,7 +998,6 @@ Response：
 |state|string|order state|
 |type|string|order type|
 |client_order_id|string|client order id|
-
 
 ## All Orders
 
