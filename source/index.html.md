@@ -66,6 +66,7 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|更新|订单推送和rest增加eventTime和isTaker|
 |2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
 |2022-07-15|operation sub.personal|更新|订单推送增加参数：”已成交额“、”已成交量“、“平均成交价”|
+|2022-08-23|/open/api/v2/order/advanced/place_batch|增加|增加批量下单加强版接口|
 
 # 接入说明
 
@@ -1013,6 +1014,66 @@ None
 <aside class="notice">
 对于同一次批量下单的操作，参数中的订单元素需要统一客户订单id行为，不能有些元素带有客户订单id另一些元素不带
 </aside>
+
+## 批量下单(加强)
+
+<aside class="notice">
+该版本的批量下单会比之前的批量下单接口 `/open/api/v2/order/place_batch`，响应时间上快 8-10倍左右（以每个批次20个订单的量计算），但是如果对以下差异点有疑问，请慎用:<br/> 
+1. 该接口会按照 trade_type 维度整批次成功或者失败，比如该批次中有8个买单，10个卖单，但是如果其中有一个买单的资产不足，则这8个买单都    	 会失败，而卖单会成功（如果卖单对应的币种资产足够）<br/>  
+2. 强制需要传递 client_order_id <br/> 
+3. 批次内的交易对必须是一样的<br/>
+</aside>
+
+> 请求示例
+
+```json
+[
+    {
+        "order_type": "LIMIT_ORDER",
+        "price": "40000",
+        "quantity": "0.0002",
+        "symbol": "RACA_USDT",
+        "trade_type": "BID",
+        "client_order_id":  9588234
+    },
+    {
+        "order_type": "LIMIT_ORDER",
+        "price": "0.00846945",
+        "quantity": "1",
+        "symbol": "RACA_USDT",
+        "trade_type": "ASK"
+    }
+]
+```
+> 响应示例
+
+```json
+{
+    "code": 200,
+    "data": {
+        "1572936": "c8663a12a2fc457fbfdd55307b463495",
+        "1572937": "ec42569b4f4349f7aabe26f78b0f8bd2",
+        "1572938": "70669675cac2414c90493be2dcfaf7e3"
+    }
+}
+```
+- **POST** ```/open/api/v2/order/advanced/place_batch```
+
+参数：
+
+| 参数名          | 数据类型 | 是否必须 | 说明       | 取值范围                                    |
+| --------------- | -------- | -------- | ---------- | ------------------------------------------- |
+| symbol          | string   | 是       | 交易对名称 |                                               |
+| price           | string   | 是       | 交易价格   |                                               |
+| quantity        | string   | 是       | 交易量     |                                               |
+| trade_type      | string   | 是       | 交易类型   | BID，ASK                                       |
+| order_type      | string   | 是       | 订单类型   | LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL     |
+| client_order_id | string   | 是       | 客户订单id | 最大长度32位字符，用户需要维护client order id 的唯一性 |
+响应：
+
+| 参数名 | 数据类型 | 说明                                              |
+| ------ | -------- | ------------------------------------------------- |
+| data   | map      | 客户订单id(client_order_id)及对应订单号(order_id) |
 
 ## 当前挂单
 
