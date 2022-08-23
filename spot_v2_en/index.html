@@ -442,6 +442,9 @@
                     <a href="#place-order-in-batch" class="toc-h2 toc-link" data-title="Place Order In Batch">Place Order In Batch</a>
                   </li>
                   <li>
+                    <a href="#place-order-in-batch-enhanced" class="toc-h2 toc-link" data-title="Place Order In Batch(enhanced)">Place Order In Batch(enhanced)</a>
+                  </li>
+                  <li>
                     <a href="#open-orders" class="toc-h2 toc-link" data-title="Open Orders">Open Orders</a>
                   </li>
                   <li>
@@ -633,7 +636,13 @@ API V1 will no longer be maintained starting from the end of June 2021. Please p
 <td>2022-07-15</td>
 <td>operation sub.personal</td>
 <td>Update</td>
-<td>add parameter: avgPrice, executedQty and cumulativeQuoteQty</td>
+<td>Add parameter: avgPrice, executedQty and cumulativeQuoteQty</td>
+</tr>
+<tr>
+<td>2022-08-23</td>
+<td>/open/api/v2/order/advanced/place_batch</td>
+<td>ADD</td>
+<td>Add Place Order In Batch(enhanced) endpoint</td>
 </tr>
 </tbody></table>
 <h1 id='integration-guide'>Integration guide</h1><h2 id='access-urls'>Access URLs</h2>
@@ -1170,16 +1179,17 @@ Rate Limit : 20times/2s
     </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH_USDT"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.0017985"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1983186"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4117576"</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574668200000</span><span class="p">,</span><span class="w">
-             </span><span class="nl">"change_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00027307"</span><span class="w">
+          </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC_USDT"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"47876.096755"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1161420469.76"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24902.08"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23494.28"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24684.48"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24685.6"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24018.6"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24681.71"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660226100000</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"change_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.02760818"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1224,6 +1234,11 @@ Rate Limit : 20times/2s
 <td>volume</td>
 <td>string</td>
 <td>deal total amount of this period</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>total amount</td>
 </tr>
 <tr>
 <td>high</td>
@@ -1927,7 +1942,7 @@ When client recieves response from server, it only means the cancelling request 
 </aside>
 <h2 id='place-order-in-batch'>Place Order In Batch</h2>
 <blockquote>
-<p>Response example</p>
+<p>Response example:</p>
 
 <p>response when requesting with client_order_id</p>
 </blockquote>
@@ -2034,6 +2049,122 @@ It's the user's responsibility to maintain the uniqueness of the client order id
 <aside class="notice">
 For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
 </aside>
+<h2 id='place-order-in-batch-enhanced'>Place Order In Batch(enhanced)</h2>
+<aside class="notice">
+ This version of batch ordering is about 8-10 times faster than the previous batch ordering interface `/open/ API/V2 /order/place_batch` with a response time of 20 orders per batch, but use with caution if in doubt about the following differences:<br/>
+
+1. The interface will succeed or fail the whole batch according to the trade_type dimension. For example, there are 8 buy and 10 sell orders in the batch, but if one of the assets is not enough to buy, all the 8 buy orders will fail, and the sell orders will succeed (if the corresponding currency asset of the sell order is sufficient).<br/>
+2. Client_order_id must be passed.<br/>
+3. Transaction pairs within batches must be the same.<br/>
+</aside>
+
+<blockquote>
+<p>Request Payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT_ORDER"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0002"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RACA_USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"client_order_id"</span><span class="p">:</span><span class="w">  </span><span class="mi">9588234</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT_ORDER"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00846945"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RACA_USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response Payload</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"1572936"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c8663a12a2fc457fbfdd55307b463495"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"1572937"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ec42569b4f4349f7aabe26f78b0f8bd2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"1572938"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70669675cac2414c90493be2dcfaf7e3"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/open/api/v2/order/advanced/place_batch</code></li>
+</ul>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Mandatory</th>
+<th>Description</th>
+<th>Allowed range</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>YES</td>
+<td>symbol</td>
+<td></td>
+</tr>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>YES</td>
+<td>order price</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>YES</td>
+<td>quantity</td>
+<td></td>
+</tr>
+<tr>
+<td>trade_type</td>
+<td>string</td>
+<td>YES</td>
+<td>trade_type</td>
+<td>BID，ASK</td>
+</tr>
+<tr>
+<td>order_type</td>
+<td>string</td>
+<td>YES</td>
+<td>order_type</td>
+<td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
+</tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>YES</td>
+<td>clientOrderId</td>
+<td>maximum 32 characters. The user must maintain theuniqueness of the clientOrderID</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>map</td>
+<td>client_order_id:order_id</td>
+</tr>
+</tbody></table>
 <h2 id='open-orders'>Open Orders</h2>
 <blockquote>
 <p>Response example</p>
@@ -3167,11 +3298,6 @@ Rate Limit : 20times/2s
 <td>actual_amount </td>
 <td>number </td>
 <td>The actual received amount</td>
-</tr>
-<tr>
-<td>actual_fee </td>
-<td>number </td>
-<td>Withdraw fee</td>
 </tr>
 <tr>
 <td>amount </td>
