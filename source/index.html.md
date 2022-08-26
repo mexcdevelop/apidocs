@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-08-26**
+
+- ETF endpoint add some response params
+
 ## **2022-08-15**
 
 - Add Universal Transfer,Query Universal Transfer History,Enable Futures for Sub-account,Enable Margin for Sub-account endpoints.
@@ -2153,15 +2157,17 @@ Response:
 
 ```json
 {
-
-"symbol": "BTC3LUSDT", 
-
-"netValue": "0.147", 
-
-"feeRate":" 0.00001", 
-
-"timestamp": `1507725176595`
-
+  "symbol": "OP3SUSDT",
+  "netValue": "0.332",
+  "feeRate": "0.00001",
+  "timestamp": 1661494588543,
+  "leverage": -3,
+  "realLeverage": 2.9126,
+  "mergedTimes": 3,
+  "lastMergedTime": 1659063531000,
+  "preBasket": 18827.8361,
+  "preLeverage": 2.2888,
+  "basket": 24678.0916
 }
 
 ```
@@ -2185,6 +2191,13 @@ Response:
 | netValue  | string | Net Value   |
 | feeRate   | string | Fund Fee    |
 | timestamp | long   |             |
+|leverage    |string | target leverage  |
+|realLeverage|string | real leverage    |
+|mergedTimes |string | mergedTimes      |
+|lastMergedTime|long | lastMergedTime   |
+|preBasket  |string  | Basket Before   |
+|preLeverage|string  | Leverage Before  |
+|basket     |string  | Basket After  |
 
 # Margin Account and Trading Interface
 
