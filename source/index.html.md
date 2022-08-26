@@ -61,6 +61,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 # 更新日志
 ## **2022-08-15**
 
+- ETF接口增加部分返回参数
+
+## **2022-08-15**
+
 - 更新访问说明和限速规则
 - 新增母子用户万向划转、查询母子万向划转、开通子账户合约业务、开通子账户杠杆业务接口
 
@@ -2510,15 +2514,17 @@ GET /api/v3/etf/info
 
 ```json
 {
-
-"symbol": "BTC3LUSDT", 
-
-"netValue": "0.147", 
-
-"feeRate":" 0.00001", 
-
-"timestamp": `1507725176595`
-
+  "symbol": "OP3SUSDT",
+  "netValue": "0.332",
+  "feeRate": "0.00001",
+  "timestamp": 1661494588543,
+  "leverage": -3,
+  "realLeverage": 2.9126,
+  "mergedTimes": 3,
+  "lastMergedTime": 1659063531000,
+  "preBasket": 18827.8361,
+  "preLeverage": 2.2888,
+  "basket": 24678.0916
 }
 
 ```
@@ -2543,6 +2549,13 @@ GET /api/v3/etf/info
 | netValue  | string   | 最新净值      |
 | feeRate   | string   | 管理费率      |
 | timestamp | long     | 系统时间      |
+|leverage   |string    | 目标杠杆      |
+|realLeverage|string   | 当前杠杆      |
+|mergedTimes|string    | 合并次数      |
+|lastMergedTime|long   | 最近合并时间   |
+|preBasket  |string    | 再平衡前篮子   |
+|preLeverage|string    | 再平衡前杠杆   |
+|basket     |string    | 再平衡后篮子   |
 
 
 # 杠杆账户和交易接口
