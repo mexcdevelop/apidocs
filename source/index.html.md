@@ -1428,7 +1428,7 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 > 请求示例
 
 ```
-POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
 ```
 > 返回示例
 
@@ -2072,7 +2072,7 @@ Get /api/v3/capital/config/getall
 |withdrawEnable|是否可提币|
 |withdrawFee|提币手续费| 
 |withdrawMax|最大提币限额|
-|withdrawMin|最大提币限额|
+|withdrawMin|最小提币限额|
 |contract|币种智能合约地址|
 
 ## 提币
