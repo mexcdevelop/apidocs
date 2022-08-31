@@ -1166,8 +1166,6 @@ post /api/v3/capital/sub-account/universalTransfer
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
@@ -1175,6 +1173,8 @@ post /api/v3/capital/sub-account/universalTransfer
 |symbol|string|否|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
 |asset|string|是|资产，eg：USDT|
 |amount|string|是|数量，eg：1.82938475|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 
 
@@ -1219,8 +1219,6 @@ get /api/v3/capital/sub-account/universalTransfer
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
@@ -1229,6 +1227,8 @@ get /api/v3/capital/sub-account/universalTransfer
 |endTime|string|否|截止时间|
 |page|string|否|默认 1|
 |limit|string|否|默认 500, 最大 500|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 
 **返回参数**
@@ -2099,14 +2099,14 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |withdrawOrderId|string|否|自定义提币ID(目前不支持)|
 |network|string|否|提币网络|
 |address|string|是|提币地址(memo请使用:进行拼接)|
 |amount|string|是|数量|
 |remark|string|否|备注|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
  
 1. 如果不发送`network`,将按该币种默认网络返回结果;
 2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
@@ -2150,13 +2150,13 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |status|string|否|状态|
 |startTime|string|否|默认当前时间90天前的时间|
 |endTime|string|否|默认当前时间戳，13位|
 |limit|string|否|默认：1000，最大1000|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
 
@@ -2210,13 +2210,13 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |status|string|否|提币状态|
 |limit|string|否|默认：1000， 最大：1000|
 |startTime|string|否|默认当前时间90天前的时间戳|
 |endTime|string|否|默认当前时间戳|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 1. 支持多网络提币前的历史记录可能不会返回`network`字段.
 2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
@@ -2278,10 +2278,10 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |network|string|否||
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 **返回参数**
 
@@ -3595,7 +3595,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp|时间 |是|[string||1507725176595|
+|timestamp|时间 |是|string||1507725176595|
 |signature|签名 |是|string|signature|
 |symbol|交易对|是|string|BTCUSDT|
 |tier|不传则返回所有逐仓杠杆档位|否|string|| 
