@@ -3620,7 +3620,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 - 本篇所列出的所有wss接口的baseurl为: **wss://wbs.mexc.com/ws**
 - 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连。
-- <symbol>名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api@<symbol>`</br>实例：`spot@public.deals.v3.api@BTCUSDT`
+- symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api@<symbol>`</br>实例：`spot@public.deals.v3.api@BTCUSDT`
 - websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接。
 - 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用。
 
@@ -3867,13 +3867,13 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 
 # Websocket账户信息推送
 
-- 本篇所列出API接口的base url : **[https://api.mexc.com](https://api.mexc.com/)**
+- 本篇所列出API接口的base url : **https://api.mexc.com**
 - 用于订阅账户数据的 `listenKey` 从创建时刻起有效期为60分钟
 - 可以通过 `PUT` 一个 `listenKey` 延长60分钟有效期
 - 可以通过`DELETE`一个 `listenKey` 立即关闭当前数据流，并使该`listenKey` 无效
 - 在具有有效`listenKey`的帐户上执行`POST`将返回当前有效的`listenKey`并将其有效期延长60分钟
 - websocket接口的baseurl: **wss://wbs.mexc.me/ws**
-- 订阅账户数据流的stream名称为 **/ws?listenKey=<listenKey>**   如：**wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
+- 订阅账户数据流的stream名称为 **/ws?listenKey=listenKey** <br/>  如：**wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
 - 每个链接有效期不超过24小时，请妥善处理断线重连。
 
 ## Listen Key(现货账户) 
