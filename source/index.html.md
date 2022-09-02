@@ -3887,7 +3887,9 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
   "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
 }
 ```
+
 **HTTP请求**
+
 - **POST**  ` /api/v3/userDataStream`
 
 开始一个新的数据流。除非发送 keepalive，否则数据流于60分钟后关闭。如果该帐户具有有效的`listenKey`，则将返回该`listenKey`并将其有效期延长60分钟。 
@@ -3905,10 +3907,34 @@ NONE
     "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
 }
 ```
+
 **HTTP请求**
+
 - **PUT**  ` /api/v3/userDataStream`
 
 有效期延长至本次调用后60分钟,建议每30分钟发送一个 ping 。
+
+**请求参数:**
+
+| 参数名    | 数据类型 | 是否必需 | 说明 |
+| :-------- | :------- | :------- | :--- |
+| listenKey | STRING   | YES      |      |
+
+### 关闭 Listen Key  
+
+> **响应**
+
+```
+{
+    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+```
+
+**HTTP请求**
+
+- **DELETE**  ` /api/v3/userDataStream`
+
+关闭用户数据流。
 
 **请求参数:**
 
