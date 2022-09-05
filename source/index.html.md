@@ -60,6 +60,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-09-02**
+
+- 新增v3 websocket
+
 ## **2022-08-26**
 
 - ETF接口增加部分返回参数
@@ -1166,8 +1170,6 @@ post /api/v3/capital/sub-account/universalTransfer
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
@@ -1175,6 +1177,8 @@ post /api/v3/capital/sub-account/universalTransfer
 |symbol|string|否|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
 |asset|string|是|资产，eg：USDT|
 |amount|string|是|数量，eg：1.82938475|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 
 
@@ -1219,8 +1223,6 @@ get /api/v3/capital/sub-account/universalTransfer
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
@@ -1229,6 +1231,8 @@ get /api/v3/capital/sub-account/universalTransfer
 |endTime|string|否|截止时间|
 |page|string|否|默认 1|
 |limit|string|否|默认 500, 最大 500|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 
 **返回参数**
@@ -1423,12 +1427,12 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 | orderListId|客户端订单列表          |          |
 
 ## 批量下单
-支持单次批量下20单,限频2次/秒。
+支持单次批量下20单,要求必须是同一交易对，限频2次/秒。
 
 > 请求示例
 
 ```
-POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
 ```
 > 返回示例
 
@@ -2072,7 +2076,7 @@ Get /api/v3/capital/config/getall
 |withdrawEnable|是否可提币|
 |withdrawFee|提币手续费| 
 |withdrawMax|最大提币限额|
-|withdrawMin|最大提币限额|
+|withdrawMin|最小提币限额|
 |contract|币种智能合约地址|
 
 ## 提币
@@ -2099,14 +2103,14 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |withdrawOrderId|string|否|自定义提币ID(目前不支持)|
 |network|string|否|提币网络|
 |address|string|是|提币地址(memo请使用:进行拼接)|
 |amount|string|是|数量|
 |remark|string|否|备注|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
  
 1. 如果不发送`network`,将按该币种默认网络返回结果;
 2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
@@ -2150,13 +2154,13 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |status|string|否|状态|
 |startTime|string|否|默认当前时间90天前的时间|
 |endTime|string|否|默认当前时间戳，13位|
 |limit|string|否|默认：1000，最大1000|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
 
@@ -2210,13 +2214,13 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |status|string|否|提币状态|
 |limit|string|否|默认：1000， 最大：1000|
 |startTime|string|否|默认当前时间90天前的时间戳|
 |endTime|string|否|默认当前时间戳|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 1. 支持多网络提币前的历史记录可能不会返回`network`字段.
 2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
@@ -2278,10 +2282,10 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |coin|string|是|币种|
 |network|string|否||
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 **返回参数**
 
@@ -3595,7 +3599,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp|时间 |是|[string||1507725176595|
+|timestamp|时间 |是|string||1507725176595|
 |signature|签名 |是|string|signature|
 |symbol|交易对|是|string|BTCUSDT|
 |tier|不传则返回所有逐仓杠杆档位|否|string|| 
@@ -3611,6 +3615,489 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 |liquidationRiskRatio|清算风险比|string|1.05|
 |baseAssetMaxBorrowable|基础货币最大可借|string|9|
 |quoteAssetMaxBorrowable|计价货币最大可借|string|70000|
+
+# Websocket 行情推送
+
+- 本篇所列出的所有wss接口的baseurl为: **wss://wbs.mexc.com/ws**
+- 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连。
+- symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api@<symbol>`</br>实例：`spot@public.deals.v3.api@BTCUSDT`
+- websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接。
+- 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用。
+
+## 实时订阅/取消数据流
+
+- 以下数据可以通过websocket发送以实现订阅或取消订阅数据流。示例如下。
+- 响应内容中的`id`是无符号整数，作为往来信息的唯一标识。
+- 如果相应内容中的 `msg` 为相应的请求字段，表示请求发送成功。
+
+### 订阅一个信息流
+
+> **订阅频道响应**
+
+```
+ {
+  "id":0,
+  "code":0,
+  "msg":"spot@public.deals.v3.api@BTCUSDT"
+ }
+```
+
+- **请求**
+
+
+{
+ "method":"SUBSCRIPTION",
+ "params":["spot@public.deals.v3.api@BTCUSDT"]
+}
+
+### 取消订阅一个信息流
+
+> **取消订阅响应**
+
+```
+ {
+  "id":0,
+  "code":0,
+  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
+ }÷
+```
+
+- **请求**
+
+{
+ "method":"UNSUBSCRIPTION",
+ "params":["spot@public.deals.v3.api@BTCUSDT","spot@public.increase.depth.v3.api@BTCUSDT"]
+}
+
+### PING/PONG机制
+
+> **PING/PONG响应**
+
+```
+ {
+  "id":0,
+  "code":0,
+  "msg":"PONG"
+ }
+```
+
+- **请求**
+
+{"method":"PING"}
+
+## 逐笔交易(实时)
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.deals.v3.api@BTCUSDT"
+    ]
+}
+```
+> **response:**
+
+```
+{
+	"c":"spot@public.deals.v3.api@BTCUSDT",    
+	"d":{
+			"deals":[{
+					"S":2,                             //交易类型tradeType
+					"p":"20233.84",                    //成交价格price
+					"t":1661927587825,  				       //成交时间dealTime
+					"v":"0.001028"}],  						     //成交数量quantity
+			"e":"spot@public.deals.v3.api"},        //事件类型eventType			         
+	"s":"BTCUSDT",  								           //交易对symbol
+	"t":1661927587836                          //事件时间eventTime
+} 								         
+```
+
+**请求参数：**   `spot@public.deals.v3.api@<symbol>`
+
+逐笔交易推送每一笔成交的信息。**成交**，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| deals | array | 成交信息  |
+| > S | int | 交易类型 1:买 2:卖 |
+| > p | string | 成交价格 |
+| > t | long | 成交时间 |
+| > v | string | 成交数量 |
+| e | string | 事件类型 |
+| s | string | 交易对 |
+| t | long | 事件时间 |
+
+## K线 Streams
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.kline.v3.api@BTCUSDT@Min15"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+	"c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
+	"d":{
+			"k":{
+				"T":1661931900,      //这根K线的结束时间                      
+				"a":29043.48804658,	 //这根K线期间成交额
+				"c":20279.43,				 //这根K线期间末一笔成交价
+				"h":20284.93,				 //这根K线期间最高成交价
+				"i":"Min15",				 //K线间隔
+				"l":20277.52,				 //这根K线期间最低成交价
+				"o":20284.93,				 //这根K线期间第一笔成交价
+				"s":"BTCUSDT",			 //交易对
+				"t":1661931000,			 //这根K线的起始时间
+				"v":1.43211},				 //这根K线期间成交量
+			"e":"spot@public.kline.v3.api"},					 //事件类型
+	"s":"BTCUSDT",						 //交易对
+	"t":1661931016878					 //事件时间
+}
+
+```
+
+K线逐秒推送所请求的K线种类(最新一根K线)的更新。
+
+**请求参数：** `spot@public.kline.v3.api@<symbol>@<interval>`
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| e | string | 事件类型 |
+| k | object| k线信息 |
+| > T | long | 这根K线的结束时间 |
+| > a | bigDecimal | 这根K线期间成交额 |
+| > c | bigDecimal | 这根K线期间末一笔成交价 |
+| > h | bigDecimal | 这根K线期间最高成交价 |
+| > i | interval | K线间隔 |
+| > l | bigDecimal | 这根K线期间最低成交价 |
+| > o | bigDecimal | 这根K线期间第一笔成交价 |
+| > t | long | 这根K线的起始时间 |
+| > v | bigDecimal | 这根K线期间成交量 |
+| s | string | 交易对 |
+| t | long | 事件时间 |
+
+**K线图间隔参数:**
+
+Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
+
+- Min1
+- Min5
+- Min15
+- Min30
+- Min60
+- Hour4
+- Hour8
+- Day1
+- Week1
+- Month1
+
+## 增量深度信息(实时)
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.v3.api@BTCUSDT"
+    ]
+}
+```
+
+> **response:**
+
+```
+
+{
+	"c":"spot@public.increase.depth.v3.api@BTCUSDT",  
+	"d":{
+		"asks":[{									//bids:买单,asks:卖单
+			"p":"20290.89",		//变动的价格档位
+			"v":"0.000000"}], //数量
+		"e":"spot@public.increase.depth.v3.api", },	 //事件类型
+	"s":"BTCUSDT",							//交易对
+	"t":1661932660144						//事件时间
+}
+```
+
+如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+
+**请求参数:** `spot@public.increase.depth.v3.api@<symbol>`
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| p | string | 变动的价格档位 |
+| v | string | 数量 |
+| e | string | 事件类型 |
+| s | string | 交易对 |
+| t | long | 事件时间 |
+
+
+
+<!-- ## 如何正确在本地维护一个orderbook副本
+
+1. 通过订阅 **spot@public.increase.depth.v3.api@<symbol>**获取全量深度信息，保存当前version。
+2. 订阅ws深度信息，收到更新后，如果收到的数据version>当前version,同一个价位，后收到的更新覆盖前面的。
+3. 访问Rest接口 **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** 获得一个1000档的深度快照
+4. 将目前缓存的深度信息中同一价格，version<步骤3获取到的快照中的version的数据丢弃。
+5. 将深度快照中的内容更新至本地缓存，并从ws接收到的event开始继续更新。
+6. 每一个新event的version应该恰好等于上一个event的version+1，否则可能出现了丢包，如出现丢包或者获取到的event的version不连续,请从步骤3重新进行初始化。
+7. 每一个event中的挂单量代表这个价格目前的挂单量**绝对值**，而不是相对变化。
+8. 如果某个价格对应的挂单量为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+
+注意: 因为深度快照对价格档位数量有限制，初始快照之外的价格档位并且没有数量变化的价格档位不会出现在增量深度的更新信息内。因此，即使应用来自增量深度的所有更新，这些价格档位也不会在本地 order book 中可见，所以本地的 order book 与真实的 order book 可能会有一些差异。 不过对于大多数用例，5000 的深度限制足以有效地了解市场和交易。 -->
+
+
+
+# Websocket账户信息推送
+
+- 本篇所列出API接口的base url : **https://api.mexc.com**
+- 用于订阅账户数据的 `listenKey` 从创建时刻起有效期为60分钟
+- 可以通过 `PUT` 一个 `listenKey` 延长60分钟有效期
+- 可以通过`DELETE`一个 `listenKey` 立即关闭当前数据流，并使该`listenKey` 无效
+- 在具有有效`listenKey`的帐户上执行`POST`将返回当前有效的`listenKey`并将其有效期延长60分钟
+- websocket接口的baseurl: **wss://wbs.mexc.me/ws**
+- 订阅账户数据流的stream名称为 **/ws?listenKey=listenKey** <br/>  如：**wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
+- 每个链接有效期不超过24小时，请妥善处理断线重连。
+
+## Listen Key(现货账户) 
+
+### 生成 Listen Key 
+
+> **响应**
+
+```
+{
+  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+```
+
+**HTTP请求**
+
+- **POST**  ` /api/v3/userDataStream`
+
+开始一个新的数据流。除非发送 keepalive，否则数据流于60分钟后关闭。如果该帐户具有有效的`listenKey`，则将返回该`listenKey`并将其有效期延长60分钟。 
+
+**参数:**
+
+NONE
+
+### 延长 Listen Key 有效期 
+
+> **响应**
+
+```
+{
+    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+```
+
+**HTTP请求**
+
+- **PUT**  ` /api/v3/userDataStream`
+
+有效期延长至本次调用后60分钟,建议每30分钟发送一个 ping 。
+
+**请求参数:**
+
+| 参数名    | 数据类型 | 是否必需 | 说明 |
+| :-------- | :------- | :------- | :--- |
+| listenKey | STRING   | YES      |      |
+
+### 关闭 Listen Key  
+
+> **响应**
+
+```
+{
+    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+```
+
+**HTTP请求**
+
+- **DELETE**  ` /api/v3/userDataStream`
+
+关闭用户数据流。
+
+**请求参数:**
+
+| 参数名    | 数据类型 | 是否必需 | 说明 |
+| :-------- | :------- | :------- | :--- |
+| listenKey | STRING   | YES      |      |
+
+## 账户成交(实时)
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@private.deals.v3.api"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+    "c": "spot@private.deals.v3.api",
+    "d": {
+        "S": 1,
+        "T": 1661938980268,
+        "c": "",
+        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
+        "m": 1,
+        "p": "1.008",
+        "st": 0,
+        "t": "4079b1522a0b40e7919f609e1ea38d44",
+        "v": "5"
+    },
+    "s": "MXUSDT",
+    "t": 1661938980285
+}
+```
+
+**请求参数：** `spot@private.deals.v3.api`
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| d | json | 账户成交信息 |
+| > S | int | 交易类型 1:买 2:卖 |
+| > T | long | 成交时间 |
+| > c | string | 用户自定义订单id: clientOrderId |
+| > i | string | 订单id: orderId |
+| > m | int | 是否是挂单: isMaker |
+| > p | string | 交易价格 |
+| > st | byte | 是否自成交：isSelfTrade |
+| > t | string | 成交id: tradeId |
+| > v | string | 交易数量 |
+| s | string | 交易对 |
+| t | long | 事件时间 |
+
+## 账户订单(实时)
+
+>**request:**
+
+```
+{
+  "method": "SUBSCRIPTION",
+  "params": [
+      "spot@private.orders.v3.api"
+  ]
+}
+```
+
+**请求参数：** `spot@private.orders.v3.api`
+
+### a.限价/市价订单 (实时)
+
+> **response:**
+
+```
+{
+  "c": "spot@private.orders.v3.api",
+  "d": {
+        "A":8.0,
+        "O":1661938138000,
+        "S":1,
+        "V":10,
+        "a":8,
+        "c":"",
+        "i":"e03a5c7441e44ed899466a7140b71391",
+        "m":0,
+        "o":1,
+        "p":0.8,
+        "s":1,
+        "v":10
+  },
+  "s": "MXUSDT",
+  "t": 1661938138193
+}
+```
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| d | json | 账户订单信息 |
+| > A | bigDecimal | 实际剩余金额: remainAmount |
+| > O | long | 订单创建时间 |
+| > S | int | 交易类型 1:买 2:卖 |
+| > V | bigDecimal | 实际剩余数量: remainQuantity |
+| > a | bigDecimal | 下单总金额 |
+| > c | string | 用户自定义订单id: clientOrderId |
+| > i | string | 订单id |
+| > m | int | 是否是挂单: isMaker |
+| > o | int | 订单类型LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100） |
+| > p | bigDecimal | 下单价格 |
+| > s | int | 订单状态 1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单 |
+| > v | bigDecimal | 下单数量 |
+| t | long | 事件时间 |
+| s | string | 交易对 |
+
+### b.账户止盈止损订单(实时)
+
+> **response:**
+
+```
+{
+  "c": "spot@private.orders.v3.api",
+  "d": {
+        "N":"USDT",
+        "O":1661938853715,
+        "P":0.9,
+        "S":1,
+        "T":"LE",
+        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
+        "o":100,
+        "p":1.01,
+        "s":"NEW",
+        "v":6
+  },
+  "s": "MXUSDT",
+  "t": 1661938853727
+}
+```
+
+**返回参数:**
+
+|  参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| d            | json | 账户订单信息 |
+| > N | string | 手续费资产类别 |
+|  > O | long | 订单创建时间 |
+|  > P | bigDecimal | 触发价格 |
+|  > S | int | 交易类型 1: 买 2: 卖 |
+|  > T | int | 0: GE(买入价大过触发价) 1: LE(买入价小于触发价) |
+|  > i | string | 订单id |
+| >  o | int | 订单类型 LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100） |
+|  > p | bigDecimal | 下单价格 |
+| > s | string | 订单状态  NEW ,CANCELED ,EXECUTED, FAILED |
+|  > v | bigDecimal | 下单数量 |
+| s | string | 交易对 |
+| t | long | 事件时间 |
+
 
 # 公开API参数
 
