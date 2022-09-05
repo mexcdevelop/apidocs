@@ -341,6 +341,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-09-02" class="toc-h2 toc-link" data-title="2022-09-02"><strong>2022-09-02</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-08-26" class="toc-h2 toc-link" data-title="2022-08-26"><strong>2022-08-26</strong></a>
                   </li>
                   <li>
@@ -624,6 +627,37 @@
               </ul>
           </li>
           <li>
+            <a href="#websocket-market-streams" class="toc-h1 toc-link" data-title="Websocket Market Streams">Websocket Market Streams</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#live-subscribing-unsubscribing-to-streams" class="toc-h2 toc-link" data-title="Live Subscribing/Unsubscribing to streams">Live Subscribing/Unsubscribing to streams</a>
+                  </li>
+                  <li>
+                    <a href="#trade-streams" class="toc-h2 toc-link" data-title="Trade Streams">Trade Streams</a>
+                  </li>
+                  <li>
+                    <a href="#kline-streams" class="toc-h2 toc-link" data-title="Kline Streams">Kline Streams</a>
+                  </li>
+                  <li>
+                    <a href="#diff-depth-stream" class="toc-h2 toc-link" data-title="Diff.Depth Stream">Diff.Depth Stream</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#websocket-user-data-streams" class="toc-h1 toc-link" data-title="Websocket User Data Streams">Websocket User Data Streams</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listen-key-spot" class="toc-h2 toc-link" data-title="Listen Key(SPOT)">Listen Key(SPOT)</a>
+                  </li>
+                  <li>
+                    <a href="#account-deals" class="toc-h2 toc-link" data-title="Account Deals">Account Deals</a>
+                  </li>
+                  <li>
+                    <a href="#account-orders" class="toc-h2 toc-link" data-title="Account Orders">Account Orders</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#public-api-definitions" class="toc-h1 toc-link" data-title="Public API Definitions">Public API Definitions</a>
               <ul class="toc-list-h2">
                   <li>
@@ -686,7 +720,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-08-26'><strong>2022-08-26</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-09-02'><strong>2022-09-02</strong></h2>
+<ul>
+<li>Add v3 websocket</li>
+</ul>
+<h2 id='2022-08-26'><strong>2022-08-26</strong></h2>
 <ul>
 <li>ETF endpoint add some response params</li>
 </ul>
@@ -2172,18 +2210,6 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">sign</td>
-</tr>
-<tr>
 <td style="text-align: left">fromAccount</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
@@ -2224,6 +2250,18 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">amount,eg:1.82938475</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">sign</td>
 </tr>
 </tbody></table>
 
@@ -2281,18 +2319,6 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">sign</td>
-</tr>
-<tr>
 <td style="text-align: left">fromAccount</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
@@ -2339,6 +2365,18 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">default 500, max 500</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">sign</td>
 </tr>
 </tbody></table>
 
@@ -2710,7 +2748,7 @@ Klines are uniquely identified by their open time.</p>
 <blockquote>
 <p>Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
 </code></pre></div>
 <blockquote>
 <p>Response</p>
@@ -3961,18 +3999,6 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">signature</td>
-</tr>
-<tr>
 <td style="text-align: left">coin</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
@@ -4007,6 +4033,18 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">remark</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -4067,18 +4105,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">signature</td>
-</tr>
-<tr>
 <td style="text-align: left">coin</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
@@ -4107,6 +4133,18 @@ Response:</li>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">default:1000,max:1000</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -4202,18 +4240,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">signature</td>
-</tr>
-<tr>
 <td style="text-align: left">coin</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
@@ -4242,6 +4268,18 @@ Response:</li>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">default:current time</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -4356,18 +4394,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">signature</td>
-</tr>
-<tr>
 <td style="text-align: left">coin</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
@@ -4378,6 +4404,18 @@ Response:</li>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">deposit network</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -4436,18 +4474,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">signature</td>
-</tr>
-<tr>
 <td style="text-align: left">fromAccountType</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
@@ -4476,6 +4502,18 @@ Response:</li>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">symbol,needed when<code>fromAccountType</code>is ISOLATED_MARGIN.eg:ETHUSDT</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -4549,18 +4587,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">signature</td>
-</tr>
-<tr>
 <td style="text-align: left">fromAccountType</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
@@ -4601,6 +4627,18 @@ Response:</li>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">symbol,needed when<code>fromAccountType</code>is ISOLATED_MARGIN.eg:ETHUSDT</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -4801,20 +4839,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">time</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">1655143087012</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
 <td style="text-align: left">tradeMode</td>
 <td style="text-align: left">tradeMode</td>
 <td style="text-align: left">YES</td>
@@ -4827,6 +4851,20 @@ Response:</li>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">BTCUSDT</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">time</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">1655143087012</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"></td>
 </tr>
 </tbody></table>
 
@@ -4892,20 +4930,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">time</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">YES</td>
@@ -4967,6 +4991,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">time</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -5044,20 +5082,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">time</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">YES</td>
@@ -5091,6 +5115,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">time</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -5148,20 +5186,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset/btc</td>
 <td style="text-align: left">YES</td>
@@ -5209,6 +5233,20 @@ Response:</li>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -5280,20 +5318,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -5313,6 +5337,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -5446,20 +5484,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -5493,6 +5517,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -5619,20 +5657,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset</td>
 <td style="text-align: left">YES</td>
@@ -5687,6 +5711,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -5818,20 +5856,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -5872,6 +5896,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6005,20 +6043,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -6059,6 +6083,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6190,20 +6228,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">YES</td>
@@ -6216,6 +6240,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6353,20 +6391,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -6379,6 +6403,20 @@ Response:</li>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6434,25 +6472,25 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">timestamp</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6532,20 +6570,6 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -6565,6 +6589,20 @@ Response:</li>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6736,25 +6774,25 @@ Response:</li>
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: left">symbols</td>
+<td style="text-align: left">max 5 symbols; String delimited by &quot;,&quot;.</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">&quot;BTCUSDT,MXUSDT,ADAUSDT&quot;</td>
+</tr>
+<tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">timestamp</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
-<td style="text-align: left">symbols</td>
-<td style="text-align: left">max 5 symbols; String delimited by &quot;,&quot;.</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">&quot;BTCUSDT,MXUSDT,ADAUSDT&quot;</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -6943,20 +6981,6 @@ get /api/v3/margin/trigerOrder
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -6969,6 +6993,20 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -7028,20 +7066,6 @@ get /api/v3/margin/trigerOrder
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">asset</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -7096,6 +7120,20 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -7198,25 +7236,25 @@ get /api/v3/margin/trigerOrder
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">timestamp</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -7286,20 +7324,6 @@ get /api/v3/margin/trigerOrder
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">startTime</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">NO</td>
@@ -7333,6 +7357,20 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -7460,25 +7498,25 @@ get /api/v3/margin/trigerOrder
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{timestamp}}</td>
+<td style="text-align: left">timestamp</td>
 </tr>
 <tr>
 <td style="text-align: left">signature</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left"></td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -7564,20 +7602,6 @@ get /api/v3/margin/trigerOrder
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">[string</td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left"></td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">{{signature}}</td>
-</tr>
-<tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left"></td>
 <td style="text-align: left">YES</td>
@@ -7590,6 +7614,20 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">NO</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">signature</td>
 </tr>
 </tbody></table>
 
@@ -7644,6 +7682,742 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">quoteAssetMaxBorrowable</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">70000</td>
+</tr>
+</tbody></table>
+<h1 id='websocket-market-streams'>Websocket Market Streams</h1>
+<ul>
+<li>The base endpoint is: <strong>wss://wbs.mexc.com/ws</strong></li>
+<li>A single connection to <strong>wbs.mexc.com</strong> is only valid for 24 hours; expect to be disconnected at the 24 hour mark</li>
+<li>All symbols are <strong>Uppercase</strong> <br/>eg:<code>spot@public.deals.v3.api@&lt;symbol&gt;</code></br>-&gt;<code>spot@public.deals.v3.api@BTCUSDT</code></li>
+<li>If there is no valid websocket subscription, the server will disconnect in <strong>30 seconds</strong>. If the subscription is successful but there is no streams, the server will disconnect in <strong>1 minute</strong>. The client can send <code>PING</code> to maintain the connection.</li>
+</ul>
+<h2 id='live-subscribing-unsubscribing-to-streams'>Live Subscribing/Unsubscribing to streams</h2>
+<ul>
+<li>The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.</li>
+<li>The id used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.</li>
+<li>In the response, if the <code>msg</code>  received is same as request params, this means the request sent was a success.</li>
+</ul>
+<h3 id='subscribe-to-a-stream'>Subscribe to a stream</h3>
+<blockquote>
+<p><strong>Subscribe Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> {
+  "id":0,
+  "code":0,
+  "msg":"spot@public.deals.v3.api@BTCUSDT"
+ }
+</code></pre></div>
+<ul>
+<li><strong>Request</strong></li>
+</ul>
+
+<p>{
+ &quot;method&quot;:&quot;SUBSCRIPTION&quot;,
+ &quot;params&quot;:[&quot;spot@public.deals.v3.api@BTCUSDT&quot;]
+}</p>
+<h3 id='unsubscribe-to-a-stream'>Unsubscribe to a stream</h3>
+<blockquote>
+<p><strong>Unsubscribe Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> {
+  "id":0,
+  "code":0,
+  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
+ }÷
+</code></pre></div>
+<ul>
+<li><strong>Request</strong></li>
+</ul>
+
+<p>{
+ &quot;method&quot;:&quot;UNSUBSCRIPTION&quot;,
+ &quot;params&quot;:[&quot;spot@public.deals.v3.api@BTCUSDT&quot;,&quot;spot@public.increase.depth.v3.api@BTCUSDT&quot;]
+}</p>
+<h3 id='ping-pong'>PING/PONG</h3>
+<blockquote>
+<p><strong>PING/PONG Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> {
+  "id":0,
+  "code":0,
+  "msg":"PONG"
+ }
+</code></pre></div>
+<ul>
+<li><strong>Request</strong></li>
+</ul>
+
+<p>{&quot;method&quot;:&quot;PING&quot;}</p>
+<h2 id='trade-streams'>Trade Streams</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.deals.v3.api@BTCUSDT"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c":"spot@public.deals.v3.api@BTCUSDT",    
+    "d":{
+            "deals":[{
+                    "S":2,                             //tradeType
+                    "p":"20233.84",                    //price
+                    "t":1661927587825,                         //dealTime
+                    "v":"0.001028"}],                            //quantity
+            "e":"spot@public.deals.v3.api"},        //eventType                  
+    "s":"BTCUSDT",                                             //symbol
+    "t":1661927587836                          //eventTime
+}                                        
+</code></pre></div>
+<p><strong>Request：</strong>   <code>spot@public.deals.v3.api@&lt;symbol&gt;</code></p>
+
+<p>The Trade Streams push raw trade information; each trade has a unique buyer and seller.</p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">deals</td>
+<td style="text-align: left">array</td>
+<td style="text-align: left">dealsInfo</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; S</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">tradeType 1:buy 2:sell</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">dealTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">e</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">eventType</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+<h2 id='kline-streams'>Kline Streams</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.kline.v3.api@BTCUSDT@Min15"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
+    "d":{
+            "k":{
+                "T":1661931900,                     
+                "a":29043.48804658,  
+                "c":20279.43,                
+                "h":20284.93,                
+                "i":"Min15",                 
+                "l":20277.52,                
+                "o":20284.93,                
+                "s":"BTCUSDT",           
+                "t":1661931000,          
+                "v":1.43211},                
+            "e":"spot@public.kline.v3.api"},                    
+    "s":"BTCUSDT",                      
+    "t":1661931016878                    
+}
+
+</code></pre></div>
+<p>The Kline/Candlestick Stream push updates to the current klines/candlestick every second.</p>
+
+<p><strong>Request：</strong> <code>spot@public.kline.v3.api@&lt;symbol&gt;@&lt;interval&gt;</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">k</td>
+<td style="text-align: left">object</td>
+<td style="text-align: left">klineInfo</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; T</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">volume</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; c</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">closingPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; h</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">highestPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; i</td>
+<td style="text-align: left">interval</td>
+<td style="text-align: left">interval</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; l</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">lowestPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; o</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">openingPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">stratTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+
+<p><strong>Kline chart intervals:</strong></p>
+
+<p>Min -&gt; minutes; Hour -&gt; hours; Day -&gt; days; Week -&gt; weeks, M -&gt; months</p>
+
+<ul>
+<li>Min1</li>
+<li>Min5</li>
+<li>Min15</li>
+<li>Min30</li>
+<li>Min60</li>
+<li>Hour4</li>
+<li>Hour8</li>
+<li>Day1</li>
+<li>Week1</li>
+<li>Month1</li>
+</ul>
+<h2 id='diff-depth-stream'>Diff.Depth Stream</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.v3.api@BTCUSDT"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+    "c":"spot@public.increase.depth.v3.api@BTCUSDT",  
+    "d":{
+        "asks":[{                                   
+            "p":"20290.89",     
+            "v":"0.000000"}], 
+        "e":"spot@public.increase.depth.v3.api", },  
+    "s":"BTCUSDT",                      
+    "t":1661932660144                   
+}
+</code></pre></div>
+<p>If the quantity is 0, it means that the order of the price has been cancel or traded，remove the price level.</p>
+
+<p><strong>Request:</strong> <code>spot@public.increase.depth.v3.api@&lt;symbol&gt;</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price</td>
+</tr>
+<tr>
+<td style="text-align: left">v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">e</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">eventType</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+<h1 id='websocket-user-data-streams'>Websocket User Data Streams</h1>
+<ul>
+<li>The base API endpoint is: <strong>https://api.mexc.com</strong></li>
+<li>A User Data Stream <code>listenKey</code> is valid for 60 minutes after creation.</li>
+<li>Doing a <code>PUT</code> on a <code>listenKey</code> will extend its validity for 60 minutes.</li>
+<li>Doing a <code>DELETE</code> on a <code>listenKey</code> will close the stream and invalidate the <code>listenKey</code>.</li>
+<li>Doing a <code>POST</code> on an account with an active <code>listenKey</code> will return the currently active <code>listenKey</code> and extend its validity for 60 minutes.</li>
+<li>websocket baseurl: <strong>wss://wbs.mexc.me/ws</strong></li>
+<li>User Data Streams are accessed at <strong>/ws?listenKey=listenKey</strong> <br/>eg:<strong>wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
+<li>A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark</li>
+</ul>
+<h2 id='listen-key-spot'>Listen Key(SPOT)</h2><h3 id='create-a-listenkey'>Create a ListenKey</h3>
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+</code></pre></div>
+<p><strong>HTTP</strong></p>
+
+<ul>
+<li><strong>POST</strong>  <code>/api/v3/userDataStream</code></li>
+</ul>
+
+<p>Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active <code>listenKey</code>, that <code>listenKey</code> will be returned and its validity will be extended for 60 minutes. </p>
+
+<p><strong>request:</strong></p>
+
+<p>NONE</p>
+<h3 id='keep-alive-a-listenkey'>Keep-alive a ListenKey</h3>
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+</code></pre></div>
+<p><strong>HTTP</strong></p>
+
+<ul>
+<li><strong>PUT</strong>  <code>/api/v3/userDataStream</code></li>
+</ul>
+
+<p>Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It&#39;s recommended to send a ping about every 30 minutes.</p>
+
+<p><strong>Request:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">listenKey</td>
+<td style="text-align: left">STRING</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p>### Close a ListenKey  </p>
+
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> {
+     "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+ }
+</code></pre></div>
+<p><strong>HTTP</strong></p>
+
+<ul>
+<li><strong>DELETE</strong>  <code>/api/v3/userDataStream</code></li>
+</ul>
+
+<p>Close out a user data stream.</p>
+<h2 id='account-deals'>Account Deals</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@private.deals.v3.api"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c": "spot@private.deals.v3.api",
+    "d": {
+        "S": 1,
+        "T": 1661938980268,
+        "c": "",
+        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
+        "m": 1,
+        "p": "1.008",
+        "st": 0,
+        "t": "4079b1522a0b40e7919f609e1ea38d44",
+        "v": "5"
+    },
+    "s": "MXUSDT",
+    "t": 1661938980285
+}
+</code></pre></div>
+<p><strong>Request：</strong> <code>spot@private.deals.v3.api</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">dealsInfo</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; S</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">tradetype 1:buy 2:sell</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; T</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">tradeTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; c</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">clientOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; i</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">orderId</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; m</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">isMaker</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; st</td>
+<td style="text-align: left">byte</td>
+<td style="text-align: left">isSelfTrade</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; t</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">tradeId</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+<h2 id='account-orders'>Account Orders</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "method": "SUBSCRIPTION",
+  "params": [
+      "spot@private.orders.v3.api"
+  ]
+}
+</code></pre></div>
+<p><strong>Request：</strong> <code>spot@private.orders.v3.api</code></p>
+<h3 id='a-limit-market-orders'>a.Limit/Market Orders</h3>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "c": "spot@private.orders.v3.api",
+  "d": {
+        "A":8.0,
+        "O":1661938138000,
+        "S":1,
+        "V":10,
+        "a":8,
+        "c":"",
+        "i":"e03a5c7441e44ed899466a7140b71391",
+        "m":0,
+        "o":1,
+        "p":0.8,
+        "s":1,
+        "v":10
+  },
+  "s": "MXUSDT",
+  "t": 1661938138193
+}
+</code></pre></div>
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">orderInfo</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; A</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">remainAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; O</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">createTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; S</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">tradetype 1:buy 2:sell</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; V</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">remainQuantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; c</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">clientOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; i</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">orderId</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; m</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">isMaker</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; o</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100)</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; p</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">PRICE</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; s</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">status 1:New order 2:Filled 3:Partially filled 4:Order canceled 5:Order filled partially, and then the rest of the order is canceled</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+</tbody></table>
+<h3 id='b-stop-limit-order'>b.Stop Limit Order</h3>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "c": "spot@private.orders.v3.api",
+  "d": {
+        "N":"USDT",
+        "O":1661938853715,
+        "P":0.9,
+        "S":1,
+        "T":"LE",
+        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
+        "o":100,
+        "p":1.01,
+        "s":"NEW",
+        "v":6
+  },
+  "s": "MXUSDT",
+  "t": 1661938853727
+}
+</code></pre></div>
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">orderInfo</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; N</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commissionAsset</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; O</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">createTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; P</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">triggerPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; S</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">tradetype 1:buy 2:sell</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; T</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">0: GE(price is higher than triggerPrice) 1: LE(price is lower than triggerPrice)</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; i</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">orderId</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;  o</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">orderType LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100)</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; p</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">state  NEW,CANCELED,EXECUTED,FAILED</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
 </tr>
 </tbody></table>
 <h1 id='public-api-definitions'>Public API Definitions</h1><h3 id='enum-definitions'>ENUM definitions</h3><h3 id='order-side'><strong>Order side</strong></h3>
