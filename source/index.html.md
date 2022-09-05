@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-09-02**
+
+- Add v3 websocket
+
 ## **2022-08-26**
 
 - ETF endpoint add some response params
@@ -997,8 +1001,6 @@ post /api/v3/capital/sub-account/universalTransfer
 
 | name | Type| Mandatory  | Description |  
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|sign|
 |fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
 |toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
 |fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
@@ -1006,6 +1008,8 @@ post /api/v3/capital/sub-account/universalTransfer
 |symbol|string|NO|Only supported under ISOLATED_MARGIN type,eg:ETHUSDT|
 |asset|string|YES|asset,eg:USDT|
 |amount|string|YES|amount,eg:1.82938475|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
 
 **Response:**
 
@@ -1045,8 +1049,6 @@ get /api/v3/capital/sub-account/universalTransfer
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|sign|
 |fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
 |toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
 |fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
@@ -1055,6 +1057,8 @@ get /api/v3/capital/sub-account/universalTransfer
 |endTime|string|NO|endTime|
 |page|string|NO|default 1|
 |limit|string|NO|default 500, max 500|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|sign|
 
 **Response:**
 
@@ -1227,7 +1231,7 @@ Supports 20 orders in a batch,rate limit:2 times/s.
 > Request
 
 ```
-POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTC_USDT","side": "BID","client_order_id": 9588234},{"type": "LIMIT_ORDER","price": "0.00846945","quantity": "1","symbol": "RACA_USDT","side": "ASK"}]
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
 ```
 
 > Response
@@ -1839,14 +1843,14 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
 |coin|string|YES|coin |
 |withdrawOrderId|string|NO|withdrawOrderId|
 |network|string|NO|withdraw network|
 |address|string|YES|withdraw address( memo please use : for splicing) |
 |amount|string|YES|withdraw amount|
 |remark|string|NO|remark|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
  
 1. If `network` is not sent, will return default network in that currency.
 2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
@@ -1890,13 +1894,13 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
 |coin|string|YES|coin |
 |status|string|NO|status|
 |startTime|string|NO|default: 90 days ago from current time|
 |endTime|string|NO|default:current time|
 |limit|string|NO|default:1000,max:1000|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
 
 Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
 
@@ -1950,13 +1954,13 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
 |coin|string|YES|coin |
 |status|string|NO|withdraw status|
 |limit|string|NO|default:1000, max:1000|
 |startTime|string|NO|default: 90 days ago from current time|
 |endTime|string|NO|default:current time|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
 
 1. Supported multiple network coins'  withdraw history may not return the 'network' field.
 2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
@@ -2019,10 +2023,10 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
 |coin|string|YES|coin |
 |network|string|NO|deposit network|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
 
 Response:
 
@@ -2057,13 +2061,13 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
 |fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
 |toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
 |asset|string|YES|asset|
 |amount|string|YES|amount|
 |symbol|string|NO|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
 
 When type is`ISOLATEDMARGIN`, `fromSymbol` and `toSymbol` must be sent.
 
@@ -2122,8 +2126,6 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
 |fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
 |toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
 |startTime|string|NO|startTime|
@@ -2131,6 +2133,8 @@ Parameters:
 |page|string|NO|default:1|
 |size|string|NO|default:10, max:100|
 |symbol|string|YES|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
 
 1. Only can quary the data for the last six months
 2. If 'startTime' and 'endTime' are not send, will return the last seven days' data by default
@@ -2228,10 +2232,10 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-| timestamp | time | YES| string|1655143087012|
-| signature | signature |YES|string|
 | tradeMode | tradeMode |YES|int|0: Normal 1:Auto|
 | symbol | symbol |YES|string|BTCUSDT|
+| timestamp | time | YES| string|1655143087012|
+| signature | signature |YES|string|
 
 
 **Response Parameter**
@@ -2273,8 +2277,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 | name | Description| Mandatory  | Type |  Sample  | 
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| time |YES|string|{{timestamp}}|
-|signature| signature |YES|string|{{signature}}|
 |symbol| symbol |YES|string|BTCUSDT|
 |isIsolated|is Isolated，"TRUE", "FALSE", Default "TRUE"|NO|string|TRUE|
 |side|BUY SELL|YES|string|BUY|
@@ -2284,6 +2286,8 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 |price|price|NO|string| 
 |newClientOrderId|newClientOrderId|NO|string| 
 |recvWindow| |NO|string| 
+|timestamp| time |YES|string|timestamp|
+|signature| signature |YES|string|signature|
 
 
 **Response Parameter**
@@ -2321,13 +2325,13 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 
 | name | Description| Mandatory  | Type |  Sample |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp|time |YES|string|{{timestamp}}|
-|signature|signature |YES|string|{{signature}}|
 |asset|asset|YES|string|BTC| 
 |isIsolated|is Isolated，"TRUE", Default "TRUE"|NO|string| 
 |symbol|symbol|YES|string| 
 |amount| amount|YES|string| 
 |recvWindow| |NO|string| 
+|timestamp|time |YES|string|timestamp|
+|signature|signature |YES|string|signature|
 
 
 **Response Parameter**
@@ -2365,8 +2369,6 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |asset|asset/btc|YES|string||
 |isIsolated|is Isolated，"TRUE",  Default "TRUE"|NO|string||
 |symbol|symbol|YES|string||
@@ -2374,6 +2376,8 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 |borrowId|loan order id|YES|string||
 |isAllRepay|all repay or portion repay|NO|string||
 |recvWindow| |YES|string||
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2424,11 +2428,11 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string||
 |isIsolated|is Isolated，"TRUE", Default "TRUE"|NO|string||
 |recvWindow|less than `60000`|NO|string||
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2487,13 +2491,13 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|
 |isIsolated|is Isolated，"TRUE", "FALSE", Default "FALSE"|NO|string|
 |orderId| |YES|string|
 |origClientOrderId|origClientOrderId|NO|string|
 |recvWindow| |NO|string|
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2550,8 +2554,6 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |asset|asset|YES|string|BTC|
 |symbol|symbol|YES|string|
 |tranId|tranId |NO|string|
@@ -2560,6 +2562,8 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 |current|current page. Default:1|NO|string|
 |size|Default:10 max:100|NO|string|
 |recvWindow| |NO|string|
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2620,14 +2624,14 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|
 |isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|string|
 |orderId| |NO|string|
 |startTime| |NO|string|
 |endTime| |NO|string|
 |limit|Default 500;max 500.|NO|string|
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2677,14 +2681,14 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|
 |isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|string|
 |startTime| |NO|string|
 |endTime| |NO|string|
 |fromId|TradeId|NO|string|
 |limit|Default 500; max 1000.|NO|string|
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2750,10 +2754,10 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol|symbol|YES|string| 
 |isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|string|
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2802,10 +2806,10 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |asset| |YES|string| 
 |symbol|symbol|YES|string| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2840,9 +2844,9 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
-|symbol| |YES|string|   
+|symbol| |YES|string| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|  
 
 **Response Parameter**
 
@@ -2892,11 +2896,11 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|
 |isIsolated|is Isolated，"TRUE", "FALSE",Default "TRUE"|NO|string| |
 |orderId| |NO|string| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -2982,10 +2986,9 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbols|max 5 symbols; String delimited by ",".|YES|string|"BTCUSDT,MXUSDT,ADAUSDT"|
-
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 **Response Parameter**
 
 | name | Description  |Type | Sample|
@@ -3069,10 +3072,10 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |asset| |YES|string| 
 |symbol| symbol|YES|string| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -3105,8 +3108,6 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |asset| |YES|string| |
 |symbol|symbol|YES|string| |
 |tranId|transfer id|YES|string| |
@@ -3115,6 +3116,8 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 |current|current page Default:1|NO|string| |
 |size|Default:10 max:100|NO|string| |
 |recvWindow| |NO|string| |
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -3162,9 +3165,9 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -3199,13 +3202,13 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |startTime| |NO|string| |
 |endTime| |NO|string|| 
 |symbol| |YES|string|| 
 |current|current page Default:1|NO|string|| 
 |size|Default:10 max:100|NO|string|| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -3267,9 +3270,9 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|string|{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -3315,10 +3318,10 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 | name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
-|timestamp| |YES|[string||{{timestamp}}|
-|signature| |YES|string|{{signature}}|
 |symbol| |YES|string|| 
 |tier||NO|string|| 
+|timestamp| |YES|string|timestamp|
+|signature| |YES|string|signature|
 
 **Response Parameter**
 
@@ -3331,6 +3334,466 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 |liquidationRiskRatio|liquidationRiskRatio|string|1.05|
 |baseAssetMaxBorrowable|baseAssetMaxBorrowable|string|9|
 |quoteAssetMaxBorrowable|quoteAssetMaxBorrowable|string|70000|
+
+# Websocket Market Streams
+
+- The base endpoint is: **wss://wbs.mexc.com/ws**
+- A single connection to **wbs.mexc.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark
+- All symbols are **Uppercase** <br/>eg:`spot@public.deals.v3.api@<symbol>`</br>->`spot@public.deals.v3.api@BTCUSDT`
+- If there is no valid websocket subscription, the server will disconnect in **30 seconds**. If the subscription is successful but there is no streams, the server will disconnect in **1 minute**. The client can send `PING` to maintain the connection.
+
+## Live Subscribing/Unsubscribing to streams
+
+- The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
+- The id used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.
+- In the response, if the `msg`  received is same as request params, this means the request sent was a success.
+
+### Subscribe to a stream
+
+> **Subscribe Response**
+
+```
+ {
+  "id":0,
+  "code":0,
+  "msg":"spot@public.deals.v3.api@BTCUSDT"
+ }
+```
+
+- **Request**
+
+
+{
+ "method":"SUBSCRIPTION",
+ "params":["spot@public.deals.v3.api@BTCUSDT"]
+}
+
+### Unsubscribe to a stream
+
+> **Unsubscribe Response**
+
+```
+ {
+  "id":0,
+  "code":0,
+  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
+ }÷
+```
+
+- **Request**
+
+{
+ "method":"UNSUBSCRIPTION",
+ "params":["spot@public.deals.v3.api@BTCUSDT","spot@public.increase.depth.v3.api@BTCUSDT"]
+}
+
+### PING/PONG
+
+> **PING/PONG Response**
+
+```
+ {
+  "id":0,
+  "code":0,
+  "msg":"PONG"
+ }
+```
+
+- **Request**
+
+{"method":"PING"}
+
+## Trade Streams
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.deals.v3.api@BTCUSDT"
+    ]
+}
+```
+> **response:**
+
+```
+{
+	"c":"spot@public.deals.v3.api@BTCUSDT",    
+	"d":{
+			"deals":[{
+					"S":2,                             //tradeType
+					"p":"20233.84",                    //price
+					"t":1661927587825,  				       //dealTime
+					"v":"0.001028"}],  						     //quantity
+			"e":"spot@public.deals.v3.api"},        //eventType			         
+	"s":"BTCUSDT",  								           //symbol
+	"t":1661927587836                          //eventTime
+} 								         
+```
+
+**Request：**   `spot@public.deals.v3.api@<symbol>`
+
+The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+
+**Response:**
+
+| name      | Type   | Description |
+| :-------- | :----- | :--- |
+| deals | array | dealsInfo  |
+| > S | int | tradeType 1:buy 2:sell |
+| > p | string | price |
+| > t | long | dealTime |
+| > v | string | quantity |
+| e | string | eventType |
+| s | string | symbol |
+| t | long | eventTime |
+
+## Kline Streams
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.kline.v3.api@BTCUSDT@Min15"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+	"c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
+	"d":{
+			"k":{
+				"T":1661931900,                     
+				"a":29043.48804658,	 
+				"c":20279.43,				 
+				"h":20284.93,				 
+				"i":"Min15",				 
+				"l":20277.52,				 
+				"o":20284.93,				 
+				"s":"BTCUSDT",			 
+				"t":1661931000,			 
+				"v":1.43211},				 
+			"e":"spot@public.kline.v3.api"},					
+	"s":"BTCUSDT",						
+	"t":1661931016878					 
+}
+
+```
+
+The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
+
+**Request：** `spot@public.kline.v3.api@<symbol>@<interval>`
+
+**Response:**
+
+| name      | Type   | Description |
+| :-------- | :----- | :--- |
+| k | object| klineInfo |
+| > T | long | endTime |
+| > a | bigDecimal | volume |
+| > c | bigDecimal | closingPrice |
+| > h | bigDecimal | highestPrice |
+| > i | interval | interval |
+| > l | bigDecimal | lowestPrice |
+| > o | bigDecimal | openingPrice |
+| > t | long | stratTime |
+| > v | bigDecimal | quantity |
+| s | string | symbol |
+| t | long | eventTime |
+
+**Kline chart intervals:**
+
+Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
+
+- Min1
+- Min5
+- Min15
+- Min30
+- Min60
+- Hour4
+- Hour8
+- Day1
+- Week1
+- Month1
+
+## Diff.Depth Stream
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.v3.api@BTCUSDT"
+    ]
+}
+```
+
+> **response:**
+
+```
+
+{
+	"c":"spot@public.increase.depth.v3.api@BTCUSDT",  
+	"d":{
+		"asks":[{									
+			"p":"20290.89",		
+			"v":"0.000000"}], 
+		"e":"spot@public.increase.depth.v3.api", },	 
+	"s":"BTCUSDT",						
+	"t":1661932660144					
+}
+```
+
+If the quantity is 0, it means that the order of the price has been cancel or traded，remove the price level.
+
+**Request:** `spot@public.increase.depth.v3.api@<symbol>`
+
+**Response:**
+
+| name      | Type   | Description |
+| :-------- | :----- | :--- |
+| p | string | price |
+| v | string | quantity |
+| e | string | eventType |
+| s | string | symbol |
+| t | long | eventTime |
+
+
+# Websocket User Data Streams
+
+- The base API endpoint is: **https://api.mexc.com**
+- A User Data Stream `listenKey` is valid for 60 minutes after creation.
+- Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
+- Doing a `DELETE` on a `listenKey` will close the stream and invalidate the `listenKey`.
+- Doing a `POST` on an account with an active `listenKey` will return the currently active `listenKey` and extend its validity for 60 minutes.
+- websocket baseurl: **wss://wbs.mexc.me/ws**
+- User Data Streams are accessed at **/ws?listenKey=listenKey** <br/>eg:**wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
+- A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark
+
+## Listen Key(SPOT) 
+
+### Create a ListenKey
+
+> **Response**
+
+```
+{
+  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+```
+
+**HTTP**
+
+- **POST**  ` /api/v3/userDataStream`
+
+Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes. 
+
+**request:**
+
+NONE
+
+### Keep-alive a ListenKey 
+
+> **Response**
+
+```
+{
+    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
+```
+**HTTP**
+
+- **PUT**  ` /api/v3/userDataStream`
+
+Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+
+**Request:**
+
+| name    | Type | Mandatory | Description |
+| :-------- | :------- | :------- | :--- |
+| listenKey | STRING   | YES      |      |
+
+ ### Close a ListenKey  
+
+ > **Response**
+
+ ```
+ {
+     "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+ }
+ ```
+
+ **HTTP**
+
+ - **DELETE**  ` /api/v3/userDataStream`
+
+ Close out a user data stream.
+
+
+## Account Deals
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@private.deals.v3.api"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+    "c": "spot@private.deals.v3.api",
+    "d": {
+        "S": 1,
+        "T": 1661938980268,
+        "c": "",
+        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
+        "m": 1,
+        "p": "1.008",
+        "st": 0,
+        "t": "4079b1522a0b40e7919f609e1ea38d44",
+        "v": "5"
+    },
+    "s": "MXUSDT",
+    "t": 1661938980285
+}
+```
+
+**Request：** `spot@private.deals.v3.api`
+
+**Response:**
+
+| name      | Type   | Description |
+| :-------- | :----- | :--- |
+| d | json | dealsInfo |
+| > S | int | tradetype 1:buy 2:sell |
+| > T | long | tradeTime |
+| > c | string | clientOrderId |
+| > i | string | orderId |
+| > m | int | isMaker |
+| > p | string | price |
+| > st | byte | isSelfTrade |
+| > t | string | tradeId |
+| > v | string | quantity |
+| s | string | symbol |
+| t | long |eventTime |
+
+## Account Orders
+
+>**request:**
+
+```
+{
+  "method": "SUBSCRIPTION",
+  "params": [
+      "spot@private.orders.v3.api"
+  ]
+}
+```
+
+**Request：** `spot@private.orders.v3.api`
+
+### a.Limit/Market Orders 
+
+> **response:**
+
+```
+{
+  "c": "spot@private.orders.v3.api",
+  "d": {
+        "A":8.0,
+        "O":1661938138000,
+        "S":1,
+        "V":10,
+        "a":8,
+        "c":"",
+        "i":"e03a5c7441e44ed899466a7140b71391",
+        "m":0,
+        "o":1,
+        "p":0.8,
+        "s":1,
+        "v":10
+  },
+  "s": "MXUSDT",
+  "t": 1661938138193
+}
+```
+
+**Response:**
+
+| name      | Type   | Description |
+| :-------- | :----- | :--- |
+| d | json | orderInfo |
+| > A | bigDecimal | remainAmount |
+| > O | long | createTime|
+| > S | int | tradetype 1:buy 2:sell |
+| > V | bigDecimal | remainQuantity |
+| > a | bigDecimal | amount |
+| > c | string | clientOrderId |
+| > i | string | orderId |
+| > m | int | isMaker |
+| > o | int | LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100) |
+| > p | bigDecimal | PRICE |
+| > s | int | status 1:New order 2:Filled 3:Partially filled 4:Order canceled 5:Order filled partially, and then the rest of the order is canceled |
+| > v | bigDecimal | quantity |
+| t | long | eventTime |
+| s | string | symbol |
+
+### b.Stop Limit Order
+
+> **response:**
+
+```
+{
+  "c": "spot@private.orders.v3.api",
+  "d": {
+        "N":"USDT",
+        "O":1661938853715,
+        "P":0.9,
+        "S":1,
+        "T":"LE",
+        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
+        "o":100,
+        "p":1.01,
+        "s":"NEW",
+        "v":6
+  },
+  "s": "MXUSDT",
+  "t": 1661938853727
+}
+```
+
+**Response:**
+
+|  name      | Type   | Description |
+| :-------- | :----- | :--- |
+| d            | json | orderInfo |
+| > N | string | commissionAsset |
+|  > O | long | createTime |
+|  > P | bigDecimal | triggerPrice |
+|  > S | int | tradetype 1:buy 2:sell |
+|  > T | int | 0: GE(price is higher than triggerPrice) 1: LE(price is lower than triggerPrice) |
+|  > i | string | orderId |
+| >  o | int | orderType LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100) |
+|  > p | bigDecimal | price |
+| > s | string | state  NEW,CANCELED,EXECUTED,FAILED |
+|  > v | bigDecimal | quantity |
+| s | string | symbol |
+| t | long | eventTime |
+
+
 
 # Public API Definitions
 
