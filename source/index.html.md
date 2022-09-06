@@ -60,7 +60,7 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
-## **2022-09-02**
+## **2022-09-06**
 
 - 新增邀请返佣接口 
 
