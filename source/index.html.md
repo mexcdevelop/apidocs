@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-09-06**
+
+- Add Rebate Endpoints
+
 ## **2022-09-02**
 
 - Add v3 websocket
@@ -3377,7 +3381,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
   "id":0,
   "code":0,
   "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }÷
+ }
 ```
 
 - **Request**
