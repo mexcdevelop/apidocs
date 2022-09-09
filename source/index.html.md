@@ -4167,6 +4167,8 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 | account |string|受邀人账号|
 | inviteTime |long|邀请时间|
 
+若startTime和endTime均未发送,返回最近一年的数据。
+
 ## 获取返佣记录明细 （奖励记录）
 
 > 请求示例
@@ -4236,9 +4238,10 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 |tradeTime|long|用户交易时间|
 |updateTime|long|获取返佣时间|
 
+若startTime和endTime均未发送,返回最近一年的数据。
+
 ## 获取自返记录明细 （奖励记录）
 
-自己交易返回的奖励
 
 > 请求示例
 
@@ -4305,6 +4308,9 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 |account|string|受邀人账号|
 |tradeTime|long|用户交易时间|
 |updateTime|long|获取返佣时间|
+
+若startTime和endTime均未发送,返回最近一年的数据。
+
 
 # 公开API参数
 
