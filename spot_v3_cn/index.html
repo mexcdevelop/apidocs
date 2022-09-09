@@ -344,6 +344,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-09-06" class="toc-h2 toc-link" data-title="2022-09-06"><strong>2022-09-06</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-09-02" class="toc-h2 toc-link" data-title="2022-09-02"><strong>2022-09-02</strong></a>
                   </li>
                   <li>
@@ -670,6 +673,20 @@
               </ul>
           </li>
           <li>
+            <a href="#0900514e9d" class="toc-h1 toc-link" data-title="邀请返佣接口">邀请返佣接口</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#8254d412a1" class="toc-h2 toc-link" data-title="获取邀请返佣记录">获取邀请返佣记录</a>
+                  </li>
+                  <li>
+                    <a href="#72fbc63aa1" class="toc-h2 toc-link" data-title="获取返佣记录明细 （奖励记录）">获取返佣记录明细 （奖励记录）</a>
+                  </li>
+                  <li>
+                    <a href="#26b3666f08" class="toc-h2 toc-link" data-title="获取自返记录明细 （奖励记录）">获取自返记录明细 （奖励记录）</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#api-2" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
               <ul class="toc-list-h2">
                   <li>
@@ -724,7 +741,11 @@
 <li> 咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-09-02'><strong>2022-09-02</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-09-06'><strong>2022-09-06</strong></h2>
+<ul>
+<li>新增邀请返佣接口 </li>
+</ul>
+<h2 id='2022-09-02'><strong>2022-09-02</strong></h2>
 <ul>
 <li>新增v3 websocket</li>
 </ul>
@@ -2052,26 +2073,26 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">子账户名称（8-32个字母加数字）如：subAccount1</td>
 </tr>
 <tr>
 <td style="text-align: left">note</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">备注  如：1</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -2087,12 +2108,12 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">子账户名称（8-32个字母加数字）如：subAccount1</td>
 </tr>
 <tr>
 <td style="text-align: left">note</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">备注  如：1</td>
 </tr>
 </tbody></table>
@@ -2141,38 +2162,38 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">子账户名称 如：subAccount1</td>
 </tr>
 <tr>
 <td style="text-align: left">isFreeze</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">true or false</td>
 </tr>
 <tr>
 <td style="text-align: left">page</td>
-<td style="text-align: left">INT</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">默认: 1</td>
 </tr>
 <tr>
 <td style="text-align: left">limit</td>
-<td style="text-align: left">INT</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">默认: 10, 最大: 200</td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -2188,17 +2209,17 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">子账户名称</td>
 </tr>
 <tr>
 <td style="text-align: left">isFreeze</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是否冻结</td>
 </tr>
 <tr>
 <td style="text-align: left">createTime</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">创建时间</td>
 </tr>
 </tbody></table>
@@ -2251,37 +2272,37 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">子账户名称 如：subAccount1</td>
 </tr>
 <tr>
 <td style="text-align: left">note</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">APIKey的备注</td>
 </tr>
 <tr>
 <td style="text-align: left">permissions</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE</td>
 </tr>
 <tr>
 <td style="text-align: left">ip</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
@@ -2298,37 +2319,37 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">子账户名称</td>
 </tr>
 <tr>
 <td style="text-align: left">note</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">APIKey的备注</td>
 </tr>
 <tr>
 <td style="text-align: left">apiKey</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">API公钥</td>
 </tr>
 <tr>
 <td style="text-align: left">secretKey</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">API的私钥</td>
 </tr>
 <tr>
 <td style="text-align: left">permissions</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">APIKey权限</td>
 </tr>
 <tr>
 <td style="text-align: left">ip</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">APIKey绑定的ip地址</td>
 </tr>
 <tr>
 <td style="text-align: left">creatTime</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">创建时间</td>
 </tr>
 </tbody></table>
@@ -2380,19 +2401,19 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">子账户名称 如：subAccount1</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
@@ -2409,27 +2430,27 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">note</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">APIKey的备注</td>
 </tr>
 <tr>
 <td style="text-align: left">apiKey</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">API公钥</td>
 </tr>
 <tr>
 <td style="text-align: left">permissions</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">APIKey权限</td>
 </tr>
 <tr>
 <td style="text-align: left">ip</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">APIKey绑定的ip地址</td>
 </tr>
 <tr>
 <td style="text-align: left">creatTime</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">创建时间</td>
 </tr>
 </tbody></table>
@@ -2472,25 +2493,25 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">子账户名称 如：subAccount1</td>
 </tr>
 <tr>
 <td style="text-align: left">apiKey</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left">API的公钥 如：ghytfugy2168hjksaj</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
+<td style="text-align: left">long</td>
 <td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
@@ -2507,7 +2528,7 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">subAccount</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">子账户名称</td>
 </tr>
 </tbody></table>
@@ -3010,56 +3031,56 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left">ENUM</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">详见枚举定义：订单方向</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left">ENUM</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">详见枚举定义：订单类型</td>
 </tr>
 <tr>
 <td style="text-align: left">quantity</td>
-<td style="text-align: left">DECIMAL</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">委托数量</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteOrderQty</td>
-<td style="text-align: left">DECIMAL</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">委托总额</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left">DECIMAL</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">委托价格</td>
 </tr>
 <tr>
 <td style="text-align: left">newClientOrderId</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">客户自定义的唯一订单ID</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">赋值不能大于 60000</td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -3104,12 +3125,12 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">订单类型</td>
 </tr>
 <tr>
@@ -3182,61 +3203,61 @@ body
 <tr>
 <td style="text-align: left">batchOrders</td>
 <td style="text-align: left">LIST</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
 <td style="text-align: left">side</td>
 <td style="text-align: left">ENUM</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">详见枚举定义：订单方向</td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left">ENUM</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left">详见枚举定义：订单类型</td>
 </tr>
 <tr>
 <td style="text-align: left">quantity</td>
-<td style="text-align: left">DECIMAL</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">委托数量</td>
 </tr>
 <tr>
 <td style="text-align: left">quoteOrderQty</td>
-<td style="text-align: left">DECIMAL</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">委托总额</td>
 </tr>
 <tr>
 <td style="text-align: left">price</td>
-<td style="text-align: left">DECIMAL</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">decimal</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">委托价格</td>
 </tr>
 <tr>
 <td style="text-align: left">newClientOrderId</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">客户自定义的唯一订单ID</td>
 </tr>
 <tr>
 <td style="text-align: left">recvWindow</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">赋值不能大于 60000</td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
-<td style="text-align: left">LONG</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -3270,12 +3291,12 @@ body
 </thead><tbody>
 <tr>
 <td style="text-align: left">symbol</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
 <td style="text-align: left">orderId</td>
-<td style="text-align: left">STRING</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">订单类型</td>
 </tr>
 </tbody></table>
@@ -3343,7 +3364,7 @@ body
 <tr>
 <td style="text-align: left">newClientOrderId</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">NO</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left">客户自定义的唯一订单ID</td>
 </tr>
 <tr>
@@ -4506,9 +4527,10 @@ body
 <ol>
 <li>如果不发送<code>network</code>,将按该币种默认网络返回结果;</li>
 <li>可以在接口 <code>Get /api/v3/capital/config/getall</code>的返回值中某币种的<code>networkList</code>获取<code>network</code>网络字段和<code>isDefault</code>是否为默认网络。</li>
-<li>提币地址只支持web端添加到提币地址管理中的地址。
-<strong>返回参数</strong></li>
+<li>提币地址只支持web端添加到提币地址管理中的地址。</li>
 </ol>
+
+<p><strong>返回参数</strong></p>
 
 <table><thead>
 <tr>
@@ -8218,7 +8240,7 @@ get /api/v3/margin/trigerOrder
   "id":0,
   "code":0,
   "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }÷
+ }
 </code></pre></div>
 <ul>
 <li><strong>请求</strong></li>
@@ -8590,8 +8612,8 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">listenKey</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -8623,8 +8645,8 @@ get /api/v3/margin/trigerOrder
 </thead><tbody>
 <tr>
 <td style="text-align: left">listenKey</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
@@ -8949,6 +8971,425 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">事件时间</td>
 </tr>
 </tbody></table>
+<h1 id='0900514e9d'>邀请返佣接口</h1><h2 id='8254d412a1'>获取邀请返佣记录</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//当前页</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//总记录数</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//总页数</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"spot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00082273"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">现货返佣，以usdt计</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"futures"</span><span class="p">:</span><span class="s2">"0.00022487"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">合约返佣，以usdt计</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00012126"</span><span class="p">,</span><span class="w">  </span><span class="err">//累积奖励金额，以usdt计</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"221827"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人UID</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人账号</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"inviteTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="err">//邀请时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">},</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">...</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"spot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00082273"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">现货返佣，以usdt计</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"futures"</span><span class="p">:</span><span class="s2">"0.00022487"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">合约返佣，以usdt计</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00012126"</span><span class="p">,</span><span class="w">  </span><span class="err">//累积奖励金额，以usdt计</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82937"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人UID</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"338****291@qq.com"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人账号</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"inviteTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="err">//邀请时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">}</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/taxQuery</code></li>
+</ul>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">默认 1</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">spot</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">现货返佣，以usdt计</td>
+</tr>
+<tr>
+<td style="text-align: left">futures</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">合约返佣，以usdt计</td>
+</tr>
+<tr>
+<td style="text-align: left">total</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">累积奖励金额，以usdt计</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">受邀人UID</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">受邀人账号</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">邀请时间</td>
+</tr>
+</tbody></table>
+
+<p>若startTime和endTime均未发送,返回最近一年的数据。</p>
+<h2 id='72fbc63aa1'>获取返佣记录明细 （奖励记录）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/detail?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">//当前页</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">//总记录数</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">//总页数</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣资产，币种</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣类型：现货，杠杆，合约</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣比例</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001126"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣金额</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2293729101827"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人UID</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人账号</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="err">//用户交易时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="err">//获取返佣时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">},</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err">...</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣资产，币种</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣类型：现货，杠杆，合约</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣比例</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000056"</span><span class="p">,</span><span class="err">//</span><span class="w"> </span><span class="err">返佣金额</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22937291018263"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人UID</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人账号</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="err">//用户交易时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637928379000</span><span class="err">//获取返佣时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail</code></li>
+</ul>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">默认 1</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣资产，币种</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣类型：现货，杠杆，合约</td>
+</tr>
+<tr>
+<td style="text-align: left">rate</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣比例</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣金额</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">受邀人UID</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">受邀人账号</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">用户交易时间</td>
+</tr>
+<tr>
+<td style="text-align: left">updateTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">获取返佣时间</td>
+</tr>
+</tbody></table>
+
+<p>若startTime和endTime均未发送,返回最近一年的数据。</p>
+<h2 id='26b3666f08'>获取自返记录明细 （奖励记录）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//当前页</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">  </span><span class="err">//总记录数</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="err">//总页数</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">返佣资产，币种</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">返佣类型：现货，杠杆，合约</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣比例</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001126"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">返佣金额</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2293729101827"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人UID</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人账号</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="err">//用户交易时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="err">//获取返佣时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">},</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">...</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣资产，币种</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣类型：现货，杠杆，合约</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣比例</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000056"</span><span class="p">,</span><span class="err">//</span><span class="w"> </span><span class="err">返佣金额</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22937291018263"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人UID</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">受邀人账号</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="err">//用户交易时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637928379000</span><span class="err">//获取返佣时间</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">}</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail/kickback</code></li>
+</ul>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">默认 1</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣资产，币种</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣类型：现货，杠杆，合约</td>
+</tr>
+<tr>
+<td style="text-align: left">rate</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣比例</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣金额</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">受邀人UID</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">受邀人账号</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">用户交易时间</td>
+</tr>
+<tr>
+<td style="text-align: left">updateTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">获取返佣时间</td>
+</tr>
+</tbody></table>
+
+<p>若startTime和endTime均未发送,返回最近一年的数据。</p>
 <h1 id='api-2'>公开API参数</h1><h2 id='8c6d51826c'>枚举定义</h2><h3 id='ba0138f8ea'>订单方向</h3>
 <ul>
 <li>BUY 买入</li>
