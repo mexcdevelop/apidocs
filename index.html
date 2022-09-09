@@ -341,6 +341,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-09-06" class="toc-h2 toc-link" data-title="2022-09-06"><strong>2022-09-06</strong></a>
+                  </li>
+                  <li>
                     <a href="#2022-09-02" class="toc-h2 toc-link" data-title="2022-09-02"><strong>2022-09-02</strong></a>
                   </li>
                   <li>
@@ -658,6 +661,20 @@
               </ul>
           </li>
           <li>
+            <a href="#rebate-endpoints" class="toc-h1 toc-link" data-title="Rebate Endpoints">Rebate Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-rebate-history-records" class="toc-h2 toc-link" data-title="Get Rebate History Records">Get Rebate History Records</a>
+                  </li>
+                  <li>
+                    <a href="#get-rebate-records-detail" class="toc-h2 toc-link" data-title="Get Rebate Records Detail">Get Rebate Records Detail</a>
+                  </li>
+                  <li>
+                    <a href="#get-self-rebate-records-detail" class="toc-h2 toc-link" data-title="Get Self Rebate Records Detail">Get Self Rebate Records Detail</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#public-api-definitions" class="toc-h1 toc-link" data-title="Public API Definitions">Public API Definitions</a>
               <ul class="toc-list-h2">
                   <li>
@@ -720,7 +737,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-09-02'><strong>2022-09-02</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-09-06'><strong>2022-09-06</strong></h2>
+<ul>
+<li>Add Rebate Endpoints</li>
+</ul>
+<h2 id='2022-09-02'><strong>2022-09-02</strong></h2>
 <ul>
 <li>Add v3 websocket</li>
 </ul>
@@ -7723,7 +7744,7 @@ get /api/v3/margin/trigerOrder
   "id":0,
   "code":0,
   "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }÷
+ }
 </code></pre></div>
 <ul>
 <li><strong>Request</strong></li>
@@ -8420,6 +8441,425 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">eventTime</td>
 </tr>
 </tbody></table>
+<h1 id='rebate-endpoints'>Rebate Endpoints</h1><h2 id='get-rebate-history-records'>Get Rebate History Records</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"spot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00082273"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"futures"</span><span class="p">:</span><span class="s2">"0.00022487"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00012126"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"221827"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"inviteTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">},</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">...</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"spot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00082273"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"futures"</span><span class="p">:</span><span class="s2">"0.00022487"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00012126"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82937"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"338****291@qq.com"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"inviteTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">}</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Http Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/taxQuery</code></li>
+</ul>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">spot</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">spot rebate,unit:usdt</td>
+</tr>
+<tr>
+<td style="text-align: left">futures</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">futures rebate,unit:usdt</td>
+</tr>
+<tr>
+<td style="text-align: left">total</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">total rebate,unit:usdt</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Invitee uid</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Invitee account</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">invite time</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not sent, the recent 1 year&#39;s data will be returned.</p>
+<h2 id='get-rebate-records-detail'>Get Rebate Records Detail</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/detail?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001126"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2293729101827"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">},</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err">...</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000056"</span><span class="p">,</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22937291018263"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637928379000</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">}</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>Http Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail</code></li>
+</ul>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate asset</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate type: spot futures margin</td>
+</tr>
+<tr>
+<td style="text-align: left">rate</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate rate</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate amount</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Invitee uid</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Invitee account</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">trade time</td>
+</tr>
+<tr>
+<td style="text-align: left">updateTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">update time</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not sent, the recent 1 year&#39;s data will be returned.</p>
+<h2 id='get-self-rebate-records-detail'>Get Self Rebate Records Detail</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot"</span><span class="p">,</span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0001126"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2293729101827"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">},</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="err">...</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">{</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.3"</span><span class="p">,</span><span class="w"> 
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000056"</span><span class="p">,</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"22937291018263"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">"154****291@qq.com"</span><span class="p">,</span><span class="w">  
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637651320000</span><span class="p">,</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637928379000</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w">  </span><span class="p">}</span><span class="w">
+ </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Http Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail/kickback</code></li>
+</ul>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate asset</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate type: spot futures margin</td>
+</tr>
+<tr>
+<td style="text-align: left">rate</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate rate</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">rebate amount</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Invitee uid</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Invitee account</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">trade time</td>
+</tr>
+<tr>
+<td style="text-align: left">updateTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">update time</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not sent, the recent 1 year&#39;s data will be returned.</p>
 <h1 id='public-api-definitions'>Public API Definitions</h1><h3 id='enum-definitions'>ENUM definitions</h3><h3 id='order-side'><strong>Order side</strong></h3>
 <ul>
 <li>BUY</li>
