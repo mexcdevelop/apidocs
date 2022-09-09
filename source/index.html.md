@@ -3860,6 +3860,8 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 | account |string|Invitee account|
 | inviteTime |long|invite time|
 
+If startTime and endTime are not sent, the recent 1 year's data will be returned.
+
 ## Get Rebate Records Detail
 
 > request
@@ -3929,6 +3931,8 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 |tradeTime|long|trade time|
 |updateTime|long|update time|
 
+If startTime and endTime are not sent, the recent 1 year's data will be returned.
+
 ## Get Self Rebate Records Detail
 
 > request
@@ -3996,6 +4000,8 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 |account|string|Invitee account|
 |tradeTime|long|trade time|
 |updateTime|long|update time|
+
+If startTime and endTime are not sent, the recent 1 year's data will be returned.
 
 
 # Public API Definitions
