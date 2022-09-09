@@ -54,6 +54,10 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
+## **2022-09-06**
+
+- Add Rebate Endpoints
+
 ## **2022-09-02**
 
 - Add v3 websocket
@@ -3377,7 +3381,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
   "id":0,
   "code":0,
   "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }÷
+ }
 ```
 
 - **Request**
@@ -3524,7 +3528,7 @@ Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
 
 ## Diff.Depth Stream
 
->**request:**
+> **request:**
 
 ```
 {
@@ -3793,6 +3797,211 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 | s | string | symbol |
 | t | long | eventTime |
 
+# Rebate Endpoints
+
+## Get Rebate History Records
+
+> request
+
+```
+get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "page": 1,  
+    "totalRecords": 1,  
+    "totalPageNum": 1,  
+    "data": [
+        {
+            "spot": "0.00082273",  
+            "futures":"0.00022487",       
+            "total": "0.00012126",  
+            "uid": "221827",  
+            "account": "154****291@qq.com",  
+            "inviteTime": 1637651320000
+        },
+        ...
+        {
+            "spot": "0.00082273",  
+            "futures":"0.00022487",    
+            "total": "0.00012126",  
+            "uid": "82937",  
+            "account": "338****291@qq.com",  
+            "inviteTime": 1637651320000
+        }
+    ]
+}
+```
+**Http Request**
+
+- **GET** ```/api/v3/rebate/taxQuery```
+
+**Request**
+
+| name | Type|  Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long | NO       |        |
+| endTime    | long | NO       |        |
+| page       | int  | NO       | default 1  |
+| recvWindow | long | NO       |        |
+| timestamp  | long | YES       |        |
+| signature  | string | YES     |        |
+
+**Response**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+| spot |string|spot rebate,unit:usdt|
+| futures |string|futures rebate,unit:usdt|
+| total |string|total rebate,unit:usdt|
+| uid |string|Invitee uid|
+| account |string|Invitee account|
+| inviteTime |long|invite time|
+
+If startTime and endTime are not sent, the recent 1 year's data will be returned.
+
+## Get Rebate Records Detail
+
+> request
+
+```
+get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+     "page": 1, 
+     "totalRecords": 1, 
+     "totalPageNum": 1, 
+     "data": [
+         {
+             "asset": "USDT", 
+             "type": "spot",       
+             "rate": "0.3", 
+             "amount": "0.0001126", 
+             "uid": "2293729101827", 
+             "account": "154****291@qq.com", 
+             "tradeTime": 1637651320000,
+             "updateTime": 1637651320000
+         },
+         ...
+         {
+             "asset": "ETH", 
+             "type": "margin", 
+             "rate": "0.3", 
+             "amount": "0.00000056",
+             "uid": "22937291018263", 
+             "account": "154****291@qq.com", 
+             "tradeTime": 1637651320000,
+             "updateTime": 1637928379000
+         }
+     ]
+}
+​
+```
+**Http Request**
+
+- **GET** ```/api/v3/rebate/detail```
+
+**Request**
+
+| name | Type|  Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long | NO       |        |
+| endTime    | long | NO       |        |
+| page       | int  | NO       | default 1  |
+| recvWindow | long | NO       |        |
+| timestamp  | long | YES       |        |
+| signature  | string | YES     |        |
+
+
+**Response**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|asset|string|rebate asset|
+|type|string|rebate type: spot futures margin |
+|rate|string|rebate rate|
+|amount|string|rebate amount|
+|uid|string|Invitee uid|
+|account|string|Invitee account|
+|tradeTime|long|trade time|
+|updateTime|long|update time|
+
+If startTime and endTime are not sent, the recent 1 year's data will be returned.
+
+## Get Self Rebate Records Detail
+
+> request
+
+```
+get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "page": 1,  
+    "totalRecords": 27,  
+    "totalPageNum": 3,  
+    "data": [
+        {
+            "asset": "USDT",  
+            "type": "spot",        
+            "rate": "0.3", 
+            "amount": "0.0001126",  
+            "uid": "2293729101827",  
+            "account": "154****291@qq.com",  
+            "tradeTime": 1637651320000,
+            "updateTime": 1637651320000
+        },
+        ...
+        {
+            "asset": "ETH", 
+            "type": "margin", 
+            "rate": "0.3", 
+            "amount": "0.00000056",
+            "uid": "22937291018263",  
+            "account": "154****291@qq.com",  
+            "tradeTime": 1637651320000,
+            "updateTime": 1637928379000
+        }
+    ]
+}
+```
+**Http Request**
+
+- **GET** ```/api/v3/rebate/detail/kickback```
+
+**Request**
+
+| name | Type|  Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long | NO       |        |
+| endTime    | long | NO       |        |
+| page       | int  | NO       | default 1  |
+| recvWindow | long | NO       |        |
+| timestamp  | long | YES       |        |
+| signature  | string | YES     |        |
+
+
+**Response**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|asset|string|rebate asset|
+|type|string|rebate type: spot futures margin |
+|rate|string|rebate rate|
+|amount|string|rebate amount|
+|uid|string|Invitee uid|
+|account|string|Invitee account|
+|tradeTime|long|trade time|
+|updateTime|long|update time|
+
+If startTime and endTime are not sent, the recent 1 year's data will be returned.
 
 
 # Public API Definitions
