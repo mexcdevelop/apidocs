@@ -2588,7 +2588,7 @@ Rate limit:20 times/2 seconds
 | externalOid  | string  | false  | external order ID|
 | stopLossPrice  | decimal  | false  | stop-loss price|
 | takeProfitPrice  | decimal  | false  | take-profit price|
-| positionMode  | int  | false  |  position mode,1:hedge，2:one-way|
+| positionMode  | int  | false  |  position mode,1:hedge,2:one-way,default: the user's current config|
 | reduceOnly  | boolean  | false  | Default false,For one-way positions, if you need to only reduce positions, pass in true, and two-way positions will not accept this parameter.|
 
 **Response parameters:**
