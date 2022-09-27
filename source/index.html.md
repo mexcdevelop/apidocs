@@ -2543,7 +2543,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | externalOid  | string  | false  | 外部订单号|
 | stopLossPrice  | decimal  | false  | 止损价|
 | takeProfitPrice  | decimal  | false  | 止盈价 |
-| positionMode  | int  | false  | 1:双向持仓，2:单向持仓，默认为1|
+| positionMode  | int  | false  | 1:双向持仓，2:单向持仓，如果不传，默认为用户当前设置|
 | reduceOnly  | boolean  | false  | 默认为false,单向持仓如果需要只减仓时传入true，双向持仓不受理此参数|
 
 **响应参数:**
