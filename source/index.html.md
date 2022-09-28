@@ -242,7 +242,7 @@ The following error information can be returend
 | 30005    | Oversell error |
 | 30010    | Price out of allowed range |
 | 30016    | Market is closed |
-| 30019    | Orders count over limit for batch processing |
+| 30019    | api market order is disabled |
 | 30020    | Restricted symbol, API access is not allowed for the time being |
 | 30021    | Invalid symbol |
 
