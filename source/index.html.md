@@ -3849,7 +3849,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 ### ENUM definitions
 
-### **Order side**
+### Order side
 
 - BUY
 - SELL
