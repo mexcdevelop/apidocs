@@ -300,24 +300,51 @@ The default rate limiting rule for an endpoint is 20 times per second.
 
 The following error information can be returend
 
-| Code      | Description                                                            |
-|-----------|------------------------------------------------------------------------|
-| 400       | Invalid parameter                                                      |
-| 401       | Invalid signature, fail to pass the validation                         |
-| 429       | Too many requests, rate limit rule is violated                         |
-| 10072     | Invalid access key                                                     |
-| 10073     | Invalid request time                                                   |
-| 30000     | Trading is suspended for the requested symbol                          |
-| 30001     | Current trading type (bid or ask) is not allowed                       |
-| 30002     | Invalid trading amount, smaller than the symbol minimum trading amount |
-| 30003     | Invalid trading amount, greater than the symbol maximum trading amount |
-| 30004     | Insufficient balance                                                   |
-| 30005     | Oversell error                                                         |
-| 30010     | Price out of allowed range                                             |
-| 30016     | Market is closed                                                       |
-| 30019     | api market order is disabled                                           |
-| 30020     | Restricted symbol, API access is not allowed for the time being        |
-| 30021     | Invalid symbol                                                         |
+| Code      | Description                                                                           |
+|-----------|---------------------------------------------------------------------------------------|
+| 400       | Invalid parameter                                                                     |
+| 401       | Invalid signature, fail to pass the validation                                        |
+| 429       | Too many requests, rate limit rule is violated                                        |
+| 10072     | Invalid access key                                                                    |
+| 10073     | Invalid request time                                                                  |
+| 30000     | Trading is suspended for the requested symbol                                         |
+| 30001     | Current trading type (bid or ask) is not allowed                                      |
+| 30002     | Invalid trading amount, smaller than the symbol minimum trading amount                |
+| 30003     | Invalid trading amount, greater than the symbol maximum trading amount                |
+| 30004     | Insufficient balance                                                                  |
+| 30005     | Oversell error                                                                        |
+| 30010     | Price out of allowed range                                                            |
+| 30016     | Market is closed                                                                      |
+| 30019     | api market order is disabled                                                          |
+| 30020     | Restricted symbol, API access is not allowed for the time being                       |
+| 30021     | Invalid symbol                                                                        |
+| 700001  | API-key format invalid                                                                |
+| 700002  | Signature for this request is not valid                                               |
+| 700003  | Timestamp for this request is outside of the recvWindow                               |
+| 700004  | Mandatory parameter '%s' was not sent, was empty/null, or malformed.                  |
+| 700005  | 'recvWindow' must be less than 60000                                                  |
+| 700006  | IP non white list                                                                     |
+| 700007  | No permission to access the endpoint                                                  |
+| 700008  | Illegal characters found in parameter 's%'; legal range is '${regexp}"'               |
+| 730001  | Pair not found                                                                        |
+| 730002  | Your input param is invalid                                                           |
+| 730000  | Request failed, please contact the customer service                                   |
+| 730001  | User information error                                                                |
+| 730002  | Parameter error                                                                       |
+| 730003  | Unsupported operation, please contact the customer service                            |
+| 730100  | Unusual user status                                                                   |
+| 730600  | Sub-account name cannot be null                                                       |
+| 730601  | Sub-account name must be a combination of 8-32 letters and numbers                    |
+| 730602  | Sub-account remarks cannot be null                                                    |
+| 730700  | API KEY remarks cannot be null                                                        |
+| 730701  | API KEY permission cannot be null                                                     |
+| 730702  | API KEY permission does not exist                                                     |
+| 730703  | The IP information is incorrect, and a maximum of 10 IPs are allowed to be bound only |
+| 730704  | The bound IP format is incorrect, please refill                                       |
+| 730705  | At most 30 groups of Api Keys are allowed to be created only                            |
+| 730706  | API KEY information does not exist                                                       |
+| 730707  | accessKey cannot be null                                                                 |
+| 730101  | The user name already exists                                                                  |
 
 # Market Data Endpoints
 
