@@ -3849,12 +3849,12 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 ### ENUM definitions
 
-### Order side
+### <a id="order_side">Order side</a>
 
 - BUY
 - SELL
 
-### Order type
+### <a id="order_type">Order type</a>
 
 - LIMIT (Limit order)   
 - MARKET (Market order)
@@ -3862,7 +3862,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 - IMMEDIATE_OR_CANCEL (Immediate or cancel order)
 - FILL_OR_KILL (Fill or kill order)
 
-### Order State
+### <a id="order_type">Order State</a>
 
 - NEW   Uncompleted
 - FIELLD  Filled
@@ -3870,7 +3870,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 - CANCELED  Canceled
 - PARTIALLY_CANCELED  Partially canceled
 
-### Kline Interval
+### <a id="order_type">Kline Interval</a>
 
 - 1m  1 minute
 - 5m  5 minute
