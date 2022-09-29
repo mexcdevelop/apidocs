@@ -60,6 +60,10 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-09-06**
+
+- 新增邀请返佣接口 
+
 ## **2022-09-02**
 
 - 新增v3 websocket
@@ -967,17 +971,17 @@ POST /api/v3/sub-account/virtualSubAccount?subAccount=subAccount1&note=1&timesta
 
 | 参数名       | 数据类型   | 是否必需 | 说明       |
 | :--------- | :----- | :------- | :--------- |
-| subAccount | STRING | YES      | 子账户名称（8-32个字母加数字）如：subAccount1 |
-| note       | STRING | YES      | 备注  如：1     |
-| recvWindow | LONG   | NO       |            |
-| timestamp  | LONG   | YES      |     |
+| subAccount | string | 是      | 子账户名称（8-32个字母加数字）如：subAccount1 |
+| note       | string | 是      | 备注  如：1     |
+| recvWindow | long   | 否       |            |
+| timestamp  | long   | 是      |     |
 
 **返回参数**
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| subAccount | STRING | 子账户名称（8-32个字母加数字）如：subAccount1 |
-| note       | STRING | 备注  如：1     |
+| subAccount | string | 子账户名称（8-32个字母加数字）如：subAccount1 |
+| note       | string | 备注  如：1     |
 
 ## 查看子账户列表
 获取您的母账户下所有子账户信息
@@ -1016,20 +1020,20 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 
 | 名称       | 类型   | 是否必需 | 说明                |
 | :--------- | :----- | :------- | :------------------ |
-| subAccount | STRING | NO       | 子账户名称 如：subAccount1          |
-| isFreeze   | STRING | NO       | true or false       |
-| page       | INT    | NO       | 默认: 1             |
-| limit      | INT    | NO       | 默认: 10, 最大: 200 |
-| timestamp  | LONG   | YES      |                     |
-| recvWindow | LONG   | NO       |                     |
+| subAccount | string | 否       | 子账户名称 如：subAccount1          |
+| isFreeze   | string | 否       | true or false       |
+| page       | int    | 否       | 默认: 1             |
+| limit      | int    | 否       | 默认: 10, 最大: 200 |
+| timestamp  | long   | 是      |                     |
+| recvWindow | long   | 否       |                     |
 
 **返回参数**
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| subAccount | STRING | 子账户名称 |
-| isFreeze | STRING | 是否冻结 |
-| createTime | LONG | 创建时间 |
+| subAccount | string | 子账户名称 |
+| isFreeze | string | 是否冻结 |
+| createTime | long | 创建时间 |
 
 
 ## 创建子账户的APIkey
@@ -1073,12 +1077,12 @@ body
 
 | 参数名      | 类型   | 是否必须 | 说明                                                         |
 | :----------- | :------ | :-------- | :------------------------------------------------------------ |
-| subAccount  | STRING | 是       | 子账户名称 如：subAccount1                                   |
-| note        | STRING | 是       | APIKey的备注                                                 |
-| permissions | STRING | 是       | APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE|
-| ip          | STRING | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193    |
-| recvWindow  | LONG   | 否       |                                                              |
-| timestamp   | LONG   | 是       |                                                              |
+| subAccount  | string | 是       | 子账户名称 如：subAccount1                                   |
+| note        | string | 是       | APIKey的备注                                                 |
+| permissions | string | 是       | APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE|
+| ip          | string | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193    |
+| recvWindow  | long   | 否       |                                                              |
+| timestamp   | long   | 是       |                                                              |
 
 
 
@@ -1086,13 +1090,13 @@ body
 
 | 参数名      | 类型   | 说明               |
 | :----------- | :------ | :------------------ |
-| subAccount  | STRING | 子账户名称         |
-| note        | STRING | APIKey的备注       |
-| apiKey      | STRING | API公钥            |
-| secretKey   | STRING | API的私钥          |
-| permissions | STRING | APIKey权限         |
-| ip          | STRING | APIKey绑定的ip地址 |
-| creatTime   | LONG   | 创建时间           |
+| subAccount  | string | 子账户名称         |
+| note        | string | APIKey的备注       |
+| apiKey      | string | API公钥            |
+| secretKey   | string | API的私钥          |
+| permissions | string | APIKey权限         |
+| ip          | string | APIKey绑定的ip地址 |
+| creatTime   | long   | 创建时间           |
 
 
 
@@ -1135,20 +1139,20 @@ GET/api/v3/sub-account/apiKey?subAccount=subAccount1&timestamp=1597026383085
 
 | 参数名     | 类型   | 是否必须 | 说明       |
 | :--------- | :----- | :------- | :--------- |
-| subAccount | STRING | 是       | 子账户名称 如：subAccount1|
-| recvWindow | LONG   | 否       |            |
-| timestamp  | LONG   | 是       |            |
+| subAccount | string | 是       | 子账户名称 如：subAccount1|
+| recvWindow | long   | 否       |            |
+| timestamp  | long   | 是       |            |
 
 
 **返回参数**
 
 | 参数名  | 类型 | 说明          |
 | :---------- | :------- | :----------------- |
-| note        | STRING   | APIKey的备注       |
-| apiKey      | STRING   | API公钥            |
-| permissions | STRING   | APIKey权限         |
-| ip          | STRING   | APIKey绑定的ip地址 |
-| creatTime   | LONG     | 创建时间           |
+| note        | string   | APIKey的备注       |
+| apiKey      | string   | API公钥            |
+| permissions | string   | APIKey权限         |
+| ip          | string   | APIKey绑定的ip地址 |
+| creatTime   | long     | 创建时间           |
 
 
 
@@ -1184,10 +1188,10 @@ body
 
 | 参数名     | 类型   | 是否必须 | 说明       |
 | :--------- | :----- | :------- | :--------- |
-| subAccount | STRING | 是       | 子账户名称 如：subAccount1|
-| apiKey     | STRING | 是       | API的公钥 如：ghytfugy2168hjksaj |
-| recvWindow | LONG   | 否       |            |
-| timestamp  | LONG   | 是       |            |
+| subAccount | string | 是       | 子账户名称 如：subAccount1|
+| apiKey     | string | 是       | API的公钥 如：ghytfugy2168hjksaj |
+| recvWindow | long   | 否       |            |
+| timestamp  | long   | 是       |            |
 
 
 
@@ -1195,7 +1199,7 @@ body
 
 | 参数名   | 类型   | 说明    |
 | :--------- | :------- | :--------- |
-| subAccount | STRING   | 子账户名称 |
+| subAccount | string   | 子账户名称 |
 
 ## 母子用户万向划转
 
@@ -1438,17 +1442,17 @@ POST /api/v3/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&price=2000
 
 **请求参数**
 
-| 名称             | 类型    | 是否必需 | 说明                                    |
-| :---------------- | :------- | :-------- |:--------------------------------------|
-| symbol           | STRING  | YES      | 交易对                                   |
-| side             | ENUM    | YES      | 详见枚举定义：<a href="#order_side">订单方向</a> |
-| type             | ENUM    | YES      | 详见枚举定义：<a href="#order_type">订单类型</a> |
-| quantity         | DECIMAL | NO       | 委托数量                                  |
-| quoteOrderQty    | DECIMAL | NO       | 委托总额                                  |
-| price            | DECIMAL | NO       | 委托价格                                  |
-| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID                          |
-| recvWindow       | LONG    | NO       | 赋值不能大于 60000                          |
-| timestamp        | LONG    | YES      |                                       |
+| 名称             | 类型    | 是否必需 | 说明                   |
+| :---------------- | :------- | :-------- | :---------------------- |
+| symbol           | string  | 是      | 交易对                 |
+| side             | ENUM    | 是      | 详见枚举定义：<a href="#order_side">订单方向</a> |
+| type             | ENUM    | 是      | 详见枚举定义：<a href="#order_type">订单类型</a> |
+| quantity         | decimal | 否       | 委托数量               |
+| quoteOrderQty    | decimal | 否       | 委托总额               |
+| price            | decimal | 否       | 委托价格               |
+| newClientOrderId | string  | 否       | 客户自定义的唯一订单ID |
+| recvWindow       | long    | 否       | 赋值不能大于 60000     |
+| timestamp        | long    | 是      |                        |
 
 基于订单 `type`不同，强制要求某些参数:
 
@@ -1470,12 +1474,11 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 **返回参数**
 
 
-
-| 参数名       | 数据类型 | 说明   |
-| :------------ | :-------- |:-----|
-| symbol | STRING | 交易对  |
-| orderId | STRING | 订单id |
-| orderListId|客户端订单列表          |      |
+| 参数名       | 数据类型 | 说明                |
+| :------------ | :-------- | :------------------- |
+| symbol | string | 交易对 |
+| orderId | string | 订单id |
+| orderListId|客户端订单列表          |          |
 
 ## 批量下单
 支持单次批量下20单,要求必须是同一交易对，限频2次/秒。
@@ -1528,18 +1531,19 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 **请求参数**
 
-| 名称             | 类型    | 是否必需 | 说明                                          |
-| :--------------- | :------ | :------- |:--------------------------------------------|
-| batchOrders      | LIST  | YES      | 订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例) |
-| symbol           | STRING  | YES      | 交易对                                         |
-| side             | ENUM    | YES      | 详见枚举定义：<a href="#order_side">订单方向</a>       |
-| type             | ENUM    | YES      | 详见枚举定义：<a href="#order_type">订单类型</a>       |
-| quantity         | DECIMAL | NO       | 委托数量                                        |
-| quoteOrderQty    | DECIMAL | NO       | 委托总额                                        |
-| price            | DECIMAL | NO       | 委托价格                                        |
-| newClientOrderId | STRING  | NO       | 客户自定义的唯一订单ID                                |
-| recvWindow       | LONG    | NO       | 赋值不能大于 60000                                |
-| timestamp        | LONG    | YES      |                                             |
+
+| 名称             | 类型    | 是否必需 | 说明                   |
+| :--------------- | :------ | :------- | :--------------------- |
+| batchOrders      | LIST  | 是      | 订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例) |
+| symbol           | string  | 是      | 交易对                 |
+| side             | ENUM    | 是      | 详见枚举定义：<a href="#order_side">订单方向</a> |
+| type             | ENUM    | 是      | 详见枚举定义：<a href="#order_type">订单类型</a> |
+| quantity         | decimal | 否       | 委托数量               |
+| quoteOrderQty    | decimal | 否       | 委托总额               |
+| price            | decimal | 否       | 委托价格               |
+| newClientOrderId | string  | 否       | 客户自定义的唯一订单ID |
+| recvWindow       | long    | 否       | 赋值不能大于 60000     |
+| timestamp        | long    | 是      |                        |
 
 基于订单 `type`不同，强制要求某些参数:
 
@@ -1552,8 +1556,8 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 | 参数名       | 数据类型 | 说明                |
 | :------------ | :-------- | :------------------- |
-| symbol | STRING | 交易对 |
-| orderId | STRING | <a href="#order_type">订单类型</a> |
+| symbol | string | 交易对 |
+| orderId | string | 订单id |
 
 ## 撤销订单
 
@@ -1596,7 +1600,7 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 | symbol            | string   | 是       | 交易对名称             |
 | orderId           | string   | 否       | 订单Id                 |
 | origClientOrderId | string   | 否       | 初始自定义订单Id       |
-| newClientOrderId  | string   | NO       | 客户自定义的唯一订单ID |
+| newClientOrderId  | string   | 否     | 客户自定义的唯一订单ID |
 | recvWindow        | long     | 否       |                        |
 | timestamp         | long     | 是       |                        |
 
@@ -2166,6 +2170,7 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 1. 如果不发送`network`,将按该币种默认网络返回结果;
 2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
 3. 提币地址只支持web端添加到提币地址管理中的地址。
+
 **返回参数**
 
 | 参数名 | 说明  |
@@ -3710,7 +3715,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
   "id":0,
   "code":0,
   "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }÷
+ }
 ```
 
 - **请求**
@@ -3969,7 +3974,7 @@ NONE
 
 | 参数名    | 数据类型 | 是否必需 | 说明 |
 | :-------- | :------- | :------- | :--- |
-| listenKey | STRING   | YES      |      |
+| listenKey | string   | 是      |      |
 
 ### 关闭 Listen Key  
 
@@ -3991,7 +3996,7 @@ NONE
 
 | 参数名    | 数据类型 | 是否必需 | 说明 |
 | :-------- | :------- | :------- | :--- |
-| listenKey | STRING   | YES      |      |
+| listenKey | string   | 是      |      |
 
 ## 账户成交(实时)
 
@@ -4148,6 +4153,214 @@ NONE
 |  > v | bigDecimal | 下单数量 |
 | s | string | 交易对 |
 | t | long | 事件时间 |
+
+
+# 邀请返佣接口
+
+## 获取邀请返佣记录
+
+> 请求示例
+
+```
+get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "page": 1,  //当前页
+    "totalRecords": 1,  //总记录数
+    "totalPageNum": 1,  //总页数
+    "data": [
+        {
+            "spot": "0.00082273",  // 现货返佣，以usdt计
+            "futures":"0.00022487",        // 合约返佣，以usdt计
+            "total": "0.00012126",  //累积奖励金额，以usdt计
+            "uid": "221827",  // 受邀人UID
+            "account": "154****291@qq.com",  // 受邀人账号
+            "inviteTime": 1637651320000//邀请时间
+        },
+        ...
+        {
+            "spot": "0.00082273",  // 现货返佣，以usdt计
+            "futures":"0.00022487",        // 合约返佣，以usdt计
+            "total": "0.00012126",  //累积奖励金额，以usdt计
+            "uid": "82937",  // 受邀人UID
+            "account": "338****291@qq.com",  // 受邀人账号
+            "inviteTime": 1637651320000//邀请时间
+        }
+    ]
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/taxQuery```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long | 否       |        |
+| endTime    | long | 否       |        |
+| page       | int  | 否       | 默认 1  |
+| recvWindow | long | 否       |        |
+| timestamp  | long | 是       |        |
+| signature  | string | 是     |        |
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+| spot |string|现货返佣，以usdt计|
+| futures |string|合约返佣，以usdt计|
+| total |string|累积奖励金额，以usdt计|
+| uid |string|受邀人UID|
+| account |string|受邀人账号|
+| inviteTime |long|邀请时间|
+
+若startTime和endTime均未发送,返回最近一年的数据。
+
+## 获取返佣记录明细 （奖励记录）
+
+> 请求示例
+
+```
+get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+     "page": 1, //当前页
+     "totalRecords": 1, //总记录数
+     "totalPageNum": 1, //总页数
+     "data": [
+         {
+             "asset": "USDT", // 返佣资产，币种
+             "type": "spot",       // 返佣类型：现货，杠杆，合约
+             "rate": "0.3", // 返佣比例
+             "amount": "0.0001126", // 返佣金额
+             "uid": "2293729101827", // 受邀人UID
+             "account": "154****291@qq.com", // 受邀人账号
+             "tradeTime": 1637651320000,//用户交易时间
+             "updateTime": 1637651320000//获取返佣时间
+         },
+         ...
+         {
+             "asset": "ETH", // 返佣资产，币种
+             "type": "margin", // 返佣类型：现货，杠杆，合约
+             "rate": "0.3", // 返佣比例
+             "amount": "0.00000056",// 返佣金额
+             "uid": "22937291018263", // 受邀人UID
+             "account": "154****291@qq.com", // 受邀人账号
+             "tradeTime": 1637651320000,//用户交易时间
+             "updateTime": 1637928379000//获取返佣时间
+         }
+     ]
+}
+​
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/detail```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long | 否       |        |
+| endTime    | long | 否       |        |
+| page       | int  | 否       | 默认 1  |
+| recvWindow | long | 否       |        |
+| timestamp  | long | 是       |        |
+| signature  | string | 是     |        |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|asset|string|返佣资产，币种|
+|type|string|返佣类型：现货，杠杆，合约|
+|rate|string|返佣比例|
+|amount|string|返佣金额|
+|uid|string|受邀人UID|
+|account|string|受邀人账号|
+|tradeTime|long|用户交易时间|
+|updateTime|long|获取返佣时间|
+
+若startTime和endTime均未发送,返回最近一年的数据。
+
+## 获取自返记录明细 （奖励记录）
+
+
+> 请求示例
+
+```
+get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "page": 1,  //当前页
+    "totalRecords": 27,  //总记录数
+    "totalPageNum": 3,  //总页数
+    "data": [
+        {
+            "asset": "USDT",  // 返佣资产，币种
+            "type": "spot",        // 返佣类型：现货，杠杆，合约
+            "rate": "0.3", // 返佣比例
+            "amount": "0.0001126",  // 返佣金额
+            "uid": "2293729101827",  // 受邀人UID
+            "account": "154****291@qq.com",  // 受邀人账号
+            "tradeTime": 1637651320000,//用户交易时间
+            "updateTime": 1637651320000//获取返佣时间
+        },
+        ...
+        {
+            "asset": "ETH", // 返佣资产，币种
+            "type": "margin", // 返佣类型：现货，杠杆，合约
+            "rate": "0.3", // 返佣比例
+            "amount": "0.00000056",// 返佣金额
+            "uid": "22937291018263",  // 受邀人UID
+            "account": "154****291@qq.com",  // 受邀人账号
+            "tradeTime": 1637651320000,//用户交易时间
+            "updateTime": 1637928379000//获取返佣时间
+        }
+    ]
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/detail/kickback```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long | 否       |        |
+| endTime    | long | 否       |        |
+| page       | int  | 否       | 默认 1  |
+| recvWindow | long | 否       |        |
+| timestamp  | long | 是       |        |
+| signature  | string | 是     |        |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|asset|string|返佣资产，币种|
+|type|string|返佣类型：现货，杠杆，合约|
+|rate|string|返佣比例|
+|amount|string|返佣金额|
+|uid|string|受邀人UID|
+|account|string|受邀人账号|
+|tradeTime|long|用户交易时间|
+|updateTime|long|获取返佣时间|
+
+若startTime和endTime均未发送,返回最近一年的数据。
 
 
 # 公开API参数
