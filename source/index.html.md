@@ -2956,7 +2956,7 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 |signature|签名 |是|string|signature|
 |symbol|交易对|是|string|BTCUSDT|
 |isIsolated|是否逐仓杠杆|否|string|"TRUE", "FALSE", 默认 "TRUE"|
-|orderId|订单id 订单id|否|string|746779360689786880|
+|orderId|订单id|否|string|746779360689786880|
 |startTime|开始时间 |否|string|
 |endTime|截止时间 |否|string|
 |limit|默认 500;最大500.|否|string|
