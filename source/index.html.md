@@ -577,6 +577,7 @@ Parameters:
 | endTime   | long    | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |                        |
 | limit     | integer | NO        |                                                          | Default 500; max 1000. |
 
+startTime and endTime must be used at the same time.
 
 Response:
 
