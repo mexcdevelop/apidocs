@@ -420,6 +420,9 @@
                   <li>
                     <a href="#limits" class="toc-h2 toc-link" data-title="Limits">Limits</a>
                   </li>
+                  <li>
+                    <a href="#error-code" class="toc-h2 toc-link" data-title="Error Code">Error Code</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -680,18 +683,6 @@
                   <li>
                     <a href="#enum-definitions" class="toc-h2 toc-link" data-title="ENUM definitions">ENUM definitions</a>
                   </li>
-                  <li>
-                    <a href="#order-side" class="toc-h2 toc-link" data-title="Order side"><strong>Order side</strong></a>
-                  </li>
-                  <li>
-                    <a href="#order-type" class="toc-h2 toc-link" data-title="Order type">Order type</a>
-                  </li>
-                  <li>
-                    <a href="#order-state" class="toc-h2 toc-link" data-title="Order State">Order State</a>
-                  </li>
-                  <li>
-                    <a href="#kline-interval" class="toc-h2 toc-link" data-title="Kline Interval">Kline Interval</a>
-                  </li>
               </ul>
           </li>
       </ul>
@@ -801,7 +792,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 </ul>
 <h2 id='2022-03-21'><strong>2022-03-21</strong></h2>
 <ul>
-<li>Add order state</li>
+<li>Add order status</li>
 </ul>
 <h2 id='2022-03-18'><strong>2022-03-18</strong></h2>
 <ul>
@@ -1011,6 +1002,188 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <p>The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.</p>
 
 <p>The default rate limiting rule for an endpoint is 20 times per second.</p>
+<h2 id='error-code'>Error Code</h2>
+<p>The following error information can be returend</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Invalid parameter</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Invalid signature, fail to pass the validation</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too many requests, rate limit rule is violated</td>
+</tr>
+<tr>
+<td>10072</td>
+<td>Invalid access key</td>
+</tr>
+<tr>
+<td>10073</td>
+<td>Invalid request time</td>
+</tr>
+<tr>
+<td>30000</td>
+<td>Trading is suspended for the requested symbol</td>
+</tr>
+<tr>
+<td>30001</td>
+<td>Current trading type (bid or ask) is not allowed</td>
+</tr>
+<tr>
+<td>30002</td>
+<td>Invalid trading amount, smaller than the symbol minimum trading amount</td>
+</tr>
+<tr>
+<td>30003</td>
+<td>Invalid trading amount, greater than the symbol maximum trading amount</td>
+</tr>
+<tr>
+<td>30004</td>
+<td>Insufficient balance</td>
+</tr>
+<tr>
+<td>30005</td>
+<td>Oversell error</td>
+</tr>
+<tr>
+<td>30010</td>
+<td>Price out of allowed range</td>
+</tr>
+<tr>
+<td>30016</td>
+<td>Market is closed</td>
+</tr>
+<tr>
+<td>30019</td>
+<td>api market order is disabled</td>
+</tr>
+<tr>
+<td>30020</td>
+<td>Restricted symbol, API access is not allowed for the time being</td>
+</tr>
+<tr>
+<td>30021</td>
+<td>Invalid symbol</td>
+</tr>
+<tr>
+<td>700001</td>
+<td>API-key format invalid</td>
+</tr>
+<tr>
+<td>700002</td>
+<td>Signature for this request is not valid</td>
+</tr>
+<tr>
+<td>700003</td>
+<td>Timestamp for this request is outside of the recvWindow</td>
+</tr>
+<tr>
+<td>700004</td>
+<td>Mandatory parameter &#39;%s&#39; was not sent, was empty/null, or malformed.</td>
+</tr>
+<tr>
+<td>700005</td>
+<td>&#39;recvWindow&#39; must be less than 60000</td>
+</tr>
+<tr>
+<td>700006</td>
+<td>IP non white list</td>
+</tr>
+<tr>
+<td>700007</td>
+<td>No permission to access the endpoint</td>
+</tr>
+<tr>
+<td>700008</td>
+<td>Illegal characters found in parameter &#39;s%&#39;; legal range is &#39;${regexp}&quot;&#39;</td>
+</tr>
+<tr>
+<td>730001</td>
+<td>Pair not found</td>
+</tr>
+<tr>
+<td>730002</td>
+<td>Your input param is invalid</td>
+</tr>
+<tr>
+<td>730000</td>
+<td>Request failed, please contact the customer service</td>
+</tr>
+<tr>
+<td>730001</td>
+<td>User information error</td>
+</tr>
+<tr>
+<td>730002</td>
+<td>Parameter error</td>
+</tr>
+<tr>
+<td>730003</td>
+<td>Unsupported operation, please contact the customer service</td>
+</tr>
+<tr>
+<td>730100</td>
+<td>Unusual user status</td>
+</tr>
+<tr>
+<td>730600</td>
+<td>Sub-account name cannot be null</td>
+</tr>
+<tr>
+<td>730601</td>
+<td>Sub-account name must be a combination of 8-32 letters and numbers</td>
+</tr>
+<tr>
+<td>730602</td>
+<td>Sub-account remarks cannot be null</td>
+</tr>
+<tr>
+<td>730700</td>
+<td>API KEY remarks cannot be null</td>
+</tr>
+<tr>
+<td>730701</td>
+<td>API KEY permission cannot be null</td>
+</tr>
+<tr>
+<td>730702</td>
+<td>API KEY permission does not exist</td>
+</tr>
+<tr>
+<td>730703</td>
+<td>The IP information is incorrect, and a maximum of 10 IPs are allowed to be bound only</td>
+</tr>
+<tr>
+<td>730704</td>
+<td>The bound IP format is incorrect, please refill</td>
+</tr>
+<tr>
+<td>730705</td>
+<td>At most 30 groups of Api Keys are allowed to be created only</td>
+</tr>
+<tr>
+<td>730706</td>
+<td>API KEY information does not exist</td>
+</tr>
+<tr>
+<td>730707</td>
+<td>accessKey cannot be null</td>
+</tr>
+<tr>
+<td>730101</td>
+<td>The user name already exists</td>
+</tr>
+</tbody></table>
 <h1 id='market-data-endpoints'>Market Data Endpoints</h1><h2 id='test-connectivity'>Test Connectivity</h2>
 <blockquote>
 <p>Response</p>
@@ -1406,6 +1579,8 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 </tbody></table>
 
+<p>startTime and endTime must be used at the same time.</p>
+
 <p>Response:</p>
 
 <table><thead>
@@ -1491,7 +1666,7 @@ Klines are uniquely identified by their open time.</p>
 <td>interval</td>
 <td>ENUM</td>
 <td>YES</td>
-<td>ENUM: Kline interval</td>
+<td>ENUM: <a href="#kline_interval">Kline Interval</a></td>
 </tr>
 <tr>
 <td>startTime</td>
@@ -2681,13 +2856,13 @@ Klines are uniquely identified by their open time.</p>
 <td>side</td>
 <td>ENUM</td>
 <td>YES</td>
-<td>ENUM：Order Side</td>
+<td>ENUM：<a href="#order_side">Order Side</a></td>
 </tr>
 <tr>
 <td>type</td>
 <td>ENUM</td>
 <td>YES</td>
-<td>ENUM：Order Type</td>
+<td>ENUM：<a href="#order_type">Order Type</a></td>
 </tr>
 <tr>
 <td>quantity</td>
@@ -2840,13 +3015,13 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">side</td>
 <td style="text-align: left">ENUM</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">order side</td>
+<td style="text-align: left"><a href="#order_side">order side</a></td>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
 <td style="text-align: left">ENUM</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">order type</td>
+<td style="text-align: left"><a href="#order_type">order type</a></td>
 </tr>
 <tr>
 <td style="text-align: left">quantity</td>
@@ -3041,7 +3216,7 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>status</td>
-<td>Order status</td>
+<td><a href="#order_status">order status</a></td>
 </tr>
 <tr>
 <td>timeInForce</td>
@@ -3049,11 +3224,11 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>type</td>
-<td>Order type</td>
+<td><a href="#order_type">Order type</a></td>
 </tr>
 <tr>
 <td>side</td>
-<td>Order side</td>
+<td><a href="#order_side">order side</a></td>
 </tr>
 </tbody></table>
 <h2 id='cancel-all-open-orders-on-a-symbol'>Cancel all Open Orders on a Symbol</h2>
@@ -3171,7 +3346,7 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>status</td>
-<td>Order status</td>
+<td><a href="#order_status">order status</a></td>
 </tr>
 <tr>
 <td>timeInForce</td>
@@ -3179,11 +3354,11 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>type</td>
-<td>Order type</td>
+<td><a href="#order_type">Order type</a></td>
 </tr>
 <tr>
 <td>side</td>
-<td>Order side</td>
+<td><a href="#order_side">order side</a></td>
 </tr>
 </tbody></table>
 <h2 id='query-order'>Query Order</h2>
@@ -3300,7 +3475,7 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>status</td>
-<td>Order status</td>
+<td><a href="#order_status">order status</a></td>
 </tr>
 <tr>
 <td>timeInForce</td>
@@ -3308,11 +3483,11 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>type</td>
-<td>Order type</td>
+<td><a href="#order_type">Order type</a></td>
 </tr>
 <tr>
 <td>side</td>
-<td>Order side</td>
+<td><a href="#order_side">Order side</a></td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -3436,7 +3611,7 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>status</td>
-<td>Order status</td>
+<td><a href="#order_status">order status</a></td>
 </tr>
 <tr>
 <td>timeInForce</td>
@@ -3444,11 +3619,11 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>type</td>
-<td>Order type</td>
+<td><a href="#order_type">Order type</a></td>
 </tr>
 <tr>
 <td>side</td>
-<td>Order side</td>
+<td><a href="#order_side">Order side</a></td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -3590,7 +3765,7 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>status</td>
-<td>Order status</td>
+<td><a href="#order_status">order status</a></td>
 </tr>
 <tr>
 <td>timeInForce</td>
@@ -3598,11 +3773,11 @@ Klines are uniquely identified by their open time.</p>
 </tr>
 <tr>
 <td>type</td>
-<td>Order type</td>
+<td><a href="#order_type">Order type</a></td>
 </tr>
 <tr>
 <td>side</td>
-<td>Order side</td>
+<td><a href="#order_side">Order side</a></td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -4973,7 +5148,7 @@ Response:</li>
 </tr>
 <tr>
 <td style="text-align: left">type</td>
-<td style="text-align: left">API Definitions：order type</td>
+<td style="text-align: left">API Definitions：<a href="#order_type">order type</a></td>
 <td style="text-align: left">YES</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"></td>
@@ -8860,12 +9035,12 @@ get /api/v3/margin/trigerOrder
 </tbody></table>
 
 <p>If startTime and endTime are not sent, the recent 1 year&#39;s data will be returned.</p>
-<h1 id='public-api-definitions'>Public API Definitions</h1><h3 id='enum-definitions'>ENUM definitions</h3><h3 id='order-side'><strong>Order side</strong></h3>
+<h1 id='public-api-definitions'>Public API Definitions</h1><h2 id='enum-definitions'>ENUM definitions</h2><h3 id='order-side'><a id="order_side">Order side</a></h3>
 <ul>
 <li>BUY</li>
 <li>SELL</li>
 </ul>
-<h3 id='order-type'>Order type</h3>
+<h3 id='order-type'><a id="order_type">Order type</a></h3>
 <ul>
 <li>LIMIT (Limit order)<br></li>
 <li>MARKET (Market order)</li>
@@ -8873,7 +9048,7 @@ get /api/v3/margin/trigerOrder
 <li>IMMEDIATE_OR_CANCEL (Immediate or cancel order)</li>
 <li>FILL_OR_KILL (Fill or kill order)</li>
 </ul>
-<h3 id='order-state'>Order State</h3>
+<h3 id='order-status'><a id="order_status">Order Status</a></h3>
 <ul>
 <li>NEW   Uncompleted</li>
 <li>FIELLD  Filled</li>
@@ -8881,7 +9056,7 @@ get /api/v3/margin/trigerOrder
 <li>CANCELED  Canceled</li>
 <li>PARTIALLY_CANCELED  Partially canceled</li>
 </ul>
-<h3 id='kline-interval'>Kline Interval</h3>
+<h3 id='kline-interval'><a id="kline_interval">Kline Interval</a></h3>
 <ul>
 <li>1m  1 minute</li>
 <li>5m  5 minute</li>
