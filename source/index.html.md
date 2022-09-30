@@ -118,7 +118,7 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 ## **2022-03-21**
 
-- Add order state
+- Add order status
 
 ## **2022-03-18**
 
@@ -299,6 +299,56 @@ There is rate limit for API access frequency, upon exceed client will get code 4
 The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
 
 The default rate limiting rule for an endpoint is 20 times per second.
+
+## Error Code
+
+The following error information can be returend
+
+| Code      | Description                                                                           |
+|-----------|---------------------------------------------------------------------------------------|
+| 400       | Invalid parameter                                                                     |
+| 401       | Invalid signature, fail to pass the validation                                        |
+| 429       | Too many requests, rate limit rule is violated                                        |
+| 10072     | Invalid access key                                                                    |
+| 10073     | Invalid request time                                                                  |
+| 30000     | Trading is suspended for the requested symbol                                         |
+| 30001     | Current trading type (bid or ask) is not allowed                                      |
+| 30002     | Invalid trading amount, smaller than the symbol minimum trading amount                |
+| 30003     | Invalid trading amount, greater than the symbol maximum trading amount                |
+| 30004     | Insufficient balance                                                                  |
+| 30005     | Oversell error                                                                        |
+| 30010     | Price out of allowed range                                                            |
+| 30016     | Market is closed                                                                      |
+| 30019     | api market order is disabled                                                          |
+| 30020     | Restricted symbol, API access is not allowed for the time being                       |
+| 30021     | Invalid symbol                                                                        |
+| 700001  | API-key format invalid                                                                |
+| 700002  | Signature for this request is not valid                                               |
+| 700003  | Timestamp for this request is outside of the recvWindow                               |
+| 700004  | Mandatory parameter '%s' was not sent, was empty/null, or malformed.                  |
+| 700005  | 'recvWindow' must be less than 60000                                                  |
+| 700006  | IP non white list                                                                     |
+| 700007  | No permission to access the endpoint                                                  |
+| 700008  | Illegal characters found in parameter 's%'; legal range is '${regexp}"'               |
+| 730001  | Pair not found                                                                        |
+| 730002  | Your input param is invalid                                                           |
+| 730000  | Request failed, please contact the customer service                                   |
+| 730001  | User information error                                                                |
+| 730002  | Parameter error                                                                       |
+| 730003  | Unsupported operation, please contact the customer service                            |
+| 730100  | Unusual user status                                                                   |
+| 730600  | Sub-account name cannot be null                                                       |
+| 730601  | Sub-account name must be a combination of 8-32 letters and numbers                    |
+| 730602  | Sub-account remarks cannot be null                                                    |
+| 730700  | API KEY remarks cannot be null                                                        |
+| 730701  | API KEY permission cannot be null                                                     |
+| 730702  | API KEY permission does not exist                                                     |
+| 730703  | The IP information is incorrect, and a maximum of 10 IPs are allowed to be bound only |
+| 730704  | The bound IP format is incorrect, please refill                                       |
+| 730705  | At most 30 groups of Api Keys are allowed to be created only                            |
+| 730706  | API KEY information does not exist                                                       |
+| 730707  | accessKey cannot be null                                                                 |
+| 730101  | The user name already exists                                                                  |
 
 # Market Data Endpoints
 
@@ -531,6 +581,7 @@ Parameters:
 | endTime   | long    | NO        | Timestamp in ms to get aggregate trades until INCLUSIVE. |                        |
 | limit     | integer | NO        |                                                          | Default 500; max 1000. |
 
+startTime and endTime must be used at the same time.
 
 Response:
 
@@ -572,13 +623,13 @@ Klines are uniquely identified by their open time.
 
 Parameters:
 
-| name      | Type    | Mandatory | Description            |
-| --------- | ------- | --------- | ---------------------- |
-| symbol    | string  | YES       |                        |
-| interval  | ENUM    | YES       | ENUM: Kline interval   |
-| startTime | long    | NO        |                        |
-| endTime   | long    | NO        |                        |
-| limit     | integer | NO        | Default 500; max 1000. |
+| name      | Type    | Mandatory | Description                                        |
+| --------- | ------- | --------- |----------------------------------------------------|
+| symbol    | string  | YES       |                                                    |
+| interval  | ENUM    | YES       | ENUM: <a href="#kline_interval">Kline Interval</a> |
+| startTime | long    | NO        |                                                    |
+| endTime   | long    | NO        |                                                    |
+| limit     | integer | NO        | Default 500; max 1000.                             |
 
 
 Response:
@@ -1198,17 +1249,17 @@ equaled POST /api/v3/order
 
 Parameters:
 
-| name             | type    | Mandatory | Description          |
-| ---------------- | ------- | --------- | -------------------- |
-| symbol           | STRING  | YES       |                      |
-| side             | ENUM    | YES       | ENUM：Order Side     |
-| type             | ENUM    | YES       | ENUM：Order Type     |
-| quantity         | DECIMAL | NO        | Quantity             |
-| quoteOrderQty    | DECIMAL | NO        | Quote order quantity |
-| price            | DECIMAL | NO        | Price                |
-| newClientOrderId | STRING  | NO        |                      |
-| recvWindow       | LONG    | NO        | Max 60000            |
-| timestamp        | LONG    | YES       |                      |
+| name             | type    | Mandatory | Description                               |
+| ---------------- | ------- | --------- |-------------------------------------------|
+| symbol           | STRING  | YES       |                                           |
+| side             | ENUM    | YES       | ENUM：<a href="#order_side">Order Side</a> |
+| type             | ENUM    | YES       | ENUM：<a href="#order_type">Order Type</a> |
+| quantity         | DECIMAL | NO        | Quantity                                  |
+| quoteOrderQty    | DECIMAL | NO        | Quote order quantity                      |
+| price            | DECIMAL | NO        | Price                                     |
+| newClientOrderId | STRING  | NO        |                                           |
+| recvWindow       | LONG    | NO        | Max 60000                                 |
+| timestamp        | LONG    | YES       |                                           |
 
 Additional mandatory parameters based on `type`:
 
@@ -1282,18 +1333,18 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 Parameters:
 
-| name             | type    | Mandatory | Description           |
-| :--------------- | :------ | :------- | :--------------------- |
-| batchOrders      | LIST  | YES      |list of batchOrders,supports max 20 orders|
-| symbol           | STRING  | YES      |symbol                |
-| side             | ENUM    | YES      | order side |
-| type             | ENUM    | YES      | order type |
-| quantity         | DECIMAL | NO       | quantity  |
-| quoteOrderQty    | DECIMAL | NO       | quoteOrderQty   |
-| price            | DECIMAL | NO       | order price  |
-| newClientOrderId | STRING  | NO       | ClientOrderId |
-| recvWindow       | LONG    | NO       | less than 60000     |
-| timestamp        | LONG    | YES      |  order time  |
+| name             | type    | Mandatory | Description                                |
+| :--------------- | :------ | :------- |:-------------------------------------------|
+| batchOrders      | LIST  | YES      | list of batchOrders,supports max 20 orders |
+| symbol           | STRING  | YES      | symbol                                     |
+| side             | ENUM    | YES      | <a href="#order_side">order side</a>       |
+| type             | ENUM    | YES      | <a href="#order_type">order type</a>       |
+| quantity         | DECIMAL | NO       | quantity                                   |
+| quoteOrderQty    | DECIMAL | NO       | quoteOrderQty                              |
+| price            | DECIMAL | NO       | order price                                |
+| newClientOrderId | STRING  | NO       | ClientOrderId                              |
+| recvWindow       | LONG    | NO       | less than 60000                            |
+| timestamp        | LONG    | YES      | order time                                 |
 
 base on different`type`,some params are mandatory:
 
@@ -1349,20 +1400,20 @@ Either `orderId` or `origClientOrderId` must be sent.
 
 Response:
 
-| name                | Description                |
-| ------------------- | -------------------------- |
-| symbol              | Symbol                     |
-| origClientOrderId   | Original client order id   |
-| orderId             | order id                   |
-| clientOrderId       | client order id            |
-| price               | Price                      |
-| origOty             | Original order quantity    |
-| executedQty         | Executed order quantity    |
-| cummulativeQuoteQty | Cummulative quote quantity |
-| status              | Order status               |
-| timeInForce         |                            |
-| type                | Order type                 |
-| side                | Order side                 |
+| name                | Description                          |
+| ------------------- |--------------------------------------|
+| symbol              | Symbol                               |
+| origClientOrderId   | Original client order id             |
+| orderId             | order id                             |
+| clientOrderId       | client order id                      |
+| price               | Price                                |
+| origOty             | Original order quantity              |
+| executedQty         | Executed order quantity              |
+| cummulativeQuoteQty | Cummulative quote quantity           |
+| status              | <a href="#order_status">order status</a>                         |
+| timeInForce         |                                      |
+| type                | <a href="#order_type">Order type</a> |
+| side                | <a href="#order_side">order side</a> |
 
 ## Cancel all Open Orders on a Symbol 
 
@@ -1428,10 +1479,10 @@ Response:
 | origOty             | Original order quantity    |
 | executedQty         | Executed order quantity    |
 | cummulativeQuoteQty | Cummulative quote quantity |
-| status              | Order status               |
+| status              | <a href="#order_status">order status</a>               |
 | timeInForce         |                            |
-| type                | Order type                 |
-| side                | Order side                 |
+| type                | <a href="#order_type">Order type</a>                 |
+| side                | <a href="#order_side">order side</a>                 |
 
 ## Query Order
 
@@ -1476,24 +1527,24 @@ Parameters:
 
 Response:
 
-| name                | Description                |
-| ------------------- | -------------------------- |
-| symbol              | Symbol                     |
-| origClientOrderId   | Original client order id   |
-| orderId             | order id                   |
-| clientOrderId       | client order id            |
-| price               | Price                      |
-| origOty             | Original order quantity    |
-| executedQty         | Executed order quantity    |
-| cummulativeQuoteQty | Cummulative quote quantity |
-| status              | Order status               |
-| timeInForce         |                            |
-| type                | Order type                 |
-| side                | Order side                 |
-| stopPrice           | stop price                 |
-| time                | Order created time         |
-| updateTime          | Last update time           |
-| isWorking           | is orderbook               |
+| name                | Description                          |
+| ------------------- |--------------------------------------|
+| symbol              | Symbol                               |
+| origClientOrderId   | Original client order id             |
+| orderId             | order id                             |
+| clientOrderId       | client order id                      |
+| price               | Price                                |
+| origOty             | Original order quantity              |
+| executedQty         | Executed order quantity              |
+| cummulativeQuoteQty | Cummulative quote quantity           |
+| status              | <a href="#order_status">order status</a>                         |
+| timeInForce         |                                      |
+| type                | <a href="#order_type">Order type</a>                           |
+| side                | <a href="#order_side">Order side</a> |
+| stopPrice           | stop price                           |
+| time                | Order created time                   |
+| updateTime          | Last update time                     |
+| isWorking           | is orderbook                         |
 
 ## Current Open Orders
 
@@ -1539,24 +1590,24 @@ Parameters:
 
 Response:
 
-| name                | Description                |
-| ------------------- | -------------------------- |
-| symbol              | Symbol                     |
-| origClientOrderId   | Original client order id   |
-| orderId             | order id                   |
-| clientOrderId       | client order id            |
-| price               | Price                      |
-| origOty             | Original order quantity    |
-| executedQty         | Executed order quantity    |
-| cummulativeQuoteQty | Cummulative quote quantity |
-| status              | Order status               |
-| timeInForce         |                            |
-| type                | Order type                 |
-| side                | Order side                 |
-| stopPrice           | stop price                 |
-| time                | Order created time         |
-| updateTime          | Last update time           |
-| isWorking           | is orderbook               |
+| name                | Description                         |
+| ------------------- |-------------------------------------|
+| symbol              | Symbol                              |
+| origClientOrderId   | Original client order id            |
+| orderId             | order id                            |
+| clientOrderId       | client order id                     |
+| price               | Price                               |
+| origOty             | Original order quantity             |
+| executedQty         | Executed order quantity             |
+| cummulativeQuoteQty | Cummulative quote quantity          |
+| status              | <a href="#order_status">order status</a>                        |
+| timeInForce         |                                     |
+| type                | <a href="#order_type">Order type</a>                           |
+| side                | <a href="#order_side">Order side</a> |
+| stopPrice           | stop price                          |
+| time                | Order created time                  |
+| updateTime          | Last update time                    |
+| isWorking           | is orderbook                        |
 
 ## All Orders
 
@@ -1605,25 +1656,25 @@ Parameters:
 
 Response:
 
-| name                | Description                |
-| ------------------- | -------------------------- |
-| symbol              | Symbol                     |
-| origClientOrderId   | Original client order id   |
-| orderId             | order id                   |
-| clientOrderId       | client order id            |
-| price               | Price                      |
-| origOty             | Original order quantity    |
-| executedQty         | Executed order quantity    |
-| cummulativeQuoteQty | Cummulative quote quantity |
-| status              | Order status               |
-| timeInForce         |                            |
-| type                | Order type                 |
-| side                | Order side                 |
-| stopPrice           | stop price                 |
-| time                | Order created time         |
-| updateTime          | Last update time           |
-| isWorking           | is orderbook               |
-| origQuoteOrderQty   |                            |
+| name                | Description                          |
+| ------------------- |--------------------------------------|
+| symbol              | Symbol                               |
+| origClientOrderId   | Original client order id             |
+| orderId             | order id                             |
+| clientOrderId       | client order id                      |
+| price               | Price                                |
+| origOty             | Original order quantity              |
+| executedQty         | Executed order quantity              |
+| cummulativeQuoteQty | Cummulative quote quantity           |
+| status              | <a href="#order_status">order status</a>                         |
+| timeInForce         |                                      |
+| type                | <a href="#order_type">Order type</a>                           |
+| side                | <a href="#order_side">Order side</a> |
+| stopPrice           | stop price                           |
+| time                | Order created time                   |
+| updateTime          | Last update time                     |
+| isWorking           | is orderbook                         |
+| origQuoteOrderQty   |                                      |
 
 ## Account Information
 
@@ -2279,19 +2330,19 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample  | 
-| :------ | :-------- | :-------- | :---------- | :------------------- |
-|symbol| symbol |YES|string|BTCUSDT|
-|isIsolated|is Isolated，"TRUE", "FALSE", Default "TRUE"|NO|string|TRUE|
-|side|BUY SELL|YES|string|BUY|
-|type|API Definitions：order type |YES|string| 
-|quantity|quantity|NO|string| 
-|quoteOrderQty|order quantity |NO|string| 
-|price|price|NO|string| 
-|newClientOrderId|newClientOrderId|NO|string| 
-|recvWindow| |NO|string| 
-|timestamp| time |YES|string|timestamp|
-|signature| signature |YES|string|signature|
+| name | Description                                          | Mandatory  | Type |  Sample  | 
+| :------ |:-----------------------------------------------------| :-------- | :---------- | :------------------- |
+|symbol| symbol                                               |YES|string|BTCUSDT|
+|isIsolated| is Isolated，"TRUE", "FALSE", Default "TRUE"          |NO|string|TRUE|
+|side| BUY SELL                                             |YES|string|BUY|
+|type| API Definitions：<a href="#order_type">order type</a> |YES|string| 
+|quantity| quantity                                             |NO|string| 
+|quoteOrderQty| order quantity                                       |NO|string| 
+|price| price                                                |NO|string| 
+|newClientOrderId| newClientOrderId                                     |NO|string| 
+|recvWindow|                                                      |NO|string| 
+|timestamp| time                                                 |YES|string|timestamp|
+|signature| signature                                            |YES|string|signature|
 
 
 **Response Parameter**
@@ -4006,14 +4057,14 @@ If startTime and endTime are not sent, the recent 1 year's data will be returned
 
 # Public API Definitions
 
-### ENUM definitions
+## ENUM definitions
 
-### **Order side**
+### <a id="order_side">Order side</a>
 
 - BUY
 - SELL
 
-### Order type
+### <a id="order_type">Order type</a>
 
 - LIMIT (Limit order)   
 - MARKET (Market order)
@@ -4021,7 +4072,7 @@ If startTime and endTime are not sent, the recent 1 year's data will be returned
 - IMMEDIATE_OR_CANCEL (Immediate or cancel order)
 - FILL_OR_KILL (Fill or kill order)
 
-### Order State
+### <a id="order_status">Order Status</a>
 
 - NEW   Uncompleted
 - FIELLD  Filled
@@ -4029,7 +4080,7 @@ If startTime and endTime are not sent, the recent 1 year's data will be returned
 - CANCELED  Canceled
 - PARTIALLY_CANCELED  Partially canceled
 
-### Kline Interval
+### <a id="kline_interval">Kline Interval</a>
 
 - 1m  1 minute
 - 5m  5 minute
