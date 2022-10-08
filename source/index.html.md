@@ -1945,7 +1945,7 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|coin|string|YES|coin |
+|coin|string|NO|coin |
 |status|string|NO|status|
 |startTime|string|NO|default: 90 days ago from current time|
 |endTime|string|NO|default:current time|
@@ -2005,7 +2005,7 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|coin|string|YES|coin |
+|coin|string|NO|coin |
 |status|string|NO|withdraw status|
 |limit|string|NO|default:1000, max:1000|
 |startTime|string|NO|default: 90 days ago from current time|
