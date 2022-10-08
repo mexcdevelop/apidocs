@@ -2208,15 +2208,15 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|是|币种|
-|status|string|否|状态|
-|startTime|string|否|默认当前时间90天前的时间|
-|endTime|string|否|默认当前时间戳，13位|
-|limit|string|否|默认：1000，最大1000|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| :------ | :-------- |:-----| :---------- |
+|coin|string| 否    |币种|
+|status|string| 否    |状态|
+|startTime|string| 否    |默认当前时间90天前的时间|
+|endTime|string| 否    |默认当前时间戳，13位|
+|limit|string| 否    |默认：1000，最大1000|
+|timestamp|string| 是    |时间戳|
+|signature|string| 是    |签名|
 
 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
 
@@ -2268,15 +2268,15 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|是|币种|
-|status|string|否|提币状态|
-|limit|string|否|默认：1000， 最大：1000|
-|startTime|string|否|默认当前时间90天前的时间戳|
-|endTime|string|否|默认当前时间戳|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| :------ | :-------- |:-----| :---------- |
+|coin|string| 否    |币种|
+|status|string| 否    |提币状态|
+|limit|string| 否    |默认：1000， 最大：1000|
+|startTime|string| 否    |默认当前时间90天前的时间戳|
+|endTime|string| 否    |默认当前时间戳|
+|timestamp|string| 是    |时间戳|
+|signature|string| 是    |签名|
 
 1. 支持多网络提币前的历史记录可能不会返回`network`字段.
 2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
