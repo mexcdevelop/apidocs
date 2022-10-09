@@ -1223,17 +1223,17 @@ post /api/v3/capital/sub-account/universalTransfer
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
-|toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
-|toAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
-|symbol|string|否|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
-|asset|string|是|资产，eg：USDT|
-|amount|string|是|数量，eg：1.82938475|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须  | 说明                                                                 | 
+| :------ | :-------- | :-------- |:-------------------------------------------------------------------|
+|fromAccount|string|否| 母子账户，可填subAccout账户名，不填默认母账户                                        |
+|toAccount|string|否| 母子账户，可填subAccout账户名，不填默认母账户                                        |
+|fromAccountType|string|是| 划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述 |
+|toAccountType|string|是| 划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述 |
+|symbol|string|否| 币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT            |
+|asset|string|是| 资产，eg：USDT                                                         |
+|amount|string|是| 数量，eg：1.82938475                                                   |
+|timestamp|string|是| 时间戳                                                                |
+|signature|string|是| 签名                                                                 |
 
 
 
@@ -1280,8 +1280,8 @@ get /api/v3/capital/sub-account/universalTransfer
 | :------ | :-------- | :-------- | :---------- |
 |fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
-|toAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"，划转规则见上描述|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述|
+|toAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述|
 |startTime|string|否|起始时间|
 |endTime|string|否|截止时间|
 |page|string|否|默认 1|
@@ -2208,15 +2208,15 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|是|币种|
-|status|string|否|状态|
-|startTime|string|否|默认当前时间90天前的时间|
-|endTime|string|否|默认当前时间戳，13位|
-|limit|string|否|默认：1000，最大1000|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| :------ | :-------- |:-----| :---------- |
+|coin|string| 否    |币种|
+|status|string| 否    |状态|
+|startTime|string| 否    |默认当前时间90天前的时间|
+|endTime|string| 否    |默认当前时间戳，13位|
+|limit|string| 否    |默认：1000，最大1000|
+|timestamp|string| 是    |时间戳|
+|signature|string| 是    |签名|
 
 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
 
@@ -2268,15 +2268,15 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|是|币种|
-|status|string|否|提币状态|
-|limit|string|否|默认：1000， 最大：1000|
-|startTime|string|否|默认当前时间90天前的时间戳|
-|endTime|string|否|默认当前时间戳|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| :------ | :-------- |:-----| :---------- |
+|coin|string| 否    |币种|
+|status|string| 否    |提币状态|
+|limit|string| 否    |默认：1000， 最大：1000|
+|startTime|string| 否    |默认当前时间90天前的时间戳|
+|endTime|string| 否    |默认当前时间戳|
+|timestamp|string| 是    |时间戳|
+|signature|string| 是    |签名|
 
 1. 支持多网络提币前的历史记录可能不会返回`network`字段.
 2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
@@ -2378,8 +2378,8 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 | :------ | :-------- | :-------- | :---------- |
 |timestamp|string|是|时间戳|
 |signature|string|是|签名|
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|是|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
+|toAccountType|string|是|划入账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
 |asset|string|是|资产|
 |amount|string|是|数量|
 |symbol|string|否|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
@@ -2443,8 +2443,8 @@ get /api/v3/capital/transfer
 | :------ | :-------- | :-------- | :---------- |
 |timestamp|string|是|时间戳|
 |signature|string|是|签名|
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|是|划入账户类型，现货/合约/杠杆/法币，枚举值："SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
+|toAccountType|string|是|划入账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
 |startTime|string|否||
 |endTime|string|否||
 |page|string|否|默认1|
