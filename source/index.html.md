@@ -1058,8 +1058,8 @@ post /api/v3/capital/sub-account/universalTransfer
 | :------ | :-------- | :-------- | :---------- |
 |fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
 |toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
-|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN"
 |symbol|string|NO|Only supported under ISOLATED_MARGIN type,eg:ETHUSDT|
 |asset|string|YES|asset,eg:USDT|
 |amount|string|YES|amount,eg:1.82938475|
@@ -1106,8 +1106,8 @@ get /api/v3/capital/sub-account/universalTransfer
 | :------ | :-------- | :-------- | :---------- |
 |fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
 |toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
-|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN""FIAT"|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES","ISOLATED_MARGIN"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES","ISOLATED_MARGIN"|
 |startTime|string|NO|startTime|
 |endTime|string|NO|endTime|
 |page|string|NO|default 1|
@@ -1949,7 +1949,7 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|coin|string|YES|coin |
+|coin|string|NO|coin |
 |status|string|NO|status|
 |startTime|string|NO|default: 90 days ago from current time|
 |endTime|string|NO|default:current time|
@@ -2009,7 +2009,7 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|coin|string|YES|coin |
+|coin|string|NO|coin |
 |status|string|NO|withdraw status|
 |limit|string|NO|default:1000, max:1000|
 |startTime|string|NO|default: 90 days ago from current time|
@@ -2116,8 +2116,8 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
 |asset|string|YES|asset|
 |amount|string|YES|amount|
 |symbol|string|NO|symbol,needed when`fromAccountType`is ISOLATED_MARGIN.eg:ETHUSDT|
@@ -2137,6 +2137,7 @@ Response:
 > Request
 
 ```
+get /api/v3/capital/transfer
 get /api/v3/capital/transfer
 ```
 > Response
@@ -2181,8 +2182,8 @@ Parameters:
 
 | name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
-|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN""FIAT"|
+|fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
+|toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
 |startTime|string|NO|startTime|
 |endTime|string|NO|endTime|
 |page|string|NO|default:1|
