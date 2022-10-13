@@ -60,9 +60,9 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
-## **（更新预告）2022-10-14 16:00(UTC+8)**
+## **2022-10-14 16:00(UTC+8)**
 
-- 更新部分[钱包接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下，请提前做好准备：
+- 更新部分[钱包接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下：
 
   1、[提币接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)：提币时，参数address和memo需要分别正确传入（原memo在address后以冒号拼接）；
 
@@ -71,6 +71,10 @@ https://github.com/mxcdevelop/mexc-api-demo
   3、[获取充值地址](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)：返回参数tag改为memo，且充值所需memo会在memo参数中返回；
 
   4、[获取充值历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)：返回参数addressTag改为memo，且充值所需memo会在memo参数中返回；
+
+  5、新增：[生成充值地址](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
+
+  6、[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)：新增withdrawTips和depositTips两个字段。
 
 ## **2022-09-06**
 
@@ -115,8 +119,11 @@ https://github.com/mxcdevelop/mexc-api-demo
 ## **2022-08-03**
 
 - 新增部分钱包接口：
+
   1、[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)
+
   2、[提币](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)
+
   3、[获取充值历史(支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)
 
   4、[获取提币历史(支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
@@ -124,6 +131,7 @@ https://github.com/mxcdevelop/mexc-api-demo
   5、[获取充值地址 (支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)
 
   6、[用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2e7fe13169)
+
   7、[查询用户万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#7a4f3b3457)
 
 ## **2022-07-27**
@@ -257,9 +265,9 @@ https://github.com/mxcdevelop/mexc-api-demo
 | ```Content-Type```  | ```application/json``` |
 
 ## 签名
-- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
+- 调用SIGNED接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode，注意**encode只支持大写**）。
 - 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
-- 签名 **大小写不敏感.**
+- 签名 **目前只支持小写**。
 - "totalParams"定义为与"request body"串联的"query string"。
 
 ### 时间安全
@@ -2143,23 +2151,25 @@ Get /api/v3/capital/config/getall
 ```json
 [
   {
-    "coin": "BTC",
-    "name": "Bitcoin",
+    "coin": "EOS",
+    "name": "EOS",
     "networkList": [
       {
-          "coin": "BTC",
+          "coin": "EOS",
           "depositDesc": null,
           "depositEnable": true,
           "minConfirm": 0,
-          "name": "BTC-TRX",
-          "network": "TRC20",
+          "name": "EOS",
+          "network": "EOS",
           "withdrawEnable": false,
           "withdrawFee": "0.000100000000000000",
           "withdrawIntegerMultiple": null,
-          "withdrawMax": "40.000000000000000000",
+          "withdrawMax": "10000.000000000000000000",
           "withdrawMin": "0.001000000000000000",
           "sameAddress": false,
-          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9",
+          "withdrawTips": "Both a MEMO and an Address are required.",
+          "depositTips": "Both a MEMO and an Address are required."
       },
       {
           "coin": "BTC",
@@ -2174,7 +2184,9 @@ Get /api/v3/capital/config/getall
           "withdrawMax": "100.000000000000000000",
           "withdrawMin": "0.000100000000000000",
           "sameAddress": false,
-          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"
+          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+          "withdrawTips": null,
+          "depositTips": null
       }
     ]
   },
@@ -2206,7 +2218,7 @@ Get /api/v3/capital/config/getall
 > 请求示例
 
 ```
-post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amount=3&signature={{signature}}&timestamp={{timestamp}}
+post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
@@ -2228,7 +2240,8 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 |coin|string|是|币种|
 |withdrawOrderId|string|否|自定义提币ID(目前不支持)|
 |network|string|否|提币网络|
-|address|string|是|提币地址(memo请使用:进行拼接)|
+|address|string|是|提币地址|
+|memo|string|是|如地址中需求memo，在此处传入|
 |amount|string|是|数量|
 |remark|string|否|备注|
 |timestamp|string|是|时间戳|
@@ -2249,23 +2262,23 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 > 请求示例
 
 ```
-get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signature={{signature}}
+get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
   {
-        "amount": "128",
-        "coin": "USDT-BSC",
-        "network": "BSC",
+        "amount": "50000",
+        "coin": "EOS",
+        "network": "EOS",
         "status": 5,
-        "address": "0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b",
-        "addressTag": null,
-        "txId": "0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0",
-        "insertTime": 1657952043000,
-        "unlockConfirm": "16",
-        "confirmTimes": "24"
+        "address": "0x20b7cf77db93d6ef1ab979c49142ec168427fdee",
+        "txId": "01391d1c1397ef0a3cbb3c7f99a90846f7c8c2a8dddcdcf84f46b530dede203e1bc804",
+        "insertTime": 1659513342000,
+        "unlockConfirm": "10",
+        "confirmTimes": "241",
+        "memo": "xxyy1122"
   }
 ]
 ```
@@ -2301,6 +2314,7 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 |insertTime|插入时间/创建时间|
 |unlockConfirm| 解锁需要的网络确认次数|
 |confirmTimes|已解锁次数|
+|memo|memo|
 
 ## 获取提币历史 (支持多网络)
 
@@ -2366,6 +2380,46 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 |txId| 提现交易id|
 |remark|提现记录备注|
 
+## 生成充值地址 (支持多网络)
+
+> 请求示例
+
+```
+post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "coin": "EOS",
+    "network": "EOS",
+    "address": "zzqqqqqqqqqq",
+    "memo": "MX10068"
+}
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/deposit/address```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| :------ | :-------- |:-----| :---------- |
+|coin|string| 是    |币种|
+|network|string| 是    |充值网络|
+|timestamp|string| 是    |时间戳|
+|signature|string| 是    |签名|
+
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|address|地址|
+|coin|币种|
+|network|链类型|
+|memo|memo值|
+
 ## 获取充值地址 (支持多网络)
 
 > 请求示例
@@ -2381,19 +2435,19 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
       "coin": "USDT",
       "network": "TRC20",
       "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
-      "tag": null
+      "memo": null
   },
   {
       "coin": "USDT",
       "network": "BEP20(BSC)",
       "address": "0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b",
-      "tag": null
+      "memo": null
   },
   {
       "coin": "USDT",
       "network": "ERC20",
       "address": "0x3f4d1f43761b52fd594e5a77cd83cab6955e85b",
-      "tag": null
+      "memo": null
   }
 ]
 ```
@@ -2416,8 +2470,8 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 | :------------ | :-------- |
 |address|地址|
 |coin|币种|
-|tag|标签|
-|network||
+|memo|memo|
+|network|网络|
 
 ## 用户万向划转【母母账户】
 
