@@ -54,7 +54,7 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
-## **（Advance notice）2022-10-14 16:00(UTC+8)**
+## **2022-10-14 16:00(UTC+8)**
 
 - Update Endpoints [Wallet Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
@@ -65,6 +65,11 @@ For more information please refer to this page: [MEXC API Postman](https://githu
   3.[Deposit Address](https://mxcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter  `tag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
 
   4.[Deposit History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter  `addressTag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
+
+  5.Add [Generate deposit address](https://mxcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
+
+  6.[Query the currency information](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information): add `withdrawTips` and `depositTips` params。
+
 
 ## **2022-09-06**
 
@@ -231,6 +236,7 @@ The base endpoint is:
 - HTTP 403 return code is used when the WAF Limit (Web Application Firewall) has been violated.
 - HTTP 429 return code is used when breaking a request rate limit.
 - HTTP 5XX return codes are used for internal errors; the issue is on MEXC's side. It is important to NOT treat this as a failure operation; the execution status is UNKNOWN and could have been a success.
+
 ## General Information on Endpoints
 
 The API accepts requests of type GET, POST or DELETE
@@ -251,9 +257,10 @@ Relevant parameters in the header
 | ```Content-Type```  | ```application/json``` |
 
 ## SIGNED
-- SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body(in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing).
+
+- SIGNED endpoints require an additional parameter, signature, to be sent in the query string or request body(in the API of batch operation, if there are special symbols such as comma in the parameter value, these symbols need to be URL encoded when signing,and encode only support uppercase).
 - Endpoints use HMAC SHA256 signatures. The HMAC SHA256 signature is a keyed HMAC SHA256 operation. Use your secretKey as the key and totalParams as the value for the HMAC operation.
-- The signature is not case sensitive.
+- The signature is support lowercase only.
 - totalParams is defined as the query string concatenated with the request body.
 
 ### Timing security
@@ -1893,23 +1900,25 @@ Get /api/v3/capital/config/getall
 ```json
 [
   {
-    "coin": "BTC",
-    "name": "Bitcoin",
+    "coin": "EOS",
+    "name": "EOS",
     "networkList": [
       {
-          "coin": "BTC",
+          "coin": "EOS",
           "depositDesc": null,
           "depositEnable": true,
           "minConfirm": 0,
-          "name": "BTC-TRX",
-          "network": "TRC20",
+          "name": "EOS",
+          "network": "EOS",
           "withdrawEnable": false,
           "withdrawFee": "0.000100000000000000",
           "withdrawIntegerMultiple": null,
-          "withdrawMax": "40.000000000000000000",
+          "withdrawMax": "10000.000000000000000000",
           "withdrawMin": "0.001000000000000000",
           "sameAddress": false,
-          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9",
+          "withdrawTips": "Both a MEMO and an Address are required.",
+          "depositTips": "Both a MEMO and an Address are required."
       },
       {
           "coin": "BTC",
@@ -1924,7 +1933,9 @@ Get /api/v3/capital/config/getall
           "withdrawMax": "100.000000000000000000",
           "withdrawMin": "0.000100000000000000",
           "sameAddress": false,
-          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"
+          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+          "withdrawTips": null,
+          "depositTips": null
       }
     ]
   },
@@ -1952,14 +1963,15 @@ Response:
 |withdrawMax|Max withdraw amount|
 |withdrawMin|Min withdraw amount|
 |contract|coin contract|
-
+|withdrawTips|withdrawTips|
+|depositTips|depositTips|
 
 ## Withdraw
 
 > Request
 
 ```
-post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amount=3&signature={{signature}}&timestamp={{timestamp}}
+post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
 ```
 > Response
 
@@ -1981,7 +1993,8 @@ Parameters:
 |coin|string|YES|coin |
 |withdrawOrderId|string|NO|withdrawOrderId|
 |network|string|NO|withdraw network|
-|address|string|YES|withdraw address( memo please use : for splicing) |
+|address|string|YES|withdraw address|
+|memo|string|YES|memo|
 |amount|string|YES|withdraw amount|
 |remark|string|NO|remark|
 |timestamp|string|YES|timestamp|
@@ -2001,23 +2014,23 @@ Response:
 > Request
 
 ```
-get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signature={{signature}}
+get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{signature}}
 ```
 > Response
 
 ```json
 [
   {
-        "amount": "128",
-        "coin": "USDT-BSC",
-        "network": "BSC",
+        "amount": "50000",
+        "coin": "EOS",
+        "network": "EOS",
         "status": 5,
-        "address": "0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b",
-        "addressTag": null,
-        "txId": "0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0",
-        "insertTime": 1657952043000,
-        "unlockConfirm": "16",
-        "confirmTimes": "24"
+        "address": "0x20b7cf77db93d6ef1ab979c49142ec168427fdee",
+        "txId": "01391d1c1397ef0a3cbb3c7f99a90846f7c8c2a8dddcdcf84f46b530dede203e1bc804",
+        "insertTime": 1659513342000,
+        "unlockConfirm": "10",
+        "confirmTimes": "241",
+        "memo": "xxyy1122"
   }
 ]
 ```
@@ -2053,6 +2066,7 @@ Response:
 |insertTime|insertTime|
 |unlockConfirm| unlockConfirm|
 |confirmTimes|confirmTimes|
+|memo|memo|
 
 ## Withdraw History (supporting network) 
 
@@ -2066,18 +2080,19 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 ```json
 [
   {
-        "id": "17bc9f68c3b740c5947c074748d42c3",
-        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
-        "coin": "USDT-BSC",
-        "network": "BSC",
-        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
-        "amount": "1501",
+        "id": "bb17a2d452684f00a523c015d512a341",
+        "txId": null,
+        "coin": "EOS",
+        "network": "EOS",
+        "address": "zzqqqqqqqqqq",
+        "amount": "10",
         "transferType": 0,
-        "status": 7,
-        "transactionFee": "1",
+        "status": 3,
+        "transactionFee": "0",
         "confirmNo": null,
-        "applyTime": 1658625828000,
-        "remark": ""
+        "applyTime": 1665300874000,
+        "remark": "",
+        "memo": "MX10086"
   }
 ]
 ```
@@ -2119,6 +2134,53 @@ Response:
 |txId|txId|
 |remark|remark|
 
+## Generate deposit address (supporting network) 
+
+> Request
+
+```
+post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+  {
+      "coin": "USDT",
+      "network": "TRC20",
+      "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
+      "tag": null
+  },
+  {
+     "coin": "EOS",
+     "network": "EOS",
+     "address": "zzqqqqqqqqqq",
+     "memo": "MX10068"
+  }
+]
+```
+
+
+- **POST** ```/api/v3/capital/deposit/address```
+
+Parameters: 
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|coin|string|YES|coin |
+|network|string|YES|deposit network|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+
+Response:
+
+| name | Description  |
+| :------------ | :-------- |
+|address|deposit address|
+|coin|coin |
+|memo|memo|
+|network|network|
+
 ## Deposit Address (supporting network) 
 
 > Request
@@ -2134,19 +2196,19 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
       "coin": "USDT",
       "network": "TRC20",
       "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
-      "tag": null
+      "memo": null
   },
   {
       "coin": "USDT",
       "network": "BEP20(BSC)",
       "address": "0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b",
-      "tag": null
+      "memo": null
   },
   {
       "coin": "USDT",
       "network": "ERC20",
       "address": "0x3f4d1f43761b52fd594e5a77cd83cab6955e85b",
-      "tag": null
+      "memo": null
   }
 ]
 ```
@@ -2169,7 +2231,7 @@ Response:
 | :------------ | :-------- |
 |address|deposit address|
 |coin|coin |
-|tag|tag|
+|memo|memo|
 |network|network|
 
 ## User Universal Transfer
