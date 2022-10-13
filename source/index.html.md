@@ -2321,25 +2321,26 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 > 请求示例
 
 ```
-get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
   {
-        "id": "17bc9f68c3b740c5947c074748d42c3",
-        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
-        "coin": "USDT-BSC",
-        "network": "BSC",
-        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
-        "amount": "1501",
+        "id": "bb17a2d452684f00a523c015d512a341",
+        "txId": null,
+        "coin": "EOS",
+        "network": "EOS",
+        "address": "zzqqqqqqqqqq",
+        "amount": "10",
         "transferType": 0,
-        "status": 7,
-        "transactionFee": "1",
+        "status": 3,
+        "transactionFee": "0",
         "confirmNo": null,
-        "applyTime": 1658625828000,
-        "remark": ""
+        "applyTime": 1665300874000,
+        "remark": "",
+        "memo": "MX10086"
   }
 ]
 ```
@@ -2379,6 +2380,7 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 |confirmNo| 提现确认数|
 |txId| 提现交易id|
 |remark|提现记录备注|
+|memo|memo|
 
 ## 生成充值地址 (支持多网络)
 
