@@ -60,45 +60,104 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 # 更新日志
 
+## **2022-10-14 16:00(UTC+8)**
+
+- 更新部分[钱包接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下：
+
+  1、[提币接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)：提币时，参数address和memo需要分别正确传入（原memo在address后以冒号拼接）；
+
+  2、[获取提币历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)：参数address和memo分别正确返回（原memo在address后以冒号拼接）；
+
+  3、[获取充值地址](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)：返回参数tag改为memo，且充值所需memo会在memo参数中返回；
+
+  4、[获取充值历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)：返回参数addressTag改为memo，且充值所需memo会在memo参数中返回；
+
+  5、新增：[生成充值地址](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
+
+  6、[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)：新增withdrawTips和depositTips两个字段。
+
 ## **2022-09-06**
 
-- 新增邀请返佣接口 
+- 新增邀请返佣相关接口：
+
+  1、[获取邀请返佣记录](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#8254d412a1)：获取您邀请的好友以及从他们进行的交易产生的返佣；
+
+  2、[获取返佣记录明细 （奖励记录）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#72fbc63aa1)：您可查看您的好友以及好友的子账户进行合约和现货（非杠杆)交易产生的每笔返佣记录；
+
+  3、[获取自返记录明细 （奖励记录）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#26b3666f08)：您可查看您以被邀請的好友身份进行的每笔合約和现货（无保证金）及从中产生的自返佣记录。
 
 ## **2022-09-02**
 
-- 新增v3 websocket
+- 新增v3 websocket：
+
+  1、Websocket 行情推送：包括[逐笔交易（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59)、[K线 Streams](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams)、[增量深度信息（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875);
+
+  2、Websocket账户信息推送:包括[成交推送（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#444af6a5fa)和[订单推送（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ef28329b2a)；
 
 ## **2022-08-26**
 
-- ETF接口增加部分返回参数
+- [获取杠杆ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口新增返回参数：
+
+| 字段名称       | 数据类型 | 描述          |
+| :------------- | :------- | :------------ |
+| preBasket      | string   | 再平衡前篮子  |
+| preLeverage    | string   | 再平衡前杠杆  |
+| basket         | string   | 再平衡后篮子  |
 
 ## **2022-08-15**
 
-- 新增母子用户万向划转、查询母子万向划转、开通子账户合约业务、开通子账户杠杆业务接口
+- 新增部分母子账户接口：
+
+  1、[母子用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
+
+  2、[查询母子万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
+
+  3、[开通子账户合约业务](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#e5e82cdf39)
+
+  4、[开通子账户杠杆业务接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#6d1ec37c49)
 
 ## **2022-08-03**
 
-- 新增钱包接口
+- 新增部分钱包接口：
+
+  1、[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)
+
+  2、[提币](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)
+
+  3、[获取充值历史(支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)
+
+  4、[获取提币历史(支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
+
+  5、[获取充值地址 (支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)
+
+  6、[用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2e7fe13169)
+
+  7、[查询用户万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#7a4f3b3457)
 
 ## **2022-07-27**
 
-- 下单类型新增IOC单和FOK单
+- 现货[下单](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#fd6ce2a756)接口新增订单类型：IOC和FOK
 
 ## **2022-07-15**
 
-- 成交历史接口增加“是否自成交”参数
+- [账户成交历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#1c077e2313)接口新增返回参数：
+
+| 参数名          | 说明              |
+| :-------------- | :---------------- |
+| isSelfTrade     | 是否自成交        |
 
 ## **2022-07-08**
 
-- 新增批量下单接口
+- 新增[批量下单](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b)接口：支持单次批量下20单；
 
 ## **2022-07-03**
 
-- 新增现货账号模块查询币种信息接口，该接口可返回币种在所支持的网络中的智能合约地址
+- 钱包接口模块下新增：[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)接口，该接口可返回币种是否可充提/提币限额以及智能合约地址等。
 
 ## **2022-06-16**
 
-- 新增杠杆账户和交易接口
+- 新增[杠杆账户和交易](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#34a848ad3d)相关接口；
+
 
 ## **2022-05-22**
 
@@ -107,24 +166,41 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 ## **2022-04-25**
 
-- 新增"允许API现货/杠杆交易"返回参数
-- 当前挂单接口优化，支持多交易对查询
+- [交易规范信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#e7746f7d60)接口新增返回参数：
 
-## **2022-06-21**
+| 参数名                     | 数据类型 | 说明                |
+| :------------------------- | :------- | :------------------ |
+| isSpotTradingAllowed       | Boolean  | 是否允许api现货交易 |
+| isMarginTradingAllowed     | Boolean  | 是否允许api杠杆交易 |
 
-- 新增demo
 
-## **2022-06-16**
-
-- 新增杠杆接口
+- [当前挂单](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#066ca582c9)接口优化：支持多交易对查询，每次最多可以传5个symbol。
 
 ## **2022-03-29**
 
-- 新增母子账户模块相关接口
+- 新增[母子账户](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#86382eac44)相关接口：
+
+  1、[创建子账户](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#c6789f6fd9)
+
+  2、[查看子账户列表](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efa0aed0d6)
+
+  3、[创建子账户的APIkey](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#apikey)
+
+  4、[查询子账户的APIKey](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#apikey-2)
+
+  5、[删除子账户的APIKey](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#apikey-3)
+
+  6、[母子用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
+
+  7、[查询母子万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
+
+  8、[开通子账户的合约业务](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#e5e82cdf39)
+
+  9、[开通子账户的杠杆业务](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#6d1ec37c49)
 
 ## **2022-03-25**
 
-- 新增Postman Collections
+- 新增[API代码库](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#api)：Postman Collections，可以通过`Postman collection`来快速体验、使用API接口。
 
 ## **2022-03-24**
 
@@ -132,21 +208,20 @@ https://github.com/mxcdevelop/mexc-api-demo
 
 ## **2022-03-21**
 
-- 新增<a href="#order_status">订单状态</a>枚举
+- 新增订单状态枚举
 
 ## **2022-03-18**
 
-- 新增订单类型：市价单
+- 新增[订单类型](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#8c6d51826c)：市价单（现货）
 - 新增分页说明：startTime和endTime需同时使用
 
 ## **2022-03-09**
 
 - 新增枚举类型
-- 修复文档问题
 
 ## **2022-02-19**
 
-- 新增ETF接口
+- 新增[ETF接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf)：包括[获取杠杆ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)
 
 ## **2022-02-11**
 - 新版API
@@ -190,9 +265,9 @@ https://github.com/mxcdevelop/mexc-api-demo
 | ```Content-Type```  | ```application/json``` |
 
 ## 签名
-- 调用SIGNED 接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）。
+- 调用SIGNED接口时，除了接口本身所需的参数外，还需要在query string 或 request body中传递 signature, 即签名参数（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode，注意**encode只支持大写**）。
 - 签名使用HMAC SHA256算法. API-KEY所对应的API-Secret作为 HMAC SHA256 的密钥，其他所有参数作为HMAC SHA256的操作对象，得到的输出即为签名。
-- 签名 **大小写不敏感.**
+- 签名 **目前只支持小写**。
 - "totalParams"定义为与"request body"串联的"query string"。
 
 ### 时间安全
@@ -2076,23 +2151,25 @@ Get /api/v3/capital/config/getall
 ```json
 [
   {
-    "coin": "BTC",
-    "name": "Bitcoin",
+    "coin": "EOS",
+    "name": "EOS",
     "networkList": [
       {
-          "coin": "BTC",
+          "coin": "EOS",
           "depositDesc": null,
           "depositEnable": true,
           "minConfirm": 0,
-          "name": "BTC-TRX",
-          "network": "TRC20",
+          "name": "EOS",
+          "network": "EOS",
           "withdrawEnable": false,
           "withdrawFee": "0.000100000000000000",
           "withdrawIntegerMultiple": null,
-          "withdrawMax": "40.000000000000000000",
+          "withdrawMax": "10000.000000000000000000",
           "withdrawMin": "0.001000000000000000",
           "sameAddress": false,
-          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+          "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9",
+          "withdrawTips": "Both a MEMO and an Address are required.",
+          "depositTips": "Both a MEMO and an Address are required."
       },
       {
           "coin": "BTC",
@@ -2107,7 +2184,9 @@ Get /api/v3/capital/config/getall
           "withdrawMax": "100.000000000000000000",
           "withdrawMin": "0.000100000000000000",
           "sameAddress": false,
-          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"
+          "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+          "withdrawTips": null,
+          "depositTips": null
       }
     ]
   },
@@ -2139,7 +2218,7 @@ Get /api/v3/capital/config/getall
 > 请求示例
 
 ```
-post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9ZikopzCUD4zyieSEfwbjdjUPVb&amount=3&signature={{signature}}&timestamp={{timestamp}}
+post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
@@ -2161,7 +2240,8 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 |coin|string|是|币种|
 |withdrawOrderId|string|否|自定义提币ID(目前不支持)|
 |network|string|否|提币网络|
-|address|string|是|提币地址(memo请使用:进行拼接)|
+|address|string|是|提币地址|
+|memo|string|是|如地址中需求memo，在此处传入|
 |amount|string|是|数量|
 |remark|string|否|备注|
 |timestamp|string|是|时间戳|
@@ -2182,23 +2262,23 @@ post /api/v3/capital/withdraw/apply?coin=USDT&network=TRC20&address=TPb5qT9Zikop
 > 请求示例
 
 ```
-get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signature={{signature}}
+get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
   {
-        "amount": "128",
-        "coin": "USDT-BSC",
-        "network": "BSC",
+        "amount": "50000",
+        "coin": "EOS",
+        "network": "EOS",
         "status": 5,
-        "address": "0xebe4804f7ecc22d5011c42e6ea1f22e6c891d9b",
-        "addressTag": null,
-        "txId": "0xd8ff2e4e87ba64454039b62f6fcd456cb8afdbd21352a94b2b115b70212d97d:0",
-        "insertTime": 1657952043000,
-        "unlockConfirm": "16",
-        "confirmTimes": "24"
+        "address": "0x20b7cf77db93d6ef1ab979c49142ec168427fdee",
+        "txId": "01391d1c1397ef0a3cbb3c7f99a90846f7c8c2a8dddcdcf84f46b530dede203e1bc804",
+        "insertTime": 1659513342000,
+        "unlockConfirm": "10",
+        "confirmTimes": "241",
+        "memo": "xxyy1122"
   }
 ]
 ```
@@ -2234,31 +2314,33 @@ get /api/v3/capital/deposit/hisrec?coin=USDT-BSC&timestamp={{timestamp}}&signatu
 |insertTime|插入时间/创建时间|
 |unlockConfirm| 解锁需要的网络确认次数|
 |confirmTimes|已解锁次数|
+|memo|memo|
 
 ## 获取提币历史 (支持多网络)
 
 > 请求示例
 
 ```
-get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 [
   {
-        "id": "17bc9f68c3b740c5947c074748d42c3",
-        "txId": "0xaa61d7a5b51580ec4e4e56b3f49e4c8f2f9d0665995f0652dfeeb5007f8fbf9",
-        "coin": "USDT-BSC",
-        "network": "BSC",
-        "address": "0x2c7471e7F4A841b591460F431D9A3B1DEF6E5EC",
-        "amount": "1501",
+        "id": "bb17a2d452684f00a523c015d512a341",
+        "txId": null,
+        "coin": "EOS",
+        "network": "EOS",
+        "address": "zzqqqqqqqqqq",
+        "amount": "10",
         "transferType": 0,
-        "status": 7,
-        "transactionFee": "1",
+        "status": 3,
+        "transactionFee": "0",
         "confirmNo": null,
-        "applyTime": 1658625828000,
-        "remark": ""
+        "applyTime": 1665300874000,
+        "remark": "",
+        "memo": "MX10086"
   }
 ]
 ```
@@ -2298,6 +2380,47 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 |confirmNo| 提现确认数|
 |txId| 提现交易id|
 |remark|提现记录备注|
+|memo|memo|
+
+## 生成充值地址 (支持多网络)
+
+> 请求示例
+
+```
+post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "coin": "EOS",
+    "network": "EOS",
+    "address": "zzqqqqqqqqqq",
+    "memo": "MX10068"
+}
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/deposit/address```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| :------ | :-------- |:-----| :---------- |
+|coin|string| 是    |币种|
+|network|string| 是    |充值网络|
+|timestamp|string| 是    |时间戳|
+|signature|string| 是    |签名|
+
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|address|地址|
+|coin|币种|
+|network|链类型|
+|memo|memo值|
 
 ## 获取充值地址 (支持多网络)
 
@@ -2314,19 +2437,19 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
       "coin": "USDT",
       "network": "TRC20",
       "address": "TXobiKkdciupZrhdvZyTSSLjE8CmZAufS",
-      "tag": null
+      "memo": null
   },
   {
       "coin": "USDT",
       "network": "BEP20(BSC)",
       "address": "0xebe4804f7ecc22d5011c42e6ea1f2e6c891d89b",
-      "tag": null
+      "memo": null
   },
   {
       "coin": "USDT",
       "network": "ERC20",
       "address": "0x3f4d1f43761b52fd594e5a77cd83cab6955e85b",
-      "tag": null
+      "memo": null
   }
 ]
 ```
@@ -2349,8 +2472,8 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 | :------------ | :-------- |
 |address|地址|
 |coin|币种|
-|tag|标签|
-|network||
+|memo|memo|
+|network|网络|
 
 ## 用户万向划转【母母账户】
 
@@ -3675,10 +3798,11 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 # Websocket 行情推送
 
 - 本篇所列出的所有wss接口的baseurl为: **wss://wbs.mexc.com/ws**
-- 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连。
+- 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连
 - symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api@<symbol>`</br>实例：`spot@public.deals.v3.api@BTCUSDT`
-- websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接。
-- 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用。
+- websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接
+- 1个 ws 连接最多30个订阅
+- 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用
 
 ## 实时订阅/取消数据流
 
@@ -3930,7 +4054,9 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 - 在具有有效`listenKey`的帐户上执行`POST`将返回当前有效的`listenKey`并将其有效期延长60分钟
 - websocket接口的baseurl: **wss://wbs.mexc.me/ws**
 - 订阅账户数据流的stream名称为 **/ws?listenKey=listenKey** <br/>  如：**wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
-- 每个链接有效期不超过24小时，请妥善处理断线重连。
+- 每个链接有效期不超过24小时，请妥善处理断线重连
+- 每个UID，最多申请60个listen key（不包含已失效listen key）
+- ws链接数的数量限制：每个listen key最多5个ws链接（即：每个uid最多申请的60个listen key，300个ws链接）
 
 ## Listen Key(现货账户) 
 
