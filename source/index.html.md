@@ -1322,13 +1322,24 @@ equaled POST /api/v3/order
 
 ## New Order
 
+> Request
+
+```
+POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&timestamp={{timestamp}}&signature={{signature}}
+```
+
 > Response
 
 ```json
 {
-    "symbol": "BTCUSDT",
-    "orderId": "0a3b6af38f7a4f2e9bea9a5782321ddc",
-    "orderListId": -1
+    "symbol": "MXUSDT",
+    "orderId": "06a480e69e604477bfb48dddd5f0b750",
+    "orderListId": -1,
+    "price": "0.1",
+    "origQty": "50",
+    "type": "LIMIT",
+    "side": "BUY",
+    "transactTime": 1666676533741
 }
 ```
 
@@ -1347,6 +1358,20 @@ Parameters:
 | newClientOrderId | STRING  | NO        |                                           |
 | recvWindow       | LONG    | NO        | Max 60000                                 |
 | timestamp        | LONG    | YES       |                                           |
+
+Response:
+
+| name                | Description                          |
+| ------------------- |--------------------------------------|
+| symbol              | Symbol                               |
+| orderId             | order id                             |
+| orderListId         | order list id                        |
+| price               | Price                                |
+| origOty             | Original order quantity              |
+| type                | <a href="#order_type">Order type</a> |
+| side                | <a href="#order_side">order side</a> |
+| transactTime        | transactTime                         |
+
 
 Additional mandatory parameters based on `type`:
 
@@ -1447,7 +1472,7 @@ Response
 | symbol | STRING | symbol |
 | orderId | STRING | orderId |
 
-## Cancel Orde
+## Cancel Order
 
 > Response
 
@@ -1497,7 +1522,7 @@ Response:
 | origOty             | Original order quantity              |
 | executedQty         | Executed order quantity              |
 | cummulativeQuoteQty | Cummulative quote quantity           |
-| status              | <a href="#order_status">order status</a>                         |
+| status              | <a href="#order_status">order status</a> |
 | timeInForce         |                                      |
 | type                | <a href="#order_type">Order type</a> |
 | side                | <a href="#order_side">order side</a> |
