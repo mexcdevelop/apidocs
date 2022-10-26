@@ -3302,15 +3302,20 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/order?symbol=BTCUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=0.0003&amp;price=20000&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/order?symbol=MXUSDT&amp;side=BUY&amp;type=LIMIT&amp;quantity=50&amp;price=0.1&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a3b6af38f7a4f2e9bea9a5782321ddc"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MXUSDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"06a480e69e604477bfb48dddd5f0b750"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderListId"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"origQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"transactTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1666676533741</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -3435,8 +3440,33 @@ body
 </tr>
 <tr>
 <td style="text-align: left">orderListId</td>
+<td style="text-align: left">string</td>
 <td style="text-align: left">客户端订单列表</td>
-<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">price</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订单id</td>
+</tr>
+<tr>
+<td style="text-align: left">origQty</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">委托数量</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"><a href="#order_type">订单类型</a></td>
+</tr>
+<tr>
+<td style="text-align: left">side</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"><a href="#order_side">订单方向</a></td>
+</tr>
+<tr>
+<td style="text-align: left">transactTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">下单时间</td>
 </tr>
 </tbody></table>
 <h2 id='de93fae07b'>批量下单</h2>
