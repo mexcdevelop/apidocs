@@ -308,10 +308,10 @@ curl "https://contract.mexc.com/api/v1/contract/detail"
 | volUnit  | int  | 数量的最小步进单位 |
 | minVol  | decimal  | 订单张数下限|
 | maxVol  | decimal  | 订单张数上限 |
-| bidLimitPriceRate  | decimal  | 卖单价格限制比率 |
-| askLimitPriceRate  | decimal  | 买单价格限制比率 |
-| takerFeeRate  | decimal  | 买单费率 |
-| makerFeeRate  | decimal  | 卖单费率 |
+| bidLimitPriceRate  | decimal  | 买单价格限制比率 |
+| askLimitPriceRate  | decimal  | 卖单价格限制比率 |
+| takerFeeRate  | decimal  | 吃单费率 |
+| makerFeeRate  | decimal  | 挂单费率 |
 | maintenanceMarginRate  | decimal  | 维持保证金率 |
 | initialMarginRate  | decimal  | 初始保证金率 |
 | riskBaseVol  | decimal  | 基本张数 |
