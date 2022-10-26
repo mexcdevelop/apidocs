@@ -1500,15 +1500,20 @@ POST /api/v3/order/test
 > 请求示例
 
 ```
-POST /api/v3/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&price=20000&timestamp={{timestamp}}&signature={{signature}}
+POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
 {
-    "symbol": "BTCUSDT",
-    "orderId": "0a3b6af38f7a4f2e9bea9a5782321ddc",
-    "orderListId": -1
+    "symbol": "MXUSDT",
+    "orderId": "06a480e69e604477bfb48dddd5f0b750",
+    "orderListId": -1,
+    "price": "0.1",
+    "origQty": "50",
+    "type": "LIMIT",
+    "side": "BUY",
+    "transactTime": 1666676533741
 }
 ```
 **HTTP请求**
@@ -1553,7 +1558,13 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 | :------------ | :-------- | :------------------- |
 | symbol | string | 交易对 |
 | orderId | string | 订单id |
-| orderListId|客户端订单列表          |          |
+| orderListId|string|客户端订单列表 |
+| price | string | 订单id |
+| origQty | string | 委托数量 |
+| type | string | <a href="#order_type">订单类型</a>|
+| side | string | <a href="#order_side">订单方向</a> |
+| transactTime | long | 下单时间 |
+
 
 ## 批量下单
 支持单次批量下20单,要求必须是同一交易对，限频2次/秒。
