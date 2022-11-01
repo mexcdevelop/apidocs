@@ -2246,17 +2246,17 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|是|币种|
-|withdrawOrderId|string|否|自定义提币ID(目前不支持)|
-|network|string|否|提币网络|
-|address|string|是|提币地址|
-|memo|string|是|如地址中需求memo，在此处传入|
-|amount|string|是|数量|
-|remark|string|否|备注|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须 | 说明               | 
+| :------ | :-------- |:-----|:-----------------|
+|coin|string| 是    | 币种               |
+|withdrawOrderId|string| 否    | 自定义提币ID(目前不支持)   |
+|network|string| 否    | 提币网络             |
+|address|string| 是    | 提币地址             |
+|memo|string| 否    | 如地址中需求memo，则此处必传 |
+|amount|string| 是    | 数量               |
+|remark|string| 否    | 备注               |
+|timestamp|string| 是    | 时间戳              |
+|signature|string| 是    | 签名               |
  
 1. 如果不发送`network`,将按该币种默认网络返回结果;
 2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
