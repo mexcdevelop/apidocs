@@ -2754,7 +2754,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 | :------------ | :-------- | :-------- |:-------------- |
 |symbol| 交易对|string|BTCUSDT|
 |orderId|订单id |string|693471305432961024|
-|clientOrderId|客户自定义订单id |string|6gCrw2kRUAF9CvJDGP16IP|
 |isIsolated| 是否是逐仓|boolean|true|
 |transactTime| 下单时间|number|1507725176595|
 
