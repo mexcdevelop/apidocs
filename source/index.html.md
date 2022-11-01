@@ -2079,7 +2079,7 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 | permissions      | 权限       |
 
 ## 账户成交历史
-获取账户指定交易对的成交历史
+获取账户指定交易对的成交历史，仅可查询近1月成交记录，如需查看更多成交记录，请使用web端导出功能，最多支持导出近3年成交记录。
 
 
 > 请求示例
@@ -2723,7 +2723,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
   {
   "symbol": "BTCUSDT",
   "orderId": "693471305432961024",
-  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
   "isIsolated": true,       
   "transactTime": 1507725176595
   }
@@ -2745,8 +2744,7 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 |type|详见枚举定义：<a href="#order_type">订单类型</a>  (暂不支持市价单)|是|string|LIMIT| 
 |quantity|订单数量|否|string|10| 
 |quoteOrderQty|订单总额|否|string|200000| 
-|price|下单价格买入价|否|string|20000| 
-|newClientOrderId|客户自定义的唯一订单ID|否|string|6gCrw2kRUAF9CvJDGP16IP| 
+|price|下单价格买入价|否|string|20000|
 |recvWindow|同步时间 |否|string|6000| 
 
 
