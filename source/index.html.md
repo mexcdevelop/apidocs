@@ -1771,14 +1771,14 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 
 **返回参数**
 
-| 参数名              | 说明           |
-| :------------------- |:-------------|
+| 参数名                 | 说明           |
+|:--------------------|:-------------|
 | symbol              | 交易对          |
 | origClientOrderId   | 原始客户端订单id    |
 | orderId             | 订单id         |
 | clientOrderId       | 客户端id        |
 | price               | 价格           |
-| origOty             | 初始数量         |
+| origQty             | 初始数量         |
 | executedQty         | 已成交数量        |
 | cummulativeQuoteQty | 已成交金额        |
 | status              | 状态           |
