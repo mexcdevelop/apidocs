@@ -2013,17 +2013,17 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 
 Parameters: 
 
-| name | Type| Mandatory | Description                                                 | 
-| :------ | :-------- |:----------|:------------------------------------------------------------|
-|coin|string| YES       | coin                                                        |
-|withdrawOrderId|string| NO        | withdrawOrderId                                             |
-|network|string| NO        | withdraw network                                            |
-|address|string| YES       | withdraw address                                            |
-|memo|string| NO        | memo(If memo is required in the address, it must be passed) |
-|amount|string| YES       | withdraw amount                                             |
-|remark|string| NO        | remark                                                      |
-|timestamp|string| YES       | timestamp                                                   |
-|signature|string| YES       | signature                                                   |
+| name | Type| Mandatory | Description                                                    | 
+| :------ | :-------- |:----------|:---------------------------------------------------------------|
+|coin|string| YES       | coin                                                           |
+|withdrawOrderId|string| NO        | withdrawOrderId                                                |
+|network|string| NO        | withdraw network                                               |
+|address|string| YES       | withdraw address                                               |
+|memo|string| NO        | memo(If memo is required in the address, it must be passed in) |
+|amount|string| YES       | withdraw amount                                                |
+|remark|string| NO        | remark                                                         |
+|timestamp|string| YES       | timestamp                                                      |
+|signature|string| YES       | signature                                                      |
  
 1. If `network` is not sent, will return default network in that currency.
 2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
