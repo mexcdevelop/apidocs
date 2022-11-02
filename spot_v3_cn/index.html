@@ -3879,7 +3879,7 @@ body
 <td style="text-align: left">价格</td>
 </tr>
 <tr>
-<td style="text-align: left">origOty</td>
+<td style="text-align: left">origQty</td>
 <td style="text-align: left">初始数量</td>
 </tr>
 <tr>
@@ -4525,7 +4525,7 @@ body
 </tr>
 </tbody></table>
 <h2 id='1c077e2313'>账户成交历史</h2>
-<p>获取账户指定交易对的成交历史</p>
+<p>获取账户指定交易对的成交历史，仅可查询近1月成交记录，如需查看更多成交记录，请使用web端导出功能，最多支持导出近3年成交记录。</p>
 
 <blockquote>
 <p>请求示例</p>
@@ -4835,8 +4835,8 @@ body
 <tr>
 <td style="text-align: left">memo</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">是</td>
-<td style="text-align: left">如地址中需求memo，在此处传入</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">如地址中需求memo，则此处必传</td>
 </tr>
 <tr>
 <td style="text-align: left">amount</td>
@@ -5836,7 +5836,6 @@ body
   </span><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"693471305432961024"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6gCrw2kRUAF9CvJDGP16IP"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"isIsolated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">       
   </span><span class="nl">"transactTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1507725176595</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -5923,13 +5922,6 @@ body
 <td style="text-align: left">20000</td>
 </tr>
 <tr>
-<td style="text-align: left">newClientOrderId</td>
-<td style="text-align: left">客户自定义的唯一订单ID</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">6gCrw2kRUAF9CvJDGP16IP</td>
-</tr>
-<tr>
 <td style="text-align: left">recvWindow</td>
 <td style="text-align: left">同步时间</td>
 <td style="text-align: left">否</td>
@@ -5959,12 +5951,6 @@ body
 <td style="text-align: left">订单id</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">693471305432961024</td>
-</tr>
-<tr>
-<td style="text-align: left">clientOrderId</td>
-<td style="text-align: left">客户自定义订单id</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">6gCrw2kRUAF9CvJDGP16IP</td>
 </tr>
 <tr>
 <td style="text-align: left">isIsolated</td>
