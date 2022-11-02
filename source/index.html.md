@@ -1361,16 +1361,16 @@ Parameters:
 
 Response:
 
-| name                | Description                          |
-| ------------------- |--------------------------------------|
-| symbol              | Symbol                               |
-| orderId             | order id                             |
-| orderListId         | order list id                        |
-| price               | Price                                |
-| origOty             | Original order quantity              |
-| type                | <a href="#order_type">Order type</a> |
-| side                | <a href="#order_side">order side</a> |
-| transactTime        | transactTime                         |
+| name         | Description                          |
+|--------------|--------------------------------------|
+| symbol       | Symbol                               |
+| orderId      | order id                             |
+| orderListId  | order list id                        |
+| price        | Price                                |
+| origQty      | Original order quantity              |
+| type         | <a href="#order_type">Order type</a> |
+| side         | <a href="#order_side">order side</a> |
+| transactTime | transactTime                         |
 
 
 Additional mandatory parameters based on `type`:
@@ -1876,7 +1876,7 @@ Response:
 - **GET** ```/api/v3/myTrades```
 
 
-Get trades for a specific account and symbol.
+Get trades for a specific account and symbol,Only the transaction records in the past 1 month can be queried. If you want to view more transaction records, please use the export function on the web side, which supports exporting transaction records of the past 3 years at most.
 
 Parameters:
 
@@ -2013,17 +2013,17 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|YES|coin |
-|withdrawOrderId|string|NO|withdrawOrderId|
-|network|string|NO|withdraw network|
-|address|string|YES|withdraw address|
-|memo|string|YES|memo|
-|amount|string|YES|withdraw amount|
-|remark|string|NO|remark|
-|timestamp|string|YES|timestamp|
-|signature|string|YES|signature|
+| name | Type| Mandatory | Description                                                    | 
+| :------ | :-------- |:----------|:---------------------------------------------------------------|
+|coin|string| YES       | coin                                                           |
+|withdrawOrderId|string| NO        | withdrawOrderId                                                |
+|network|string| NO        | withdraw network                                               |
+|address|string| YES       | withdraw address                                               |
+|memo|string| NO        | memo(If memo is required in the address, it must be passed in) |
+|amount|string| YES       | withdraw amount                                                |
+|remark|string| NO        | remark                                                         |
+|timestamp|string| YES       | timestamp                                                      |
+|signature|string| YES       | signature                                                      |
  
 1. If `network` is not sent, will return default network in that currency.
 2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
@@ -2486,7 +2486,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
   {
   "symbol": "BTCUSDT",
   "orderId": "693471305432961024",
-  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
   "isIsolated": true,       
   "transactTime": 1507725176595
   }
@@ -2506,8 +2505,7 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 |type| API Definitions:<a href="#order_type">order type</a> |YES|string| 
 |quantity| quantity                                             |NO|string| 
 |quoteOrderQty| order quantity                                       |NO|string| 
-|price| price                                                |NO|string| 
-|newClientOrderId| newClientOrderId                                     |NO|string| 
+|price| price                                                |NO|string|
 |recvWindow|                                                      |NO|string| 
 |timestamp| time                                                 |YES|string|timestamp|
 |signature| signature                                            |YES|string|signature|
@@ -2519,7 +2517,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 | :------------ | :-------- | :-------- |:-------------- |
 |symbol| |string|BTCUSDT|
 |orderId| |string|693471305432961024|
-|clientOrderId| |string|6gCrw2kRUAF9CvJDGP16IP|
 |isIsolated| is Isolated|boolean|true|
 |transactTime| |number|1507725176595|
 
