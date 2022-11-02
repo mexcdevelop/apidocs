@@ -1771,14 +1771,14 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 
 **返回参数**
 
-| 参数名              | 说明           |
-| :------------------- |:-------------|
+| 参数名                 | 说明           |
+|:--------------------|:-------------|
 | symbol              | 交易对          |
 | origClientOrderId   | 原始客户端订单id    |
 | orderId             | 订单id         |
 | clientOrderId       | 客户端id        |
 | price               | 价格           |
-| origOty             | 初始数量         |
+| origQty             | 初始数量         |
 | executedQty         | 已成交数量        |
 | cummulativeQuoteQty | 已成交金额        |
 | status              | 状态           |
@@ -2079,7 +2079,7 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 | permissions      | 权限       |
 
 ## 账户成交历史
-获取账户指定交易对的成交历史
+获取账户指定交易对的成交历史，仅可查询近1月成交记录，如需查看更多成交记录，请使用web端导出功能，最多支持导出近3年成交记录。
 
 
 > 请求示例
@@ -2246,17 +2246,17 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 
 **请求参数**
 
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-|coin|string|是|币种|
-|withdrawOrderId|string|否|自定义提币ID(目前不支持)|
-|network|string|否|提币网络|
-|address|string|是|提币地址|
-|memo|string|是|如地址中需求memo，在此处传入|
-|amount|string|是|数量|
-|remark|string|否|备注|
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
+| 参数名 | 数据类型| 是否必须 | 说明               | 
+| :------ | :-------- |:-----|:-----------------|
+|coin|string| 是    | 币种               |
+|withdrawOrderId|string| 否    | 自定义提币ID(目前不支持)   |
+|network|string| 否    | 提币网络             |
+|address|string| 是    | 提币地址             |
+|memo|string| 否    | 如地址中需求memo，则此处必传 |
+|amount|string| 是    | 数量               |
+|remark|string| 否    | 备注               |
+|timestamp|string| 是    | 时间戳              |
+|signature|string| 是    | 签名               |
  
 1. 如果不发送`network`,将按该币种默认网络返回结果;
 2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
@@ -2723,7 +2723,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
   {
   "symbol": "BTCUSDT",
   "orderId": "693471305432961024",
-  "clientOrderId": "6gCrw2kRUAF9CvJDGP16IP",
   "isIsolated": true,       
   "transactTime": 1507725176595
   }
@@ -2745,8 +2744,7 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 |type|详见枚举定义：<a href="#order_type">订单类型</a>  (暂不支持市价单)|是|string|LIMIT| 
 |quantity|订单数量|否|string|10| 
 |quoteOrderQty|订单总额|否|string|200000| 
-|price|下单价格买入价|否|string|20000| 
-|newClientOrderId|客户自定义的唯一订单ID|否|string|6gCrw2kRUAF9CvJDGP16IP| 
+|price|下单价格买入价|否|string|20000|
 |recvWindow|同步时间 |否|string|6000| 
 
 
@@ -2756,7 +2754,6 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 | :------------ | :-------- | :-------- |:-------------- |
 |symbol| 交易对|string|BTCUSDT|
 |orderId|订单id |string|693471305432961024|
-|clientOrderId|客户自定义订单id |string|6gCrw2kRUAF9CvJDGP16IP|
 |isIsolated| 是否是逐仓|boolean|true|
 |transactTime| 下单时间|number|1507725176595|
 
