@@ -46,7 +46,7 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 ## Contact us
 
-- MEXC API Telegram Grop [MEXC API Support Group](https://t.me/MEXCAPIsupport)
+- MEXC API Telegram Group [MEXC API Support Group](https://t.me/MEXCAPIsupport)
   - For any general questions about the API not covered in the documentation.
   - For any MM questions
 - MEXC Customer Support *website.app online customer server*
