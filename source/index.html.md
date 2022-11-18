@@ -2361,6 +2361,7 @@ Parameters:
 
 1. Only can quary the data for the last six months
 2. If 'startTime' and 'endTime' are not send, will return the last seven days' data by default
+
 Response:
 
 | name | Description  |
@@ -2439,12 +2440,11 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 > response
 
 ```json
-[
-  {
-  "tradeMode": 0,
-  "symbol": "BTCUSDT"
-  }
-]
+
+{
+"tradeMode": 0,
+"symbol": "BTCUSDT"
+}
 ```
 
 **Http Request**
@@ -2482,14 +2482,13 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 > response
 
 ```json
-[
   {
   "symbol": "BTCUSDT",
   "orderId": "693471305432961024",
   "isIsolated": true,       
   "transactTime": 1507725176595
   }
-]
+
 ```
 **Http Request**
 
@@ -2531,11 +2530,11 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 > response
 
 ```json
-[
+
   {
     "tranId": 746784754145301480
   }
-]
+
 ```
 **Http Request**
 
@@ -2575,11 +2574,11 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 > response
 
 ```json
-[
+
   {
     "tranId": 2597392
   }
-]
+
 ```
 **Http Request**
 
@@ -2683,7 +2682,7 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 > response
 
 ```json
-[
+
   {
      "symbol": "BTCUSDT",
      "orderId": "746777776866070528",
@@ -2701,7 +2700,7 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
      "time": 1658212162000,
      "updateTime": 1658212162000     
   }
-]
+
 ```
 **Http Request**
 
@@ -2751,7 +2750,7 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 > response
 
 ```json
-[
+
   {
      "symbol": "BTCUSDT",
      "tranId": "746784754145300480",
@@ -2764,7 +2763,7 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
      "status": "REPAID",
      "timestamp": 1658213826000
   }
-]
+
 ```
 **Http Request**
 
@@ -3012,11 +3011,11 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 > response
 
 ```json
-[
+
   {
      "amount": "0.00022998"
   } 
-]
+
 ```
 **Http Request**
 
@@ -3048,13 +3047,13 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 > response
 
 ```json
-[
+
   {
      "price": "21823.45",
      "symbol": "BTCUSDT",
      "calcTime": 1658215048128
   }
-]
+
 ```
 **Http Request**
 
@@ -3088,7 +3087,7 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 > response
 
 ```json
-[
+
   {
      "symbol": "BTCUSDT",
      "orderId": "746779360689786880",
@@ -3106,7 +3105,7 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
      "time": 1658212540000,
      "updateTime": 1658212551000
   }
-]
+
 ```
 **Http Request**
 
@@ -3156,7 +3155,7 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 > response
 
 ```json
-[
+
   {
    "assets":[
       {
@@ -3196,7 +3195,7 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
       }
    ]
   }
-]
+
 ```
 **Http Request**
 
@@ -3277,12 +3276,12 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 > response
 
 ```json
-[
+
   {
      "amount": "0.00618914",
      "borrowLimit": "30"
   }
-]
+
 ```
 **Http Request**
 
@@ -3368,14 +3367,14 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 > response
 
 ```json
-[
+
   {
    "symbol":"BTCUSDT",
    "base":"BTC",
    "quote":"USDT",
    "isMarginTrade":true
   }
-]
+
 ```
 **Http Request**
 
@@ -3410,9 +3409,10 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 > response
 
 ```json
-[
+{
 
-]
+}
+
 ```
 **Http Request**
 
@@ -4258,7 +4258,7 @@ If startTime and endTime are not sent, the recent 1 year's data will be returned
 ### <a id="order_status">Order Status</a>
 
 - NEW   Uncompleted
-- FIELLD  Filled
+- FILLED  Filled
 - PARTIALLY_FILLED  Partially filled
 - CANCELED  Canceled
 - PARTIALLY_CANCELED  Partially canceled
