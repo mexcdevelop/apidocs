@@ -3329,7 +3329,7 @@ subscribe , unsubscribe, example is shown on the right.
 | p  | decimal  | transaction  price |
 | v  | decimal  | volume |
 | T  | int  | transaction direction,1:purchase,2:sell |
-| O  | int   | open position?, 1: Yes,2: No, vol is the additional position when O is 1 |
+| O  | int   | open position, 1: maker and taker both Yes,2:maker and taker both No,3:other condition, vol is the additional position when O is 1 |
 | M  | int   | Is it auto-transact ? 1: Yes,2: No |
 | t  | long   | transaction time |
 
