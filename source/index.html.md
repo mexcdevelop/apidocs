@@ -1491,7 +1491,8 @@ None
 | fee                   | string  | 手续费           |
 | member_id             | string  | 用户ID           |
 | state                 | string  | 状态             |
-| txid                  | string  | 交易hash         |
+| txid                  | string  | 交易id         |
+| trans_hash            | string  | 交易hash         |
 | update_time           | string  | 更新时间         |
 | wallet_type           | string  | 钱包类型         |
 | current_page          | number  | 当前页           |
@@ -1573,7 +1574,8 @@ None
 | id           | string  | 提现ID           |
 | remark       | string  | 提现备注         |
 | state        | string  | 状态             |
-| tx_id        | string  | 交易hash         |
+| tx_id        | string  | 交易id         |
+| trans_hash   | string  | 交易hash         |
 | update_time  | string  | 更新时间         |
 | page_num     | number  | 当前页           |
 | page_size    | number  | 当前页条数       |
