@@ -888,7 +888,7 @@ curl "https://contract.mexc.com/api/v1/contract/deals/BTC_USDT"
 | p  | decimal  | 成交价 |
 | v  | decimal  | 数量 |
 | T  | int  | 成交方向,1:买,2:卖 |
-| O  | int   | 是否是开仓，1:是,2:否,当O为1的时候, vol是新增的持仓量 |
+| O  | int   | 是否是开仓，1:taker和maker都是开仓,2:taker和maker都不是开仓,3:其他情况,当O为1的时候, vol是新增的持仓量 |
 | M  | int   | 是否为自成交,1:是,2:否 |
 | t  | long   | 成交时间|
 
