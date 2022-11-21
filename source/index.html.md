@@ -1343,7 +1343,8 @@ Rate Limit : 20times/2s
 | fee   | string  | Fee |
 | member_id   | string  | UserID |
 | state  | string  | Status |
-| txid  | string  | Trading hash |
+| txid  | string  | Trading hash id|
+| trans_hash | string  | Trading hash |
 | update_time  | string  | Update time |
 | wallet_type  | string  | The wallet type |
 | current_page  | number  | The current page |
@@ -1424,7 +1425,8 @@ Rate Limit : 20times/2s
 | member_id   | string  | UserID |
 | remark  | string  | Withdraw notes  |
 | state  | string  | Status |
-| txid  | string  | Trading hash |
+| txid  | string  | Trading hash id|
+| trans_hash | string  | Trading hash |
 | update_time  | string  | Update time |
 | wallet_type  | string  | The wallet type |
 | current_page  | number  | The current page |
