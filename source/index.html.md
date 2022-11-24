@@ -36,6 +36,7 @@ meta:
 <aside class="notice">
 使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
 </aside>
+
 ## Demo示例
 
 我们提供了5种语言的demo，用户可以参考，目前支持了现货，推送等示例，后续会持续更新。
@@ -49,6 +50,20 @@ https://github.com/mxcdevelop/mexc-api-demo
 现在你可以通过`Postman collection`来快速体验、使用API接口。
 如果想了解更多如何使用Postman，请访问: [Mexc API Postman](https://github.com/mxcdevelop/mexc-api-postman)
 
+## 经纪商申请
+
+MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪商合作伙伴是MEXC生态系统中的重要参与部分。MEXC推出了MEXC经纪商权益，包括交易返佣和营销支持，以奖励合作伙伴。
+
+**目前MEXC支持的经纪商模式：**
+
+**1. API 经纪商：**
+包括集跟单平台、交易机器人、量化策略平台或其他500人以上资产管理平台等，用户可以将API key授权给API经纪商，API经纪商代替用户发送含有经济商ID的交易订单，获取手续费分润。
+
+**2. 独立经纪商：**
+包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。
+
+合作请联系：broker@mexc.com
+
 ## 联系我们
 
 - MEXC API电报群 [MEXC API Support Group](https://t.me/MEXCAPIsupport)
@@ -56,11 +71,15 @@ https://github.com/mxcdevelop/mexc-api-demo
   - 咨询API或者websocket性能方面的问题
   - 咨询做市相关的问题
 - MEXC 客服 *官网、app中在线客服*
-  -  咨询关于钱包、短信、2FA等问题
+  - 咨询关于钱包、短信、2FA等问题
 
 # 更新日志
 
-## **2022-10-14 16:00(UTC+8)**
+## **2022-11-24 **
+
+- 新增开启MX抵扣接口和查看MX抵扣状态接口
+
+## **2022-10-14 **
 
 - 更新部分[钱包接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下：
 
@@ -2146,6 +2165,82 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | isSelfTrade     | 是否自成交           |
 | clientOrderId   | 用户自定义id|
 
+## 开启MX抵扣
+调用该接口，开启或者关闭MX抵扣手续费设置
+
+> 请求示例
+
+```
+post api/v3/mxDeduct/enable
+```
+> 返回示例
+
+```json
+{
+  "data":{
+    "mxDeductEnable":true
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672280
+} 
+```
+**HTTP请求**
+
+- **POST** ```api/v3/mxDeduct/enable```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|mxDeductEnable|boolean|yes|是否开启MX抵扣,true:开启, false:关闭|
+|recvWindow|long|no|同步时间|
+|timestamp|long|yes|时间戳|
+|signature|string|yes|签名|
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|是否开启了MX抵扣,true:已开启,false:已关闭.|
+
+## 查看MX抵扣状态
+
+> 请求示例
+
+```
+get api/v3/mxDeduct/enable
+```
+> 返回示例
+
+```json
+{
+  "data":{
+    "mxDeductEnable":false
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672717
+}
+```
+**HTTP请求**
+
+- **GET** ```api/v3/mxDeduct/enableh```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|recvWindow|long|no|同步时间|
+|timestamp|long|yes|时间戳|
+|signature|string|yes|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|是否开启了MX抵扣,true:已开启,false:已关闭.|
 
 # 钱包接口
 
