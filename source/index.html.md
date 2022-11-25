@@ -2167,7 +2167,7 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | clientOrderId   | 用户自定义id|
 
 ## 开启MX抵扣
-调用该接口，开启或者关闭MX抵扣手续费设置
+调用该接口，开启或者关闭现货MX抵扣手续费设置
 
 > 请求示例
 
@@ -2204,6 +2204,9 @@ post api/v3/mxDeduct/enable
 | 参数名  |类型 | 说明|
 | :------------ | :-------- | :--------|
 |mxDeductEnable|boolean|是否开启了MX抵扣,true:已开启,false:已关闭.|
+
+<aside class="notice">合约账户的MX抵扣：将MX转入合约账户, 即可使用MX抵扣USDT本位合约手续费, 享受10%手续费折扣</aside>
+
 
 ## 查看MX抵扣状态
 
