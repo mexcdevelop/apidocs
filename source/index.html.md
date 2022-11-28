@@ -44,6 +44,22 @@ This is recommended for new users who want to get a quick-start into using the A
 
 For more information please refer to this page: [MEXC API Postman](https://github.com/mxcdevelop/mexc-api-postman)
 
+## MEXC Broker Introduction
+
+MEXC is committed to building crypto infrastructure, with API broker partners that provide valuable services being an essential part of the MEXC ecosystem. To reward the partners, MEXC now provides privileges for MEXC brokers, including trading rebates and marketing support.
+
+**Broker Modes Supported by MEXC**
+
+**1. API Broker**
+
+This includes copy trade platforms, trading bots, quantitative strategy platforms, or other asset management platforms with more than 500 people, etc. Users can authorize the API key to the API broker, and the API broker will send the trading orders containing the broker ID on behalf of the user and receive profit shares from fees.
+
+**2. Independent Broker**
+
+This includes wallet platforms, market data platforms, aggregation trading platforms, stockbrokers, as well as stock and securities trading platforms, etc., all of which have their own independent users. MEXC can provide order matching systems, account management systems, settlement systems, as well as main and sub-account systems, etc. Independent brokers can share the trading fluidity and depth over the MEXC platform and receive profit shares from fees.
+
+To apply for a partnership, please contact: **broker@mexc.com**
+
 ## Contact us
 
 - MEXC API Telegram Group [MEXC API Support Group](https://t.me/MEXCAPIsupport)
@@ -54,7 +70,12 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
-## **2022-10-14 16:00(UTC+8)**
+## **2022-11-24 **
+
+- Add MEXC Broker Introduction
+- Add "Enable MX Deduct" and "Query MX Deduct Status" Endpoints
+
+## **2022-10-14 **
 
 - Update Endpoints [Wallet Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
@@ -1910,6 +1931,84 @@ Response:
 | isSelfTrade     |   isSelfTrade |
 | clientOrderId   | clientOrderId |
 
+## Enable MX Deduct
+Enable or disable MX deduct for spot commission fee
+
+> Request
+
+```
+post api/v3/mxDeduct/enable
+```
+> Response
+
+```json
+{
+  "data":{
+    "mxDeductEnable":true
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672280
+} 
+```
+**HTTP请求**
+
+- **POST** ```api/v3/mxDeduct/enable```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|mxDeductEnable|boolean|yes|true:enable,false:disable|
+|recvWindow|long|no|recvWindow|
+|timestamp|long|yes|timestamp|
+|signature|string|yes|signature|
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|true:enable,false:disable|
+
+<aside class="notice">For Futures:Enjoy 10% off trading fees when you transfer MX into your futures account and offset USDT-margined futures trading fees with MX.</aside>
+
+
+## Query MX Deduct Status
+
+> Request
+
+```
+get api/v3/mxDeduct/enable
+```
+> Response
+
+```json
+{
+  "data":{
+    "mxDeductEnable":false
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672717
+}
+```
+
+- **GET** ```api/v3/mxDeduct/enableh```
+
+**Parameters:**
+
+| name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|recvWindow|long|no|recvWindow|
+|timestamp|long|yes|timestamp|
+|signature|string|yes|signature|
+
+
+**Response:**
+
+| name  |Type | Description|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|true:enable,false:disable|
 
 # Wallet Endpoints
 
