@@ -44,6 +44,22 @@ This is recommended for new users who want to get a quick-start into using the A
 
 For more information please refer to this page: [MEXC API Postman](https://github.com/mxcdevelop/mexc-api-postman)
 
+## MEXC Broker Introduction
+
+MEXC is committed to building crypto infrastructure, with API broker partners that provide valuable services being an essential part of the MEXC ecosystem. To reward the partners, MEXC now provides privileges for MEXC brokers, including trading rebates and marketing support.
+
+**Broker Modes Supported by MEXC**
+
+**1. API Broker**
+
+This includes copy trade platforms, trading bots, quantitative strategy platforms, or other asset management platforms with more than 500 people, etc. Users can authorize the API key to the API broker, and the API broker will send the trading orders containing the broker ID on behalf of the user and receive profit shares from fees.
+
+**2. Independent Broker**
+
+This includes wallet platforms, market data platforms, aggregation trading platforms, stockbrokers, as well as stock and securities trading platforms, etc., all of which have their own independent users. MEXC can provide order matching systems, account management systems, settlement systems, as well as main and sub-account systems, etc. Independent brokers can share the trading fluidity and depth over the MEXC platform and receive profit shares from fees.
+
+To apply for a partnership, please contact: **broker@mexc.com**
+
 ## Contact us
 
 - MEXC API Telegram Group [MEXC API Support Group](https://t.me/MEXCAPIsupport)
@@ -54,7 +70,16 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 # Change Log
 
-## **2022-10-14 16:00(UTC+8)**
+## **2022-11-29 **
+
+- Add "Margin Account Orders" channel and "Margin Account Risk Rate" channel in Websocket
+
+## **2022-11-24 **
+
+- Add MEXC Broker Introduction
+- Add "Enable MX Deduct" and "Query MX Deduct Status" Endpoints
+
+## **2022-10-14 **
 
 - Update Endpoints [Wallet Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
@@ -93,7 +118,7 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 - [ETF](https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf) add some response params:
 
-| name       | type | Description          |
+| Name       | type | Description          |
 | :------------- | :------- | :------------ |
 | preBasket      | string   | preBasket  |
 | preLeverage    | string   | preLeverage  |
@@ -137,7 +162,7 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 - [Account Trade List](https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-trade-list) add params: isSelfTrade
 
-| name          | Description              |
+| Name          | Description              |
 | :-------------- | :---------------- |
 | isSelfTrade     | isSelfTrade        |
 
@@ -163,7 +188,7 @@ For more information please refer to this page: [MEXC API Postman](https://githu
 
 - [Exchange Info](https://mxcdevelop.github.io/apidocs/spot_v3_en/#exchange-information) add parameters:
 
-| name                     | type | Description                |
+| Name                     | type | Description                |
 | :------------------------- | :------- | :------------------ |
 | isSpotTradingAllowed       | Boolean  | isSpotTradingAllowed |
 | isMarginTradingAllowed     | Boolean  | isMarginTradingAllowed |
@@ -424,8 +449,8 @@ The following error information can be returend
 | 730002  | Parameter error                                                                       |
 | 730003  | Unsupported operation, please contact the customer service                            |
 | 730100  | Unusual user status                                                                   |
-| 730600  | Sub-account name cannot be null                                                       |
-| 730601  | Sub-account name must be a combination of 8-32 letters and numbers                    |
+| 730600  | Sub-account Name cannot be null                                                       |
+| 730601  | Sub-account Name must be a combination of 8-32 letters and numbers                    |
 | 730602  | Sub-account remarks cannot be null                                                    |
 | 730700  | API KEY remarks cannot be null                                                        |
 | 730701  | API KEY permission cannot be null                                                     |
@@ -435,7 +460,7 @@ The following error information can be returend
 | 730705  | At most 30 groups of Api Keys are allowed to be created only                            |
 | 730706  | API KEY information does not exist                                                       |
 | 730707  | accessKey cannot be null                                                                 |
-| 730101  | The user name already exists                                                                  |
+| 730101  | The user Name already exists                                                                  |
 
 # Market Data Endpoints
 
@@ -542,14 +567,14 @@ There are 3 possible options:
 
 Parameter:
 
-| name   | Type    | Mandatory | Description     | Scope                 |
+| Name   | Type    | Mandatory | Description     | Scope                 |
 | ------ | ------- | --------- | --------------- | --------------------- |
 | symbol | string  | YES       | Symbol          |                       |
 | limit  | integer | NO        | Returen  number | default 100; max 5000 |
 
 Response:
 
-| name         | Type | Description            |
+| Name         | Type | Description            |
 | ------------ | ---- | ---------------------- |
 | lastUpdateId | long | Last Update Id       |
 | bids         | list | Bid [Price, Quantity ] |
@@ -577,7 +602,7 @@ Response:
 
 Parameter:
 
-| name   | Type    | Mandatory | Description | Scope                  |
+| Name   | Type    | Mandatory | Description | Scope                  |
 | ------ | ------- | --------- | ----------- | ---------------------- |
 | symbol | string  | YES       |             |                        |
 | limit  | integer | NO        |             | Default  500; max 1000 |
@@ -585,7 +610,7 @@ Parameter:
 
 Response:
 
-| name         | Description                         |
+| Name         | Description                         |
 | ------------ | ----------------------------------- |
 | id           | Trade id                            |
 | price        | Price                               |
@@ -617,7 +642,7 @@ Response:
 
 Parameters:
 
-| name   | Type    | Mandatory | Description   | Scope                 |
+| Name   | Type    | Mandatory | Description   | Scope                 |
 | ------ | ------- | --------- | ------------- | --------------------- |
 | symbol | string  | YES       | Symbol        |                       |
 | limit  | integer | NO        | Return number | Default 500; max 1000 |
@@ -625,7 +650,7 @@ Parameters:
 
 Response:
 
-| name         | Description                         |
+| Name         | Description                         |
 | ------------ | ----------------------------------- |
 | id           | Trade id                            |
 | price        | Price                               |
@@ -661,7 +686,7 @@ Get compressed, aggregate trades. Trades that fill at the time, from the same or
 
 Parameters:
 
-| name      | Type    | Mandatory | Description                                              | Scope                  |
+| Name      | Type    | Mandatory | Description                                              | Scope                  |
 | --------- | ------- | --------- | -------------------------------------------------------- | ---------------------- |
 | symbol    | string  | YES       |                                                          |                        |
 | startTime | long    | NO        | Timestamp in ms to get aggregate trades from INCLUSIVE.  |                        |
@@ -672,7 +697,7 @@ startTime and endTime must be used at the same time.
 
 Response:
 
-| name | Description                         |
+| Name | Description                         |
 | ---- | ----------------------------------- |
 | a    | Aggregate tradeId                   |
 | f    | First tradeId                       |
@@ -710,7 +735,7 @@ Klines are uniquely identified by their open time.
 
 Parameters:
 
-| name      | Type    | Mandatory | Description                                        |
+| Name      | Type    | Mandatory | Description                                        |
 | --------- | ------- | --------- |----------------------------------------------------|
 | symbol    | string  | YES       |                                                    |
 | interval  | ENUM    | YES       | ENUM: <a href="#kline_interval">Kline Interval</a> |
@@ -748,14 +773,14 @@ Response:
 
 Parameters:
 
-| name   | Type   | Mandatory | Description |
+| Name   | Type   | Mandatory | Description |
 | ------ | ------ | --------- | ----------- |
 | symbol | string | YES       |             |
 
 
 Response:
 
-| name  | Description              |
+| Name  | Description              |
 | ----- | ------------------------ |
 | mins  | Average price time frame |
 | price | Price                    |
@@ -832,14 +857,14 @@ or
 
 Parameters:
 
-| name   | Type   | Mandatory | Description                                                                      |
+| Name   | Type   | Mandatory | Description                                                                      |
 | ------ | ------ | --------- | -------------------------------------------------------------------------------- |
 | symbol | string | NO        | If the symbol is not sent, tickers for all symbols will be returned in an array. |
 
 
 Response:
 
-| name               | Description           |
+| Name               | Description           |
 | ------------------ | --------------------- |
 | symbol             | Symbol                |
 | priceChange        | price Change          |
@@ -886,14 +911,14 @@ or
 
 Parameters:
 
-| name   | Type   | Mandatory | Description                                                          |
+| Name   | Type   | Mandatory | Description                                                          |
 | ------ | ------ | --------- | -------------------------------------------------------------------- |
 | symbol | string | NO        | If the symbol is not sent, all symbols will be returned in an array. |
 
 
 Response:
 
-| name   | Description |
+| Name   | Description |
 | ------ | ----------- |
 | symbol |             |
 | price  | Last price  |
@@ -936,14 +961,14 @@ Best price/qty on the order book for a symbol or symbols.
 
 Parameters:
 
-| name   | Type   | Mandatory | Description                                                          |
+| Name   | Type   | Mandatory | Description                                                          |
 | ------ | ------ | --------- | -------------------------------------------------------------------- |
 | symbol | string | NO        | If the symbol is not sent, all symbols will be returned in an array. |
 
 
 Response:
 
-| name     | Description       |
+| Name     | Description       |
 | -------- | ----------------- |
 | symbol   | Symbol            |
 | bidPrice | Best bid price    |
@@ -973,9 +998,9 @@ Create a sub-account from the master account.
 
 Parameters:
 
-| name       | Type   | Mandatory | Description       |
+| Name       | Type   | Mandatory | Description       |
 | ---------- | ------ | --------- | ----------------- |
-| subAccount | STRING | YES       | Sub-account name  |
+| subAccount | STRING | YES       | Sub-account Name  |
 | note       | STRING | YES       | Sub-account notes |
 | recvWindow | LONG   | NO        |                   |
 | timestamp  | LONG   | YES       |                   |
@@ -1011,9 +1036,9 @@ Get details of the sub-account list
 
 Parameters:
 
-| name       | Type   | Mandatory | Description                       |
+| Name       | Type   | Mandatory | Description                       |
 | ---------- | ------ | --------- | --------------------------------- |
-| subAccount | STRING | NO        | Sub-account name                  |
+| subAccount | STRING | NO        | Sub-account Name                  |
 | isFreeze   | STRING | NO        | true or false                     |
 | page       | INT    | NO        | Default value: 1                  |
 | limit      | INT    | NO        | Default value: 10, Max value: 200 |
@@ -1045,9 +1070,9 @@ Parameters:
 
 Parameters:
 
-| name        | Type   | Mandatory | Description                                                  |
+| Name        | Type   | Mandatory | Description                                                  |
 | ----------- | ------ | --------- | ------------------------------------------------------------ |
-| subAccount  | STRING | YES       | Sub-account name                                             |
+| subAccount  | STRING | YES       | Sub-account Name                                             |
 | note        | STRING | YES       | APIKey note                                                  |
 | permissions | STRING | YES       | Permission of APIKey:<br/>SPOT_ACCOUNT_READ,<br/>SPOT_ACCOUNT_WRITE,<br/>SPOT_DEAL_READ,<br/>SPOT_DEAL_WRITE,<br/>ISOLATED_MARGIN_ACCOUNT_READ,<br/>ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>ISOLATED_MARGIN_DEAL_READ,<br/>ISOLATED_MARGIN_DEAL_WRITE,<br/>CONTRACT_ACCOUNT_READ,<br/>CONTRACT_ACCOUNT_WRITE,<br/>CONTRACT_DEAL_READ,<br/>CONTRACT_DEAL_WRITE,<br/>SPOT_TRANSFER_READ,<br/>SPOT_TRANSFER_WRITE| 
 | ip          | STRING | NO        | Link IP addresses, separate with commas if more than one. Support up to 20 addresses. |
@@ -1088,9 +1113,9 @@ Applies to master accounts only
 
 Parameters:
 
-| name       | Type   | Mandatory | Description      |
+| Name       | Type   | Mandatory | Description      |
 | ---------- | ------ | --------- | ---------------- |
-| subAccount | STRING | YES       | Sub-account name |
+| subAccount | STRING | YES       | Sub-account Name |
 | recvWindow | LONG   | NO        |                  |
 | timestamp  | LONG   | YES       |                  |
 
@@ -1113,9 +1138,9 @@ Parameters:
 
 Parameters:
 
-| name       | Type   | Mandatory | Description      |
+| Name       | Type   | Mandatory | Description      |
 | ---------- | ------ | --------- | ---------------- |
-| subAccount | STRING | YES       | Sub-account name |
+| subAccount | STRING | YES       | Sub-account Name |
 | apiKey     | STRING | YES       | API public key   |
 | recvWindow | LONG   | NO        |                  |
 | timestamp  | LONG   | YES       |                  |
@@ -1141,7 +1166,7 @@ post /api/v3/capital/sub-account/universalTransfer
 
 **Parameters:**
 
-| name | Type| Mandatory  | Description |  
+| Name | Type| Mandatory  | Description |  
 | :------ | :-------- | :-------- | :---------- |
 |fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
 |toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
@@ -1155,7 +1180,7 @@ post /api/v3/capital/sub-account/universalTransfer
 
 **Response:**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
 |tranId|string|transfer ID|
 
@@ -1189,7 +1214,7 @@ get /api/v3/capital/sub-account/universalTransfer
 
 **Parameters:**
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |fromAccount|string|NO|Transfer from master account by default if fromAccount is not sent|
 |toAccount|string|NO|Transfer to master account by default if toAccount is not sent|
@@ -1204,7 +1229,7 @@ get /api/v3/capital/sub-account/universalTransfer
 
 **Response:**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
 |tranId|string|transfer ID|
 |fromAccount|string|fromAccount|
@@ -1246,17 +1271,17 @@ post /api/v3/sub-account/futures
 
 **Parameters:**
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|subAccount|string|YES|subaccount name|
+|subAccount|string|YES|subaccount Name|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|sign|
 
 **Response:**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
-|subAccount|string|subaccount name|
+|subAccount|string|subaccount Name|
 |isFuturesEnabled|boolean|isFuturesEnabled:true|
 |timestamp|string|response time|
 
@@ -1286,17 +1311,17 @@ post /api/v3/sub-account/margin
 
 **Parameters:**
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
-|subAccount|string|YES|subaccount name|
+|subAccount|string|YES|subaccount Name|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|sign|
 
 **Response:**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
-|subAccount|string|subaccount name|
+|subAccount|string|subaccount Name|
 |isMarginEnabled|booleanisMarginEnabled:true or false|
 |timestamp|string|response time|
 
@@ -1347,7 +1372,7 @@ POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&times
 
 Parameters:
 
-| name             | type    | Mandatory | Description                               |
+| Name             | type    | Mandatory | Description                               |
 | ---------------- | ------- | --------- |-------------------------------------------|
 | symbol           | STRING  | YES       |                                           |
 | side             | ENUM    | YES       | ENUM:<a href="#order_side">Order Side</a> |
@@ -1361,7 +1386,7 @@ Parameters:
 
 Response:
 
-| name         | Description                          |
+| Name         | Description                          |
 |--------------|--------------------------------------|
 | symbol       | Symbol                               |
 | orderId      | order id                             |
@@ -1445,7 +1470,7 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 Parameters:
 
-| name             | type    | Mandatory | Description                                |
+| Name             | type    | Mandatory | Description                                |
 | :--------------- | :------ | :------- |:-------------------------------------------|
 | batchOrders      | LIST  | YES      | list of batchOrders,supports max 20 orders |
 | symbol           | STRING  | YES      | symbol                                     |
@@ -1467,7 +1492,7 @@ base on different`type`,some params are mandatory:
 
 Response
 
-| name       | type | Description       |
+| Name       | type | Description       |
 | :------------ | :-------- | :------------------- |
 | symbol | STRING | symbol |
 | orderId | STRING | orderId |
@@ -1499,7 +1524,7 @@ Cancel an active order.
 
 Parameters:
 
-| name              | Type   | Mandatory | Description |
+| Name              | Type   | Mandatory | Description |
 | ----------------- | ------ | --------- | ----------- |
 | symbol            | string | YES       |             |
 | orderId           | string | NO        | Order id    |
@@ -1512,7 +1537,7 @@ Either `orderId` or `origClientOrderId` must be sent.
 
 Response:
 
-| name                | Description                          |
+| Name                | Description                          |
 | ------------------- |--------------------------------------|
 | symbol              | Symbol                               |
 | origClientOrderId   | Original client order id             |
@@ -1572,7 +1597,7 @@ Cancel all pending orders for a single  symbol, including OCO pending orders.
 
 Parameters:
 
-| name       | Type   | Mandatory | Description |
+| Name       | Type   | Mandatory | Description |
 | ---------- | ------ | --------- | ----------- |
 | symbol     | string | YES       | maximum input 5 symbols,separated by ",". e.g. "BTCUSDT,MXUSDT,ADAUSDT"|
 | recvWindow | long   | NO        |             |
@@ -1581,7 +1606,7 @@ Parameters:
 
 Response:
 
-| name                | Description                |
+| Name                | Description                |
 | ------------------- | -------------------------- |
 | symbol              | Symbol                     |
 | origClientOrderId   | Original client order id   |
@@ -1628,7 +1653,7 @@ Check an order's status.
 
 Parameters:
 
-| name              | Type   | Mandatory | Description |
+| Name              | Type   | Mandatory | Description |
 | ----------------- | ------ | --------- | ----------- |
 | symbol            | String | YES       |             |
 | origClientOrderId | String | NO        |             |
@@ -1639,7 +1664,7 @@ Parameters:
 
 Response:
 
-| name                | Description                          |
+| Name                | Description                          |
 | ------------------- |--------------------------------------|
 | symbol              | Symbol                               |
 | origClientOrderId   | Original client order id             |
@@ -1693,7 +1718,7 @@ Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 Parameters:
 
-| name       | Type   | Mandatory | Description |
+| Name       | Type   | Mandatory | Description |
 | ---------- | ------ | --------- | ----------- |
 | symbol     | string | YES       |             |
 | recvWindow | long   | NO        |             |
@@ -1702,7 +1727,7 @@ Parameters:
 
 Response:
 
-| name                | Description                         |
+| Name                | Description                         |
 | ------------------- |-------------------------------------|
 | symbol              | Symbol                              |
 | origClientOrderId   | Original client order id            |
@@ -1756,7 +1781,7 @@ Get all account orders including active, cancelled or completed orders(the query
 
 Parameters:
 
-| name       | Type   | Mandatory | Description             |
+| Name       | Type   | Mandatory | Description             |
 | ---------- | ------ | --------- | ----------------------- |
 | symbol     | string | YES       | Symbol                  |
 | startTime  | long   | NO        |                         |
@@ -1768,7 +1793,7 @@ Parameters:
 
 Response:
 
-| name                | Description                          |
+| Name                | Description                          |
 | ------------------- |--------------------------------------|
 | symbol              | Symbol                               |
 | origClientOrderId   | Original client order id             |
@@ -1822,7 +1847,7 @@ Get current account information,rate limit:2 times/s.
 
 Parameters:
 
-| name       | Type | Mandatory | Description |
+| Name       | Type | Mandatory | Description |
 | ---------- | ---- | --------- | ----------- |
 | recvWindow | long | NO        |             |
 | timestamp  | long | YES       |             |
@@ -1830,7 +1855,7 @@ Parameters:
 
 Response:
 
-| name             | Description     |
+| Name             | Description     |
 | ---------------- | --------------- |
 | makerCommission  | maker fee       |
 | takerCommission  | taker fee       |
@@ -1880,7 +1905,7 @@ Get trades for a specific account and symbol,Only the transaction records in the
 
 Parameters:
 
-| name       | Type   | Mandatory | Description            |
+| Name       | Type   | Mandatory | Description            |
 | ---------- | ------ | --------- | ---------------------- |
 | symbol     | string | YES       |                        |
 | orderId    | string | NO        | order Id               |
@@ -1893,7 +1918,7 @@ Parameters:
 
 Response:
 
-| name            | Description   |
+| Name            | Description   |
 | --------------- | ------------- |
 | symbol          |               |
 | id              | deal id       |
@@ -1910,6 +1935,84 @@ Response:
 | isSelfTrade     |   isSelfTrade |
 | clientOrderId   | clientOrderId |
 
+## Enable MX Deduct
+Enable or disable MX deduct for spot commission fee
+
+> Request
+
+```
+post api/v3/mxDeduct/enable
+```
+> Response
+
+```json
+{
+  "data":{
+    "mxDeductEnable":true
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672280
+} 
+```
+**HTTP请求**
+
+- **POST** ```api/v3/mxDeduct/enable```
+
+**Parameters:**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|mxDeductEnable|boolean|yes|true:enable,false:disable|
+|recvWindow|long|no|recvWindow|
+|timestamp|long|yes|timestamp|
+|signature|string|yes|signature|
+
+**Response:**
+
+| Name  |Type | Description|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|true:enable,false:disable|
+
+<aside class="notice">For Futures:Enjoy 10% off trading fees when you transfer MX into your futures account and offset USDT-margined futures trading fees with MX.</aside>
+
+
+## Query MX Deduct Status
+
+> Request
+
+```
+get api/v3/mxDeduct/enable
+```
+> Response
+
+```json
+{
+  "data":{
+    "mxDeductEnable":false
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672717
+}
+```
+
+- **GET** ```api/v3/mxDeduct/enableh```
+
+**Parameters:**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|recvWindow|long|no|recvWindow|
+|timestamp|long|yes|timestamp|
+|signature|string|yes|signature|
+
+
+**Response:**
+
+| Name  |Type | Description|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|true:enable,false:disable|
 
 # Wallet Endpoints
 
@@ -1926,14 +2029,14 @@ Get /api/v3/capital/config/getall
 [
   {
     "coin": "EOS",
-    "name": "EOS",
+    "Name": "EOS",
     "networkList": [
       {
           "coin": "EOS",
           "depositDesc": null,
           "depositEnable": true,
           "minConfirm": 0,
-          "name": "EOS",
+          "Name": "EOS",
           "network": "EOS",
           "withdrawEnable": false,
           "withdrawFee": "0.000100000000000000",
@@ -1950,7 +2053,7 @@ Get /api/v3/capital/config/getall
           "depositDesc": null,
           "depositEnable": true,
           "minConfirm": 0,
-          "name": "BTC-BSC",
+          "Name": "BTC-BSC",
           "network": "BEP20(BSC)",
           "withdrawEnable": true,
           "withdrawFee": "0.000010000000000000",
@@ -1979,7 +2082,7 @@ Parameters:
 
 Response:
 
-| name | Description  | 
+| Name | Description  | 
 | :------------ | :-------- | 
 |depositEnable|depositEnable|
 |network|withdraw network|
@@ -2013,7 +2116,7 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 
 Parameters: 
 
-| name | Type| Mandatory | Description                                                    | 
+| Name | Type| Mandatory | Description                                                    | 
 | :------ | :-------- |:----------|:---------------------------------------------------------------|
 |coin|string| YES       | coin                                                           |
 |withdrawOrderId|string| NO        | withdrawOrderId                                                |
@@ -2030,7 +2133,7 @@ Parameters:
 3. Withdraw address only support address which added in withdrawal settings on website.
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- | 
 |id|withdraw ID|
 
@@ -2065,7 +2168,7 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|NO|coin |
 |status|string|NO|status|
@@ -2079,7 +2182,7 @@ Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 9
 
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- |
 |amount|deposit amount|
 |coin|coin |
@@ -2127,7 +2230,7 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|NO|coin |
 |status|string|NO|withdraw status|
@@ -2143,7 +2246,7 @@ Parameters:
 
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- | 
 |address|withdraw address|
 |amount| withdraw amount|
@@ -2190,7 +2293,7 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|YES|coin |
 |network|string|YES|deposit network|
@@ -2199,7 +2302,7 @@ Parameters:
 
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- |
 |address|deposit address|
 |coin|coin |
@@ -2243,7 +2346,7 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|YES|coin |
 |network|string|NO|deposit network|
@@ -2252,7 +2355,7 @@ Parameters:
 
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- |
 |address|deposit address|
 |coin|coin |
@@ -2281,7 +2384,7 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
 |toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
@@ -2295,7 +2398,7 @@ When type is`ISOLATEDMARGIN`, `fromSymbol` and `toSymbol` must be sent.
 
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- | 
 |tranId|tranId|
 
@@ -2347,7 +2450,7 @@ get /api/v3/capital/transfer
 
 Parameters: 
 
-| name | Type| Mandatory  | Description | 
+| Name | Type| Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 |fromAccountType|string|YES|fromAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
 |toAccountType|string|YES|toAccountType:"SPOT","FUTURES",<br/>"ISOLATED_MARGIN"|
@@ -2364,7 +2467,7 @@ Parameters:
 
 Response:
 
-| name | Description  |
+| Name | Description  |
 | :------------ | :-------- | 
 |total|total|
 |tranId|tranId|
@@ -2406,14 +2509,14 @@ Get information on ETFs, such as symbol, netValue and fund fee.
 
 Parameters:
 
-| name   | Type   | Mandatory | Description |
+| Name   | Type   | Mandatory | Description |
 | ------ | ------ | --------- | ----------- |
 | symbol | string | No        | ETF symbol  |
 
 
 Response:
 
-| name      | Type   | Description |
+| Name      | Type   | Description |
 | --------- | ------ | ----------- |
 | symbol    | string | ETF symbol  |
 | netValue  | string | Net Value   |
@@ -2453,7 +2556,7 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 | tradeMode | tradeMode |YES|int|0: Normal 1:Auto|
 | symbol | symbol |YES|string|BTCUSDT|
@@ -2463,7 +2566,7 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :-------| :------ |
 |tradeMode|tradeMode|int|0|
 |symbol|symbol|string|BTCUSDT|
@@ -2496,7 +2599,7 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 **Request Parameter**
 
-| name | Description                                          | Mandatory  | Type |  Sample  | 
+| Name | Description                                          | Mandatory  | Type |  Sample  | 
 | :------ |:-----------------------------------------------------| :-------- | :---------- | :------------------- |
 |symbol| symbol                                               |YES|string|BTCUSDT|
 |isIsolated| is Isolated,"TRUE", "FALSE", Default "TRUE"          |NO|string|TRUE|
@@ -2512,7 +2615,7 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 **Response Parameter**
 
-| name | Description  |Type | Sample |
+| Name | Description  |Type | Sample |
 | :------------ | :-------- | :-------- |:-------------- |
 |symbol| |string|BTCUSDT|
 |orderId| |string|693471305432961024|
@@ -2542,7 +2645,7 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample |
+| Name | Description| Mandatory  | Type |  Sample |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |asset|asset|YES|string|BTC| 
 |isIsolated|is Isolated,"TRUE", Default "TRUE"|NO|string| 
@@ -2555,7 +2658,7 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 
 **Response Parameter**
 
-| name | Description  |Type | Sample |
+| Name | Description  |Type | Sample |
 | :------------ | :-------- | :-------- | :------------------- |
 | tranId |transfer id |number|746784754145301480|
 
@@ -2586,7 +2689,7 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |asset|asset/btc|YES|string||
 |isIsolated|is Isolated,"TRUE",  Default "TRUE"|NO|string||
@@ -2600,7 +2703,7 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |tranId|repay id|number|2597392|
 
@@ -2645,7 +2748,7 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string||
 |isIsolated|is Isolated,"TRUE", Default "TRUE"|NO|string||
@@ -2655,7 +2758,7 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| |string|BTCUSDT|
 |isIsolated| is isolated symbol |boolean|true|
@@ -2708,7 +2811,7 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|
 |isIsolated|is Isolated,"TRUE", "FALSE", Default "FALSE"|NO|string|
@@ -2720,7 +2823,7 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| |string|LTCBTC|
 |orderId| |string|693471305432961024|
@@ -2771,7 +2874,7 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |asset|asset|YES|string|BTC|
 |symbol|symbol|YES|string|
@@ -2786,7 +2889,7 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| symbol|string|MXUSDT|
 |tranId| |number|12807067523|
@@ -2841,7 +2944,7 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|
 |isIsolated|is Isolated,"TRUE", "FALSE",Default "TRUE"|NO|string|
@@ -2854,7 +2957,7 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |clientOrderId| |string|D2KDy4DIeS56PvkM13f8cP|
 |cummulativeQuoteQty| |string|0.00000000|
@@ -2898,7 +3001,7 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|
 |isIsolated|is Isolated,"TRUE", "FALSE",Default "TRUE"|NO|string|
@@ -2911,7 +3014,7 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |commission|commission|string|0.00006000|
 |commissionAsset|commissionAsset|string|BTC|
@@ -2971,7 +3074,7 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol|symbol|YES|string| 
 |isIsolated|is Isolated,"TRUE", "FALSE",Default "TRUE"|NO|string|
@@ -2980,7 +3083,7 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |clientOrderId| |string|qhcZw71gAkCCTv0t0k8LUK|
 |cummulativeQuoteQty|cummulativeQuoteQty|string|0.00000000|
@@ -3023,7 +3126,7 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |asset| |YES|string| 
 |symbol|symbol|YES|string| 
@@ -3032,7 +3135,7 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |amount| |string|0.00022998|
 
@@ -3061,7 +3164,7 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string| 
 |timestamp| |YES|string|timestamp|
@@ -3069,7 +3172,7 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |calcTime| |number|1562046418000|
 |price| |string|0.00333930|
@@ -3113,7 +3216,7 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|
 |isIsolated|is Isolated,"TRUE", "FALSE",Default "TRUE"|NO|string| |
@@ -3123,7 +3226,7 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |clientOrderId| |string|ZwfQzuDIGpceVhKW5DvCmO|
 |cummulativeQuoteQty|cummulativeQuoteQty|string|0.00000000|
@@ -3203,14 +3306,14 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbols|max 5 symbols; String delimited by ",".|YES|string|"BTCUSDT,MXUSDT,ADAUSDT"|
 |timestamp| |YES|string|timestamp|
 |signature| |YES|string|signature|
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |asset| |string|BTC|
 |borrowEnabled| |boolean|true|
@@ -3254,14 +3357,14 @@ get /api/v3/margin/trigerOrder
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 
  -->
@@ -3289,7 +3392,7 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |asset| |YES|string| 
 |symbol| symbol|YES|string| 
@@ -3298,7 +3401,7 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |amount| max borrowable amount|string|1.69248805|
 |borrowLimit| borrowLimit |string|60|
@@ -3325,7 +3428,7 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |asset| |YES|string| |
 |symbol|symbol|YES|string| |
@@ -3340,7 +3443,7 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| symbol|string|MXUSDT|
 |amount| amount|string|14.00000000|
@@ -3382,7 +3485,7 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|| 
 |timestamp| |YES|string|timestamp|
@@ -3390,7 +3493,7 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| |string|BTCUSDT|
 |base| |string|BTC|
@@ -3420,7 +3523,7 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |startTime| |NO|string| |
 |endTime| |NO|string|| 
@@ -3432,7 +3535,7 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |avgPrice| |string|0.00388359|
 |executedQty| |string|31.39000000|
@@ -3488,7 +3591,7 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|| 
 |timestamp| |YES|string|timestamp|
@@ -3496,7 +3599,7 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| |string|BTCUSDT|
 |leverage| |string|10|
@@ -3536,7 +3639,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |symbol| |YES|string|| 
 |tier||NO|string|| 
@@ -3545,7 +3648,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 |symbol| |string|BTCUSDT|
 |tier|tier|number|1|
@@ -3665,7 +3768,7 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
 
 **Response:**
 
-| name      | Type   | Description |
+| Name      | Type   | Description |
 | :-------- | :----- | :--- |
 | deals | array | dealsInfo  |
 | > S | int | tradeType 1:buy 2:sell |
@@ -3719,7 +3822,7 @@ The Kline/Candlestick Stream push updates to the current klines/candlestick ever
 
 **Response:**
 
-| name      | Type   | Description |
+| Name      | Type   | Description |
 | :-------- | :----- | :--- |
 | k | object| klineInfo |
 | > T | long | endTime |
@@ -3784,7 +3887,7 @@ If the quantity is 0, it means that the order of the price has been cancel or tr
 
 **Response:**
 
-| name      | Type   | Description |
+| Name      | Type   | Description |
 | :-------- | :----- | :--- |
 | p | string | price |
 | v | string | quantity |
@@ -3815,7 +3918,7 @@ If the quantity is 0, it means that the order of the price has been cancel or tr
 
 - Each listen key maximum support  5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).
 
-## Listen Key(SPOT) 
+## Listen Key 
 
 ### Create a ListenKey
 
@@ -3854,7 +3957,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 **Request:**
 
-| name    | Type | Mandatory | Description |
+| Name    | Type | Mandatory | Description |
 | :-------- | :------- | :------- | :--- |
 | listenKey | STRING   | YES      |      |
 
@@ -3875,7 +3978,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
  Close out a user data stream.
 
 
-## Account Deals
+## Spot Account Deals
 
 >**request:**
 
@@ -3913,7 +4016,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 **Response:**
 
-| name      | Type   | Description |
+| Name      | Type   | Description |
 | :-------- | :----- | :--- |
 | d | json | dealsInfo |
 | > S | int | tradetype 1:buy 2:sell |
@@ -3928,7 +4031,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 | s | string | symbol |
 | t | long |eventTime |
 
-## Account Orders
+## Spot Account Orders
 
 >**request:**
 
@@ -3943,7 +4046,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 **Request:** `spot@private.orders.v3.api`
 
-### a.Limit/Market Orders 
+### 1. Limit/Market Orders 
 
 > **response:**
 
@@ -3971,7 +4074,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 **Response:**
 
-| name      | Type   | Description |
+| Name      | Type   | Description |
 | :-------- | :----- | :--- |
 | d | json | orderInfo |
 | > A | bigDecimal | remainAmount |
@@ -3989,7 +4092,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 | t | long | eventTime |
 | s | string | symbol |
 
-### b.Stop Limit Order
+### 2. Stop Limit Order
 
 > **response:**
 
@@ -4015,7 +4118,7 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 
 **Response:**
 
-|  name      | Type   | Description |
+|  Name      | Type   | Description |
 | :-------- | :----- | :--- |
 | d            | json | orderInfo |
 | > N | string | commissionAsset |
@@ -4030,6 +4133,128 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 |  > v | bigDecimal | quantity |
 | s | string | symbol |
 | t | long | eventTime |
+
+## Margin Account Orders
+
+> **request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "margin@private.orders.v3.api"
+    ]
+}
+```
+> **response:**
+
+```
+{
+    "c": "margin@private.orders.v3.api",
+    "d":{
+         "O":1661938138000,   
+         "p":"0.8",           
+         "a":"8",             
+         "v":"10",            
+        "da":"0",           
+        "dv":"0",          
+         "A":"8.0",           
+         "V":"10",            
+         "n": "0",            
+         "N": "USDT",         
+         "S":1,               
+         "o":1,               
+         "s":1,               
+         "i":"e03a5c7441e44ed899466a7140b71391", 
+    },
+    "s": "MXUSDT",           
+    "t":1661938138193       
+}
+```
+**Request:** `margin@private.orders.v3.api`
+
+**response:**
+
+| Name | Type | Description          |
+| :----- | :------- | :------------ |
+| d      | json     | order info  |
+| >O     | long     | createTime  |
+| >p     | string   | price      |
+| >a     | string   | amount    |
+| >v     | string   | quantity      |
+| >da     | string  | dealAmount    |
+| >dv     | string  | dealQuantity      |
+| >A     | string   | remainAmount|
+| >V     | string   | remainQuantity|
+| >n     | string   | fee   |
+| >N     | string   | feeCurrency|
+| >S     | int      | tradeType |
+| >o     | int      | orderType   |
+| >s     | int      | status    |
+| >i     | string   | orderId        |
+| s      | string   | symbol        |
+| t      | long     | timestamp     |
+
+## Margin Account Risk Rate
+
+> **request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "margin@private.risk.rate.v3.api@BTCUSDT",
+    ]
+}
+```
+> **response:**
+
+```
+{
+    "c": "margin@private.risk.rate.v3.api@BTCUSDT",
+    "d":{
+          "ba":{          
+                 "a":"0.0", 
+                 "b":"0.0", 
+                 "f":"0.0", 
+                 "i":"0.0", 
+                 "n":"BTC",
+                 "t":"0.0"},
+          "qa":{           
+                 "a":"1359.917312", 
+                 "b":"1279.922176", 
+                 "f":"0.0",         
+                 "i":"8.44748637",  
+                 "n":"USDT",      
+                 "t":"1359.917312"},
+          "l":"--",        
+          "r":"1.05",      
+          "sl":"1.05",     
+     },
+    "s":"BTCUSDT",  
+    "t":1661938138193     
+}
+```
+**Request:** `margin@private.risk.rate.v3.api@<symbol>`
+
+**response:**
+
+| Name      | Type   | Description |
+| :-------- | :----- | :--- |
+| d | json | riskRateInfo |
+| >ba | json | currencyAsset |
+| >qa | json | marketAsset |
+| >>a | string | availableAmount|
+| >>b | string | borrowAmount|
+| >>f | string | frozenAmount |
+| >>i | string | interest|
+| >>n | string | name |
+| >>t | string | totalAmount |
+| >l | string | liquidationPrice |
+| >r | string | riskRate|
+| >sl | string |stopLine|
+| s | string | symbol|
+| t | long | timestamp |
 
 # Rebate Endpoints
 
@@ -4074,7 +4299,7 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 
 **Request**
 
-| name | Type|  Mandatory  | Description | 
+| Name | Type|  Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 | startTime  | long | NO       |        |
 | endTime    | long | NO       |        |
@@ -4085,7 +4310,7 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 
 **Response**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
 | spot |string|spot rebate,unit:usdt|
 | futures |string|futures rebate,unit:usdt|
@@ -4142,7 +4367,7 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 
 **Request**
 
-| name | Type|  Mandatory  | Description | 
+| Name | Type|  Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 | startTime  | long | NO       |        |
 | endTime    | long | NO       |        |
@@ -4154,7 +4379,7 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 
 **Response**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
 |asset|string|rebate asset|
 |type|string|rebate type: spot futures margin |
@@ -4212,7 +4437,7 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 **Request**
 
-| name | Type|  Mandatory  | Description | 
+| Name | Type|  Mandatory  | Description | 
 | :------ | :-------- | :-------- | :---------- |
 | startTime  | long | NO       |        |
 | endTime    | long | NO       |        |
@@ -4224,7 +4449,7 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 **Response**
 
-| name  |Type | Description|
+| Name  |Type | Description|
 | :------------ | :-------- | :--------|
 |asset|string|rebate asset|
 |type|string|rebate type: spot futures margin |
