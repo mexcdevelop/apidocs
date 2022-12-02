@@ -333,6 +333,9 @@
                     <a href="#api-library" class="toc-h2 toc-link" data-title="API Library">API Library</a>
                   </li>
                   <li>
+                    <a href="#mexc-broker-introduction" class="toc-h2 toc-link" data-title="MEXC Broker Introduction">MEXC Broker Introduction</a>
+                  </li>
+                  <li>
                     <a href="#contact-us" class="toc-h2 toc-link" data-title="Contact us">Contact us</a>
                   </li>
               </ul>
@@ -341,7 +344,13 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#2022-10-14-16-00-utc-8" class="toc-h2 toc-link" data-title="2022-10-14 16:00(UTC+8)"><strong>2022-10-14 16:00(UTC+8)</strong></a>
+                    <a href="#2022-11-29" class="toc-h2 toc-link" data-title="*2022-11-29 *">*<em>2022-11-29 *</em></a>
+                  </li>
+                  <li>
+                    <a href="#2022-11-24" class="toc-h2 toc-link" data-title="*2022-11-24 *">*<em>2022-11-24 *</em></a>
+                  </li>
+                  <li>
+                    <a href="#2022-10-14" class="toc-h2 toc-link" data-title="*2022-10-14 *">*<em>2022-10-14 *</em></a>
                   </li>
                   <li>
                     <a href="#2022-09-06" class="toc-h2 toc-link" data-title="2022-09-06"><strong>2022-09-06</strong></a>
@@ -537,6 +546,12 @@
                   <li>
                     <a href="#account-trade-list" class="toc-h2 toc-link" data-title="Account Trade List">Account Trade List</a>
                   </li>
+                  <li>
+                    <a href="#enable-mx-deduct" class="toc-h2 toc-link" data-title="Enable MX Deduct">Enable MX Deduct</a>
+                  </li>
+                  <li>
+                    <a href="#query-mx-deduct-status" class="toc-h2 toc-link" data-title="Query MX Deduct Status">Query MX Deduct Status</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -662,13 +677,19 @@
             <a href="#websocket-user-data-streams" class="toc-h1 toc-link" data-title="Websocket User Data Streams">Websocket User Data Streams</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#listen-key-spot" class="toc-h2 toc-link" data-title="Listen Key(SPOT)">Listen Key(SPOT)</a>
+                    <a href="#listen-key" class="toc-h2 toc-link" data-title="Listen Key">Listen Key</a>
                   </li>
                   <li>
-                    <a href="#account-deals" class="toc-h2 toc-link" data-title="Account Deals">Account Deals</a>
+                    <a href="#spot-account-deals" class="toc-h2 toc-link" data-title="Spot Account Deals">Spot Account Deals</a>
                   </li>
                   <li>
-                    <a href="#account-orders" class="toc-h2 toc-link" data-title="Account Orders">Account Orders</a>
+                    <a href="#spot-account-orders" class="toc-h2 toc-link" data-title="Spot Account Orders">Spot Account Orders</a>
+                  </li>
+                  <li>
+                    <a href="#margin-account-orders" class="toc-h2 toc-link" data-title="Margin Account Orders">Margin Account Orders</a>
+                  </li>
+                  <li>
+                    <a href="#margin-account-risk-rate" class="toc-h2 toc-link" data-title="Margin Account Risk Rate">Margin Account Risk Rate</a>
                   </li>
               </ul>
           </li>
@@ -723,6 +744,20 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <p>This is recommended for new users who want to get a quick-start into using the API.</p>
 
 <p>For more information please refer to this page: <a href="https://github.com/mxcdevelop/mexc-api-postman">MEXC API Postman</a></p>
+<h2 id='mexc-broker-introduction'>MEXC Broker Introduction</h2>
+<p>MEXC is committed to building crypto infrastructure, with API broker partners that provide valuable services being an essential part of the MEXC ecosystem. To reward the partners, MEXC now provides privileges for MEXC brokers, including trading rebates and marketing support.</p>
+
+<p><strong>Broker Modes Supported by MEXC</strong></p>
+
+<p><strong>1. API Broker</strong></p>
+
+<p>This includes copy trade platforms, trading bots, quantitative strategy platforms, or other asset management platforms with more than 500 people, etc. Users can authorize the API key to the API broker, and the API broker will send the trading orders containing the broker ID on behalf of the user and receive profit shares from fees.</p>
+
+<p><strong>2. Independent Broker</strong></p>
+
+<p>This includes wallet platforms, market data platforms, aggregation trading platforms, stockbrokers, as well as stock and securities trading platforms, etc., all of which have their own independent users. MEXC can provide order matching systems, account management systems, settlement systems, as well as main and sub-account systems, etc. Independent brokers can share the trading fluidity and depth over the MEXC platform and receive profit shares from fees.</p>
+
+<p>To apply for a partnership, please contact: <strong>broker@mexc.com</strong></p>
 <h2 id='contact-us'>Contact us</h2>
 <ul>
 <li>MEXC API Telegram Group <a href="https://t.me/MEXCAPIsupport">MEXC API Support Group</a>
@@ -737,7 +772,16 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-10-14-16-00-utc-8'><strong>2022-10-14 16:00(UTC+8)</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-11-29'>*<em>2022-11-29 *</em></h2>
+<ul>
+<li>Add &quot;Margin Account Orders&quot; channel and &quot;Margin Account Risk Rate&quot; channel in Websocket</li>
+</ul>
+<h2 id='2022-11-24'>*<em>2022-11-24 *</em></h2>
+<ul>
+<li>Add MEXC Broker Introduction</li>
+<li>Add &quot;Enable MX Deduct&quot; and &quot;Query MX Deduct Status&quot; Endpoints</li>
+</ul>
+<h2 id='2022-10-14'>*<em>2022-10-14 *</em></h2>
 <ul>
 <li>Update Endpoints <a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints">Wallet Endpoints</a>:</li>
 </ul>
@@ -778,7 +822,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -840,7 +884,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -873,7 +917,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -1269,11 +1313,11 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 <tr>
 <td>730600</td>
-<td>Sub-account name cannot be null</td>
+<td>Sub-account Name cannot be null</td>
 </tr>
 <tr>
 <td>730601</td>
-<td>Sub-account name must be a combination of 8-32 letters and numbers</td>
+<td>Sub-account Name must be a combination of 8-32 letters and numbers</td>
 </tr>
 <tr>
 <td>730602</td>
@@ -1313,7 +1357,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 <tr>
 <td>730101</td>
-<td>The user name already exists</td>
+<td>The user Name already exists</td>
 </tr>
 </tbody></table>
 <h1 id='market-data-endpoints'>Market Data Endpoints</h1><h2 id='test-connectivity'>Test Connectivity</h2>
@@ -1431,7 +1475,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -1458,7 +1502,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1503,7 +1547,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -1530,7 +1574,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -1587,7 +1631,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -1614,7 +1658,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -1674,7 +1718,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -1717,7 +1761,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -1782,7 +1826,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -1878,7 +1922,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -1896,7 +1940,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -1982,7 +2026,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2000,7 +2044,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -2105,7 +2149,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2123,7 +2167,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -2175,7 +2219,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2193,7 +2237,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -2237,7 +2281,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2247,7 +2291,7 @@ Klines are uniquely identified by their open time.</p>
 <td>subAccount</td>
 <td>STRING</td>
 <td>YES</td>
-<td>Sub-account name</td>
+<td>Sub-account Name</td>
 </tr>
 <tr>
 <td>note</td>
@@ -2297,7 +2341,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2307,7 +2351,7 @@ Klines are uniquely identified by their open time.</p>
 <td>subAccount</td>
 <td>STRING</td>
 <td>NO</td>
-<td>Sub-account name</td>
+<td>Sub-account Name</td>
 </tr>
 <tr>
 <td>isFreeze</td>
@@ -2362,7 +2406,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2372,7 +2416,7 @@ Klines are uniquely identified by their open time.</p>
 <td>subAccount</td>
 <td>STRING</td>
 <td>YES</td>
-<td>Sub-account name</td>
+<td>Sub-account Name</td>
 </tr>
 <tr>
 <td>note</td>
@@ -2438,7 +2482,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2448,7 +2492,7 @@ Klines are uniquely identified by their open time.</p>
 <td>subAccount</td>
 <td>STRING</td>
 <td>YES</td>
-<td>Sub-account name</td>
+<td>Sub-account Name</td>
 </tr>
 <tr>
 <td>recvWindow</td>
@@ -2479,7 +2523,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -2489,7 +2533,7 @@ Klines are uniquely identified by their open time.</p>
 <td>subAccount</td>
 <td>STRING</td>
 <td>YES</td>
-<td>Sub-account name</td>
+<td>Sub-account Name</td>
 </tr>
 <tr>
 <td>apiKey</td>
@@ -2531,7 +2575,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -2597,7 +2641,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -2640,7 +2684,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -2712,7 +2756,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -2810,7 +2854,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -2820,7 +2864,7 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">subAccount</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">subaccount name</td>
+<td style="text-align: left">subaccount Name</td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
@@ -2840,7 +2884,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -2848,7 +2892,7 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">subAccount</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">subaccount name</td>
+<td style="text-align: left">subaccount Name</td>
 </tr>
 <tr>
 <td style="text-align: left">isFuturesEnabled</td>
@@ -2888,7 +2932,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -2898,7 +2942,7 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">subAccount</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">YES</td>
-<td style="text-align: left">subaccount name</td>
+<td style="text-align: left">subaccount Name</td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
@@ -2918,7 +2962,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -2926,7 +2970,7 @@ Klines are uniquely identified by their open time.</p>
 <tr>
 <td style="text-align: left">subAccount</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">subaccount name</td>
+<td style="text-align: left">subaccount Name</td>
 </tr>
 <tr>
 <td style="text-align: left">isMarginEnabled</td>
@@ -2982,7 +3026,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -3048,7 +3092,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -3177,7 +3221,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -3267,7 +3311,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -3312,7 +3356,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -3362,7 +3406,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -3462,7 +3506,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -3492,7 +3536,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -3579,7 +3623,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -3621,7 +3665,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -3727,7 +3771,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -3757,7 +3801,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -3863,7 +3907,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -3911,7 +3955,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -4020,7 +4064,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -4044,7 +4088,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -4139,7 +4183,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -4193,7 +4237,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
@@ -4254,6 +4298,152 @@ Klines are uniquely identified by their open time.</p>
 <td>clientOrderId</td>
 </tr>
 </tbody></table>
+<h2 id='enable-mx-deduct'>Enable MX Deduct</h2>
+<p>Enable or disable MX deduct for spot commission fee</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post api/v3/mxDeduct/enable
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"mxDeductEnable"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1669109672280</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>POST</strong> <code>api/v3/mxDeduct/enable</code></li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">mxDeductEnable</td>
+<td style="text-align: left">boolean</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">true:enable,false:disable</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">no</td>
+<td style="text-align: left">recvWindow</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">mxDeductEnable</td>
+<td style="text-align: left">boolean</td>
+<td style="text-align: left">true:enable,false:disable</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">For Futures:Enjoy 10% off trading fees when you transfer MX into your futures account and offset USDT-margined futures trading fees with MX.</aside>
+<h2 id='query-mx-deduct-status'>Query MX Deduct Status</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get api/v3/mxDeduct/enable
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"mxDeductEnable"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1669109672717</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>api/v3/mxDeduct/enableh</code></li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">no</td>
+<td style="text-align: left">recvWindow</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">mxDeductEnable</td>
+<td style="text-align: left">boolean</td>
+<td style="text-align: left">true:enable,false:disable</td>
+</tr>
+</tbody></table>
 <h1 id='wallet-endpoints'>Wallet Endpoints</h1><h2 id='query-the-currency-information'>Query the currency information</h2>
 <blockquote>
 <p>Request</p>
@@ -4266,14 +4456,14 @@ Klines are uniquely identified by their open time.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"networkList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
           </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"depositDesc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="nl">"depositEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
           </span><span class="nl">"minConfirm"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000100000000000000"</span><span class="p">,</span><span class="w">
@@ -4290,7 +4480,7 @@ Klines are uniquely identified by their open time.</p>
           </span><span class="nl">"depositDesc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="nl">"depositEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
           </span><span class="nl">"minConfirm"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-BSC"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-BSC"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEP20(BSC)"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawEnable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000010000000000000"</span><span class="p">,</span><span class="w">
@@ -4320,7 +4510,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -4384,7 +4574,7 @@ Klines are uniquely identified by their open time.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -4455,7 +4645,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -4496,7 +4686,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -4552,7 +4742,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -4636,7 +4826,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -4695,7 +4885,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -4784,7 +4974,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -4820,7 +5010,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -4879,7 +5069,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -4915,7 +5105,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -4959,7 +5149,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -5015,7 +5205,7 @@ Response:</li>
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -5073,7 +5263,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -5144,7 +5334,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
@@ -5218,7 +5408,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Mandatory</th>
 <th>Description</th>
@@ -5236,7 +5426,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th>name</th>
+<th>Name</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -5324,7 +5514,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -5365,7 +5555,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -5413,7 +5603,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -5496,7 +5686,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -5552,7 +5742,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -5614,7 +5804,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -5656,7 +5846,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -5732,7 +5922,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -5788,7 +5978,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -5836,7 +6026,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -5954,7 +6144,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6016,7 +6206,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -6127,7 +6317,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6210,7 +6400,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -6326,7 +6516,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6395,7 +6585,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -6513,7 +6703,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6582,7 +6772,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -6698,7 +6888,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6739,7 +6929,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -6861,7 +7051,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6902,7 +7092,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -6942,7 +7132,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -6976,7 +7166,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7040,7 +7230,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -7088,7 +7278,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7244,7 +7434,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -7278,7 +7468,7 @@ get /api/v3/capital/transfer
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7414,14 +7604,14 @@ get /api/v3/margin/trigerOrder
 
 **Request Parameter**
 
-| name | Description| Mandatory  | Type |  Sample            |
+| Name | Description| Mandatory  | Type |  Sample            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
 |timestamp| |YES|string|{{timestamp}}|
 |signature| |YES|string|{{signature}}|
 
 **Response Parameter**
 
-| name | Description  |Type | Sample|
+| Name | Description  |Type | Sample|
 | :------------ | :-------- | :--------| :------------------- |
 
  -->
@@ -7451,7 +7641,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -7492,7 +7682,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7536,7 +7726,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -7619,7 +7809,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7706,7 +7896,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -7740,7 +7930,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7795,7 +7985,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -7857,7 +8047,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -7969,7 +8159,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -8003,7 +8193,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -8073,7 +8263,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Type</th>
@@ -8114,7 +8304,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Description</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Sample</th>
@@ -8263,7 +8453,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -8351,7 +8541,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -8468,7 +8658,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -8512,7 +8702,7 @@ get /api/v3/margin/trigerOrder
 <li><p>Each UID can apply for a maximum of 60 listen keys (excluding invalid listen keys).</p></li>
 <li><p>Each listen key maximum support  5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).</p></li>
 </ul>
-<h2 id='listen-key-spot'>Listen Key(SPOT)</h2><h3 id='create-a-listenkey'>Create a ListenKey</h3>
+<h2 id='listen-key'>Listen Key</h2><h3 id='create-a-listenkey'>Create a ListenKey</h3>
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
@@ -8551,7 +8741,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -8581,7 +8771,7 @@ get /api/v3/margin/trigerOrder
 </ul>
 
 <p>Close out a user data stream.</p>
-<h2 id='account-deals'>Account Deals</h2>
+<h2 id='spot-account-deals'>Spot Account Deals</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
@@ -8618,7 +8808,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -8684,7 +8874,7 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">eventTime</td>
 </tr>
 </tbody></table>
-<h2 id='account-orders'>Account Orders</h2>
+<h2 id='spot-account-orders'>Spot Account Orders</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
@@ -8696,7 +8886,7 @@ get /api/v3/margin/trigerOrder
 }
 </code></pre></div>
 <p><strong>Request:</strong> <code>spot@private.orders.v3.api</code></p>
-<h3 id='a-limit-market-orders'>a.Limit/Market Orders</h3>
+<h3 id='1-limit-market-orders'>1. Limit/Market Orders</h3>
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
@@ -8724,7 +8914,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -8805,7 +8995,7 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">symbol</td>
 </tr>
 </tbody></table>
-<h3 id='b-stop-limit-order'>b.Stop Limit Order</h3>
+<h3 id='2-stop-limit-order'>2. Stop Limit Order</h3>
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
@@ -8831,7 +9021,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -8902,6 +9092,260 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">eventTime</td>
 </tr>
 </tbody></table>
+<h2 id='margin-account-orders'>Margin Account Orders</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "margin@private.orders.v3.api"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c": "margin@private.orders.v3.api",
+    "d":{
+         "O":1661938138000,   
+         "p":"0.8",           
+         "a":"8",             
+         "v":"10",            
+        "da":"0",           
+        "dv":"0",          
+         "A":"8.0",           
+         "V":"10",            
+         "n": "0",            
+         "N": "USDT",         
+         "S":1,               
+         "o":1,               
+         "s":1,               
+         "i":"e03a5c7441e44ed899466a7140b71391", 
+    },
+    "s": "MXUSDT",           
+    "t":1661938138193       
+}
+</code></pre></div>
+<p><strong>Request:</strong> <code>margin@private.orders.v3.api</code></p>
+
+<p><strong>response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">order info</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;O</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">createTime</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;da</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">dealAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;dv</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">dealQuantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;A</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">remainAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;V</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">remainQuantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;n</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">fee</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;N</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">feeCurrency</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;S</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">tradeType</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;o</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">orderType</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;s</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">status</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;i</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">orderId</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='margin-account-risk-rate'>Margin Account Risk Rate</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "margin@private.risk.rate.v3.api@BTCUSDT",
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c": "margin@private.risk.rate.v3.api@BTCUSDT",
+    "d":{
+          "ba":{          
+                 "a":"0.0", 
+                 "b":"0.0", 
+                 "f":"0.0", 
+                 "i":"0.0", 
+                 "n":"BTC",
+                 "t":"0.0"},
+          "qa":{           
+                 "a":"1359.917312", 
+                 "b":"1279.922176", 
+                 "f":"0.0",         
+                 "i":"8.44748637",  
+                 "n":"USDT",      
+                 "t":"1359.917312"},
+          "l":"--",        
+          "r":"1.05",      
+          "sl":"1.05",     
+     },
+    "s":"BTCUSDT",  
+    "t":1661938138193     
+}
+</code></pre></div>
+<p><strong>Request:</strong> <code>margin@private.risk.rate.v3.api@&lt;symbol&gt;</code></p>
+
+<p><strong>response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">riskRateInfo</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;ba</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">currencyAsset</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;qa</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">marketAsset</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;&gt;a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">availableAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;&gt;b</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">borrowAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;&gt;f</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">frozenAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;&gt;i</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">interest</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;&gt;n</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">name</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;&gt;t</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">totalAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">liquidationPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">riskRate</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;sl</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">stopLine</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+</tbody></table>
 <h1 id='rebate-endpoints'>Rebate Endpoints</h1><h2 id='get-rebate-history-records'>Get Rebate History Records</h2>
 <blockquote>
 <p>request</p>
@@ -8946,7 +9390,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -8994,7 +9438,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -9081,7 +9525,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -9129,7 +9573,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
@@ -9225,7 +9669,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Mandatory</th>
 <th style="text-align: left">Description</th>
@@ -9273,7 +9717,7 @@ get /api/v3/margin/trigerOrder
 
 <table><thead>
 <tr>
-<th style="text-align: left">name</th>
+<th style="text-align: left">Name</th>
 <th style="text-align: left">Type</th>
 <th style="text-align: left">Description</th>
 </tr>
