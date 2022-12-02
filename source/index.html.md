@@ -36,6 +36,7 @@ meta:
 <aside class="notice">
 使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
 </aside>
+
 ## Demo示例
 
 我们提供了5种语言的demo，用户可以参考，目前支持了现货，推送等示例，后续会持续更新。
@@ -49,6 +50,20 @@ https://github.com/mxcdevelop/mexc-api-demo
 现在你可以通过`Postman collection`来快速体验、使用API接口。
 如果想了解更多如何使用Postman，请访问: [Mexc API Postman](https://github.com/mxcdevelop/mexc-api-postman)
 
+## 经纪商申请
+
+MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪商合作伙伴是MEXC生态系统中的重要参与部分。MEXC推出了MEXC经纪商权益，包括交易返佣和营销支持，以奖励合作伙伴。
+
+**目前MEXC支持的经纪商模式：**
+
+**1. API 经纪商：**
+包括集跟单平台、交易机器人、量化策略平台或其他500人以上资产管理平台等，用户可以将API key授权给API经纪商，API经纪商代替用户发送含有经济商ID的交易订单，获取手续费分润。
+
+**2. 独立经纪商：**
+包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。
+
+合作请联系：broker@mexc.com
+
 ## 联系我们
 
 - MEXC API电报群 [MEXC API Support Group](https://t.me/MEXCAPIsupport)
@@ -56,11 +71,20 @@ https://github.com/mxcdevelop/mexc-api-demo
   - 咨询API或者websocket性能方面的问题
   - 咨询做市相关的问题
 - MEXC 客服 *官网、app中在线客服*
-  -  咨询关于钱包、短信、2FA等问题
+  - 咨询关于钱包、短信、2FA等问题
 
 # 更新日志
 
-## **2022-10-14 16:00(UTC+8)**
+## **2022-11-29 **
+
+- 新增websocket杠杆账户订单推送和风险率推送
+
+## **2022-11-24 **
+
+- 新增经纪商申请介绍
+- 新增开启MX抵扣接口和查看MX抵扣状态接口
+
+## **2022-10-14 **
 
 - 更新部分[钱包接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下：
 
@@ -2146,6 +2170,85 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | isSelfTrade     | 是否自成交           |
 | clientOrderId   | 用户自定义id|
 
+## 开启MX抵扣
+调用该接口，开启或者关闭现货MX抵扣手续费设置
+
+> 请求示例
+
+```
+post api/v3/mxDeduct/enable
+```
+> 返回示例
+
+```json
+{
+  "data":{
+    "mxDeductEnable":true
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672280
+} 
+```
+**HTTP请求**
+
+- **POST** ```api/v3/mxDeduct/enable```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|mxDeductEnable|boolean|yes|是否开启MX抵扣,true:开启, false:关闭|
+|recvWindow|long|no|同步时间|
+|timestamp|long|yes|时间戳|
+|signature|string|yes|签名|
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|是否开启了MX抵扣,true:已开启,false:已关闭.|
+
+<aside class="notice">合约账户的MX抵扣：将MX转入合约账户, 即可使用MX抵扣USDT本位合约手续费, 享受10%手续费折扣</aside>
+
+
+## 查看MX抵扣状态
+
+> 请求示例
+
+```
+get api/v3/mxDeduct/enable
+```
+> 返回示例
+
+```json
+{
+  "data":{
+    "mxDeductEnable":false
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672717
+}
+```
+**HTTP请求**
+
+- **GET** ```api/v3/mxDeduct/enableh```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|recvWindow|long|no|同步时间|
+|timestamp|long|yes|时间戳|
+|signature|string|yes|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|mxDeductEnable|boolean|是否开启了MX抵扣,true:已开启,false:已关闭.|
 
 # 钱包接口
 
@@ -4066,7 +4169,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 - 每个UID，最多申请60个listen key（不包含已失效listen key）
 - ws链接数的数量限制：每个listen key最多5个ws链接（即：每个uid最多申请的60个listen key，300个ws链接）
 
-## Listen Key(现货账户) 
+## Listen Key 
 
 ### 生成 Listen Key 
 
@@ -4132,7 +4235,7 @@ NONE
 | :-------- | :------- | :------- | :--- |
 | listenKey | string   | 是      |      |
 
-## 账户成交(实时)
+## 现货账户成交(实时)
 
 >**request:**
 
@@ -4185,7 +4288,7 @@ NONE
 | s | string | 交易对 |
 | t | long | 事件时间 |
 
-## 账户订单(实时)
+## 现货账户订单(实时)
 
 >**request:**
 
@@ -4288,6 +4391,128 @@ NONE
 | s | string | 交易对 |
 | t | long | 事件时间 |
 
+
+## 杠杆账户订单(逐仓杠杆)
+
+> **request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "margin@private.orders.v3.api"
+    ]
+}
+```
+> **response:**
+
+```
+{
+    "c": "margin@private.orders.v3.api",
+    "d":{
+         "O":1661938138000,   // 订单创建时间
+         "p":"0.8",           // 下单价格
+         "a":"8",             // 下单总金额
+         "v":"10",            // 下单数量
+        "da":"0",           //成交金额
+        "dv":"0",          //成交数量
+         "A":"8.0",           // 实际剩余金额
+         "V":"10",            // 实际剩余数量
+         "n": "0",            // 手续费数量
+         "N": "USDT",         // 手续费币种
+         "S":1,               // 交易方向
+         "o":1,               // 订单类型
+         "s":1,               // 订单状态
+         "i":"e03a5c7441e44ed899466a7140b71391", // 订单id
+    },
+    "s": "MXUSDT",            // 交易对
+    "t":1661938138193         // 事件时间
+}
+```
+**请求参数：** `margin@private.orders.v3.api`
+
+**返回参数:**
+
+| 参数名 | 数据类型 | 说明          |
+| :----- | :------- | :------------ |
+| d      | json     | 账户订单信息  |
+| >O     | long     | 订单创建时间  |
+| >p     | string   | 下单价格      |
+| >a     | string   | 下单总金额    |
+| >v     | string   | 下单数量      |
+| >da     | string  | 成交金额    |
+| >dv     | string  | 成交数量      |
+| >A     | string   | 实际剩余金额  |
+| >V     | string   | 实际剩余数量  |
+| >n     | string   | 手续费数量    |
+| >N     | string   | 手续费币种    |
+| >S     | int      | 交易方向      |
+| >o     | int      | 订单类型      |
+| >s     | int      | 订单状态      |
+| >i     | string   | 订单id        |
+| s      | string   | 交易对        |
+| t      | long     | 事件时间      |
+
+## 杠杆账户风险率(逐仓杠杆) 
+
+> **request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "margin@private.risk.rate.v3.api@BTCUSDT",
+    ]
+}
+```
+> **response:**
+
+```
+{
+    "c": "margin@private.risk.rate.v3.api@BTCUSDT",
+    "d":{
+          "ba":{          // 交易货币
+                 "a":"0.0", // 可用数量
+                 "b":"0.0", // 借币数量
+                 "f":"0.0", // 冻结数量
+                 "i":"0.0", // 利息
+                 "n":"BTC",// 货币名称
+                 "t":"0.0"},// 共计数量
+          "qa":{           // 计价货币
+                 "a":"1359.917312", // 可用数量
+                 "b":"1279.922176", // 借币数量
+                 "f":"0.0",         // 冻结数量
+                 "i":"8.44748637",  // 利息
+                 "n":"USDT",      // 货币名称
+                 "t":"1359.917312"},// 共计数量
+          "l":"--",        // 强平价
+          "r":"1.05",      // 风险率
+          "sl":"1.05",     // 强平线
+     },
+    "s":"BTCUSDT",   // 交易对
+    "t":1661938138193      //事件时间
+}
+```
+**请求参数：** `margin@private.risk.rate.v3.api@<symbol>`
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| d | json | 风险率信息 |
+| >ba | json | 交易货币 |
+| >qa | json | 计价货币 |
+| >>a | string | 可用数量|
+| >>b | string | 借币数量|
+| >>f | string | 冻结数量 |
+| >>i | string | 利息 |
+| >>n | string | 货币名称 |
+| >>t | string | 共计数量 |
+| >l | string | 强平价 |
+| >r | string | 风险率|
+| >sl | string |强平线|
+| s | string | 交易对|
+| t | long | 事件时间 |
 
 # 邀请返佣接口
 
