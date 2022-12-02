@@ -13,7 +13,36 @@ meta:
     content: Documentation for the mexc global API
 ---
 
-# Broker 
+# MEXC Broker Introduction
+
+**MEXC is committed to building crypto infrastructure, with API broker partners that provide valuable services being an essential part of the MEXC ecosystem. To reward the partners, MEXC now provides privileges for MEXC brokers, including trading rebates and marketing support.**
+
+To apply for a partnership, please contact: **broker@mexc.com**
+
+## Broker Modes Supported by MEXC
+
+**1. API Broker**</br>
+This includes copy trade platforms, trading bots, quantitative strategy platforms, or other asset management platforms with more than 500 people, etc. Users can authorize the API key to the API broker, and the API broker will send the trading orders containing the broker ID on behalf of the user and receive profit shares from fees.
+
+**2. Independent Broker**</br>
+This includes wallet platforms, market data platforms, aggregation trading platforms, stockbrokers, as well as stock and securities trading platforms, etc., all of which have their own independent users. MEXC can provide order matching systems, account management systems, settlement systems, as well as main and sub-account systems, etc. Independent brokers can share the trading fluidity and depth over the MEXC platform and receive profit shares from fees.
+
+## Broker Services Provided by MEXC
+
+**1. API Brokers**</br>
+The user signs up at MEXC, applies for API Key in MEXC, and provides it to the broker. 
+
+   * Supports trading pairs set by users</br>
+   * Supports API Key renewal, and avoids multiple binding.
+    
+
+**2. Independent Brokers**</br>
+Brokers have their own brands and separate account systems.Brokers create separate sub-accounts for users to trade under the Master account. Sub-accounts support deposit and withdrawal.
+
+   * Support sub-account deposit and withdrawal
+   * Support sub-account transfer
+
+# Broker Endpoints
 
 ## Query Universal Transfer History - broker user
 
