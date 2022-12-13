@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2022-12-13 **
+
+- Update websocket reoponse parameters
+
 ## **2022-11-29 **
 
 - Add "Margin Account Orders" channel and "Margin Account Risk Rate" channel in Websocket
@@ -3806,7 +3810,6 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
 				"i":"Min15",				 
 				"l":20277.52,				 
 				"o":20284.93,				 
-				"s":"BTCUSDT",			 
 				"t":1661931000,			 
 				"v":1.43211},				 
 			"e":"spot@public.kline.v3.api"},					
@@ -3875,7 +3878,8 @@ Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
 		"asks":[{									
 			"p":"20290.89",		
 			"v":"0.000000"}], 
-		"e":"spot@public.increase.depth.v3.api", },	 
+		"e":"spot@public.increase.depth.v3.api", 
+    "r":"3407459756"},	 
 	"s":"BTCUSDT",						
 	"t":1661932660144					
 }
@@ -3892,6 +3896,7 @@ If the quantity is 0, it means that the order of the price has been cancel or tr
 | p | string | price |
 | v | string | quantity |
 | e | string | eventType |
+| r | string | version |
 | s | string | symbol |
 | t | long | eventTime |
 
