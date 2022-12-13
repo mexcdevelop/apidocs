@@ -73,6 +73,7 @@ To apply for a partnership, please contact: **broker@mexc.com**
 ## **2022-12-13 **
 
 - Add params: avgPrice,cumulativeQuantity,cumulativeAmount for `spot@private.orders.v3.api` channel
+- Add Query ReferCode Endpoint
 
 ## **2022-11-29 **
 
@@ -4483,6 +4484,38 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 If startTime and endTime are not sent, the recent 1 year's data will be returned.
 
+## Query ReferCode
+
+> request
+
+```
+get /api/v3/rebate/referCode?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "referCode": "in3jd"
+}
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/referCode```
+
+**Request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| recvWindow | long | NO       |        |
+| timestamp  | long | YES       |        |
+| signature  | string | YES     |        |
+
+
+**Response**
+
+| Name  |Type | Description|
+| :------------ | :-------- | :--------|
+|referCode|string|referCode|
 
 # Public API Definitions
 
