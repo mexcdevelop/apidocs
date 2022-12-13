@@ -4734,8 +4734,6 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 若startTime和endTime均未发送,返回最近一年的数据。
 
-# 获取邀请人接口
-
 ## 获取邀请人
 
 > 请求示例
