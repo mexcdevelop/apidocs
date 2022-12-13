@@ -78,6 +78,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 ## **2022-12-13 **
 
 - websocket `spot@private.orders.v3.api`频道新增：平均成交价，累计成交数量，累计成交金额三个参数。
+- 新增获取邀请人接口
 
 ## **2022-11-29 **
 
@@ -4732,6 +4733,42 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 |updateTime|long|获取返佣时间|
 
 若startTime和endTime均未发送,返回最近一年的数据。
+
+# 获取邀请人接口
+
+## 获取邀请人
+
+> 请求示例
+
+```
+get /api/v3/rebate/referCode?timestamp=1597026383085&signature=abc
+```
+> 返回示例
+
+```json
+{
+    "referCode": "in3jd"
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/referCode```
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| recvWindow | long | 否       |        |
+| timestamp  | long | 是       |        |
+| signature  | string | 是     |        |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|referCode|string|邀请人的邀请码，非用户本身的|
+
 
 
 # 公开API参数
