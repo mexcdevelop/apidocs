@@ -70,6 +70,11 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2022-12-13 **
+
+- Add params: avgPrice,cumulativeQuantity,cumulativeAmount for `spot@private.orders.v3.api` channel
+- Add Query ReferCode Endpoint
+
 ## **2022-11-29 **
 
 - Add "Margin Account Orders" channel and "Margin Account Risk Rate" channel in Websocket
@@ -3806,7 +3811,6 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
 				"i":"Min15",				 
 				"l":20277.52,				 
 				"o":20284.93,				 
-				"s":"BTCUSDT",			 
 				"t":1661931000,			 
 				"v":1.43211},				 
 			"e":"spot@public.kline.v3.api"},					
@@ -3875,7 +3879,8 @@ Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
 		"asks":[{									
 			"p":"20290.89",		
 			"v":"0.000000"}], 
-		"e":"spot@public.increase.depth.v3.api", },	 
+		"e":"spot@public.increase.depth.v3.api", 
+    "r":"3407459756"},	 
 	"s":"BTCUSDT",						
 	"t":1661932660144					
 }
@@ -3892,9 +3897,20 @@ If the quantity is 0, it means that the order of the price has been cancel or tr
 | p | string | price |
 | v | string | quantity |
 | e | string | eventType |
+| r | string | version |
 | s | string | symbol |
 | t | long | eventTime |
 
+**How is incremental depth information maintained:**
+
+1. Though **spot@public.increase.depth.v3.api@<symbol>** to get full amount of depth information, save the current version.
+2. Subscribe to ws depth information, if the received data version more than the current version after update,  the later received update cover the previous one at the same price.
+3. Through **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** get  the latest 1000 depth snapshots.
+4. Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information
+5. Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS
+6. The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.
+7. The amount of hanging orders in each event represents the **absolute value** of the current hanging orders of the price, rather than the relative change.
+8. If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.
 
 # Websocket User Data Streams
 
@@ -4065,7 +4081,10 @@ Keepalive a user data stream to prevent a time out. User data streams will close
         "o":1,
         "p":0.8,
         "s":1,
-        "v":10
+        "v":10,
+        "ap":0,  
+        "cv":0, 	
+        "ca":0 
   },
   "s": "MXUSDT",
   "t": 1661938138193
@@ -4089,6 +4108,9 @@ Keepalive a user data stream to prevent a time out. User data streams will close
 | > p | bigDecimal | PRICE |
 | > s | int | status 1:New order 2:Filled 3:Partially filled 4:Order canceled 5:Order filled partially, and then the rest of the order is canceled |
 | > v | bigDecimal | quantity |
+| > ap | bigDecimal | avgPrice |
+| > cv | bigDecimal | cumulativeQuantity |
+| > ca | bigDecimal | cumulativeAmount |
 | t | long | eventTime |
 | s | string | symbol |
 
@@ -4462,6 +4484,38 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 If startTime and endTime are not sent, the recent 1 year's data will be returned.
 
+## Query ReferCode
+
+> request
+
+```
+get /api/v3/rebate/referCode?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "referCode": "in3jd"
+}
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/referCode```
+
+**Request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| recvWindow | long | NO       |        |
+| timestamp  | long | YES       |        |
+| signature  | string | YES     |        |
+
+
+**Response**
+
+| Name  |Type | Description|
+| :------------ | :-------- | :--------|
+|referCode|string|referCode|
 
 # Public API Definitions
 
