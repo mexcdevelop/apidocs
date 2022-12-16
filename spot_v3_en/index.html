@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-12-13" class="toc-h2 toc-link" data-title="*2022-12-13 *">*<em>2022-12-13 *</em></a>
+                  </li>
+                  <li>
                     <a href="#2022-11-29" class="toc-h2 toc-link" data-title="*2022-11-29 *">*<em>2022-11-29 *</em></a>
                   </li>
                   <li>
@@ -705,6 +708,9 @@
                   <li>
                     <a href="#get-self-rebate-records-detail" class="toc-h2 toc-link" data-title="Get Self Rebate Records Detail">Get Self Rebate Records Detail</a>
                   </li>
+                  <li>
+                    <a href="#query-refercode" class="toc-h2 toc-link" data-title="Query ReferCode">Query ReferCode</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -772,7 +778,12 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-11-29'>*<em>2022-11-29 *</em></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-12-13'>*<em>2022-12-13 *</em></h2>
+<ul>
+<li>Add params: avgPrice,cumulativeQuantity,cumulativeAmount for <code>spot@private.orders.v3.api</code> channel</li>
+<li>Add Query ReferCode Endpoint</li>
+</ul>
+<h2 id='2022-11-29'>*<em>2022-11-29 *</em></h2>
 <ul>
 <li>Add &quot;Margin Account Orders&quot; channel and &quot;Margin Account Risk Rate&quot; channel in Websocket</li>
 </ul>
@@ -8524,7 +8535,6 @@ get /api/v3/margin/trigerOrder
                 "i":"Min15",                 
                 "l":20277.52,                
                 "o":20284.93,                
-                "s":"BTCUSDT",           
                 "t":1661931000,          
                 "v":1.43211},                
             "e":"spot@public.kline.v3.api"},                    
@@ -8645,7 +8655,8 @@ get /api/v3/margin/trigerOrder
         "asks":[{                                   
             "p":"20290.89",     
             "v":"0.000000"}], 
-        "e":"spot@public.increase.depth.v3.api", },  
+        "e":"spot@public.increase.depth.v3.api", 
+    "r":"3407459756"},   
     "s":"BTCUSDT",                      
     "t":1661932660144                   
 }
@@ -8679,6 +8690,11 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">eventType</td>
 </tr>
 <tr>
+<td style="text-align: left">r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">version</td>
+</tr>
+<tr>
 <td style="text-align: left">s</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">symbol</td>
@@ -8689,6 +8705,19 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">eventTime</td>
 </tr>
 </tbody></table>
+
+<p><strong>How is incremental depth information maintained:</strong></p>
+
+<ol>
+<li>Though <strong>spot@public.increase.depth.v3.api@<symbol></strong> to get full amount of depth information, save the current version.</li>
+<li>Subscribe to ws depth information, if the received data version more than the current version after update,  the later received update cover the previous one at the same price.</li>
+<li>Through <strong>https://api.mexc.com/api/v3/depth?symbol=MXBTC&amp;limit=1000</strong> get  the latest 1000 depth snapshots.</li>
+<li>Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information</li>
+<li>Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS</li>
+<li>The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.</li>
+<li>The amount of hanging orders in each event represents the <strong>absolute value</strong> of the current hanging orders of the price, rather than the relative change.</li>
+<li>If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.</li>
+</ol>
 <h1 id='websocket-user-data-streams'>Websocket User Data Streams</h1>
 <ul>
 <li><p>The base API endpoint is: <strong>https://api.mexc.com</strong></p></li>
@@ -8904,7 +8933,10 @@ get /api/v3/margin/trigerOrder
         "o":1,
         "p":0.8,
         "s":1,
-        "v":10
+        "v":10,
+        "ap":0,  
+        "cv":0,     
+        "ca":0 
   },
   "s": "MXUSDT",
   "t": 1661938138193
@@ -8983,6 +9015,21 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">&gt; v</td>
 <td style="text-align: left">bigDecimal</td>
 <td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; ap</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">avgPrice</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; cv</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">cumulativeQuantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; ca</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">cumulativeAmount</td>
 </tr>
 <tr>
 <td style="text-align: left">t</td>
@@ -9765,6 +9812,70 @@ get /api/v3/margin/trigerOrder
 </tbody></table>
 
 <p>If startTime and endTime are not sent, the recent 1 year&#39;s data will be returned.</p>
+<h2 id='query-refercode'>Query ReferCode</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/referCode?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"referCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in3jd"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/referCode</code></li>
+</ul>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">referCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">referCode</td>
+</tr>
+</tbody></table>
 <h1 id='public-api-definitions'>Public API Definitions</h1><h2 id='enum-definitions'>ENUM definitions</h2><h3 id='order-side'><a id="order_side">Order side</a></h3>
 <ul>
 <li>BUY</li>
