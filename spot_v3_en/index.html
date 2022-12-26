@@ -418,6 +418,32 @@
               </ul>
           </li>
           <li>
+            <a href="#faqs" class="toc-h1 toc-link" data-title="FAQs">FAQs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#q1-how-many-api-keys-can-a-user-apply" class="toc-h2 toc-link" data-title="Q1: How many API Keys can a user apply?">Q1: How many API Keys can a user apply?</a>
+                  </li>
+                  <li>
+                    <a href="#q2-how-many-sub-accounts-can-a-main-account-apply" class="toc-h2 toc-link" data-title="Q2: How many sub-accounts can a main account apply?">Q2: How many sub-accounts can a main account apply?</a>
+                  </li>
+                  <li>
+                    <a href="#q3-why-are-there-often-issues-of-disconnections-and-expired-sessions" class="toc-h2 toc-link" data-title="Q3: Why are there often issues of disconnections and expired sessions?">Q3: Why are there often issues of disconnections and expired sessions?</a>
+                  </li>
+                  <li>
+                    <a href="#q4-what-should-i-do-after-an-error-is-reported-for-exceeding-the-limit-frequency" class="toc-h2 toc-link" data-title="Q4: What should I do after an error is reported for exceeding the limit frequency?">Q4: What should I do after an error is reported for exceeding the limit frequency?</a>
+                  </li>
+                  <li>
+                    <a href="#q5-how-many-orders-can-an-account-place" class="toc-h2 toc-link" data-title="Q5: How many orders can an account place?">Q5: How many orders can an account place?</a>
+                  </li>
+                  <li>
+                    <a href="#q6-why-does-websocket-always-disconnect" class="toc-h2 toc-link" data-title="Q6：Why does WebSocket always disconnect?">Q6：Why does WebSocket always disconnect?</a>
+                  </li>
+                  <li>
+                    <a href="#q7-why-am-i-unable-to-subcribe-to-multiple-channels-on-websocket" class="toc-h2 toc-link" data-title="Q7: Why am I unable to subcribe to multiple channels on WebSocket?">Q7: Why am I unable to subcribe to multiple channels on WebSocket?</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#general-info" class="toc-h1 toc-link" data-title="General Info">General Info</a>
               <ul class="toc-list-h2">
                   <li>
@@ -999,6 +1025,24 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <ul>
 <li>New version API</li>
 </ul>
+<h1 id='faqs'>FAQs</h1><h2 id='q1-how-many-api-keys-can-a-user-apply'>Q1: How many API Keys can a user apply?</h2>
+<p>Each account can create up to 30 API Keys. The validity of an API Key without a linked IP address is 90 days, and the API Key will expire automatically. Each API Key can be linked to a maximum of 10 IP addresses.</p>
+<h2 id='q2-how-many-sub-accounts-can-a-main-account-apply'>Q2: How many sub-accounts can a main account apply?</h2>
+<p>Each main account can create up to 30 sub-accounts. The sub-accounts will automatically inherit the main account rates. However, sub-accounts created via API cannot be logged in on Web.</p>
+<h2 id='q3-why-are-there-often-issues-of-disconnections-and-expired-sessions'>Q3: Why are there often issues of disconnections and expired sessions?</h2>
+<p>If stable access is not possible, it is recommended to use Japan or Singapore AWS cloud servers for access.</p>
+<h2 id='q4-what-should-i-do-after-an-error-is-reported-for-exceeding-the-limit-frequency'>Q4: What should I do after an error is reported for exceeding the limit frequency?</h2>
+<p>After exceeding the interface access frequency limit, you will not be able to continue accessing the interface. It will resume to normal after 10 minutes to keep the interface access frequency below the limit.</p>
+<h2 id='q5-how-many-orders-can-an-account-place'>Q5: How many orders can an account place?</h2>
+<p>Each account can hold up to 200 valid orders that are not completely filled.</p>
+<h2 id='q6-why-does-websocket-always-disconnect'>Q6：Why does WebSocket always disconnect?</h2>
+<ol>
+<li>If there is no valid subscription, it will disconnect in 30 seconds.</li>
+<li>If the subscription is successful, and there is no traffic in 60 seconds, it will automatically disconnect.</li>
+<li>To ensure a stable connection, a Pong reply is required upon receiving the Ping message sent from the server.</li>
+</ol>
+<h2 id='q7-why-am-i-unable-to-subcribe-to-multiple-channels-on-websocket'>Q7: Why am I unable to subcribe to multiple channels on WebSocket?</h2>
+<p>WebSocket currently allows subscription to up to 30 channels via a single link. Any subscription will be invalid after the limit is exceeded. To subscribe to more channels, it is recommended to create multiple links.</p>
 <h1 id='general-info'>General Info</h1><h2 id='base-endpoint'>Base endpoint</h2>
 <p>The base endpoint is:</p>
 
@@ -1199,56 +1243,204 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 </thead><tbody>
 <tr>
+<td>-2011</td>
+<td>Unknown order sent</td>
+</tr>
+<tr>
+<td>26</td>
+<td>operation not allowed</td>
+</tr>
+<tr>
 <td>400</td>
-<td>Invalid parameter</td>
+<td>api key required</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Invalid signature, fail to pass the validation</td>
+<td>No authority</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Access Denied</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too many requests, rate limit rule is violated</td>
+<td>Too Many Requests</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal error</td>
+</tr>
+<tr>
+<td>503</td>
+<td>service not available, please try again</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Time-out</td>
+</tr>
+<tr>
+<td>602</td>
+<td>Signature verification failed</td>
+</tr>
+<tr>
+<td>10001</td>
+<td>user does not exist</td>
+</tr>
+<tr>
+<td>10007</td>
+<td>bad symbol</td>
+</tr>
+<tr>
+<td>10015</td>
+<td>user id cannot be null</td>
 </tr>
 <tr>
 <td>10072</td>
-<td>Invalid access key</td>
+<td>invalid access key</td>
 </tr>
 <tr>
 <td>10073</td>
-<td>Invalid request time</td>
+<td>invalid Request-Time</td>
 </tr>
 <tr>
-<td>30000</td>
-<td>Trading is suspended for the requested symbol</td>
+<td>10095</td>
+<td>amount cannot be null</td>
 </tr>
 <tr>
-<td>30001</td>
-<td>Current trading type (bid or ask) is not allowed</td>
+<td>10096</td>
+<td>amount decimal places is too long</td>
 </tr>
 <tr>
-<td>30002</td>
-<td>Invalid trading amount, smaller than the symbol minimum trading amount</td>
+<td>10097</td>
+<td>amount is error</td>
 </tr>
 <tr>
-<td>30003</td>
-<td>Invalid trading amount, greater than the symbol maximum trading amount</td>
+<td>10098</td>
+<td>risk control system detected abnormal</td>
 </tr>
 <tr>
-<td>30004</td>
+<td>10099</td>
+<td>user sub account does not open</td>
+</tr>
+<tr>
+<td>10100</td>
+<td>this currency transfer is not supported</td>
+</tr>
+<tr>
+<td>10101</td>
 <td>Insufficient balance</td>
 </tr>
 <tr>
+<td>10102</td>
+<td>amount cannot be zero or negative</td>
+</tr>
+<tr>
+<td>10103</td>
+<td>this account transfer is not supported</td>
+</tr>
+<tr>
+<td>10200</td>
+<td>transfer operation processing</td>
+</tr>
+<tr>
+<td>10201</td>
+<td>transfer in failed</td>
+</tr>
+<tr>
+<td>10202</td>
+<td>transfer out failed</td>
+</tr>
+<tr>
+<td>10206</td>
+<td>transfer is disabled</td>
+</tr>
+<tr>
+<td>10211</td>
+<td>transfer is forbidden</td>
+</tr>
+<tr>
+<td>10212</td>
+<td>This withdrawal address is not on the commonly used address list or has been invalidated</td>
+</tr>
+<tr>
+<td>10216</td>
+<td>no address available. Please try again later</td>
+</tr>
+<tr>
+<td>10219</td>
+<td>asset flow writing failed please try again</td>
+</tr>
+<tr>
+<td>10222</td>
+<td>currency cannot be null</td>
+</tr>
+<tr>
+<td>10232</td>
+<td>currency does not exist</td>
+</tr>
+<tr>
+<td>10259</td>
+<td>Intermediate account does not configured in redisredis</td>
+</tr>
+<tr>
+<td>10265</td>
+<td>Due to risk control, withdrawal is unavailable, please try again later</td>
+</tr>
+<tr>
+<td>10268</td>
+<td>remark length is too long</td>
+</tr>
+<tr>
+<td>20001</td>
+<td>subsystem is not supported</td>
+</tr>
+<tr>
+<td>20002</td>
+<td>Internal system error please contact support</td>
+</tr>
+<tr>
+<td>22222</td>
+<td>record does not exist</td>
+</tr>
+<tr>
+<td>30000</td>
+<td>suspended transaction for the symbol</td>
+</tr>
+<tr>
+<td>30001</td>
+<td>The current transaction direction is not allowed to place an order</td>
+</tr>
+<tr>
+<td>30002</td>
+<td>The minimum transaction volume cannot be less than :</td>
+</tr>
+<tr>
+<td>30003</td>
+<td>The maximum transaction volume cannot be greater than :</td>
+</tr>
+<tr>
+<td>30004</td>
+<td>Insufficient position</td>
+</tr>
+<tr>
 <td>30005</td>
-<td>Oversell error</td>
+<td>Oversold</td>
 </tr>
 <tr>
 <td>30010</td>
-<td>Price out of allowed range</td>
+<td>no valid trade price</td>
+</tr>
+<tr>
+<td>30014</td>
+<td>invalid symbol</td>
 </tr>
 <tr>
 <td>30016</td>
-<td>Market is closed</td>
+<td>trading disabled</td>
+</tr>
+<tr>
+<td>30018</td>
+<td>market order is disabled</td>
 </tr>
 <tr>
 <td>30019</td>
@@ -1256,11 +1448,55 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 <tr>
 <td>30020</td>
-<td>Restricted symbol, API access is not allowed for the time being</td>
+<td>no permission for the symbol</td>
 </tr>
 <tr>
 <td>30021</td>
-<td>Invalid symbol</td>
+<td>invalid symbol</td>
+</tr>
+<tr>
+<td>30025</td>
+<td>no exist opponent order</td>
+</tr>
+<tr>
+<td>30026</td>
+<td>invalid order ids</td>
+</tr>
+<tr>
+<td>30027</td>
+<td>The currency has reached the maximum position limit, the buying is suspended</td>
+</tr>
+<tr>
+<td>30028</td>
+<td>The currency triggered the platform risk control, the selling is suspended</td>
+</tr>
+<tr>
+<td>30029</td>
+<td>Cannot exceed the maximum order limit</td>
+</tr>
+<tr>
+<td>30032</td>
+<td>Cannot exceed the maximum position</td>
+</tr>
+<tr>
+<td>30041</td>
+<td>current order type can not place order</td>
+</tr>
+<tr>
+<td>33333</td>
+<td>param is error</td>
+</tr>
+<tr>
+<td>44444</td>
+<td>param cannot be null</td>
+</tr>
+<tr>
+<td>60005</td>
+<td>your account is abnormal</td>
+</tr>
+<tr>
+<td>70011</td>
+<td>Pair user ban trade apikey</td>
 </tr>
 <tr>
 <td>700001</td>
@@ -1276,11 +1512,11 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 <tr>
 <td>700004</td>
-<td>Mandatory parameter &#39;%s&#39; was not sent, was empty/null, or malformed.</td>
+<td>Param &#39;origClientOrderId&#39; or &#39;orderId&#39; must be sent, but both were empty/null</td>
 </tr>
 <tr>
 <td>700005</td>
-<td>&#39;recvWindow&#39; must be less than 60000</td>
+<td>recvWindow must less than 60000</td>
 </tr>
 <tr>
 <td>700006</td>
@@ -1292,7 +1528,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 </tr>
 <tr>
 <td>700008</td>
-<td>Illegal characters found in parameter &#39;s%&#39;; legal range is &#39;${regexp}&quot;&#39;</td>
+<td>Illegal characters found in parameter</td>
 </tr>
 <tr>
 <td>730001</td>
@@ -1369,6 +1605,14 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <tr>
 <td>730101</td>
 <td>The user Name already exists</td>
+</tr>
+<tr>
+<td>140001</td>
+<td>sub account does not exist</td>
+</tr>
+<tr>
+<td>140002</td>
+<td>sub account is forbidden</td>
 </tr>
 </tbody></table>
 <h1 id='market-data-endpoints'>Market Data Endpoints</h1><h2 id='test-connectivity'>Test Connectivity</h2>
