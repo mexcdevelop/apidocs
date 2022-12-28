@@ -4243,7 +4243,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 {
     "method": "SUBSCRIPTION",
     "params": [
-                "spot@public.limit.depth.v3.api@BTC_USDT@5"
+                "spot@public.limit.depth.v3.api@BTCUSDT@5"
 
    ]
 }
@@ -4254,7 +4254,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 ```
 
 {
-  "c":"spot@public.limit.depth.v3.api@BTC_USDT@5",  
+  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
   "d":{
     "asks":[{                 //bids:买单,asks:卖单
             "p":"20290.89",   //变动的价格档位
