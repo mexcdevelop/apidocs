@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2022-12-28 **
+
+- websocket add Partial Book Depth Streams
+
 ## **2022-12-13 **
 
 - Add params: avgPrice,cumulativeQuantity,cumulativeAmount for `spot@private.orders.v3.api` channel
@@ -3971,6 +3975,52 @@ Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
 If the quantity is 0, it means that the order of the price has been cancel or traded,remove the price level.
 
 **Request:** `spot@public.increase.depth.v3.api@<symbol>`
+
+**Response:**
+
+| Name      | Type   | Description |
+| :-------- | :----- | :--- |
+| p | string | price |
+| v | string | quantity |
+| e | string | eventType |
+| r | string | version |
+| s | string | symbol |
+| t | long | eventTime |
+
+## Partial Book Depth Streams
+Top bids and asks, Valid are 5, 10, or 20.
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.limit.depth.v3.api@BTC_USDT@5"
+
+   ]
+}
+```
+
+> **response:**
+
+```
+
+{
+  "c":"spot@public.limit.depth.v3.api@BTC_USDT@5",  
+  "d":{
+    "asks":[{                 
+            "p":"20290.89",   
+            "v":"0.650000"}], 
+    "e":"spot@public.limit.depth.v3.api",  
+    "r":"3407459756"},  
+  "s":"BTCUSDT",             
+  "t":1661932660144          
+}
+```
+
+
+**Request:** `spot@public.limit.depth.v3.api@<symbol>@<level>`
 
 **Response:**
 
