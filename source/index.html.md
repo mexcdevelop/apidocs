@@ -3996,7 +3996,7 @@ Top bids and asks, Valid are 5, 10, or 20.
 {
     "method": "SUBSCRIPTION",
     "params": [
-                "spot@public.limit.depth.v3.api@BTC_USDT@5"
+                "spot@public.limit.depth.v3.api@BTCUSDT@5"
 
    ]
 }
@@ -4007,7 +4007,7 @@ Top bids and asks, Valid are 5, 10, or 20.
 ```
 
 {
-  "c":"spot@public.limit.depth.v3.api@BTC_USDT@5",  
+  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
   "d":{
     "asks":[{                 
             "p":"20290.89",   
