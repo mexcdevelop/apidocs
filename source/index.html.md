@@ -75,6 +75,16 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+
+## **2022-12-29**
+
+- [获取杠杆ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口去除返回参数：
+
+| 字段名称       | 数据类型 | 描述          |
+| :------------- | :------- | :------------ |
+| preBasket      | string   | 再平衡前篮子  |
+| preLeverage    | string   | 再平衡前杠杆  |
+
 ## **2022-12-28 **
 
 - websocket新增有限档深度信息推送
@@ -2819,8 +2829,6 @@ GET /api/v3/etf/info
   "realLeverage": 2.9126,
   "mergedTimes": 3,
   "lastMergedTime": 1659063531000,
-  "preBasket": 18827.8361,
-  "preLeverage": 2.2888,
   "basket": 24678.0916
 }
 
@@ -2850,8 +2858,6 @@ GET /api/v3/etf/info
 |realLeverage|string    | 当前杠杆      |
 |mergedTimes |string    | 合并次数      |
 |lastMergedTime|long   | 最近合并时间   |
-|preBasket  |string    | 再平衡前篮子   |
-|preLeverage|string    | 再平衡前杠杆   |
 |basket     |string    | 再平衡后篮子   |
 
 
