@@ -70,6 +70,15 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2022-12-29**
+
+- [ETF](https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf) remove some response params:
+
+| Name       | type | Description          |
+| :------------- | :------- | :------------ |
+| preBasket      | string   | preBasket  |
+| preLeverage    | string   | preLeverage  |
+
 ## **2022-12-28 **
 
 - websocket add Partial Book Depth Streams
@@ -2587,8 +2596,6 @@ Response:
   "realLeverage": 2.9126,
   "mergedTimes": 3,
   "lastMergedTime": 1659063531000,
-  "preBasket": 18827.8361,
-  "preLeverage": 2.2888,
   "basket": 24678.0916
 }
 
@@ -2617,8 +2624,6 @@ Response:
 |realLeverage|string | real leverage    |
 |mergedTimes |string | mergedTimes      |
 |lastMergedTime|long | lastMergedTime   |
-|preBasket  |string  | Basket Before   |
-|preLeverage|string  | Leverage Before  |
 |basket     |string  | Basket After  |
 
 # Margin Account and Trading Interface
