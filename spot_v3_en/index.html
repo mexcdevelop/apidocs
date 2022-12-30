@@ -344,6 +344,12 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-12-29" class="toc-h2 toc-link" data-title="2022-12-29"><strong>2022-12-29</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-12-28" class="toc-h2 toc-link" data-title="*2022-12-28 *">*<em>2022-12-28 *</em></a>
+                  </li>
+                  <li>
                     <a href="#2022-12-13" class="toc-h2 toc-link" data-title="*2022-12-13 *">*<em>2022-12-13 *</em></a>
                   </li>
                   <li>
@@ -700,6 +706,9 @@
                   <li>
                     <a href="#diff-depth-stream" class="toc-h2 toc-link" data-title="Diff.Depth Stream">Diff.Depth Stream</a>
                   </li>
+                  <li>
+                    <a href="#partial-book-depth-streams" class="toc-h2 toc-link" data-title="Partial Book Depth Streams">Partial Book Depth Streams</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -804,7 +813,34 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2022-12-13'>*<em>2022-12-13 *</em></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2022-12-29'><strong>2022-12-29</strong></h2>
+<ul>
+<li><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf">ETF</a> remove some response params:</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">preBasket</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">preBasket</td>
+</tr>
+<tr>
+<td style="text-align: left">preLeverage</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">preLeverage</td>
+</tr>
+</tbody></table>
+<h2 id='2022-12-28'>*<em>2022-12-28 *</em></h2>
+<ul>
+<li>websocket add Partial Book Depth Streams</li>
+</ul>
+<h2 id='2022-12-13'>*<em>2022-12-13 *</em></h2>
 <ul>
 <li>Add params: avgPrice,cumulativeQuantity,cumulativeAmount for <code>spot@private.orders.v3.api</code> channel</li>
 <li>Add Query ReferCode Endpoint</li>
@@ -5647,8 +5683,6 @@ get /api/v3/capital/transfer
   </span><span class="nl">"realLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.9126</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mergedTimes"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"lastMergedTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1659063531000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"preBasket"</span><span class="p">:</span><span class="w"> </span><span class="mf">18827.8361</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"preLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2888</span><span class="p">,</span><span class="w">
   </span><span class="nl">"basket"</span><span class="p">:</span><span class="w"> </span><span class="mf">24678.0916</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -5725,16 +5759,6 @@ get /api/v3/capital/transfer
 <td>lastMergedTime</td>
 <td>long</td>
 <td>lastMergedTime</td>
-</tr>
-<tr>
-<td>preBasket</td>
-<td>string</td>
-<td>Basket Before</td>
-</tr>
-<tr>
-<td>preLeverage</td>
-<td>string</td>
-<td>Leverage Before</td>
 </tr>
 <tr>
 <td>basket</td>
@@ -8908,6 +8932,78 @@ get /api/v3/margin/trigerOrder
 <p>If the quantity is 0, it means that the order of the price has been cancel or traded,remove the price level.</p>
 
 <p><strong>Request:</strong> <code>spot@public.increase.depth.v3.api@&lt;symbol&gt;</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price</td>
+</tr>
+<tr>
+<td style="text-align: left">v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">e</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">eventType</td>
+</tr>
+<tr>
+<td style="text-align: left">r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">version</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+<h2 id='partial-book-depth-streams'>Partial Book Depth Streams</h2>
+<p>Top bids and asks, Valid are 5, 10, or 20.</p>
+
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.limit.depth.v3.api@BTCUSDT@5"
+
+   ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
+  "d":{
+    "asks":[{                 
+            "p":"20290.89",   
+            "v":"0.650000"}], 
+    "e":"spot@public.limit.depth.v3.api",  
+    "r":"3407459756"},  
+  "s":"BTCUSDT",             
+  "t":1661932660144          
+}
+</code></pre></div>
+<p><strong>Request:</strong> <code>spot@public.limit.depth.v3.api@&lt;symbol&gt;@&lt;level&gt;</code></p>
 
 <p><strong>Response:</strong></p>
 
