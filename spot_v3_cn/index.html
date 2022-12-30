@@ -347,6 +347,12 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2022-12-29" class="toc-h2 toc-link" data-title="2022-12-29"><strong>2022-12-29</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2022-12-28" class="toc-h2 toc-link" data-title="*2022-12-28 *">*<em>2022-12-28 *</em></a>
+                  </li>
+                  <li>
                     <a href="#2022-12-13" class="toc-h2 toc-link" data-title="*2022-12-13 *">*<em>2022-12-13 *</em></a>
                   </li>
                   <li>
@@ -704,6 +710,9 @@
                     <a href="#efff33c875" class="toc-h2 toc-link" data-title="增量深度信息(实时)">增量深度信息(实时)</a>
                   </li>
                   <li>
+                    <a href="#1fecb05b1e" class="toc-h2 toc-link" data-title="有限档位深度信息">有限档位深度信息</a>
+                  </li>
+                  <li>
                     <a href="#orderbook" class="toc-h2 toc-link" data-title="如何正确在本地维护一个orderbook副本">如何正确在本地维护一个orderbook副本</a>
                   </li>
               </ul>
@@ -812,7 +821,34 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2022-12-13'>*<em>2022-12-13 *</em></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2022-12-29'><strong>2022-12-29</strong></h2>
+<ul>
+<li><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2">获取杠杆ETF基础信息</a>接口去除返回参数：</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: left">字段名称</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">preBasket</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">再平衡前篮子</td>
+</tr>
+<tr>
+<td style="text-align: left">preLeverage</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">再平衡前杠杆</td>
+</tr>
+</tbody></table>
+<h2 id='2022-12-28'>*<em>2022-12-28 *</em></h2>
+<ul>
+<li>websocket新增有限档深度信息推送</li>
+</ul>
+<h2 id='2022-12-13'>*<em>2022-12-13 *</em></h2>
 <ul>
 <li>websocket <code>spot@private.orders.v3.api</code>频道新增：平均成交价，累计成交数量，累计成交金额三个参数。</li>
 <li>新增获取邀请人接口</li>
@@ -6080,8 +6116,6 @@ body
   </span><span class="nl">"realLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.9126</span><span class="p">,</span><span class="w">
   </span><span class="nl">"mergedTimes"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
   </span><span class="nl">"lastMergedTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1659063531000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"preBasket"</span><span class="p">:</span><span class="w"> </span><span class="mf">18827.8361</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"preLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2888</span><span class="p">,</span><span class="w">
   </span><span class="nl">"basket"</span><span class="p">:</span><span class="w"> </span><span class="mf">24678.0916</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -6160,16 +6194,6 @@ body
 <td style="text-align: left">lastMergedTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">最近合并时间</td>
-</tr>
-<tr>
-<td style="text-align: left">preBasket</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">再平衡前篮子</td>
-</tr>
-<tr>
-<td style="text-align: left">preLeverage</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">再平衡前杠杆</td>
 </tr>
 <tr>
 <td style="text-align: left">basket</td>
@@ -9371,6 +9395,78 @@ get /api/v3/margin/trigerOrder
 <p>如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。</p>
 
 <p><strong>请求参数:</strong> <code>spot@public.increase.depth.v3.api@&lt;symbol&gt;</code></p>
+
+<p><strong>返回参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">变动的价格档位</td>
+</tr>
+<tr>
+<td style="text-align: left">v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">e</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">事件类型</td>
+</tr>
+<tr>
+<td style="text-align: left">r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">版本号</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">事件时间</td>
+</tr>
+</tbody></table>
+<h2 id='1fecb05b1e'>有限档位深度信息</h2>
+<p>推送有限档深度信息，levels表示几档买卖单信息, 可选 5/10/20档。</p>
+
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.limit.depth.v3.api@BTCUSDT@5"
+
+   ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
+  "d":{
+    "asks":[{                 //bids:买单,asks:卖单
+            "p":"20290.89",   //变动的价格档位
+            "v":"0.000000"}], //数量
+    "e":"spot@public.limit.depth.v3.api",  //事件类型
+    "r":"3407459756"},  //版本号 
+  "s":"BTCUSDT",              //交易对
+  "t":1661932660144           //事件时间
+}
+</code></pre></div>
+<p><strong>请求参数:</strong> <code>spot@public.limit.depth.v3.api@&lt;symbol&gt;@&lt;level&gt;</code></p>
 
 <p><strong>返回参数:</strong></p>
 
