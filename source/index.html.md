@@ -462,11 +462,26 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 ## 限频规则
 
-对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁
+对REST API的访问有频率限制，当超出限制时，返回状态429：请求过于频繁。
 
-需要携带access key进行访问的接口，以账号作为限速的基本单位；不需要携带access key进行访问的接口，以IP作为限速的基本单位
+需要携带access key进行访问的接口，以账号作为限速的基本单位；不需要携带access key进行访问的接口，以IP作为限速的基本单位。
 
-未说明限速规则的接口默认为20次/秒
+### 限频说明
+
+- 每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。
+- **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。**
+
+### 限频使用
+
+- 按照IP统计的接口, 请求返回头里面会包含`X-MBX-USED-WEIGHT-(intervalNum)(intervalLetter)`的头，代表了当前账户所有已用的IP权重。
+- 按照UID统计的接口, 请求返回头里面会包含`X-SAPI-USED-UID-WEIGHT-1M=<value>`, 代表了当前账户所有已用的UID权重。
+
+### 超频报错
+
+- 收到429时，您有责任停止发送请求，不得滥用API。
+- **收到429后仍然继续违反访问限制，会被封禁IP。**
+- 频繁违反限制，封禁时间会逐渐延长，**从最短2分钟到最长3天**。
+- `Retry-After`的头会与带有418或429的响应发送，并且会给出**以秒为单位**的等待时长(如果是429)以防止禁令，或者如果是418，直到禁令结束。
 
 ## 错误码
 
@@ -589,7 +604,7 @@ GET /api/v3/ping
 **HTTP请求**
 - **GET** ```/api/v3/ping```
 
-
+**权重(IP):** 1
 
 **请求参数**
 
@@ -619,6 +634,7 @@ GET /api/v3/time
 
 - **GET** ```/api/v3/time ```
   
+**权重(IP):** 1
 
 **请求参数**
 
@@ -680,7 +696,7 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 
 - **GET** ```/api/v3/exchangeInfo```
 
-
+**权重(IP):** 10
 
 **请求参数**
 
@@ -749,8 +765,9 @@ GET /api/v3/depth?symbol=BTCUSDT&limit=200
 
 - **GET** ```/api/v3/depth```
 
-**请求参数**
+**权重(IP):** 基于限制调整
 
+**请求参数**
 
 | 参数名 | 数据类型 | 是否必须 | 说明       | 取值范围            |
 | :------ | :-------- | :-------- | :---------- | :------------------- |
@@ -791,6 +808,8 @@ GET /api/v3/trades?symbol=BTCUSDT&limit=600
 ```
 **HTTP请求**
 - **GET** ```/api/v3/trades```
+
+**权重(IP):** 5
 
 **请求参数**
 
@@ -852,7 +871,7 @@ GET /api/v3/trades?symbol=BTCUSDT&limit=600
 | isBuyerMaker | 是否为maker单  |
 | isBestMatch  | 是否为最佳匹配 | :-->
 
-## 近期成交(归集)
+## 近期成交(归集) 
 归集交易与逐笔交易的区别在于，同一价格、同一方向、同一时间的trade会被聚合为一条
 
 > 请求示例
@@ -881,6 +900,7 @@ GET /api/v3/aggTrades?symbol=BTCUSDT
 
 - **GET** ```/api/v3/aggTrades```
 
+**权重(IP):** 1
 
 **请求参数**
 
@@ -936,6 +956,7 @@ GET /api/v3/klines?symbol=BTCUSDT&interval=1m&startTime=1652848049876&endTimne=1
 
 - **GET** ```/api/v3/klines```
   
+**权重(IP):** 1
 
 **请求参数**
 
@@ -982,6 +1003,8 @@ GET /api/v3/avgPrice?symbol=BTCUSDT
 **HTTP请求**
 
 - **GET** ```/api/v3/avgPrice```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1034,6 +1057,8 @@ GET /api/v3/ticker/24hr?symbol=BTCUSDT
 
 - **GET** ```/api/v3/ticker/24hr```
 
+**权重(IP):** 1单交易对/40所有交易对
+
 **请求参数**
 
 | 参数名 | 数据类型 | 是否必须 | 说明                              |
@@ -1085,6 +1110,8 @@ GET /api/v3/ticker/price?symbol=BTCUSDT
 
 - **GET** ```/api/v3/ticker/price```
 
+**权重(IP):**1 单一交易对;**2** 交易对参数缺失
+
 **请求参数**
 
 | 参数名 | 数据类型 | 是否必须 | 说明                  |
@@ -1123,7 +1150,7 @@ GET /api/v3/ticker/bookTicker?symbol=BTCUSDT
 
 - **GET** ```/api/v3/ticker/bookTicker```
 
-
+**权重(IP):**1 单一交易对;**2** 交易对参数缺失;
 
 **请求参数**
 
@@ -1167,6 +1194,8 @@ POST /api/v3/sub-account/virtualSubAccount?subAccount=subAccount1&note=1&timesta
 **HTTP请求**
 
 - **POST** ```/api/v3/sub-account/virtualSubAccount```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1216,6 +1245,8 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
  **HTTP请求**
 
 - **GET**  ```/api/v3/sub-account/list```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1272,7 +1303,7 @@ body
 
 - **POST** ```/api/v3/sub-account/apiKey```
 
-
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1336,6 +1367,8 @@ GET/api/v3/sub-account/apiKey?subAccount=subAccount1&timestamp=1597026383085
 
 - **GET** ```/api/v3/sub-account/apiKey```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名     | 类型   | 是否必须 | 说明       |
@@ -1383,7 +1416,7 @@ body
 
 - **DELETE** ```/api/v3/sub-account/apiKey```
 
-
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1421,6 +1454,8 @@ post /api/v3/capital/sub-account/universalTransfer
 **HTTP请求**
 
 - **POST** ```/api/v3/capital/sub-account/universalTransfer```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1474,6 +1509,8 @@ get /api/v3/capital/sub-account/universalTransfer
 **HTTP请求**
 
 - **GET** ```/api/v3/capital/sub-account/universalTransfer```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1535,6 +1572,8 @@ post /api/v3/sub-account/futures
 
 - **POST** ```/api/v3/sub-account/futures```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -1580,6 +1619,8 @@ post /api/v3/sub-account/margin
 
 - **POST** ```/api/v3/sub-account/margin```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -1614,7 +1655,10 @@ POST /api/v3/order/test
 {}
 ```
 **HTTP请求**
+
 - **POST** ```/api/v3/order/test```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1645,6 +1689,8 @@ POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&times
 **HTTP请求**
 
 - **POST** ```/api/v3/order```
+
+**权重(IP):** 1/**权重(UID):** 1
 
 **请求参数**
 
@@ -1741,6 +1787,8 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 - **POST** ```/api/v3/batchOrders```
 
+**权重(IP):** 1
+
 **请求参数**
 
 
@@ -1803,7 +1851,7 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 
 - **DELETE** ```/api/v3/order```
 
-
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1884,7 +1932,7 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 
 - **DELETE** ```/api/v3/openOrders```
 
-
+**权重(IP):** 1
 
 **请求参数**
 
@@ -1949,6 +1997,7 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 
 - **GET** ```/api/v3/order```
 
+**权重(IP):** 2
 
 **请求参数**
 
@@ -2023,6 +2072,7 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 
 - **GET** ```/api/v3/openOrders```
 
+**权重(IP):** 3
 
 **请求参数**
 
@@ -2094,7 +2144,7 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 
 - **GET** ```/api/v3/allOrders```
 
-
+**权重(IP):** 10
 
 **请求参数**
 
@@ -2176,6 +2226,7 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 
 - **GET** ```/api/v3/account```
 
+**权重(IP):** 10
 
 **请求参数**
 
@@ -2240,6 +2291,7 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 
 - **GET** ```/api/v3/myTrades```
 
+**权重(IP):** 10
 
 **请求参数**
 
@@ -2296,6 +2348,8 @@ post api/v3/mxDeduct/enable
 
 - **POST** ```api/v3/mxDeduct/enable```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -2336,6 +2390,8 @@ get api/v3/mxDeduct/enable
 **HTTP请求**
 
 - **GET** ```api/v3/mxDeduct/enableh```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -2412,6 +2468,8 @@ Get /api/v3/capital/config/getall
 
 - **GET** ```/api/v3/capital/config/getall```
 
+**权重(IP):** 10
+
 **请求参数**
 
 无
@@ -2448,6 +2506,8 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 **HTTP请求**
 
 - **POST** ```/api/v3/capital/withdraw/apply```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -2501,6 +2561,8 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 **HTTP请求**
 
 - **GET** ```/api/v3/capital/deposit/hisrec```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -2564,6 +2626,8 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
 
 - **GET** ```/api/v3/capital/withdraw/history```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须 | 说明 | 
@@ -2619,6 +2683,8 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 
 - **POST** ```/api/v3/capital/deposit/address```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须 | 说明 | 
@@ -2673,6 +2739,8 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 - **GET** ```/api/v3/capital/deposit/address```
 
+**权重(IP):** 10
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -2710,6 +2778,8 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 **HTTP请求**
 
 - **POST** ```/api/v3/capital/transfer```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -2776,6 +2846,8 @@ get /api/v3/capital/transfer
 
 - **GET** ```/api/v3/capital/transfer```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -2837,6 +2909,7 @@ GET /api/v3/etf/info
 
 - **GET** ```api/v3/etf/info```
 
+**权重(IP):** 1
 
 **请求参数**
 
@@ -2886,6 +2959,8 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 - **POST** ```/api/v3/margin/tradeMode```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -2933,6 +3008,8 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 
 - **POST** ```/api/v3/margin/order```
 
+**权重(UID):**6
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例  | 
@@ -2979,6 +3056,8 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 
 - **POST** ```/api/v3/margin/loan```
 
+**权重(UID):** 1000
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例 |
@@ -3022,6 +3101,8 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 **HTTP请求**
 
 - **POST** ```/api/v3/margin/repay```
+
+**权重(UID):** 1000
 
 **请求参数**
 
@@ -3083,6 +3164,8 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 **HTTP请求**
 
 - **DELETE** ```/api/v3/margin/openOrders```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -3148,6 +3231,8 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 
 - **DELETE** ```/api/v3/margin/order```
 
+**权重(IP):** 10
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3209,6 +3294,8 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/loan```
+
+**权重(IP):** 10
 
 **请求参数**
 
@@ -3280,6 +3367,8 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 
 - **GET** ```/api/v3/margin/allOrders```
 
+**权重(IP):** 10
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3335,6 +3424,8 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/myTrades```
+
+**权重(IP):** 10
 
 **请求参数**
 
@@ -3409,6 +3500,8 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 - **GET** ```/api/v3/margin/openOrders```
 
+**权重(IP):** 3
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3465,6 +3558,8 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 - **GET** ```/api/v3/margin/maxTransferable```
 
+**权重(IP):** 50
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3502,6 +3597,8 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/priceIndex```
+
+**权重(IP):** 10
 
 **请求参数**
 
@@ -3554,6 +3651,8 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/order```
+
+**权重(IP):** 10
 
 **请求参数**
 
@@ -3644,6 +3743,8 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/isolated/account```
+
+**权重(IP):** 10
 
 **请求参数**
 
@@ -3737,6 +3838,8 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 - **GET** ```/api/v3/margin/maxBorrowable```
 
+**权重(IP):** 50
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3771,6 +3874,8 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/repay```
+
+**权重(IP):** 10
 
 **请求参数**
 
@@ -3829,6 +3934,8 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 - **GET** ```/api/v3/margin/isolated/pair```
 
+**权重(IP):** 10
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3865,6 +3972,8 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/forceLiquidationRec```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -3935,6 +4044,8 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 - **GET** ```/api/v3/margin/isolatedMarginData```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 说明| 是否必须  | 数据类型 |  示例            |
@@ -3982,6 +4093,8 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 **HTTP请求**
 
 - **GET** ```/api/v3/margin/isolatedMarginTier```
+
+**权重(IP):** 1
 
 **请求参数**
 
