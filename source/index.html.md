@@ -459,22 +459,28 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 Note that the signature is different in example 3. There is no & between "LIMIT" and "quantity=1".
 
 ## LIMITS
+
 There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests.
 The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
 
 ### Limits Description
+
 - According to the two modes of IP and UID (account) limit, each are independent.
 - Endpoints are marked according to IP or UID limit and their corresponding weight value.
 - Each endpoint with IP limits has an independent 20000 per minute limit.
 - Each endpoint with UID limits has an independent 240000 per minute limit.
 - Responses from endpoints with IP limits contain the header X-SAPI-USED-IP-WEIGHT-1M, defining the weight used by the current IP.
 - Responses from endpoints with UID limits contain the header X-SAPI-USED-UID-WEIGHT-1M, defining the weight used by the current UID.
+
 ### Limits Error
+
 - When a 429 is received, it's your obligation as an API to back off and not spam the API.
 - Repeatedly violating rate limits and/or failing to back off after receiving 429s will result in an automated IP ban .
 - IP bans are tracked and scale in duration for repeat offenders, from 2 minutes to 3 days.
 - A Retry-After header is sent with a 418 or 429 responses and will give the number of seconds required to wait, in the case of a 429, to prevent a ban, or, in the case of a 418, until the ban is over.
+
 ### Websocket Limits
+
 - The Websocket limits is: 100times/s.
 - A connection that goes beyond the limit will be disconnected; IPs that are repeatedly disconnected may be banned.
 - A single connection can listen to a maximum of 30 streams.
