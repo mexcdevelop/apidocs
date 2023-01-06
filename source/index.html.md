@@ -473,9 +473,6 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 - 每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。
 - **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。**
-
-### 限频使用
-
 - 按照IP统计的接口, 请求返回头里面会包含`X-MBX-USED-WEIGHT-(intervalNum)(intervalLetter)`的头，代表了当前账户所有已用的IP权重。
 - 按照UID统计的接口, 请求返回头里面会包含`X-SAPI-USED-UID-WEIGHT-1M=<value>`, 代表了当前账户所有已用的UID权重。
 
