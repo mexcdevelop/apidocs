@@ -1739,7 +1739,7 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 
 
 ## 批量下单
-支持单次批量下20单,要求必须是同一交易对，限频2次/秒。
+支持单次批量下20单,要求必须是同一交易对。
 
 > 请求示例
 
@@ -2185,7 +2185,7 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 | origQuoteOrderQty   | 原始的交易金额                                |
 
 ## 账户信息
-获取当前账户信息，限速2次每秒。
+获取当前账户信息。
 
 > 请求示例
 
@@ -4821,6 +4821,8 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 
 - **GET** ```/api/v3/rebate/taxQuery```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -4888,6 +4890,8 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 **HTTP请求**
 
 - **GET** ```/api/v3/rebate/detail```
+
+**权重(IP):** 1
 
 **请求参数**
 
@@ -4960,6 +4964,8 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 - **GET** ```/api/v3/rebate/detail/kickback```
 
+**权重(IP):** 1
+
 **请求参数**
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
@@ -5004,6 +5010,8 @@ get /api/v3/rebate/referCode?timestamp=1597026383085&signature=abc
 **HTTP请求**
 
 - **GET** ```/api/v3/rebate/referCode```
+
+**权重(IP):** 1
 
 **请求参数**
 
