@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-01-06**
+
+- [Update Limits Info](https://mxcdevelop.github.io/apidocs/spot_v3_en/#limits)
+
 ## **2022-12-29**
 
 - [ETF](https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf) remove some response params:
@@ -79,25 +83,25 @@ To apply for a partnership, please contact: **broker@mexc.com**
 | preBasket      | string   | preBasket  |
 | preLeverage    | string   | preLeverage  |
 
-## **2022-12-28 **
+## **2022-12-28**
 
 - websocket add Partial Book Depth Streams
 
-## **2022-12-13 **
+## **2022-12-13**
 
 - Add params: avgPrice,cumulativeQuantity,cumulativeAmount for `spot@private.orders.v3.api` channel
 - Add Query ReferCode Endpoint
 
-## **2022-11-29 **
+## **2022-11-29**
 
 - Add "Margin Account Orders" channel and "Margin Account Risk Rate" channel in Websocket
 
-## **2022-11-24 **
+## **2022-11-24**
 
 - Add MEXC Broker Introduction
 - Add "Enable MX Deduct" and "Query MX Deduct Status" Endpoints
 
-## **2022-10-14 **
+## **2022-10-14**
 
 - Update Endpoints [Wallet Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
@@ -453,14 +457,33 @@ symbol=BTCUSDT&side=BUY&type=LIMIT
 quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 Note that the signature is different in example 3. There is no & between "LIMIT" and "quantity=1".
-## Limits
 
+## LIMITS
 
 There is rate limit for API access frequency, upon exceed client will get code 429: Too many requests.
-
 The account is used as the basic unit of speed limit for the endpoints that need to carry access keys. For endpoints that do not need to carry access keys, IP addresses are used as the basic unit of rate limiting.
 
-The default rate limiting rule for an endpoint is 20 times per second.
+### Limits Description
+
+- According to the two modes of IP and UID (account) limit, each are independent.
+- Endpoints are marked according to IP or UID limit and their corresponding weight value.
+- Each endpoint with IP limits has an independent 20000 per minute limit.
+- Each endpoint with UID limits has an independent 240000 per minute limit.
+- Responses from endpoints with IP limits contain the header X-SAPI-USED-IP-WEIGHT-1M, defining the weight used by the current IP.
+- Responses from endpoints with UID limits contain the header X-SAPI-USED-UID-WEIGHT-1M, defining the weight used by the current UID.
+
+### Limits Error
+
+- When a 429 is received, it's your obligation as an API to back off and not spam the API.
+- Repeatedly violating rate limits and/or failing to back off after receiving 429s will result in an automated IP ban .
+- IP bans are tracked and scale in duration for repeat offenders, from 2 minutes to 3 days.
+- A Retry-After header is sent with a 418 or 429 responses and will give the number of seconds required to wait, in the case of a 429, to prevent a ban, or, in the case of a 418, until the ban is over.
+
+### Websocket Limits
+
+- The Websocket limits is: 100times/s.
+- A connection that goes beyond the limit will be disconnected; IPs that are repeatedly disconnected may be banned.
+- A single connection can listen to a maximum of 30 streams.
 
 ## Error Code
 
@@ -576,6 +599,8 @@ The following error information can be returend
 
 Test connectivity to the Rest API.
 
+**Weight(IP):** 1
+
 Parameter:
 
 NONE
@@ -592,6 +617,7 @@ NONE
 
 - **GET** ```/api/v3/time ```
   
+**Weight(IP):** 1
 
 Parameter:
 
@@ -637,6 +663,8 @@ NONE
 
 Current exchange trading rules and symbol information
 
+**Weight(IP):** 10
+
 **Parameter**:
 
 There are 3 possible options:
@@ -664,6 +692,8 @@ There are 3 possible options:
 ```
 
 - **GET** ```/api/v3/depth```
+
+**Weight(IP):** 1
 
 Parameter:
 
@@ -699,6 +729,8 @@ Response:
 ```
 
 - **GET** ```/api/v3/trades```
+
+**Weight(IP):** 5
 
 Parameter:
 
@@ -739,6 +771,8 @@ Response:
 ```
 
 - **GET** ```/api/v3/historicalTrades```
+
+**Weight(IP):** 1
 
 Parameters:
 
@@ -781,6 +815,7 @@ Response:
 
 - **GET** ```/api/v3/aggTrades```
   
+**Weight(IP):** 1
 
 Get compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
 
@@ -829,6 +864,7 @@ Response:
 
 - **GET** ```/api/v3/klines```
   
+**Weight(IP):** 1
 
 Kline/candlestick bars for a symbol.
 Klines are uniquely identified by their open time.
@@ -870,6 +906,8 @@ Response:
 ```
 
 - **GET** ```/api/v3/avgPrice```
+
+**Weight(IP):** 1
 
 Parameters:
 
@@ -955,6 +993,13 @@ or
 
 - **GET** ```/api/v3/ticker/24hr```
 
+**Weight(IP):** 
+
+| Parameter	   | Symbols Provided   |  Weight  |
+| ------ | ------ | ------  |
+| symbol | 1 |  1 |
+| symbols | all |  40 |
+
 Parameters:
 
 | Name   | Type   | Mandatory | Description                                                                      |
@@ -1009,6 +1054,13 @@ or
 
 - **GET** ```/api/v3/ticker/price```
 
+**Weight(IP):** 
+
+| Parameter	   | Symbols Provided   |  Weight  |
+| ------  | ------ | ------  |
+| symbol  | 1      |  1      |
+| symbols | all    |  2      |
+
 Parameters:
 
 | Name   | Type   | Mandatory | Description                                                          |
@@ -1056,6 +1108,7 @@ OR
 
 - **GET** ```/api/v3/ticker/bookTicker```
 
+**Weight(IP):** 1
 
 Best price/qty on the order book for a symbol or symbols.
 
@@ -1094,7 +1147,7 @@ Create a sub-account from the master account.
 
 - POST / api/v3/sub-account/virtualSubAccount
 
-
+**Weight(IP):** 1
 
 Parameters:
 
@@ -1132,7 +1185,7 @@ Get details of the sub-account list
 
 - GET / api/v3/sub-account/list 
 
-
+**Weight(IP):** 1
 
 Parameters:
 
@@ -1166,7 +1219,7 @@ Parameters:
 
 - POST /api/v3/sub-account/apiKey
 
-
+**Weight(IP):** 1
 
 Parameters:
 
@@ -1211,6 +1264,8 @@ Applies to master accounts only
 
 - GET/api/v3/sub-account/apiKey
 
+**Weight(IP):** 1
+
 Parameters:
 
 | Name       | Type   | Mandatory | Description      |
@@ -1234,7 +1289,7 @@ Parameters:
 
 - DELETE /api/v3/sub-account/apiKey
 
-
+**Weight(IP):** 1
 
 Parameters:
 
@@ -1263,6 +1318,8 @@ post /api/v3/capital/sub-account/universalTransfer
 ```
 
 - **POST** ```/api/v3/capital/sub-account/universalTransfer```
+
+**Weight(IP):** 1
 
 **Parameters:**
 
@@ -1311,6 +1368,8 @@ get /api/v3/capital/sub-account/universalTransfer
   }
 ```
 - **GET** ```/api/v3/capital/sub-account/universalTransfer```
+
+**Weight(IP):** 1
 
 **Parameters:**
 
@@ -1369,6 +1428,8 @@ post /api/v3/sub-account/futures
 
 - **POST** ```/api/v3/sub-account/futures```
 
+**Weight(IP):** 1
+
 **Parameters:**
 
 | Name | Type| Mandatory  | Description | 
@@ -1409,6 +1470,8 @@ post /api/v3/sub-account/margin
 
 - **POST** ```/api/v3/sub-account/margin```
 
+**Weight(IP):** 1
+
 **Parameters:**
 
 | Name | Type| Mandatory  | Description | 
@@ -1438,6 +1501,8 @@ post /api/v3/sub-account/margin
 ```
 
 - **POST** ```/api/v3/order/test```
+
+**Weight(IP):** 1
 
 Creates and validates a new order but does not send it into the matching engine.
 
@@ -1469,6 +1534,8 @@ POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&times
 ```
 
 - **POST** ```/api/v3/order```
+
+**Weight(IP):** 1, **Weight(UID):** 1
 
 Parameters:
 
@@ -1568,6 +1635,8 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 - **POST** ```/api/v3/batchOrders```
 
+**Weight(IP):** 1,**Weight(UID):** 1
+
 Parameters:
 
 | Name             | type    | Mandatory | Description                                |
@@ -1619,6 +1688,8 @@ Response
 ```
 
 - **DELETE** ```/api/v3/order```
+
+**Weight(IP):** 1
 
 Cancel an active order.
 
@@ -1693,6 +1764,8 @@ Response:
 
 - **DELETE** ```/api/v3/openOrders```
 
+**Weight(IP):** 1
+
 Cancel all pending orders for a single  symbol, including OCO pending orders.
 
 Parameters:
@@ -1748,6 +1821,8 @@ Response:
 ```
 
 - **GET** ```/api/v3/order```
+
+**Weight(IP):** 2
 
 Check an order's status.
 
@@ -1814,6 +1889,8 @@ Response:
 
 - **GET** ```/api/v3/openOrders```
 
+**Weight(IP):** 3
+
 Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 Parameters:
@@ -1876,6 +1953,8 @@ Response:
 ```
 
 - **GET** ```/api/v3/allOrders```
+
+**Weight(IP):** 10
 
 Get all account orders including active, cancelled or completed orders(the query period is the latest 24 hours by default). You can query a maximum of the latest 7 days.
 
@@ -1943,6 +2022,8 @@ Response:
 
 - **GET** ```/api/v3/account```
 
+**Weight(IP):** 10
+
 Get current account information,rate limit:2 times/s.
 
 Parameters:
@@ -2000,6 +2081,7 @@ Response:
 
 - **GET** ```/api/v3/myTrades```
 
+**Weight(IP):** 10
 
 Get trades for a specific account and symbol,Only the transaction records in the past 1 month can be queried. If you want to view more transaction records, please use the export function on the web side, which supports exporting transaction records of the past 3 years at most.
 
@@ -2059,6 +2141,8 @@ post api/v3/mxDeduct/enable
 
 - **POST** ```api/v3/mxDeduct/enable```
 
+**Weight(IP):** 1
+
 **Parameters:**
 
 | Name | Type| Mandatory  | Description | 
@@ -2098,6 +2182,8 @@ get api/v3/mxDeduct/enable
 ```
 
 - **GET** ```api/v3/mxDeduct/enableh```
+
+**Weight(IP):** 1
 
 **Parameters:**
 
@@ -2172,6 +2258,8 @@ Get /api/v3/capital/config/getall
 
 - **GET** ```/api/v3/capital/config/getall```
 
+**Weight(IP):** 10
+
 Query currency details and the smart contract address
 
 
@@ -2213,6 +2301,8 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 
 
 - **POST** ```/api/v3/capital/withdraw/apply```
+
+**Weight(IP):** 1
 
 Parameters: 
 
@@ -2265,6 +2355,8 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 
 
 - **GET** ```/api/v3/capital/deposit/hisrec```
+
+**Weight(IP):** 1
 
 Parameters: 
 
@@ -2327,6 +2419,8 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 
 
 - **GET** ```/api/v3/capital/withdraw/history```
+
+**Weight(IP):** 1
 
 Parameters: 
 
@@ -2391,6 +2485,8 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 
 - **POST** ```/api/v3/capital/deposit/address```
 
+**Weight(IP):** 1
+
 Parameters: 
 
 | Name | Type| Mandatory  | Description | 
@@ -2444,6 +2540,8 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 
 - **GET** ```/api/v3/capital/deposit/address```
 
+**Weight(IP):** 10
+
 Parameters: 
 
 | Name | Type| Mandatory  | Description | 
@@ -2482,6 +2580,8 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 
 - **POST** ```/api/v3/capital/transfer```
 
+**Weight(IP):** 1
+
 Parameters: 
 
 | Name | Type| Mandatory  | Description | 
@@ -2507,7 +2607,6 @@ Response:
 > Request
 
 ```
-get /api/v3/capital/transfer
 get /api/v3/capital/transfer
 ```
 > Response
@@ -2547,6 +2646,8 @@ get /api/v3/capital/transfer
 
 
 - **GET** ```/api/v3/capital/transfer```
+
+**Weight(IP):** 1
 
 Parameters: 
 
@@ -2603,6 +2704,8 @@ Response:
 
 - **GET** ```api/v3/etf/info```
 
+**Weight(IP):** 1
+
 Get information on ETFs, such as symbol, netValue and fund fee.
 
 Parameters:
@@ -2650,6 +2753,8 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 - **POST** ```/api/v3/margin/tradeMode```
 
+**Weight(IP):** 1
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -2692,6 +2797,8 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 **Http Request**
 
 - **POST** ```/api/v3/margin/order```
+
+**Weight(UID):** 6
 
 **Request Parameter**
 
@@ -2739,6 +2846,8 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 
 - **POST** ```/api/v3/margin/loan```
 
+**Weight(UID):** 1000
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample |
@@ -2782,6 +2891,8 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 **Http Request**
 
 - **POST** ```/api/v3/margin/repay```
+
+**Weight(UID):** 1000
 
 **Request Parameter**
 
@@ -2841,6 +2952,8 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 **Http Request**
 
 - **DELETE** ```/api/v3/margin/openOrders```
+
+**Weight(IP):** 1
 
 **Request Parameter**
 
@@ -2905,6 +3018,8 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 
 - **DELETE** ```/api/v3/margin/order```
 
+**Weight(IP):** 10
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -2967,6 +3082,8 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 **Http Request**
 
 - **GET** ```/api/v3/margin/loan```
+
+**Weight(IP):** 10
 
 **Request Parameter**
 
@@ -3038,6 +3155,8 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 
 - **GET** ```/api/v3/margin/allOrders```
 
+**Weight(IP):** 10
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3094,6 +3213,8 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 **Http Request**
 
 - **GET** ```/api/v3/margin/myTrades```
+
+**Weight(IP):** 10
 
 **Request Parameter**
 
@@ -3168,6 +3289,8 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 - **GET** ```/api/v3/margin/openOrders```
 
+**Weight(IP):** 3
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3220,6 +3343,8 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 - **GET** ```/api/v3/margin/maxTransferable```
 
+**Weight(IP):** 50
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3257,6 +3382,8 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 **Http Request**
 
 - **GET** ```/api/v3/margin/priceIndex```
+
+**Weight(IP):** 10
 
 **Request Parameter**
 
@@ -3309,6 +3436,8 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 **Http Request**
 
 - **GET** ```/api/v3/margin/order```
+
+**Weight(IP):** 10
 
 **Request Parameter**
 
@@ -3400,6 +3529,8 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 
 - **GET** ```/api/v3/margin/isolated/account```
 
+**Weight(IP):** 10
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3486,6 +3617,8 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 
 - **GET** ```/api/v3/margin/maxBorrowable```
 
+**Weight(IP):** 50
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3521,6 +3654,8 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 **Http Request**
 
 - **GET** ```/api/v3/margin/repay```
+
+**Weight(IP):** 10
 
 **Request Parameter**
 
@@ -3579,6 +3714,8 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 
 - **GET** ```/api/v3/margin/isolated/pair```
 
+**Weight(IP):** 10
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3616,6 +3753,8 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 **Http Request**
 
 - **GET** ```/api/v3/margin/forceLiquidationRec```
+
+**Weight(IP):** 1
 
 **Request Parameter**
 
@@ -3685,6 +3824,8 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 
 - **GET** ```/api/v3/margin/isolatedMarginData```
 
+**Weight(IP):** 1
+
 **Request Parameter**
 
 | Name | Description| Mandatory  | Type |  Sample            |
@@ -3732,6 +3873,8 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 **Http Request**
 
 - **GET** ```/api/v3/margin/isolatedMarginTier```
+
+**Weight(IP):** 1
 
 **Request Parameter**
 
@@ -4456,6 +4599,8 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 
 - **GET** ```/api/v3/rebate/taxQuery```
 
+**Weight(IP):** 1
+
 **Request**
 
 | Name | Type|  Mandatory  | Description | 
@@ -4523,6 +4668,8 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 **Http Request**
 
 - **GET** ```/api/v3/rebate/detail```
+
+**Weight(IP):** 1
 
 **Request**
 
@@ -4594,6 +4741,8 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 
 - **GET** ```/api/v3/rebate/detail/kickback```
 
+**Weight(IP):** 1
+
 **Request**
 
 | Name | Type|  Mandatory  | Description | 
@@ -4638,6 +4787,8 @@ get /api/v3/rebate/referCode?timestamp={{timestamp}}&signature={{signature}}
 **HTTP Request**
 
 - **GET** ```/api/v3/rebate/referCode```
+
+**Weight(IP):** 1
 
 **Request**
 
