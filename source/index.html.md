@@ -2509,7 +2509,7 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
     {"success":true,"code":0}
     ```
 
-## 下单
+## 下单（维护中）
 
 > 响应示例
 
@@ -2553,7 +2553,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 成功时,success =true,data值为订单id,success =false,失败data=null
 
-## 批量下单
+## 批量下单（维护中）
 
 > 示例
 
@@ -2617,7 +2617,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | errorMsg  | string  | 错误信息，失败时不为空|
 | errorCode  | int  | 错误code，默认为0|
 
-## 取消订单
+## 取消订单（维护中）
 
 > 响应示例
 
@@ -2669,7 +2669,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | errorMsg  | string  | 错误原因|
 | errorCode  | int  | 错误码，非0即是撤单失败|
 
-## 根据外部订单号取消订单
+## 根据外部订单号取消订单（维护中）
 
 > 参数示例
 
@@ -2695,7 +2695,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 | symbol  | string  | true  | 合约名|
 | externalOid  | string  | true  | 外部订单号|
 
-## 取消某合约下所有订单
+## 取消某合约下所有订单（维护中）
 
 撤销某个合约下的所有未完成订单。
 
@@ -2723,7 +2723,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 \- 已禁用 调用是返回错误码 8817 提示信息：风险限制功能已升级，详情请前往web端查看
 
-## 计划委托下单
+## 计划委托下单（维护中）
 
 - **POST** ```api/v1/private/planorder/place```
 
@@ -2751,7 +2751,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 成功时,success =true,data值为订单id,success =false,失败data=null
 
-## 取消计划委托订单
+## 取消计划委托订单（维护中）
 
 > 响应示例:
 
@@ -2791,7 +2791,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 公共参数,success: true成功,false失败
 
-## 取消所有计划委托订单
+## 取消所有计划委托订单（维护中）
 
 - **POST** ```api/v1/private/planorder/cancel_all```
 
@@ -2809,7 +2809,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 公共参数,success: true成功,false失败
 
-## 取消止盈止损委托单
+## 取消止盈止损委托单（维护中）
 
 > 示例:
 
@@ -2846,7 +2846,7 @@ USDT永续合约交易提供了限价单和市价单下单模式。只有当您�
 
 公共参数,success: true成功,false失败
 
-## 取消所有止盈止损委托单
+## 取消所有止盈止损委托单（维护中）
 
 - **POST** ```api/v1/private/stoporder/cancel_all```
 
