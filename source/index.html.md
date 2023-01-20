@@ -2552,7 +2552,7 @@ public parameters, success: true, success, false ,failure
 
 
 
-## Order
+## Order (Under maintenance)
 
 > Response
 
@@ -2596,7 +2596,7 @@ Rate limit:20 times/2 seconds
 
 success, success =true, data represent the order id success =false, failure data=null
 
-## Bulk order
+## Bulk order (Under maintenance)
 
 > Response
 
@@ -2661,7 +2661,7 @@ Rate limit:1/2 seconds
 | errorCode  | int  | error code, default is 0|
 
 
-## Cancel  the order
+## Cancel the order (Under maintenance)
 
 > Response
 
@@ -2713,7 +2713,7 @@ Rate limit:20 times/2 seconds
 | errorMsg  | string  | error message  |
 | errorCode  | int  | error code，Not 0 means the revoke failed  |
 
-## Cancel the order according to the external order ID
+## Cancel the order according to the external order ID (Under maintenance)
 
 > Response
 
@@ -2739,7 +2739,7 @@ Rate limit:20 times/2 seconds
 | symbol  | string  | true  | the name of the contract|
 | externalOid  | string  | true  | external orderid|
 
-## Cancel all orders under a contract
+## Cancel all orders under a contract (Under maintenance)
 
 Cancel all uncompleted orders under a contract.
 
@@ -2771,7 +2771,7 @@ public parameters , success: true success, false failure
 
 
 
-## Trigger order
+## Trigger order (Under maintenance)
 
 - **POST** ```api/v1/private/planorder/place```
 
@@ -2799,7 +2799,7 @@ Rate limit:20 times/2 seconds
 
 success, success =true, data value is the order ID, success =false, failure data=null
 
-## Cancel the trigger order
+## Cancel the trigger order (Under maintenance)
 
 > Response
 
@@ -2839,7 +2839,7 @@ Rate limit:20 times/2 seconds
 
 public parameters, Success: true success, false failure
 
-## Cancel all trigger orders
+## Cancel all trigger orders (Under maintenance)
 
 - **POST** ```api/v1/private/planorder/cancel_all```
 
@@ -2857,7 +2857,7 @@ Rate limit:20 times/2 seconds
 
 public parameters, Success: true success, false failure
 
-## Cancel the Stop-Limit trigger order
+## Cancel the Stop-Limit trigger order (Under maintenance)
 
 > Response
 
@@ -2890,7 +2890,7 @@ Rate limit:20 times/2 seconds
 | ------------ | ------------ | ------------ | ------------ |
 | stopPlanOrderId |long | true |the Stop-Limit trigger order ID|
 
-## Cancel all Stop-Limit price trigger orders
+## Cancel all Stop-Limit price trigger orders (Under maintenance)
 
 - **POST** ```api/v1/private/stoporder/cancel_all```
 
