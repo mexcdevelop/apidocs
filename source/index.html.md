@@ -4204,9 +4204,9 @@ Top bids and asks, Valid are 5, 10, or 20.
 
 - Doing a `POST` on an account with an active `listenKey` will return the currently active `listenKey` and extend its validity for 60 minutes.
 
-- websocket baseurl: **wss://wbs.mexc.me/ws**
+- websocket baseurl: **wss://wbs.mexc.com/ws**
 
-- User Data Streams are accessed at **/ws?listenKey=listenKey** <br/>eg:**wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
+- User Data Streams are accessed at **/ws?listenKey=listenKey** <br/>eg:**wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
 
 - A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.
 
