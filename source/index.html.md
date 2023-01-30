@@ -1585,7 +1585,7 @@ MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required
 
 ## Batch Orders
 
-Supports 20 orders in a batch,rate limit:2 times/s.
+Supports 20 orders with a same symbol in a batch,rate limit:2 times/s.
 
 > Request
 
