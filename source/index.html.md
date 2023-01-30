@@ -127,7 +127,7 @@ get  /api/v3/broker/sub-account/universalTransfer
 | status          | string | transfer status |
 | timestamp       | number | transfer time   |
 
-##  Query Sub-account Once Token
+<!-- ##  Query Sub-account Once Token
 
 > request
 
@@ -163,7 +163,8 @@ get  /api/v3/broker/sub-account/onceToken
 
 | Name      | Type   | Description          |
 | --------- | ------ | -------------------- |
-| onceToken | string | subAccount onceToken |
+| onceToken | string | subAccount onceToken | -->
+
 ## Create a Sub-account
 
 > request
@@ -518,7 +519,7 @@ get  /api/v3/broker/capital/deposit/subAddress
 | network | string | deposit network |
 | memo    | string | memo            |
 
-##  Query Sub-account Deposit History(For Master Account)
+<!-- ##  Query Sub-account Deposit History(For Master Account)
 
 > request
 
@@ -588,7 +589,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 | addressTag    | string | addressTag                                                   |
 | txId          | string | txid                                                         |
 | unlockConfirm | string | unlockConfirm                                                |
-| confirmTimes  | string | confirmTimes                                                 |
+| confirmTimes  | string | confirmTimes                                                 | -->
 
 ##  Query Sub-account Deposit History
 
