@@ -143,7 +143,7 @@ get  /api/v3/broker/sub-account/universalTransfer
 | status |string|划转状态【成功，失败，划转中，中断】|
 | timestamp|number|划转时间|
 
-##  查询子账户的once token
+<!-- ##  查询子账户的once token
 
 > 请求示例
 
@@ -180,7 +180,7 @@ get  /api/v3/broker/sub-account/onceToken
 
 | 参数名 | 类型 | 说明 |
 | ------ | ---- | ---- |
-|onceToken|string| 子账户onceToken|
+|onceToken|string| 子账户onceToken| -->
 
 ##  创建子账户
 
@@ -541,7 +541,7 @@ get  /api/v3/broker/capital/deposit/subAddress
 |network|string|充值网络|
 |memo|string|memo值|
 
-##  broker 母查所有子的所有充值记录
+<!-- ##  broker 母查所有子的所有充值记录
 
 > 请求示例
 
@@ -612,7 +612,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 |addressTag|string| 地址标签|
 |txId|string| txid|
 |unlockConfirm|string|解锁需要的网络确认次数|
-|confirmTimes|string| 确认进度|
+|confirmTimes|string| 确认进度| -->
 
 ##  获取子账户充值记录
 
