@@ -38,8 +38,8 @@ under the License.
         >
       <% end %>
     <% end %>
-    <title><%= current_page.data.title || "API Documentation" %></title>
-
+    <title><%= current_page.data.title || "MEXC GLOBAL API Documentation" %></title>
+    <%= favicon_tag 'favicon.png' %>
     <style media="screen">
       <%= Rouge::Themes::MonokaiSublimeSlate.render(:scope => '.highlight') %>
     </style>
@@ -71,8 +71,19 @@ under the License.
         <%= image_tag('navbar.png') %>
       </span>
     </a>
+    <header>
+      <div class="flex_box">
+        <a href="https://www.mexc.com">
+          <%= image_tag "mexc-logo.svg", class: 'logo' %>
+        </a>
+        <div class="nav_box">
+        </div>
+        <select class="toc-nav-dropdown" onChange="javascript:changeMenuLink(options[selectedIndex].value)">
+        </select>
+      </div>
+      <a onClick="javascript:changeHyperLink()" class="lang" href="javascript:void(0);" id="lang_box">english</a>
+    </header>
     <div class="toc-wrapper">
-      <%= image_tag "logo.png", class: 'logo' %>
       <% if language_tabs.any? %>
         <div class="lang-selector">
           <% language_tabs.each do |lang| %>
@@ -134,4 +145,51 @@ under the License.
       </div>
     </div>
   </body>
+  <script>
+    $(function(){
+      const menuObj = [
+        ['spot_v3', 'SpotV3', 'spot_v3_en', '现货V3' ,'spot_v3_cn'],
+        ['spot_v2', 'SpotV2', 'spot_v2_en', '现货V2' ,'spot_v2_cn'],
+        ['contract_v1', 'Futures', 'contract_v1_en', '合约' ,'contract_v1_cn'],
+        ['broker','Broker','broker_en','经纪商','broker_cn']
+      ];
+      const navBox = $('.nav_box');
+      const navOptions = $('.toc-nav-dropdown');
+      const currentLang = /cn/.test(window.location.pathname);
+      menuObj.forEach(item => {
+        const _item = `
+          <span class="nav_cell nav_tab">
+            <a onClick="javascript:changeMenuLink('${item[0]}')" class="${item[0]}" href="javascript:void(0);">${currentLang?item[3]:item[1]}</a>
+          </span>
+        `;
+        const _option = `<option class="${item[0]}" value="${item[0]}">${currentLang?item[3]:item[1]}</option>`;
+        navOptions.append(_option);
+        navBox.append(_item);
+      })
+      const toggleBtn = $("#lang_box");
+      console.log(window.location.pathname)
+      const currentSystem = menuObj.map(i=> i[0]).find(j => {
+        return new RegExp(j).test(window.location.pathname);
+      }) || 'spot_v3';
+      const current_btn =  $(`a.${currentSystem}`);
+      const current_option =  $(`option.${currentSystem}`);
+      toggleBtn.html(currentLang ? 'english': '中文');
+      current_btn.addClass('current');
+      current_option.attr('selected', 'selected');
+    })
+
+    function changeMenuLink(menu) {
+        const currentLang = /cn/.test(window.location.pathname);
+        window.location.href = window.location.origin + '/apidocs/' + menu + '_' + (currentLang? 'cn': 'en');
+    }
+
+    function changeHyperLink() {
+        const isEnglish = /en/.test(window.location.pathname);
+        if(isEnglish){
+          window.location.href = window.location.origin + window.location.pathname.replace(/en/,'cn')
+        }else{
+          window.location.href = window.location.origin + window.location.pathname.replace(/cn/,'en')
+        }
+      }
+  </script>
 </html>
