@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-5391f9ea.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -3568,7 +3568,7 @@ Klines are uniquely identified by their open time.</p>
 </ul></li>
 </ul>
 <h2 id='batch-orders'>Batch Orders</h2>
-<p>Supports 20 orders in a batch,rate limit:2 times/s.</p>
+<p>Supports 20 orders with a same symbol in a batch,rate limit:2 times/s.</p>
 
 <blockquote>
 <p>Request</p>
@@ -9252,8 +9252,8 @@ get /api/v3/margin/trigerOrder
 <li><p>Doing a <code>PUT</code> on a <code>listenKey</code> will extend its validity for 60 minutes.</p></li>
 <li><p>Doing a <code>DELETE</code> on a <code>listenKey</code> will close the stream and invalidate the <code>listenKey</code>.</p></li>
 <li><p>Doing a <code>POST</code> on an account with an active <code>listenKey</code> will return the currently active <code>listenKey</code> and extend its validity for 60 minutes.</p></li>
-<li><p>websocket baseurl: <strong>wss://wbs.mexc.me/ws</strong></p></li>
-<li><p>User Data Streams are accessed at <strong>/ws?listenKey=listenKey</strong> <br/>eg:<strong>wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></p></li>
+<li><p>websocket baseurl: <strong>wss://wbs.mexc.com/ws</strong></p></li>
+<li><p>User Data Streams are accessed at <strong>/ws?listenKey=listenKey</strong> <br/>eg:<strong>wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></p></li>
 <li><p>A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.</p></li>
 <li><p>Each UID can apply for a maximum of 60 listen keys (excluding invalid listen keys).</p></li>
 <li><p>Each listen key maximum support  5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).</p></li>
