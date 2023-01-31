@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-5391f9ea.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -338,9 +338,6 @@
                     <a href="#query-universal-transfer-history-broker-user" class="toc-h2 toc-link" data-title="Query Universal Transfer History - broker user">Query Universal Transfer History - broker user</a>
                   </li>
                   <li>
-                    <a href="#query-sub-account-once-token" class="toc-h2 toc-link" data-title="Query Sub-account Once Token">Query Sub-account Once Token</a>
-                  </li>
-                  <li>
                     <a href="#create-a-sub-account" class="toc-h2 toc-link" data-title="Create a Sub-account">Create a Sub-account</a>
                   </li>
                   <li>
@@ -360,9 +357,6 @@
                   </li>
                   <li>
                     <a href="#deposit-address-of-sub-account" class="toc-h2 toc-link" data-title="Deposit Address of Sub-account">Deposit Address of Sub-account</a>
-                  </li>
-                  <li>
-                    <a href="#query-sub-account-deposit-history-for-master-account" class="toc-h2 toc-link" data-title="Query Sub-account Deposit History(For Master Account)">Query Sub-account Deposit History(For Master Account)</a>
                   </li>
                   <li>
                     <a href="#query-sub-account-deposit-history" class="toc-h2 toc-link" data-title="Query Sub-account Deposit History">Query Sub-account Deposit History</a>
@@ -612,74 +606,44 @@ Brokers have their own brands and separate account systems.Brokers create separa
 <td>transfer time</td>
 </tr>
 </tbody></table>
-<h2 id='query-sub-account-once-token'>Query Sub-account Once Token</h2>
-<blockquote>
-<p>request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get  /api/v3/broker/sub-account/onceToken
 
-</code></pre></div>
-<blockquote>
-<p>response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"onceToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lksod273hsbqi90ljiha"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<!-- ##  Query Sub-account Once Token
 
-</span></code></pre></div>
-<p><strong>Http Request:</strong></p>
+> request
 
-<ul>
-<li><strong>GET</strong> <code>/api/v3/broker/sub-account/onceToken</code></li>
-</ul>
+```
+get  /api/v3/broker/sub-account/onceToken
 
-<p><strong>API Permission: SPOT_TRANSFER_READ</strong></p>
+```
 
-<p><strong>Request Parameter:</strong></p>
+> response
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Mandatory</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>subAccount</td>
-<td>string</td>
-<td>yes</td>
-<td>subAccount name</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>yes</td>
-<td>timestamp</td>
-</tr>
-<tr>
-<td>signature</td>
-<td>string</td>
-<td>yes</td>
-<td>signature</td>
-</tr>
-</tbody></table>
+```json
+{
+    "onceToken": "lksod273hsbqi90ljiha"
+}
 
-<p><strong>Response Parameter:</strong></p>
+```
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>onceToken</td>
-<td>string</td>
-<td>subAccount onceToken</td>
-</tr>
-</tbody></table>
+**Http Request:**
+
+- **GET** ```/api/v3/broker/sub-account/onceToken```
+
+**API Permission: SPOT_TRANSFER_READ**
+
+**Request Parameter:**
+
+| Name       | Type   | Mandatory | Description     |
+| ---------- | ------ | --------- | --------------- |
+| subAccount | string | yes       | subAccount name |
+| timestamp  | string | yes       | timestamp       |
+| signature  | string | yes       | signature       |
+
+**Response Parameter:**
+
+| Name      | Type   | Description          |
+| --------- | ------ | -------------------- |
+| onceToken | string | subAccount onceToken | -->
 <h2 id='create-a-sub-account'>Create a Sub-account</h2>
 <blockquote>
 <p>request</p>
@@ -1410,170 +1374,78 @@ Brokers have their own brands and separate account systems.Brokers create separa
 <td>memo</td>
 </tr>
 </tbody></table>
-<h2 id='query-sub-account-deposit-history-for-master-account'>Query Sub-account Deposit History(For Master Account)</h2>
-<blockquote>
-<p>request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get  /api/v3/broker/capital/deposit/subHisrec/getall
 
-</code></pre></div>
-<blockquote>
-<p>response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.00999800"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"PAXG"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:,</span><span class="w">
-        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e1a59395a81fc8d62c"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.50000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-       </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
-         </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p><strong>Http Request:</strong></p>
+<!-- ##  Query Sub-account Deposit History(For Master Account)
 
-<ul>
-<li><strong>GET</strong> <code>/api/v3/broker/capital/deposit/subHisrec/getall</code></li>
-</ul>
+> request
 
-<p><strong>API Permission: SPOT_DEPOSIT_READ</strong></p>
+```
+get  /api/v3/broker/capital/deposit/subHisrec/getall
 
-<p><strong>Request Parameter:</strong></p>
+```
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Mandatory</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>coin</td>
-<td>string</td>
-<td>no</td>
-<td>deposit coin</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>no</td>
-<td><a href="#status">deposit status</a></td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>string</td>
-<td>no</td>
-<td>default: 10 days ago from current time</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>string</td>
-<td>no</td>
-<td>default:current time</td>
-</tr>
-<tr>
-<td>limit</td>
-<td>string</td>
-<td>no</td>
-<td>default:20</td>
-</tr>
-<tr>
-<td>page</td>
-<td>string</td>
-<td>no</td>
-<td>default:1</td>
-</tr>
-<tr>
-<td>recvWindow</td>
-<td>string</td>
-<td>no</td>
-<td>recvWindow</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>yes</td>
-<td>timestamp</td>
-</tr>
-<tr>
-<td>signature</td>
-<td>string</td>
-<td>yes</td>
-<td>signature</td>
-</tr>
-</tbody></table>
+> response
 
-<p><strong>Response Parameter:</strong></p>
+```json
+[
+    {
+        "amount":"0.00999800",
+        "coin":"PAXG",
+        "network":"ETH",
+        "status":,
+        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
+        "addressTag":"",
+        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "unlockConfirm":"12", 
+        "confirmTimes":"7"
+    },
+    {
+        "amount":"0.50000000",
+        "coin":"IOTA",
+        "network":"IOTA",
+        "status":1,
+       "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
+        "addressTag":"",
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+         "unlockConfirm":"12", 
+         "confirmTimes":"7"
+    }
+]
+```
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>amount</td>
-<td>string</td>
-<td>deposit amount</td>
-</tr>
-<tr>
-<td>coin</td>
-<td>string</td>
-<td>deposit coin</td>
-</tr>
-<tr>
-<td>network</td>
-<td>string</td>
-<td>deposit network</td>
-</tr>
-<tr>
-<td>status</td>
-<td>number</td>
-<td><a href="#status">deposit status</a></td>
-</tr>
-<tr>
-<td>address</td>
-<td>string</td>
-<td>deposit address</td>
-</tr>
-<tr>
-<td>addressTag</td>
-<td>string</td>
-<td>addressTag</td>
-</tr>
-<tr>
-<td>txId</td>
-<td>string</td>
-<td>txid</td>
-</tr>
-<tr>
-<td>unlockConfirm</td>
-<td>string</td>
-<td>unlockConfirm</td>
-</tr>
-<tr>
-<td>confirmTimes</td>
-<td>string</td>
-<td>confirmTimes</td>
-</tr>
-</tbody></table>
+**Http Request:**
+
+- **GET** ```/api/v3/broker/capital/deposit/subHisrec/getall```
+
+**API Permission: SPOT_DEPOSIT_READ**
+
+**Request Parameter:**
+
+| Name       | Type   | Mandatory | Description                                                  |
+| ---------- | ------ | --------- | ------------------------------------------------------------ |
+| coin       | string | no        | deposit coin                                                 |
+| status     | string | no        | <a href="#status">deposit status</a> |
+| startTime  | string | no        | default: 10 days ago from current time                       |
+| endTime    | string | no        | default:current time                                         |
+| limit      | string | no        | default:20                                                   |
+| page       | string | no        | default:1                                                    |
+| recvWindow | string | no        | recvWindow                                                   |
+| timestamp  | string | yes       | timestamp                                                    |
+| signature  | string | yes       | signature                                                    |
+
+**Response Parameter:**
+
+| Name          | Type   | Description                                                  |
+| ------------- | ------ | ------------------------------------------------------------ |
+| amount        | string | deposit amount                                               |
+| coin          | string | deposit coin                                                 |
+| network       | string | deposit network                                              |
+| status        | number | <a href="#status">deposit status</a>                         |
+| address       | string | deposit address                                              |
+| addressTag    | string | addressTag                                                   |
+| txId          | string | txid                                                         |
+| unlockConfirm | string | unlockConfirm                                                |
+| confirmTimes  | string | confirmTimes                                                 | -->
 <h2 id='query-sub-account-deposit-history'>Query Sub-account Deposit History</h2>
 <blockquote>
 <p>request</p>
