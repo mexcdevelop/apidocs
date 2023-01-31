@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-5391f9ea.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -9678,8 +9678,8 @@ get /api/v3/margin/trigerOrder
 <li>可以通过 <code>PUT</code> 一个 <code>listenKey</code> 延长60分钟有效期</li>
 <li>可以通过<code>DELETE</code>一个 <code>listenKey</code> 立即关闭当前数据流，并使该<code>listenKey</code> 无效</li>
 <li>在具有有效<code>listenKey</code>的帐户上执行<code>POST</code>将返回当前有效的<code>listenKey</code>并将其有效期延长60分钟</li>
-<li>websocket接口的baseurl: <strong>wss://wbs.mexc.me/ws</strong></li>
-<li>订阅账户数据流的stream名称为 <strong>/ws?listenKey=listenKey</strong> <br/>  如：<strong>wss://wbs.mexc.me/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
+<li>websocket接口的baseurl: <strong>wss://wbs.mexc.com/ws</strong></li>
+<li>订阅账户数据流的stream名称为 <strong>/ws?listenKey=listenKey</strong> <br/>  如：<strong>wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
 <li>每个链接有效期不超过24小时，请妥善处理断线重连</li>
 <li>每个UID，最多申请60个listen key（不包含已失效listen key）</li>
 <li>ws链接数的数量限制：每个listen key最多5个ws链接（即：每个uid最多申请的60个listen key，300个ws链接）</li>
