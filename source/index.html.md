@@ -752,7 +752,7 @@ Response:
 | isBuyerMaker | Was the buyer the maker?            |
 | isBestMatch  | Was the trade the best price match? |
 
-## Old Trade Lookup
+<!-- ## Old Trade Lookup
 
 > Response
 
@@ -792,7 +792,7 @@ Response:
 | quoteQty     | Trade total                         |
 | time         | Trade time                          |
 | isBuyerMaker | Was the buyer the maker?            |
-| isBestMatch  | Was the trade the best price match? |
+| isBestMatch  | Was the trade the best price match? | -->
 
 ## Compressed/Aggregate Trades List
 
