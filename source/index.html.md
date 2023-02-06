@@ -51,11 +51,12 @@ MEXC OAuth 2.0支持WEB，基于OAuth 2.0协议（RFC 6749）开发。
 
 **3. OAuth经纪商：**</br>
 **接入流程**  
-  1. 官网注册账户申请经纪商，您需要先申请成为MEXC的经纪商。  
+  1. 官网注册账户申请经纪商，您需要先[申请成为MEXC的经纪商](https://docs.google.com/forms/d/e/1FAIpQLSea0FypAsUB3g23P_jfPueFvdIIofTBbXRi9DdrU_igasgp5g/viewform)。  
   2. 申请通过后，专属客户经理会提供给您相应的开发文档。  
   3. OAuth返佣设置  
 接入后的OAuth经纪商，下单时需要将专属broker_id填写到header的source字段里，作为返佣订单统计的标识。
-**授权模式介绍**
+  
+**授权模式介绍**  
 MEXC OAuth 2.0提供的授权模式：授权码模式。
 
 |授权模式|描述|使用场景|
