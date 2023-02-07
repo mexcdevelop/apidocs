@@ -4188,7 +4188,7 @@ Top bids and asks, Valid are 5, 10, or 20.
 ## Individual Symbol Book Ticker Streams
 Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
 
->**request:**
+> **request:**
 
 ```
 {
