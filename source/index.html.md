@@ -4206,10 +4206,11 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 {
  "c":"spot@public.bookTicker.v3.api@<BTCUSDT>",
  "d":{
-    "b":"25.35190000", 
+    
+    "A":"40.66000000" 
     "B":"31.21000000",  
-    "a":"25.36520000", 
-    "A":"40.66000000"},  
+    "a":"25.36520000",
+    "b":"25.35190000",},  
  "s":"BTCUSDT", 
  "t":1661932660144 
 }
@@ -4222,10 +4223,10 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 
 | Name      | Type   | Description |
 | :-------- | :----- | :--- |
-| p | string | price |
-| v | string | quantity |
-| e | string | eventType |
-| r | string | version |
+| A | string | best ask qty |
+| B | string | best bid qty |
+| a | string | best ask price |
+| b | string | best bid price |
 | s | string | symbol |
 | t | long | eventTime |
 
