@@ -72,6 +72,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2023-01-06**
 
+- ws add channel:Individual Symbol Book Ticker Streams
+
+## **2023-01-06**
+
 - [Update Limits Info](https://mxcdevelop.github.io/apidocs/spot_v3_en/#limits)
 
 ## **2022-12-29**
@@ -4169,6 +4173,50 @@ Top bids and asks, Valid are 5, 10, or 20.
 
 
 **Request:** `spot@public.limit.depth.v3.api@<symbol>@<level>`
+
+**Response:**
+
+| Name      | Type   | Description |
+| :-------- | :----- | :--- |
+| p | string | price |
+| v | string | quantity |
+| e | string | eventType |
+| r | string | version |
+| s | string | symbol |
+| t | long | eventTime |
+
+## Individual Symbol Book Ticker Streams
+Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.bookTicker.v3.api@BTCUSDT"
+      ]
+}
+```
+
+> **response:**
+
+```
+
+{
+ "c":"spot@public.bookTicker.v3.api@<BTCUSDT>",
+ "d":{
+    "b":"25.35190000", 
+    "B":"31.21000000",  
+    "a":"25.36520000", 
+    "A":"40.66000000"},  
+ "s":"BTCUSDT", 
+ "t":1661932660144 
+}
+```
+
+
+**Request:** `spot@public.bookTicker.v3.api@<symbol>`
 
 **Response:**
 
