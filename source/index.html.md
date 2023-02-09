@@ -26,6 +26,11 @@ meta:
 **2. 独立经纪商：**</br>
 包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。
 
+**3. OAuth经纪商：**</br>
+对接MEXC OAuth 2.0的第三方应用，可向MEXC用户提供一键交易功能，具体如下：  
+MEXC用户仅需要在第三方应用内一键授权，无需向第三方应用直接提供API Key，即可进行交易。  
+MEXC OAuth 2.0支持WEB，基于OAuth 2.0协议（RFC 6749）开发。
+
 ## MEXC提供的经纪商服务内容
 
 **1. API 经纪商：**</br>
@@ -44,6 +49,23 @@ meta:
    * 支持子账号充提
    * 支持子账号划转
 
+**3. OAuth经纪商：**</br>
+**接入流程**  
+  1. 官网注册账户申请经纪商，您需要先[申请成为MEXC的经纪商](https://docs.google.com/forms/d/e/1FAIpQLSea0FypAsUB3g23P_jfPueFvdIIofTBbXRi9DdrU_igasgp5g/viewform)。  
+  2. 申请通过后，专属客户经理会提供给您相应的开发文档。  
+  3. OAuth返佣设置  
+接入后的OAuth经纪商，下单时需要将专属broker_id填写到header的source字段里，作为返佣订单统计的标识。
+  
+**授权模式介绍**  
+MEXC OAuth 2.0提供的授权模式：授权码模式。
+
+|授权模式|描述|使用场景|
+|----------|------|-------|
+|授权码模式|用户授权，第三方应用提供client_secret获取授权码。通过授权码获取访问令牌和刷新令牌。|应用有服务器，可存储应用密钥，与MEXCOAuth服务器进行密钥交互。|
+
+授权码模式 
+<img src="../images/broker-2.png">  
+用户通过第三方应用跳转至MEXC授权页面并进行授权后，第三方应用可以凭借此授权码换取访问令牌，通过调用MEXC OpenAPI，访问用户授权的数据资源。
 
 
 ## MEXC 经纪商合作模式
@@ -143,7 +165,7 @@ get  /api/v3/broker/sub-account/universalTransfer
 | status |string|划转状态【成功，失败，划转中，中断】|
 | timestamp|number|划转时间|
 
-##  查询子账户的once token
+<!-- ##  查询子账户的once token
 
 > 请求示例
 
@@ -180,7 +202,7 @@ get  /api/v3/broker/sub-account/onceToken
 
 | 参数名 | 类型 | 说明 |
 | ------ | ---- | ---- |
-|onceToken|string| 子账户onceToken|
+|onceToken|string| 子账户onceToken| -->
 
 ##  创建子账户
 
@@ -541,7 +563,7 @@ get  /api/v3/broker/capital/deposit/subAddress
 |network|string|充值网络|
 |memo|string|memo值|
 
-##  broker 母查所有子的所有充值记录
+<!-- ##  broker 母查所有子的所有充值记录
 
 > 请求示例
 
@@ -612,7 +634,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 |addressTag|string| 地址标签|
 |txId|string| txid|
 |unlockConfirm|string|解锁需要的网络确认次数|
-|confirmTimes|string| 确认进度|
+|confirmTimes|string| 确认进度| -->
 
 ##  获取子账户充值记录
 
