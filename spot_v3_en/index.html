@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-5391f9ea.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -345,6 +345,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#2023-01-06" class="toc-h2 toc-link" data-title="2023-01-06"><strong>2023-01-06</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2023-01-06-2" class="toc-h2 toc-link" data-title="2023-01-06"><strong>2023-01-06</strong></a>
                   </li>
                   <li>
                     <a href="#2022-12-29" class="toc-h2 toc-link" data-title="2022-12-29"><strong>2022-12-29</strong></a>
@@ -495,9 +498,6 @@
                   </li>
                   <li>
                     <a href="#recent-trades-list" class="toc-h2 toc-link" data-title="Recent Trades List">Recent Trades List</a>
-                  </li>
-                  <li>
-                    <a href="#old-trade-lookup" class="toc-h2 toc-link" data-title="Old Trade Lookup">Old Trade Lookup</a>
                   </li>
                   <li>
                     <a href="#compressed-aggregate-trades-list" class="toc-h2 toc-link" data-title="Compressed/Aggregate Trades List">Compressed/Aggregate Trades List</a>
@@ -712,6 +712,9 @@
                   <li>
                     <a href="#partial-book-depth-streams" class="toc-h2 toc-link" data-title="Partial Book Depth Streams">Partial Book Depth Streams</a>
                   </li>
+                  <li>
+                    <a href="#individual-symbol-book-ticker-streams" class="toc-h2 toc-link" data-title="Individual Symbol Book Ticker Streams">Individual Symbol Book Ticker Streams</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -817,6 +820,10 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 </ul></li>
 </ul>
 <h1 id='change-log'>Change Log</h1><h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
+<ul>
+<li>ws add channel:Individual Symbol Book Ticker Streams</li>
+</ul>
+<h2 id='2023-01-06-2'><strong>2023-01-06</strong></h2>
 <ul>
 <li><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#limits">Update Limits Info</a></li>
 </ul>
@@ -1934,92 +1941,48 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <td>Was the trade the best price match?</td>
 </tr>
 </tbody></table>
-<h2 id='old-trade-lookup'>Old Trade Lookup</h2>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"qty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.478468"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"quoteQty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11.004764"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1640830579240</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"isBuyerMaker"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"isBestMatch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<ul>
-<li><strong>GET</strong> <code>/api/v3/historicalTrades</code></li>
-</ul>
 
-<p><strong>Weight(IP):</strong> 1</p>
+<!-- ## Old Trade Lookup
 
-<p>Parameters:</p>
+> Response
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Mandatory</th>
-<th>Description</th>
-<th>Scope</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>YES</td>
-<td>Symbol</td>
-<td></td>
-</tr>
-<tr>
-<td>limit</td>
-<td>integer</td>
-<td>NO</td>
-<td>Return number</td>
-<td>Default 500; max 1000</td>
-</tr>
-</tbody></table>
+```json
+[
+  {
+    "id": null,
+    "price": "23",
+    "qty": "0.478468",
+    "quoteQty": "11.004764",
+    "time": 1640830579240,
+    "isBuyerMaker": true,
+    "isBestMatch": true
+  }
+]
+```
 
-<p>Response:</p>
+- **GET** ```/api/v3/historicalTrades```
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Trade id</td>
-</tr>
-<tr>
-<td>price</td>
-<td>Price</td>
-</tr>
-<tr>
-<td>qty</td>
-<td>Number</td>
-</tr>
-<tr>
-<td>quoteQty</td>
-<td>Trade total</td>
-</tr>
-<tr>
-<td>time</td>
-<td>Trade time</td>
-</tr>
-<tr>
-<td>isBuyerMaker</td>
-<td>Was the buyer the maker?</td>
-</tr>
-<tr>
-<td>isBestMatch</td>
-<td>Was the trade the best price match?</td>
-</tr>
-</tbody></table>
+**Weight(IP):** 1
+
+Parameters:
+
+| Name   | Type    | Mandatory | Description   | Scope                 |
+| ------ | ------- | --------- | ------------- | --------------------- |
+| symbol | string  | YES       | Symbol        |                       |
+| limit  | integer | NO        | Return number | Default 500; max 1000 |
+
+
+Response:
+
+| Name         | Description                         |
+| ------------ | ----------------------------------- |
+| id           | Trade id                            |
+| price        | Price                               |
+| qty          | Number                              |
+| quoteQty     | Trade total                         |
+| time         | Trade time                          |
+| isBuyerMaker | Was the buyer the maker?            |
+| isBestMatch  | Was the trade the best price match? | -->
 <h2 id='compressed-aggregate-trades-list'>Compressed/Aggregate Trades List</h2>
 <blockquote>
 <p>Response</p>
@@ -9220,6 +9183,77 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">r</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">version</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+<h2 id='individual-symbol-book-ticker-streams'>Individual Symbol Book Ticker Streams</h2>
+<p>Pushes any update to the best bid or ask&#39;s price or quantity in real-time for a specified symbol.</p>
+
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.bookTicker.v3.api@BTCUSDT"
+      ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+ "c":"spot@public.bookTicker.v3.api@&lt;BTCUSDT&gt;",
+ "d":{
+    
+    "A":"40.66000000" 
+    "B":"31.21000000",  
+    "a":"25.36520000",
+    "b":"25.35190000",},  
+ "s":"BTCUSDT", 
+ "t":1661932660144 
+}
+</code></pre></div>
+<p><strong>Request:</strong> <code>spot@public.bookTicker.v3.api@&lt;symbol&gt;</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">A</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">best ask qty</td>
+</tr>
+<tr>
+<td style="text-align: left">B</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">best bid qty</td>
+</tr>
+<tr>
+<td style="text-align: left">a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">best ask price</td>
+</tr>
+<tr>
+<td style="text-align: left">b</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">best bid price</td>
 </tr>
 <tr>
 <td style="text-align: left">s</td>
