@@ -341,9 +341,6 @@
                     <a href="#broker-2" class="toc-h2 toc-link" data-title="查询母子万向划转历史-broker用户">查询母子万向划转历史-broker用户</a>
                   </li>
                   <li>
-                    <a href="#once-token" class="toc-h2 toc-link" data-title="查询子账户的once token">查询子账户的once token</a>
-                  </li>
-                  <li>
                     <a href="#c6789f6fd9" class="toc-h2 toc-link" data-title="创建子账户">创建子账户</a>
                   </li>
                   <li>
@@ -363,9 +360,6 @@
                   </li>
                   <li>
                     <a href="#626fe2cf03" class="toc-h2 toc-link" data-title="获取子账户充值地址">获取子账户充值地址</a>
-                  </li>
-                  <li>
-                    <a href="#broker-3" class="toc-h2 toc-link" data-title="broker 母查所有子的所有充值记录">broker 母查所有子的所有充值记录</a>
                   </li>
                   <li>
                     <a href="#3f75e2568c" class="toc-h2 toc-link" data-title="获取子账户充值记录">获取子账户充值记录</a>
@@ -388,7 +382,7 @@
             <a href="#api" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#broker-4" class="toc-h2 toc-link" data-title="Broker 枚举定义">Broker 枚举定义</a>
+                    <a href="#broker-3" class="toc-h2 toc-link" data-title="Broker 枚举定义">Broker 枚举定义</a>
                   </li>
               </ul>
           </li>
@@ -407,6 +401,11 @@
 
 <p><strong>2. 独立经纪商：</strong></br>
 包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。</p>
+
+<p><strong>3. OAuth经纪商：</strong></br>
+对接MEXC OAuth 2.0的第三方应用，可向MEXC用户提供一键交易功能，具体如下：<br>
+MEXC用户仅需要在第三方应用内一键授权，无需向第三方应用直接提供API Key，即可进行交易。<br>
+MEXC OAuth 2.0支持WEB，基于OAuth 2.0协议（RFC 6749）开发。</p>
 <h2 id='mexc-2'>MEXC提供的经纪商服务内容</h2>
 <p><strong>1. API 经纪商：</strong></br>
 用户在MEXC注册账号</br>
@@ -426,6 +425,34 @@
 <li>支持子账号充提</li>
 <li>支持子账号划转</li>
 </ul>
+
+<p><strong>3. OAuth经纪商：</strong></br>
+<strong>接入流程</strong><br>
+  1. 官网注册账户申请经纪商，您需要先<a href="https://docs.google.com/forms/d/e/1FAIpQLSea0FypAsUB3g23P_jfPueFvdIIofTBbXRi9DdrU_igasgp5g/viewform">申请成为MEXC的经纪商</a>。<br>
+  2. 申请通过后，专属客户经理会提供给您相应的开发文档。<br>
+  3. OAuth返佣设置<br>
+接入后的OAuth经纪商，下单时需要将专属broker_id填写到header的source字段里，作为返佣订单统计的标识。</p>
+
+<p><strong>授权模式介绍</strong><br>
+MEXC OAuth 2.0提供的授权模式：授权码模式。</p>
+
+<table><thead>
+<tr>
+<th>授权模式</th>
+<th>描述</th>
+<th>使用场景</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>授权码模式</td>
+<td>用户授权，第三方应用提供client_secret获取授权码。通过授权码获取访问令牌和刷新令牌。</td>
+<td>应用有服务器，可存储应用密钥，与MEXCOAuth服务器进行密钥交互。</td>
+</tr>
+</tbody></table>
+
+<p>授权码模式 
+<img src="images/broker-2-ce29304c.png"><br>
+用户通过第三方应用跳转至MEXC授权页面并进行授权后，第三方应用可以凭借此授权码换取访问令牌，通过调用MEXC OpenAPI，访问用户授权的数据资源。</p>
 <h2 id='mexc-3'>MEXC 经纪商合作模式</h2>
 <p><strong>1. API 经纪商：</strong> </p>
 
@@ -627,75 +654,45 @@ get  /api/v3/broker/sub-account/universalTransfer
 <td>划转时间</td>
 </tr>
 </tbody></table>
-<h2 id='once-token'>查询子账户的once token</h2>
-<blockquote>
-<p>请求示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
+
+<!-- ##  查询子账户的once token
+
+> 请求示例
+
+```
+
 get  /api/v3/broker/sub-account/onceToken
 
-</code></pre></div>
-<blockquote>
-<p>返回示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"onceToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lksod273hsbqi90ljiha"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+```
 
-</span></code></pre></div>
-<p><strong>HTTP请求：</strong></p>
+> 返回示例
 
-<ul>
-<li><strong>GET</strong> <code>/api/v3/broker/sub-account/onceToken</code></li>
-</ul>
+```json
+{
+    "onceToken": "lksod273hsbqi90ljiha"
+}
 
-<p><strong>权限：现货账户读取</strong></p>
+```
 
-<p><strong>请求参数：</strong></p>
+**HTTP请求：**
 
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>数据类型</th>
-<th>是否必须</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>subAccount</td>
-<td>string</td>
-<td>yes</td>
-<td>子账户名称</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>yes</td>
-<td>时间</td>
-</tr>
-<tr>
-<td>signature</td>
-<td>string</td>
-<td>yes</td>
-<td>签名</td>
-</tr>
-</tbody></table>
+- **GET** ```/api/v3/broker/sub-account/onceToken```
 
-<p><strong>返回参数：</strong></p>
+**权限：现货账户读取**
 
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>onceToken</td>
-<td>string</td>
-<td>子账户onceToken</td>
-</tr>
-</tbody></table>
+**请求参数：**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| ------ | -------- | -------- | ---------- |
+|subAccount|string|yes|子账户名称|
+|timestamp|string|yes|时间|
+|signature|string|yes|签名|
+
+**返回参数：**
+
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+|onceToken|string| 子账户onceToken| -->
 <h2 id='c6789f6fd9'>创建子账户</h2>
 <blockquote>
 <p>请求示例</p>
@@ -1433,171 +1430,79 @@ get  /api/v3/broker/capital/deposit/subAddress
 <td>memo值</td>
 </tr>
 </tbody></table>
-<h2 id='broker-3'>broker 母查所有子的所有充值记录</h2>
-<blockquote>
-<p>请求示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
+
+<!-- ##  broker 母查所有子的所有充值记录
+
+> 请求示例
+
+```
+
 get  /api/v3/broker/capital/deposit/subHisrec/getall
 
-</code></pre></div>
-<blockquote>
-<p>返回示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.00999800"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"PAXG"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:,</span><span class="w">
-        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e1a59395a81fc8d62c"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.50000000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-       </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
-         </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<p><strong>HTTP请求：</strong></p>
+```
 
-<ul>
-<li><strong>GET</strong> <code>/api/v3/broker/capital/deposit/subHisrec/getall</code></li>
-</ul>
+> 返回示例
 
-<p><strong>权限：现货充提读取</strong></p>
+```json
+[
+    {
+        "amount":"0.00999800",
+        "coin":"PAXG",
+        "network":"ETH",
+        "status":,
+        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
+        "addressTag":"",
+        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "unlockConfirm":"12", 
+        "confirmTimes":"7"
+    },
+    {
+        "amount":"0.50000000",
+        "coin":"IOTA",
+        "network":"IOTA",
+        "status":1,
+       "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
+        "addressTag":"",
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+         "unlockConfirm":"12", 
+         "confirmTimes":"7"
+    }
+]
+```
 
-<p><strong>请求参数：</strong></p>
+**HTTP请求：**
 
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>数据类型</th>
-<th>是否必须</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>coin</td>
-<td>string</td>
-<td>no</td>
-<td>币种</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>no</td>
-<td><a href="#status">状态</a></td>
-</tr>
-<tr>
-<td>startTime</td>
-<td>string</td>
-<td>no</td>
-<td>开始时间，如果没有传，默认查询10天</td>
-</tr>
-<tr>
-<td>endTime</td>
-<td>string</td>
-<td>no</td>
-<td>结束时间，如果没有传，取当前时间</td>
-</tr>
-<tr>
-<td>limit</td>
-<td>string</td>
-<td>no</td>
-<td>默认值20，目前无最大值限制</td>
-</tr>
-<tr>
-<td>page</td>
-<td>string</td>
-<td>no</td>
-<td>默认值1</td>
-</tr>
-<tr>
-<td>recvWindow</td>
-<td>string</td>
-<td>no</td>
-<td>同步时间</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>yes</td>
-<td>时间</td>
-</tr>
-<tr>
-<td>signature</td>
-<td>string</td>
-<td>yes</td>
-<td>签名</td>
-</tr>
-</tbody></table>
+- **GET** ```/api/v3/broker/capital/deposit/subHisrec/getall```
 
-<p><strong>返回参数：</strong></p>
+**权限：现货充提读取**
 
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>amount</td>
-<td>string</td>
-<td>充值数量</td>
-</tr>
-<tr>
-<td>coin</td>
-<td>string</td>
-<td>充值币种</td>
-</tr>
-<tr>
-<td>network</td>
-<td>string</td>
-<td>充值网络</td>
-</tr>
-<tr>
-<td>status</td>
-<td>number</td>
-<td><a href="#status">状态</a></td>
-</tr>
-<tr>
-<td>address</td>
-<td>string</td>
-<td>充值地址</td>
-</tr>
-<tr>
-<td>addressTag</td>
-<td>string</td>
-<td>地址标签</td>
-</tr>
-<tr>
-<td>txId</td>
-<td>string</td>
-<td>txid</td>
-</tr>
-<tr>
-<td>unlockConfirm</td>
-<td>string</td>
-<td>解锁需要的网络确认次数</td>
-</tr>
-<tr>
-<td>confirmTimes</td>
-<td>string</td>
-<td>确认进度</td>
-</tr>
-</tbody></table>
+**请求参数：**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| ------ | -------- | -------- | ---------- |
+|coin|string|no|币种|
+|status|string|no|<a href="#status">状态</a> |
+|startTime|string|no|开始时间，如果没有传，默认查询10天|
+|endTime|string|no|结束时间，如果没有传，取当前时间|
+|limit|string|no|默认值20，目前无最大值限制|
+|page|string|no|默认值1|
+|recvWindow|string|no|同步时间|
+|timestamp|string|yes|时间|
+|signature|string|yes|签名|
+
+**返回参数：**
+
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+|amount|string| 充值数量|
+|coin|string| 充值币种|
+|network|string|充值网络|
+|status|number| <a href="#status">状态</a> |
+|address|string| 充值地址|
+|addressTag|string| 地址标签|
+|txId|string| txid|
+|unlockConfirm|string|解锁需要的网络确认次数|
+|confirmTimes|string| 确认进度| -->
 <h2 id='3f75e2568c'>获取子账户充值记录</h2>
 <blockquote>
 <p>请求示例</p>
@@ -2173,7 +2078,7 @@ post  /api/v3/broker/sub-account/margin
 <td>返回时间</td>
 </tr>
 </tbody></table>
-<h1 id='api'>公开API参数</h1><h2 id='broker-4'>Broker 枚举定义</h2><h3 id='4dc38d4caa'><a id="from_account">划出账户类型</a></h3>
+<h1 id='api'>公开API参数</h1><h2 id='broker-3'>Broker 枚举定义</h2><h3 id='4dc38d4caa'><a id="from_account">划出账户类型</a></h3>
 <ul>
 <li>SPOT 现货</li>
 <li>FUTURES 合约</li>
@@ -2230,7 +2135,8 @@ post  /api/v3/broker/sub-account/margin
       const menuObj = [
         ['spot_v3', 'SpotV3', 'spot_v3_en', '现货V3' ,'spot_v3_cn'],
         ['spot_v2', 'SpotV2', 'spot_v2_en', '现货V2' ,'spot_v2_cn'],
-        ['contract_v1', 'Futures', 'contract_v1_en', '合约' ,'contract_v1_cn']
+        ['contract_v1', 'Futures', 'contract_v1_en', '合约' ,'contract_v1_cn'],
+        ['broker','Broker','broker_en','经纪商','broker_cn']
       ];
       const navBox = $('.nav_box');
       const navOptions = $('.toc-nav-dropdown');
