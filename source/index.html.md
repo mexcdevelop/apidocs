@@ -72,6 +72,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2023-01-06**
 
+- ws add channel:Individual Symbol Book Ticker Streams
+
+## **2023-01-06**
+
 - [Update Limits Info](https://mxcdevelop.github.io/apidocs/spot_v3_en/#limits)
 
 ## **2022-12-29**
@@ -752,7 +756,7 @@ Response:
 | isBuyerMaker | Was the buyer the maker?            |
 | isBestMatch  | Was the trade the best price match? |
 
-## Old Trade Lookup
+<!-- ## Old Trade Lookup
 
 > Response
 
@@ -792,7 +796,7 @@ Response:
 | quoteQty     | Trade total                         |
 | time         | Trade time                          |
 | isBuyerMaker | Was the buyer the maker?            |
-| isBestMatch  | Was the trade the best price match? |
+| isBestMatch  | Was the trade the best price match? | -->
 
 ## Compressed/Aggregate Trades List
 
@@ -4178,6 +4182,51 @@ Top bids and asks, Valid are 5, 10, or 20.
 | v | string | quantity |
 | e | string | eventType |
 | r | string | version |
+| s | string | symbol |
+| t | long | eventTime |
+
+## Individual Symbol Book Ticker Streams
+Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
+
+> **request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.bookTicker.v3.api@BTCUSDT"
+      ]
+}
+```
+
+> **response:**
+
+```
+
+{
+ "c":"spot@public.bookTicker.v3.api@<BTCUSDT>",
+ "d":{
+    
+    "A":"40.66000000" 
+    "B":"31.21000000",  
+    "a":"25.36520000",
+    "b":"25.35190000",},  
+ "s":"BTCUSDT", 
+ "t":1661932660144 
+}
+```
+
+
+**Request:** `spot@public.bookTicker.v3.api@<symbol>`
+
+**Response:**
+
+| Name      | Type   | Description |
+| :-------- | :----- | :--- |
+| A | string | best ask qty |
+| B | string | best bid qty |
+| a | string | best ask price |
+| b | string | best bid price |
 | s | string | symbol |
 | t | long | eventTime |
 
