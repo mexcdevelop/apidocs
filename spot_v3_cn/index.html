@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-5391f9ea.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -346,6 +346,9 @@
           <li>
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2023-02-07" class="toc-h2 toc-link" data-title="2023-02-07"><strong>2023-02-07</strong></a>
+                  </li>
                   <li>
                     <a href="#2023-01-06" class="toc-h2 toc-link" data-title="2023-01-06"><strong>2023-01-06</strong></a>
                   </li>
@@ -716,6 +719,9 @@
                     <a href="#1fecb05b1e" class="toc-h2 toc-link" data-title="有限档位深度信息">有限档位深度信息</a>
                   </li>
                   <li>
+                    <a href="#symbol" class="toc-h2 toc-link" data-title="按Symbol的最优挂单信息">按Symbol的最优挂单信息</a>
+                  </li>
+                  <li>
                     <a href="#orderbook" class="toc-h2 toc-link" data-title="如何正确在本地维护一个orderbook副本">如何正确在本地维护一个orderbook副本</a>
                   </li>
               </ul>
@@ -824,7 +830,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-02-07'><strong>2023-02-07</strong></h2>
+<ul>
+<li>ws新增频道：按Symbol的最优挂单信息</li>
+</ul>
+<h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
 <ul>
 <li><a href="https://mxcdevelop.github.io/apidocs/spot_v3_cn/#c1fd2fc5ac">新增权重限速模式</a></li>
 </ul>
@@ -9646,6 +9656,77 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">r</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">版本号</td>
+</tr>
+<tr>
+<td style="text-align: left">s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">事件时间</td>
+</tr>
+</tbody></table>
+<h2 id='symbol'>按Symbol的最优挂单信息</h2>
+<p>实时推送指定交易对最优挂单信息。</p>
+
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.bookTicker.v3.api@BTCUSDT"
+      ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+{
+ "c":"spot@public.bookTicker.v3.api@&lt;BTCUSDT&gt;",
+ "d":{
+    "A":"40.66000000"},  //卖单最优挂单数量
+    "B":"31.21000000",  //买单最优挂单数量
+    "a":"25.36520000", //卖单最优挂单价格
+    "b":"25.35190000", // 买单最优挂单价格 
+  },  
+ "s":"BTCUSDT", //交易对
+ "t":1661932660144 //事件时间
+}
+</code></pre></div>
+<p><strong>请求参数:</strong> <code>spot@public.bookTicker.v3.api@&lt;symbol&gt;</code></p>
+
+<p><strong>返回参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">A</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">卖单最优挂单数量</td>
+</tr>
+<tr>
+<td style="text-align: left">B</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">买单最优挂单数量</td>
+</tr>
+<tr>
+<td style="text-align: left">a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">卖单最优挂单价格</td>
+</tr>
+<tr>
+<td style="text-align: left">b</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">买单最优挂单价格</td>
 </tr>
 <tr>
 <td style="text-align: left">s</td>
