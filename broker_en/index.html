@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-5391f9ea.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -398,6 +398,14 @@ This includes copy trade platforms, trading bots, quantitative strategy platform
 
 <p><strong>2. Independent Broker</strong></br>
 This includes wallet platforms, market data platforms, aggregation trading platforms, stockbrokers, as well as stock and securities trading platforms, etc., all of which have their own independent users. MEXC can provide order matching systems, account management systems, settlement systems, as well as main and sub-account systems, etc. Independent brokers can share the trading fluidity and depth over the MEXC platform and receive profit shares from fees.</p>
+
+<p><strong>3. Oauth Broker</strong>  </p>
+
+<p><strong>Introduction</strong>  </p>
+
+<p>The third-party application connected to MEXC OAuth 2.0 can provide MEXC users the one-click trade function. The details are as follows:<br>
+MEXC users only need to perform authorization in the third-party application in one click, and they can start trading without directly providing the API key to the third-party application.<br>
+MEXC OAuth 2.0 is supported on Web version, and is developed based on the OAuth 2.0 protocol (RFC 6749).</p>
 <h2 id='broker-services-provided-by-mexc'>Broker Services Provided by MEXC</h2>
 <p><strong>1. API Brokers</strong></br>
 The user signs up at MEXC, applies for API Key in MEXC, and provides it to the broker. </p>
@@ -412,8 +420,35 @@ Brokers have their own brands and separate account systems.Brokers create separa
 
 <ul>
 <li>Support sub-account deposit and withdrawal</li>
-<li>Support sub-account transfer</li>
+<li>Support sub-account transfer<br></li>
 </ul>
+
+<p><strong>3. Integration Procedure</strong><br>
+1. Sign up for an account on the official website and apply to become a broker.
+You must first apply to become a MEXC broker using <a href="https://docs.google.com/forms/d/e/1FAIpQLSed5ocsfcvUU0xtq0dgJ2KIGBwzjQf3tKfhwi7phuRvxdKjsg/viewform">MEXC Broker Project Application Form</a>.<br>
+2. Once approved, a dedicated account manager will provide you the corresponding developer docs.<br>
+3. OAuth Rebate Settings<br>
+After integration of the OAuth broker, when placing an order, you need to fill in the exclusive broker_id in the source field of the header to be used as an identifier for the rebate order statistics.  </p>
+
+<p><strong>Authorization Mode Introduction</strong><br>
+The authorization mode provided by MEXC OAuth 2.0: Authorization code mode.  </p>
+
+<table><thead>
+<tr>
+<th>Authorization Mode</th>
+<th>Description</th>
+<th>Scenario</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization Mode</td>
+<td>User authorizes a third-party application to provide client_secret and obtain the authorization code, which is then used to obtain access token and refresh token.</td>
+<td>The application has a server, which can store the application key and interact the key with the MEXCOAuth server.</td>
+</tr>
+</tbody></table>
+
+<p><strong>Authorization Code Mode</strong><br>
+After the user jumps to the MEXC authorization page through the third-party application and authorizes it, the third-party application can exchange the authorization code for an access token, and access the data resources authorized by the user by using MEXC OpenAPI.</p>
 <h1 id='broker-endpoints'>Broker Endpoints</h1><h2 id='query-universal-transfer-history-broker-user'>Query Universal Transfer History - broker user</h2>
 <blockquote>
 <p>request</p>
