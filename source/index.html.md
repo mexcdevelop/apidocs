@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-02-07**
+
+- ws新增频道：按Symbol的最优挂单信息
+
 ## **2023-01-06**
 
 - [新增权重限速模式](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#c1fd2fc5ac)
@@ -4404,7 +4408,50 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | s | string | 交易对 |
 | t | long | 事件时间 |
 
+## 按Symbol的最优挂单信息
+实时推送指定交易对最优挂单信息。
 
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.bookTicker.v3.api@BTCUSDT"
+      ]
+}
+```
+
+> **response:**
+
+```
+
+{
+ "c":"spot@public.bookTicker.v3.api@<BTCUSDT>",
+ "d":{
+    "A":"40.66000000"},  //卖单最优挂单数量
+    "B":"31.21000000",  //买单最优挂单数量
+    "a":"25.36520000", //卖单最优挂单价格
+    "b":"25.35190000", // 买单最优挂单价格 
+  },  
+ "s":"BTCUSDT", //交易对
+ "t":1661932660144 //事件时间
+}
+```
+
+
+**请求参数:** `spot@public.bookTicker.v3.api@<symbol>`
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| A | string | 卖单最优挂单数量 |
+| B | string | 买单最优挂单数量 |
+| a | string | 卖单最优挂单价格 |
+| b | string | 买单最优挂单价格 |
+| s | string | 交易对 |
+| t | long | 事件时间 |
 
 ## 如何正确在本地维护一个orderbook副本
 
