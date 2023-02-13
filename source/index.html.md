@@ -2953,10 +2953,6 @@ post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signa
 
 - **POST** ```/api/v3/capital/convert```
 
-**接口权限要求**
-
-- 账户读/SPOT_ACCOUNT_READ
-
 **权重(IP):** 10
 
 **请求参数**
