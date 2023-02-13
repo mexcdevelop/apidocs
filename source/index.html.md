@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-02-13**
+
+- 新增获取小额资产可兑换列表、小额资产兑换和查询小额资产兑换历史接口
+
 ## **2023-02-07**
 
 - ws新增频道：按Symbol的最优挂单信息
@@ -2481,7 +2485,10 @@ Get /api/v3/capital/config/getall
 
 **请求参数**
 
-无
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 
 **返回参数**
@@ -2794,13 +2801,13 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
 |toAccountType|string|是|划入账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
 |asset|string|是|资产|
 |amount|string|是|数量|
 |symbol|string|否|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 当类型为 `ISOLATEDMARGIN`,`fromSymbol`和`toSymbol` 必须要发送.
 
@@ -2861,8 +2868,6 @@ get /api/v3/capital/transfer
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|timestamp|string|是|时间戳|
-|signature|string|是|签名|
 |fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
 |toAccountType|string|是|划入账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
 |startTime|string|否||
@@ -2870,6 +2875,8 @@ get /api/v3/capital/transfer
 |page|string|否|默认1|
 |size|string|否|默认 10, 最大 100|
 |symbol|string|是|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，如:ETHUSDT|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
 
 1. 仅支持查询最近半年（6个月）数据
 2. 若`startTime`和`endTime`没传，则默认返回最近7天数据
@@ -2887,6 +2894,176 @@ get /api/v3/capital/transfer
 |symbol|转出交易对|
 |status|划转状态|
 |timestamp|划转时间|
+
+
+## 获取小额资产可兑换列表
+
+> 请求示例
+
+```
+get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+[
+    {
+        "convertMx": "0.00129158",
+        "balance": "0.00339606433902421",
+        "asset": "ETHF"
+    }
+]
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/convert/list```
+
+**权重(IP):** 1
+
+**请求参数**
+  
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|convertMx|余额mx值预估(扣除手续费后)|
+|balance|币种余额|
+|asset|币种|
+
+## 小额资产兑换
+
+> 请求示例
+
+```
+post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{ 
+"totalConvert": "1.82736182"
+} 
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/convert```
+
+**接口权限要求**
+
+- 账户读/SPOT_ACCOUNT_READ
+
+**权重(IP):** 10
+
+**请求参数**
+  
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|asset|string|是|要兑换mx的小额资产(最多可以传15个)如:asset=BTC,FIL,ETH|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|totalConvert|转换后的mx数量(扣除mx手续费)|
+
+## 查询小额资产兑换历史
+
+> 请求示例
+
+```
+get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "data": [
+        {
+            "totalConvert": "0.00885018",
+            "totalFee": "0.000177",
+            "convertTime": 1665360563000,
+            "convertDetails": [
+                {
+                    "id": "3e52a99c5c3447b2af2163cd829dca28",
+                    "convert": "0.00885018",
+                    "fee": "0.000177",
+                    "amount": "0.007130464601986065",
+                    "time": 1665360563000,
+                    "asset": "ETHF"
+                }
+            ]
+        },
+        {
+            "totalConvert": "0.026782",
+            "totalFee": "0.00053562",
+            "convertTime": 1663631477000,
+            "convertDetails": [
+                {
+                    "id": "6483bfb1766d41d8a4b6b6315ded6e99",
+                    "convert": "0.02098255",
+                    "fee": "0.00041965",
+                    "amount": "0.00000098",
+                    "time": 1663631477000,
+                    "asset": "BTC"
+                },
+                {
+                    "id": "f9e886f28c454f5dae45eec6a11f6c6a",
+                    "convert": "0.00084019",
+                    "fee": "0.0000168",
+                    "amount": "2",
+                    "time": 1663631477000,
+                    "asset": "JAM"
+                }
+            ]
+        }
+    ],  
+    "totalRecords": 4,
+    "page": 1,
+    "totalPageNum": 1
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/convert```
+
+**权重(IP):** 1
+
+**请求参数**
+  
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|startTime|long|否|开始时间|
+|endTime|long|否|结束时间|
+|page|int|否|页数,默认 1|
+|limit|int|否|返回的条数,默认 1; 最大 1000|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+**返回参数**
+
+| 参数名 |  数据类型|说明  |
+| :------------ | :-------- | :-------- |
+|totalConvert|string|转换后的mx数量(扣除mx手续费)|
+|totalFee|string|本次兑换的总手续费|
+|convertTime|long|本次兑换时间|
+|convertDetails|object|本次转换的细节|
+|id|string|兑换id|
+|convert|string|兑换后的mx|
+|fee|string|兑换手续费|
+|amount|string|币种数量|
+|time|long|兑换时间|
+|asset|string|币种|
+|page|int|当前页|
+|totalRecords|int|总记录数|
+|totalPage|int|总页数|
+
 
 # ETF接口
 
