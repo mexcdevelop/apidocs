@@ -2946,7 +2946,7 @@ post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signa
 
 ```json
 { 
-"totalConvert": "1.82736182"
+  "totalConvert": "1.82736182"
 } 
 ```
 **HTTP请求**
