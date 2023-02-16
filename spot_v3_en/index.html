@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-01-13" class="toc-h2 toc-link" data-title="2023-01-13"><strong>2023-01-13</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-01-06" class="toc-h2 toc-link" data-title="2023-01-06"><strong>2023-01-06</strong></a>
                   </li>
                   <li>
@@ -619,6 +622,15 @@
                   <li>
                     <a href="#query-user-universal-transfer-history" class="toc-h2 toc-link" data-title="Query User Universal Transfer History">Query User Universal Transfer History</a>
                   </li>
+                  <li>
+                    <a href="#get-assets-that-can-be-converted-into-mx" class="toc-h2 toc-link" data-title="Get Assets That Can Be Converted Into MX">Get Assets That Can Be Converted Into MX</a>
+                  </li>
+                  <li>
+                    <a href="#dust-transfer" class="toc-h2 toc-link" data-title="Dust Transfer">Dust Transfer</a>
+                  </li>
+                  <li>
+                    <a href="#dustlog" class="toc-h2 toc-link" data-title="DustLog">DustLog</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -819,7 +831,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-01-13'><strong>2023-01-13</strong></h2>
+<ul>
+<li>Add:Get Assets That Can Be Converted Into MX,Dust Transfer,Dust Log endpoints</li>
+</ul>
+<h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
 <ul>
 <li>ws add channel:Individual Symbol Book Ticker Streams</li>
 </ul>
@@ -4698,8 +4714,6 @@ Klines are uniquely identified by their open time.</p>
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1669109672280</span><span class="w">
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div>
-<p><strong>HTTP请求</strong></p>
-
 <ul>
 <li><strong>POST</strong> <code>api/v3/mxDeduct/enable</code></li>
 </ul>
@@ -5776,6 +5790,320 @@ Response:</li>
 <tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='get-assets-that-can-be-converted-into-mx'>Get Assets That Can Be Converted Into MX</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00129158"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00339606433902421"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHF"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/convert/list</code></li>
+</ul>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">convertMx</td>
+<td style="text-align: left">MX amount（Deducted commission fee）</td>
+</tr>
+<tr>
+<td style="text-align: left">balance</td>
+<td style="text-align: left">Convertible balance</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">asset</td>
+</tr>
+</tbody></table>
+<h2 id='dust-transfer'>Dust Transfer</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post {{api_url}}/api/v3/capital/convert?asset=ETHF&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
+  </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.82736182"</span><span class="w">
+</span><span class="p">}</span><span class="w"> 
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/convert</code></li>
+</ul>
+
+<p><strong>Weight(IP):</strong> 10</p>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">The asset being converted.(max 15 assert)eg:asset=BTC,FIL,ETH</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">totalConvert</td>
+<td style="text-align: left">Convert MX amount(Deducted commission fee)</td>
+</tr>
+</tbody></table>
+<h2 id='dustlog'>DustLog</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00885018"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"totalFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000177"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"convertTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1665360563000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"convertDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3e52a99c5c3447b2af2163cd829dca28"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"convert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00885018"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000177"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.007130464601986065"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1665360563000</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHF"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.026782"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"totalFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00053562"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"convertTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1663631477000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"convertDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6483bfb1766d41d8a4b6b6315ded6e99"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"convert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.02098255"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00041965"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000098"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1663631477000</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f9e886f28c454f5dae45eec6a11f6c6a"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"convert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00084019"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"fee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0000168"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1663631477000</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JAM"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">  
+    </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/convert</code></li>
+</ul>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p>Parameters:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">page,default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">limit,default 1; max 1000</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">totalConvert</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Convert MX amount(Deducted commission fee)</td>
+</tr>
+<tr>
+<td style="text-align: left">totalFee</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Total fee amount</td>
+</tr>
+<tr>
+<td style="text-align: left">convertTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">Convert time</td>
+</tr>
+<tr>
+<td style="text-align: left">convertDetails</td>
+<td style="text-align: left">object</td>
+<td style="text-align: left">Convert details</td>
+</tr>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Convert id</td>
+</tr>
+<tr>
+<td style="text-align: left">convert</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Convert mx</td>
+</tr>
+<tr>
+<td style="text-align: left">fee</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">fee amount</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">time</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">Convert time</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">page</td>
+</tr>
+<tr>
+<td style="text-align: left">totalRecords</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">totalRecords</td>
+</tr>
+<tr>
+<td style="text-align: left">totalPage</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">totalPage</td>
 </tr>
 </tbody></table>
 <h1 id='etf'>ETF</h1><h2 id='get-etf-info'>Get ETF info</h2>
