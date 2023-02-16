@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-01-13**
+
+- Add:Get Assets That Can Be Converted Into MX,Dust Transfer,Dust Log endpoints
+
 ## **2023-01-06**
 
 - ws add channel:Individual Symbol Book Ticker Streams
@@ -2141,7 +2145,7 @@ post api/v3/mxDeduct/enable
   "timestamp":1669109672280
 } 
 ```
-**HTTP请求**
+
 
 - **POST** ```api/v3/mxDeduct/enable```
 
@@ -2684,6 +2688,171 @@ Response:
 |symbol|symbol|
 |status|status|
 |timestamp|timestamp|
+
+## Get Assets That Can Be Converted Into MX
+
+> Request
+
+```
+get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+    {
+        "convertMx": "0.00129158",
+        "balance": "0.00339606433902421",
+        "asset": "ETHF"
+    }
+]
+```
+
+
+- **GET** ```/api/v3/capital/convert/list```
+
+**Weight(IP):** 1
+
+Parameters:
+  
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+
+Response:
+
+| Name | Description  |
+| :------------ | :-------- | 
+|convertMx|MX amount（Deducted commission fee）|
+|balance|Convertible balance|
+|asset|asset|
+
+## Dust Transfer
+
+> Request
+
+```
+post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+{ 
+  "totalConvert": "1.82736182"
+} 
+```
+
+- **POST** ```/api/v3/capital/convert```
+
+**Weight(IP):** 10
+
+Parameters:
+  
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|asset|string|YES|The asset being converted.(max 15 assert)eg:asset=BTC,FIL,ETH|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+
+Response:
+
+| Name | Description  |
+| :------------ | :-------- | 
+|totalConvert|Convert MX amount(Deducted commission fee)|
+
+## DustLog
+
+> Request
+
+```
+get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+{
+    "data": [
+        {
+            "totalConvert": "0.00885018",
+            "totalFee": "0.000177",
+            "convertTime": 1665360563000,
+            "convertDetails": [
+                {
+                    "id": "3e52a99c5c3447b2af2163cd829dca28",
+                    "convert": "0.00885018",
+                    "fee": "0.000177",
+                    "amount": "0.007130464601986065",
+                    "time": 1665360563000,
+                    "asset": "ETHF"
+                }
+            ]
+        },
+        {
+            "totalConvert": "0.026782",
+            "totalFee": "0.00053562",
+            "convertTime": 1663631477000,
+            "convertDetails": [
+                {
+                    "id": "6483bfb1766d41d8a4b6b6315ded6e99",
+                    "convert": "0.02098255",
+                    "fee": "0.00041965",
+                    "amount": "0.00000098",
+                    "time": 1663631477000,
+                    "asset": "BTC"
+                },
+                {
+                    "id": "f9e886f28c454f5dae45eec6a11f6c6a",
+                    "convert": "0.00084019",
+                    "fee": "0.0000168",
+                    "amount": "2",
+                    "time": 1663631477000,
+                    "asset": "JAM"
+                }
+            ]
+        }
+    ],  
+    "totalRecords": 4,
+    "page": 1,
+    "totalPageNum": 1
+}
+```
+
+
+- **GET** ```/api/v3/capital/convert```
+
+**Weight(IP):** 1
+
+Parameters:
+  
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|startTime|long|NO|startTime|
+|endTime|long|NO|endTime|
+|page|int|NO|page,default 1|
+|limit|int|NO|limit,default 1; max 1000|
+|timestamp|string|YES|timestamp|
+|signature|string|YES|signature|
+
+Response:
+
+| Name |  Type|Description  |
+| :------------ | :-------- | :-------- |
+|totalConvert|string|Convert MX amount(Deducted commission fee)|
+|totalFee|string|Total fee amount|
+|convertTime|long|Convert time|
+|convertDetails|object|Convert details|
+|id|string|Convert id|
+|convert|string|Convert mx|
+|fee|string|fee amount|
+|amount|string|amount|
+|time|long|Convert time|
+|asset|string|asset|
+|page|int|page|
+|totalRecords|int|totalRecords|
+|totalPage|int|totalPage|
+
+
 
 # ETF
 
