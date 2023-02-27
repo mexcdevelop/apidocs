@@ -2442,7 +2442,7 @@ get api/v3/mxDeduct/enable
 ```
 **HTTP请求**
 
-- **GET** ```api/v3/mxDeduct/enableh```  
+- **GET** ```api/v3/mxDeduct/enable```  
 
 **接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
