@@ -1111,7 +1111,7 @@
 <h2 id='q4'>Q4:超出限制频率报错后，该怎么做？</h2>
 <p>超出接口访问频率限制后，无法继续访问接口，10分钟后会恢复正常，要保持低于限制的频率访问接口。</p>
 <h2 id='q5'>Q5:一个账户最多可以下多少单？</h2>
-<p>每个账户最大可以同时拥有200个未完全成交的有效订单。</p>
+<p>每个账户最大可以同时拥有500个未完全成交的有效订单。</p>
 <h2 id='q6-websocket'>Q6:为什么WebSocket总是断开连接？</h2>
 <p>1.如果没有有效订阅的话，会在30s断开链接。
 2.如果订阅成功后，60s内没有流量，会自动断开。
@@ -2765,8 +2765,10 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/sub-account/virtualSubAccount</code></li>
+<li><strong>POST</strong> <code>/api/v3/sub-account/virtualSubAccount</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -2858,6 +2860,8 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <ul>
 <li><strong>GET</strong>  <code>/api/v3/sub-account/list</code></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R  </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -2968,8 +2972,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/sub-account/apiKey</code></li>
+<li><strong>POST</strong> <code>/api/v3/sub-account/apiKey</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R  </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3099,8 +3105,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/sub-account/apiKey</code></li>
+<li><strong>GET</strong> <code>/api/v3/sub-account/apiKey</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3193,8 +3201,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/sub-account/apiKey</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/sub-account/apiKey</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3267,8 +3277,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/sub-account/universalTransfer</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/sub-account/universalTransfer</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 资金划转写 / SPOT_TRANSFER_W </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3382,8 +3394,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/sub-account/universalTransfer</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/sub-account/universalTransfer</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 资金划转读 / SPOT_TRANSFER_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3558,8 +3572,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/sub-account/futures</code></li>
+<li><strong>POST</strong> <code>/api/v3/sub-account/futures</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3642,8 +3658,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/sub-account/margin</code></li>
+<li><strong>POST</strong> <code>/api/v3/sub-account/margin</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3718,8 +3736,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/order/test</code></li>
+<li><strong>POST</strong> <code>/api/v3/order/test</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -3751,8 +3771,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/order</code></li>
+<li><strong>POST</strong> <code>/api/v3/order</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1/<strong>权重(UID):</strong> 1</p>
 
@@ -3949,8 +3971,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/batchOrders</code></li>
+<li><strong>POST</strong> <code>/api/v3/batchOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -4094,8 +4118,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/order</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/order</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -4253,8 +4279,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/openOrders</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/openOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -4380,8 +4408,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/order</code></li>
+<li><strong>GET</strong> <code>/api/v3/order</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 2</p>
 
@@ -4546,8 +4576,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/openOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/openOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 3</p>
 
@@ -4699,8 +4731,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/allOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/allOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -4876,8 +4910,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/account</code></li>
+<li><strong>GET</strong> <code>/api/v3/account</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -5004,8 +5040,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/myTrades</code></li>
+<li><strong>GET</strong> <code>/api/v3/myTrades</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -5147,8 +5185,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>api/v3/mxDeduct/enable</code></li>
+<li><strong>POST</strong> <code>api/v3/mxDeduct/enable</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -5226,8 +5266,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>api/v3/mxDeduct/enableh</code></li>
+<li><strong>GET</strong> <code>api/v3/mxDeduct/enable</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -5333,8 +5375,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/config/getall</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/config/getall</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关读 / SPOT_WITHDRAW_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -5417,8 +5461,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -5534,8 +5580,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/deposit/hisrec</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/deposit/hisrec</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关读 / SPOT_WITHDRAW_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -5678,8 +5726,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/withdraw/history</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/withdraw/history</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关读 / SPOT_WITHDRAW_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -5826,8 +5876,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/deposit/address</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/deposit/address</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W  </p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -5925,8 +5977,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/deposit/address</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/deposit/address</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关读 / SPOT_WITHDRAW_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -6009,8 +6063,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/transfer</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/transfer</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 资金划转写 / SPOT_TRANSFER_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -6126,8 +6182,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/transfer</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 资金划转读 / SPOT_TRANSFER_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -6270,8 +6328,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/convert/list</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/convert/list</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -6336,8 +6396,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/convert</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/convert</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -6442,8 +6504,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/convert</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/convert</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -6597,7 +6661,7 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>api/v3/etf/info</code></li>
+<li><strong>GET</strong> <code>api/v3/etf/info</code><br></li>
 </ul>
 
 <p><strong>权重(IP):</strong> 1</p>
@@ -6698,8 +6762,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/tradeMode</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/tradeMode</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息写 / ISOLATED_MARGIN_ACCOUNT_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -6792,8 +6858,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/order</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/order</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息写 / ISOLATED_MARGIN_DEAL_W</p>
 
 <p><strong>权重(UID):</strong>6</p>
 
@@ -6933,8 +7001,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/loan</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/loan</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息写 / ISOLATED_MARGIN_ACCOUNT_W</p>
 
 <p><strong>权重(UID):</strong> 1000</p>
 
@@ -7039,8 +7109,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/repay</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/repay</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息写 / ISOLATED_MARGIN_ACCOUNT_W</p>
 
 <p><strong>权重(UID):</strong> 1000</p>
 
@@ -7175,8 +7247,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/margin/openOrders</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/margin/openOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息写 / ISOLATED_MARGIN_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -7344,8 +7418,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/margin/order</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/margin/order</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息写 / ISOLATED_MARGIN_DEAL_W</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -7519,8 +7595,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/loan</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/loan</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -7720,8 +7798,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/allOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/allOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -7909,8 +7989,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/myTrades</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/myTrades</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -8096,8 +8178,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/openOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/openOrders</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 3</p>
 
@@ -8265,8 +8349,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/maxTransferable</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/maxTransferable</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 50</p>
 
@@ -8329,8 +8415,6 @@ body
 </tr>
 </tbody></table>
 <h2 id='efcdde18d1'>查询杠杆价格指数</h2>
-<p>说明</p>
-
 <blockquote>
 <p>请求示例</p>
 </blockquote>
@@ -8350,8 +8434,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/priceIndex</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/priceIndex</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -8450,8 +8536,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/order</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/order</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -8656,8 +8744,10 @@ body
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolated/account</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolated/account</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -8876,8 +8966,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/maxBorrowable</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/maxBorrowable</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 50</p>
 
@@ -8961,8 +9053,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/repay</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/repay</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -9133,8 +9227,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolated/pair</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolated/pair</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -9223,8 +9319,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/forceLiquidationRec</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/forceLiquidationRec</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -9399,8 +9497,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginData</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginData</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -9505,8 +9605,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginTier</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginTier</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -10836,8 +10938,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/taxQuery</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/taxQuery</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -10973,8 +11077,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/detail</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -11119,8 +11225,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/detail/kickback</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail/kickback</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -11240,8 +11348,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/referCode</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/referCode</code><br></li>
 </ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
