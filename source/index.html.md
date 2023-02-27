@@ -41,14 +41,19 @@ MEXC OAuth 2.0 is supported on Web version, and is developed based on the OAuth 
 The user signs up at MEXC, applies for API Key in MEXC, and provides it to the broker. 
 
    * Supports trading pairs set by users</br>
-   * Supports API Key renewal, and avoids multiple binding.
-    
+   * Supports API Key renewal, and avoids multiple binding.  
+
+<img src="../images/brokeren1.png"> 
+   
 
 **2. Independent Brokers**</br>
 Brokers have their own brands and separate account systems.Brokers create separate sub-accounts for users to trade under the Master account. Sub-accounts support deposit and withdrawal.
 
    * Support sub-account deposit and withdrawal
-   * Support sub-account transfer  
+   * Support sub-account transfer   
+
+<img src="../images/brokeren2.png"> 
+
 
 **3. Integration Procedure**  
 1. Sign up for an account on the official website and apply to become a broker.
@@ -64,7 +69,10 @@ The authorization mode provided by MEXC OAuth 2.0: Authorization code mode.
 
 |Authorization Mode|Description|Scenario|
 |------|-----|-----|
-|Authorization Mode|User authorizes a third-party application to provide client_secret and obtain the authorization code, which is then used to obtain access token and refresh token.|The application has a server, which can store the application key and interact the key with the MEXCOAuth server.|  
+|Authorization Mode|User authorizes a third-party application to provide client_secret and obtain the authorization code, which is then used to obtain access token and refresh token.|The application has a server, which can store the application key and interact the key with the MEXCOAuth server.|    
+
+<img src="../images/brokeren3.png"> 
+
 
 **Authorization Code Mode**  
 After the user jumps to the MEXC authorization page through the third-party application and authorizes it, the third-party application can exchange the authorization code for an access token, and access the data resources authorized by the user by using MEXC OpenAPI.
