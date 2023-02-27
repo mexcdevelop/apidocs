@@ -1100,7 +1100,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <h2 id='q4-what-should-i-do-after-an-error-is-reported-for-exceeding-the-limit-frequency'>Q4: What should I do after an error is reported for exceeding the limit frequency?</h2>
 <p>After exceeding the interface access frequency limit, you will not be able to continue accessing the interface. It will resume to normal after 10 minutes to keep the interface access frequency below the limit.</p>
 <h2 id='q5-how-many-orders-can-an-account-place'>Q5: How many orders can an account place?</h2>
-<p>Each account can hold up to 200 valid orders that are not completely filled.</p>
+<p>Each account can hold up to 500 valid orders that are not completely filled.</p>
 <h2 id='q6-why-does-websocket-always-disconnect'>Q6：Why does WebSocket always disconnect?</h2>
 <ol>
 <li>If there is no valid subscription, it will disconnect in 30 seconds.</li>
@@ -2632,8 +2632,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li>POST / api/v3/sub-account/virtualSubAccount</li>
+<li>POST / api/v3/sub-account/virtualSubAccount<br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -2694,8 +2696,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li>GET / api/v3/sub-account/list </li>
+<li>GET / api/v3/sub-account/list<br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -2761,8 +2765,10 @@ Klines are uniquely identified by their open time.</p>
     </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li>POST /api/v3/sub-account/apiKey</li>
+<li>POST /api/v3/sub-account/apiKey<br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -2839,8 +2845,10 @@ Klines are uniquely identified by their open time.</p>
    </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li>GET/api/v3/sub-account/apiKey</li>
+<li>GET/api/v3/sub-account/apiKey<br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -2882,8 +2890,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li>DELETE /api/v3/sub-account/apiKey</li>
+<li>DELETE /api/v3/sub-account/apiKey<br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -2936,8 +2946,10 @@ Klines are uniquely identified by their open time.</p>
  </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/sub-account/universalTransfer</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/sub-account/universalTransfer</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong>  SPOT_TRANSFER_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -3047,8 +3059,10 @@ Klines are uniquely identified by their open time.</p>
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/sub-account/universalTransfer</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/sub-account/universalTransfer</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_TRANSFER_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -3219,8 +3233,10 @@ Klines are uniquely identified by their open time.</p>
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/sub-account/futures</code></li>
+<li><strong>POST</strong> <code>/api/v3/sub-account/futures</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -3299,8 +3315,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/sub-account/margin</code></li>
+<li><strong>POST</strong> <code>/api/v3/sub-account/margin</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -3366,8 +3384,10 @@ Klines are uniquely identified by their open time.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/order/test</code></li>
+<li><strong>POST</strong> <code>/api/v3/order/test</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -3397,8 +3417,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/order</code></li>
+<li><strong>POST</strong> <code>/api/v3/order</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1, <strong>Weight(UID):</strong> 1</p>
 
@@ -3594,8 +3616,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/batchOrders</code></li>
+<li><strong>POST</strong> <code>/api/v3/batchOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1,<strong>Weight(UID):</strong> 1</p>
 
@@ -3729,8 +3753,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/order</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/order</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -3881,8 +3907,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/openOrders</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/openOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -4000,8 +4028,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/order</code></li>
+<li><strong>GET</strong> <code>/api/v3/order</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 2</p>
 
@@ -4150,8 +4180,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/openOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/openOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 3</p>
 
@@ -4288,8 +4320,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/allOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/allOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -4447,8 +4481,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/account</code></li>
+<li><strong>GET</strong> <code>/api/v3/account</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -4568,8 +4604,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/myTrades</code></li>
+<li><strong>GET</strong> <code>/api/v3/myTrades</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -4715,8 +4753,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>api/v3/mxDeduct/enable</code></li>
+<li><strong>POST</strong> <code>api/v3/mxDeduct/enable</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -4792,8 +4832,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>api/v3/mxDeduct/enableh</code></li>
+<li><strong>GET</strong> <code>api/v3/mxDeduct/enable</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -4895,8 +4937,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/config/getall</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/config/getall</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -4967,8 +5011,10 @@ Klines are uniquely identified by their open time.</p>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5081,8 +5127,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/deposit/hisrec</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/deposit/hisrec</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5223,8 +5271,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/withdraw/history</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/withdraw/history</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5373,8 +5423,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/deposit/address</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/deposit/address</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5470,8 +5522,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/deposit/address</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/deposit/address</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -5552,8 +5606,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/transfer</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/transfer</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_TRANSFER_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5667,8 +5723,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/transfer</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_TRANSFER_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5810,8 +5868,10 @@ Response:</li>
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/convert/list</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/convert/list</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -5874,8 +5934,10 @@ Response:</li>
 </span><span class="p">}</span><span class="w"> 
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/convert</code></li>
+<li><strong>POST</strong> <code>/api/v3/capital/convert</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -5978,8 +6040,10 @@ Response:</li>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>GET</strong> <code>/api/v3/capital/convert</code></li>
+<li><strong>GET</strong> <code>/api/v3/capital/convert</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -6224,8 +6288,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/tradeMode</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/tradeMode</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -6315,8 +6381,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/order</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/order</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_WRITE</p>
 
 <p><strong>Weight(UID):</strong> 6</p>
 
@@ -6456,8 +6524,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/loan</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/loan</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_WRITE</p>
 
 <p><strong>Weight(UID):</strong> 1000</p>
 
@@ -6562,8 +6632,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/margin/repay</code></li>
+<li><strong>POST</strong> <code>/api/v3/margin/repay</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_WRITE</p>
 
 <p><strong>Weight(UID):</strong> 1000</p>
 
@@ -6696,8 +6768,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/margin/openOrders</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/margin/openOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -6864,8 +6938,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>DELETE</strong> <code>/api/v3/margin/order</code></li>
+<li><strong>DELETE</strong> <code>/api/v3/margin/order</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_WRITE</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -7039,8 +7115,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/loan</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/loan</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -7240,8 +7318,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/allOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/allOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -7429,8 +7509,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/myTrades</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/myTrades</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -7616,8 +7698,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/openOrders</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/openOrders</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 3</p>
 
@@ -7781,8 +7865,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/maxTransferable</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/maxTransferable</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 50</p>
 
@@ -7864,8 +7950,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/priceIndex</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/priceIndex</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong>  ISOLATED_MARGIN_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -7964,8 +8052,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/order</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/order</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_DEAL_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -8170,8 +8260,10 @@ Response:</li>
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolated/account</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolated/account</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -8379,8 +8471,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/maxBorrowable</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/maxBorrowable</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 50</p>
 
@@ -8466,8 +8560,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/repay</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/repay</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -8638,8 +8734,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolated/pair</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolated/pair</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -8729,8 +8827,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/forceLiquidationRec</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/forceLiquidationRec</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -8905,8 +9005,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginData</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginData</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -9011,8 +9113,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginTier</code></li>
+<li><strong>GET</strong> <code>/api/v3/margin/isolatedMarginTier</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> ISOLATED_MARGIN_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -10319,8 +10423,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/taxQuery</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/taxQuery</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -10456,8 +10562,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/detail</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -10602,8 +10710,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>Http Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/detail/kickback</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/detail/kickback</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -10723,8 +10833,10 @@ get /api/v3/margin/trigerOrder
 <p><strong>HTTP Request</strong></p>
 
 <ul>
-<li><strong>GET</strong> <code>/api/v3/rebate/referCode</code></li>
+<li><strong>GET</strong> <code>/api/v3/rebate/referCode</code><br></li>
 </ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
