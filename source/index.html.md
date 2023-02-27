@@ -2229,7 +2229,7 @@ get api/v3/mxDeduct/enable
 }
 ```
 
-- **GET** ```api/v3/mxDeduct/enableh```  
+- **GET** ```api/v3/mxDeduct/enable```  
 
 **Permission:** SPOT_DEAL_READ
 
