@@ -64,19 +64,19 @@ MEXC OAuth 2.0提供的授权模式：授权码模式。
 |授权码模式|用户授权，第三方应用提供client_secret获取授权码。通过授权码获取访问令牌和刷新令牌。|应用有服务器，可存储应用密钥，与MEXCOAuth服务器进行密钥交互。|
 
 授权码模式 
-<img src="../images/broker-2.png">  
 用户通过第三方应用跳转至MEXC授权页面并进行授权后，第三方应用可以凭借此授权码换取访问令牌，通过调用MEXC OpenAPI，访问用户授权的数据资源。
 
+<img src="../images/broker3.png">  
 
 ## MEXC 经纪商合作模式
 
 **1. API 经纪商：** 
 
-<img src="../images/broker.png">
+<img src="../images/broker1.png">
 
 **2. 独立经纪商：**
 
-<img src="../images/broker-2.png">
+<img src="../images/broker2.png">
 
 
 # Broker 接口
