@@ -301,7 +301,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## Q5:一个账户最多可以下多少单？
 
-每个账户最大可以同时拥有200个未完全成交的有效订单。
+每个账户最大可以同时拥有500个未完全成交的有效订单。
 
 ## Q6:为什么WebSocket总是断开连接？
 
@@ -1206,7 +1206,9 @@ POST /api/v3/sub-account/virtualSubAccount?subAccount=subAccount1&note=1&timesta
 
 **HTTP请求**
 
-- **POST** ```/api/v3/sub-account/virtualSubAccount```
+- **POST** ```/api/v3/sub-account/virtualSubAccount```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
 
 **权重(IP):** 1
 
@@ -1258,6 +1260,8 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
  **HTTP请求**
 
 - **GET**  ```/api/v3/sub-account/list```
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R  
 
 **权重(IP):** 1
 
@@ -1314,7 +1318,9 @@ body
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/sub-account/apiKey```
+- **POST** ```/api/v3/sub-account/apiKey```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R  
 
 **权重(IP):** 1
 
@@ -1378,7 +1384,9 @@ GET/api/v3/sub-account/apiKey?subAccount=subAccount1&timestamp=1597026383085
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/sub-account/apiKey```
+- **GET** ```/api/v3/sub-account/apiKey```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
 
 **权重(IP):** 1
 
@@ -1427,7 +1435,9 @@ body
 ```
 **HTTP请求**
 
-- **DELETE** ```/api/v3/sub-account/apiKey```
+- **DELETE** ```/api/v3/sub-account/apiKey```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
 
 **权重(IP):** 1
 
@@ -1466,7 +1476,9 @@ post /api/v3/capital/sub-account/universalTransfer
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/sub-account/universalTransfer```
+- **POST** ```/api/v3/capital/sub-account/universalTransfer```  
+
+**接口权限要求:** 资金划转写 / SPOT_TRANSFER_W 
 
 **权重(IP):** 1
 
@@ -1521,7 +1533,9 @@ get /api/v3/capital/sub-account/universalTransfer
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/sub-account/universalTransfer```
+- **GET** ```/api/v3/capital/sub-account/universalTransfer```  
+
+**接口权限要求:** 资金划转读 / SPOT_TRANSFER_R
 
 **权重(IP):** 1
 
@@ -1583,7 +1597,9 @@ post /api/v3/sub-account/futures
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/sub-account/futures```
+- **POST** ```/api/v3/sub-account/futures```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
 
 **权重(IP):** 1
 
@@ -1630,7 +1646,9 @@ post /api/v3/sub-account/margin
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/sub-account/margin```
+- **POST** ```/api/v3/sub-account/margin```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
 
 **权重(IP):** 1
 
@@ -1669,7 +1687,9 @@ POST /api/v3/order/test
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/order/test```
+- **POST** ```/api/v3/order/test```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 1
 
@@ -1701,7 +1721,9 @@ POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&times
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/order```
+- **POST** ```/api/v3/order```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 1/**权重(UID):** 1
 
@@ -1798,7 +1820,9 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/batchOrders```
+- **POST** ```/api/v3/batchOrders```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 1
 
@@ -1862,7 +1886,9 @@ DELETE /api/v3/order?symbol=BTCUSDT&orderId=135598325645746176&timestamp={{times
 ```
 **HTTP请求**
 
-- **DELETE** ```/api/v3/order```
+- **DELETE** ```/api/v3/order```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 1
 
@@ -1943,7 +1969,9 @@ DELETE /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{sig
 ```
 **HTTP请求**
 
-- **DELETE** ```/api/v3/openOrders```
+- **DELETE** ```/api/v3/openOrders```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 1
 
@@ -2008,7 +2036,9 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/order```
+- **GET** ```/api/v3/order```  
+
+**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
 **权重(IP):** 2
 
@@ -2083,7 +2113,9 @@ GET /api/v3/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signat
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/openOrders```
+- **GET** ```/api/v3/openOrders```  
+
+**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
 **权重(IP):** 3
 
@@ -2155,7 +2187,9 @@ GET /api/v3/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{signatu
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/allOrders```
+- **GET** ```/api/v3/allOrders```  
+
+**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
 **权重(IP):** 10
 
@@ -2237,7 +2271,9 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/account```
+- **GET** ```/api/v3/account```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 10
 
@@ -2302,7 +2338,9 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/myTrades```
+- **GET** ```/api/v3/myTrades```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 10
 
@@ -2359,7 +2397,9 @@ post api/v3/mxDeduct/enable
 ```
 **HTTP请求**
 
-- **POST** ```api/v3/mxDeduct/enable```
+- **POST** ```api/v3/mxDeduct/enable```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 1
 
@@ -2402,7 +2442,9 @@ get api/v3/mxDeduct/enable
 ```
 **HTTP请求**
 
-- **GET** ```api/v3/mxDeduct/enableh```
+- **GET** ```api/v3/mxDeduct/enable```  
+
+**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
 **权重(IP):** 1
 
@@ -2479,7 +2521,9 @@ Get /api/v3/capital/config/getall
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/config/getall```
+- **GET** ```/api/v3/capital/config/getall```  
+
+**接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
 
 **权重(IP):** 10
 
@@ -2521,7 +2565,9 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/withdraw/apply```
+- **POST** ```/api/v3/capital/withdraw/apply```  
+
+**接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
 
 **权重(IP):** 1
 
@@ -2576,7 +2622,9 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/deposit/hisrec```
+- **GET** ```/api/v3/capital/deposit/hisrec```  
+
+**接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
 
 **权重(IP):** 1
 
@@ -2640,7 +2688,9 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/withdraw/history```
+- **GET** ```/api/v3/capital/withdraw/history```  
+
+**接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
 
 **权重(IP):** 1
 
@@ -2697,7 +2747,9 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/deposit/address```
+- **POST** ```/api/v3/capital/deposit/address```  
+
+**接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W  
 
 **权重(IP):** 1
 
@@ -2753,7 +2805,9 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/deposit/address```
+- **GET** ```/api/v3/capital/deposit/address```  
+
+**接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
 
 **权重(IP):** 10
 
@@ -2793,7 +2847,9 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/transfer```
+- **POST** ```/api/v3/capital/transfer```  
+
+**接口权限要求:** 资金划转写 / SPOT_TRANSFER_W
 
 **权重(IP):** 1
 
@@ -2860,7 +2916,9 @@ get /api/v3/capital/transfer
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/transfer```
+- **GET** ```/api/v3/capital/transfer```  
+
+**接口权限要求:** 资金划转读 / SPOT_TRANSFER_R
 
 **权重(IP):** 1
 
@@ -2916,7 +2974,9 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/convert/list```
+- **GET** ```/api/v3/capital/convert/list```  
+
+**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
 **权重(IP):** 1
 
@@ -2951,7 +3011,9 @@ post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signa
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/convert```
+- **POST** ```/api/v3/capital/convert```  
+
+**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
 
 **权重(IP):** 10
 
@@ -3027,7 +3089,9 @@ get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signa
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/capital/convert```
+- **GET** ```/api/v3/capital/convert```  
+
+**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
 
 **权重(IP):** 1
 
@@ -3089,7 +3153,7 @@ GET /api/v3/etf/info
 ```
 **HTTP请求**
 
-- **GET** ```api/v3/etf/info```
+- **GET** ```api/v3/etf/info```  
 
 **权重(IP):** 1
 
@@ -3139,7 +3203,9 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 **HTTP请求**
 
-- **POST** ```/api/v3/margin/tradeMode```
+- **POST** ```/api/v3/margin/tradeMode```  
+
+**接口权限要求:** 杠杆账户信息写 / ISOLATED_MARGIN_ACCOUNT_W
 
 **权重(IP):** 1
 
@@ -3187,7 +3253,9 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/margin/order```
+- **POST** ```/api/v3/margin/order```  
+
+**接口权限要求:** 杠杆交易信息写 / ISOLATED_MARGIN_DEAL_W
 
 **权重(UID):**6
 
@@ -3235,7 +3303,9 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/margin/loan```
+- **POST** ```/api/v3/margin/loan```  
+
+**接口权限要求:** 杠杆账户信息写 / ISOLATED_MARGIN_ACCOUNT_W
 
 **权重(UID):** 1000
 
@@ -3281,7 +3351,9 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/margin/repay```
+- **POST** ```/api/v3/margin/repay```  
+
+**接口权限要求:** 杠杆账户信息写 / ISOLATED_MARGIN_ACCOUNT_W
 
 **权重(UID):** 1000
 
@@ -3344,7 +3416,9 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 ```
 **HTTP请求**
 
-- **DELETE** ```/api/v3/margin/openOrders```
+- **DELETE** ```/api/v3/margin/openOrders```  
+
+**接口权限要求:** 杠杆交易信息写 / ISOLATED_MARGIN_DEAL_W
 
 **权重(IP):** 1
 
@@ -3410,7 +3484,9 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 ```
 **HTTP请求**
 
-- **DELETE** ```/api/v3/margin/order```
+- **DELETE** ```/api/v3/margin/order```  
+
+**接口权限要求:** 杠杆交易信息写 / ISOLATED_MARGIN_DEAL_W
 
 **权重(IP):** 10
 
@@ -3474,7 +3550,10 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/loan```
+- **GET** ```/api/v3/margin/loan```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
+
 
 **权重(IP):** 10
 
@@ -3546,7 +3625,9 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/allOrders```
+- **GET** ```/api/v3/margin/allOrders```  
+
+**接口权限要求:** 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R
 
 **权重(IP):** 10
 
@@ -3604,7 +3685,9 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/myTrades```
+- **GET** ```/api/v3/margin/myTrades```  
+
+**接口权限要求:** 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R
 
 **权重(IP):** 10
 
@@ -3679,7 +3762,9 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/openOrders```
+- **GET** ```/api/v3/margin/openOrders```  
+
+**接口权限要求:** 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R
 
 **权重(IP):** 3
 
@@ -3737,7 +3822,9 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/maxTransferable```
+- **GET** ```/api/v3/margin/maxTransferable```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 50
 
@@ -3758,7 +3845,7 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 
 
 ## 查询杠杆价格指数
-说明
+
 > 请求示例
 
 ```
@@ -3777,7 +3864,9 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/priceIndex```
+- **GET** ```/api/v3/margin/priceIndex```  
+
+**接口权限要求:** 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R
 
 **权重(IP):** 10
 
@@ -3799,7 +3888,7 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 
 
 
-## 查询杠杆账户订单详情
+## 查询杠杆账户订单详情 
 
 > 请求示例
 
@@ -3831,7 +3920,9 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/order```
+- **GET** ```/api/v3/margin/order```  
+
+**接口权限要求:** 杠杆交易信息读 / ISOLATED_MARGIN_DEAL_R
 
 **权重(IP):** 10
 
@@ -3923,7 +4014,9 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/isolated/account```
+- **GET** ```/api/v3/margin/isolated/account```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 10
 
@@ -4017,7 +4110,9 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/maxBorrowable```
+- **GET** ```/api/v3/margin/maxBorrowable```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 50
 
@@ -4054,7 +4149,9 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/repay```
+- **GET** ```/api/v3/margin/repay```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 10
 
@@ -4113,7 +4210,9 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/isolated/pair```
+- **GET** ```/api/v3/margin/isolated/pair```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 10
 
@@ -4152,7 +4251,9 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/forceLiquidationRec```
+- **GET** ```/api/v3/margin/forceLiquidationRec```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -4223,7 +4324,9 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/isolatedMarginData```
+- **GET** ```/api/v3/margin/isolatedMarginData```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -4273,7 +4376,9 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/margin/isolatedMarginTier```
+- **GET** ```/api/v3/margin/isolatedMarginTier```  
+
+**接口权限要求:** 杠杆账户信息读 / ISOLATED_MARGIN_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -5043,7 +5148,9 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/rebate/taxQuery```
+- **GET** ```/api/v3/rebate/taxQuery```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -5113,7 +5220,9 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/rebate/detail```
+- **GET** ```/api/v3/rebate/detail```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -5186,7 +5295,9 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/rebate/detail/kickback```
+- **GET** ```/api/v3/rebate/detail/kickback```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -5233,7 +5344,9 @@ get /api/v3/rebate/referCode?timestamp=1597026383085&signature=abc
 ```
 **HTTP请求**
 
-- **GET** ```/api/v3/rebate/referCode```
+- **GET** ```/api/v3/rebate/referCode```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 1
 
