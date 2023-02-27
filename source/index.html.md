@@ -297,7 +297,7 @@ After exceeding the interface access frequency limit, you will not be able to co
 
 ## Q5: How many orders can an account place?
 
-Each account can hold up to 200 valid orders that are not completely filled.
+Each account can hold up to 500 valid orders that are not completely filled.
 
 ## Q6：Why does WebSocket always disconnect?
 
@@ -1153,7 +1153,9 @@ Create a sub-account from the master account.
 }
 ```
 
-- POST / api/v3/sub-account/virtualSubAccount
+- POST / api/v3/sub-account/virtualSubAccount  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1191,7 +1193,9 @@ Get details of the sub-account list
 }
 ```
 
-- GET / api/v3/sub-account/list 
+- GET / api/v3/sub-account/list   
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1225,7 +1229,9 @@ Parameters:
     }
 ```
 
-- POST /api/v3/sub-account/apiKey
+- POST /api/v3/sub-account/apiKey   
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1270,7 +1276,9 @@ Applies to master accounts only
    }
 ```
 
-- GET/api/v3/sub-account/apiKey
+- GET/api/v3/sub-account/apiKey  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1295,7 +1303,9 @@ Parameters:
 }
 ```
 
-- DELETE /api/v3/sub-account/apiKey
+- DELETE /api/v3/sub-account/apiKey  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1325,7 +1335,9 @@ post /api/v3/capital/sub-account/universalTransfer
  }
 ```
 
-- **POST** ```/api/v3/capital/sub-account/universalTransfer```
+- **POST** ```/api/v3/capital/sub-account/universalTransfer```  
+
+**Permission:**  SPOT_TRANSFER_WRITE
 
 **Weight(IP):** 1
 
@@ -1375,7 +1387,9 @@ get /api/v3/capital/sub-account/universalTransfer
     "timestamp":1544433325000
   }
 ```
-- **GET** ```/api/v3/capital/sub-account/universalTransfer```
+- **GET** ```/api/v3/capital/sub-account/universalTransfer```  
+
+**Permission:** SPOT_TRANSFER_READ
 
 **Weight(IP):** 1
 
@@ -1434,7 +1448,9 @@ post /api/v3/sub-account/futures
   }
 ```
 
-- **POST** ```/api/v3/sub-account/futures```
+- **POST** ```/api/v3/sub-account/futures```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1476,7 +1492,9 @@ post /api/v3/sub-account/margin
 }
 ```
 
-- **POST** ```/api/v3/sub-account/margin```
+- **POST** ```/api/v3/sub-account/margin```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -1508,7 +1526,9 @@ post /api/v3/sub-account/margin
 {}
 ```
 
-- **POST** ```/api/v3/order/test```
+- **POST** ```/api/v3/order/test```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1
 
@@ -1541,7 +1561,9 @@ POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&times
 }
 ```
 
-- **POST** ```/api/v3/order```
+- **POST** ```/api/v3/order```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1, **Weight(UID):** 1
 
@@ -1641,7 +1663,9 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 }
 ```
 
-- **POST** ```/api/v3/batchOrders```
+- **POST** ```/api/v3/batchOrders```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1,**Weight(UID):** 1
 
@@ -1695,7 +1719,9 @@ Response
 }
 ```
 
-- **DELETE** ```/api/v3/order```
+- **DELETE** ```/api/v3/order```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1
 
@@ -1770,7 +1796,9 @@ Response:
 ]
 ```
 
-- **DELETE** ```/api/v3/openOrders```
+- **DELETE** ```/api/v3/openOrders```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1
 
@@ -1828,7 +1856,9 @@ Response:
 }
 ```
 
-- **GET** ```/api/v3/order```
+- **GET** ```/api/v3/order```  
+
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 2
 
@@ -1895,7 +1925,9 @@ Response:
 ]
 ```
 
-- **GET** ```/api/v3/openOrders```
+- **GET** ```/api/v3/openOrders```  
+
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 3
 
@@ -1960,7 +1992,9 @@ Response:
 ]
 ```
 
-- **GET** ```/api/v3/allOrders```
+- **GET** ```/api/v3/allOrders```  
+
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 10
 
@@ -2028,7 +2062,9 @@ Response:
 }
 ```
 
-- **GET** ```/api/v3/account```
+- **GET** ```/api/v3/account```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -2087,7 +2123,9 @@ Response:
 ]
 ```
 
-- **GET** ```/api/v3/myTrades```
+- **GET** ```/api/v3/myTrades```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -2147,7 +2185,9 @@ post api/v3/mxDeduct/enable
 ```
 
 
-- **POST** ```api/v3/mxDeduct/enable```
+- **POST** ```api/v3/mxDeduct/enable```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 1
 
@@ -2189,7 +2229,9 @@ get api/v3/mxDeduct/enable
 }
 ```
 
-- **GET** ```api/v3/mxDeduct/enableh```
+- **GET** ```api/v3/mxDeduct/enable```  
+
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 1
 
@@ -2264,7 +2306,9 @@ Get /api/v3/capital/config/getall
 ]
 ```
 
-- **GET** ```/api/v3/capital/config/getall```
+- **GET** ```/api/v3/capital/config/getall```  
+
+**Permission:** SPOT_WITHDRAW_READ
 
 **Weight(IP):** 10
 
@@ -2308,7 +2352,9 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 ```
 
 
-- **POST** ```/api/v3/capital/withdraw/apply```
+- **POST** ```/api/v3/capital/withdraw/apply```  
+
+**Permission:** SPOT_WITHDRAW_WRITE
 
 **Weight(IP):** 1
 
@@ -2362,7 +2408,9 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 ```
 
 
-- **GET** ```/api/v3/capital/deposit/hisrec```
+- **GET** ```/api/v3/capital/deposit/hisrec```  
+
+**Permission:** SPOT_WITHDRAW_READ
 
 **Weight(IP):** 1
 
@@ -2426,7 +2474,9 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
 ```
 
 
-- **GET** ```/api/v3/capital/withdraw/history```
+- **GET** ```/api/v3/capital/withdraw/history```  
+
+**Permission:** SPOT_WITHDRAW_READ
 
 **Weight(IP):** 1
 
@@ -2491,7 +2541,9 @@ post /api/v3/capital/deposit/address?coin=EOS&network=EOS&timestamp={{timestamp}
 ```
 
 
-- **POST** ```/api/v3/capital/deposit/address```
+- **POST** ```/api/v3/capital/deposit/address```  
+
+**Permission:** SPOT_WITHDRAW_WRITE
 
 **Weight(IP):** 1
 
@@ -2546,7 +2598,9 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 ```
 
 
-- **GET** ```/api/v3/capital/deposit/address```
+- **GET** ```/api/v3/capital/deposit/address```  
+
+**Permission:** SPOT_WITHDRAW_READ
 
 **Weight(IP):** 10
 
@@ -2586,7 +2640,9 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 ```
 
 
-- **POST** ```/api/v3/capital/transfer```
+- **POST** ```/api/v3/capital/transfer```  
+
+**Permission:** SPOT_TRANSFER_WRITE
 
 **Weight(IP):** 1
 
@@ -2653,7 +2709,9 @@ get /api/v3/capital/transfer
 ```
 
 
-- **GET** ```/api/v3/capital/transfer```
+- **GET** ```/api/v3/capital/transfer```  
+
+**Permission:** SPOT_TRANSFER_READ
 
 **Weight(IP):** 1
 
@@ -2709,7 +2767,9 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ```
 
 
-- **GET** ```/api/v3/capital/convert/list```
+- **GET** ```/api/v3/capital/convert/list```  
+
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 1
 
@@ -2743,7 +2803,9 @@ post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signa
 } 
 ```
 
-- **POST** ```/api/v3/capital/convert```
+- **POST** ```/api/v3/capital/convert```  
+
+**Permission:** SPOT_DEAL_WRITE
 
 **Weight(IP):** 10
 
@@ -2819,7 +2881,9 @@ get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signa
 ```
 
 
-- **GET** ```/api/v3/capital/convert```
+- **GET** ```/api/v3/capital/convert```  
+
+**Permission:** SPOT_DEAL_READ
 
 **Weight(IP):** 1
 
@@ -2924,7 +2988,9 @@ POST /api/v3/margin/tradeMode?tradeMode=0&symbol=BTCUSDT&timestamp={{timestamp}}
 
 **Http Request**
 
-- **POST** ```/api/v3/margin/tradeMode```
+- **POST** ```/api/v3/margin/tradeMode```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_WRITE
 
 **Weight(IP):** 1
 
@@ -2969,7 +3035,9 @@ POST /api/v3/margin/order?symbol=BTCUSDT&side=BUY&type=LIMIT&quantity=0.0003&pri
 ```
 **Http Request**
 
-- **POST** ```/api/v3/margin/order```
+- **POST** ```/api/v3/margin/order```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_WRITE
 
 **Weight(UID):** 6
 
@@ -3017,7 +3085,9 @@ post /api/v3/margin/loan?asset=BTC&amount=0.002&symbol=BTCUSDT&timestamp={{times
 ```
 **Http Request**
 
-- **POST** ```/api/v3/margin/loan```
+- **POST** ```/api/v3/margin/loan```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_WRITE
 
 **Weight(UID):** 1000
 
@@ -3063,7 +3133,9 @@ post /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&isAllRepay=true&borrowId=7467
 ```
 **Http Request**
 
-- **POST** ```/api/v3/margin/repay```
+- **POST** ```/api/v3/margin/repay```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_WRITE
 
 **Weight(UID):** 1000
 
@@ -3124,7 +3196,9 @@ delete /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 ```
 **Http Request**
 
-- **DELETE** ```/api/v3/margin/openOrders```
+- **DELETE** ```/api/v3/margin/openOrders```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_WRITE
 
 **Weight(IP):** 1
 
@@ -3189,7 +3263,9 @@ delete /api/v3/margin/order?symbol=BTCUSDT&orderId=746777776866070528&timestamp=
 ```
 **Http Request**
 
-- **DELETE** ```/api/v3/margin/order```
+- **DELETE** ```/api/v3/margin/order```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_WRITE
 
 **Weight(IP):** 10
 
@@ -3254,7 +3330,9 @@ get /api/v3/margin/loan?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}}&signatu
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/loan```
+- **GET** ```/api/v3/margin/loan```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -3326,7 +3404,9 @@ get /api/v3/margin/allOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/allOrders```
+- **GET** ```/api/v3/margin/allOrders```  
+
+**Permission:** ISOLATED_MARGIN_DEAL_READ
 
 **Weight(IP):** 10
 
@@ -3385,7 +3465,9 @@ get /api/v3/margin/myTrades?symbol=BTCUSDT&timestamp={{timestamp}}&signature={{s
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/myTrades```
+- **GET** ```/api/v3/margin/myTrades```  
+
+**Permission:** ISOLATED_MARGIN_DEAL_READ
 
 **Weight(IP):** 10
 
@@ -3460,7 +3542,9 @@ get /api/v3/margin/openOrders?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/openOrders```
+- **GET** ```/api/v3/margin/openOrders```  
+
+**Permission:** ISOLATED_MARGIN_DEAL_READ
 
 **Weight(IP):** 3
 
@@ -3514,7 +3598,10 @@ get /api/v3/margin/maxTransferable?asset=BTC&symbol=BTCUSDT&timestamp={{timestam
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/maxTransferable```
+- **GET** ```/api/v3/margin/maxTransferable```  
+
+
+ **Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 50
 
@@ -3554,7 +3641,9 @@ get /api/v3/margin/priceIndex?symbol=BTCUSDT&timestamp={{timestamp}}&signature={
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/priceIndex```
+- **GET** ```/api/v3/margin/priceIndex```  
+
+**Permission:**  ISOLATED_MARGIN_DEAL_READ
 
 **Weight(IP):** 10
 
@@ -3608,7 +3697,9 @@ get /api/v3/margin/order?symbol=BTCUSDT&orderId=746779360689786880&timestamp={{t
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/order```
+- **GET** ```/api/v3/margin/order```  
+
+**Permission:** ISOLATED_MARGIN_DEAL_READ
 
 **Weight(IP):** 10
 
@@ -3700,7 +3791,9 @@ get /api/v3/margin/isolated/account?symbols=BTCUSDT&timestamp={{timestamp}}&sign
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/isolated/account```
+- **GET** ```/api/v3/margin/isolated/account```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -3788,7 +3881,9 @@ get /api/v3/margin/maxBorrowable?asset=BTC&symbol=BTCUSDT&timestamp={{timestamp}
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/maxBorrowable```
+- **GET** ```/api/v3/margin/maxBorrowable```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 50
 
@@ -3826,7 +3921,9 @@ get /api/v3/margin/repay?asset=BTC&symbol=BTCUSDT&tranId=2597392&timestamp={{tim
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/repay```
+- **GET** ```/api/v3/margin/repay```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -3885,7 +3982,9 @@ get /api/v3/margin/isolated/pair?symbol=BTCUSDT&timestamp={{timestamp}}&signatur
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/isolated/pair```
+- **GET** ```/api/v3/margin/isolated/pair```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 10
 
@@ -3925,7 +4024,9 @@ get /api/v3/margin/forceLiquidationRec?symbol=BTCUSDT&timestamp={{timestamp}}&si
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/forceLiquidationRec```
+- **GET** ```/api/v3/margin/forceLiquidationRec```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -3995,7 +4096,9 @@ get /api/v3/margin/isolatedMarginData?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/isolatedMarginData```
+- **GET** ```/api/v3/margin/isolatedMarginData```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -4045,7 +4148,9 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 ```
 **Http Request**
 
-- **GET** ```/api/v3/margin/isolatedMarginTier```
+- **GET** ```/api/v3/margin/isolatedMarginTier```  
+
+**Permission:** ISOLATED_MARGIN_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -4815,7 +4920,9 @@ get /api/v3/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
 ```
 **Http Request**
 
-- **GET** ```/api/v3/rebate/taxQuery```
+- **GET** ```/api/v3/rebate/taxQuery```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -4885,7 +4992,9 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 ```
 **Http Request**
 
-- **GET** ```/api/v3/rebate/detail```
+- **GET** ```/api/v3/rebate/detail```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -4957,7 +5066,9 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 ```
 **Http Request**
 
-- **GET** ```/api/v3/rebate/detail/kickback```
+- **GET** ```/api/v3/rebate/detail/kickback```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -5004,7 +5115,9 @@ get /api/v3/rebate/referCode?timestamp={{timestamp}}&signature={{signature}}
 ```
 **HTTP Request**
 
-- **GET** ```/api/v3/rebate/referCode```
+- **GET** ```/api/v3/rebate/referCode```  
+
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
