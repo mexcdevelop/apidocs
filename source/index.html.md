@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-03-07**
+
+- ws新增频道：现货账户信息推送
+
 ## **2023-02-13**
 
 - 新增获取小额资产可兑换列表、小额资产兑换和查询小额资产兑换历史接口
@@ -4822,7 +4826,55 @@ NONE
 
 | 参数名    | 数据类型 | 是否必需 | 说明 |
 | :-------- | :------- | :------- | :--- |
-| listenKey | string   | 是      |      |
+| listenKey | string   | 是      |      |  
+
+## 现货账户信息(实时)  
+在订阅成功后，每当账户余额发生变动或可用余额发生变动时，服务器将推送账户资产的更新。  
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+    "spot@private.account.v3.api"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+    "c": "spot@private.account.v3.api",
+    "d": {
+        "a": "USDT",
+        "c": 1678185928428,
+        "f": "302.185113007893322435",
+        "fd": "-4.990689704",
+        "l": "4.990689704",
+        "ld": "4.990689704",
+        "o": "ENTRUST_PLACE"
+    },
+    "t": 1678185928435
+}
+```
+
+**请求参数：** `spot@private.deals.v3.api`
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| d | json | 账户信息 |
+| > a | string | 资产名称 |
+| > c | long | 结算时间 |
+| > f | string | 可用余额 |
+| > fd | string | 可用变动金额 |
+| > l | string | 冻结余额 |
+| > ld | string | 冻结变动金额 |
+| > o | string | <a href="#account_position">变动类型</a>|
+| t | long | 事件时间 |
 
 ## 现货账户成交(实时)
 
@@ -5403,6 +5455,20 @@ get /api/v3/rebate/referCode?timestamp=1597026383085&signature=abc
 - 4h  4小时
 - 1d  1天
 - 1M  1月
+
+### <a id="account_position">变动类型</a>
+
+- WITHDRAW  提现
+- WITHDRAW_FEE 提现手续费
+- DEPOSIT 充值
+- DEPOSIT_FEE 充值手续费
+- ENTRUST 委托成交
+- ENTRUST_PLACE 下单
+- ENTRUST_CANCEL 撤单
+- TRADE_FEE 手续费
+- ENTRUST_UNFROZEN 订单冻结资金返还
+- SUGAR 空投
+- ETF_INDEX ETF下单
 
 
 
