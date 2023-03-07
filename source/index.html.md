@@ -4860,7 +4860,7 @@ NONE
 }
 ```
 
-**请求参数：** `spot@private.deals.v3.api`
+**请求参数：** `spot@private.account.v3.api`
 
 **返回参数:**
 
