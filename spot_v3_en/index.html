@@ -344,13 +344,16 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#2023-01-13" class="toc-h2 toc-link" data-title="2023-01-13"><strong>2023-01-13</strong></a>
+                    <a href="#2023-03-07" class="toc-h2 toc-link" data-title="2023-03-07"><strong>2023-03-07</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2023-02-13" class="toc-h2 toc-link" data-title="2023-02-13"><strong>2023-02-13</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2023-02-07" class="toc-h2 toc-link" data-title="2023-02-07"><strong>2023-02-07</strong></a>
                   </li>
                   <li>
                     <a href="#2023-01-06" class="toc-h2 toc-link" data-title="2023-01-06"><strong>2023-01-06</strong></a>
-                  </li>
-                  <li>
-                    <a href="#2023-01-06-2" class="toc-h2 toc-link" data-title="2023-01-06"><strong>2023-01-06</strong></a>
                   </li>
                   <li>
                     <a href="#2022-12-29" class="toc-h2 toc-link" data-title="2022-12-29"><strong>2022-12-29</strong></a>
@@ -736,6 +739,9 @@
                     <a href="#listen-key" class="toc-h2 toc-link" data-title="Listen Key">Listen Key</a>
                   </li>
                   <li>
+                    <a href="#spot-account-upadte" class="toc-h2 toc-link" data-title="Spot Account Upadte">Spot Account Upadte</a>
+                  </li>
+                  <li>
                     <a href="#spot-account-deals" class="toc-h2 toc-link" data-title="Spot Account Deals">Spot Account Deals</a>
                   </li>
                   <li>
@@ -831,15 +837,19 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-01-13'><strong>2023-01-13</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-03-07'><strong>2023-03-07</strong></h2>
+<ul>
+<li>ws add channel:Account Update</li>
+</ul>
+<h2 id='2023-02-13'><strong>2023-02-13</strong></h2>
 <ul>
 <li>Add:Get Assets That Can Be Converted Into MX,Dust Transfer,Dust Log endpoints</li>
 </ul>
-<h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
+<h2 id='2023-02-07'><strong>2023-02-07</strong></h2>
 <ul>
 <li>ws add channel:Individual Symbol Book Ticker Streams</li>
 </ul>
-<h2 id='2023-01-06-2'><strong>2023-01-06</strong></h2>
+<h2 id='2023-01-06'><strong>2023-01-06</strong></h2>
 <ul>
 <li><a href="https://mxcdevelop.github.io/apidocs/spot_v3_en/#limits">Update Limits Info</a></li>
 </ul>
@@ -9793,6 +9803,93 @@ get /api/v3/margin/trigerOrder
 </ul>
 
 <p>Close out a user data stream.</p>
+<h2 id='spot-account-upadte'>Spot Account Upadte</h2>
+<p>The server will push an update of the account assets when the account balance changes.  </p>
+
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+    "spot@private.account.v3.api"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c": "spot@private.account.v3.api",
+    "d": {
+        "a": "USDT",
+        "c": 1678185928428,
+        "f": "302.185113007893322435",
+        "fd": "-4.990689704",
+        "l": "4.990689704",
+        "ld": "4.990689704",
+        "o": "ENTRUST_PLACE"
+    },
+    "t": 1678185928435
+}
+</code></pre></div>
+<p><strong>Request:</strong> <code>spot@private.account.v3.api</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">account updates</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; c</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">change time</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; f</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">free balance</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; fd</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">free changed amount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">frozen amount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; ld</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">frozen changed amount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; o</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"><a href="#account_position">changed type</a></td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
 <h2 id='spot-account-deals'>Spot Account Deals</h2>
 <blockquote>
 <p><strong>request:</strong></p>
@@ -10916,6 +11013,20 @@ get /api/v3/margin/trigerOrder
 <li>4h  4 hour</li>
 <li>1d  1 day</li>
 <li>1M  1 month</li>
+</ul>
+<h3 id='changed-type'><a id="account_position">changed type</a></h3>
+<ul>
+<li>WITHDRAW  withdraw</li>
+<li>WITHDRAW_FEE withdraw fee</li>
+<li>DEPOSIT deposit</li>
+<li>DEPOSIT_FEE deposit fee</li>
+<li>ENTRUST deal</li>
+<li>ENTRUST_PLACE place order</li>
+<li>ENTRUST_CANCEL cancel order</li>
+<li>TRADE_FEE trade fee</li>
+<li>ENTRUST_UNFROZEN return frozen order funds</li>
+<li>SUGAR airdrop</li>
+<li>ETF_INDEX ETF place order</li>
 </ul>
 
       </div>
