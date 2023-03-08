@@ -70,11 +70,15 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
-## **2023-01-13**
+## **2023-03-07**
+
+- ws add channel:Account Update
+
+## **2023-02-13**
 
 - Add:Get Assets That Can Be Converted Into MX,Dust Transfer,Dust Log endpoints
 
-## **2023-01-06**
+## **2023-02-07**
 
 - ws add channel:Individual Symbol Book Ticker Streams
 
@@ -4597,6 +4601,57 @@ Keepalive a user data stream to prevent a time out. User data streams will close
  Close out a user data stream.
 
 
+## Spot Account Upadte  
+
+The server will push an update of the account assets when the account balance changes.  
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+    "spot@private.account.v3.api"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+    "c": "spot@private.account.v3.api",
+    "d": {
+        "a": "USDT",
+        "c": 1678185928428,
+        "f": "302.185113007893322435",
+        "fd": "-4.990689704",
+        "l": "4.990689704",
+        "ld": "4.990689704",
+        "o": "ENTRUST_PLACE"
+    },
+    "t": 1678185928435
+}
+```
+
+**Request:** `spot@private.account.v3.api`
+
+**Response:**
+
+| Name      | Type   | Description |
+| :-------- | :----- | :--- |
+| d | json | account updates |
+| > a | string | asset |
+| > c | long | change time |
+| > f | string | free balance |
+| > fd | string | free changed amount |
+| > l | string | frozen amount |
+| > ld | string | frozen changed amount|
+| > o | string | <a href="#account_position">changed type</a>|
+| t | long | eventTime |
+
+
+
 ## Spot Account Deals
 
 >**request:**
@@ -5172,3 +5227,16 @@ get /api/v3/rebate/referCode?timestamp={{timestamp}}&signature={{signature}}
 - 1d  1 day
 - 1M  1 month
 
+### <a id="account_position">changed type</a>
+
+- WITHDRAW  withdraw
+- WITHDRAW_FEE withdraw fee
+- DEPOSIT deposit
+- DEPOSIT_FEE deposit fee
+- ENTRUST deal
+- ENTRUST_PLACE place order
+- ENTRUST_CANCEL cancel order
+- TRADE_FEE trade fee
+- ENTRUST_UNFROZEN return frozen order funds
+- SUGAR airdrop
+- ETF_INDEX ETF place order
