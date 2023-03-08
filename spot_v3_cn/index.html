@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-03-07" class="toc-h2 toc-link" data-title="2023-03-07"><strong>2023-03-07</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-02-13" class="toc-h2 toc-link" data-title="2023-02-13"><strong>2023-02-13</strong></a>
                   </li>
                   <li>
@@ -745,6 +748,9 @@
                     <a href="#listen-key" class="toc-h2 toc-link" data-title="Listen Key">Listen Key</a>
                   </li>
                   <li>
+                    <a href="#e2afeb0acf" class="toc-h2 toc-link" data-title="现货账户信息(实时)">现货账户信息(实时)</a>
+                  </li>
+                  <li>
                     <a href="#df446b56c7" class="toc-h2 toc-link" data-title="现货账户成交(实时)">现货账户成交(实时)</a>
                   </li>
                   <li>
@@ -842,7 +848,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-02-13'><strong>2023-02-13</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-03-07'><strong>2023-03-07</strong></h2>
+<ul>
+<li>ws新增频道：现货账户信息推送</li>
+</ul>
+<h2 id='2023-02-13'><strong>2023-02-13</strong></h2>
 <ul>
 <li>新增获取小额资产可兑换列表、小额资产兑换和查询小额资产兑换历史接口</li>
 </ul>
@@ -10308,6 +10318,93 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
+<h2 id='e2afeb0acf'>现货账户信息(实时)</h2>
+<p>在订阅成功后，每当账户余额发生变动或可用余额发生变动时，服务器将推送账户资产的更新。  </p>
+
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+    "spot@private.account.v3.api"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "c": "spot@private.account.v3.api",
+    "d": {
+        "a": "USDT",
+        "c": 1678185928428,
+        "f": "302.185113007893322435",
+        "fd": "-4.990689704",
+        "l": "4.990689704",
+        "ld": "4.990689704",
+        "o": "ENTRUST_PLACE"
+    },
+    "t": 1678185928435
+}
+</code></pre></div>
+<p><strong>请求参数：</strong> <code>spot@private.account.v3.api</code></p>
+
+<p><strong>返回参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">账户信息</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">资产名称</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; c</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">结算时间</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; f</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">可用余额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; fd</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">可用变动金额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">冻结余额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; ld</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">冻结变动金额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; o</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left"><a href="#account_position">变动类型</a></td>
+</tr>
+<tr>
+<td style="text-align: left">t</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">事件时间</td>
+</tr>
+</tbody></table>
 <h2 id='df446b56c7'>现货账户成交(实时)</h2>
 <blockquote>
 <p><strong>request:</strong></p>
@@ -11431,6 +11528,20 @@ get /api/v3/margin/trigerOrder
 <li>4h  4小时</li>
 <li>1d  1天</li>
 <li>1M  1月</li>
+</ul>
+<h3 id='1601926999'><a id="account_position">变动类型</a></h3>
+<ul>
+<li>WITHDRAW  提现</li>
+<li>WITHDRAW_FEE 提现手续费</li>
+<li>DEPOSIT 充值</li>
+<li>DEPOSIT_FEE 充值手续费</li>
+<li>ENTRUST 委托成交</li>
+<li>ENTRUST_PLACE 下单</li>
+<li>ENTRUST_CANCEL 撤单</li>
+<li>TRADE_FEE 手续费</li>
+<li>ENTRUST_UNFROZEN 订单冻结资金返还</li>
+<li>SUGAR 空投</li>
+<li>ETF_INDEX ETF下单</li>
 </ul>
 
       </div>
