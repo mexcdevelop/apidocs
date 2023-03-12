@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-03-12**
+
+- 新增：查询API交易对、用户API交易对、取消提币和获取提币地址接口
+
 ## **2023-03-07**
 
 - ws新增频道：现货账户信息推送
@@ -630,6 +634,7 @@ NONE
 **返回参数**
 
 NONE
+
 ## 获取服务器时间
 
 获得服务器当前时间戳
@@ -656,6 +661,48 @@ GET /api/v3/time
 **请求参数**
 
 NONE
+
+
+## API交易对
+
+获取平台可API交易的交易对
+
+> 请求示例
+
+```
+GET /api/v3/defaultSymbols
+```
+
+> 返回示例
+
+```json
+{
+    "code": 200,
+    "data": [
+        "GENE1USDT",
+        "SNTUSDT",
+        "SQUAWKUSDT",
+        "HEGICUSDT",
+        "GUMUSDT"
+    ],
+    "msg": null
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/defaultSymbols ```
+  
+**权重(IP):** 1
+
+**请求参数**
+
+NONE
+
+**返回参数**
+
+| 参数名       | 数据类型 | 说明                       |
+| :------------ | :-------- |:-------------------------|
+| symbol | string | 返回支持API交易的交易对      |
 
 
 ## 交易规范信息
@@ -1676,6 +1723,50 @@ post /api/v3/sub-account/margin
 
 # 现货账户和交易接口
 
+## 用户API交易对
+
+获取用户可API交易的交易对
+
+> 请求示例
+
+```
+GET /api/v3/selfSymbols?timestamp={{timestamp}}&signature={{signature}}
+```
+
+> 返回示例
+
+```json
+{
+    "code": 200,
+    "data": [
+        "GENE1USDT",
+        "SNTUSDT",
+        "SQUAWKUSDT",
+        "HEGICUSDT",
+        "GUMUSDT"
+    ],
+    "msg": null
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/selfSymbols ```
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+NONE
+
+**返回参数**
+
+| 参数名       | 数据类型 | 说明                       |
+| :------------ | :-------- |:-------------------------|
+| symbol | string | 返回支持API交易的交易对      |
+
+
 ## 测试下单
 用于测试订单请求，但不会提交到撮合引擎
 
@@ -2599,6 +2690,40 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 | :------------ | :-------- | 
 |id|提币ID|
 
+## 取消提币
+
+> 请求示例
+
+```
+delete /api/v3/capital/withdraw?id=ca7bd51895134fb5bd749f1cf875b8af&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "id": "ca7bd51895134fb5bd749f1cf875b8af"
+}
+```
+**HTTP请求**
+
+- **DELETE** ```/api/v3/capital/withdraw```  
+
+**接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须 | 说明               | 
+| :------ | :-------- |:-----|:-----------------|
+|id|string| 是    | 提币ID              |
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|id|提币ID|
+
 ## 获取充值历史(支持多网络)
 
 > 请求示例
@@ -2832,6 +2957,69 @@ get /api/v3/capital/deposit/address?coin=USDT&timestamp={{timestamp}}&signature=
 |coin|币种|
 |memo|memo|
 |network|网络|
+
+## 获取提币地址 (支持多网络)
+
+> 请求示例
+
+```
+get /api/v3/capital/withdraw/address?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "data": [
+        {
+            "coin": "USDT",
+            "network": "TRC20",
+            "address": "TArGWdTApuuZtiWMjupXqbZqQYsBTy126o",
+            "addressTag": "test",
+            "memo": null
+        },
+        {
+            "coin": "USDT",
+            "network": "BEP20(BSC)",
+            "address": "0xa82898C70BeB5E1b1621fdA62fD17Ba27227BBC5",
+            "addressTag": "usdt",
+            "memo": null
+        }
+    ],
+    "totalRecords": 2,
+    "page": 1,
+    "totalPageNum": 1
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/withdraw/address```  
+
+**接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
+
+**权重(IP):** 10
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|coin|string|否|币种|
+|page|number|否|页数，默认1|
+|limit|number|否|条数|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- |
+|coin|币种|
+|network|链名称|
+|address|地址|
+|addressTag|地址标签|
+|memo|memo|
+|totalRecords|总条数|
+|totalPageNum|总页数|
+|page|当前页|
 
 ## 用户万向划转【母母账户】
 
