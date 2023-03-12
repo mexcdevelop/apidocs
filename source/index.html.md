@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-03-12**
+
+- Add:API default symbol,User API default symbol,cancel withdraw,Deposit Address endpoints.
+
 ## **2023-03-07**
 
 - ws add channel:Account Update
@@ -634,6 +638,45 @@ NONE
 Parameter:
 
 NONE
+
+## API default symbol
+
+> Request
+
+```
+GET /api/v3/defaultSymbols
+```
+
+> Response
+
+```json
+{
+    "code": 200,
+    "data": [
+        "GENE1USDT",
+        "SNTUSDT",
+        "SQUAWKUSDT",
+        "HEGICUSDT",
+        "GUMUSDT"
+    ],
+    "msg": null
+}
+```
+
+
+- **GET** ```/api/v3/defaultSymbols ```
+  
+**Weight(IP):** 1
+
+**Request**
+
+NONE
+
+**Response**
+
+| Name       | Type | Description                       |
+| :------------ | :-------- |:-------------------------|
+| symbol | string | symbol  |
 
 ## Exchange Information
 
@@ -1522,6 +1565,49 @@ post /api/v3/sub-account/margin
 
 # Spot Account/Trade
 
+## User API default symbol
+
+> Request
+
+```
+GET /api/v3/selfSymbols?timestamp={{timestamp}}&signature={{signature}}
+```
+
+> Response
+
+```json
+{
+    "code": 200,
+    "data": [
+        "GENE1USDT",
+        "SNTUSDT",
+        "SQUAWKUSDT",
+        "HEGICUSDT",
+        "GUMUSDT"
+    ],
+    "msg": null
+}
+```
+
+
+- **GET** ```/api/v3/selfSymbols ```
+
+**Permission:**  SPOT_ACCOUNT_R
+
+**Weight(IP):** 1
+
+**Request**
+
+NONE
+
+**Response**
+
+| Name       | Type | Description                       |
+| :------------ | :-------- |:-------------------------|
+| symbol | string | api trade symbol      |
+
+
+
 ## Test New Order
 
 > Response
@@ -2385,6 +2471,40 @@ Response:
 | :------------ | :-------- | 
 |id|withdraw ID|
 
+## Cancel withdraw
+
+> Request
+
+```
+delete /api/v3/capital/withdraw?id=ca7bd51895134fb5bd749f1cf875b8af&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+{
+    "id": "ca7bd51895134fb5bd749f1cf875b8af"
+}
+```
+
+
+- **DELETE** ```/api/v3/capital/withdraw```  
+
+**Permission:** SPOT_WITHDRAW_W
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name | Type| Mandatory | Description               | 
+| :------ | :-------- |:-----|:-----------------|
+|id|string| Yes    | withdraw id              |
+
+**Response**
+
+| Name | Description  |
+| :------------ | :-------- | 
+|id|withdraw id|
+
 ## Deposit History(supporting network) 
 
 > Request
@@ -2624,7 +2744,70 @@ Response:
 |address|deposit address|
 |coin|coin |
 |memo|memo|
+|network|network|  
+
+## Deposit Address (supporting network)
+
+> Request
+
+```
+get /api/v3/capital/withdraw/address?coin=USDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+{
+    "data": [
+        {
+            "coin": "USDT",
+            "network": "TRC20",
+            "address": "TArGWdTApuuZtiWMjupXqbZqQYsBTy126o",
+            "addressTag": "test",
+            "memo": null
+        },
+        {
+            "coin": "USDT",
+            "network": "BEP20(BSC)",
+            "address": "0xa82898C70BeB5E1b1621fdA62fD17Ba27227BBC5",
+            "addressTag": "usdt",
+            "memo": null
+        }
+    ],
+    "totalRecords": 2,
+    "page": 1,
+    "totalPageNum": 1
+}
+```
+
+
+- **GET** ```/api/v3/capital/withdraw/address```  
+
+**Permission:**  SPOT_WITHDRAW_R
+
+**Weight(IP):** 10
+
+**Request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|coin|string|No|coin|
+|page|number|No|page,default 1|
+|limit|number|No|limit for per page|
+|timestamp|string|Yes|timestamp|
+|signature|string|Yes|signature|
+
+**Response**
+
+| Name | Description  |
+| :------------ | :-------- |
+|coin|coin|
 |network|network|
+|address|address|
+|addressTag|addressTag|
+|memo|memo|
+|totalRecords|totalRecords|
+|totalPageNum|totalPageNum|
+|page|page|
 
 ## User Universal Transfer
 
