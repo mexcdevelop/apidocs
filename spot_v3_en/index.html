@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-03-12" class="toc-h2 toc-link" data-title="2023-03-12"><strong>2023-03-12</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-03-07" class="toc-h2 toc-link" data-title="2023-03-07"><strong>2023-03-07</strong></a>
                   </li>
                   <li>
@@ -497,6 +500,9 @@
                     <a href="#check-server-time" class="toc-h2 toc-link" data-title="Check Server Time">Check Server Time</a>
                   </li>
                   <li>
+                    <a href="#api-default-symbol" class="toc-h2 toc-link" data-title="API default symbol">API default symbol</a>
+                  </li>
+                  <li>
                     <a href="#exchange-information" class="toc-h2 toc-link" data-title="Exchange Information">Exchange Information</a>
                   </li>
                   <li>
@@ -561,6 +567,9 @@
             <a href="#spot-account-trade" class="toc-h1 toc-link" data-title="Spot Account/Trade">Spot Account/Trade</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#user-api-default-symbol" class="toc-h2 toc-link" data-title="User API default symbol">User API default symbol</a>
+                  </li>
+                  <li>
                     <a href="#test-new-order" class="toc-h2 toc-link" data-title="Test New Order">Test New Order</a>
                   </li>
                   <li>
@@ -608,6 +617,9 @@
                     <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
                   </li>
                   <li>
+                    <a href="#cancel-withdraw" class="toc-h2 toc-link" data-title="Cancel withdraw">Cancel withdraw</a>
+                  </li>
+                  <li>
                     <a href="#deposit-history-supporting-network" class="toc-h2 toc-link" data-title="Deposit History(supporting network)">Deposit History(supporting network)</a>
                   </li>
                   <li>
@@ -618,6 +630,9 @@
                   </li>
                   <li>
                     <a href="#deposit-address-supporting-network" class="toc-h2 toc-link" data-title="Deposit Address (supporting network)">Deposit Address (supporting network)</a>
+                  </li>
+                  <li>
+                    <a href="#deposit-address-supporting-network-2" class="toc-h2 toc-link" data-title="Deposit Address (supporting network)">Deposit Address (supporting network)</a>
                   </li>
                   <li>
                     <a href="#user-universal-transfer" class="toc-h2 toc-link" data-title="User Universal Transfer">User Universal Transfer</a>
@@ -837,7 +852,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-03-07'><strong>2023-03-07</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-03-12'><strong>2023-03-12</strong></h2>
+<ul>
+<li>Add:API default symbol,User API default symbol,cancel withdraw,Deposit Address endpoints.</li>
+</ul>
+<h2 id='2023-03-07'><strong>2023-03-07</strong></h2>
 <ul>
 <li>ws add channel:Account Update</li>
 </ul>
@@ -1744,6 +1763,52 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <p>Parameter:</p>
 
 <p>NONE</p>
+<h2 id='api-default-symbol'>API default symbol</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/defaultSymbols
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"GENE1USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SNTUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SQUAWKUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"HEGICUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GUMUSDT"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/defaultSymbols</code></li>
+</ul>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<p>NONE</p>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+</tbody></table>
 <h2 id='exchange-information'>Exchange Information</h2>
 <blockquote>
 <p>Response</p>
@@ -3387,7 +3452,55 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">response time</td>
 </tr>
 </tbody></table>
-<h1 id='spot-account-trade'>Spot Account/Trade</h1><h2 id='test-new-order'>Test New Order</h2>
+<h1 id='spot-account-trade'>Spot Account/Trade</h1><h2 id='user-api-default-symbol'>User API default symbol</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/selfSymbols?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"GENE1USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SNTUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SQUAWKUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"HEGICUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GUMUSDT"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/selfSymbols</code></li>
+</ul>
+
+<p><strong>Permission:</strong>  SPOT_ACCOUNT_R</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<p>NONE</p>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">api trade symbol</td>
+</tr>
+</tbody></table>
+<h2 id='test-new-order'>Test New Order</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -5112,6 +5225,58 @@ Response:</li>
 <td style="text-align: left">withdraw ID</td>
 </tr>
 </tbody></table>
+<h2 id='cancel-withdraw'>Cancel withdraw</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/capital/withdraw?id=ca7bd51895134fb5bd749f1cf875b8af&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bd51895134fb5bd749f1cf875b8af"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>DELETE</strong> <code>/api/v3/capital/withdraw</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_W</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">withdraw id</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">withdraw id</td>
+</tr>
+</tbody></table>
 <h2 id='deposit-history-supporting-network'>Deposit History(supporting network)</h2>
 <blockquote>
 <p>Request</p>
@@ -5598,6 +5763,128 @@ Response:</li>
 <tr>
 <td style="text-align: left">network</td>
 <td style="text-align: left">network</td>
+</tr>
+</tbody></table>
+<h2 id='deposit-address-supporting-network-2'>Deposit Address (supporting network)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/withdraw/address?coin=USDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRC20"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TArGWdTApuuZtiWMjupXqbZqQYsBTy126o"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"memo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEP20(BSC)"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xa82898C70BeB5E1b1621fdA62fD17Ba27227BBC5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"memo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/withdraw/address</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong>  SPOT_WITHDRAW_R</p>
+
+<p><strong>Weight(IP):</strong> 10</p>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">page,default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">limit for per page</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">network</td>
+</tr>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">address</td>
+</tr>
+<tr>
+<td style="text-align: left">addressTag</td>
+<td style="text-align: left">addressTag</td>
+</tr>
+<tr>
+<td style="text-align: left">memo</td>
+<td style="text-align: left">memo</td>
+</tr>
+<tr>
+<td style="text-align: left">totalRecords</td>
+<td style="text-align: left">totalRecords</td>
+</tr>
+<tr>
+<td style="text-align: left">totalPageNum</td>
+<td style="text-align: left">totalPageNum</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">page</td>
 </tr>
 </tbody></table>
 <h2 id='user-universal-transfer'>User Universal Transfer</h2>
