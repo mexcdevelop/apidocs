@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-03-12" class="toc-h2 toc-link" data-title="2023-03-12"><strong>2023-03-12</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-03-07" class="toc-h2 toc-link" data-title="2023-03-07"><strong>2023-03-07</strong></a>
                   </li>
                   <li>
@@ -503,6 +506,9 @@
                     <a href="#3f1907847c" class="toc-h2 toc-link" data-title="获取服务器时间">获取服务器时间</a>
                   </li>
                   <li>
+                    <a href="#api-2" class="toc-h2 toc-link" data-title="API交易对">API交易对</a>
+                  </li>
+                  <li>
                     <a href="#e7746f7d60" class="toc-h2 toc-link" data-title="交易规范信息">交易规范信息</a>
                   </li>
                   <li>
@@ -567,6 +573,9 @@
             <a href="#c15d2e6b39" class="toc-h1 toc-link" data-title="现货账户和交易接口">现货账户和交易接口</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#api-3" class="toc-h2 toc-link" data-title="用户API交易对">用户API交易对</a>
+                  </li>
+                  <li>
                     <a href="#711c4ca31b" class="toc-h2 toc-link" data-title="测试下单">测试下单</a>
                   </li>
                   <li>
@@ -614,6 +623,9 @@
                     <a href="#096be69702" class="toc-h2 toc-link" data-title="提币">提币</a>
                   </li>
                   <li>
+                    <a href="#534d29990b" class="toc-h2 toc-link" data-title="取消提币">取消提币</a>
+                  </li>
+                  <li>
                     <a href="#70f3430304" class="toc-h2 toc-link" data-title="获取充值历史(支持多网络)">获取充值历史(支持多网络)</a>
                   </li>
                   <li>
@@ -624,6 +636,9 @@
                   </li>
                   <li>
                     <a href="#aba7aa7a08" class="toc-h2 toc-link" data-title="获取充值地址 (支持多网络)">获取充值地址 (支持多网络)</a>
+                  </li>
+                  <li>
+                    <a href="#18362c3031" class="toc-h2 toc-link" data-title="获取提币地址 (支持多网络)">获取提币地址 (支持多网络)</a>
                   </li>
                   <li>
                     <a href="#2e7fe13169" class="toc-h2 toc-link" data-title="用户万向划转【母母账户】">用户万向划转【母母账户】</a>
@@ -782,7 +797,7 @@
               </ul>
           </li>
           <li>
-            <a href="#api-2" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
+            <a href="#api-4" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#8c6d51826c" class="toc-h2 toc-link" data-title="枚举定义">枚举定义</a>
@@ -848,7 +863,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-03-07'><strong>2023-03-07</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-03-12'><strong>2023-03-12</strong></h2>
+<ul>
+<li>新增：查询API交易对、用户API交易对、取消提币和获取提币地址接口</li>
+</ul>
+<h2 id='2023-03-07'><strong>2023-03-07</strong></h2>
 <ul>
 <li>ws新增频道：现货账户信息推送</li>
 </ul>
@@ -1773,6 +1792,56 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <p><strong>请求参数</strong></p>
 
 <p>NONE</p>
+<h2 id='api-2'>API交易对</h2>
+<p>获取平台可API交易的交易对</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/defaultSymbols
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"GENE1USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SNTUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SQUAWKUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"HEGICUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GUMUSDT"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/defaultSymbols</code></li>
+</ul>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<p>NONE</p>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返回支持API交易的交易对</td>
+</tr>
+</tbody></table>
 <h2 id='e7746f7d60'>交易规范信息</h2>
 <p>获取交易规则和交易对信息。</p>
 
@@ -3730,7 +3799,59 @@ body
 <td style="text-align: left">返回时间</td>
 </tr>
 </tbody></table>
-<h1 id='c15d2e6b39'>现货账户和交易接口</h1><h2 id='711c4ca31b'>测试下单</h2>
+<h1 id='c15d2e6b39'>现货账户和交易接口</h1><h2 id='api-3'>用户API交易对</h2>
+<p>获取用户可API交易的交易对</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/selfSymbols?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"GENE1USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SNTUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SQUAWKUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"HEGICUSDT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GUMUSDT"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/selfSymbols</code></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<p>NONE</p>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返回支持API交易的交易对</td>
+</tr>
+</tbody></table>
+<h2 id='711c4ca31b'>测试下单</h2>
 <p>用于测试订单请求，但不会提交到撮合引擎</p>
 
 <blockquote>
@@ -5563,6 +5684,60 @@ body
 <td style="text-align: left">提币ID</td>
 </tr>
 </tbody></table>
+<h2 id='534d29990b'>取消提币</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>delete /api/v3/capital/withdraw?id=ca7bd51895134fb5bd749f1cf875b8af&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca7bd51895134fb5bd749f1cf875b8af"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>DELETE</strong> <code>/api/v3/capital/withdraw</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">提币ID</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">提币ID</td>
+</tr>
+</tbody></table>
 <h2 id='70f3430304'>获取充值历史(支持多网络)</h2>
 <blockquote>
 <p>请求示例</p>
@@ -6053,6 +6228,130 @@ body
 <tr>
 <td style="text-align: left">network</td>
 <td style="text-align: left">网络</td>
+</tr>
+</tbody></table>
+<h2 id='18362c3031'>获取提币地址 (支持多网络)</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/withdraw/address?coin=USDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRC20"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TArGWdTApuuZtiWMjupXqbZqQYsBTy126o"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"memo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEP20(BSC)"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0xa82898C70BeB5E1b1621fdA62fD17Ba27227BBC5"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"memo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/withdraw/address</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关读 / SPOT_WITHDRAW_R</p>
+
+<p><strong>权重(IP):</strong> 10</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">币种</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页数，默认1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">条数</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">币种</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">链名称</td>
+</tr>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">地址</td>
+</tr>
+<tr>
+<td style="text-align: left">addressTag</td>
+<td style="text-align: left">地址标签</td>
+</tr>
+<tr>
+<td style="text-align: left">memo</td>
+<td style="text-align: left">memo</td>
+</tr>
+<tr>
+<td style="text-align: left">totalRecords</td>
+<td style="text-align: left">总条数</td>
+</tr>
+<tr>
+<td style="text-align: left">totalPageNum</td>
+<td style="text-align: left">总页数</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">当前页</td>
 </tr>
 </tbody></table>
 <h2 id='2e7fe13169'>用户万向划转【母母账户】</h2>
@@ -11497,7 +11796,7 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">邀请人的邀请码，非用户本身的</td>
 </tr>
 </tbody></table>
-<h1 id='api-2'>公开API参数</h1><h2 id='8c6d51826c'>枚举定义</h2><h3 id='699c10ebb7'><a id="order_side">订单方向</a></h3>
+<h1 id='api-4'>公开API参数</h1><h2 id='8c6d51826c'>枚举定义</h2><h3 id='699c10ebb7'><a id="order_side">订单方向</a></h3>
 <ul>
 <li>BUY 买入</li>
 <li>SELL 卖出</li>
