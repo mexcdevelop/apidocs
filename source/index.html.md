@@ -75,6 +75,11 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-03-16**
+
+- 新增：查询用户万向划转历史（根据tranId）接口
+- ws账户成交推送新增“手续费”、“手续费币种”和“交易金额”参数
+
 ## **2023-03-12**
 
 - 新增：查询API交易对、用户API交易对、取消提币和获取提币地址接口
@@ -3145,6 +3150,60 @@ get /api/v3/capital/transfer
 |status|划转状态|
 |timestamp|划转时间|
 
+## 查询用户万向划转历史（根据tranId）
+
+> 请求示例
+
+```
+get /api/v3/capital/transfer/tranId?tranId=cb28c88cd20c42819e4d5148d5fb5742&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "tranId": "cb28c88cd20c42819e4d5148d5fb5742",
+    "clientTranId": null,
+    "asset": "USDT",
+    "amount": "10",
+    "fromAccountType": "SPOT",
+    "toAccountType": "FUTURES",
+    "symbol": null,
+    "status": "SUCCESS",
+    "timestamp": 1678603205000
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/transfer/tranId```  
+
+**接口权限要求:** 资金划转读 / SPOT_TRANSFER_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|tranId|string|是|划转id|
+|timestamp|string|是|时间戳|
+|signature|string|是|签名|
+
+仅支持查询最近半年（6个月）数据
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|tranId|划转ID|
+|clientTranId|client ID|
+|asset|币种|
+|amount|划转数量|
+|fromAccountType|转出业务账户|
+|toAccountType|划入业务账户|
+|symbol|转出交易对|
+|status|划转状态|
+|timestamp|划转时间|
+
 
 ## 获取小额资产可兑换列表
 
@@ -4966,7 +5025,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 
 - **POST**  ` /api/v3/userDataStream`
 
-开始一个新的数据流。除非发送 keepalive，否则数据流于60分钟后关闭。如果该帐户具有有效的`listenKey`，则将返回该`listenKey`并将其有效期延长60分钟。 
+开始一个新的数据流。除非发送 keepalive，否则数据流于60分钟后关闭。
 
 **参数:**
 
@@ -5083,15 +5142,18 @@ NONE
 {
     "c": "spot@private.deals.v3.api",
     "d": {
+        "p": "1.804",
+        "v": "0.31",
+        "a": "0.55924",
         "S": 1,
-        "T": 1661938980268,
+        "T": 1678901086198,
+        "t": "5bbb6ad8b4474570b155610e3960cd",
         "c": "",
-        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
-        "m": 1,
-        "p": "1.008",
+        "i": "2dd9655f9fa2438fa1709510d7afd9",
+        "m": 0,
         "st": 0,
-        "t": "4079b1522a0b40e7919f609e1ea38d44",
-        "v": "5"
+        "n": "0.000248206380027431",
+        "N": "MX"
     },
     "s": "MXUSDT",
     "t": 1661938980285
@@ -5114,6 +5176,9 @@ NONE
 | > st | byte | 是否自成交：isSelfTrade |
 | > t | string | 成交id: tradeId |
 | > v | string | 交易数量 |
+| > a | string | 交易金额 |
+| > n | string | 手续费数量 |
+| > N | string | 手续费币种 |
 | s | string | 交易对 |
 | t | long | 事件时间 |
 
