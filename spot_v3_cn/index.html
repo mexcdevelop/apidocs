@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-03-16" class="toc-h2 toc-link" data-title="2023-03-16"><strong>2023-03-16</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-03-12" class="toc-h2 toc-link" data-title="2023-03-12"><strong>2023-03-12</strong></a>
                   </li>
                   <li>
@@ -647,6 +650,9 @@
                     <a href="#7a4f3b3457" class="toc-h2 toc-link" data-title="查询用户万向划转历史">查询用户万向划转历史</a>
                   </li>
                   <li>
+                    <a href="#tranid" class="toc-h2 toc-link" data-title="查询用户万向划转历史（根据tranId）">查询用户万向划转历史（根据tranId）</a>
+                  </li>
+                  <li>
                     <a href="#8e0fd904fc" class="toc-h2 toc-link" data-title="获取小额资产可兑换列表">获取小额资产可兑换列表</a>
                   </li>
                   <li>
@@ -863,7 +869,12 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-03-12'><strong>2023-03-12</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-03-16'><strong>2023-03-16</strong></h2>
+<ul>
+<li>新增：查询用户万向划转历史（根据tranId）接口</li>
+<li>ws账户成交推送新增“手续费”、“手续费币种”和“交易金额”参数</li>
+</ul>
+<h2 id='2023-03-12'><strong>2023-03-12</strong></h2>
 <ul>
 <li>新增：查询API交易对、用户API交易对、取消提币和获取提币地址接口</li>
 </ul>
@@ -6617,6 +6628,114 @@ body
 <td style="text-align: left">划转时间</td>
 </tr>
 </tbody></table>
+<h2 id='tranid'>查询用户万向划转历史（根据tranId）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/transfer/tranId?tranId=cb28c88cd20c42819e4d5148d5fb5742&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cb28c88cd20c42819e4d5148d5fb5742"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clientTranId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromAccountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678603205000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer/tranId</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 资金划转读 / SPOT_TRANSFER_R</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">划转id</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p>仅支持查询最近半年（6个月）数据</p>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">划转ID</td>
+</tr>
+<tr>
+<td style="text-align: left">clientTranId</td>
+<td style="text-align: left">client ID</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">币种</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">划转数量</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">转出业务账户</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">划入业务账户</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">转出交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">划转状态</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">划转时间</td>
+</tr>
+</tbody></table>
 <h2 id='8e0fd904fc'>获取小额资产可兑换列表</h2>
 <blockquote>
 <p>请求示例</p>
@@ -10546,7 +10665,7 @@ get /api/v3/margin/trigerOrder
 <li><strong>POST</strong>  <code>/api/v3/userDataStream</code></li>
 </ul>
 
-<p>开始一个新的数据流。除非发送 keepalive，否则数据流于60分钟后关闭。如果该帐户具有有效的<code>listenKey</code>，则将返回该<code>listenKey</code>并将其有效期延长60分钟。 </p>
+<p>开始一个新的数据流。除非发送 keepalive，否则数据流于60分钟后关闭。</p>
 
 <p><strong>参数:</strong></p>
 
@@ -10721,15 +10840,18 @@ get /api/v3/margin/trigerOrder
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "c": "spot@private.deals.v3.api",
     "d": {
+        "p": "1.804",
+        "v": "0.31",
+        "a": "0.55924",
         "S": 1,
-        "T": 1661938980268,
+        "T": 1678901086198,
+        "t": "5bbb6ad8b4474570b155610e3960cd",
         "c": "",
-        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
-        "m": 1,
-        "p": "1.008",
+        "i": "2dd9655f9fa2438fa1709510d7afd9",
+        "m": 0,
         "st": 0,
-        "t": "4079b1522a0b40e7919f609e1ea38d44",
-        "v": "5"
+        "n": "0.000248206380027431",
+        "N": "MX"
     },
     "s": "MXUSDT",
     "t": 1661938980285
@@ -10795,6 +10917,21 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">&gt; v</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易数量</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易金额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; n</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">手续费数量</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; N</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">手续费币种</td>
 </tr>
 <tr>
 <td style="text-align: left">s</td>
