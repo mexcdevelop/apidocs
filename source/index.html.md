@@ -70,6 +70,14 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-03-16**
+
+- Add:Query User Universal Transfer History (by tranId) endpoint
+
+- ws spot@private.deals.v3.api channel add params:"commission","commissionAsset"and"deals amount"
+
+## 
+
 ## **2023-03-12**
 
 - Add:API default symbol,User API default symbol,cancel withdraw,Deposit Address endpoints.
@@ -2934,6 +2942,61 @@ Response:
 |status|status|
 |timestamp|timestamp|
 
+## Query User Universal Transfer History （by tranId）
+
+> Request
+
+```
+get /api/v3/capital/transfer/tranId?tranId=cb28c88cd20c42819e4d5148d5fb5742&timestamp={{timestamp}}&signature={{signature}}
+```
+
+> Response
+
+```json
+{
+    "tranId": "cb28c88cd20c42819e4d5148d5fb5742",
+    "clientTranId": null,
+    "asset": "USDT",
+    "amount": "10",
+    "fromAccountType": "SPOT",
+    "toAccountType": "FUTURES",
+    "symbol": null,
+    "status": "SUCCESS",
+    "timestamp": 1678603205000
+}
+```
+
+- **GET** ```/api/v3/capital/transfer/tranId```  
+
+**Permission:**  SPOT_TRANSFER_R
+
+**Weight(IP):** 1
+
+**request**
+
+| Name    | Type | Mandatory | Description   |
+| :-------- | :------- | :------- | :----- |
+| tranId    | string   | YES       | tranId  |
+| timestamp | string   | YES       | timestamp |
+| signature | string   | YES       | signature   |
+
+Only can quary the data for the last six months
+
+**response**
+
+| Name          | Description         |
+| :-------------- | :----------- |
+|tranId|tranId|
+|clientTranId|client ID|
+|asset|coin |
+|amount|amount|
+|fromAccountType|fromAccountType|
+|toAccountType|toAccountType|
+|symbol|symbol|
+|status|status|
+|timestamp|timestamp|
+
+
 ## Get Assets That Can Be Converted Into MX
 
 > Request
@@ -4740,7 +4803,7 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 
 - **POST**  ` /api/v3/userDataStream`
 
-Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active `listenKey`, that `listenKey` will be returned and its validity will be extended for 60 minutes. 
+Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. 
 
 **request:**
 
@@ -4854,15 +4917,18 @@ The server will push an update of the account assets when the account balance ch
 {
     "c": "spot@private.deals.v3.api",
     "d": {
+        "p": "1.804",
+        "v": "0.31",
+        "a": "0.55924",
         "S": 1,
-        "T": 1661938980268,
+        "T": 1678901086198,
+        "t": "5bbb6ad8b4474570b155610e30d960cd",
         "c": "",
-        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
-        "m": 1,
-        "p": "1.008",
+        "i": "2dd9655f9fa2438fa1709510d7c1afd9",
+        "m": 0,
         "st": 0,
-        "t": "4079b1522a0b40e7919f609e1ea38d44",
-        "v": "5"
+        "n": "0.000248206380027431",
+        "N": "MX"
     },
     "s": "MXUSDT",
     "t": 1661938980285
@@ -4885,6 +4951,9 @@ The server will push an update of the account assets when the account balance ch
 | > st | byte | isSelfTrade |
 | > t | string | tradeId |
 | > v | string | quantity |
+| > a | string | deals amount |
+| > n | string | commission fee|
+| > N | string | commissionAsset）|
 | s | string | symbol |
 | t | long |eventTime |
 
