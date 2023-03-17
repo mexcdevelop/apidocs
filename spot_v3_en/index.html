@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-03-16" class="toc-h2 toc-link" data-title="2023-03-16"><strong>2023-03-16</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-03-12" class="toc-h2 toc-link" data-title="2023-03-12"><strong>2023-03-12</strong></a>
                   </li>
                   <li>
@@ -641,6 +644,9 @@
                     <a href="#query-user-universal-transfer-history" class="toc-h2 toc-link" data-title="Query User Universal Transfer History">Query User Universal Transfer History</a>
                   </li>
                   <li>
+                    <a href="#query-user-universal-transfer-history-by-tranid" class="toc-h2 toc-link" data-title="Query User Universal Transfer History （by tranId）">Query User Universal Transfer History （by tranId）</a>
+                  </li>
+                  <li>
                     <a href="#get-assets-that-can-be-converted-into-mx" class="toc-h2 toc-link" data-title="Get Assets That Can Be Converted Into MX">Get Assets That Can Be Converted Into MX</a>
                   </li>
                   <li>
@@ -852,7 +858,12 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-03-12'><strong>2023-03-12</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-03-16'><strong>2023-03-16</strong></h2>
+<ul>
+<li><p>Add:Query User Universal Transfer History (by tranId) endpoint</p></li>
+<li><p>ws spot@private.deals.v3.api channel add params:&quot;commission&quot;,&quot;commissionAsset&quot;and&quot;deals amount&quot;</p></li>
+</ul>
+<h2 id='2023-03-12'><strong>2023-03-12</strong></h2>
 <ul>
 <li>Add:API default symbol,User API default symbol,cancel withdraw,Deposit Address endpoints.</li>
 </ul>
@@ -6147,6 +6158,112 @@ Response:</li>
 <td style="text-align: left">timestamp</td>
 </tr>
 </tbody></table>
+<h2 id='query-user-universal-transfer-history-by-tranid'>Query User Universal Transfer History （by tranId）</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/transfer/tranId?tranId=cb28c88cd20c42819e4d5148d5fb5742&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cb28c88cd20c42819e4d5148d5fb5742"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clientTranId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fromAccountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678603205000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer/tranId</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong>  SPOT_TRANSFER_R</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">tranId</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p>Only can quary the data for the last six months</p>
+
+<p><strong>response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">tranId</td>
+</tr>
+<tr>
+<td style="text-align: left">clientTranId</td>
+<td style="text-align: left">client ID</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">fromAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">toAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">status</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+</tbody></table>
 <h2 id='get-assets-that-can-be-converted-into-mx'>Get Assets That Can Be Converted Into MX</h2>
 <blockquote>
 <p>Request</p>
@@ -10035,7 +10152,7 @@ get /api/v3/margin/trigerOrder
 <li><strong>POST</strong>  <code>/api/v3/userDataStream</code></li>
 </ul>
 
-<p>Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. If the account has an active <code>listenKey</code>, that <code>listenKey</code> will be returned and its validity will be extended for 60 minutes. </p>
+<p>Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. </p>
 
 <p><strong>request:</strong></p>
 
@@ -10194,15 +10311,18 @@ get /api/v3/margin/trigerOrder
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "c": "spot@private.deals.v3.api",
     "d": {
+        "p": "1.804",
+        "v": "0.31",
+        "a": "0.55924",
         "S": 1,
-        "T": 1661938980268,
+        "T": 1678901086198,
+        "t": "5bbb6ad8b4474570b155610e30d960cd",
         "c": "",
-        "i": "c079b0fcb80a46e8b128b281ce4e4f38",
-        "m": 1,
-        "p": "1.008",
+        "i": "2dd9655f9fa2438fa1709510d7c1afd9",
+        "m": 0,
         "st": 0,
-        "t": "4079b1522a0b40e7919f609e1ea38d44",
-        "v": "5"
+        "n": "0.000248206380027431",
+        "N": "MX"
     },
     "s": "MXUSDT",
     "t": 1661938980285
@@ -10268,6 +10388,21 @@ get /api/v3/margin/trigerOrder
 <td style="text-align: left">&gt; v</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">deals amount</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; n</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commission fee</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt; N</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commissionAsset）</td>
 </tr>
 <tr>
 <td style="text-align: left">s</td>
