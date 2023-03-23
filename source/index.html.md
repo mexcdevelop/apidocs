@@ -2221,7 +2221,7 @@ Response:
 | updateTime       | Update Time     |
 | accountType      | Account type    |
 | balances         | Balance         |
-| asset            | Aseet coin      |
+| asset            | Asset coin      |
 | free             | Available  coin |
 | locked           | Forzen coin     |
 | permissions      | Permission      |
@@ -2785,7 +2785,7 @@ Response:
 |memo|memo|
 |network|network|  
 
-## Deposit Address (supporting network)
+## Withdraw Address (supporting network)
 
 > Request
 
