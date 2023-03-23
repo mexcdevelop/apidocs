@@ -738,6 +738,37 @@ There are 3 possible options:
 | symbol       | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbol=MXUSDT"          |
 | symbols      | curl -X GET "https://api.mexc.com/api/v3/exchangeInfo?symbols=MXUSDT,BTCUSDT" |
 
+**Response:**
+
+| Name       | Type | Description                      |
+| :------------ | :-------- |:-------------------------|
+| timezone | string | timezone                       |
+| serverTime | long | server Time                    |
+| rateLimits | Array | rate Limits                     |
+| exchangeFilters | Array | exchange Filters                     |
+| symbol | String | symbol                      |
+| status | String | status                       |
+| baseAsset | String | base Asset                      |
+| baseAssetPrecision | Int | base Asset Precision                   |
+| quoteAsset | String | quote Asset                      |
+| quotePrecision | Int | quote Precision                 |
+| quoteAssetPrecision | Int | quote Asset Precision                  |
+| baseCommissionPrecision | Int | base Commission Precision                 |
+| quoteCommissionPrecision | Int | quote Commission Precision                |
+| orderTypes | Array | <a href="#order_type">Order Type</a> |
+| quoteOrderQtyMarketAllowed | Boolean | quoteOrderQtyMarketAllowed                |
+| isSpotTradingAllowed | Boolean |   allow api spot trading            |
+| isMarginTradingAllowed | Boolean | allow api margin trading               |
+| permissions | Array | permissions                       |
+| maxQuoteAmount | String | max Quote Amount                  |
+| makerCommission | String | marker Commission                |
+| takerCommission | String | taker Commission                 |
+|quoteAmountPrecision|string|  min order amount                 |
+|baseSizePrecision|string|  min order quantity                 |
+
+
+
+
 ## Order Book
 
 > Response
