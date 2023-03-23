@@ -325,33 +325,7 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 | symbol         | string   | 交易对名称                       |
 | state          | string   | 交易对状态，当前是否可以进行交易 |
 | price_scale    | integer  | 价格精度                         |
-| quantity_scale | integer  | 数量精度                         | ## 各接口限速信息 |
-
-> 响应示例
-
-```json
-{
-    "code": 200,
-    "data": {
-        "total_limit": "100",
-        "request_limit": {
-            "/api/v2/market/symbols": "5",
-            "/api/v2/market/depth": "5"
-        }
-    }
-}
-```
-
-- **GET** ```/open/api/v2/common/rate_limit```
-
-参数：None
-
-响应
-
-| 字段名           | 数据类型 | 说明                                     |
-| ---------------- | -------- | ---------------------------------------- |
-| total_limit      | string   | 用户每秒最大请求阈值                     |
-| request_limit    | map      | 用户每秒每个API最大请求阈值              |
+| quantity_scale | integer  | 数量精度                         | 
 | min_amount       | string   | 最小交易金额                             |
 | max_amount       | string   | 最大交易金额                             |
 | maker_fee_rate   | string   | Maker费率                                |
@@ -497,55 +471,10 @@ None
 | time        | string   | 最新报价时间            |
 | change_rate | string   | 本阶段涨跌幅## 深度信息 |
 
-> 响应示例
-
-```json
-{
-    "code": 200,
-    "data": {
-        "asks": [
-            {
-                "price": "183.1683154",
-                "quantity": "128.5"
-            },
-            {
-                "price": "183.1983186",
-                "quantity": "101.6"
-            }
-        ],
-        "bids": [
-            {
-                "price": "182.4417544",
-                "quantity": "115.5"
-            },
-            {
-                "price": "182.4217568",
-                "quantity": "135.7"
-            }
-        ]
-    }
-}
-```
-
-- **GET** ```/open/api/v2/market/depth ```
-
-参数：
-
-| 参数名 | 数据类型 | 是否必须 | 说明         | 取值范围 |
-| ------ | -------- | -------- | ------------ | -------- |
-| symbol | string   | 是       | 交易对名称   |          |
-| depth  | string   | 是       | 返回的深度数 | 1~2000   |
-
-响应：
-
-| 参数名 | 数据类型 | 说明                                       |
-| ------ | -------- | ------------------------------------------ |
-| bids   | object   | 买单，包含字段[price, quantity] 价格及数量 |
-| asks   | object   | 卖单，包含字段[price, quantity] 价格及数量 |  |
-
 <aside class="notice">
 阶段是以当前时间的滚动24小时计。
 </aside>
+
 ## 深度信息
 
 > 响应示例
