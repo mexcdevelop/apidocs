@@ -1626,8 +1626,8 @@ None
 | 参数名     | 类型   | 是否必填 | 说明                                                   |
 | ---------- | ------ | -------- | ------------------------------------------------------ |
 | currency   | string | false    | 币种 （缺省值所有币种）                                |
-| from       | string | false    | 出账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有 |
-| to         | string | false    | 入账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有 |
+| from       | string | false    | 出账账户，币币账户、合约账户，缺省时所有 |
+| to         | string | false    | 入账账户，币币账户、合约账户，缺省时所有 |
 | start_time | long   | false    | 开始时间                                               |
 | end_time   | long   | false    | 结束时间                                               |
 | page_num   | number | false    | 页数，默认 1                                           |
@@ -1641,8 +1641,8 @@ None
 | msg            | string  | 错误描述（如有）                                |
 | currency       | string  | 币种                                            |
 | amount         | string  | 金额                                            |
-| from           | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户      |
-| to             | string  | 入账账户，币币账户、逐仓杠杆账户、合约账户      |
+| from           | string  | 出账账户，币币账户、合约账户      |
+| to             | string  | 入账账户，币币账户、合约账户      |
 | transact_state | string  | 划转状态 成功 SUCCESS、失败 FAILED、划转中 WAIT |
 | transact_id    | string  | 划转交易 id                                     |
 | total_size     | int     | 总条数                                          |
@@ -1708,5 +1708,5 @@ None
 | transact_id | string  | 划转交易 id                                |
 | currency    | string  | 币种                                       | 
 | amount      | String | 划转数量 |
-| from        | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户 |
+| from        | string  | 出账账户，币币账户、合约账户 |
 
