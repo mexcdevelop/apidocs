@@ -100,14 +100,14 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 - [新增权重限速模式](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#c1fd2fc5ac)
 
-## **2022-12-29**
+<!-- ## **2022-12-29**
 
 - [获取杠杆ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口去除返回参数：
 
 | 字段名称       | 数据类型 | 描述          |
 | :------------- | :------- | :------------ |
 | preBasket      | string   | 再平衡前篮子  |
-| preLeverage    | string   | 再平衡前杠杆  |
+| preLeverage    | string   | 再平衡前杠杆  | -->
 
 ## **2022-12-28**
 
@@ -118,9 +118,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 - websocket `spot@private.orders.v3.api`频道新增：平均成交价，累计成交数量，累计成交金额三个参数。
 - 新增获取邀请人接口
 
-## **2022-11-29**
+<!-- ## **2022-11-29**
 
-- 新增websocket杠杆账户订单推送和风险率推送
+- 新增websocket杠杆账户订单推送和风险率推送 -->
 
 ## **2022-11-24**
 
@@ -163,7 +163,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-08-26**
 
-- [获取杠杆ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口新增返回参数：
+- [获取ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口新增返回参数：
 
 | 字段名称       | 数据类型 | 描述          |
 | :------------- | :------- | :------------ |
@@ -178,10 +178,6 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
   1、[母子用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
 
   2、[查询母子万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
-
-  3、[开通子账户合约业务](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#e5e82cdf39)
-
-  4、[开通子账户杠杆业务接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#6d1ec37c49)
 
 ## **2022-08-03**
 
@@ -221,10 +217,6 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 - 钱包接口模块下新增：[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)接口，该接口可返回币种是否可充提/提币限额以及智能合约地址等。
 
-## **2022-06-16**
-
-- 新增[杠杆账户和交易](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#34a848ad3d)相关接口；
-
 
 ## **2022-05-22**
 
@@ -261,10 +253,6 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
   7、[查询母子万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
 
-  8、[开通子账户的合约业务](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#e5e82cdf39)
-
-  9、[开通子账户的杠杆业务](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#6d1ec37c49)
-
 ## **2022-03-25**
 
 - 新增[API代码库](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#api)：Postman Collections，可以通过`Postman collection`来快速体验、使用API接口。
@@ -288,7 +276,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-02-19**
 
-- 新增[ETF接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf)：包括[获取杠杆ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)
+- 新增[ETF接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf)：包括[获取ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)
 
 ## **2022-02-11**
 
@@ -751,7 +739,7 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
             "baseSizePrecision": "0.0001",
             "permissions": [
                 "SPOT",
-                "MARGIN"
+                "Limit"
             ],
             "filters": [],
             "maxQuoteAmount": "5000000",
@@ -1386,7 +1374,7 @@ body
 | :----------- | :------ | :-------- | :------------------------------------------------------------ |
 | subAccount  | string | 是       | 子账户名称 如：subAccount1                                   |
 | note        | string | 是       | APIKey的备注                                                 |
-| permissions | string | 是       | APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>杠杆账户信息读/ISOLATED_MARGIN_ACCOUNT_READ,<br/>杠杆账户信息写/ISOLATED_MARGIN_ACCOUNT_WRITE,<br/>杠杆交易信息读/ISOLATED_MARGIN_DEAL_READ,<br/>杠杆交易信息写/ISOLATED_MARGIN_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE|
+| permissions | string | 是       | APIKey权限:<br/>账户读/SPOT_ACCOUNT_READ,<br/>账户写/SPOT_ACCOUNT_WRITE,<br/>现货交易信息读/SPOT_DEAL_READ,<br/>现货交易信息写/SPOT_DEAL_WRITE,<br/>合约账户信息读/CONTRACT_ACCOUNT_READ,<br/>合约账户信息写/CONTRACT_ACCOUNT_WRITE,<br/>合约交易信息读/CONTRACT_DEAL_READ,<br/>合约交易信息写/CONTRACT_DEAL_WRITE,<br/>资金划转读/SPOT_TRANSFER_READ,<br/>资金划转写/SPOT_TRANSFER_WRITE|
 | ip          | string | 否       | 绑定ip地址，多个ip用半角逗号隔开，最多支持20个ip。    如：135.181.193    |
 | recvWindow  | long   | 否       |                                                              |
 | timestamp   | long   | 是       |                                                              |
@@ -1544,9 +1532,8 @@ post /api/v3/capital/sub-account/universalTransfer
 | :------ | :-------- | :-------- |:-------------------------------------------------------------------|
 |fromAccount|string|否| 母子账户，可填subAccout账户名，不填默认母账户                                        |
 |toAccount|string|否| 母子账户，可填subAccout账户名，不填默认母账户                                        |
-|fromAccountType|string|是| 划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述 |
-|toAccountType|string|是| 划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述 |
-|symbol|string|否| 币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT            |
+|fromAccountType|string|是| 划出账户类型，现货/合约，枚举值："SPOT","FUTURES",划转规则见上描述 |
+|toAccountType|string|是| 划出账户类型，现货/合约，枚举值："SPOT","FUTURES",划转规则见上描述 |
 |asset|string|是| 资产，eg：USDT                                                         |
 |amount|string|是| 数量，eg：1.82938475                                                   |
 |timestamp|string|是| 时间戳                                                                |
@@ -1601,8 +1588,8 @@ get /api/v3/capital/sub-account/universalTransfer
 | :------ | :-------- | :-------- | :---------- |
 |fromAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
 |toAccount|string|否|母子账户，可填subAccout账户名，不填默认母账户|
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述|
-|toAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"，划转规则见上描述|
+|fromAccountType|string|是|划出账户类型，现货/合约，枚举值："SPOT","FUTURES",划转规则见上描述|
+|toAccountType|string|是|划出账户类型，现货/合约，枚举值："SPOT","FUTURES",划转规则见上描述|
 |startTime|string|否|起始时间|
 |endTime|string|否|截止时间|
 |page|string|否|默认 1|
@@ -1629,7 +1616,7 @@ get /api/v3/capital/sub-account/universalTransfer
 |timestamp|number|划转时间|
 |totalCount|number||
 
-## 开通子账户的合约业务
+<!-- ## 开通子账户的合约业务
 
 > 请求示例
 
@@ -1723,7 +1710,7 @@ post /api/v3/sub-account/margin
 | :------------ | :-------- | :--------|
 |subAccount|string|子账户名称|
 |isMarginEnabled|boolean|是否开通杠杆业务：true or false|
-|timestamp|string|返回时间|
+|timestamp|string|返回时间| -->
 
 
 # 现货账户和交易接口
@@ -3054,15 +3041,13 @@ post /api/v3/capital/transfer?fromAccountType=FUTURES&toAccountType=SPOT&asset=U
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
-|toAccountType|string|是|划入账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
+|fromAccountType|string|是|划出账户类型，现货/合约，枚举值："SPOT","FUTURES"|
+|toAccountType|string|是|划入账户类型，现货/合约，枚举值："SPOT","FUTURES"|
 |asset|string|是|资产|
 |amount|string|是|数量|
-|symbol|string|否|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
 |timestamp|string|是|时间戳|
 |signature|string|是|签名|
 
-当类型为 `ISOLATEDMARGIN`,`fromSymbol`和`toSymbol` 必须要发送.
 
 **返回参数**
 
@@ -3123,13 +3108,12 @@ get /api/v3/capital/transfer
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-|fromAccountType|string|是|划出账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
-|toAccountType|string|是|划入账户类型，现货/合约/杠杆，枚举值："SPOT","FUTURES","ISOLATED_MARGIN"|
+|fromAccountType|string|是|划出账户类型，现货/合约，枚举值："SPOT","FUTURES"|
+|toAccountType|string|是|划入账户类型，现货/合约/，枚举值："SPOT","FUTURES"|
 |startTime|string|否||
 |endTime|string|否||
 |page|string|否|默认1|
 |size|string|否|默认 10, 最大 100|
-|symbol|string|是|交易对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，如:ETHUSDT|
 |timestamp|string|是|时间戳|
 |signature|string|是|签名|
 
@@ -3378,7 +3362,7 @@ get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signa
 
 # ETF接口
 
-## 获取杠杆ETF基础信息
+## 获取ETF基础信息
 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
 
 > 请求示例
@@ -3420,7 +3404,7 @@ GET /api/v3/etf/info
 
 | 字段名称  | 数据类型 | 描述          |
 | :--------- | :-------- | :------------- |
-| symbol     | string   | 杠杆ETF交易对 |
+| symbol     | string   | ETF交易对 |
 | netValue   | string   | 最新净值      |
 | feeRate    | string   | 管理费率      |
 | timestamp  | long     | 系统时间      |
@@ -3431,7 +3415,7 @@ GET /api/v3/etf/info
 |basket     |string    | 再平衡后篮子   |
 
 
-# 杠杆账户和交易接口
+<!-- # 杠杆账户和交易接口
 
 ## 切换杠杆账户模式
 切换杠杆账户的交易模式
@@ -4342,7 +4326,7 @@ get /api/v3/margin/trigerOrder
 
  -->
 
-## 查询账户最大可借贷额度
+<!-- ## 查询账户最大可借贷额度
 
 > 请求示例
 
@@ -4652,7 +4636,7 @@ get /api/v3/margin/isolatedMarginTier?symbol=BTCUSDT&timestamp={{timestamp}}&sig
 |initialRiskRatio|初始风险比|string|1.111|
 |liquidationRiskRatio|清算风险比|string|1.05|
 |baseAssetMaxBorrowable|基础货币最大可借|string|9|
-|quoteAssetMaxBorrowable|计价货币最大可借|string|70000|
+|quoteAssetMaxBorrowable|计价货币最大可借|string|70000| --> 
 
 # Websocket 行情推送
 
@@ -5292,7 +5276,7 @@ NONE
 | t | long | 事件时间 |
 
 
-## 杠杆账户订单(逐仓杠杆)
+<!-- ## 杠杆账户订单(逐仓杠杆)
 
 > **request:**
 
@@ -5351,9 +5335,9 @@ NONE
 | >s     | int      | 订单状态      |
 | >i     | string   | 订单id        |
 | s      | string   | 交易对        |
-| t      | long     | 事件时间      |
+| t      | long     | 事件时间      | -->
 
-## 杠杆账户风险率(逐仓杠杆) 
+<!-- ## 杠杆账户风险率(逐仓杠杆) 
 
 > **request:**
 
@@ -5412,7 +5396,7 @@ NONE
 | >r | string | 风险率|
 | >sl | string |强平线|
 | s | string | 交易对|
-| t | long | 事件时间 |
+| t | long | 事件时间 | -->
 
 # 邀请返佣接口
 
@@ -5500,7 +5484,7 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
      "data": [
          {
              "asset": "USDT", // 返佣资产，币种
-             "type": "spot",       // 返佣类型：现货，杠杆，合约
+             "type": "spot",       // 返佣类型：现货，合约
              "rate": "0.3", // 返佣比例
              "amount": "0.0001126", // 返佣金额
              "uid": "2293729101827", // 受邀人UID
@@ -5511,7 +5495,7 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
          ...
          {
              "asset": "ETH", // 返佣资产，币种
-             "type": "margin", // 返佣类型：现货，杠杆，合约
+             "type": "spot", // 返佣类型：现货，合约
              "rate": "0.3", // 返佣比例
              "amount": "0.00000056",// 返佣金额
              "uid": "22937291018263", // 受邀人UID
@@ -5548,7 +5532,7 @@ get /api/v3/rebate/detail?timestamp={{timestamp}}&signature={{signature}}
 | 参数名  |类型 | 说明|
 | :------------ | :-------- | :--------|
 |asset|string|返佣资产，币种|
-|type|string|返佣类型：现货，杠杆，合约|
+|type|string|返佣类型：现货，合约|
 |rate|string|返佣比例|
 |amount|string|返佣金额|
 |uid|string|受邀人UID|
@@ -5576,7 +5560,7 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
     "data": [
         {
             "asset": "USDT",  // 返佣资产，币种
-            "type": "spot",        // 返佣类型：现货，杠杆，合约
+            "type": "spot",        // 返佣类型：现货，合约
             "rate": "0.3", // 返佣比例
             "amount": "0.0001126",  // 返佣金额
             "uid": "2293729101827",  // 受邀人UID
@@ -5587,7 +5571,7 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
         ...
         {
             "asset": "ETH", // 返佣资产，币种
-            "type": "margin", // 返佣类型：现货，杠杆，合约
+            "type": "spot", // 返佣类型：现货，合约
             "rate": "0.3", // 返佣比例
             "amount": "0.00000056",// 返佣金额
             "uid": "22937291018263",  // 受邀人UID
@@ -5623,7 +5607,7 @@ get /api/v3/rebate/detail/kickback?timestamp={{timestamp}}&signature={{signature
 | 参数名  |类型 | 说明|
 | :------------ | :-------- | :--------|
 |asset|string|返佣资产，币种|
-|type|string|返佣类型：现货，杠杆，合约|
+|type|string|返佣类型：现货，合约|
 |rate|string|返佣比例|
 |amount|string|返佣金额|
 |uid|string|受邀人UID|
