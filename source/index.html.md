@@ -84,7 +84,7 @@ Please make API requests with the following base urls:
 The APIs accept GET, POST or DELETE request, as will be described in later sections
 
 - For a GET or DELETE reqeust, all parameters are path paremeters (query string)
-- For a POST reqeust, business parameters are to be put in request body and of JSON format(with```content-type```set to```application/json```), they will not be used for signing of the request. To calculate signature, params ```api_key```、```req_time```、```recv_window```(optional)、```sign``` need to be sent as path parameter
+- For a POST reqeust, business parameters are to be put in request body and of JSON format(with```content-type```set to```application/json```), they will not be used for signing of the request. To calculate signature, params ```api_key```,```req_time```,```recv_window```(optional),```sign``` need to be sent as path parameter
 
 ## Response Format
 
@@ -124,7 +124,7 @@ Parameters related to request signature
 
 ## Creating API key
 
-API key can be created in the ```User Center``` of MEXC site. There are two parts of API key, ```Access key``` and ```Secret key```，both of them will be used for calculating and validating a signature. Please grant appropriate permissions for the created API key, before using it. 
+API key can be created in the ```User Center``` of MEXC site. There are two parts of API key, ```Access key``` and ```Secret key```,both of them will be used for calculating and validating a signature. Please grant appropriate permissions for the created API key, before using it. 
 
 <aside class="warning">
 Secret key will ONLY be displayed in the page when API key is generated, please make records accordingly
@@ -566,7 +566,7 @@ Request paramters：
 | Parameter | Data type | Mandatory | Description | Allowed range |
 |-----|-----|-----|-----|-----|
 |symbol|string|Y|symbol name| |
-|limit|integer|N|Number of records to be returned| 1~1000，default to 100|
+|limit|integer|N|Number of records to be returned| 1~1000,default to 100|
 
 Response：
 
@@ -616,7 +616,7 @@ Request parameters：
 |symbol|string|Y|symbol name| |
 |interval|string|Y|inteval|of minutes: 1m, 5m, 15m, 30m, 60m. of hour: 4h, of day: 1d, of month: 1M|
 |start_time|long|N|start time, string of 10 digits stands for the seconds since Unix epoch| |
-|limit|integer|N|number of records to be returned| 1~1000，default to 100|
+|limit|integer|N|number of records to be returned| 1~1000,default to 100|
 
 Response：
 
@@ -778,8 +778,8 @@ Request parameters：
 |symbol|string|Y|symbol name| |
 |price|string|Y|price| |
 |quantity|string|Y|quantity| |
-|trade_type|string|Y|trade type|BID，ASK|
-|order_type|string|Y|order type|LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL|
+|trade_type|string|Y|trade type|BID,ASK|
+|order_type|string|Y|order type|LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL|
 |client_order_id|string|N|client order id|With maximum length of 32 characters|
 
 <aside class="notice">
@@ -868,8 +868,8 @@ Request parameters：
 |symbol|string|Y|symbol name| |
 |price|string|Y|price| |
 |quantity|string|Y|quantity of the order| |
-|trade_type|string|Y|trade type|BID，ASK|
-|order_type|string|Y|order type|LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL|
+|trade_type|string|Y|trade type|BID,ASK|
+|order_type|string|Y|order type|LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL|
 |client_order_id|string|N|client order id|With maximum length of 32 characters|
 
 Response：
@@ -938,8 +938,8 @@ For each batch request, the parameter client_order_id should be consistent, mean
 | symbol          | string   | YES       | symbol |                                               |
 | price           | string   | YES       | order price  |                                               |
 | quantity        | string   | YES       | quantity     |                                               |
-| trade_type      | string   | YES       | trade_type   | BID，ASK                                       |
-| order_type      | string   | YES       | order_type   | LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL     |
+| trade_type      | string   | YES       | trade_type   | BID,ASK                                       |
+| order_type      | string   | YES       | order_type   | LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL     |
 | client_order_id | string   | YES       | clientOrderId |  maximum 32 characters. The user must maintain theuniqueness of the clientOrderID |
 
 **Response Parameters:**
@@ -981,8 +981,8 @@ Request parameters：
 |-----|-----|-----|-----|-----|
 |symbol|string|Y|symbol name| |
 |start_time|string|N|start time| |
-|limit|string|N|number of records to be returned| 1~1000，default to 50 |
-|trade_type|string|N|order type| BID，ASK |
+|limit|string|N|number of records to be returned| 1~1000,default to 50 |
+|trade_type|string|N|order type| BID,ASK |
 
 
 Response：
@@ -1042,8 +1042,8 @@ Request parameters：
 |-----|-----|-----|-----|-----|
 |symbol|string|Y|symbol name| |
 |start_time|string|N|start time| the default is the last 7 days, and the maximum query is 30 days. |
-|limit|string|N|number of records to be returned| 1~1000，default to 50|
-|trade_type|string|Y|order type| BID，ASK |
+|limit|string|N|number of records to be returned| 1~1000,default to 50|
+|trade_type|string|Y|order type| BID,ASK |
 |states|string|Y|state to be quired| NEW：Unfilled ；FILLED：Filled；PARTIALLY_FILLED：Partially filled；CANCELED：Canceled；PARTIALLY_CANCELED：Partially canceled |
 
 
@@ -1153,7 +1153,7 @@ Request parameters：
 | Parameter | Data type | Mandatory | Description | Allowed range |
 |-----|-----|-----|-----|-----|
 |symbol|string|Y|symbol name| |
-|limit|string|N|number of records to be returned| 1~1000，default to 50|
+|limit|string|N|number of records to be returned| 1~1000,default to 50|
 |start_time|string|N|start time| |
 
 
@@ -1507,10 +1507,10 @@ Rate Limit : 2 times/s
 
 | Parameter | Data Type | Mandatory  | Description |
 | ------------ | ------------ | ------------ | ------------ |
-| currency | string | true | Currency，Ex. usdt|
+| currency | string | true | Currency,Ex. usdt|
 | amount | number | true | Transfer amount |
-| from | string | true | Transfer-out account，spot account MAIN，Contract account CONTRACT|
-| to | string | true | Transfer-in account，spot account MAIN，futures account CONTRACT|
+| from | string | true | Transfer-out account,spot account MAIN,Contract account CONTRACT|
+| to | string | true | Transfer-in account,spot account MAIN,futures account CONTRACT|
 
 **Response Parameters:**
 
@@ -1550,12 +1550,12 @@ Rate Limit : 2 times/s
 | Parameter | Data Type | Mandatory  | Description |
 | ------------ | ------------ | ------------ | ------------ |
 | currency | string | false | Currency  （Return all currencies without filling）|(delete space)
-| from | string | false | Transfer-out account ，spot account 、isolated-margin account 、futures account ，return all without filling |
-| to | string | false | Transfer-in account，spot account, isolated-margin account, futures account，return all without filling |
+| from | string | false | Transfer-out account ,spot account ,futures account ,return all without filling |
+| to | string | false | Transfer-in account,spot account, ifutures account,return all without filling |
 | start_time | long | false | Start time|
 | end_time | long | false | End time
 | page_num | number | false | default 1 |
-| page_size | number | false | Page size，default 20, maximum 50 |
+| page_size | number | false | Page size,default 20, maximum 50 |
 
 **Response Parameters:**
 
@@ -1565,9 +1565,9 @@ Rate Limit : 2 times/s
 | msg | string | Error message (if any) |
 | currency | string | Currency  |
 | amount | string| Amount  |
-| from | string | Transfer-out account，spot account, isolated-margin account, contract account |
-| to | string | Transfer-in account ，spot account、isolated-margin account、futures account  |
-| transact_state | string | Transfer status  Success SUCCESS、Fail  FAILED、Transferring WAIT|
+| from | string | Transfer-out account,spot account,  contract account |
+| to | string | Transfer-in account ,spot account,futures account  |
+| transact_state | string | Transfer status  Success SUCCESS,Fail  FAILED,Transferring WAIT|
 | transact_id | string | Transfer id |
 | total_size | int | The total size |
 | total_page | int | The total pages |
@@ -1589,8 +1589,8 @@ Rate Limit : 2 times/s
 | Parameter | Data Type | Mandatory  | Description |
 | ------------ | ------------ | ------------ | ------------ |
 | currency | string | true | Currency  |
-| account_type | string | false |  Account type：All、spot account 、futures account ，default spot account  |
-| sub_uid | long | false | Sub- account uid，type is invalid with any filling|
+| account_type | string | false |  Account type：All,spot account ,futures account ,default spot account  |
+| sub_uid | long | false | Sub- account uid,type is invalid with any filling|
 
 **Response Parameters:**
 
@@ -1632,7 +1632,7 @@ Rate Limit : 2 times/s
 | transact_id | string | Transfer id |
 | currency | String | Currency  |
 | amount | String | Transfer amount  |
-| from | string | Transfer-out account ，spot account 、isolated-margin account 、futures account  |
-| to | string | Transfer-in account ，spot account 、isolated-margin account 、futures account  |
-| transact_state | string | Transfer status  Success 、Fail  、Transferring |
+| from | string | Transfer-out account ,spot account ,futures account  |
+| to | string | Transfer-in account ,spot account ,futures account  |
+| transact_state | string | Transfer status  Success ,Fail  ,Transferring |
 
