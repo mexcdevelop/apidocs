@@ -65,9 +65,6 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|更新| 接口/推送增加client_order_id和trade_id和order_id|
 |2022-08-23|/open/api/v2/order/advanced/place_batch|增加|增加批量下单加强版接口|
 
-<!-- |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|更新|订单推送和rest增加eventTime和isTaker|
-|2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
-|2022-07-15|operation sub.personal|更新|订单推送增加参数：”已成交额“、”已成交量“、“平均成交价”| -->
 
 # 接入说明
 
