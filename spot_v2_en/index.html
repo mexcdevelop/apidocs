@@ -604,7 +604,7 @@ API V1 will no longer be maintained starting from the end of June 2021. Please p
 
 <ul>
 <li>For a GET or DELETE reqeust, all parameters are path paremeters (query string)</li>
-<li>For a POST reqeust, business parameters are to be put in request body and of JSON format(with<code>content-type</code>set to<code>application/json</code>), they will not be used for signing of the request. To calculate signature, params <code>api_key</code>、<code>req_time</code>、<code>recv_window</code>(optional)、<code>sign</code> need to be sent as path parameter</li>
+<li>For a POST reqeust, business parameters are to be put in request body and of JSON format(with<code>content-type</code>set to<code>application/json</code>), they will not be used for signing of the request. To calculate signature, params <code>api_key</code>,<code>req_time</code>,<code>recv_window</code>(optional),<code>sign</code> need to be sent as path parameter</li>
 </ul>
 <h2 id='response-format'>Response Format</h2>
 <p>Response is of JSON format for all APIs</p>
@@ -655,7 +655,7 @@ API V1 will no longer be maintained starting from the end of June 2021. Please p
 </tr>
 </tbody></table>
 <h2 id='creating-api-key'>Creating API key</h2>
-<p>API key can be created in the <code>User Center</code> of MEXC site. There are two parts of API key, <code>Access key</code> and <code>Secret key</code>，both of them will be used for calculating and validating a signature. Please grant appropriate permissions for the created API key, before using it. </p>
+<p>API key can be created in the <code>User Center</code> of MEXC site. There are two parts of API key, <code>Access key</code> and <code>Secret key</code>,both of them will be used for calculating and validating a signature. Please grant appropriate permissions for the created API key, before using it. </p>
 
 <aside class="warning">
 Secret key will ONLY be displayed in the page when API key is generated, please make records accordingly
@@ -1369,7 +1369,7 @@ The module is refreshed according to a 24-hour cycle.
 <td>integer</td>
 <td>N</td>
 <td>Number of records to be returned</td>
-<td>1~1000，default to 100</td>
+<td>1~1000,default to 100</td>
 </tr>
 </tbody></table>
 
@@ -1472,7 +1472,7 @@ The module is refreshed according to a 24-hour cycle.
 <td>integer</td>
 <td>N</td>
 <td>number of records to be returned</td>
-<td>1~1000，default to 100</td>
+<td>1~1000,default to 100</td>
 </tr>
 </tbody></table>
 
@@ -1789,14 +1789,14 @@ Rate Limit : 20times/2s
 <td>string</td>
 <td>Y</td>
 <td>trade type</td>
-<td>BID，ASK</td>
+<td>BID,ASK</td>
 </tr>
 <tr>
 <td>order_type</td>
 <td>string</td>
 <td>Y</td>
 <td>order type</td>
-<td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
+<td>LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL</td>
 </tr>
 <tr>
 <td>client_order_id</td>
@@ -1956,14 +1956,14 @@ When client recieves response from server, it only means the cancelling request 
 <td>string</td>
 <td>Y</td>
 <td>trade type</td>
-<td>BID，ASK</td>
+<td>BID,ASK</td>
 </tr>
 <tr>
 <td>order_type</td>
 <td>string</td>
 <td>Y</td>
 <td>order type</td>
-<td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
+<td>LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL</td>
 </tr>
 <tr>
 <td>client_order_id</td>
@@ -2080,14 +2080,14 @@ For each batch request, the parameter client_order_id should be consistent, mean
 <td>string</td>
 <td>YES</td>
 <td>trade_type</td>
-<td>BID，ASK</td>
+<td>BID,ASK</td>
 </tr>
 <tr>
 <td>order_type</td>
 <td>string</td>
 <td>YES</td>
 <td>order_type</td>
-<td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
+<td>LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL</td>
 </tr>
 <tr>
 <td>client_order_id</td>
@@ -2170,14 +2170,14 @@ For each batch request, the parameter client_order_id should be consistent, mean
 <td>string</td>
 <td>N</td>
 <td>number of records to be returned</td>
-<td>1~1000，default to 50</td>
+<td>1~1000,default to 50</td>
 </tr>
 <tr>
 <td>trade_type</td>
 <td>string</td>
 <td>N</td>
 <td>order type</td>
-<td>BID，ASK</td>
+<td>BID,ASK</td>
 </tr>
 </tbody></table>
 
@@ -2307,14 +2307,14 @@ For each batch request, the parameter client_order_id should be consistent, mean
 <td>string</td>
 <td>N</td>
 <td>number of records to be returned</td>
-<td>1~1000，default to 50</td>
+<td>1~1000,default to 50</td>
 </tr>
 <tr>
 <td>trade_type</td>
 <td>string</td>
 <td>Y</td>
 <td>order type</td>
-<td>BID，ASK</td>
+<td>BID,ASK</td>
 </tr>
 <tr>
 <td>states</td>
@@ -2551,7 +2551,7 @@ For each batch request, the parameter client_order_id should be consistent, mean
 <td>string</td>
 <td>N</td>
 <td>number of records to be returned</td>
-<td>1~1000，default to 50</td>
+<td>1~1000,default to 50</td>
 </tr>
 <tr>
 <td>start_time</td>
@@ -3496,7 +3496,7 @@ Rate Limit : 2 times/s
 <td>currency</td>
 <td>string</td>
 <td>true</td>
-<td>Currency，Ex. usdt</td>
+<td>Currency,Ex. usdt</td>
 </tr>
 <tr>
 <td>amount</td>
@@ -3508,13 +3508,13 @@ Rate Limit : 2 times/s
 <td>from</td>
 <td>string</td>
 <td>true</td>
-<td>Transfer-out account，spot account MAIN，Contract account CONTRACT</td>
+<td>Transfer-out account,spot account MAIN,Contract account CONTRACT</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
 <td>true</td>
-<td>Transfer-in account，spot account MAIN，futures account CONTRACT</td>
+<td>Transfer-in account,spot account MAIN,futures account CONTRACT</td>
 </tr>
 </tbody></table>
 
@@ -3614,13 +3614,13 @@ Rate Limit : 2 times/s
 <td>from</td>
 <td>string</td>
 <td>false</td>
-<td>Transfer-out account ，spot account 、isolated-margin account 、futures account ，return all without filling</td>
+<td>Transfer-out account ,spot account ,futures account ,return all without filling</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
 <td>false</td>
-<td>Transfer-in account，spot account, isolated-margin account, futures account，return all without filling</td>
+<td>Transfer-in account,spot account, ifutures account,return all without filling</td>
 </tr>
 <tr>
 <td>start_time</td>
@@ -3644,7 +3644,7 @@ Rate Limit : 2 times/s
 <td>page_size</td>
 <td>number</td>
 <td>false</td>
-<td>Page size，default 20, maximum 50</td>
+<td>Page size,default 20, maximum 50</td>
 </tr>
 </tbody></table>
 
@@ -3680,17 +3680,17 @@ Rate Limit : 2 times/s
 <tr>
 <td>from</td>
 <td>string</td>
-<td>Transfer-out account，spot account, isolated-margin account, contract account</td>
+<td>Transfer-out account,spot account,  contract account</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
-<td>Transfer-in account ，spot account、isolated-margin account、futures account </td>
+<td>Transfer-in account ,spot account,futures account </td>
 </tr>
 <tr>
 <td>transact_state</td>
 <td>string</td>
-<td>Transfer status  Success SUCCESS、Fail  FAILED、Transferring WAIT</td>
+<td>Transfer status  Success SUCCESS,Fail  FAILED,Transferring WAIT</td>
 </tr>
 <tr>
 <td>transact_id</td>
@@ -3741,13 +3741,13 @@ Rate Limit : 2 times/s
 <td>account_type</td>
 <td>string</td>
 <td>false</td>
-<td>Account type：All、spot account 、futures account ，default spot account </td>
+<td>Account type：All,spot account ,futures account ,default spot account </td>
 </tr>
 <tr>
 <td>sub_uid</td>
 <td>long</td>
 <td>false</td>
-<td>Sub- account uid，type is invalid with any filling</td>
+<td>Sub- account uid,type is invalid with any filling</td>
 </tr>
 </tbody></table>
 
@@ -3869,17 +3869,17 @@ Rate Limit : 2 times/s
 <tr>
 <td>from</td>
 <td>string</td>
-<td>Transfer-out account ，spot account 、isolated-margin account 、futures account </td>
+<td>Transfer-out account ,spot account ,futures account </td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
-<td>Transfer-in account ，spot account 、isolated-margin account 、futures account </td>
+<td>Transfer-in account ,spot account ,futures account </td>
 </tr>
 <tr>
 <td>transact_state</td>
 <td>string</td>
-<td>Transfer status  Success 、Fail  、Transferring</td>
+<td>Transfer status  Success ,Fail  ,Transferring</td>
 </tr>
 </tbody></table>
 
