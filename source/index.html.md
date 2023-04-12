@@ -65,9 +65,6 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|更新| 接口/推送增加client_order_id和trade_id和order_id|
 |2022-08-23|/open/api/v2/order/advanced/place_batch|增加|增加批量下单加强版接口|
 
-<!-- |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|更新|订单推送和rest增加eventTime和isTaker|
-|2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
-|2022-07-15|operation sub.personal|更新|订单推送增加参数：”已成交额“、”已成交量“、“平均成交价”| -->
 
 # 接入说明
 
@@ -325,33 +322,7 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 | symbol         | string   | 交易对名称                       |
 | state          | string   | 交易对状态，当前是否可以进行交易 |
 | price_scale    | integer  | 价格精度                         |
-| quantity_scale | integer  | 数量精度                         | ## 各接口限速信息 |
-
-> 响应示例
-
-```json
-{
-    "code": 200,
-    "data": {
-        "total_limit": "100",
-        "request_limit": {
-            "/api/v2/market/symbols": "5",
-            "/api/v2/market/depth": "5"
-        }
-    }
-}
-```
-
-- **GET** ```/open/api/v2/common/rate_limit```
-
-参数：None
-
-响应
-
-| 字段名           | 数据类型 | 说明                                     |
-| ---------------- | -------- | ---------------------------------------- |
-| total_limit      | string   | 用户每秒最大请求阈值                     |
-| request_limit    | map      | 用户每秒每个API最大请求阈值              |
+| quantity_scale | integer  | 数量精度                         | 
 | min_amount       | string   | 最小交易金额                             |
 | max_amount       | string   | 最大交易金额                             |
 | maker_fee_rate   | string   | Maker费率                                |
@@ -497,55 +468,10 @@ None
 | time        | string   | 最新报价时间            |
 | change_rate | string   | 本阶段涨跌幅## 深度信息 |
 
-> 响应示例
-
-```json
-{
-    "code": 200,
-    "data": {
-        "asks": [
-            {
-                "price": "183.1683154",
-                "quantity": "128.5"
-            },
-            {
-                "price": "183.1983186",
-                "quantity": "101.6"
-            }
-        ],
-        "bids": [
-            {
-                "price": "182.4417544",
-                "quantity": "115.5"
-            },
-            {
-                "price": "182.4217568",
-                "quantity": "135.7"
-            }
-        ]
-    }
-}
-```
-
-- **GET** ```/open/api/v2/market/depth ```
-
-参数：
-
-| 参数名 | 数据类型 | 是否必须 | 说明         | 取值范围 |
-| ------ | -------- | -------- | ------------ | -------- |
-| symbol | string   | 是       | 交易对名称   |          |
-| depth  | string   | 是       | 返回的深度数 | 1~2000   |
-
-响应：
-
-| 参数名 | 数据类型 | 说明                                       |
-| ------ | -------- | ------------------------------------------ |
-| bids   | object   | 买单，包含字段[price, quantity] 价格及数量 |
-| asks   | object   | 卖单，包含字段[price, quantity] 价格及数量 |  |
-
 <aside class="notice">
 阶段是以当前时间的滚动24小时计。
 </aside>
+
 ## 深度信息
 
 > 响应示例
@@ -1697,8 +1623,8 @@ None
 | 参数名     | 类型   | 是否必填 | 说明                                                   |
 | ---------- | ------ | -------- | ------------------------------------------------------ |
 | currency   | string | false    | 币种 （缺省值所有币种）                                |
-| from       | string | false    | 出账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有 |
-| to         | string | false    | 入账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有 |
+| from       | string | false    | 出账账户，币币账户、合约账户，缺省时所有 |
+| to         | string | false    | 入账账户，币币账户、合约账户，缺省时所有 |
 | start_time | long   | false    | 开始时间                                               |
 | end_time   | long   | false    | 结束时间                                               |
 | page_num   | number | false    | 页数，默认 1                                           |
@@ -1712,8 +1638,8 @@ None
 | msg            | string  | 错误描述（如有）                                |
 | currency       | string  | 币种                                            |
 | amount         | string  | 金额                                            |
-| from           | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户      |
-| to             | string  | 入账账户，币币账户、逐仓杠杆账户、合约账户      |
+| from           | string  | 出账账户，币币账户、合约账户      |
+| to             | string  | 入账账户，币币账户、合约账户      |
 | transact_state | string  | 划转状态 成功 SUCCESS、失败 FAILED、划转中 WAIT |
 | transact_id    | string  | 划转交易 id                                     |
 | total_size     | int     | 总条数                                          |
@@ -1779,5 +1705,5 @@ None
 | transact_id | string  | 划转交易 id                                |
 | currency    | string  | 币种                                       | 
 | amount      | String | 划转数量 |
-| from        | string  | 出账账户，币币账户、逐仓杠杆账户、合约账户 |
+| from        | string  | 出账账户，币币账户、合约账户 |
 
