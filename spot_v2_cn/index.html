@@ -589,10 +589,6 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 <td>增加批量下单加强版接口</td>
 </tr>
 </tbody></table>
-
-<!-- |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|更新|订单推送和rest增加eventTime和isTaker|
-|2022-06-16| wss://wbs.mexc.com/raw/ws|更新|添加现货websocket文档|
-|2022-07-15|operation sub.personal|更新|订单推送增加参数：”已成交额“、”已成交量“、“平均成交价”| -->
 <h1 id='2d07d50c97'>接入说明</h1><h2 id='url'>接入URL</h2>
 <p>请选用以下的baseurl进行API请求：</p>
 
@@ -975,47 +971,6 @@ Secret key仅在申请时展示，请做好记录留存
 <td>integer</td>
 <td>数量精度</td>
 </tr>
-</tbody></table>
-
-<blockquote>
-<p>响应示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"total_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"request_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"/api/v2/market/symbols"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"/api/v2/market/depth"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<ul>
-<li><strong>GET</strong> <code>/open/api/v2/common/rate_limit</code></li>
-</ul>
-
-<p>参数：None</p>
-
-<p>响应</p>
-
-<table><thead>
-<tr>
-<th>字段名</th>
-<th>数据类型</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>total_limit</td>
-<td>string</td>
-<td>用户每秒最大请求阈值</td>
-</tr>
-<tr>
-<td>request_limit</td>
-<td>map</td>
-<td>用户每秒每个API最大请求阈值</td>
-</tr>
 <tr>
 <td>min_amount</td>
 <td>string</td>
@@ -1277,87 +1232,6 @@ Secret key仅在申请时展示，请做好记录留存
 <td>change_rate</td>
 <td>string</td>
 <td>本阶段涨跌幅## 深度信息</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>响应示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1683154"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128.5"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"183.1983186"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"101.6"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4417544"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"115.5"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"182.4217568"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"135.7"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<ul>
-<li><strong>GET</strong> <code>/open/api/v2/market/depth</code></li>
-</ul>
-
-<p>参数：</p>
-
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>数据类型</th>
-<th>是否必须</th>
-<th>说明</th>
-<th>取值范围</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>是</td>
-<td>交易对名称</td>
-<td></td>
-</tr>
-<tr>
-<td>depth</td>
-<td>string</td>
-<td>是</td>
-<td>返回的深度数</td>
-<td>1~2000</td>
-</tr>
-</tbody></table>
-
-<p>响应：</p>
-
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>数据类型</th>
-<th>说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>bids</td>
-<td>object</td>
-<td>买单，包含字段[price, quantity] 价格及数量</td>
-</tr>
-<tr>
-<td>asks</td>
-<td>object</td>
-<td>卖单，包含字段[price, quantity] 价格及数量</td>
 </tr>
 </tbody></table>
 
@@ -3807,13 +3681,13 @@ Secret key仅在申请时展示，请做好记录留存
 <td>from</td>
 <td>string</td>
 <td>false</td>
-<td>出账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有</td>
+<td>出账账户，币币账户、合约账户，缺省时所有</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
 <td>false</td>
-<td>入账账户，币币账户、逐仓杠杆账户、合约账户，缺省时所有</td>
+<td>入账账户，币币账户、合约账户，缺省时所有</td>
 </tr>
 <tr>
 <td>start_time</td>
@@ -3873,12 +3747,12 @@ Secret key仅在申请时展示，请做好记录留存
 <tr>
 <td>from</td>
 <td>string</td>
-<td>出账账户，币币账户、逐仓杠杆账户、合约账户</td>
+<td>出账账户，币币账户、合约账户</td>
 </tr>
 <tr>
 <td>to</td>
 <td>string</td>
-<td>入账账户，币币账户、逐仓杠杆账户、合约账户</td>
+<td>入账账户，币币账户、合约账户</td>
 </tr>
 <tr>
 <td>transact_state</td>
@@ -4062,7 +3936,7 @@ Secret key仅在申请时展示，请做好记录留存
 <tr>
 <td>from</td>
 <td>string</td>
-<td>出账账户，币币账户、逐仓杠杆账户、合约账户</td>
+<td>出账账户，币币账户、合约账户</td>
 </tr>
 </tbody></table>
 
