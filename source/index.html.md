@@ -786,7 +786,6 @@ post  /api/v3/broker/sub-account/universalTransfer
 | toAccount       | string | no        | Transfer to master account by default if toAccount is not sent |
 | fromAccountType | string | yes       | <a href="#from_account">fromAccountType</a>|
 | toAccountType   | string | yes       | <a href="#to_account">toAccountType</a>|
-| symbol          | string | yes       | Only supported when fromAccountTypeid `ISOLATED_MARGIN type`,eg:ETHUSDT |
 | asset           | string | yes       | asset,eg:USDT                                                |
 | amount          | string | yes       | amount,eg:1.82938475                                         |
 
@@ -844,49 +843,6 @@ post  /api/v3/broker/sub-account/futures
 | isFuturesEnabled | boolean | isFuturesEnabled: true or false |
 | timestamp        | string  | response time                   |
 
-## Enable Margin for Sub-account
-
-> request
-
-```
-post  /api/v3/broker/sub-account/margin
-
-```
-
-> response
-
-```json
-{
-    "code": "0",
-    "message": "",
-    "data": [{
-        "subAccount": "mexc1",
-        "isMarginEnabled": true,
-        "timestamp": "1597026383085"
-    }]
-}
-```
-
-**Http Request:**
-
-- **POST** ```/api/v3/broker/sub-account/margin```
-
-**Query Parameter:**
-
-| Name       | Type   | Mandatory | Description     |
-| ---------- | ------ | --------- | --------------- |
-| subAccount | string | yes       | subAccount name |
-| timestamp  | string | yes       | timestamp       |
-| signature  | string | yes       | signature       |
-
-**Response Parameter:**
-
-| Name            | Type    | Description                    |
-| --------------- | ------- | ------------------------------ |
-| subAccount      | string  | subAccount name                |
-| isMarginEnabled | boolean | isMarginEnabled: true or false |
-| timestamp       | string  | response time                  |
-
 # Public API Definitions
 
 ## ENUM definitions
@@ -895,13 +851,11 @@ post  /api/v3/broker/sub-account/margin
 
 - SPOT 
 - FUTURES 
-- ISOLATED_MARGIN 
 
 ### <a id="to_account">toAccountType</a>
 
 - SPOT 
 - FUTURES 
-- ISOLATED_MARGIN 
 
 ### <a id="permissions">Permission</a>
 
@@ -909,10 +863,6 @@ post  /api/v3/broker/sub-account/margin
 - SPOT_ACCOUNT_WRITE 
 - SPOT_DEAL_READ 
 - SPOT_DEAL_WRITE 
-- ISOLATED_MARGIN_ACCOUNT_READ 
-- ISOLATED_MARGIN_ACCOUNT_WRITE 
-- ISOLATED_MARGIN_DEAL_READ 
-- ISOLATED_MARGIN_DEAL_WRITE 
 - CONTRACT_ACCOUNT_READ 
 - CONTRACT_ACCOUNT_WRITE
 - CONTRACT_DEAL_READ 
