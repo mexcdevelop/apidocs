@@ -797,7 +797,6 @@ post  /api/v3/broker/sub-account/universalTransfer
 |toAccount|string|no|母子账户，可填subAccout账户名，不填默认母账户|
 |fromAccountType|string|yes|<a href="#from_account">划出账户类型</a>|
 |toAccountType|string|yes|<a href="#to_account">划入账户类型</a>|
-|symbol|string|yes|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
 |asset|string|yes|划转资产，eg：USDT|
 |amount|string|yes|划转数量，eg：1.82938475|
 
@@ -856,49 +855,6 @@ post  /api/v3/broker/sub-account/futures
 |isFuturesEnabled|boolean|开通合约业务，开通：true|
 |timestamp|string|返回时间|
 
-##  开通子账户的杠杆业务
-
-> 请求示例
-
-```
-
-post  /api/v3/broker/sub-account/margin
-
-```
-
-> 返回示例
-
-```json
-{
-    "code": "0",
-    "message": "",
-    "data": [{
-        "subAccount": "mexc1",
-        "isMarginEnabled": true,
-        "timestamp": "1597026383085"
-    }]
-}
-```
-
-**HTTP请求：**
-
-- **POST** ```/api/v3/broker/sub-account/margin```
-
-**Query参数：**
-
-| 参数名 | 数据类型| 是否必须 | 说明 | 
-| ------ | -------- | -------- | ---------- |
-|subAccount|string|yes|子账户名称|
-|timestamp|string|yes|时间|
-|signature|string|yes|签名|
-
-**返回参数：**
-
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-|subAccount|string|子账户名称|
-|isMarginEnabled|boolean|是否开通杠杆业务：true or false|
-|timestamp|string|返回时间|
 # 公开API参数
 
 ## Broker 枚举定义
@@ -907,13 +863,11 @@ post  /api/v3/broker/sub-account/margin
 
 - SPOT 现货
 - FUTURES 合约
-- ISOLATED_MARGIN 杠杆
 
 ### <a id="to_account">划入账户类型</a>
 
 - SPOT 现货
 - FUTURES 合约
-- ISOLATED_MARGIN 杠杆
 
 ### <a id="permissions">权限</a>
 
@@ -921,10 +875,6 @@ post  /api/v3/broker/sub-account/margin
 - SPOT_ACCOUNT_WRITE 账户写
 - SPOT_DEAL_READ 现货交易信息读
 - SPOT_DEAL_WRITE 现货交易信息写
-- ISOLATED_MARGIN_ACCOUNT_READ 杠杆账户信息读
-- ISOLATED_MARGIN_ACCOUNT_WRITE 杠杆账户信息写
-- ISOLATED_MARGIN_DEAL_READ 杠杆交易信息读
-- ISOLATED_MARGIN_DEAL_WRITE 杠杆交易信息写
 - CONTRACT_ACCOUNT_READ 合约账户信息读
 - CONTRACT_ACCOUNT_WRITE 合约账户信息写
 - CONTRACT_DEAL_READ 合约交易信息读
