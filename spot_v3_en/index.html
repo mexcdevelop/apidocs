@@ -1243,8 +1243,6 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <li>Endpoints are marked according to IP or UID limit and their corresponding weight value.</li>
 <li>Each endpoint with IP limits has an independent 20000 per minute limit.</li>
 <li>Each endpoint with UID limits has an independent 240000 per minute limit.</li>
-<li>Responses from endpoints with IP limits contain the header X-SAPI-USED-IP-WEIGHT-1M, defining the weight used by the current IP.</li>
-<li>Responses from endpoints with UID limits contain the header X-SAPI-USED-UID-WEIGHT-1M, defining the weight used by the current UID.</li>
 </ul>
 <h3 id='limits-error'>Limits Error</h3>
 <ul>
@@ -5168,9 +5166,9 @@ post /api/v3/sub-account/margin
 <ol>
 <li>If <code>network</code> is not sent, will return default network in that currency.</li>
 <li>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code> and check whether is default network by response params<code>isDefault</code></li>
-<li>Withdraw address only support address which added in withdrawal settings on website.
-Response:</li>
 </ol>
+
+<p>Response:</p>
 
 <table><thead>
 <tr>
@@ -7133,6 +7131,8 @@ Response:</li>
   "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
 }
 </code></pre></div>
+<p><strong>Permission:</strong>  SPOT_ACCOUNT_R</p>
+
 <p><strong>HTTP</strong></p>
 
 <ul>
