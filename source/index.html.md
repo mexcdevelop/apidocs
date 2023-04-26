@@ -3020,17 +3020,28 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ```json
 [
     {
-        "convertMx": "0.00129158",
-        "balance": "0.00339606433902421",
-        "asset": "ETHF"
-    }
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "USDT",
+           "code": "30021",
+           "message": "xxxxxxx"
+ },
+{
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "BTC",
+           "code": "30021",
+           "message": "xxxxxxx"
+ }
 ]
 ```
 
 
 - **GET** ```/api/v3/capital/convert/list```  
 
-**Permission:** SPOT_DEAL_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -3045,28 +3056,34 @@ Response:
 
 | Name | Description  |
 | :------------ | :-------- | 
-|convertMx|MX amount（Deducted commission fee）|
-|balance|Convertible balance|
-|asset|asset|
+| convertMx|MX amount（Deducted commission fee）|
+| convertUsdt | usdt amount     |
+| balance|Convertible balance|
+| asset|asset|
+| code    | code     |
+| message | message  |
 
 ## Dust Transfer
 
 > Request
 
 ```
-post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signature={{signature}}
+post {{api_url}}/api/v3/capital/convert?asset=BTC,FIL,ETH&timestamp={{timestamp}}&signature={{signature}}
 ```
 > Response
 
 ```json
-{ 
-  "totalConvert": "1.82736182"
-} 
+{
+  "successList":["ALGO","OMG"],
+  "failedList":[],
+  "totalConvert":"0.07085578",
+  "convertFee":"0.00071571"
+  }
 ```
 
 - **POST** ```/api/v3/capital/convert```  
 
-**Permission:** SPOT_DEAL_WRITE
+**Permission:** SPOT_ACCOUNT_W
 
 **Weight(IP):** 10
 
@@ -3083,6 +3100,12 @@ Response:
 | Name | Description  |
 | :------------ | :-------- | 
 |totalConvert|Convert MX amount(Deducted commission fee)|
+| convertFee  | convertFee     |
+| successList | convert success List |
+| failedList  | convert failed List |
+| -asset     | asset         |
+| -message   | message  |
+| -code      | code   |
 
 ## DustLog
 
