@@ -3093,17 +3093,28 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ```json
 [
     {
-        "convertMx": "0.00129158",
-        "balance": "0.00339606433902421",
-        "asset": "ETHF"
-    }
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "USDT",
+           "code": "30021",
+           "message": "xxxxxxx"
+ },
+{
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "BTC",
+           "code": "30021",
+           "message": "xxxxxxx"
+ }
 ]
 ```
 **HTTP请求**
 
 - **GET** ```/api/v3/capital/convert/list```  
 
-**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -3118,29 +3129,35 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 
 | 参数名 | 说明  |
 | :------------ | :-------- | 
-|convertMx|余额mx值预估(扣除手续费后)|
-|balance|币种余额|
-|asset|币种|
+| convertMx|余额mx值预估(扣除手续费后)|
+| convertUsdt | 余额usdt估值      |
+| balance|币种余额|
+| asset|币种|
+| code    | 无法兑换原因code     |
+| message | 无法兑换原因message  |
 
 ## 小额资产兑换
 
 > 请求示例
 
 ```
-post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signature={{signature}}
+post {{api_url}}/api/v3/capital/convert?asset=BTC,FIL,ETH&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
-{ 
-  "totalConvert": "1.82736182"
-} 
+{
+  "successList":["ALGO","OMG"],
+  "failedList":[],
+  "totalConvert":"0.07085578",
+  "convertFee":"0.00071571"
+  }
 ```
 **HTTP请求**
 
 - **POST** ```/api/v3/capital/convert```  
 
-**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
+**接口权限要求:** 账户写 / SPOT_ACCOUNT_W
 
 **权重(IP):** 10
 
@@ -3157,6 +3174,12 @@ post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signa
 | 参数名 | 说明  |
 | :------------ | :-------- | 
 |totalConvert|转换后的mx数量(扣除mx手续费)|
+| convertFee  | 扣除mx手续费     |
+| successList | 兑换成功币种列表 |
+| failedList  | 兑换失败币种列表 |
+| -asset     | 资产名称         |
+| -message   | 兑换失败错误信息 |
+| -code      | 兑换失败错误码   |
 
 ## 查询小额资产兑换历史
 
