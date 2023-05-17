@@ -2555,7 +2555,7 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 | 参数名 | 数据类型| 是否必须 | 说明               | 
 | :------ | :-------- |:-----|:-----------------|
 |coin|string| 是    | 币种               |
-|withdrawOrderId|string| 否    | 自定义提币ID(目前不支持)   |
+|withdrawOrderId|string| 否    | 自定义提币ID   |
 |network|string| 否    | 提币网络             |
 |address|string| 是    | 提币地址             |
 |memo|string| 否    | 如地址中需求memo，则此处必传 |
