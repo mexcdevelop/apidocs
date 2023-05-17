@@ -3600,8 +3600,6 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 
 - Doing a `DELETE` on a `listenKey` will close the stream and invalidate the `listenKey`.
 
-- Doing a `POST` on an account with an active `listenKey` will return the currently active `listenKey` and extend its validity for 60 minutes.
-
 - websocket baseurl: **wss://wbs.mexc.com/ws**
 
 - User Data Streams are accessed at **/ws?listenKey=listenKey** <br/>eg:**wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
