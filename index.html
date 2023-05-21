@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-05-21" class="toc-h2 toc-link" data-title="2023-05-21"><strong>2023-05-21</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-03-16" class="toc-h2 toc-link" data-title="2023-03-16"><strong>2023-03-16</strong></a>
                   </li>
                   <li>
@@ -490,6 +493,9 @@
           <li>
             <a href="#market-data-endpoints" class="toc-h1 toc-link" data-title="Market Data Endpoints">Market Data Endpoints</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#download-historical-market-data" class="toc-h2 toc-link" data-title="Download Historical Market Data">Download Historical Market Data</a>
+                  </li>
                   <li>
                     <a href="#test-connectivity" class="toc-h2 toc-link" data-title="Test Connectivity">Test Connectivity</a>
                   </li>
@@ -775,7 +781,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-03-16'><strong>2023-03-16</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-05-21'><strong>2023-05-21</strong></h2>
+<ul>
+<li>Add Download Historical Market Data</li>
+</ul>
+<h2 id='2023-03-16'><strong>2023-03-16</strong></h2>
 <ul>
 <li><p>Add:Query User Universal Transfer History (by tranId) endpoint</p></li>
 <li><p>ws spot@private.deals.v3.api channel add params:&quot;commission&quot;,&quot;commissionAsset&quot;and&quot;deals amount&quot;</p></li>
@@ -1639,7 +1649,9 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <td>sub account is forbidden</td>
 </tr>
 </tbody></table>
-<h1 id='market-data-endpoints'>Market Data Endpoints</h1><h2 id='test-connectivity'>Test Connectivity</h2>
+<h1 id='market-data-endpoints'>Market Data Endpoints</h1><h2 id='download-historical-market-data'>Download Historical Market Data</h2>
+<p>Provides kline and trading data for all Spot pairs since 01-01-2023：<a href="https://www.mexc.co/zh-CN/market-data-download">Historical Market Data</a></p>
+<h2 id='test-connectivity'>Test Connectivity</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -5163,10 +5175,7 @@ post /api/v3/sub-account/margin
 </tr>
 </tbody></table>
 
-<ol>
-<li>If <code>network</code> is not sent, will return default network in that currency.</li>
-<li>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code> and check whether is default network by response params<code>isDefault</code></li>
-</ol>
+<p>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code>.</p>
 
 <p>Response:</p>
 
@@ -6206,17 +6215,28 @@ post /api/v3/sub-account/margin
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00129158"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00339606433902421"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHF"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+           </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"convertUsdt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000441"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30021"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxxxx"</span><span class="w">
+ </span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+           </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"convertUsdt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000441"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30021"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxxxx"</span><span class="w">
+ </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <ul>
 <li><strong>GET</strong> <code>/api/v3/capital/convert/list</code><br></li>
 </ul>
 
-<p><strong>Permission:</strong> SPOT_DEAL_READ</p>
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
 <p><strong>Weight(IP):</strong> 1</p>
 
@@ -6257,6 +6277,10 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">MX amount（Deducted commission fee）</td>
 </tr>
 <tr>
+<td style="text-align: left">convertUsdt</td>
+<td style="text-align: left">usdt amount</td>
+</tr>
+<tr>
 <td style="text-align: left">balance</td>
 <td style="text-align: left">Convertible balance</td>
 </tr>
@@ -6264,25 +6288,36 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">asset</td>
 <td style="text-align: left">asset</td>
 </tr>
+<tr>
+<td style="text-align: left">code</td>
+<td style="text-align: left">code</td>
+</tr>
+<tr>
+<td style="text-align: left">message</td>
+<td style="text-align: left">message</td>
+</tr>
 </tbody></table>
 <h2 id='dust-transfer'>Dust Transfer</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post {{api_url}}/api/v3/capital/convert?asset=ETHF&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+<div class="highlight"><pre class="highlight plaintext"><code>post {{api_url}}/api/v3/capital/convert?asset=BTC,FIL,ETH&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
-  </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.82736182"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"successList"</span><span class="p">:[</span><span class="s2">"ALGO"</span><span class="p">,</span><span class="s2">"OMG"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"failedList"</span><span class="p">:[],</span><span class="w">
+  </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="s2">"0.07085578"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"convertFee"</span><span class="p">:</span><span class="s2">"0.00071571"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
 <li><strong>POST</strong> <code>/api/v3/capital/convert</code><br></li>
 </ul>
 
-<p><strong>Permission:</strong> SPOT_DEAL_WRITE</p>
+<p><strong>Permission:</strong> SPOT_ACCOUNT_W</p>
 
 <p><strong>Weight(IP):</strong> 10</p>
 
@@ -6327,6 +6362,30 @@ post /api/v3/sub-account/margin
 <tr>
 <td style="text-align: left">totalConvert</td>
 <td style="text-align: left">Convert MX amount(Deducted commission fee)</td>
+</tr>
+<tr>
+<td style="text-align: left">convertFee</td>
+<td style="text-align: left">convertFee</td>
+</tr>
+<tr>
+<td style="text-align: left">successList</td>
+<td style="text-align: left">convert success List</td>
+</tr>
+<tr>
+<td style="text-align: left">failedList</td>
+<td style="text-align: left">convert failed List</td>
+</tr>
+<tr>
+<td style="text-align: left">-asset</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">-message</td>
+<td style="text-align: left">message</td>
+</tr>
+<tr>
+<td style="text-align: left">-code</td>
+<td style="text-align: left">code</td>
 </tr>
 </tbody></table>
 <h2 id='dustlog'>DustLog</h2>
@@ -7116,7 +7175,6 @@ post /api/v3/sub-account/margin
 <li><p>A User Data Stream <code>listenKey</code> is valid for 60 minutes after creation.</p></li>
 <li><p>Doing a <code>PUT</code> on a <code>listenKey</code> will extend its validity for 60 minutes.</p></li>
 <li><p>Doing a <code>DELETE</code> on a <code>listenKey</code> will close the stream and invalidate the <code>listenKey</code>.</p></li>
-<li><p>Doing a <code>POST</code> on an account with an active <code>listenKey</code> will return the currently active <code>listenKey</code> and extend its validity for 60 minutes.</p></li>
 <li><p>websocket baseurl: <strong>wss://wbs.mexc.com/ws</strong></p></li>
 <li><p>User Data Streams are accessed at <strong>/ws?listenKey=listenKey</strong> <br/>eg:<strong>wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></p></li>
 <li><p>A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.</p></li>
