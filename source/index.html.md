@@ -696,6 +696,76 @@ get  /api/v3/broker/capital/deposit/subHisrec
 | unlockConfirm | string | unlockConfirm                                                |
 | confirmTimes  | string | confirmTimes                                                 |
 
+##  Query All Sub-account Deposit History(Recent 3 days)
+
+master account query all Sub-account deposit history
+
+> request
+
+```
+get  /api/v3/broker/capital/deposit/subHisrec/getall
+
+```
+
+> response
+
+```json
+[
+    {
+        "amount":"0.00999800",
+        "coin":"PAXG",
+        "network":"ETH",
+        "status":,
+        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
+        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "unlockConfirm":"12", 
+        "confirmTimes":"7"
+    },
+    {
+        "amount":"0.50000000",
+        "coin":"IOTA",
+        "network":"IOTA",
+        "status":1,
+        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
+    		"txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "unlockConfirm":"12",
+        "confirmTimes":"7"
+    }
+]
+
+```
+
+**Http Request:**
+
+- **GET** ```/api/v3/broker/capital/deposit/subHisrec/getall```
+
+**Request Parameter:**
+
+| Name       | Type   | Mandatory | Description                                                  |
+| ---------- | ------ | --------- | ------------------------------------------------------------ |
+| coin       | string | no        | deposit coin                                                 |
+| status     | string | no        | <a href="#status">deposit status</a>|
+| startTime  | string | no        | startTime                      |
+| endTime    | string | no        | endTime                                          |
+| limit      | string | no        | default:100                                                  |
+| page       | string | no        | default:1                                                    |
+| recvWindow | string | no        | recvWindow                                                   |
+| timestamp  | string | yes       | timestamp                                                    |
+| signature  | string | yes       | signature                                                    |
+
+**Response Parameter:**
+
+| Name          | Type   | Description                                                  |
+| ------------- | ------ | ------------------------------------------------------------ |
+| amount        | string | deposit amount                                               |
+| coin          | string | deposit coin                                                 |
+| network       | string | deposit network                                              |
+| status        | number | <a href="#status">deposit status</a> |
+| address       | string | deposit address                                              |
+| txId          | string | txid                                                         |
+| unlockConfirm | string | unlockConfirm                                                |
+| confirmTimes  | string | confirmTimes                                                 |
+
 ## Withdraw
 
 [only support withdraw for sub-account,not master account]
