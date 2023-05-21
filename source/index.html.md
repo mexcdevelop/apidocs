@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-05-21**
+
+- 新增历史行情数据下载
+
 ## **2023-03-16**
 
 - 新增：查询用户万向划转历史（根据tranId）接口
@@ -587,6 +591,10 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 
 # 行情接口
+
+## 历史行情数据下载
+
+提供2023年01月01日以来的K线和交易历史数据下载：[历史行情数据下载](https://www.mexc.co/zh-CN/market-data-download)
 
 ## 测试服务器连通性
 
@@ -2555,7 +2563,7 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 | 参数名 | 数据类型| 是否必须 | 说明               | 
 | :------ | :-------- |:-----|:-----------------|
 |coin|string| 是    | 币种               |
-|withdrawOrderId|string| 否    | 自定义提币ID(目前不支持)   |
+|withdrawOrderId|string| 否    | 自定义提币ID   |
 |network|string| 否    | 提币网络             |
 |address|string| 是    | 提币地址             |
 |memo|string| 否    | 如地址中需求memo，则此处必传 |
@@ -2564,8 +2572,8 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 |timestamp|string| 是    | 时间戳              |
 |signature|string| 是    | 签名               |
  
-1. 如果不发送`network`,将按该币种默认网络返回结果;
-2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
+
+可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段。
 
 
 **返回参数**
@@ -3093,17 +3101,28 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ```json
 [
     {
-        "convertMx": "0.00129158",
-        "balance": "0.00339606433902421",
-        "asset": "ETHF"
-    }
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "USDT",
+           "code": "30021",
+           "message": "xxxxxxx"
+ },
+{
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "BTC",
+           "code": "30021",
+           "message": "xxxxxxx"
+ }
 ]
 ```
 **HTTP请求**
 
 - **GET** ```/api/v3/capital/convert/list```  
 
-**接口权限要求:** 现货交易信息读 / SPOT_DEAL_R
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
 
 **权重(IP):** 1
 
@@ -3118,29 +3137,35 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 
 | 参数名 | 说明  |
 | :------------ | :-------- | 
-|convertMx|余额mx值预估(扣除手续费后)|
-|balance|币种余额|
-|asset|币种|
+| convertMx|余额mx值预估(扣除手续费后)|
+| convertUsdt | 余额usdt估值      |
+| balance|币种余额|
+| asset|币种|
+| code    | 无法兑换原因code     |
+| message | 无法兑换原因message  |
 
 ## 小额资产兑换
 
 > 请求示例
 
 ```
-post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signature={{signature}}
+post {{api_url}}/api/v3/capital/convert?asset=BTC,FIL,ETH&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
-{ 
-  "totalConvert": "1.82736182"
-} 
+{
+  "successList":["ALGO","OMG"],
+  "failedList":[],
+  "totalConvert":"0.07085578",
+  "convertFee":"0.00071571"
+  }
 ```
 **HTTP请求**
 
 - **POST** ```/api/v3/capital/convert```  
 
-**接口权限要求:** 现货交易信息写 / SPOT_DEAL_W
+**接口权限要求:** 账户写 / SPOT_ACCOUNT_W
 
 **权重(IP):** 10
 
@@ -3157,6 +3182,12 @@ post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signa
 | 参数名 | 说明  |
 | :------------ | :-------- | 
 |totalConvert|转换后的mx数量(扣除mx手续费)|
+| convertFee  | 扣除mx手续费     |
+| successList | 兑换成功币种列表 |
+| failedList  | 兑换失败币种列表 |
+| -asset     | 资产名称         |
+| -message   | 兑换失败错误信息 |
+| -code      | 兑换失败错误码   |
 
 ## 查询小额资产兑换历史
 
@@ -3655,7 +3686,6 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 - 用于订阅账户数据的 `listenKey` 从创建时刻起有效期为60分钟
 - 可以通过 `PUT` 一个 `listenKey` 延长60分钟有效期
 - 可以通过`DELETE`一个 `listenKey` 立即关闭当前数据流，并使该`listenKey` 无效
-- 在具有有效`listenKey`的帐户上执行`POST`将返回当前有效的`listenKey`并将其有效期延长60分钟
 - websocket接口的baseurl: **wss://wbs.mexc.com/ws**
 - 订阅账户数据流的stream名称为 **/ws?listenKey=listenKey** <br/>  如：**wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
 - 每个链接有效期不超过24小时，请妥善处理断线重连
