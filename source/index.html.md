@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-05-21**
+
+- Add Download Historical Market Data
+
 ## **2023-03-16**
 
 - Add:Query User Universal Transfer History (by tranId) endpoint
@@ -594,6 +598,10 @@ The following error information can be returend
 | 140002 | sub account is forbidden                                     |
 
 # Market Data Endpoints
+
+## Download Historical Market Data
+
+Provides kline and trading data for all Spot pairs since 01-01-2023：[Historical Market Data](https://www.mexc.co/zh-CN/market-data-download)
 
 ## Test Connectivity
 
