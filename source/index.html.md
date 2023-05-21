@@ -2492,8 +2492,7 @@ Parameters:
 |timestamp|string| YES       | timestamp                                                      |
 |signature|string| YES       | signature                                                      |
  
-1. If `network` is not sent, will return default network in that currency.
-2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
+Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList`.
 
 Response:
 
