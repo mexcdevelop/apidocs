@@ -666,10 +666,11 @@ get  /api/v3/broker/capital/deposit/subHisrec
         "coin":"IOTA",
         "network":"IOTA",
         "status":1,
-"address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
-        "addressTag":"",    		"txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
-         "unlockConfirm":"12",
-         "confirmTimes":"7"
+        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
+        "addressTag":"",    		
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "unlockConfirm":"12",
+        "confirmTimes":"7"
     }
 ]
 
@@ -686,7 +687,7 @@ get  /api/v3/broker/capital/deposit/subHisrec
 |coin|string|no|币种|
 |status|string|no|<a href="#status">状态</a> |
 |startTime|string|no|开始时间，如果没有传，默认查询10天|
-|endTime|string|no|结束时间，如果没有传，取当前时间|
+|endTime|string|no|结束时间|
 |limit|string|no|默认值20，目前无最大值限制|
 |page|string|no|默认值1|
 |recvWindow|string|no|同步时间|
@@ -703,6 +704,77 @@ get  /api/v3/broker/capital/deposit/subHisrec
 |status|number| <a href="#status">状态</a> |
 |address|string| 充值地址|
 |addressTag|string| 地址标签|
+|txId|string| txid|
+|unlockConfirm|string|解锁需要的网络确认次数|
+|confirmTimes|string| 确认进度|
+
+##  获取所有子账户的所有充值记录(最近三天)
+
+母账户查询三天（三天前从0点计时）内，子账户充值记录
+
+> 请求示例
+
+```
+
+get  /api/v3/broker/capital/deposit/subHisrec/getall
+
+```
+
+> 返回示例
+
+```json
+[
+    {
+        "amount":"0.00999800",
+        "coin":"PAXG",
+        "network":"ETH",
+        "status":,
+        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
+        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "unlockConfirm":"12", 
+        "confirmTimes":"7"
+    },
+    {
+        "amount":"0.50000000",
+        "coin":"IOTA",
+        "network":"IOTA",
+        "status":1,
+        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW", 		
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "unlockConfirm":"12",
+        "confirmTimes":"7"
+    }
+]
+
+```
+
+**HTTP请求：**
+
+- **GET** ```/api/v3/broker/capital/deposit/subHisrec/getall```
+
+**请求参数：**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| ------ | -------- | -------- | ---------- |
+|coin|string|no|币种|
+|status|string|no|<a href="#status">状态</a> |
+|startTime|string|no|开始时间|
+|endTime|string|no|结束时间|
+|limit|string|no|默认值100，最大1000|
+|page|string|no|默认值1|
+|recvWindow|string|no|同步时间|
+|timestamp|string|yes|时间|
+|signature|string|yes|签名|
+
+**返回参数：**
+
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+|amount|string| 充值数量|
+|coin|string| 充值币种|
+|network|string|充值网络|
+|status|number| <a href="#status">状态</a> |
+|address|string| 充值地址|
 |txId|string| txid|
 |unlockConfirm|string|解锁需要的网络确认次数|
 |confirmTimes|string| 确认进度|
