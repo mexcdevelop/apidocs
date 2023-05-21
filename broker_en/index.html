@@ -362,6 +362,9 @@
                     <a href="#query-sub-account-deposit-history" class="toc-h2 toc-link" data-title="Query Sub-account Deposit History">Query Sub-account Deposit History</a>
                   </li>
                   <li>
+                    <a href="#query-all-sub-account-deposit-history-recent-3-days" class="toc-h2 toc-link" data-title="Query All Sub-account Deposit History(Recent 3 days)">Query All Sub-account Deposit History(Recent 3 days)</a>
+                  </li>
+                  <li>
                     <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
                   </li>
                   <li>
@@ -369,9 +372,6 @@
                   </li>
                   <li>
                     <a href="#enable-futures-for-sub-account" class="toc-h2 toc-link" data-title="Enable Futures for Sub-account">Enable Futures for Sub-account</a>
-                  </li>
-                  <li>
-                    <a href="#enable-margin-for-sub-account" class="toc-h2 toc-link" data-title="Enable Margin for Sub-account">Enable Margin for Sub-account</a>
                   </li>
               </ul>
           </li>
@@ -1503,9 +1503,9 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
         </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"PAXG"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:,</span><span class="w">
-        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e1a59395a81fc8d62c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e159395a81fc8d62c"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f581c360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
         </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -1514,10 +1514,11 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
         </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-</span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">            </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">            
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
@@ -1632,6 +1633,164 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 <td>addressTag</td>
 <td>string</td>
 <td>addressTag</td>
+</tr>
+<tr>
+<td>txId</td>
+<td>string</td>
+<td>txid</td>
+</tr>
+<tr>
+<td>unlockConfirm</td>
+<td>string</td>
+<td>unlockConfirm</td>
+</tr>
+<tr>
+<td>confirmTimes</td>
+<td>string</td>
+<td>confirmTimes</td>
+</tr>
+</tbody></table>
+<h2 id='query-all-sub-account-deposit-history-recent-3-days'>Query All Sub-account Deposit History(Recent 3 days)</h2>
+<p>master account query all Sub-account deposit history</p>
+
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get  /api/v3/broker/capital/deposit/subHisrec/getall
+
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.00999800"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"PAXG"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e1a59395a81f8d62c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e8b09f3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.50000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre></div>
+<p><strong>Http Request:</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/broker/capital/deposit/subHisrec/getall</code></li>
+</ul>
+
+<p><strong>Request Parameter:</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>coin</td>
+<td>string</td>
+<td>no</td>
+<td>deposit coin</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>no</td>
+<td><a href="#status">deposit status</a></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>string</td>
+<td>no</td>
+<td>startTime</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>string</td>
+<td>no</td>
+<td>endTime</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>string</td>
+<td>no</td>
+<td>default:100</td>
+</tr>
+<tr>
+<td>page</td>
+<td>string</td>
+<td>no</td>
+<td>default:1</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>string</td>
+<td>no</td>
+<td>recvWindow</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string</td>
+<td>yes</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>string</td>
+<td>yes</td>
+<td>signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response Parameter:</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>deposit amount</td>
+</tr>
+<tr>
+<td>coin</td>
+<td>string</td>
+<td>deposit coin</td>
+</tr>
+<tr>
+<td>network</td>
+<td>string</td>
+<td>deposit network</td>
+</tr>
+<tr>
+<td>status</td>
+<td>number</td>
+<td><a href="#status">deposit status</a></td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>deposit address</td>
 </tr>
 <tr>
 <td>txId</td>
@@ -1849,12 +2008,6 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 <td><a href="#to_account">toAccountType</a></td>
 </tr>
 <tr>
-<td>symbol</td>
-<td>string</td>
-<td>yes</td>
-<td>Only supported when fromAccountTypeid <code>ISOLATED_MARGIN type</code>,eg:ETHUSDT</td>
-</tr>
-<tr>
 <td>asset</td>
 <td>string</td>
 <td>yes</td>
@@ -1976,98 +2129,15 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 <td>response time</td>
 </tr>
 </tbody></table>
-<h2 id='enable-margin-for-sub-account'>Enable Margin for Sub-account</h2>
-<blockquote>
-<p>request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post  /api/v3/broker/sub-account/margin
-
-</code></pre></div>
-<blockquote>
-<p>response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-        </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc1"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"isMarginEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1597026383085"</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong>Http Request:</strong></p>
-
-<ul>
-<li><strong>POST</strong> <code>/api/v3/broker/sub-account/margin</code></li>
-</ul>
-
-<p><strong>Query Parameter:</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Mandatory</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>subAccount</td>
-<td>string</td>
-<td>yes</td>
-<td>subAccount name</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>yes</td>
-<td>timestamp</td>
-</tr>
-<tr>
-<td>signature</td>
-<td>string</td>
-<td>yes</td>
-<td>signature</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response Parameter:</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>subAccount</td>
-<td>string</td>
-<td>subAccount name</td>
-</tr>
-<tr>
-<td>isMarginEnabled</td>
-<td>boolean</td>
-<td>isMarginEnabled: true or false</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>response time</td>
-</tr>
-</tbody></table>
 <h1 id='public-api-definitions'>Public API Definitions</h1><h2 id='enum-definitions'>ENUM definitions</h2><h3 id='fromaccounttype'><a id="from_account">fromAccountType</a></h3>
 <ul>
 <li>SPOT </li>
 <li>FUTURES </li>
-<li>ISOLATED_MARGIN </li>
 </ul>
 <h3 id='toaccounttype'><a id="to_account">toAccountType</a></h3>
 <ul>
 <li>SPOT </li>
 <li>FUTURES </li>
-<li>ISOLATED_MARGIN </li>
 </ul>
 <h3 id='permission'><a id="permissions">Permission</a></h3>
 <ul>
@@ -2075,10 +2145,6 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 <li>SPOT_ACCOUNT_WRITE </li>
 <li>SPOT_DEAL_READ </li>
 <li>SPOT_DEAL_WRITE </li>
-<li>ISOLATED_MARGIN_ACCOUNT_READ </li>
-<li>ISOLATED_MARGIN_ACCOUNT_WRITE </li>
-<li>ISOLATED_MARGIN_DEAL_READ </li>
-<li>ISOLATED_MARGIN_DEAL_WRITE </li>
 <li>CONTRACT_ACCOUNT_READ </li>
 <li>CONTRACT_ACCOUNT_WRITE</li>
 <li>CONTRACT_DEAL_READ </li>
