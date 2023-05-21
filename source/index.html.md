@@ -26,6 +26,11 @@ meta:
 **2. 独立经纪商：**</br>
 包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。
 
+**3. OAuth经纪商：**</br>
+对接MEXC OAuth 2.0的第三方应用，可向MEXC用户提供一键交易功能，具体如下：  
+MEXC用户仅需要在第三方应用内一键授权，无需向第三方应用直接提供API Key，即可进行交易。  
+MEXC OAuth 2.0支持WEB，基于OAuth 2.0协议（RFC 6749）开发。
+
 ## MEXC提供的经纪商服务内容
 
 **1. API 经纪商：**</br>
@@ -44,17 +49,34 @@ meta:
    * 支持子账号充提
    * 支持子账号划转
 
+**3. OAuth经纪商：**</br>
+**接入流程**  
+  1. 官网注册账户申请经纪商，您需要先[申请成为MEXC的经纪商](https://docs.google.com/forms/d/e/1FAIpQLSea0FypAsUB3g23P_jfPueFvdIIofTBbXRi9DdrU_igasgp5g/viewform)。  
+  2. 申请通过后，专属客户经理会提供给您相应的开发文档。  
+  3. OAuth返佣设置  
+接入后的OAuth经纪商，下单时需要将专属broker_id填写到header的source字段里，作为返佣订单统计的标识。
+  
+**授权模式介绍**  
+MEXC OAuth 2.0提供的授权模式：授权码模式。
 
+|授权模式|描述|使用场景|
+|----------|------|-------|
+|授权码模式|用户授权，第三方应用提供client_secret获取授权码。通过授权码获取访问令牌和刷新令牌。|应用有服务器，可存储应用密钥，与MEXCOAuth服务器进行密钥交互。|
+
+授权码模式 
+用户通过第三方应用跳转至MEXC授权页面并进行授权后，第三方应用可以凭借此授权码换取访问令牌，通过调用MEXC OpenAPI，访问用户授权的数据资源。
+
+<img src="../images/broker3.png">  
 
 ## MEXC 经纪商合作模式
 
 **1. API 经纪商：** 
 
-<img src="../images/broker.png">
+<img src="../images/broker1.png">
 
 **2. 独立经纪商：**
 
-<img src="../images/broker-2.png">
+<img src="../images/broker2.png">
 
 
 # Broker 接口
@@ -633,9 +655,9 @@ get  /api/v3/broker/capital/deposit/subHisrec
         "coin":"PAXG",
         "network":"ETH",
         "status":,
-        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
+        "address":"0x788cabe9236ce061e5a892e1a595a81fc8d62c",
         "addressTag":"",
-        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "txId":"0xaad4654a3234aa6118af9b4b335f5aec360b2394721c019b5d1e75328b09f3",
         "unlockConfirm":"12", 
         "confirmTimes":"7"
     },
@@ -644,10 +666,11 @@ get  /api/v3/broker/capital/deposit/subHisrec
         "coin":"IOTA",
         "network":"IOTA",
         "status":1,
-"address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
-        "addressTag":"",    		"txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
-         "unlockConfirm":"12",
-         "confirmTimes":"7"
+        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
+        "addressTag":"",    		
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVBQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "unlockConfirm":"12",
+        "confirmTimes":"7"
     }
 ]
 
@@ -664,7 +687,7 @@ get  /api/v3/broker/capital/deposit/subHisrec
 |coin|string|no|币种|
 |status|string|no|<a href="#status">状态</a> |
 |startTime|string|no|开始时间，如果没有传，默认查询10天|
-|endTime|string|no|结束时间，如果没有传，取当前时间|
+|endTime|string|no|结束时间|
 |limit|string|no|默认值20，目前无最大值限制|
 |page|string|no|默认值1|
 |recvWindow|string|no|同步时间|
@@ -681,6 +704,77 @@ get  /api/v3/broker/capital/deposit/subHisrec
 |status|number| <a href="#status">状态</a> |
 |address|string| 充值地址|
 |addressTag|string| 地址标签|
+|txId|string| txid|
+|unlockConfirm|string|解锁需要的网络确认次数|
+|confirmTimes|string| 确认进度|
+
+##  获取所有子账户的所有充值记录(最近三天)
+
+母账户查询三天（三天前从0点计时）内，子账户充值记录
+
+> 请求示例
+
+```
+
+get  /api/v3/broker/capital/deposit/subHisrec/getall
+
+```
+
+> 返回示例
+
+```json
+[
+    {
+        "amount":"0.00999800",
+        "coin":"PAXG",
+        "network":"ETH",
+        "status":,
+        "address":"0x788cabe9236ce061e5a92e1a59395a81fc8d62c",
+        "txId":"0xaad4654a3234aa6118af9b4bf5ae81c360b2394721c019b5d1e75328b09f3",
+        "unlockConfirm":"12", 
+        "confirmTimes":"7"
+    },
+    {
+        "amount":"0.50000000",
+        "coin":"IOTA",
+        "network":"IOTA",
+        "status":1,
+        "address":"SIZ9VLMHWATXKV99LHIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW", 		
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYQNTGKRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "unlockConfirm":"12",
+        "confirmTimes":"7"
+    }
+]
+
+```
+
+**HTTP请求：**
+
+- **GET** ```/api/v3/broker/capital/deposit/subHisrec/getall```
+
+**请求参数：**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| ------ | -------- | -------- | ---------- |
+|coin|string|no|币种|
+|status|string|no|<a href="#status">状态</a> |
+|startTime|string|no|开始时间|
+|endTime|string|no|结束时间|
+|limit|string|no|默认值100，最大1000|
+|page|string|no|默认值1|
+|recvWindow|string|no|同步时间|
+|timestamp|string|yes|时间|
+|signature|string|yes|签名|
+
+**返回参数：**
+
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+|amount|string| 充值数量|
+|coin|string| 充值币种|
+|network|string|充值网络|
+|status|number| <a href="#status">状态</a> |
+|address|string| 充值地址|
 |txId|string| txid|
 |unlockConfirm|string|解锁需要的网络确认次数|
 |confirmTimes|string| 确认进度|
@@ -775,7 +869,6 @@ post  /api/v3/broker/sub-account/universalTransfer
 |toAccount|string|no|母子账户，可填subAccout账户名，不填默认母账户|
 |fromAccountType|string|yes|<a href="#from_account">划出账户类型</a>|
 |toAccountType|string|yes|<a href="#to_account">划入账户类型</a>|
-|symbol|string|yes|币对，当fromAccountType为逐仓杠杆（ISOLATED_MARGIN）时必传，eg：ETHUSDT|
 |asset|string|yes|划转资产，eg：USDT|
 |amount|string|yes|划转数量，eg：1.82938475|
 
@@ -834,49 +927,6 @@ post  /api/v3/broker/sub-account/futures
 |isFuturesEnabled|boolean|开通合约业务，开通：true|
 |timestamp|string|返回时间|
 
-##  开通子账户的杠杆业务
-
-> 请求示例
-
-```
-
-post  /api/v3/broker/sub-account/margin
-
-```
-
-> 返回示例
-
-```json
-{
-    "code": "0",
-    "message": "",
-    "data": [{
-        "subAccount": "mexc1",
-        "isMarginEnabled": true,
-        "timestamp": "1597026383085"
-    }]
-}
-```
-
-**HTTP请求：**
-
-- **POST** ```/api/v3/broker/sub-account/margin```
-
-**Query参数：**
-
-| 参数名 | 数据类型| 是否必须 | 说明 | 
-| ------ | -------- | -------- | ---------- |
-|subAccount|string|yes|子账户名称|
-|timestamp|string|yes|时间|
-|signature|string|yes|签名|
-
-**返回参数：**
-
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-|subAccount|string|子账户名称|
-|isMarginEnabled|boolean|是否开通杠杆业务：true or false|
-|timestamp|string|返回时间|
 # 公开API参数
 
 ## Broker 枚举定义
@@ -885,13 +935,11 @@ post  /api/v3/broker/sub-account/margin
 
 - SPOT 现货
 - FUTURES 合约
-- ISOLATED_MARGIN 杠杆
 
 ### <a id="to_account">划入账户类型</a>
 
 - SPOT 现货
 - FUTURES 合约
-- ISOLATED_MARGIN 杠杆
 
 ### <a id="permissions">权限</a>
 
@@ -899,10 +947,6 @@ post  /api/v3/broker/sub-account/margin
 - SPOT_ACCOUNT_WRITE 账户写
 - SPOT_DEAL_READ 现货交易信息读
 - SPOT_DEAL_WRITE 现货交易信息写
-- ISOLATED_MARGIN_ACCOUNT_READ 杠杆账户信息读
-- ISOLATED_MARGIN_ACCOUNT_WRITE 杠杆账户信息写
-- ISOLATED_MARGIN_DEAL_READ 杠杆交易信息读
-- ISOLATED_MARGIN_DEAL_WRITE 杠杆交易信息写
 - CONTRACT_ACCOUNT_READ 合约账户信息读
 - CONTRACT_ACCOUNT_WRITE 合约账户信息写
 - CONTRACT_DEAL_READ 合约交易信息读
