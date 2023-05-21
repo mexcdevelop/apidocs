@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-05-21" class="toc-h2 toc-link" data-title="2023-05-21"><strong>2023-05-21</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-03-16" class="toc-h2 toc-link" data-title="2023-03-16"><strong>2023-03-16</strong></a>
                   </li>
                   <li>
@@ -493,6 +496,9 @@
           <li>
             <a href="#ed913b7357" class="toc-h1 toc-link" data-title="行情接口">行情接口</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#f7319f06ab" class="toc-h2 toc-link" data-title="历史行情数据下载">历史行情数据下载</a>
+                  </li>
                   <li>
                     <a href="#16073bbcf1" class="toc-h2 toc-link" data-title="测试服务器连通性">测试服务器连通性</a>
                   </li>
@@ -783,7 +789,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-03-16'><strong>2023-03-16</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-05-21'><strong>2023-05-21</strong></h2>
+<ul>
+<li>新增历史行情数据下载</li>
+</ul>
+<h2 id='2023-03-16'><strong>2023-03-16</strong></h2>
 <ul>
 <li>新增：查询用户万向划转历史（根据tranId）接口</li>
 <li>ws账户成交推送新增“手续费”、“手续费币种”和“交易金额”参数</li>
@@ -1625,7 +1635,9 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td>禁止子账号访问</td>
 </tr>
 </tbody></table>
-<h1 id='ed913b7357'>行情接口</h1><h2 id='16073bbcf1'>测试服务器连通性</h2>
+<h1 id='ed913b7357'>行情接口</h1><h2 id='f7319f06ab'>历史行情数据下载</h2>
+<p>提供2023年01月01日以来的K线和交易历史数据下载：<a href="https://www.mexc.co/zh-CN/market-data-download">历史行情数据下载</a></p>
+<h2 id='16073bbcf1'>测试服务器连通性</h2>
 <p>测试能否联通 Rest API。</p>
 
 <blockquote>
@@ -5325,7 +5337,7 @@ body
 <td style="text-align: left">withdrawOrderId</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">自定义提币ID(目前不支持)</td>
+<td style="text-align: left">自定义提币ID</td>
 </tr>
 <tr>
 <td style="text-align: left">network</td>
@@ -5371,10 +5383,7 @@ body
 </tr>
 </tbody></table>
 
-<ol>
-<li>如果不发送<code>network</code>,将按该币种默认网络返回结果;</li>
-<li>可以在接口 <code>Get /api/v3/capital/config/getall</code>的返回值中某币种的<code>networkList</code>获取<code>network</code>网络字段和<code>isDefault</code>是否为默认网络。</li>
-</ol>
+<p>可以在接口 <code>Get /api/v3/capital/config/getall</code>的返回值中某币种的<code>networkList</code>获取<code>network</code>网络字段。</p>
 
 <p><strong>返回参数</strong></p>
 
@@ -6427,10 +6436,21 @@ body
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00129158"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00339606433902421"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHF"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+           </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"convertUsdt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000441"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30021"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxxxx"</span><span class="w">
+ </span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+           </span><span class="nl">"convertMx"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"convertUsdt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000009"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.000441"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30021"</span><span class="p">,</span><span class="w">
+           </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxxxx"</span><span class="w">
+ </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
@@ -6439,7 +6459,7 @@ body
 <li><strong>GET</strong> <code>/api/v3/capital/convert/list</code><br></li>
 </ul>
 
-<p><strong>接口权限要求:</strong> 现货交易信息读 / SPOT_DEAL_R</p>
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
 <p><strong>权重(IP):</strong> 1</p>
 
@@ -6480,6 +6500,10 @@ body
 <td style="text-align: left">余额mx值预估(扣除手续费后)</td>
 </tr>
 <tr>
+<td style="text-align: left">convertUsdt</td>
+<td style="text-align: left">余额usdt估值</td>
+</tr>
+<tr>
 <td style="text-align: left">balance</td>
 <td style="text-align: left">币种余额</td>
 </tr>
@@ -6487,19 +6511,30 @@ body
 <td style="text-align: left">asset</td>
 <td style="text-align: left">币种</td>
 </tr>
+<tr>
+<td style="text-align: left">code</td>
+<td style="text-align: left">无法兑换原因code</td>
+</tr>
+<tr>
+<td style="text-align: left">message</td>
+<td style="text-align: left">无法兑换原因message</td>
+</tr>
 </tbody></table>
 <h2 id='5974c88898'>小额资产兑换</h2>
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post {{api_url}}/api/v3/capital/convert?asset=ETHF&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+<div class="highlight"><pre class="highlight plaintext"><code>post {{api_url}}/api/v3/capital/convert?asset=BTC,FIL,ETH&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w"> 
-  </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.82736182"</span><span class="w">
-</span><span class="p">}</span><span class="w"> 
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"successList"</span><span class="p">:[</span><span class="s2">"ALGO"</span><span class="p">,</span><span class="s2">"OMG"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"failedList"</span><span class="p">:[],</span><span class="w">
+  </span><span class="nl">"totalConvert"</span><span class="p">:</span><span class="s2">"0.07085578"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"convertFee"</span><span class="p">:</span><span class="s2">"0.00071571"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
 
@@ -6507,7 +6542,7 @@ body
 <li><strong>POST</strong> <code>/api/v3/capital/convert</code><br></li>
 </ul>
 
-<p><strong>接口权限要求:</strong> 现货交易信息写 / SPOT_DEAL_W</p>
+<p><strong>接口权限要求:</strong> 账户写 / SPOT_ACCOUNT_W</p>
 
 <p><strong>权重(IP):</strong> 10</p>
 
@@ -6552,6 +6587,30 @@ body
 <tr>
 <td style="text-align: left">totalConvert</td>
 <td style="text-align: left">转换后的mx数量(扣除mx手续费)</td>
+</tr>
+<tr>
+<td style="text-align: left">convertFee</td>
+<td style="text-align: left">扣除mx手续费</td>
+</tr>
+<tr>
+<td style="text-align: left">successList</td>
+<td style="text-align: left">兑换成功币种列表</td>
+</tr>
+<tr>
+<td style="text-align: left">failedList</td>
+<td style="text-align: left">兑换失败币种列表</td>
+</tr>
+<tr>
+<td style="text-align: left">-asset</td>
+<td style="text-align: left">资产名称</td>
+</tr>
+<tr>
+<td style="text-align: left">-message</td>
+<td style="text-align: left">兑换失败错误信息</td>
+</tr>
+<tr>
+<td style="text-align: left">-code</td>
+<td style="text-align: left">兑换失败错误码</td>
 </tr>
 </tbody></table>
 <h2 id='9519463098'>查询小额资产兑换历史</h2>
@@ -7359,7 +7418,6 @@ body
 <li>用于订阅账户数据的 <code>listenKey</code> 从创建时刻起有效期为60分钟</li>
 <li>可以通过 <code>PUT</code> 一个 <code>listenKey</code> 延长60分钟有效期</li>
 <li>可以通过<code>DELETE</code>一个 <code>listenKey</code> 立即关闭当前数据流，并使该<code>listenKey</code> 无效</li>
-<li>在具有有效<code>listenKey</code>的帐户上执行<code>POST</code>将返回当前有效的<code>listenKey</code>并将其有效期延长60分钟</li>
 <li>websocket接口的baseurl: <strong>wss://wbs.mexc.com/ws</strong></li>
 <li>订阅账户数据流的stream名称为 <strong>/ws?listenKey=listenKey</strong> <br/>  如：<strong>wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
 <li>每个链接有效期不超过24小时，请妥善处理断线重连</li>
