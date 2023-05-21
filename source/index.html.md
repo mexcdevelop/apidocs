@@ -655,9 +655,9 @@ get  /api/v3/broker/capital/deposit/subHisrec
         "coin":"PAXG",
         "network":"ETH",
         "status":,
-        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
+        "address":"0x788cabe9236ce061e5a892e1a595a81fc8d62c",
         "addressTag":"",
-        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "txId":"0xaad4654a3234aa6118af9b4b335f5aec360b2394721c019b5d1e75328b09f3",
         "unlockConfirm":"12", 
         "confirmTimes":"7"
     },
@@ -666,9 +666,9 @@ get  /api/v3/broker/capital/deposit/subHisrec
         "coin":"IOTA",
         "network":"IOTA",
         "status":1,
-        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
+        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW",
         "addressTag":"",    		
-        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVBQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
         "unlockConfirm":"12",
         "confirmTimes":"7"
     }
@@ -729,8 +729,8 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
         "coin":"PAXG",
         "network":"ETH",
         "status":,
-        "address":"0x788cabe9236ce061e5a892e1a59395a81fc8d62c",
-        "txId":"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3",
+        "address":"0x788cabe9236ce061e5a92e1a59395a81fc8d62c",
+        "txId":"0xaad4654a3234aa6118af9b4bf5ae81c360b2394721c019b5d1e75328b09f3",
         "unlockConfirm":"12", 
         "confirmTimes":"7"
     },
@@ -739,8 +739,8 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
         "coin":"IOTA",
         "network":"IOTA",
         "status":1,
-        "address":"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW", 		
-        "txId":"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
+        "address":"SIZ9VLMHWATXKV99LHIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW", 		
+        "txId":"ESBFVQUTPIWQNJSPXFNHNYQNTGKRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999",
         "unlockConfirm":"12",
         "confirmTimes":"7"
     }
