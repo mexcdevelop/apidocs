@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-05-21**
+
+- Add Download Historical Market Data
+
 ## **2023-03-16**
 
 - Add:Query User Universal Transfer History (by tranId) endpoint
@@ -594,6 +598,10 @@ The following error information can be returend
 | 140002 | sub account is forbidden                                     |
 
 # Market Data Endpoints
+
+## Download Historical Market Data
+
+Provides kline and trading data for all Spot pairs since 01-01-2023：[Historical Market Data](https://www.mexc.co/zh-CN/market-data-download)
 
 ## Test Connectivity
 
@@ -2484,8 +2492,7 @@ Parameters:
 |timestamp|string| YES       | timestamp                                                      |
 |signature|string| YES       | signature                                                      |
  
-1. If `network` is not sent, will return default network in that currency.
-2. Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList` and check whether is default network by response params`isDefault`
+Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList`.
 
 Response:
 
@@ -3020,17 +3027,28 @@ get {{api_url}}/api/v3/capital/convert/list?timestamp={{timestamp}}&signature={{
 ```json
 [
     {
-        "convertMx": "0.00129158",
-        "balance": "0.00339606433902421",
-        "asset": "ETHF"
-    }
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "USDT",
+           "code": "30021",
+           "message": "xxxxxxx"
+ },
+{
+           "convertMx": "0.000009",
+           "convertUsdt": "0.000009",
+           "balance": "0.000441",
+           "asset": "BTC",
+           "code": "30021",
+           "message": "xxxxxxx"
+ }
 ]
 ```
 
 
 - **GET** ```/api/v3/capital/convert/list```  
 
-**Permission:** SPOT_DEAL_READ
+**Permission:** SPOT_ACCOUNT_READ
 
 **Weight(IP):** 1
 
@@ -3045,28 +3063,34 @@ Response:
 
 | Name | Description  |
 | :------------ | :-------- | 
-|convertMx|MX amount（Deducted commission fee）|
-|balance|Convertible balance|
-|asset|asset|
+| convertMx|MX amount（Deducted commission fee）|
+| convertUsdt | usdt amount     |
+| balance|Convertible balance|
+| asset|asset|
+| code    | code     |
+| message | message  |
 
 ## Dust Transfer
 
 > Request
 
 ```
-post {{api_url}}/api/v3/capital/convert?asset=ETHF&timestamp={{timestamp}}&signature={{signature}}
+post {{api_url}}/api/v3/capital/convert?asset=BTC,FIL,ETH&timestamp={{timestamp}}&signature={{signature}}
 ```
 > Response
 
 ```json
-{ 
-  "totalConvert": "1.82736182"
-} 
+{
+  "successList":["ALGO","OMG"],
+  "failedList":[],
+  "totalConvert":"0.07085578",
+  "convertFee":"0.00071571"
+  }
 ```
 
 - **POST** ```/api/v3/capital/convert```  
 
-**Permission:** SPOT_DEAL_WRITE
+**Permission:** SPOT_ACCOUNT_W
 
 **Weight(IP):** 10
 
@@ -3083,6 +3107,12 @@ Response:
 | Name | Description  |
 | :------------ | :-------- | 
 |totalConvert|Convert MX amount(Deducted commission fee)|
+| convertFee  | convertFee     |
+| successList | convert success List |
+| failedList  | convert failed List |
+| -asset     | asset         |
+| -message   | message  |
+| -code      | code   |
 
 ## DustLog
 
@@ -3576,8 +3606,6 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 - Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
 
 - Doing a `DELETE` on a `listenKey` will close the stream and invalidate the `listenKey`.
-
-- Doing a `POST` on an account with an active `listenKey` will return the currently active `listenKey` and extend its validity for 60 minutes.
 
 - websocket baseurl: **wss://wbs.mexc.com/ws**
 
