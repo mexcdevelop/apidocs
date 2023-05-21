@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-05-21**
+
+- 新增历史行情数据下载
+
 ## **2023-03-16**
 
 - 新增：查询用户万向划转历史（根据tranId）接口
@@ -587,6 +591,10 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 
 
 # 行情接口
+
+## 历史行情数据下载
+
+提供2023年01月01日以来的K线和交易历史数据下载：[历史行情数据下载](https://www.mexc.co/zh-CN/market-data-download)
 
 ## 测试服务器连通性
 
@@ -2555,7 +2563,7 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 | 参数名 | 数据类型| 是否必须 | 说明               | 
 | :------ | :-------- |:-----|:-----------------|
 |coin|string| 是    | 币种               |
-|withdrawOrderId|string| 否    | 自定义提币ID(目前不支持)   |
+|withdrawOrderId|string| 否    | 自定义提币ID   |
 |network|string| 否    | 提币网络             |
 |address|string| 是    | 提币地址             |
 |memo|string| 否    | 如地址中需求memo，则此处必传 |
@@ -2564,8 +2572,8 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 |timestamp|string| 是    | 时间戳              |
 |signature|string| 是    | 签名               |
  
-1. 如果不发送`network`,将按该币种默认网络返回结果;
-2. 可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段和`isDefault`是否为默认网络。
+
+可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段。
 
 
 **返回参数**
