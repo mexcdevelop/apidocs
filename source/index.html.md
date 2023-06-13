@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-06-13**
+
+- 新增获取有效listenKey接口
+
 ## **2023-05-21**
 
 - 新增历史行情数据下载
@@ -1766,7 +1770,7 @@ MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数
 > 请求示例
 
 ```
-POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BUY","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "SELL"}]
 ```
 > 返回示例
 
@@ -3715,6 +3719,33 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 **参数:**
 
 NONE
+
+### 获取有效 Listen Key 
+
+> **响应**
+
+```
+{
+    "listenKey": [
+        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
+        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
+        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
+    ]
+}
+```
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
+
+**HTTP请求**
+
+- **GET**  ` /api/v3/userDataStream`
+
+获取当前所有有效的listenKey
+
+**参数:**
+
+NONE
+
 
 ### 延长 Listen Key 有效期 
 
