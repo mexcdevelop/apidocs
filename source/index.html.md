@@ -3716,6 +3716,33 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 
 NONE
 
+### 获取有效 Listen Key 
+
+> **响应**
+
+```
+{
+    "listenKey": [
+        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
+        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
+        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
+    ]
+}
+```
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R 
+
+**HTTP请求**
+
+- **GET**  ` /api/v3/userDataStream`
+
+获取当前所有有效的listenKey
+
+**参数:**
+
+NONE
+
+
 ### 延长 Listen Key 有效期 
 
 > **响应**
