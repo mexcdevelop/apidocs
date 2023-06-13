@@ -302,7 +302,7 @@
     <header>
       <div class="flex_box">
         <a href="https://www.mexc.com">
-          <img src="images/mexc-logo-e691a232.svg" class="logo" alt="" />
+          <img src="images/mexc-logo-04620335.svg" class="logo" alt="" />
         </a>
         <div class="nav_box">
         </div>
@@ -343,6 +343,9 @@
           <li>
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2023-06-13" class="toc-h2 toc-link" data-title="2023-06-13"><strong>2023-06-13</strong></a>
+                  </li>
                   <li>
                     <a href="#2023-05-21" class="toc-h2 toc-link" data-title="2023-05-21"><strong>2023-05-21</strong></a>
                   </li>
@@ -781,7 +784,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-05-21'><strong>2023-05-21</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-06-13'><strong>2023-06-13</strong></h2>
+<ul>
+<li>Add query all listenKey endpoint</li>
+</ul>
+<h2 id='2023-05-21'><strong>2023-05-21</strong></h2>
 <ul>
 <li>Add Download Historical Market Data</li>
 </ul>
@@ -3665,7 +3672,7 @@ post /api/v3/sub-account/margin
 <blockquote>
 <p>Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BUY","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "SELL"}]
 </code></pre></div>
 <blockquote>
 <p>Response</p>
@@ -7198,6 +7205,31 @@ post /api/v3/sub-account/margin
 </ul>
 
 <p>Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. </p>
+
+<p><strong>request:</strong></p>
+
+<p>NONE</p>
+<h3 id='query-all-listenkey'>Query all ListenKey</h3>
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "listenKey": [
+        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
+        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
+        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
+    ]
+}
+</code></pre></div>
+<p><strong>Permission:</strong>  SPOT_ACCOUNT_R</p>
+
+<p><strong>HTTP</strong></p>
+
+<ul>
+<li><strong>GET</strong>  <code>/api/v3/userDataStream</code></li>
+</ul>
+
+<p>get all valid listenKey</p>
 
 <p><strong>request:</strong></p>
 
