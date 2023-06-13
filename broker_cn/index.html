@@ -302,7 +302,7 @@
     <header>
       <div class="flex_box">
         <a href="https://www.mexc.com">
-          <img src="images/mexc-logo-e691a232.svg" class="logo" alt="" />
+          <img src="images/mexc-logo-04620335.svg" class="logo" alt="" />
         </a>
         <div class="nav_box">
         </div>
@@ -363,6 +363,9 @@
                   </li>
                   <li>
                     <a href="#3f75e2568c" class="toc-h2 toc-link" data-title="获取子账户充值记录">获取子账户充值记录</a>
+                  </li>
+                  <li>
+                    <a href="#2e9af0f103" class="toc-h2 toc-link" data-title="获取所有子账户的所有充值记录(最近三天)">获取所有子账户的所有充值记录(最近三天)</a>
                   </li>
                   <li>
                     <a href="#096be69702" class="toc-h2 toc-link" data-title="提币">提币</a>
@@ -1518,9 +1521,9 @@ get  /api/v3/broker/capital/deposit/subHisrec
         </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"PAXG"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:,</span><span class="w">
-        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e1a59395a81fc8d62c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a892e1a595a81fc8d62c"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f5ae81c360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4b335f5aec360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
         </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -1529,10 +1532,11 @@ get  /api/v3/broker/capital/deposit/subHisrec
         </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-</span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">            </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVKPRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LH99CIGFJFUMLEVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"addressTag"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">            
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYHSQNTGKRVBQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
@@ -1575,7 +1579,7 @@ get  /api/v3/broker/capital/deposit/subHisrec
 <td>endTime</td>
 <td>string</td>
 <td>no</td>
-<td>结束时间，如果没有传，取当前时间</td>
+<td>结束时间</td>
 </tr>
 <tr>
 <td>limit</td>
@@ -1647,6 +1651,165 @@ get  /api/v3/broker/capital/deposit/subHisrec
 <td>addressTag</td>
 <td>string</td>
 <td>地址标签</td>
+</tr>
+<tr>
+<td>txId</td>
+<td>string</td>
+<td>txid</td>
+</tr>
+<tr>
+<td>unlockConfirm</td>
+<td>string</td>
+<td>解锁需要的网络确认次数</td>
+</tr>
+<tr>
+<td>confirmTimes</td>
+<td>string</td>
+<td>确认进度</td>
+</tr>
+</tbody></table>
+<h2 id='2e9af0f103'>获取所有子账户的所有充值记录(最近三天)</h2>
+<p>母账户查询三天（三天前从0点计时）内，子账户充值记录</p>
+
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+get  /api/v3/broker/capital/deposit/subHisrec/getall
+
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.00999800"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"PAXG"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"0x788cabe9236ce061e5a92e1a59395a81fc8d62c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"0xaad4654a3234aa6118af9b4bf5ae81c360b2394721c019b5d1e75328b09f3"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.50000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coin"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"network"</span><span class="p">:</span><span class="s2">"IOTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="s2">"SIZ9VLMHWATXKV99LHIGFJFUMLEHGWVZVNNZXRJJVWBPHYWPPBOSDORZ9EQSHCZAMPVAPGFYQAUUV9DROOXJLNW"</span><span class="p">,</span><span class="w">        
+        </span><span class="nl">"txId"</span><span class="p">:</span><span class="s2">"ESBFVQUTPIWQNJSPXFNHNYQNTGKRABQWTAXCDWOAKDKYWPTVG9BGXNVNKTLEJGESAVXIKIZ9999"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unlockConfirm"</span><span class="p">:</span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"confirmTimes"</span><span class="p">:</span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre></div>
+<p><strong>HTTP请求：</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/broker/capital/deposit/subHisrec/getall</code></li>
+</ul>
+
+<p><strong>请求参数：</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>数据类型</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>coin</td>
+<td>string</td>
+<td>no</td>
+<td>币种</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>no</td>
+<td><a href="#status">状态</a></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>string</td>
+<td>no</td>
+<td>开始时间</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>string</td>
+<td>no</td>
+<td>结束时间</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>string</td>
+<td>no</td>
+<td>默认值100，最大1000</td>
+</tr>
+<tr>
+<td>page</td>
+<td>string</td>
+<td>no</td>
+<td>默认值1</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>string</td>
+<td>no</td>
+<td>同步时间</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string</td>
+<td>yes</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>string</td>
+<td>yes</td>
+<td>签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数：</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>充值数量</td>
+</tr>
+<tr>
+<td>coin</td>
+<td>string</td>
+<td>充值币种</td>
+</tr>
+<tr>
+<td>network</td>
+<td>string</td>
+<td>充值网络</td>
+</tr>
+<tr>
+<td>status</td>
+<td>number</td>
+<td><a href="#status">状态</a></td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>充值地址</td>
 </tr>
 <tr>
 <td>txId</td>
