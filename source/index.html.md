@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-06-13**
+
+- Add query all listenKey endpoint
+
 ## **2023-05-21**
 
 - Add Download Historical Market Data
