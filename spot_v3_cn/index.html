@@ -302,7 +302,7 @@
     <header>
       <div class="flex_box">
         <a href="https://www.mexc.com">
-          <img src="images/mexc-logo-e691a232.svg" class="logo" alt="" />
+          <img src="images/mexc-logo-04620335.svg" class="logo" alt="" />
         </a>
         <div class="nav_box">
         </div>
@@ -346,6 +346,9 @@
           <li>
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2023-06-13" class="toc-h2 toc-link" data-title="2023-06-13"><strong>2023-06-13</strong></a>
+                  </li>
                   <li>
                     <a href="#2023-05-21" class="toc-h2 toc-link" data-title="2023-05-21"><strong>2023-05-21</strong></a>
                   </li>
@@ -789,7 +792,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-05-21'><strong>2023-05-21</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-06-13'><strong>2023-06-13</strong></h2>
+<ul>
+<li>新增获取有效listenKey接口</li>
+</ul>
+<h2 id='2023-05-21'><strong>2023-05-21</strong></h2>
 <ul>
 <li>新增历史行情数据下载</li>
 </ul>
@@ -3778,7 +3785,7 @@ body
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
+<div class="highlight"><pre class="highlight plaintext"><code>POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BUY","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "SELL"}]
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -7445,7 +7452,32 @@ body
 <p><strong>参数:</strong></p>
 
 <p>NONE</p>
-<h3 id='listen-key-3'>延长 Listen Key 有效期</h3>
+<h3 id='listen-key-3'>获取有效 Listen Key</h3>
+<blockquote>
+<p><strong>响应</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "listenKey": [
+        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
+        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
+        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
+    ]
+}
+</code></pre></div>
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R </p>
+
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong>  <code>/api/v3/userDataStream</code></li>
+</ul>
+
+<p>获取当前所有有效的listenKey</p>
+
+<p><strong>参数:</strong></p>
+
+<p>NONE</p>
+<h3 id='listen-key-4'>延长 Listen Key 有效期</h3>
 <blockquote>
 <p><strong>响应</strong></p>
 </blockquote>
@@ -7478,7 +7510,7 @@ body
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
-<h3 id='listen-key-4'>关闭 Listen Key</h3>
+<h3 id='listen-key-5'>关闭 Listen Key</h3>
 <blockquote>
 <p><strong>响应</strong></p>
 </blockquote>
