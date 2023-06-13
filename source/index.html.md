@@ -3641,6 +3641,33 @@ Start a new user data stream. The stream will close after 60 minutes unless a ke
 
 NONE
 
+### Query all ListenKey
+
+> **Response**
+
+```
+{
+    "listenKey": [
+        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
+        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
+        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
+    ]
+}
+```
+
+**Permission:**  SPOT_ACCOUNT_R
+
+**HTTP**
+
+- **GET**  ` /api/v3/userDataStream`
+
+get all valid listenKey
+
+**request:**
+
+NONE
+
+
 ### Keep-alive a ListenKey 
 
 > **Response**
