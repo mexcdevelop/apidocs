@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-06-13**
+
+- Add query all listenKey endpoint
+
 ## **2023-05-21**
 
 - Add Download Historical Market Data
@@ -1740,7 +1744,7 @@ Supports 20 orders with a same symbol in a batch,rate limit:2 times/s.
 > Request
 
 ```
-POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BID","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "ASK"}]
+POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","quantity": "0.0002","symbol": "BTCUSDT","side": "BUY","newClientOrderId": 9588234},{"type": "LIMIT_ORDER","price": "4005","quantity": "0.0003","symbol": "BTCUSDT","side": "SELL"}]
 ```
 
 > Response
@@ -3640,6 +3644,33 @@ Start a new user data stream. The stream will close after 60 minutes unless a ke
 **request:**
 
 NONE
+
+### Query all ListenKey
+
+> **Response**
+
+```
+{
+    "listenKey": [
+        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
+        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
+        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
+    ]
+}
+```
+
+**Permission:**  SPOT_ACCOUNT_R
+
+**HTTP**
+
+- **GET**  ` /api/v3/userDataStream`
+
+get all valid listenKey
+
+**request:**
+
+NONE
+
 
 ### Keep-alive a ListenKey 
 
