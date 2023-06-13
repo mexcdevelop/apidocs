@@ -13,7 +13,7 @@ search: true
 
 meta:
   - name: description
-    content: Documentation for the mexc global API
+    content: Documentation for the mexc API
 ---
 
 # 简介
