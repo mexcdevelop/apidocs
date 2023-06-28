@@ -1478,7 +1478,7 @@ Rate limit:20 times/2 seconds
 | holdFee  | decimal   | holding  fee,  positive  means  get it,  negative  means lost it |
 | realised  | decimal   | realized profit and loss|
 | adlLevel | int | adl level
-| leverage | int | leverage multiple｜
+| leverage | int | leverage multiple|
 | createTime  | date   | create time |
 | updateTime  | date   | update time |
 | autoAddIm | boolean | automatic margin |
@@ -1716,8 +1716,8 @@ Rate limit:20 times/2 seconds
 | externalOid  | string   | external order ID |
 | createTime  | date   | create time  |
 | updateTime  | date   | update time |
-| stopLossPrice | decimal | stop-loss price ｜
-| takeProfitPrice | decimal | take-profit price ｜
+| stopLossPrice | decimal | stop-loss price |
+| takeProfitPrice | decimal | take-profit price |
 | </data> |  |  | 
 
 ## Get all of the user's historical orders
@@ -1811,8 +1811,8 @@ Rate limit:20 times/2 seconds
 | usedMargin  | decimal   | used margin  |
 | createTime  | date   | create time |
 | updateTime  | date   | update tine |
-| stopLossPrice | decimal | stop-loss price ｜
-| takeProfitPrice | decimal | take-profit price ｜
+| stopLossPrice | decimal | stop-loss price |
+| takeProfitPrice | decimal | take-profit price |
 
 **Note: The price returned from this interface is the platform's takeover price. If you want to query the liquidation price of a liquidation order, you can do so through the [Get the user's current holding position](https://mxcdevelop.github.io/apidocs/contract_v1_en/#get-the-user-39-s-current-holding-position) interface. For liquidation orders, the price will be the platform's takeover price, which may differ from the liquidation price. For more information, please refer to [Liquidation and Risk Limit](https://www.mexc.com/support/articles/360044646391).**
 
@@ -2276,7 +2276,7 @@ Rate limit:20 times/2 seconds
 | positionType  | int   | position type,1: long, 2: short |
 | vol  | decimal   | trigger volume  |
 | realityVol | decimal | actual number of orders |
-| placeOrderId | long | order id after successful delegation ｜
+| placeOrderId | long | order id after successful delegation |
 | errorCode | int | errorCode,0: normal,  other errorCode details |
 | isFinished | int | whether the order status is the end-state identifier (for query),0. Non-terminal, 1. Terminal |
 | version | int | version |
