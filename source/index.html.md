@@ -13,7 +13,7 @@ search: true
 
 meta:
   - name: description
-    content: Documentation for the mexc global API
+    content: Documentation for the mexc API
 ---
 
 # 简介
@@ -855,7 +855,7 @@ None
 | data   | map      | 订单号及对应操作结果 |
 
 <aside class="notice">
-请求参数为order_ids与client_order_ids二选一，两者都提供时，将忽略client_order_ids
+请求参数为order_ids与client_order_ids二选一，两者都提供时，将忽略order_ids
 </aside>
 
 <aside class="notice">
