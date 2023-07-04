@@ -1263,7 +1263,7 @@ Response：
 |data|map|order id and the relevant processing result|
 
 <aside class="notice">
-Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the client_order_ids will be ignored
+Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the order_ids will be ignored
 </aside>
 
 <aside class="notice">
