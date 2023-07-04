@@ -3899,7 +3899,7 @@ The server will push an update of the account assets when the account balance ch
         "O":1661938853715,
         "P":0.9,
         "S":1,
-        "T":"LE",
+        "T":1,
         "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
         "o":100,
         "p":1.01,
