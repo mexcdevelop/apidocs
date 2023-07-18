@@ -339,7 +339,7 @@ The base endpoint is:
 The API accepts requests of type GET, POST or DELETE
 
 - For GET endpoints, parameters must be sent as a query string.
-- For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string or in the request body with content type application/x-www-form-urlencoded. You may mix parameters between both the query string and request body if you wish to do so.
+- For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string with content type application/x-www-form-urlencoded,or in the request body with content type application/json. You may mix parameters between both the query string and request body if you wish to do so.
 - Parameters may be sent in any order.
 - If a parameter sent in both the query string and request body, the query string parameter will be used.
 
