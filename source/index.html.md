@@ -332,7 +332,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 相应API接受GET，POST或DELETE类型的请求
 
 - GET 方法的接口, 参数必须在 query string中发送。
-- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。
+- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中以application/json的形式发送。如果你喜欢，也可以混合这两种方式发送参数。
 - 对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。
 
 ## 返回格式
