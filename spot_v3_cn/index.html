@@ -1069,7 +1069,7 @@
 
 <ul>
 <li>GET 方法的接口, 参数必须在 query string中发送。</li>
-<li>POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。</li>
+<li>POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中以application/json的形式发送。如果你喜欢，也可以混合这两种方式发送参数。</li>
 <li>对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。</li>
 </ul>
 <h2 id='dac673286f'>返回格式</h2>
@@ -1927,7 +1927,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <tr>
 <td style="text-align: left">maxQuoteAmount</td>
 <td style="text-align: left">String</td>
-<td style="text-align: left">最大委托数量</td>
+<td style="text-align: left">最大下单金额</td>
 </tr>
 <tr>
 <td style="text-align: left">makerCommission</td>
@@ -1948,6 +1948,16 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td style="text-align: left">baseSizePrecision</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">最小下单数量</td>
+</tr>
+<tr>
+<td style="text-align: left">quoteAmountPrecisionMarket</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">市价最小下单金额</td>
+</tr>
+<tr>
+<td style="text-align: left">maxQuoteAmountMarket</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">市价最大下单金额</td>
 </tr>
 </tbody></table>
 <h2 id='38a975b802'>深度信息</h2>
@@ -2286,7 +2296,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/klines?symbol=BTCUSDT&amp;interval=1m&amp;startTime=1652848049876&amp;endTimne=1652848650458
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/klines?symbol=BTCUSDT&amp;interval=1m&amp;startTime=1652848049876&amp;endTime=1652848650458
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
@@ -5519,7 +5529,7 @@ body
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">默认当前时间90天前的时间</td>
+<td style="text-align: left">默认当前时间30天前的时间</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5547,7 +5557,7 @@ body
 </tr>
 </tbody></table>
 
-<p>请注意<code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过90天.</p>
+<p>请注意<code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过30天.</p>
 
 <p><strong>返回参数</strong></p>
 
@@ -5671,7 +5681,7 @@ body
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">默认当前时间90天前的时间戳</td>
+<td style="text-align: left">默认当前时间30天前的时间戳</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5695,7 +5705,7 @@ body
 
 <ol>
 <li>支持多网络提币前的历史记录可能不会返回<code>network</code>字段.</li>
-<li>请注意<code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过90天.</li>
+<li>请注意<code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过30天.</li>
 </ol>
 
 <p><strong>返回参数</strong></p>
