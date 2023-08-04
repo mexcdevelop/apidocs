@@ -1085,7 +1085,7 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 
 <ul>
 <li>For GET endpoints, parameters must be sent as a query string.</li>
-<li>For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string or in the request body with content type application/x-www-form-urlencoded. You may mix parameters between both the query string and request body if you wish to do so.</li>
+<li>For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string with content type application/x-www-form-urlencoded,or in the request body with content type application/json. You may mix parameters between both the query string and request body if you wish to do so.</li>
 <li>Parameters may be sent in any order.</li>
 <li>If a parameter sent in both the query string and request body, the query string parameter will be used.</li>
 </ul>
@@ -1927,6 +1927,16 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <td style="text-align: left">baseSizePrecision</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">min order quantity</td>
+</tr>
+<tr>
+<td style="text-align: left">quoteAmountPrecisionMarket</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">min order amount  in market order</td>
+</tr>
+<tr>
+<td style="text-align: left">maxQuoteAmountMarket</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">max quote Amount in market order</td>
 </tr>
 </tbody></table>
 <h2 id='order-book'>Order Book</h2>
@@ -5307,7 +5317,7 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">default: 90 days ago from current time</td>
+<td style="text-align: left">default: 30 days ago from current time</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5335,7 +5345,7 @@ post /api/v3/sub-account/margin
 </tr>
 </tbody></table>
 
-<p>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 90 days.</p>
+<p>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 30 days.</p>
 
 <p>Response:</p>
 
@@ -5457,7 +5467,7 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">default: 90 days ago from current time</td>
+<td style="text-align: left">default: 30 days ago from current time</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5481,7 +5491,7 @@ post /api/v3/sub-account/margin
 
 <ol>
 <li>Supported multiple network coins&#39;  withdraw history may not return the &#39;network&#39; field.</li>
-<li>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 90 days.</li>
+<li>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 30 days.</li>
 </ol>
 
 <p>Response:</p>
