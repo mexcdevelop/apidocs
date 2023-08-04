@@ -339,7 +339,7 @@ The base endpoint is:
 The API accepts requests of type GET, POST or DELETE
 
 - For GET endpoints, parameters must be sent as a query string.
-- For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string or in the request body with content type application/x-www-form-urlencoded. You may mix parameters between both the query string and request body if you wish to do so.
+- For POST, PUT, and DELETE endpoints, the parameters may be sent as a query string with content type application/x-www-form-urlencoded,or in the request body with content type application/json. You may mix parameters between both the query string and request body if you wish to do so.
 - Parameters may be sent in any order.
 - If a parameter sent in both the query string and request body, the query string parameter will be used.
 
@@ -759,8 +759,10 @@ There are 3 possible options:
 | maxQuoteAmount | String | max Quote Amount                  |
 | makerCommission | String | marker Commission                |
 | takerCommission | String | taker Commission                 |
-|quoteAmountPrecision|string|  min order amount                 |
-|baseSizePrecision|string|  min order quantity                 |
+| quoteAmountPrecision|string|  min order amount                 |
+| baseSizePrecision|string|  min order quantity                 |
+| quoteAmountPrecisionMarket |string| min order amount  in market order       |
+| maxQuoteAmountMarket | String | max quote Amount in market order       |
 
 
 
@@ -2577,13 +2579,13 @@ Parameters:
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|NO|coin |
 |status|string|NO|status|
-|startTime|string|NO|default: 90 days ago from current time|
+|startTime|string|NO|default: 30 days ago from current time|
 |endTime|string|NO|default:current time|
 |limit|string|NO|default:1000,max:1000|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 
-Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 30 days.
 
 Response:
 
@@ -2644,13 +2646,13 @@ Parameters:
 |coin|string|NO|coin |
 |status|string|NO|withdraw status|
 |limit|string|NO|default:1000, max:1000|
-|startTime|string|NO|default: 90 days ago from current time|
+|startTime|string|NO|default: 30 days ago from current time|
 |endTime|string|NO|default:current time|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 
 1. Supported multiple network coins'  withdraw history may not return the 'network' field.
-2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 30 days.
 
 
 Response:
