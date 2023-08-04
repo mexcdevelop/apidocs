@@ -759,8 +759,10 @@ There are 3 possible options:
 | maxQuoteAmount | String | max Quote Amount                  |
 | makerCommission | String | marker Commission                |
 | takerCommission | String | taker Commission                 |
-|quoteAmountPrecision|string|  min order amount                 |
-|baseSizePrecision|string|  min order quantity                 |
+| quoteAmountPrecision|string|  min order amount                 |
+| baseSizePrecision|string|  min order quantity                 |
+| quoteAmountPrecisionMarket |string| min order amount  in market order       |
+| maxQuoteAmountMarket | String | max quote Amount in market order       |
 
 
 
@@ -2577,13 +2579,13 @@ Parameters:
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|NO|coin |
 |status|string|NO|status|
-|startTime|string|NO|default: 90 days ago from current time|
+|startTime|string|NO|default: 30 days ago from current time|
 |endTime|string|NO|default:current time|
 |limit|string|NO|default:1000,max:1000|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 
-Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 30 days.
 
 Response:
 
@@ -2644,13 +2646,13 @@ Parameters:
 |coin|string|NO|coin |
 |status|string|NO|withdraw status|
 |limit|string|NO|default:1000, max:1000|
-|startTime|string|NO|default: 90 days ago from current time|
+|startTime|string|NO|default: 30 days ago from current time|
 |endTime|string|NO|default:current time|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 
 1. Supported multiple network coins'  withdraw history may not return the 'network' field.
-2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 90 days.
+2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 30 days.
 
 
 Response:
