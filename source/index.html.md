@@ -332,7 +332,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 相应API接受GET，POST或DELETE类型的请求
 
 - GET 方法的接口, 参数必须在 query string中发送。
-- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中发送。如果你喜欢，也可以混合这两种方式发送参数。
+- POST, PUT, 和 DELETE 方法的接口,参数可以在内容形式为application/x-www-form-urlencoded的 query string 中发送，也可以在 request body 中以application/json的形式发送。如果你喜欢，也可以混合这两种方式发送参数。
 - 对参数的顺序不做要求。但如果同一个参数名在query string和request body中都有，query string中的会被优先采用。
 
 ## 返回格式
@@ -786,11 +786,14 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 | isSpotTradingAllowed | Boolean | 是否允许api现货交易              |
 | isMarginTradingAllowed | Boolean | 是否允许api杠杆交易              |
 | permissions | Array | 权限                       |
-| maxQuoteAmount | String | 最大委托数量                   |
+| maxQuoteAmount | String | 最大下单金额                   |
 | makerCommission | String | marker手续费                |
 | takerCommission | String | taker手续费                 |
-|quoteAmountPrecision|string| 最小下单金额                   |
-|baseSizePrecision|string| 最小下单数量                   |
+| quoteAmountPrecision|string| 最小下单金额                   |
+| baseSizePrecision|string| 最小下单数量                   |
+| quoteAmountPrecisionMarket |string| 市价最小下单金额                   |
+| maxQuoteAmountMarket | String | 市价最大下单金额                   |
+
 
 
 
@@ -989,7 +992,7 @@ GET /api/v3/aggTrades?symbol=BTCUSDT
 > 请求示例
 
 ```
-GET /api/v3/klines?symbol=BTCUSDT&interval=1m&startTime=1652848049876&endTimne=1652848650458
+GET /api/v3/klines?symbol=BTCUSDT&interval=1m&startTime=1652848049876&endTime=1652848650458
 ```
 
 > 返回示例
@@ -2659,13 +2662,13 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 | :------ | :-------- |:-----| :---------- |
 |coin|string| 否    |币种|
 |status|string| 否    |状态|
-|startTime|string| 否    |默认当前时间90天前的时间|
+|startTime|string| 否    |默认当前时间30天前的时间|
 |endTime|string| 否    |默认当前时间戳，13位|
 |limit|string| 否    |默认：1000，最大1000|
 |timestamp|string| 是    |时间戳|
 |signature|string| 是    |签名|
 
-请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
+请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过30天.
 
 **返回参数**
 
@@ -2726,13 +2729,13 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
 |coin|string| 否    |币种|
 |status|string| 否    |提币状态|
 |limit|string| 否    |默认：1000， 最大：1000|
-|startTime|string| 否    |默认当前时间90天前的时间戳|
+|startTime|string| 否    |默认当前时间30天前的时间戳|
 |endTime|string| 否    |默认当前时间戳|
 |timestamp|string| 是    |时间戳|
 |signature|string| 是    |签名|
 
 1. 支持多网络提币前的历史记录可能不会返回`network`字段.
-2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过90天.
+2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过30天.
 
 **返回参数**
 
