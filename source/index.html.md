@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-08-15**
+
+- 新增获取代理邀请返佣记录接口
+
 ## **2023-06-13**
 
 - 新增获取有效listenKey接口
@@ -4266,6 +4270,96 @@ get /api/v3/rebate/referCode?timestamp=1597026383085&signature=abc
 | :------------ | :-------- | :--------|
 |referCode|string|邀请人的邀请码，非用户本身的|
 
+## 获取代理邀请返佣记录 （代理账户）
+
+> 请求示例
+
+```
+get /api/v3/rebate/affiliate/commission?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 2,
+        "totalPage": 1,
+        "currentPage": 1,
+        "usdtAmount": null,
+        "totalCommissionUsdtAmount": null,
+        "totalTradeUsdtAmount": null,
+        "finished": null,
+        "resultList": [
+            {
+                "uid": "27121050",
+                "account": "",
+                "inviteCode": "mexc-12345",
+                "inviteTime": 1637145911,
+                "spot": "0.00000000",
+                "etf": "0.21131086",
+                "futures": "0.74546367",
+                "total": "0.95677453",
+                "deposit": null,
+                "firstDepositTime": null
+            },
+            {
+                "uid": "52813530",
+                "account": "",
+                "inviteCode": "mexc-12345",
+                "inviteTime": 1637145478,
+                "spot": "1.25023599",
+                "etf": "0.00000000",
+                "futures": "0.00000000",
+                "total": "1.25023599",
+                "deposit": "26000.00000000",
+                "firstDepositTime": "2021-11-19"
+            }
+        ]
+    }
+}
+​
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/affiliate/commission```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | 否       | 开始时间（佣金、入金數據時間） |
+| endTime    | long    | 否       | 截止时间（佣金、入金數據時間） |
+| inviteCode | string  | 否       | 邀请码  |
+| page       | int     | 否       | 页数  |
+| pageSize   | int     | 否       | 页面内容,不传默认10  |
+| timestamp  | long    | 是       | 时间戳    |
+| signature  | string  | 是       |  签名  |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+| uid |string|用户uid|
+| account |string|邮箱账号(如果是手机号账号，返回null)|
+| inviteCode |string|邀请码|
+| inviteTime |long|注册时间|
+| spot |string|现货返佣(usdt)|
+| etf |string|ETF返佣(usdt) |
+| futures |string|合约返佣(usdt) |
+| total |string|返佣总额(usdt) |
+| deposit |string|已入金金额(usdt)|
+| firstDepositTime |string|首次入金日期(格式yyyy-mm-dd，若没有，返回null)|
+
+若startTime和endTime均未发送,返回最近半年的数据。
 
 
 # 公开API参数
