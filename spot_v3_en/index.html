@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-08-15" class="toc-h2 toc-link" data-title="2023-08-15"><strong>2023-08-15</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-06-13" class="toc-h2 toc-link" data-title="2023-06-13"><strong>2023-06-13</strong></a>
                   </li>
                   <li>
@@ -717,6 +720,9 @@
                   <li>
                     <a href="#query-refercode" class="toc-h2 toc-link" data-title="Query ReferCode">Query ReferCode</a>
                   </li>
+                  <li>
+                    <a href="#get-affiliate-commission-record-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Commission Record (affiliate only)">Get Affiliate Commission Record (affiliate only)</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -784,7 +790,11 @@ Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/is
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-06-13'><strong>2023-06-13</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-08-15'><strong>2023-08-15</strong></h2>
+<ul>
+<li>Add Get Affiliate Commission Record endpoint</li>
+</ul>
+<h2 id='2023-06-13'><strong>2023-06-13</strong></h2>
 <ul>
 <li>Add query all listenKey endpoint</li>
 </ul>
@@ -8237,6 +8247,184 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">referCode</td>
 </tr>
 </tbody></table>
+<h2 id='get-affiliate-commission-record-affiliate-only'>Get Affiliate Commission Record (affiliate only)</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/commission?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCommissionUsdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalTradeUsdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"finished"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27121050"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc-12345"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637145911</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"spot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"etf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21131086"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"futures"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.74546367"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.95677453"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"firstDepositTime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"52813530"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"account"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc-12345"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1637145478</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"spot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.25023599"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"etf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"futures"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.25023599"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26000.00000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"firstDepositTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-19"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/commission</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">invite Code</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">page</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">pageSize，default:10</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">user uid</td>
+</tr>
+<tr>
+<td style="text-align: left">account</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">account</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">inviteCode</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">inviteTime</td>
+</tr>
+<tr>
+<td style="text-align: left">spot</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">spot commission(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">etf</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF commission(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">futures</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">futures commission(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">total</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">total commission(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">deposit</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">deposit amount(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">firstDepositTime</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">first Deposit Time</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not sent, default return the data of the last six months .</p>
 <h1 id='public-api-definitions'>Public API Definitions</h1><h2 id='enum-definitions'>ENUM definitions</h2><h3 id='order-side'><a id="order_side">Order side</a></h3>
 <ul>
 <li>BUY</li>
