@@ -70,7 +70,7 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
-## **2023-06-13**
+## **2023-08-15**
 
 - Add Get Affiliate Commission Record endpoint
 
