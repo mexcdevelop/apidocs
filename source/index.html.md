@@ -240,7 +240,7 @@ post  /api/v3/broker/sub-account/virtualSubAccount
 | ---------- | ------ | --------- | --------------------------------------------- |
 | subAccount | string | yes       | subAccount name                               |
 | note       | string | yes       | note                                          |
-| password   | string | yes       | password(hexadecimal string encrypted by MD5) |
+| password   | string | no       | password(hexadecimal string encrypted by MD5) |
 
 **Response Parameter:**
 
