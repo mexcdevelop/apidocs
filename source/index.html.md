@@ -245,7 +245,7 @@ post  /api/v3/broker/sub-account/virtualSubAccount
 | ------ | -------- | -------- | ---------- |
 |subAccount|string|yes|子账户名称|
 |note|string|yes|备注|
-|password|string|yes|资金密码【资金密码要求：MD5加密的16进制字符串过来】|
+|password|string|no|资金密码【资金密码要求：MD5加密的16进制字符串过来】|
 
 **返回参数：**
 
