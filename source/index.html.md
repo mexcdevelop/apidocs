@@ -31,10 +31,10 @@ Check the required permissions when creating an API Key
 
 We provide developers with SDKs in five languages: Python, DotNET, Java, Javascript, and Go, and provide users with methods to call APIs directly through the SDK. Currently supports all interfaces in spot.
 
-[https://github.com/mxcdevelop/mexc-api-sdk](https://github.com/mxcdevelop/mexc-api-sdk)
+[https://github.com/mexcdevelop/mexc-api-sdk](https://github.com/mexcdevelop/mexc-api-sdk)
 
 <aside class="notice">
-Any problem please submit <a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank"> feedback</a>
+Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/issues" target="_blank"> feedback</a>
 </aside>
 ### Postman Collections
 
@@ -42,7 +42,7 @@ There is now a Postman collection containing the API endpoints for quick and eas
 
 This is recommended for new users who want to get a quick-start into using the API.
 
-For more information please refer to this page: [MEXC API Postman](https://github.com/mxcdevelop/mexc-api-postman)
+For more information please refer to this page: [MEXC API Postman](https://github.com/mexcdevelop/mexc-api-postman)
 
 ## MEXC Broker Introduction
 
@@ -108,11 +108,11 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2023-01-06**
 
-- [Update Limits Info](https://mxcdevelop.github.io/apidocs/spot_v3_en/#limits)
+- [Update Limits Info](https://mexcdevelop.github.io/apidocs/spot_v3_en/#limits)
 
 ## **2022-12-29**
 
-- [ETF](https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf) remove some response params:
+- [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf) remove some response params:
 
 | Name       | type | Description          |
 | :------------- | :------- | :------------ |
@@ -135,42 +135,42 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2022-10-14**
 
-- Update Endpoints [Wallet Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
+- Update Endpoints [Wallet Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
-  1.[Withdraw](https://mxcdevelop.github.io/apidocs/spot_v3_en/#withdraw): When do a withdraw, `address` and `memo` should be passed separate (The previous version the memo is joined with a ":" after address).
+  1.[Withdraw](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw): When do a withdraw, `address` and `memo` should be passed separate (The previous version the memo is joined with a ":" after address).
 
-  2.[Withdraw History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network): Parameters `address` and `memo` should be returned separate (The previous version the memo is joined with a ":" after address).
+  2.[Withdraw History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network): Parameters `address` and `memo` should be returned separate (The previous version the memo is joined with a ":" after address).
 
-  3.[Deposit Address](https://mxcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter  `tag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
+  3.[Deposit Address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter  `tag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
 
-  4.[Deposit History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter  `addressTag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
+  4.[Deposit History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network): The return parameter  `addressTag` is changed to `memo`, and the memo required for deposite is returned in the `memo` parameter.
 
-  5.Add [Generate deposit address](https://mxcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
+  5.Add [Generate deposit address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
 
-  6.[Query the currency information](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information): add `withdrawTips` and `depositTips` params。
+  6.[Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information): add `withdrawTips` and `depositTips` params。
 
 
 ## **2022-09-06**
 
-- Add [Rebate Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#rebate-endpoints):
+- Add [Rebate Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#rebate-endpoints):
 
-  1.[Get Rebate History Records](https://mxcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-history-records):Get the rebates from friends you invited and the transactions they make.
+  1.[Get Rebate History Records](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-history-records):Get the rebates from friends you invited and the transactions they make.
 
-  2.[Get Rebate Records Detail](https://mxcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-records-detail):You can query the records of each rebate generated by contracts and spot (non-leveraged) transactions made by your friends and their sub-accounts.
+  2.[Get Rebate Records Detail](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-rebate-records-detail):You can query the records of each rebate generated by contracts and spot (non-leveraged) transactions made by your friends and their sub-accounts.
 
-  3.[Get Self Rebate Records Detail](https://mxcdevelop.github.io/apidocs/spot_v3_en/#get-self-rebate-records-detail):You can query the each contract and spot (no margin) your invited friend made as the self-commission record generated from it.
+  3.[Get Self Rebate Records Detail](https://mexcdevelop.github.io/apidocs/spot_v3_en/#get-self-rebate-records-detail):You can query the each contract and spot (no margin) your invited friend made as the self-commission record generated from it.
 
 ## **2022-09-02**
 
 - Add v3 websocket:
 
-  1.Websocket Market Streams:[Trade Streams](https://mxcdevelop.github.io/apidocs/spot_v3_en/#trade-streams),[Kline Streams](https://mxcdevelop.github.io/apidocs/spot_v3_en/#kline-streams),[Diff.Depth Stream](https://mxcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream);
+  1.Websocket Market Streams:[Trade Streams](https://mexcdevelop.github.io/apidocs/spot_v3_en/#trade-streams),[Kline Streams](https://mexcdevelop.github.io/apidocs/spot_v3_en/#kline-streams),[Diff.Depth Stream](https://mexcdevelop.github.io/apidocs/spot_v3_en/#diff-depth-stream);
 
-  2.Websocket User Data Streams:[Account Deals](https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-deals),[Account Orders](https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-orders).
+  2.Websocket User Data Streams:[Account Deals](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-deals),[Account Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-orders).
 
 ## **2022-08-26**
 
-- [ETF](https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf) add some response params:
+- [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf) add some response params:
 
 | Name       | type | Description          |
 | :------------- | :------- | :------------ |
@@ -182,36 +182,36 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 - Update for Sub-account endpoints:
 
-  1.[Universal Transfer](https://mxcdevelop.github.io/apidocs/spot_v3_en/#universal-transfer-for-master-account)
+  1.[Universal Transfer](https://mexcdevelop.github.io/apidocs/spot_v3_en/#universal-transfer-for-master-account)
 
-  2.[Query Universal Transfer History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-universal-transfer-history-for-master-account)
+  2.[Query Universal Transfer History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-universal-transfer-history-for-master-account)
 
 
 ## **2022-08-03**
 
-- Add [Wallet Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
+- Add [Wallet Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#wallet-endpoints):
 
-  1.[Query the currency information](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information)
+  1.[Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information)
 
-  2.[Withdraw](https://mxcdevelop.github.io/apidocs/spot_v3_en/#withdraw)
+  2.[Withdraw](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw)
 
-  3.[Deposit History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network)
+  3.[Deposit History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-history-supporting-network)
 
-  4.[Withdraw History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
+  4.[Withdraw History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#withdraw-history-supporting-network)
 
-  5.[Deposit Address](https://mxcdevelop.github.io/apidocs/spot_v3_en/#deposit-address-supporting-network)
+  5.[Deposit Address](https://mexcdevelop.github.io/apidocs/spot_v3_en/#deposit-address-supporting-network)
 
-  6.[User Universal Transfer](https://mxcdevelop.github.io/apidocs/spot_v3_en/#user-universal-transfer)
+  6.[User Universal Transfer](https://mexcdevelop.github.io/apidocs/spot_v3_en/#user-universal-transfer)
 
-  7.[Query User Universal Transfer History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-user-universal-transfer-history)
+  7.[Query User Universal Transfer History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-user-universal-transfer-history)
 
 ## **2022-07-27**
 
-- Spot [New Order](https://mxcdevelop.github.io/apidocs/spot_v3_en/#new-order) Order type add: IOC and FOK
+- Spot [New Order](https://mexcdevelop.github.io/apidocs/spot_v3_en/#new-order) Order type add: IOC and FOK
 
 ## **2022-07-15**
 
-- [Account Trade List](https://mxcdevelop.github.io/apidocs/spot_v3_en/#account-trade-list) add params: isSelfTrade
+- [Account Trade List](https://mexcdevelop.github.io/apidocs/spot_v3_en/#account-trade-list) add params: isSelfTrade
 
 | Name          | Description              |
 | :-------------- | :---------------- |
@@ -219,11 +219,11 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2022-07-08**
 
-- Add [Batch Orders](https://mxcdevelop.github.io/apidocs/spot_v3_en/#batch-orders) Supports 20 orders in a batch,rate limit: 2 times/s.
+- Add [Batch Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#batch-orders) Supports 20 orders in a batch,rate limit: 2 times/s.
 
 ## **2022-07-03**
 
-- Add [Query the currency information](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information),Query currency details and the smart contract address.
+- Add [Query the currency information](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-currency-information),Query currency details and the smart contract address.
 
 
 ## **2022-05-22**
@@ -233,7 +233,7 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2022-04-25**
 
-- [Exchange Info](https://mxcdevelop.github.io/apidocs/spot_v3_en/#exchange-information) add parameters:
+- [Exchange Info](https://mexcdevelop.github.io/apidocs/spot_v3_en/#exchange-information) add parameters:
 
 | Name                     | type | Description                |
 | :------------------------- | :------- | :------------------ |
@@ -241,30 +241,30 @@ To apply for a partnership, please contact: **broker@mexc.com**
 | isMarginTradingAllowed     | Boolean  | isMarginTradingAllowed |
 
 
-- [Current Open Orders](https://mxcdevelop.github.io/apidocs/spot_v3_en/#current-open-orders) Optimize: Get all open orders on multiple symbols,maximun support 5 symbols for one request.
+- [Current Open Orders](https://mexcdevelop.github.io/apidocs/spot_v3_en/#current-open-orders) Optimize: Get all open orders on multiple symbols,maximun support 5 symbols for one request.
 
 ## **2022-03-29**
 
-- Add [Sub-Account Endpoints](https://mxcdevelop.github.io/apidocs/spot_v3_en/#sub-account-endpoints):
+- Add [Sub-Account Endpoints](https://mexcdevelop.github.io/apidocs/spot_v3_en/#sub-account-endpoints):
 
-  1.[Create a Sub-account](https://mxcdevelop.github.io/apidocs/spot_v3_en/#create-a-sub-account-for-master-account)
+  1.[Create a Sub-account](https://mexcdevelop.github.io/apidocs/spot_v3_en/#create-a-sub-account-for-master-account)
 
-  2.[Query Sub-account List](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-sub-account-list-for-master-account)
+  2.[Query Sub-account List](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-sub-account-list-for-master-account)
 
-  3.[Create an APIKey for a sub-account](https://mxcdevelop.github.io/apidocs/spot_v3_en/#create-an-apikey-for-a-sub-account-for-master-account)
+  3.[Create an APIKey for a sub-account](https://mexcdevelop.github.io/apidocs/spot_v3_en/#create-an-apikey-for-a-sub-account-for-master-account)
 
-  4.[Query the APIKey of a sub-account](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-the-apikey-of-a-sub-account-for-master-account)
+  4.[Query the APIKey of a sub-account](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-the-apikey-of-a-sub-account-for-master-account)
 
-  5.[Delete the APIKey of a sub-account](https://mxcdevelop.github.io/apidocs/spot_v3_en/#delete-the-apikey-of-a-sub-account-for-master-account)
+  5.[Delete the APIKey of a sub-account](https://mexcdevelop.github.io/apidocs/spot_v3_en/#delete-the-apikey-of-a-sub-account-for-master-account)
 
-  6.[Universal Transfer](https://mxcdevelop.github.io/apidocs/spot_v3_en/#universal-transfer-for-master-account)
+  6.[Universal Transfer](https://mexcdevelop.github.io/apidocs/spot_v3_en/#universal-transfer-for-master-account)
 
-  7.[Query Universal Transfer History](https://mxcdevelop.github.io/apidocs/spot_v3_en/#query-universal-transfer-history-for-master-account)
+  7.[Query Universal Transfer History](https://mexcdevelop.github.io/apidocs/spot_v3_en/#query-universal-transfer-history-for-master-account)
 
 
 ## **2022-03-25**
 
-- Add [Postman collection](https://mxcdevelop.github.io/apidocs/spot_v3_en/#api-library)
+- Add [Postman collection](https://mexcdevelop.github.io/apidocs/spot_v3_en/#api-library)
 
 ## **2022-03-24**
 
@@ -285,7 +285,7 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 ## **2022-02-19**
 
-- Add [ETF](https://mxcdevelop.github.io/apidocs/spot_v3_en/#etf)
+- Add [ETF](https://mexcdevelop.github.io/apidocs/spot_v3_en/#etf)
 
 ## **2022-02-11**
 
