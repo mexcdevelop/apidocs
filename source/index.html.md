@@ -1745,7 +1745,7 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
 | takeProfitPrice  | decimal   | 止盈价 |
 
 
-**注意：本接口返回的`price`为平台接管成交价格，若想查询强平订单的强平价格可通过[获取用户当前持仓接口](https://mxcdevelop.github.io/apidocs/contract_v1_cn/#721eaacc0f)查询，发生强平的订单，该价格为平台的接管价格，与强平价或会出现差异，具体可参考：[强平与风险限制](https://www.mexc.com/zh-TW/support/articles/360044646391)**
+**注意：本接口返回的`price`为平台接管成交价格，若想查询强平订单的强平价格可通过[获取用户当前持仓接口](https://mexcdevelop.github.io/apidocs/contract_v1_cn/#721eaacc0f)查询，发生强平的订单，该价格为平台的接管价格，与强平价或会出现差异，具体可参考：[强平与风险限制](https://www.mexc.com/zh-TW/support/articles/360044646391)**
 
 
 ## 根据外部号查询订单
