@@ -31,24 +31,24 @@ meta:
 
 我们为开发者提供了Python,DotNET,Java,Javascript,Go五种语言的SDK,提供用户直接通过SDK调用API的方法。目前支持现货所有接口。
 
-[https://github.com/mxcdevelop/mexc-api-sdk](https://github.com/mxcdevelop/mexc-api-sdk)
+[https://github.com/mexcdevelop/mexc-api-sdk](https://github.com/mexcdevelop/mexc-api-sdk)
 
 <aside class="notice">
-使用中遇到问题请通过<a href="https://github.com/mxcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
+使用中遇到问题请通过<a href="https://github.com/mexcdevelop/mexc-api-sdk/issues" target="_blank">提交问题</a>反馈
 </aside>
 
 ## Demo示例
 
 我们提供了5种语言的demo，用户可以参考，目前支持了现货，推送等示例，后续会持续更新。
 
-https://github.com/mxcdevelop/mexc-api-demo
+https://github.com/mexcdevelop/mexc-api-demo
 
-使用中遇到问题请通过[提交问题](https://github.com/mxcdevelop/mexc-api-demo/issues)反馈
+使用中遇到问题请通过[提交问题](https://github.com/mexcdevelop/mexc-api-demo/issues)反馈
 
 ### Postman Collections
 
 现在你可以通过`Postman collection`来快速体验、使用API接口。
-如果想了解更多如何使用Postman，请访问: [Mexc API Postman](https://github.com/mxcdevelop/mexc-api-postman)
+如果想了解更多如何使用Postman，请访问: [Mexc API Postman](https://github.com/mexcdevelop/mexc-api-postman)
 
 ## 经纪商申请
 
@@ -110,7 +110,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2023-01-06**
 
-- [新增权重限速模式](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#c1fd2fc5ac)
+- [新增权重限速模式](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#c1fd2fc5ac)
 
 
 ## **2022-12-28**
@@ -130,41 +130,41 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-10-14**
 
-- 更新部分[钱包接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下：
+- 更新部分[钱包接口](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#ec5249e068)，具体如下：
 
-  1、[提币接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)：提币时，参数address和memo需要分别正确传入（原memo在address后以冒号拼接）；
+  1、[提币接口](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)：提币时，参数address和memo需要分别正确传入（原memo在address后以冒号拼接）；
 
-  2、[获取提币历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)：参数address和memo分别正确返回（原memo在address后以冒号拼接）；
+  2、[获取提币历史](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)：参数address和memo分别正确返回（原memo在address后以冒号拼接）；
 
-  3、[获取充值地址](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)：返回参数tag改为memo，且充值所需memo会在memo参数中返回；
+  3、[获取充值地址](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)：返回参数tag改为memo，且充值所需memo会在memo参数中返回；
 
-  4、[获取充值历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)：返回参数addressTag改为memo，且充值所需memo会在memo参数中返回；
+  4、[获取充值历史](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)：返回参数addressTag改为memo，且充值所需memo会在memo参数中返回；
 
-  5、新增：[生成充值地址](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
+  5、新增：[生成充值地址](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
 
-  6、[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)：新增withdrawTips和depositTips两个字段。
+  6、[查询币种信息](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)：新增withdrawTips和depositTips两个字段。
 
 ## **2022-09-06**
 
 - 新增邀请返佣相关接口：
 
-  1、[获取邀请返佣记录](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#8254d412a1)：获取您邀请的好友以及从他们进行的交易产生的返佣；
+  1、[获取邀请返佣记录](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#8254d412a1)：获取您邀请的好友以及从他们进行的交易产生的返佣；
 
-  2、[获取返佣记录明细 （奖励记录）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#72fbc63aa1)：您可查看您的好友以及好友的子账户进行合约和现货（非杠杆)交易产生的每笔返佣记录；
+  2、[获取返佣记录明细 （奖励记录）](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#72fbc63aa1)：您可查看您的好友以及好友的子账户进行合约和现货（非杠杆)交易产生的每笔返佣记录；
 
-  3、[获取自返记录明细 （奖励记录）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#26b3666f08)：您可查看您以被邀請的好友身份进行的每笔合約和现货（无保证金）及从中产生的自返佣记录。
+  3、[获取自返记录明细 （奖励记录）](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#26b3666f08)：您可查看您以被邀請的好友身份进行的每笔合約和现货（无保证金）及从中产生的自返佣记录。
 
 ## **2022-09-02**
 
 - 新增v3 websocket：
 
-  1、Websocket 行情推送：包括[逐笔交易（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59)、[K线 Streams](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#k-streams)、[增量深度信息（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875);
+  1、Websocket 行情推送：包括[逐笔交易（实时）](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#2947d06b59)、[K线 Streams](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#k-streams)、[增量深度信息（实时）](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#efff33c875);
 
-  2、Websocket账户信息推送:包括[成交推送（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#444af6a5fa)和[订单推送（实时）](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#ef28329b2a)；
+  2、Websocket账户信息推送:包括[成交推送（实时）](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#444af6a5fa)和[订单推送（实时）](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#ef28329b2a)；
 
 ## **2022-08-26**
 
-- [获取ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口新增返回参数：
+- [获取ETF基础信息](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)接口新增返回参数：
 
 | 字段名称       | 数据类型 | 描述          |
 | :------------- | :------- | :------------ |
@@ -176,35 +176,35 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 - 新增部分母子账户接口：
 
-  1、[母子用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
+  1、[母子用户万向划转](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
 
-  2、[查询母子万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
+  2、[查询母子万向划转历史](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
 
 ## **2022-08-03**
 
 - 新增部分钱包接口：
 
-  1、[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)
+  1、[查询币种信息](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)
 
-  2、[提币](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)
+  2、[提币](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#096be69702)
 
-  3、[获取充值历史(支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)
+  3、[获取充值历史(支持多网络)](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#70f3430304)
 
-  4、[获取提币历史(支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
+  4、[获取提币历史(支持多网络)](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#66382f2bd0)
 
-  5、[获取充值地址 (支持多网络)](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)
+  5、[获取充值地址 (支持多网络)](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#aba7aa7a08)
 
-  6、[用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2e7fe13169)
+  6、[用户万向划转](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#2e7fe13169)
 
-  7、[查询用户万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#7a4f3b3457)
+  7、[查询用户万向划转历史](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#7a4f3b3457)
 
 ## **2022-07-27**
 
-- 现货[下单](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#fd6ce2a756)接口新增订单类型：IOC和FOK
+- 现货[下单](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#fd6ce2a756)接口新增订单类型：IOC和FOK
 
 ## **2022-07-15**
 
-- [账户成交历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#1c077e2313)接口新增返回参数：
+- [账户成交历史](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#1c077e2313)接口新增返回参数：
 
 | 参数名          | 说明              |
 | :-------------- | :---------------- |
@@ -212,11 +212,11 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-07-08**
 
-- 新增[批量下单](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b)接口：支持单次批量下20单；
+- 新增[批量下单](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#de93fae07b)接口：支持单次批量下20单；
 
 ## **2022-07-03**
 
-- 钱包接口模块下新增：[查询币种信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)接口，该接口可返回币种是否可充提/提币限额以及智能合约地址等。
+- 钱包接口模块下新增：[查询币种信息](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#2a7110133d)接口，该接口可返回币种是否可充提/提币限额以及智能合约地址等。
 
 
 ## **2022-05-22**
@@ -226,7 +226,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-04-25**
 
-- [交易规范信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#e7746f7d60)接口新增返回参数：
+- [交易规范信息](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#e7746f7d60)接口新增返回参数：
 
 | 参数名                     | 数据类型 | 说明                |
 | :------------------------- | :------- | :------------------ |
@@ -234,29 +234,29 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 | isMarginTradingAllowed     | Boolean  | 是否允许api杠杆交易 |
 
 
-- [当前挂单](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#066ca582c9)接口优化：支持多交易对查询，每次最多可以传5个symbol。
+- [当前挂单](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#066ca582c9)接口优化：支持多交易对查询，每次最多可以传5个symbol。
 
 ## **2022-03-29**
 
-- 新增[母子账户](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#86382eac44)相关接口：
+- 新增[母子账户](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#86382eac44)相关接口：
 
-  1、[创建子账户](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#c6789f6fd9)
+  1、[创建子账户](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#c6789f6fd9)
 
-  2、[查看子账户列表](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#efa0aed0d6)
+  2、[查看子账户列表](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#efa0aed0d6)
 
-  3、[创建子账户的APIkey](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#apikey)
+  3、[创建子账户的APIkey](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#apikey)
 
-  4、[查询子账户的APIKey](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#apikey-2)
+  4、[查询子账户的APIKey](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#apikey-2)
 
-  5、[删除子账户的APIKey](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#apikey-3)
+  5、[删除子账户的APIKey](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#apikey-3)
 
-  6、[母子用户万向划转](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
+  6、[母子用户万向划转](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#b588d84077)
 
-  7、[查询母子万向划转历史](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
+  7、[查询母子万向划转历史](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#47ebdabc00)
 
 ## **2022-03-25**
 
-- 新增[API代码库](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#api)：Postman Collections，可以通过`Postman collection`来快速体验、使用API接口。
+- 新增[API代码库](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#api)：Postman Collections，可以通过`Postman collection`来快速体验、使用API接口。
 
 ## **2022-03-24**
 
@@ -268,7 +268,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-03-18**
 
-- 新增[订单类型](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#8c6d51826c)：市价单（现货）
+- 新增[订单类型](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#8c6d51826c)：市价单（现货）
 - 新增分页说明：startTime和endTime需同时使用
 
 ## **2022-03-09**
@@ -277,7 +277,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 ## **2022-02-19**
 
-- 新增[ETF接口](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf)：包括[获取ETF基础信息](https://mxcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)
+- 新增[ETF接口](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#etf)：包括[获取ETF基础信息](https://mexcdevelop.github.io/apidocs/spot_v3_cn/#etf-2)
 
 ## **2022-02-11**
 
