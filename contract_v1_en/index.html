@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta
             name="description"
-            content="Documentation for the mexc global API"
+            content="Documentation for the mexc API"
         >
     <title>MXC CONTRACT API</title>
     <link href="images/favicon-667d5fa9.png" rel="icon" type="image/png" />
@@ -3246,7 +3246,7 @@ Rate limit:20 times/2 seconds
 <tr>
 <td>leverage</td>
 <td>int</td>
-<td>leverage multiple｜</td>
+<td>leverage multiple</td>
 </tr>
 <tr>
 <td>createTime</td>
@@ -3812,12 +3812,12 @@ Rate limit:20 times/2 seconds
 <tr>
 <td>stopLossPrice</td>
 <td>decimal</td>
-<td>stop-loss price ｜</td>
+<td>stop-loss price</td>
 </tr>
 <tr>
 <td>takeProfitPrice</td>
 <td>decimal</td>
-<td>take-profit price ｜</td>
+<td>take-profit price</td>
 </tr>
 <tr>
 <td></data></td>
@@ -3954,11 +3954,6 @@ Rate limit:20 times/2 seconds
 <td>Misdescription (If there has )</td>
 </tr>
 <tr>
-<td><data></td>
-<td>array</td>
-<td></td>
-</tr>
-<tr>
 <td>orderId</td>
 <td>long</td>
 <td>orderid</td>
@@ -4076,19 +4071,16 @@ Rate limit:20 times/2 seconds
 <tr>
 <td>stopLossPrice</td>
 <td>decimal</td>
-<td>stop-loss price ｜</td>
+<td>stop-loss price</td>
 </tr>
 <tr>
 <td>takeProfitPrice</td>
 <td>decimal</td>
-<td>take-profit price ｜</td>
-</tr>
-<tr>
-<td></data></td>
-<td></td>
-<td></td>
+<td>take-profit price</td>
 </tr>
 </tbody></table>
+
+<p><strong>Note: The price returned from this interface is the platform&#39;s takeover price. If you want to query the liquidation price of a liquidation order, you can do so through the <a href="https://mexcdevelop.github.io/apidocs/contract_v1_en/#get-the-user-39-s-current-holding-position">Get the user&#39;s current holding position</a> interface. For liquidation orders, the price will be the platform&#39;s takeover price, which may differ from the liquidation price. For more information, please refer to <a href="https://www.mexc.com/support/articles/360044646391">Liquidation and Risk Limit</a>.</strong></p>
 <h2 id='query-the-order-based-on-the-external-number'>Query the order based on the external number</h2>
 <blockquote>
 <p>Response</p>
@@ -5250,7 +5242,7 @@ Rate limit:20 times/2 seconds
 <tr>
 <td>placeOrderId</td>
 <td>long</td>
-<td>order id after successful delegation ｜</td>
+<td>order id after successful delegation</td>
 </tr>
 <tr>
 <td>errorCode</td>
