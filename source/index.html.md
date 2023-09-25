@@ -1814,7 +1814,7 @@ Rate limit:20 times/2 seconds
 | stopLossPrice | decimal | stop-loss price |
 | takeProfitPrice | decimal | take-profit price |
 
-**Note: The price returned from this interface is the platform's takeover price. If you want to query the liquidation price of a liquidation order, you can do so through the [Get the user's current holding position](https://mxcdevelop.github.io/apidocs/contract_v1_en/#get-the-user-39-s-current-holding-position) interface. For liquidation orders, the price will be the platform's takeover price, which may differ from the liquidation price. For more information, please refer to [Liquidation and Risk Limit](https://www.mexc.com/support/articles/360044646391).**
+**Note: The price returned from this interface is the platform's takeover price. If you want to query the liquidation price of a liquidation order, you can do so through the [Get the user's current holding position](https://mexcdevelop.github.io/apidocs/contract_v1_en/#get-the-user-39-s-current-holding-position) interface. For liquidation orders, the price will be the platform's takeover price, which may differ from the liquidation price. For more information, please refer to [Liquidation and Risk Limit](https://www.mexc.com/support/articles/360044646391).**
 
 
 ## Query the order based on the external number
