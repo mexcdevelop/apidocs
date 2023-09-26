@@ -4512,7 +4512,7 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 | takerAmount|string|taker金额|
 | makerAmount|string|maker金额|
 | amountCurrency|string|金额币种|
-| usdtAmount|string|maker金额|
+| usdtAmount|string|usdt金额|
 | commission|string|返佣金额|
 | currency|string|返佣币种|
 
