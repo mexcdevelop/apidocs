@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-09-27**
+
+- Add Get Affiliate Withdraw Record endpoint and Get Affiliate Commission Detail Record endpoint
+
 ## **2023-08-15**
 
 - Add Get Affiliate Commission Record endpoint
@@ -313,7 +317,7 @@ After exceeding the interface access frequency limit, you will not be able to co
 
 Each account can hold up to 500 valid orders that are not completely filled.
 
-## Q6：Why does WebSocket always disconnect?
+## Q6:Why does WebSocket always disconnect?
 
 1. If there is no valid subscription, it will disconnect in 30 seconds.
 2. If the subscription is successful, and there is no traffic in 60 seconds, it will automatically disconnect.
@@ -609,7 +613,7 @@ The following error information can be returend
 
 ## Download Historical Market Data
 
-Provides kline and trading data for all Spot pairs since 01-01-2023：[Historical Market Data](https://www.mexc.co/zh-CN/market-data-download)
+Provides kline and trading data for all Spot pairs since 01-01-2023:[Historical Market Data](https://www.mexc.co/zh-CN/market-data-download)
 
 ## Test Connectivity
 
@@ -4282,6 +4286,165 @@ get /api/v3/rebate/affiliate/commission?timestamp={{timestamp}}&signature={{sign
 | firstDepositTime |string|first Deposit Time|
 
 If startTime and endTime are not sent, default return the data of the last six months .
+
+
+## Get Affiliate Withdraw Record (affiliate only)
+
+> request
+
+```
+get /api/v3/rebate/affiliate/withdraw?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "withdrawTime": 1682321417000,
+                "asset": "USDT",
+                "amount": "0.00001000"
+            },
+            {
+                "withdrawTime": 1682321405000,
+                "asset": "USDC",
+                "amount": "0.00001000"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/affiliate/withdraw```  
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name | Type| Mandatory  | Description  | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | No       | startTime |
+| endTime    | long    | No       | endTime  |
+| page       | int     | No       | page  |
+| pageSize   | int     | No       | pageSize,default: 10  |
+| timestamp  | long    | Yes       | timestamp   |
+| signature  | string  | Yes       |  signature  |
+
+
+**Response**
+
+| Name  |Type | Description |
+| :------------ | :-------- | :--------|
+| withdrawTime |long|withdrawTime|
+| asset |string|withdraw asset|
+| amount |string|withdraw amount|
+
+If startTime and endTime are not sent, the data of the last six months is returned.
+
+## Get Affiliate Commission Detail Record (affiliate only)
+
+> request
+
+```
+get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 5,
+        "totalPage": 1,
+        "currentPage": 1,
+        "totalCommissionUsdtAmount": "0.0011",
+        "totalTradeUsdtAmount": "281.8096",
+        "resultList": [
+            {
+                "type": 2,
+                "sourceType": 2,
+                "state": 2,
+                "date": 1689264000000,
+                "uid": "17875073",
+                "rate": 0.1,
+                "symbol": "USDT",
+                "takerAmount": "170.49326",
+                "makerAmount": "0",
+                "amountCurrency": "USDT",
+                "usdtAmount": "170.49326",
+                "commission": "0.00085246",
+                "currency": "USDT"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/affiliate/commission/detail```  
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name | Type| Mandatory  | Description  | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | No       | startTime |
+| endTime    | long    | No       | endTime |
+| inviteCode | string  | No       | inviteCode   |
+| page       | int     | No       | page  |
+| pageSize   | int     | No       | pageSize,default: 10  |
+| type       | int     | No       | commission type,1:spot,2:futures,3:ETF  |
+| timestamp  | long    | Yes       | timestamp   |
+| signature  | string  | Yes       |  signature  |
+
+
+**Response**
+
+| Name  |Type | Description |
+| :------------ | :-------- | :--------|
+| totalCommissionUsdtAmount| string|total commission in usdt|
+| totalTradeUsdtAmount|string|total trade volume in usdt |
+| type|int| commission type,1:spot 2:futures 3:ETF|
+| sourceType|int|sourceType,1:direct 2:sub affiliate|
+| state|int|commission state|
+| date|long|trade date|
+| uid |string|uid|
+| rate|string|commission rate|
+| symbol|string|symbol|
+| takerAmount|string|taker amount|
+| makerAmount|string|maker amount|
+| amountCurrency|string|amount currency|
+| usdtAmount|string|usdt amount|
+| commission|string|commission amount|
+| currency|string|commission currency|
+
+
+
+
+If startTime and endTime are not sent, the data from T-7 to T (within the last 8 days) is returned. If type is not sent, the data of all types is returned.
+
+
 
 
 # Public API Definitions
