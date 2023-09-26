@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-09-27**
+
+- 新增获取代理提现记录接口、获取代理返佣明细接口
+
 ## **2023-08-15**
 
 - 新增获取代理邀请返佣记录接口
@@ -4335,8 +4339,8 @@ get /api/v3/rebate/affiliate/commission?timestamp={{timestamp}}&signature={{sign
 
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
-| startTime  | long    | 否       | 开始时间（佣金、入金數據時間） |
-| endTime    | long    | 否       | 截止时间（佣金、入金數據時間） |
+| startTime  | long    | 否       | 开始时间（佣金、入金数据时间） |
+| endTime    | long    | 否       | 截止时间（佣金、入金数据时间） |
 | inviteCode | string  | 否       | 邀请码  |
 | page       | int     | 否       | 页数  |
 | pageSize   | int     | 否       | 页面内容,不传默认10  |
@@ -4357,9 +4361,165 @@ get /api/v3/rebate/affiliate/commission?timestamp={{timestamp}}&signature={{sign
 | futures |string|合约返佣(usdt) |
 | total |string|返佣总额(usdt) |
 | deposit |string|已入金金额(usdt)|
-| firstDepositTime |string|首次入金日期(格式yyyy-mm-dd，若没有，返回null)|
+| firstDepositTime |string|首次入金日期(若没有，返回null)|
 
 若startTime和endTime均未发送,返回最近半年的数据。
+
+## 获取代理提现记录 （代理账户）
+
+> 请求示例
+
+```
+get /api/v3/rebate/affiliate/withdraw?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "withdrawTime": 1682321417000,
+                "asset": "USDT",
+                "amount": "0.00001000"
+            },
+            {
+                "withdrawTime": 1682321405000,
+                "asset": "USDC",
+                "amount": "0.00001000"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/affiliate/withdraw```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | 否       | 开始时间（佣金、入金数据时间） |
+| endTime    | long    | 否       | 截止时间（佣金、入金数据时间） |
+| page       | int     | 否       | 页数  |
+| pageSize   | int     | 否       | 页面内容,不传默认10  |
+| timestamp  | long    | 是       | 时间戳    |
+| signature  | string  | 是       |  签名  |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+| withdrawalTime |long|提现时间|
+| asset |string|提现币种|
+| amount |string|提现金额|
+
+若startTime和endTime均未发送,返回最近半年的数据。
+
+## 获取代理返佣明细 （代理账户）
+
+> 请求示例
+
+```
+get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 5,
+        "totalPage": 1,
+        "currentPage": 1,
+        "totalCommissionUsdtAmount": "0.0011",
+        "totalTradeUsdtAmount": "281.8096",
+        "resultList": [
+            {
+                "type": 2,
+                "sourceType": 2,
+                "state": 2,
+                "date": 1689264000000,
+                "uid": "17875073",
+                "rate": 0.1,
+                "symbol": "USDT",
+                "takerAmount": "170.49326",
+                "makerAmount": "0",
+                "amountCurrency": "USDT",
+                "usdtAmount": "170.49326",
+                "commission": "0.00085246",
+                "currency": "USDT"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/affiliate/commission/detail```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | 否       | 开始时间（佣金、入金数据时间） |
+| endTime    | long    | 否       | 截止时间（佣金、入金数据时间） |
+| inviteCode | string  | 否       | 邀请码  |
+| page       | int     | 否       | 页数  |
+| pageSize   | int     | 否       | 页面内容,不传默认10  |
+| type       | int     | 否       | 返佣类型,1：现货、2：合约、3：ETF  |
+| timestamp  | long    | 是       | 时间戳    |
+| signature  | string  | 是       |  签名  |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+| totalCommissionUsdtAmount| string|总佣金|
+| totalTradeUsdtAmount|string|总交易量|
+| type|int| 返佣类型,1：现货、2：合约、3：ETF|
+| sourceType|int|1：直客、2：子代理|
+| state|int|返佣状态|
+| date|long|交易日期|
+| uid |string|用户uid|
+| rate|string|返佣比例|
+| symbol|string|交易对|
+| takerAmount|string|taker金额|
+| makerAmount|string|maker金额|
+| amountCurrency|string|金额币种|
+| usdtAmount|string|maker金额|
+| commission|string|返佣金额|
+| currency|string|返佣币种|
+
+
+
+
+若startTime和endTime均未发送,返回T-7~T的日期(近8天內日期)的数据,type不填则返回全部种类数据。
 
 
 # 公开API参数
