@@ -4426,7 +4426,7 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 | totalCommissionUsdtAmount| string|total commission in usdt|
 | totalTradeUsdtAmount|string|total trade volume in usdt |
 | type|int| commission type,1:spot 2:futures 3:ETF|
-| sourceType|int|sourceType,1:direct 2:sub affiliate|
+| sourceType|int|sourceType,1:referral 2:sub-affiliate|
 | state|int|commission state|
 | date|long|trade date|
 | uid |string|uid|
