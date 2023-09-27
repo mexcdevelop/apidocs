@@ -4442,7 +4442,7 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 
 
 
-If startTime and endTime are not sent, the data from T-7 to T (within the last 8 days) is returned. If type is not sent, the data of all types is returned.
+If startTime and endTime are not sent, the data from T-7 to T (within the last 8 days) is returned. If type is not sent, the data of all types is returned,maximum 30 days data can be queried at one time.
 
 
 
