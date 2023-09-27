@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-09-27" class="toc-h2 toc-link" data-title="2023-09-27"><strong>2023-09-27</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-08-15" class="toc-h2 toc-link" data-title="2023-08-15"><strong>2023-08-15</strong></a>
                   </li>
                   <li>
@@ -463,7 +466,7 @@
                     <a href="#q5-how-many-orders-can-an-account-place" class="toc-h2 toc-link" data-title="Q5: How many orders can an account place?">Q5: How many orders can an account place?</a>
                   </li>
                   <li>
-                    <a href="#q6-why-does-websocket-always-disconnect" class="toc-h2 toc-link" data-title="Q6：Why does WebSocket always disconnect?">Q6：Why does WebSocket always disconnect?</a>
+                    <a href="#q6-why-does-websocket-always-disconnect" class="toc-h2 toc-link" data-title="Q6:Why does WebSocket always disconnect?">Q6:Why does WebSocket always disconnect?</a>
                   </li>
                   <li>
                     <a href="#q7-why-am-i-unable-to-subcribe-to-multiple-channels-on-websocket" class="toc-h2 toc-link" data-title="Q7: Why am I unable to subcribe to multiple channels on WebSocket?">Q7: Why am I unable to subcribe to multiple channels on WebSocket?</a>
@@ -723,6 +726,12 @@
                   <li>
                     <a href="#get-affiliate-commission-record-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Commission Record (affiliate only)">Get Affiliate Commission Record (affiliate only)</a>
                   </li>
+                  <li>
+                    <a href="#get-affiliate-withdraw-record-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Withdraw Record (affiliate only)">Get Affiliate Withdraw Record (affiliate only)</a>
+                  </li>
+                  <li>
+                    <a href="#get-affiliate-commission-detail-record-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Commission Detail Record (affiliate only)">Get Affiliate Commission Detail Record (affiliate only)</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -790,7 +799,11 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-08-15'><strong>2023-08-15</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-09-27'><strong>2023-09-27</strong></h2>
+<ul>
+<li>Add Get Affiliate Withdraw Record endpoint and Get Affiliate Commission Detail Record endpoint</li>
+</ul>
+<h2 id='2023-08-15'><strong>2023-08-15</strong></h2>
 <ul>
 <li>Add Get Affiliate Commission Record endpoint</li>
 </ul>
@@ -1069,7 +1082,7 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <p>After exceeding the interface access frequency limit, you will not be able to continue accessing the interface. It will resume to normal after 10 minutes to keep the interface access frequency below the limit.</p>
 <h2 id='q5-how-many-orders-can-an-account-place'>Q5: How many orders can an account place?</h2>
 <p>Each account can hold up to 500 valid orders that are not completely filled.</p>
-<h2 id='q6-why-does-websocket-always-disconnect'>Q6：Why does WebSocket always disconnect?</h2>
+<h2 id='q6-why-does-websocket-always-disconnect'>Q6:Why does WebSocket always disconnect?</h2>
 <ol>
 <li>If there is no valid subscription, it will disconnect in 30 seconds.</li>
 <li>If the subscription is successful, and there is no traffic in 60 seconds, it will automatically disconnect.</li>
@@ -1667,7 +1680,7 @@ The account is used as the basic unit of speed limit for the endpoints that need
 </tr>
 </tbody></table>
 <h1 id='market-data-endpoints'>Market Data Endpoints</h1><h2 id='download-historical-market-data'>Download Historical Market Data</h2>
-<p>Provides kline and trading data for all Spot pairs since 01-01-2023：<a href="https://www.mexc.co/zh-CN/market-data-download">Historical Market Data</a></p>
+<p>Provides kline and trading data for all Spot pairs since 01-01-2023:<a href="https://www.mexc.co/zh-CN/market-data-download">Historical Market Data</a></p>
 <h2 id='test-connectivity'>Test Connectivity</h2>
 <blockquote>
 <p>Response</p>
@@ -8425,6 +8438,325 @@ post /api/v3/sub-account/margin
 </tbody></table>
 
 <p>If startTime and endTime are not sent, default return the data of the last six months .</p>
+<h2 id='get-affiliate-withdraw-record-affiliate-only'>Get Affiliate Withdraw Record (affiliate only)</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/withdraw?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"withdrawTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1682321417000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001000"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"withdrawTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1682321405000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001000"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/withdraw</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">page</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">pageSize,default: 10</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">withdrawTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">withdrawTime</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">withdraw asset</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">withdraw amount</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not sent, the data of the last six months is returned.</p>
+<h2 id='get-affiliate-commission-detail-record-affiliate-only'>Get Affiliate Commission Detail Record (affiliate only)</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCommissionUsdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0011"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalTradeUsdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"281.8096"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sourceType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1689264000000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17875073"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"takerAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"170.49326"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"makerAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amountCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"usdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"170.49326"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00085246"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/commission/detail</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">inviteCode</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">page</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">pageSize,default: 10</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">commission type,1:spot,2:futures,3:ETF</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">totalCommissionUsdtAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">total commission in usdt</td>
+</tr>
+<tr>
+<td style="text-align: left">totalTradeUsdtAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">total trade volume in usdt</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">commission type,1:spot 2:futures 3:ETF</td>
+</tr>
+<tr>
+<td style="text-align: left">sourceType</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">sourceType,1:referral 2:sub-affiliate</td>
+</tr>
+<tr>
+<td style="text-align: left">state</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">commission state</td>
+</tr>
+<tr>
+<td style="text-align: left">date</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">trade date</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">uid</td>
+</tr>
+<tr>
+<td style="text-align: left">rate</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commission rate</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">takerAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">taker amount</td>
+</tr>
+<tr>
+<td style="text-align: left">makerAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">maker amount</td>
+</tr>
+<tr>
+<td style="text-align: left">amountCurrency</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">amount currency</td>
+</tr>
+<tr>
+<td style="text-align: left">usdtAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">usdt amount</td>
+</tr>
+<tr>
+<td style="text-align: left">commission</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commission amount</td>
+</tr>
+<tr>
+<td style="text-align: left">currency</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commission currency</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not sent, the data from T-7 to T (within the last 8 days) is returned. If type is not sent, the data of all types is returned.</p>
 <h1 id='public-api-definitions'>Public API Definitions</h1><h2 id='enum-definitions'>ENUM definitions</h2><h3 id='order-side'><a id="order_side">Order side</a></h3>
 <ul>
 <li>BUY</li>
