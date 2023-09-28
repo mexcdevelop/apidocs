@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-09-27" class="toc-h2 toc-link" data-title="2023-09-27"><strong>2023-09-27</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-08-15" class="toc-h2 toc-link" data-title="2023-08-15"><strong>2023-08-15</strong></a>
                   </li>
                   <li>
@@ -729,6 +732,12 @@
                   <li>
                     <a href="#28871ea6a8" class="toc-h2 toc-link" data-title="获取代理邀请返佣记录 （代理账户）">获取代理邀请返佣记录 （代理账户）</a>
                   </li>
+                  <li>
+                    <a href="#a46c283670" class="toc-h2 toc-link" data-title="获取代理提现记录 （代理账户）">获取代理提现记录 （代理账户）</a>
+                  </li>
+                  <li>
+                    <a href="#953e360b31" class="toc-h2 toc-link" data-title="获取代理返佣明细 （代理账户）">获取代理返佣明细 （代理账户）</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -753,7 +762,7 @@
 
 <aside class="warning">如果不小心泄露了API key，请立刻删除此Key, 并可以另外生产新的Key.</aside>
 <h2 id='api-key-2'>API Key 权限设置</h2>
-<p>在创建API Key时勾选所需要的权限</p>
+<p>在创建API Key时勾选所需要的权限 </p>
 <h2 id='api'>API 代码库</h2>
 <p>我们为开发者提供了Python,DotNET,Java,Javascript,Go五种语言的SDK,提供用户直接通过SDK调用API的方法。目前支持现货所有接口。</p>
 
@@ -798,7 +807,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-08-15'><strong>2023-08-15</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-09-27'><strong>2023-09-27</strong></h2>
+<ul>
+<li>新增获取代理提现记录接口、获取代理返佣明细接口</li>
+</ul>
+<h2 id='2023-08-15'><strong>2023-08-15</strong></h2>
 <ul>
 <li>新增获取代理邀请返佣记录接口</li>
 </ul>
@@ -8582,13 +8595,13 @@ body
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">开始时间（佣金、入金數據時間）</td>
+<td style="text-align: left">开始时间（佣金、入金数据时间）</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">截止时间（佣金、入金數據時間）</td>
+<td style="text-align: left">截止时间（佣金、入金数据时间）</td>
 </tr>
 <tr>
 <td style="text-align: left">inviteCode</td>
@@ -8679,11 +8692,330 @@ body
 <tr>
 <td style="text-align: left">firstDepositTime</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">首次入金日期(格式yyyy-mm-dd，若没有，返回null)</td>
+<td style="text-align: left">首次入金日期(若没有，返回null)</td>
 </tr>
 </tbody></table>
 
 <p>若startTime和endTime均未发送,返回最近半年的数据。</p>
+<h2 id='a46c283670'>获取代理提现记录 （代理账户）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/withdraw?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"withdrawTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1682321417000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001000"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"withdrawTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1682321405000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001000"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/withdraw</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">开始时间（佣金、入金数据时间）</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">截止时间（佣金、入金数据时间）</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页数</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页面内容,不传默认10</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">withdrawalTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">提现时间</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">提现币种</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">提现金额</td>
+</tr>
+</tbody></table>
+
+<p>若startTime和endTime均未发送,返回最近半年的数据。</p>
+<h2 id='953e360b31'>获取代理返佣明细 （代理账户）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCommissionUsdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0011"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalTradeUsdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"281.8096"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sourceType"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="mi">1689264000000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17875073"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"takerAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"170.49326"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"makerAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amountCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"usdtAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"170.49326"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00085246"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/commission/detail</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">开始时间（佣金、入金数据时间）</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">截止时间（佣金、入金数据时间）</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">邀请码</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页数</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页面内容,不传默认10</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">返佣类型,1：现货、2：合约、3：ETF</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">totalCommissionUsdtAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">总佣金</td>
+</tr>
+<tr>
+<td style="text-align: left">totalTradeUsdtAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">总交易量</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">返佣类型,1：现货、2：合约、3：ETF</td>
+</tr>
+<tr>
+<td style="text-align: left">sourceType</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">1：直客、2：子代理</td>
+</tr>
+<tr>
+<td style="text-align: left">state</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">返佣状态</td>
+</tr>
+<tr>
+<td style="text-align: left">date</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">交易日期</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">用户uid</td>
+</tr>
+<tr>
+<td style="text-align: left">rate</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣比例</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">takerAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">taker金额</td>
+</tr>
+<tr>
+<td style="text-align: left">makerAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">maker金额</td>
+</tr>
+<tr>
+<td style="text-align: left">amountCurrency</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">金额币种</td>
+</tr>
+<tr>
+<td style="text-align: left">usdtAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">usdt金额</td>
+</tr>
+<tr>
+<td style="text-align: left">commission</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣金额</td>
+</tr>
+<tr>
+<td style="text-align: left">currency</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">返佣币种</td>
+</tr>
+</tbody></table>
+
+<p>若startTime和endTime均未发送,返回T-7~T的日期(近8天內日期)的数据,type不填则返回全部种类数据。</p>
 <h1 id='api-4'>公开API参数</h1><h2 id='8c6d51826c'>枚举定义</h2><h3 id='699c10ebb7'><a id="order_side">订单方向</a></h3>
 <ul>
 <li>BUY 买入</li>
