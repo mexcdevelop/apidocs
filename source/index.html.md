@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-10-17**
+
+- 新增获取代理活动页面数据接口、查询子代理页面数据接口
+
 ## **2023-09-27**
 
 - 新增获取代理提现记录接口、获取代理返佣明细接口
@@ -4520,6 +4524,178 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 
 
 若startTime和endTime均未发送,返回T-7~T的日期(近8天內日期)的数据,type不填则返回全部种类数据。
+
+## 获取代理活动页面数据 （代理账户）
+
+> 请求示例
+
+```
+get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "campaign": "11kd",
+                "inviteCode": "mexc-11Kd",
+                "clickTime": 0,
+                "createTime": 1695125287000,
+                "signup": 0,
+                "traded": 0,
+                "deposited": 0,
+                "depositAmount": "0",
+                "tradingAmount": "0",
+                "commission": "0"
+            },
+            {
+                "campaign": "New10",
+                "inviteCode": "mexc-newcode",
+                "clickTime": 7,
+                "createTime": 1693152531000,
+                "signup": 0,
+                "traded": 0,
+                "deposited": 0,
+                "depositAmount": "0",
+                "tradingAmount": "0",
+                "commission": "0"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/affiliate/campaign```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | 否       | 开始时间（佣金、入金数据时间） |
+| endTime    | long    | 否       | 截止时间（佣金、入金数据时间） |
+| page       | int     | 否       | 页数  |
+| pageSize   | int     | 否       | 页面内容,不传默认10  |
+| timestamp  | long    | 是       | 时间戳    |
+| signature  | string  | 是       |  签名  |
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+| campaign|string|活动名称|
+| inviteCode|string|活动邀请码|
+| createTime|long|活动创建时间|
+| clickTime|int|邀请码点击次数|
+| signup|int|注册人数|
+| deposited|int|已入金人数|
+| depositAmount|string|入金量，以usdt计算|
+| tradingAmount|string|交易量，以usdt计算|
+| traded|int|交易人数|
+| commission|string|佣金|
+
+
+startTime、endTime若不填写，则预设查询T-7~T日內数据。
+
+## 查询子代理页面数据（代理账户）
+
+> 请求示例
+
+```
+get /api/v3/rebate/affiliate/subaffiliates?timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "subaffiliateName": "ada176@mailtemp.top ada176",
+                "subaffiliateMail": "ad*****6@mailtemp.top",
+                "campaign": "new1",
+                "inviteCode": "mexc-12181621",
+                "activationTime": 1639834136000,
+                "registered": 0,
+                "deposited": 0,
+                "depositAmount": "0",
+                "commission": "0"
+            },
+            {
+                "subaffiliateName": "ada165@mailtemp.top ada165",
+                "subaffiliateMail": "ad*****5@mailtemp.top",
+                "campaign": null,
+                "inviteCode": "1KMyk",
+                "activationTime": 1639831541000,
+                "registered": 0,
+                "deposited": 1,
+                "depositAmount": "21.15318",
+                "commission": "0.5161221"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/rebate/affiliate/subaffiliates```  
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | 否       | 开始时间（佣金、入金数据时间） |
+| endTime    | long    | 否       | 截止时间（佣金、入金数据时间） |
+| inviteCode | string  | 否       | 邀请码 |
+| page       | int     | 否       | 页数  |
+| pageSize   | int     | 否       | 页面内容,不传默认10  |
+| timestamp  | long    | 是       | 时间戳    |
+| signature  | string  | 是       |  签名  |
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+| subaffiliateName|string|子代理名称|
+| subaffiliateMail|string|子代理邮箱|
+| campaign|string|子代理注册时的活动|
+| inviteCode|string|子代理注册时的邀请码|
+| activationTime|long|子代理开通时间|
+| registered|int|注册人数|
+| deposited|int|已入金人数|
+| depositAmount|string|入金量|
+| commission|string|佣金|
+
+startTime、endTime若不填写，则预设查询T-7~T日內数据。
 
 
 # 公开API参数
