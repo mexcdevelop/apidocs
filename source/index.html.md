@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-10-17**
+
+- Add Get Affiliate Referral Data endpoint and Get Subaffiliates Data endpoint
+
 ## **2023-09-27**
 
 - Add Get Affiliate Withdraw Record endpoint and Get Affiliate Commission Detail Record endpoint
@@ -4442,7 +4446,266 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 
 
 
-If startTime and endTime are not sent, the data from T-7 to T (within the last 8 days) is returned. If type is not sent, the data of all types is returned.
+If startTime and endTime are not sent, the data from T-7 to T is returned. If type is not sent, the data of all types is returned,maximum 30 days data can be queried at one time.
+
+<!-- ## Get Affiliate Campaign Data (affiliate only)
+
+> request
+
+```
+get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "campaign": "11kd",
+                "inviteCode": "mexc-11Kd",
+                "clickTime": 0,
+                "createTime": 1695125287000,
+                "signup": 0,
+                "traded": 0,
+                "deposited": 0,
+                "depositAmount": "0",
+                "tradingAmount": "0",
+                "commission": "0"
+            },
+            {
+                "campaign": "New10",
+                "inviteCode": "mexc-newcode",
+                "clickTime": 7,
+                "createTime": 1693152531000,
+                "signup": 0,
+                "traded": 0,
+                "deposited": 0,
+                "depositAmount": "0",
+                "tradingAmount": "0",
+                "commission": "0"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/affiliate/campaign```  
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | No       | startTime |
+| endTime    | long    | No       | endTime  |
+| page       | int     | No       | page |
+| pageSize   | int     | No       | pageSize,default: 10  |
+| timestamp  | long    | Yes       | timestamp   |
+| signature  | string  | Yes       |  signature |
+
+**Response**
+
+| Name  |Type | Description|
+| :------------ | :-------- | :--------|
+| campaign|string|campaign name|
+| inviteCode|string|campaign inviteCode|
+| createTime|long|campaign createTime|
+| clickTime|int|inviteCode clickTime|
+| signup|int|signup number|
+| deposited|int|deposited number|
+| depositAmount|string|depositAmount(usdt)|
+| tradingAmount|string|tradingAmount(usdt)|
+| traded|int|traded number|
+| commission|string|commission|
+
+
+If startTime and endTime are not sent, the data from T-7 to T is returned. -->
+
+## Get Affiliate Referral Data（affiliate only）
+
+> request
+
+```
+get /api/v3/rebate/affiliate/referral?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "uid": "42469975",
+                "nickName": null,
+                "email": "",
+                "registerTime": 1640275818000,
+                "inviteCode": "mexc-12201950",
+                "depositAmount": "0.00000000",
+                "tradingAmount": "0.00000000",
+                "commission": "0.00000000",
+                "firstDepositTime": null,
+                "firstTradeTime": null,
+                "lastDepositTime": null,
+                "lastTradeTime": null,
+                "withdrawAmount": "0.00000000",
+                "asset": "0 USDT",
+                "identification": 1
+          }
+        ]
+    }
+}
+
+​
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/affiliate/referral```  
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | No       | startTime  |
+| endTime    | long    | No       | endTime   |
+| uid        |  string | No       | uid|
+| inviteCode |  string | No       | invite code|
+| page       | int     | No       | page  |
+| pageSize   | int     | No       | pageSize,default: 10  |
+| timestamp  | long    | Yes       | timestamp    |
+| signature  | string  | Yes       |  signature  |
+
+
+**Response**
+
+| Name  | Type | Description|
+| :------------ | :-------- | :--------|
+| uid | int | uid |
+| account | string | account email|
+| inviteCode | string | invite code |
+| inviteTime | long | invite time |
+| nickName | string | nickName  |
+| firstDeposit | long | first deposit date|
+| firstTrade | long | first trade date|
+| lastDeposit | long | last deposit date|
+| lastTrade | long | last trade date|
+| depositAmount | string | deposit amount(USDT) |
+| tradingAmount | string | trading amount(USDT) |
+| amount | string | commission amount(USDT) |
+| asset | string |  0 USDT、1-1,000 USDT、1,000 - 10,000 USDT、 10,000 - 50,000 USDT、50,000 - 100,000 USDT、 100,000 - 500,000 USDT、500,000 - 1,000,000 USDT、 1,000,000 - 5,000,000 USDT、>5,000,000 USDT |
+| withdrawalAmount | string | withdrawal amount(USDT) |
+| identification | int | identification,1: Uncertified, 2: primary, 3: Advanced, 4: Institutional |
+
+If startTime and endTime are not sent, the data from T-7 to T is returned.
+
+## Get Subaffiliates Data (affiliate only)
+
+> request
+
+```
+get /api/v3/rebate/affiliate/subaffiliates?timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "success": true,
+    "code": 0,
+    "message": null,
+    "data": {
+        "pageSize": 10,
+        "totalCount": 15,
+        "totalPage": 2,
+        "currentPage": 1,
+        "resultList": [
+            {
+                "subaffiliateName": "ada176@mailtemp.top ada176",
+                "subaffiliateMail": "ad*****6@mailtemp.top",
+                "campaign": "new1",
+                "inviteCode": "mexc-12181621",
+                "activationTime": 1639834136000,
+                "registered": 0,
+                "deposited": 0,
+                "depositAmount": "0",
+                "commission": "0"
+            },
+            {
+                "subaffiliateName": "ada165@mailtemp.top ada165",
+                "subaffiliateMail": "ad*****5@mailtemp.top",
+                "campaign": null,
+                "inviteCode": "1KMyk",
+                "activationTime": 1639831541000,
+                "registered": 0,
+                "deposited": 1,
+                "depositAmount": "21.15318",
+                "commission": "0.5161221"
+            }
+        ]
+    }
+}
+
+​
+```
+**HTTP Request**
+
+- **GET** ```/api/v3/rebate/affiliate/subaffiliates```  
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| startTime  | long    | No       | startTime |
+| endTime    | long    | No       |  endTime  |
+| inviteCode | string  | No       | inviteCode|
+| page       | int     | No       | page  |
+| pageSize   | int     | No       | pageSize,default: 10  |
+| timestamp  | long    | Yes       | timestamp |
+| signature  | string  | Yes       | signature |
+
+
+**Response**
+
+| Name  | Type | Description|
+| :------------ | :-------- | :--------|
+| subaffiliateName|string|subaffiliate name|
+| subaffiliateMail|string|subaffiliate mail|
+| campaign|string|campaign |
+| inviteCode|string|inviteCode|
+| activationTime|long|activation time|
+| registered|int|registered number|
+| deposited|int|deposited number|
+| depositAmount|string|deposit amount|
+| commission|string|commission |
+
+If startTime and endTime are not sent, the data from T-7 to T is returned.
 
 
 
