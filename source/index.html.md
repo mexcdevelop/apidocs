@@ -75,6 +75,11 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-11-10**
+
+- 新增用户站内转账接口、查询用户内部转账历史接口
+- 新增miniTicker和miniTickers推送频道
+
 ## **2023-10-17**
 
 - 新增查询直客页面数据接口、查询子代理页面数据接口
@@ -3302,6 +3307,125 @@ get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signa
 |totalPage|int|总页数|
 
 
+## 用户站内转账接口
+
+> 请求示例
+
+```
+post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+  {
+    "tranId": "c45d800a47ba4cbc876a5cd29388319"
+  }
+
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/withdraw/apply```  
+
+**接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须 | 说明               | 
+| :------ | :-------- |:-----|:-----------------|
+|toAccountType|string| 是    | 收款账户类型，支持填入手机号/邮箱或者UID  |
+|toAccount|string| 是    | 收款账户地址，支持填入手机号/邮箱或者UID   |
+|areaCode|string| 否    | 如果toAccount为手机号，该字段为该手机号的必填区号            |
+|asset|string| 是    | 资产            |
+|amount|string| 是    | 数量           |
+|timestamp|string| 是    | 时间戳              |
+|signature|string| 是    | 签名               |
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|tranId|划转ID|
+
+
+## 查询用户内部转账历史接口
+
+> 请求示例
+
+```
+get /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+  {
+    "page": 1,  //当前页
+    "totalRecords": 1,  //总记录数
+    "totalPageNum": 1,  //总页数
+    "data": [
+             {
+      "tranId":"11945860693",//划转ID
+      "asset":"BTC",//币种
+      "amount":"0.1",//划转数量
+      "toAccountType":"EMAIL",//收款账户类型
+      "toAccount":"156283619@outlook.com",//收款账户
+      "fromAccount":"156283618@outlook.com",//付款账户
+      "status":"SUCCESS",//划转状态
+      "timestamp":1544433325000//划转时间
+    },
+    {
+      "tranId":"",//划转ID
+      "asset":"BTC",//币种
+      "amount":"0.8",//划转数量
+      "toAccountType":"UID",//收款账户类型
+      "fromAccount":"156283619@outlook.com",//付款账户
+      "toAccount":"87658765",//收款账户
+      "status":"SUCCESS",//划转状态
+      "timestamp":1544433325000//划转时间
+    }
+    ]
+}
+
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/capital/transfer/internal```  
+
+**接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+|参数名	|数据类型	|是否必须	|说明|
+| :------ | :-------- |:-----|:-----------------|
+|startTime|	long|	否	|
+|endTime|	long|	否	|
+|page	|int|	否|	默认1|
+|limit|	int	|否|	默认10|
+|tranId|	string|	否	|划转id|
+|timestamp|	string|	是|	时间戳|
+|signature|	string|	是|	签名|
+
+若startTime和endTime没传，则默认返回最近7天数据 
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|page	|当前页|
+|totalRecords	|总记录数|
+|totalPage	|总页数|
+|tranId	|划转ID|
+|asset	|币种|
+|amount	|划转数量|
+|fromAccountType	|转出业务账户|
+|toAccountType	|划入业务账户|
+|status	|划转状态|
+|timestamp	|划转时间|
+
+
 # ETF接口
 
 ## 获取ETF基础信息
@@ -3683,6 +3807,129 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | b | string | 买单最优挂单价格 |
 | s | string | 交易对 |
 | t | long | 事件时间 |
+
+## MiniTicker
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
+    ]
+}
+```
+> **response:**
+
+```
+{
+  "d":
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--",
+    "t":"1699502456050"},
+  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
+  "t":1699502456051,
+  "s":"BTCUSDT"
+}								         
+```
+
+**请求参数：**   `spot@public.miniTicker.v3.api@<symbol>@<timezone>`
+
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| c	| string	| 订阅频道名称| 
+| d	| data| data| 
+| >s	| string	|交易对symbol|
+| >p	| string	|交易对最新成交价|
+| >r	| string	|交易对的订阅utc8时区涨跌幅|
+| >tr	| string	|交易对的订阅时区涨跌幅|
+| >h	| string	|交易对的24小时最高价|
+| >l	| string	|交易对的24小时最低价|
+| >v	| string	|交易对的24小时交易额|
+| >q	| string	|交易对的24小时交易量|
+| >lastRT	| string	|ETF最近合并时间|
+| >MT	| string	|ETF合并次数|
+| >NV	| string	|ETF净值|
+
+
+## MiniTickers
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTickers.v3.api@UTC+8"
+    ]
+}
+```
+> **response:**
+
+```
+{
+  "d":
+  [{"s":"SENSOUSDT",
+    "p":"0.07642",
+    "r":"-0.0383",
+    "tr":"-0.0383",
+    "h":"0.08032",
+    "l":"0.07463",
+    "v":"25052.6533",
+    "q":"323777.17",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+  "c":"spot@public.miniTickers.v3.api@UTC+8",
+  "t":1699502456051,
+}								         
+```
+
+**请求参数：**   `spot@public.miniTickers.v3.api@<timezone>`
+
+
+**返回参数:**
+
+| 参数名      | 数据类型   | 说明 |
+| :-------- | :----- | :--- |
+| c	| string	| 订阅频道名称| 
+| d	| data| data| 
+| >s	| string	|交易对symbol|
+| >p	| string	|交易对最新成交价|
+| >r	| string	|交易对的订阅utc8时区涨跌幅|
+| >tr	| string	|交易对的订阅时区涨跌幅|
+| >h	| string	|交易对的24小时最高价|
+| >l	| string	|交易对的24小时最低价|
+| >v	| string	|交易对的24小时交易额|
+| >q	| string	|交易对的24小时交易量|
+| >lastRT	| string	|ETF最近合并时间|
+| >MT	| string	|ETF合并次数|
+| >NV	| string	|ETF净值|
+
 
 ## 如何正确在本地维护一个orderbook副本
 
