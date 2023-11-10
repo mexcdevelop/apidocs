@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2023-11-10" class="toc-h2 toc-link" data-title="2023-11-10"><strong>2023-11-10</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-10-17" class="toc-h2 toc-link" data-title="2023-10-17"><strong>2023-10-17</strong></a>
                   </li>
                   <li>
@@ -661,6 +664,12 @@
                   <li>
                     <a href="#dustlog" class="toc-h2 toc-link" data-title="DustLog">DustLog</a>
                   </li>
+                  <li>
+                    <a href="#internal-transfer" class="toc-h2 toc-link" data-title="Internal Transfer">Internal Transfer</a>
+                  </li>
+                  <li>
+                    <a href="#query-internal-transfer-history" class="toc-h2 toc-link" data-title="Query Internal Transfer history">Query Internal Transfer history</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -691,6 +700,12 @@
                   </li>
                   <li>
                     <a href="#individual-symbol-book-ticker-streams" class="toc-h2 toc-link" data-title="Individual Symbol Book Ticker Streams">Individual Symbol Book Ticker Streams</a>
+                  </li>
+                  <li>
+                    <a href="#miniticker" class="toc-h2 toc-link" data-title="MiniTicker">MiniTicker</a>
+                  </li>
+                  <li>
+                    <a href="#minitickers" class="toc-h2 toc-link" data-title="MiniTickers">MiniTickers</a>
                   </li>
               </ul>
           </li>
@@ -808,7 +823,12 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-10-17'><strong>2023-10-17</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2023-11-10'><strong>2023-11-10</strong></h2>
+<ul>
+<li>Add user internal transfer endpoint and query internal transfer history endpoint.</li>
+<li>Add ws miniTicker and miniTickers channels.</li>
+</ul>
+<h2 id='2023-10-17'><strong>2023-10-17</strong></h2>
 <ul>
 <li>Add Get Affiliate Referral Data endpoint and Get Subaffiliates Data endpoint</li>
 </ul>
@@ -6627,6 +6647,246 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">totalPage</td>
 </tr>
 </tbody></table>
+<h2 id='internal-transfer'>Internal Transfer</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/transfer/internal?&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c45d800a47ba4cbc876a5cd29388319"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_WRITE</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">toAccountTyp:EMAIL/UID/MOBILE</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">toAccount:EMAIL/UID/MOBILE</td>
+</tr>
+<tr>
+<td style="text-align: left">areaCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">areaCode of mobile</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">tranId</td>
+</tr>
+</tbody></table>
+<h2 id='query-internal-transfer-history'>Query Internal Transfer history</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/transfer/internal?&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+    </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+    </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+             </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">"11945860693"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"EMAIL"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toAccount"</span><span class="p">:</span><span class="s2">"156283619@outlook.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fromAccount"</span><span class="p">:</span><span class="s2">"156283618@outlook.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.8"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"UID"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"fromAccount"</span><span class="p">:</span><span class="s2">"156283619@outlook.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"toAccount"</span><span class="p">:</span><span class="s2">"87658765"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer/internal</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_READ</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">default 1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">default 10</td>
+</tr>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">tranid</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p>If startTime and endTime are not provided, will default to returning data from the last 7 days.</p>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">page</td>
+</tr>
+<tr>
+<td style="text-align: left">totalRecords</td>
+<td style="text-align: left">totalRecords</td>
+</tr>
+<tr>
+<td style="text-align: left">totalPage</td>
+<td style="text-align: left">totalPage</td>
+</tr>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">tranId</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">amount</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">fromAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">toAccountType</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">status</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+</tbody></table>
 <h1 id='etf'>ETF</h1><h2 id='get-etf-info'>Get ETF info</h2>
 <blockquote>
 <p>Response</p>
@@ -7207,6 +7467,235 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">t</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">eventTime</td>
+</tr>
+</tbody></table>
+<h2 id='miniticker'>MiniTicker</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "d":
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--",
+    "t":"1699502456050"},
+  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
+  "t":1699502456051,
+  "s":"BTCUSDT"
+}                                        
+</code></pre></div>
+<p><strong>Request:</strong>   <code>spot@public.miniTicker.v3.api@&lt;symbol&gt;@&lt;timezone&gt;</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">c</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">channel name</td>
+</tr>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">data</td>
+<td style="text-align: left">data</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">deal price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price Change Percent in utc8</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;tr</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">price Change Percent in time zone</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;h</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h high price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h low price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h volume</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;q</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h quote Volume</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;lastRT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">etf Last Rebase Time</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;MT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">etf Merge Times</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;NV</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">etf Net Value</td>
+</tr>
+</tbody></table>
+<h2 id='minitickers'>MiniTickers</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTickers.v3.api@UTC+8"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "d":
+  [{"s":"SENSOUSDT",
+    "p":"0.07642",
+    "r":"-0.0383",
+    "tr":"-0.0383",
+    "h":"0.08032",
+    "l":"0.07463",
+    "v":"25052.6533",
+    "q":"323777.17",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+  "c":"spot@public.miniTickers.v3.api@UTC+8",
+  "t":1699502456051,
+}                                        
+</code></pre></div>
+<p><strong>Request:</strong>   <code>spot@public.miniTickers.v3.api@&lt;timezone&gt;</code></p>
+
+<p><strong>Response:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">c</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">channel name</td>
+</tr>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">data</td>
+<td style="text-align: left">data</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">deal price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h price Change Percent in utc8</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;tr</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h price Change Percent in time zone</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;h</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h high price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h low price</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h volume</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;q</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">24h quote Volume</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;lastRT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">etf Last Rebase Time</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;MT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">etf Merge Times</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;NV</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">etf Net Value</td>
 </tr>
 </tbody></table>
 
