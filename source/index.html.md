@@ -3390,7 +3390,7 @@ get /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signa
 ```
 **HTTP请求**
 
-- **POST** ```get /api/v3/capital/transfer/internal```  
+- **GET** ```/api/v3/capital/transfer/internal```  
 
 **接口权限要求:** 钱包提现相关读 / SPOT_WITHDRAW_R
 
