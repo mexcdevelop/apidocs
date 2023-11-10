@@ -70,6 +70,11 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-11-10**
+
+- Add user internal transfer endpoint and query internal transfer history endpoint.
+- Add ws miniTicker and miniTickers channels.
+
 ## **2023-10-17**
 
 - Add Get Affiliate Referral Data endpoint and Get Subaffiliates Data endpoint
@@ -3225,7 +3230,122 @@ Response:
 |totalRecords|int|totalRecords|
 |totalPage|int|totalPage|
 
+## Internal Transfer
 
+> Request
+
+```
+post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+  {
+    "tranId": "c45d800a47ba4cbc876a5cd29388319"
+  }
+
+```
+
+- **POST** ```/api/v3/capital/withdraw/apply```  
+
+**Permission:** SPOT_WITHDRAW_WRITE
+
+**Weight(IP):** 1
+
+**Parameters**
+
+| Name | Type| Mandatory | Description               | 
+| :------ | :-------- |:-----|:-----------------|
+|toAccountType|string| Yes    | toAccountTyp:EMAIL/UID/MOBILE  |
+|toAccount|string| Yes    | toAccount:EMAIL/UID/MOBILE   |
+|areaCode|string| No    | areaCode of mobile            |
+|asset|string| Yes    | asset        |
+|amount|string| Yes    | amount       |
+|timestamp|string| Yes    | timestamp        |
+|signature|string| Yes    | signature      |
+
+**Response**
+
+| Name | Description  |
+| :------------ | :-------- | 
+|tranId|tranId|
+
+
+## Query Internal Transfer history
+
+> Request
+
+```
+get /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+  {
+    "page": 1,  
+    "totalRecords": 1,  
+    "totalPageNum": 1,  
+    "data": [
+             {
+      "tranId":"11945860693",
+      "asset":"BTC",
+      "amount":"0.1",
+      "toAccountType":"EMAIL",
+      "toAccount":"156283619@outlook.com",
+      "fromAccount":"156283618@outlook.com",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
+    },
+    {
+      "tranId":"",
+      "asset":"BTC",
+      "amount":"0.8",
+      "toAccountType":"UID",
+      "fromAccount":"156283619@outlook.com",
+      "toAccount":"87658765",
+      "status":"SUCCESS",
+      "timestamp":1544433325000
+    }
+    ]
+}
+
+```
+
+- **GET** ``` /api/v3/capital/transfer/internal```  
+
+**Permission:** SPOT_WITHDRAW_READ
+
+**Weight(IP):** 1
+
+**Parameters**
+
+|Name	|Type	|Mandatory	|Description|
+| :------ | :-------- |:-----|:-----------------|
+|startTime|	long|	No	|
+|endTime|	long|	No	|
+|page	|int|	No|	default 1|
+|limit|	int	|No|	default 10|
+|tranId|	string|	No	|tranid|
+|timestamp|	string|	Yes|	timestamp|
+|signature|	string|	Yes|	signature|
+
+If startTime and endTime are not provided, will default to returning data from the last 7 days.
+
+
+**Response**
+
+| Name | Description  |
+| :------------ | :-------- | 
+|page	|page|
+|totalRecords	|totalRecords|
+|totalPage	|totalPage|
+|tranId	|tranId|
+|asset	|asset|
+|amount	|amount|
+|fromAccountType	|fromAccountType|
+|toAccountType	|toAccountType|
+|status	|status|
+|timestamp	|timestamp|
 
 # ETF
 
@@ -3603,6 +3723,130 @@ Pushes any update to the best bid or ask's price or quantity in real-time for a 
 | b | string | best bid price |
 | s | string | symbol |
 | t | long | eventTime |
+
+## MiniTicker
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
+    ]
+}
+```
+> **response:**
+
+```
+{
+  "d":
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--",
+    "t":"1699502456050"},
+  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
+  "t":1699502456051,
+  "s":"BTCUSDT"
+}								         
+```
+
+**Request:**   `spot@public.miniTicker.v3.api@<symbol>@<timezone>`
+
+
+**Response:**
+
+| Name     | Type   | Description |
+| :-------- | :----- | :--- |
+| c	| string	| channel name| 
+| d	| data| data| 
+| >s	| string	|symbol|
+| >p	| string	|deal price|
+| >r	| string	|price Change Percent in utc8|
+| >tr	| string	|price Change Percent in time zone|
+| >h	| string	|24h high price |
+| >l	| string	|24h low price |
+| >v	| string	|24h volume|
+| >q	| string	|24h quote Volume|
+| >lastRT	| string	|etf Last Rebase Time|
+| >MT	| string	|etf Merge Times|
+| >NV	| string	|etf Net Value|
+
+
+## MiniTickers
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTickers.v3.api@UTC+8"
+    ]
+}
+```
+> **response:**
+
+```
+{
+  "d":
+  [{"s":"SENSOUSDT",
+    "p":"0.07642",
+    "r":"-0.0383",
+    "tr":"-0.0383",
+    "h":"0.08032",
+    "l":"0.07463",
+    "v":"25052.6533",
+    "q":"323777.17",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+  "c":"spot@public.miniTickers.v3.api@UTC+8",
+  "t":1699502456051,
+}								         
+```
+
+**Request:**   `spot@public.miniTickers.v3.api@<timezone>`
+
+
+**Response:**
+
+| Name     | Type   | Description |
+| :-------- | :----- | :--- |
+| c	| string	| channel name| 
+| d	| data| data| 
+| >s	| string	|symbol|
+| >p	| string	|deal price|
+| >r	| string	|24h price Change Percent in utc8|
+| >tr	| string	|24h price Change Percent in time zone|
+| >h	| string	|24h high price |
+| >l	| string	|24h low price |
+| >v	| string	|24h volume|
+| >q	| string	|24h quote Volume|
+| >lastRT	| string	|etf Last Rebase Time|
+| >MT	| string	|etf Merge Times|
+| >NV	| string	|etf Net Value|
+
+
 
 **How is incremental depth information maintained:**
 
