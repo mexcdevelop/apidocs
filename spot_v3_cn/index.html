@@ -286,7 +286,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-3d01b49e.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-60d8e448.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-2ee5847f.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -302,7 +302,7 @@
     <header>
       <div class="flex_box">
         <a href="https://www.mexc.com">
-          <img src="images/mexc-logo-04620335.svg" class="logo" alt="" />
+          <img src="images/mexc-logo-f33a4867.svg" class="logo" alt="" />
         </a>
         <div class="nav_box">
         </div>
@@ -346,6 +346,9 @@
           <li>
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#2023-11-10" class="toc-h2 toc-link" data-title="2023-11-10"><strong>2023-11-10</strong></a>
+                  </li>
                   <li>
                     <a href="#2023-10-17" class="toc-h2 toc-link" data-title="2023-10-17"><strong>2023-10-17</strong></a>
                   </li>
@@ -664,6 +667,12 @@
                   <li>
                     <a href="#9519463098" class="toc-h2 toc-link" data-title="查询小额资产兑换历史">查询小额资产兑换历史</a>
                   </li>
+                  <li>
+                    <a href="#1f11f9bc12" class="toc-h2 toc-link" data-title="用户站内转账接口">用户站内转账接口</a>
+                  </li>
+                  <li>
+                    <a href="#494acec9de" class="toc-h2 toc-link" data-title="查询用户内部转账历史接口">查询用户内部转账历史接口</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -694,6 +703,12 @@
                   </li>
                   <li>
                     <a href="#symbol" class="toc-h2 toc-link" data-title="按Symbol的最优挂单信息">按Symbol的最优挂单信息</a>
+                  </li>
+                  <li>
+                    <a href="#miniticker" class="toc-h2 toc-link" data-title="MiniTicker">MiniTicker</a>
+                  </li>
+                  <li>
+                    <a href="#minitickers" class="toc-h2 toc-link" data-title="MiniTickers">MiniTickers</a>
                   </li>
                   <li>
                     <a href="#orderbook" class="toc-h2 toc-link" data-title="如何正确在本地维护一个orderbook副本">如何正确在本地维护一个orderbook副本</a>
@@ -816,7 +831,12 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-10-17'><strong>2023-10-17</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2023-11-10'><strong>2023-11-10</strong></h2>
+<ul>
+<li>新增用户站内转账接口、查询用户内部转账历史接口</li>
+<li>新增miniTicker和miniTickers推送频道</li>
+</ul>
+<h2 id='2023-10-17'><strong>2023-10-17</strong></h2>
 <ul>
 <li>新增查询直客页面数据接口、查询子代理页面数据接口</li>
 </ul>
@@ -6854,6 +6874,250 @@ body
 <td style="text-align: left">总页数</td>
 </tr>
 </tbody></table>
+<h2 id='1f11f9bc12'>用户站内转账接口</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/transfer/internal?&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c45d800a47ba4cbc876a5cd29388319"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">收款账户类型，支持填入手机号/邮箱或者UID</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">收款账户地址，支持填入手机号/邮箱或者UID</td>
+</tr>
+<tr>
+<td style="text-align: left">areaCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">如果toAccount为手机号，该字段为该手机号的必填区号</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">资产</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">划转ID</td>
+</tr>
+</tbody></table>
+<h2 id='494acec9de'>查询用户内部转账历史接口</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/capital/transfer/internal?&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//当前页</span><span class="w">
+    </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//总记录数</span><span class="w">
+    </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//总页数</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+             </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">"11945860693"</span><span class="p">,</span><span class="err">//划转ID</span><span class="w">
+      </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="err">//币种</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="err">//划转数量</span><span class="w">
+      </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"EMAIL"</span><span class="p">,</span><span class="err">//收款账户类型</span><span class="w">
+      </span><span class="nl">"toAccount"</span><span class="p">:</span><span class="s2">"156283619@outlook.com"</span><span class="p">,</span><span class="err">//收款账户</span><span class="w">
+      </span><span class="nl">"fromAccount"</span><span class="p">:</span><span class="s2">"156283618@outlook.com"</span><span class="p">,</span><span class="err">//付款账户</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="err">//划转状态</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="err">//划转时间</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tranId"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="err">//划转ID</span><span class="w">
+      </span><span class="nl">"asset"</span><span class="p">:</span><span class="s2">"BTC"</span><span class="p">,</span><span class="err">//币种</span><span class="w">
+      </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"0.8"</span><span class="p">,</span><span class="err">//划转数量</span><span class="w">
+      </span><span class="nl">"toAccountType"</span><span class="p">:</span><span class="s2">"UID"</span><span class="p">,</span><span class="err">//收款账户类型</span><span class="w">
+      </span><span class="nl">"fromAccount"</span><span class="p">:</span><span class="s2">"156283619@outlook.com"</span><span class="p">,</span><span class="err">//付款账户</span><span class="w">
+      </span><span class="nl">"toAccount"</span><span class="p">:</span><span class="s2">"87658765"</span><span class="p">,</span><span class="err">//收款账户</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="err">//划转状态</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1544433325000</span><span class="err">//划转时间</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/capital/transfer/internal</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关读 / SPOT_WITHDRAW_R</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">默认1</td>
+</tr>
+<tr>
+<td style="text-align: left">limit</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">默认10</td>
+</tr>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">划转id</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p>若startTime和endTime没传，则默认返回最近7天数据 </p>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">当前页</td>
+</tr>
+<tr>
+<td style="text-align: left">totalRecords</td>
+<td style="text-align: left">总记录数</td>
+</tr>
+<tr>
+<td style="text-align: left">totalPage</td>
+<td style="text-align: left">总页数</td>
+</tr>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">划转ID</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">币种</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">划转数量</td>
+</tr>
+<tr>
+<td style="text-align: left">fromAccountType</td>
+<td style="text-align: left">转出业务账户</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">划入业务账户</td>
+</tr>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">划转状态</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">划转时间</td>
+</tr>
+</tbody></table>
 <h1 id='etf'>ETF接口</h1><h2 id='etf-2'>获取ETF基础信息</h2>
 <p>获取ETF的基础信息，如可交易币对、最新净值和管理费率。</p>
 
@@ -7450,6 +7714,235 @@ body
 <td style="text-align: left">t</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
+</tr>
+</tbody></table>
+<h2 id='miniticker'>MiniTicker</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "d":
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--",
+    "t":"1699502456050"},
+  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
+  "t":1699502456051,
+  "s":"BTCUSDT"
+}                                        
+</code></pre></div>
+<p><strong>请求参数：</strong>   <code>spot@public.miniTicker.v3.api@&lt;symbol&gt;@&lt;timezone&gt;</code></p>
+
+<p><strong>返回参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">c</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道名称</td>
+</tr>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">data</td>
+<td style="text-align: left">data</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对最新成交价</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的订阅utc8时区涨跌幅</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;tr</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的订阅时区涨跌幅</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;h</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时最高价</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时最低价</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时交易额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;q</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时交易量</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;lastRT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF最近合并时间</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;MT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF合并次数</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;NV</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF净值</td>
+</tr>
+</tbody></table>
+<h2 id='minitickers'>MiniTickers</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.miniTickers.v3.api@UTC+8"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "d":
+  [{"s":"SENSOUSDT",
+    "p":"0.07642",
+    "r":"-0.0383",
+    "tr":"-0.0383",
+    "h":"0.08032",
+    "l":"0.07463",
+    "v":"25052.6533",
+    "q":"323777.17",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+   {"s":"BTCUSDT",
+    "p":"36474.74",
+    "r":"0.0354",
+    "tr":"0.0354",
+    "h":"36549.72",
+    "l":"35101.68",
+    "v":"375173478.65",
+    "q":"10557.72895",
+    "lastRT":"-1",
+    "MT":"0",
+    "NV":"--"},
+  "c":"spot@public.miniTickers.v3.api@UTC+8",
+  "t":1699502456051,
+}                                        
+</code></pre></div>
+<p><strong>请求参数：</strong>   <code>spot@public.miniTickers.v3.api@&lt;timezone&gt;</code></p>
+
+<p><strong>返回参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">c</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订阅频道名称</td>
+</tr>
+<tr>
+<td style="text-align: left">d</td>
+<td style="text-align: left">data</td>
+<td style="text-align: left">data</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;s</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;p</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对最新成交价</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;r</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的订阅utc8时区涨跌幅</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;tr</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的订阅时区涨跌幅</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;h</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时最高价</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;l</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时最低价</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;v</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时交易额</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;q</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对的24小时交易量</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;lastRT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF最近合并时间</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;MT</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF合并次数</td>
+</tr>
+<tr>
+<td style="text-align: left">&gt;NV</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ETF净值</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook'>如何正确在本地维护一个orderbook副本</h2>
