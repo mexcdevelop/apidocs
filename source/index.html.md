@@ -3324,7 +3324,7 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/withdraw/apply```  
+- **POST** ```/api/v3/capital/transfer/internal```  
 
 **接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
 
