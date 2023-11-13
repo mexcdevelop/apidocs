@@ -3246,7 +3246,7 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 
 ```
 
-- **POST** ```/api/v3/capital/withdraw/apply```  
+- **POST** ```/api/v3/capital/transfer/internal```  
 
 **Permission:** SPOT_WITHDRAW_WRITE
 
