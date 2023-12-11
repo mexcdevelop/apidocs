@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2023-12-11**
+
+- Query Sub-account List endpoint add response params:uid
+
 ## **2023-11-10**
 
 - Add user internal transfer endpoint and query internal transfer history endpoint.
@@ -1283,12 +1287,14 @@ Get details of the sub-account list
         {
             "subAccount":"mexc666",
             "isFreeze":false,
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "49910511"
         },
         {
             "subAccount":"mexc888",
             "isFreeze":false,
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "91921059"
         }
     ]
 }
@@ -1310,6 +1316,16 @@ Parameters:
 | limit      | INT    | NO        | Default value: 10, Max value: 200 |
 | timestamp  | LONG   | YES       |                                   |
 | recvWindow | LONG   | NO        |                                   |
+
+Response:
+
+| Name     | Description       |
+| -------- | ----------------- |
+| subAccount | subAccount name            |
+| isFreeze  | isFreeze   |
+| createTime   | createTime  |
+| uid  | subaccount uid    |
+
 
 
 
