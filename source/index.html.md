@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2023-12-11**
+- 查看子账户列表接口新增返回参数：子账户uid
+
 ## **2023-11-10**
 
 - 新增用户站内转账接口、查询用户内部转账历史接口
@@ -1308,12 +1311,14 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
         {
             "subAccount":"subAccount1",
             "isFreeze":false,//是否冻结
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "49910511"
         },
         {
             "subAccount":"subAccount2",
             "isFreeze":false,
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "91921059"
         }
     ]
 }
@@ -1346,6 +1351,8 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 | subAccount | string | 子账户名称 |
 | isFreeze | string | 是否冻结 |
 | createTime | long | 创建时间 |
+| uid | string | 子账户uid |
+
 
 
 ## 创建子账户的APIkey
