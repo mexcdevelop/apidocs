@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-01-01**
+- K线查询支持周线
+- 查询充值和提现历史接口调整查询时间窗口
+
 ## **2023-12-11**
 - 查看子账户列表接口新增返回参数：子账户uid
 
@@ -2686,14 +2690,15 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 | :------ | :-------- |:-----| :---------- |
 |coin|string| 否    |币种|
 |status|string| 否    |状态|
-|startTime|string| 否    |默认当前时间30天前的时间|
+|startTime|string| 否    |默认当前时间7天前的时间|
 |endTime|string| 否    |默认当前时间戳，13位|
 |limit|string| 否    |默认：1000，最大1000|
 |timestamp|string| 是    |时间戳|
 |signature|string| 是    |签名|
 
-请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过30天.
-
+1. 默认返回最近7天的记录.
+2. `startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过7天.
+3. 做多可查询90天内的记录.
 **返回参数**
 
 | 参数名 | 说明  |
@@ -2753,14 +2758,15 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
 |coin|string| 否    |币种|
 |status|string| 否    |提币状态|
 |limit|string| 否    |默认：1000， 最大：1000|
-|startTime|string| 否    |默认当前时间30天前的时间戳|
+|startTime|string| 否    |默认当前时间7天前的时间戳|
 |endTime|string| 否    |默认当前时间戳|
 |timestamp|string| 是    |时间戳|
 |signature|string| 是    |签名|
 
-1. 支持多网络提币前的历史记录可能不会返回`network`字段.
-2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过30天.
-
+1. 默认返回最近7天的记录.
+2. `startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过7天.
+3. 做多可查询90天内的记录.
+4. 支持多网络提币前的历史记录可能不会返回`network`字段.
 **返回参数**
 
 | 参数名 | 说明  |
@@ -5074,6 +5080,7 @@ startTime、endTime若不填写，则预设查询T-7~T日內数据。
 - 60m  1小时
 - 4h  4小时
 - 1d  1天
+- 1w  1周
 - 1M  1月
 
 ### <a id="account_position">变动类型</a>
