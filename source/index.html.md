@@ -89,7 +89,7 @@ MEXC OAuth 2.0提供的授权模式：授权码模式。
 
 ```
 
-get  /api/v3/broker/sub-account/universalTransfer
+get  /api/v3/broker/sub-account/universalTransfer?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -212,7 +212,7 @@ get  /api/v3/broker/sub-account/onceToken
 
 ```
 
-post  /api/v3/broker/sub-account/virtualSubAccount
+post  /api/v3/broker/sub-account/virtualSubAccount?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -262,7 +262,7 @@ post  /api/v3/broker/sub-account/virtualSubAccount
 
 ```
 
-get  /api/v3/broker/sub-account/list
+get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -283,6 +283,7 @@ get  /api/v3/broker/sub-account/list
         "note": "2",
         "timestamp": "1597026383787"
     }]
+}
 ```
 
 **HTTP请求：**
@@ -318,7 +319,7 @@ get  /api/v3/broker/sub-account/list
 
 ```
 
-post  /api/v3/broker/sub-account/apiKey
+post  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -373,7 +374,7 @@ post  /api/v3/broker/sub-account/apiKey
 
 ```
 
-get  /api/v3/broker/sub-account/apiKey
+get  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -426,7 +427,7 @@ get  /api/v3/broker/sub-account/apiKey
 
 ```
 
-delete  /api/v3/broker/sub-account/apiKey
+delete  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -468,7 +469,7 @@ delete  /api/v3/broker/sub-account/apiKey
 
 ```
 
-post  /api/v3/broker/capital/deposit/subAddress
+post  /api/v3/broker/capital/deposit/subAddress?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -519,7 +520,7 @@ post  /api/v3/broker/capital/deposit/subAddress
 
 ```
 
-get  /api/v3/broker/capital/deposit/subAddress
+get  /api/v3/broker/capital/deposit/subAddress?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -644,7 +645,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 
 ```
 
-get  /api/v3/broker/capital/deposit/subHisrec
+get  /api/v3/broker/capital/deposit/subHisrec?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -718,7 +719,7 @@ get  /api/v3/broker/capital/deposit/subHisrec
 
 ```
 
-get  /api/v3/broker/capital/deposit/subHisrec/getall
+get  /api/v3/broker/capital/deposit/subHisrec/getall?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -788,7 +789,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 
 ```
 
-post  /api/v3/broker/capital/withdraw/apply
+post  /api/v3/broker/capital/withdraw/apply?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -838,7 +839,7 @@ post  /api/v3/broker/capital/withdraw/apply
 
 ```
 
-post  /api/v3/broker/sub-account/universalTransfer
+post  /api/v3/broker/sub-account/universalTransfer?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -886,7 +887,7 @@ post  /api/v3/broker/sub-account/universalTransfer
 
 ```
 
-post  /api/v3/broker/sub-account/futures
+post  /api/v3/broker/sub-account/futures?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -928,6 +929,69 @@ post  /api/v3/broker/sub-account/futures
 |subAccount|string|子账户名称|
 |isFuturesEnabled|boolean|开通合约业务，开通：true|
 |timestamp|string|返回时间|
+
+##  获取broker返佣记录
+
+> 请求示例
+
+```
+
+get  /api/v3/broker/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
+
+```
+
+> 返回示例
+
+```json
+{
+    "page": 1,  //当前页
+    "totalRecords": 1,  //总记录数
+    "totalPageNum": 1,  //总页数
+    "data": [
+        {
+            "asset": "USDT",  // 返佣资产
+            "amount": "0.00082273", // 返佣金额
+            "type": "spot", // 返佣类型
+            "uid": "221827",  // 返佣用户UID
+            "time": "20221022"  // 返佣时间
+        },
+        {             
+            "asset": "USDT", // 返佣资产
+            "amount": "0.00082273", // 返佣金额
+            "type": "spot", // 返佣类型
+            "uid": "221827", // 返佣用户UID 
+            "time": "20221022" // 返佣时间
+        }
+    ]
+}
+
+```
+
+**HTTP请求：**
+
+- **GET** ```/api/v3/broker/rebate/taxQuery```
+
+**请求参数：**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| ------ | -------- | -------- | ---------- |
+|startTime|string|no|开始时间|
+|endTime|string|no|结束时间|
+|page|string|no|默认值1|
+|pageSize|string|no|默认值10|
+|recvWindow|string|no|同步时间|
+|timestamp|string|yes|时间|
+|signature|string|yes|签名|
+
+**返回参数：**
+
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+|asset|string|返佣资产|
+|amount|string|返佣金额|
+|uid|string|返佣用户UID|
+|type|string|返佣类型，现货/合约|
+|time|string|返佣时间|
 
 # 公开API参数
 
