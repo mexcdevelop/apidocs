@@ -84,7 +84,7 @@ After the user jumps to the MEXC authorization page through the third-party appl
 > request
 
 ```
-get  /api/v3/broker/sub-account/universalTransfer
+get  /api/v3/broker/sub-account/universalTransfer?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -205,7 +205,7 @@ get  /api/v3/broker/sub-account/onceToken
 > request
 
 ```
-post  /api/v3/broker/sub-account/virtualSubAccount
+post  /api/v3/broker/sub-account/virtualSubAccount?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -255,7 +255,7 @@ post  /api/v3/broker/sub-account/virtualSubAccount
 > request
 
 ```
-get  /api/v3/broker/sub-account/list
+get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -276,6 +276,7 @@ get  /api/v3/broker/sub-account/list
         "note": "2",
         "timestamp": "1597026383787"
     }]
+}
 ```
 
 **Http Request:**
@@ -310,7 +311,7 @@ get  /api/v3/broker/sub-account/list
 > request
 
 ```
-post  /api/v3/broker/sub-account/apiKey
+post  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -365,7 +366,7 @@ post  /api/v3/broker/sub-account/apiKey
 > request
 
 ```
-get  /api/v3/broker/sub-account/apiKey
+get  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -417,7 +418,7 @@ get  /api/v3/broker/sub-account/apiKey
 > request
 
 ```
-delete  /api/v3/broker/sub-account/apiKey
+delete  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -458,7 +459,7 @@ delete  /api/v3/broker/sub-account/apiKey
 > request
 
 ```
-post  /api/v3/broker/capital/deposit/subAddress
+post  /api/v3/broker/capital/deposit/subAddress?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -508,7 +509,7 @@ post  /api/v3/broker/capital/deposit/subAddress
 > request
 
 ```
-get  /api/v3/broker/capital/deposit/subAddress
+get  /api/v3/broker/capital/deposit/subAddress?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -631,7 +632,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 > request
 
 ```
-get  /api/v3/broker/capital/deposit/subHisrec
+get  /api/v3/broker/capital/deposit/subHisrec?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -704,7 +705,7 @@ master account query all Sub-account deposit history
 > request
 
 ```
-get  /api/v3/broker/capital/deposit/subHisrec/getall
+get  /api/v3/broker/capital/deposit/subHisrec/getall?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -774,7 +775,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 > request
 
 ```
-post  /api/v3/broker/capital/withdraw/apply
+post  /api/v3/broker/capital/withdraw/apply?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -824,7 +825,7 @@ only support broker account
 > request
 
 ```
-post  /api/v3/broker/sub-account/universalTransfer
+post  /api/v3/broker/sub-account/universalTransfer?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -871,7 +872,7 @@ post  /api/v3/broker/sub-account/universalTransfer
 > request
 
 ```
-post  /api/v3/broker/sub-account/futures
+post  /api/v3/broker/sub-account/futures?timestamp={{timestamp}}&signature={{signature}}
 
 ```
 
@@ -913,6 +914,69 @@ post  /api/v3/broker/sub-account/futures
 | subAccount       | string  | subAccount name                 |
 | isFuturesEnabled | boolean | isFuturesEnabled: true or false |
 | timestamp        | string  | response time                   |
+
+##  Get Broker Rebate History Records
+
+> request
+
+```
+
+get  /api/v3/broker/rebate/taxQuery?timestamp={{timestamp}}&signature={{signature}}
+
+```
+
+> response
+
+```json
+{
+    "page": 1,  
+    "totalRecords": 1,  
+    "totalPageNum": 1,  
+    "data": [
+        {
+            "asset": "USDT",  
+            "amount": "0.00082273", 
+            "type": "spot", 
+            "uid": "221827",  
+            "time": "20221022"  
+        },
+        {             
+            "asset": "USDT", 
+            "amount": "0.00082273", 
+            "type": "spot", 
+            "uid": "221827", 
+            "time": "20221022" 
+        }
+    ]
+}
+
+```
+
+**HTTP REQUEST：**
+
+- **GET** ```/api/v3/broker/rebate/taxQuery```
+
+**request：**
+
+| Name | Type| Mandatory | Description | 
+| ------ | -------- | -------- | ---------- |
+|startTime|string|no|startTime|
+|endTime|string|no|endTime|
+|page|string|no|default 1|
+|pageSize|string|no|default 10|
+|recvWindow|string|no|recvWindow|
+|timestamp|string|yes|timestamp|
+|signature|string|yes|signature|
+
+**response：**
+
+| Name | Type | Description |
+| ------ | ---- | ---- |
+|asset|string|rebate asset|
+|amount|string|rebate amount|
+|uid|string|rebate user uid|
+|type|string|rebate type|
+|time|string|rebate time|
 
 # Public API Definitions
 
