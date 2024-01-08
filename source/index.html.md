@@ -70,6 +70,11 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-01-01**
+
+- Kline support interval: week
+- Deposit and withdraw history endpoint update the query timestamp range
+
 ## **2023-12-11**
 
 - Query Sub-account List endpoint add response params:uid
@@ -2612,13 +2617,15 @@ Parameters:
 | :------ | :-------- | :-------- | :---------- |
 |coin|string|NO|coin |
 |status|string|NO|status|
-|startTime|string|NO|default: 30 days ago from current time|
+|startTime|string|NO|default: 7 days ago from current time|
 |endTime|string|NO|default:current time|
 |limit|string|NO|default:1000,max:1000|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 
-Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 30 days.
+1. default return the records of the last 7 days.
+2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 7 days.
+3. can query 90 days data at most.
 
 Response:
 
@@ -2679,13 +2686,16 @@ Parameters:
 |coin|string|NO|coin |
 |status|string|NO|withdraw status|
 |limit|string|NO|default:1000, max:1000|
-|startTime|string|NO|default: 30 days ago from current time|
+|startTime|string|NO|default: 7 days ago from current time|
 |endTime|string|NO|default:current time|
 |timestamp|string|YES|timestamp|
 |signature|string|YES|signature|
 
-1. Supported multiple network coins'  withdraw history may not return the 'network' field.
-2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 30 days.
+1. default return the records of the last 7 days.
+2. Ensure that the default timestamp of 'startTime' and 'endTime' does not exceed 7 days.
+3. can query 90 days data at most.
+4. Supported multiple network coins's withdraw history may not return the 'network' field.
+
 
 
 Response:
@@ -5004,6 +5014,7 @@ If startTime and endTime are not sent, the data from T-7 to T is returned.
 - 60m  60 minute
 - 4h  4 hour
 - 1d  1 day
+- 1w  1 week
 - 1M  1 month
 
 ### <a id="account_position">changed type</a>
