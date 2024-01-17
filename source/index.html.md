@@ -75,6 +75,16 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-01-12**
+- 新增查询子账户资产接口
+
+## **2024-01-01**
+- K线查询支持周线
+- 查询充值和提现历史接口调整查询时间窗口
+
+## **2023-12-11**
+- 查看子账户列表接口新增返回参数：子账户uid
+
 ## **2023-11-10**
 
 - 新增用户站内转账接口、查询用户内部转账历史接口
@@ -1308,12 +1318,14 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
         {
             "subAccount":"subAccount1",
             "isFreeze":false,//是否冻结
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "49910511"
         },
         {
             "subAccount":"subAccount2",
             "isFreeze":false,
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "91921059"
         }
     ]
 }
@@ -1346,6 +1358,8 @@ GET /api/v3/sub-account/list?timestamp={{timestamp}}&signature={{signature}}
 | subAccount | string | 子账户名称 |
 | isFreeze | string | 是否冻结 |
 | createTime | long | 创建时间 |
+| uid | string | 子账户uid |
+
 
 
 ## 创建子账户的APIkey
@@ -1634,6 +1648,58 @@ get /api/v3/capital/sub-account/universalTransfer
 |status|string|划转状态:成功，失败，划转中，中断|
 |timestamp|number|划转时间|
 |totalCount|number||
+
+## 查询子账户资产
+
+> 请求示例
+
+```
+get /api/v3/sub-account/asset?subAccount=account1&accountType=SPOT&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "balances": [
+        {
+            "asset": "MX",
+            "free": "3",
+            "locked": "0"
+        },
+        {
+            "asset": "BTC",
+            "free": "0.0003",
+            "locked": "0"
+        }
+    ]
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/sub-account/asset```  
+
+**接口权限要求:** 资金划转读 / SPOT_TRANSFER_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| subAccount | string | 是       | 子账户名称，仅支持单个子账户查询       |
+| accountType|string|是|账户类型，现货/合约，枚举值："SPOT","FUTURES",当前仅支持SPOT|
+| timestamp|string|是|时间戳|
+| signature|string|是|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|balances|string|余额|
+|asset|string|币种|
+|free|string|可用数量|
+|locked|string|冻结数量|
 
 
 
@@ -2679,14 +2745,15 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 | :------ | :-------- |:-----| :---------- |
 |coin|string| 否    |币种|
 |status|string| 否    |状态|
-|startTime|string| 否    |默认当前时间30天前的时间|
+|startTime|string| 否    |默认当前时间7天前的时间|
 |endTime|string| 否    |默认当前时间戳，13位|
 |limit|string| 否    |默认：1000，最大1000|
 |timestamp|string| 是    |时间戳|
 |signature|string| 是    |签名|
 
-请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过30天.
-
+1. 默认返回最近7天的记录.
+2. `startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过7天.
+3. 做多可查询90天内的记录.
 **返回参数**
 
 | 参数名 | 说明  |
@@ -2746,14 +2813,15 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
 |coin|string| 否    |币种|
 |status|string| 否    |提币状态|
 |limit|string| 否    |默认：1000， 最大：1000|
-|startTime|string| 否    |默认当前时间30天前的时间戳|
+|startTime|string| 否    |默认当前时间7天前的时间戳|
 |endTime|string| 否    |默认当前时间戳|
 |timestamp|string| 是    |时间戳|
 |signature|string| 是    |签名|
 
-1. 支持多网络提币前的历史记录可能不会返回`network`字段.
-2. 请注意`startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过30天.
-
+1. 默认返回最近7天的记录.
+2. `startTime` 与 `endTime` 的默认时间戳，保证请求时间间隔不超过7天.
+3. 做多可查询90天内的记录.
+4. 支持多网络提币前的历史记录可能不会返回`network`字段.
 **返回参数**
 
 | 参数名 | 说明  |
@@ -5067,6 +5135,7 @@ startTime、endTime若不填写，则预设查询T-7~T日內数据。
 - 60m  1小时
 - 4h  4小时
 - 1d  1天
+- 1w  1周
 - 1M  1月
 
 ### <a id="account_position">变动类型</a>
