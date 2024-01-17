@@ -344,6 +344,15 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-01-12" class="toc-h2 toc-link" data-title="2024-01-12"><strong>2024-01-12</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2024-01-01" class="toc-h2 toc-link" data-title="2024-01-01"><strong>2024-01-01</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2023-12-11" class="toc-h2 toc-link" data-title="2023-12-11"><strong>2023-12-11</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-11-10" class="toc-h2 toc-link" data-title="2023-11-10"><strong>2023-11-10</strong></a>
                   </li>
                   <li>
@@ -572,6 +581,9 @@
                   </li>
                   <li>
                     <a href="#query-universal-transfer-history-for-master-account" class="toc-h2 toc-link" data-title="Query Universal Transfer History (For Master Account)">Query Universal Transfer History (For Master Account)</a>
+                  </li>
+                  <li>
+                    <a href="#query-sub-account-asset" class="toc-h2 toc-link" data-title="Query Sub-account Asset">Query Sub-account Asset</a>
                   </li>
               </ul>
           </li>
@@ -823,7 +835,20 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2023-11-10'><strong>2023-11-10</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2024-01-12'><strong>2024-01-12</strong></h2>
+<ul>
+<li>Add query sub-account asset endpoint</li>
+</ul>
+<h2 id='2024-01-01'><strong>2024-01-01</strong></h2>
+<ul>
+<li>Kline support interval: week</li>
+<li>Deposit and withdraw history endpoint update the query timestamp range</li>
+</ul>
+<h2 id='2023-12-11'><strong>2023-12-11</strong></h2>
+<ul>
+<li>Query Sub-account List endpoint add response params:uid</li>
+</ul>
+<h2 id='2023-11-10'><strong>2023-11-10</strong></h2>
 <ul>
 <li>Add user internal transfer endpoint and query internal transfer history endpoint.</li>
 <li>Add ws miniTicker and miniTickers channels.</li>
@@ -2881,12 +2906,14 @@ Klines are uniquely identified by their open time.</p>
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="s2">"mexc666"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"isFreeze"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1544433328000</span><span class="w">
+            </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1544433328000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49910511"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"subAccount"</span><span class="p">:</span><span class="s2">"mexc888"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"isFreeze"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1544433328000</span><span class="w">
+            </span><span class="nl">"createTime"</span><span class="p">:</span><span class="mi">1544433328000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"91921059"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2944,6 +2971,32 @@ Klines are uniquely identified by their open time.</p>
 <td>LONG</td>
 <td>NO</td>
 <td></td>
+</tr>
+</tbody></table>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subAccount</td>
+<td>subAccount name</td>
+</tr>
+<tr>
+<td>isFreeze</td>
+<td>isFreeze</td>
+</tr>
+<tr>
+<td>createTime</td>
+<td>createTime</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>subaccount uid</td>
 </tr>
 </tbody></table>
 <h2 id='create-an-apikey-for-a-sub-account-for-master-account'>Create an APIKey for a sub-account (For Master Account)</h2>
@@ -3401,6 +3454,104 @@ Klines are uniquely identified by their open time.</p>
 <td style="text-align: left">totalCount</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left">total transfer</td>
+</tr>
+</tbody></table>
+<h2 id='query-sub-account-asset'>Query Sub-account Asset</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/sub-account/asset?subAccount=account1&amp;accountType=SPOT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>GET</strong> <code>/api/v3/sub-account/asset</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_TRANSFER_READ</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">subAccount name,only support query for single subaccount</td>
+</tr>
+<tr>
+<td style="text-align: left">accountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">account type:&quot;SPOT&quot;,&quot;FUTURES&quot;,only support SPOT currently</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">balances</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">balance</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">asset</td>
+</tr>
+<tr>
+<td style="text-align: left">free</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">free</td>
+</tr>
+<tr>
+<td style="text-align: left">locked</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">locked</td>
 </tr>
 </tbody></table>
 
@@ -5373,7 +5524,7 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">default: 30 days ago from current time</td>
+<td style="text-align: left">default: 7 days ago from current time</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5401,7 +5552,11 @@ post /api/v3/sub-account/margin
 </tr>
 </tbody></table>
 
-<p>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 30 days.</p>
+<ol>
+<li>default return the records of the last 7 days.</li>
+<li>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 7 days.</li>
+<li>can query 90 days data at most.</li>
+</ol>
 
 <p>Response:</p>
 
@@ -5523,7 +5678,7 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
-<td style="text-align: left">default: 30 days ago from current time</td>
+<td style="text-align: left">default: 7 days ago from current time</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5546,8 +5701,10 @@ post /api/v3/sub-account/margin
 </tbody></table>
 
 <ol>
-<li>Supported multiple network coins&#39;  withdraw history may not return the &#39;network&#39; field.</li>
-<li>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 30 days.</li>
+<li>default return the records of the last 7 days.</li>
+<li>Ensure that the default timestamp of &#39;startTime&#39; and &#39;endTime&#39; does not exceed 7 days.</li>
+<li>can query 90 days data at most.</li>
+<li>Supported multiple network coins&#39;s withdraw history may not return the &#39;network&#39; field.</li>
 </ol>
 
 <p>Response:</p>
@@ -9743,6 +9900,7 @@ If startTime and endTime are not sent, the data from T-7 to T is returned. -->
 <li>60m  60 minute</li>
 <li>4h  4 hour</li>
 <li>1d  1 day</li>
+<li>1w  1 week</li>
 <li>1M  1 month</li>
 </ul>
 <h3 id='changed-type'><a id="account_position">changed type</a></h3>
