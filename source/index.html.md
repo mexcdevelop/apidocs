@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-01-12**
+
+- Add query sub-account asset endpoint
+
 ## **2024-01-01**
 
 - Kline support interval: week
@@ -1546,6 +1550,60 @@ get /api/v3/capital/sub-account/universalTransfer
 |status|string|status|
 |timestamp|number|timestamp|
 |totalCount|number|total transfer|
+
+## Query Sub-account Asset
+
+> request
+
+```
+get /api/v3/sub-account/asset?subAccount=account1&accountType=SPOT&timestamp={{timestamp}}&signature={{signature}}
+```
+> response
+
+```json
+{
+    "balances": [
+        {
+            "asset": "MX",
+            "free": "3",
+            "locked": "0"
+        },
+        {
+            "asset": "BTC",
+            "free": "0.0003",
+            "locked": "0"
+        }
+    ]
+}
+```
+
+- **GET** ```/api/v3/sub-account/asset```  
+
+**Permission:** SPOT_TRANSFER_READ
+
+**Weight(IP):** 1
+
+**request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+| subAccount | string | Yes       | subAccount name,only support query for single subaccount|
+| accountType|string|Yes|account type:"SPOT","FUTURES",only support SPOT currently|
+| timestamp|string|Yes|timestamp|
+| signature|string|Yes|signature|
+
+
+**response**
+
+| Name  |Type | Description|
+| :------------ | :-------- | :--------|
+|balances|string|balance|
+|asset|string|asset|
+|free|string|free|
+|locked|string|locked|
+
+
+
 
 <!-- ## Enable Futures for Sub-account (For Master Account)
 
