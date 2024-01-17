@@ -1687,7 +1687,7 @@ get /api/v3/sub-account/asset?subAccount=account1&accountType=SPOT&timestamp={{t
 | 参数名 | 数据类型| 是否必须  | 说明 | 
 | :------ | :-------- | :-------- | :---------- |
 | subAccount | string | 是       | 子账户名称，仅支持单个子账户查询       |
-| accountType|string|是|划出账户类型，现货/合约，枚举值："SPOT","FUTURES",当前仅支持SPOT|
+| accountType|string|是|账户类型，现货/合约，枚举值："SPOT","FUTURES",当前仅支持SPOT|
 | timestamp|string|是|时间戳|
 | signature|string|是|签名|
 
