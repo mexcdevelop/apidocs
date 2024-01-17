@@ -376,13 +376,16 @@
                   <li>
                     <a href="#e5e82cdf39" class="toc-h2 toc-link" data-title="开通子账户的合约业务">开通子账户的合约业务</a>
                   </li>
+                  <li>
+                    <a href="#broker-3" class="toc-h2 toc-link" data-title="获取broker返佣记录">获取broker返佣记录</a>
+                  </li>
               </ul>
           </li>
           <li>
             <a href="#api" class="toc-h1 toc-link" data-title="公开API参数">公开API参数</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#broker-3" class="toc-h2 toc-link" data-title="Broker 枚举定义">Broker 枚举定义</a>
+                    <a href="#broker-4" class="toc-h2 toc-link" data-title="Broker 枚举定义">Broker 枚举定义</a>
                   </li>
               </ul>
           </li>
@@ -469,7 +472,7 @@ MEXC OAuth 2.0提供的授权模式：授权码模式。</p>
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-get  /api/v3/broker/sub-account/universalTransfer
+get  /api/v3/broker/sub-account/universalTransfer?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -701,7 +704,7 @@ get  /api/v3/broker/sub-account/onceToken
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-post  /api/v3/broker/sub-account/virtualSubAccount
+post  /api/v3/broker/sub-account/virtualSubAccount?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -802,7 +805,7 @@ post  /api/v3/broker/sub-account/virtualSubAccount
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-get  /api/v3/broker/sub-account/list
+get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -822,6 +825,7 @@ get  /api/v3/broker/sub-account/list
         </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1597026383787"</span><span class="w">
     </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求：</strong></p>
 
@@ -916,7 +920,7 @@ get  /api/v3/broker/sub-account/list
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-post  /api/v3/broker/sub-account/apiKey
+post  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1047,7 +1051,7 @@ post  /api/v3/broker/sub-account/apiKey
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-get  /api/v3/broker/sub-account/apiKey
+get  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1146,7 +1150,7 @@ get  /api/v3/broker/sub-account/apiKey
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-delete  /api/v3/broker/sub-account/apiKey
+delete  /api/v3/broker/sub-account/apiKey?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1230,7 +1234,7 @@ delete  /api/v3/broker/sub-account/apiKey
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-post  /api/v3/broker/capital/deposit/subAddress
+post  /api/v3/broker/capital/deposit/subAddress?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1340,7 +1344,7 @@ post  /api/v3/broker/capital/deposit/subAddress
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-get  /api/v3/broker/capital/deposit/subAddress
+get  /api/v3/broker/capital/deposit/subAddress?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1511,7 +1515,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-get  /api/v3/broker/capital/deposit/subHisrec
+get  /api/v3/broker/capital/deposit/subHisrec?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1677,7 +1681,7 @@ get  /api/v3/broker/capital/deposit/subHisrec
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-get  /api/v3/broker/capital/deposit/subHisrec/getall
+get  /api/v3/broker/capital/deposit/subHisrec/getall?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1836,7 +1840,7 @@ get  /api/v3/broker/capital/deposit/subHisrec/getall
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-post  /api/v3/broker/capital/withdraw/apply
+post  /api/v3/broker/capital/withdraw/apply?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -1954,7 +1958,7 @@ post  /api/v3/broker/capital/withdraw/apply
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-post  /api/v3/broker/sub-account/universalTransfer
+post  /api/v3/broker/sub-account/universalTransfer?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -2064,7 +2068,7 @@ post  /api/v3/broker/sub-account/universalTransfer
 <p>请求示例</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>
-post  /api/v3/broker/sub-account/futures
+post  /api/v3/broker/sub-account/futures?timestamp={{timestamp}}&amp;signature={{signature}}
 
 </code></pre></div>
 <blockquote>
@@ -2153,7 +2157,136 @@ post  /api/v3/broker/sub-account/futures
 <td>返回时间</td>
 </tr>
 </tbody></table>
-<h1 id='api'>公开API参数</h1><h2 id='broker-3'>Broker 枚举定义</h2><h3 id='4dc38d4caa'><a id="from_account">划出账户类型</a></h3>
+<h2 id='broker-3'>获取broker返佣记录</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+get  /api/v3/broker/rebate/taxQuery?timestamp={{timestamp}}&amp;signature={{signature}}
+
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//当前页</span><span class="w">
+    </span><span class="nl">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//总记录数</span><span class="w">
+    </span><span class="nl">"totalPageNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="err">//总页数</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">返佣资产</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00082273"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣金额</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣类型</span><span class="w">
+            </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"221827"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">返佣用户UID</span><span class="w">
+            </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20221022"</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">返佣时间</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">             
+            </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣资产</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00082273"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣金额</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣类型</span><span class="w">
+            </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"221827"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣用户UID</span><span class="w"> 
+            </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20221022"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">返佣时间</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<p><strong>HTTP请求：</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/broker/rebate/taxQuery</code></li>
+</ul>
+
+<p><strong>请求参数：</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>数据类型</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>string</td>
+<td>no</td>
+<td>开始时间</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>string</td>
+<td>no</td>
+<td>结束时间</td>
+</tr>
+<tr>
+<td>page</td>
+<td>string</td>
+<td>no</td>
+<td>默认值1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>string</td>
+<td>no</td>
+<td>默认值10</td>
+</tr>
+<tr>
+<td>recvWindow</td>
+<td>string</td>
+<td>no</td>
+<td>同步时间</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string</td>
+<td>yes</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>string</td>
+<td>yes</td>
+<td>签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数：</strong></p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>asset</td>
+<td>string</td>
+<td>返佣资产</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>返佣金额</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>string</td>
+<td>返佣用户UID</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>返佣类型，现货/合约</td>
+</tr>
+<tr>
+<td>time</td>
+<td>string</td>
+<td>返佣时间</td>
+</tr>
+</tbody></table>
+<h1 id='api'>公开API参数</h1><h2 id='broker-4'>Broker 枚举定义</h2><h3 id='4dc38d4caa'><a id="from_account">划出账户类型</a></h3>
 <ul>
 <li>SPOT 现货</li>
 <li>FUTURES 合约</li>
