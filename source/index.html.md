@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-01-12**
+- 新增查询子账户资产接口
+
 ## **2024-01-01**
 - K线查询支持周线
 - 查询充值和提现历史接口调整查询时间窗口
@@ -1645,6 +1648,58 @@ get /api/v3/capital/sub-account/universalTransfer
 |status|string|划转状态:成功，失败，划转中，中断|
 |timestamp|number|划转时间|
 |totalCount|number||
+
+## 查询子账户资产
+
+> 请求示例
+
+```
+get /api/v3/sub-account/asset?subAccount=account1&accountType=SPOT&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+    "balances": [
+        {
+            "asset": "MX",
+            "free": "3",
+            "locked": "0"
+        },
+        {
+            "asset": "BTC",
+            "free": "0.0003",
+            "locked": "0"
+        }
+    ]
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/sub-account/asset```  
+
+**接口权限要求:** 资金划转读 / SPOT_TRANSFER_R
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+| subAccount | string | 是       | 子账户名称，仅支持单个子账户查询       |
+| accountType|string|是|划出账户类型，现货/合约，枚举值："SPOT","FUTURES",当前仅支持SPOT|
+| timestamp|string|是|时间戳|
+| signature|string|是|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|balances|string|余额|
+|asset|string|币种|
+|free|string|可用数量|
+|locked|string|冻结数量|
 
 
 
