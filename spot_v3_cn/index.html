@@ -347,6 +347,15 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-01-12" class="toc-h2 toc-link" data-title="2024-01-12"><strong>2024-01-12</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2024-01-01" class="toc-h2 toc-link" data-title="2024-01-01"><strong>2024-01-01</strong></a>
+                  </li>
+                  <li>
+                    <a href="#2023-12-11" class="toc-h2 toc-link" data-title="2023-12-11"><strong>2023-12-11</strong></a>
+                  </li>
+                  <li>
                     <a href="#2023-11-10" class="toc-h2 toc-link" data-title="2023-11-10"><strong>2023-11-10</strong></a>
                   </li>
                   <li>
@@ -575,6 +584,9 @@
                   </li>
                   <li>
                     <a href="#47ebdabc00" class="toc-h2 toc-link" data-title="查询母子万向划转历史">查询母子万向划转历史</a>
+                  </li>
+                  <li>
+                    <a href="#893c2d1f4c" class="toc-h2 toc-link" data-title="查询子账户资产">查询子账户资产</a>
                   </li>
               </ul>
           </li>
@@ -831,7 +843,20 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2023-11-10'><strong>2023-11-10</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2024-01-12'><strong>2024-01-12</strong></h2>
+<ul>
+<li>新增查询子账户资产接口</li>
+</ul>
+<h2 id='2024-01-01'><strong>2024-01-01</strong></h2>
+<ul>
+<li>K线查询支持周线</li>
+<li>查询充值和提现历史接口调整查询时间窗口</li>
+</ul>
+<h2 id='2023-12-11'><strong>2023-12-11</strong></h2>
+<ul>
+<li>查看子账户列表接口新增返回参数：子账户uid</li>
+</ul>
+<h2 id='2023-11-10'><strong>2023-11-10</strong></h2>
 <ul>
 <li>新增用户站内转账接口、查询用户内部转账历史接口</li>
 <li>新增miniTicker和miniTickers推送频道</li>
@@ -2892,12 +2917,14 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
         {
             "subAccount":"subAccount1",
             "isFreeze":false,//是否冻结
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "49910511"
         },
         {
             "subAccount":"subAccount2",
             "isFreeze":false,
-            "createTime":1544433328000
+            "createTime":1544433328000,
+            "uid": "91921059"
         }
     ]
 }
@@ -2984,6 +3011,11 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td style="text-align: left">createTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">创建时间</td>
+</tr>
+<tr>
+<td style="text-align: left">uid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">子账户uid</td>
 </tr>
 </tbody></table>
 <h2 id='apikey'>创建子账户的APIkey</h2>
@@ -3588,6 +3620,106 @@ body
 <td style="text-align: left">totalCount</td>
 <td style="text-align: left">number</td>
 <td style="text-align: left"></td>
+</tr>
+</tbody></table>
+<h2 id='893c2d1f4c'>查询子账户资产</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/sub-account/asset?subAccount=account1&amp;accountType=SPOT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"balances"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0003"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"locked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/sub-account/asset</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 资金划转读 / SPOT_TRANSFER_R</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">subAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">子账户名称，仅支持单个子账户查询</td>
+</tr>
+<tr>
+<td style="text-align: left">accountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">账户类型，现货/合约，枚举值：&quot;SPOT&quot;,&quot;FUTURES&quot;,当前仅支持SPOT</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">balances</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">余额</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">币种</td>
+</tr>
+<tr>
+<td style="text-align: left">free</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">可用数量</td>
+</tr>
+<tr>
+<td style="text-align: left">locked</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">冻结数量</td>
 </tr>
 </tbody></table>
 <h1 id='c15d2e6b39'>现货账户和交易接口</h1><h2 id='api-3'>用户API交易对</h2>
@@ -5585,7 +5717,7 @@ body
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">默认当前时间30天前的时间</td>
+<td style="text-align: left">默认当前时间7天前的时间</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5613,9 +5745,12 @@ body
 </tr>
 </tbody></table>
 
-<p>请注意<code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过30天.</p>
-
-<p><strong>返回参数</strong></p>
+<ol>
+<li>默认返回最近7天的记录.</li>
+<li><code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过7天.</li>
+<li>做多可查询90天内的记录.
+<strong>返回参数</strong></li>
+</ol>
 
 <table><thead>
 <tr>
@@ -5737,7 +5872,7 @@ body
 <td style="text-align: left">startTime</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
-<td style="text-align: left">默认当前时间30天前的时间戳</td>
+<td style="text-align: left">默认当前时间7天前的时间戳</td>
 </tr>
 <tr>
 <td style="text-align: left">endTime</td>
@@ -5760,11 +5895,12 @@ body
 </tbody></table>
 
 <ol>
-<li>支持多网络提币前的历史记录可能不会返回<code>network</code>字段.</li>
-<li>请注意<code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过30天.</li>
+<li>默认返回最近7天的记录.</li>
+<li><code>startTime</code> 与 <code>endTime</code> 的默认时间戳，保证请求时间间隔不超过7天.</li>
+<li>做多可查询90天内的记录.</li>
+<li>支持多网络提币前的历史记录可能不会返回<code>network</code>字段.
+<strong>返回参数</strong></li>
 </ol>
-
-<p><strong>返回参数</strong></p>
 
 <table><thead>
 <tr>
@@ -10006,6 +10142,7 @@ startTime、endTime若不填写，则预设查询T-7~T日內数据。 -->
 <li>60m  1小时</li>
 <li>4h  4小时</li>
 <li>1d  1天</li>
+<li>1w  1周</li>
 <li>1M  1月</li>
 </ul>
 <h3 id='1601926999'><a id="account_position">变动类型</a></h3>
