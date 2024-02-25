@@ -5135,7 +5135,7 @@ startTime、endTime若不填写，则预设查询T-7~T日內数据。
 - 60m  1小时
 - 4h  4小时
 - 1d  1天
-- 1w  1周
+- 1W  1周
 - 1M  1月
 
 ### <a id="account_position">变动类型</a>
