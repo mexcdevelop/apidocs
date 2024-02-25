@@ -5072,7 +5072,7 @@ If startTime and endTime are not sent, the data from T-7 to T is returned.
 - 60m  60 minute
 - 4h  4 hour
 - 1d  1 day
-- 1w  1 week
+- 1W  1 week
 - 1M  1 month
 
 ### <a id="account_position">changed type</a>
