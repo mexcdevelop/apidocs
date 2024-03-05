@@ -1549,7 +1549,6 @@ get /api/v3/capital/sub-account/universalTransfer
 |toSymbol|string|toSymbol|
 |status|string|status|
 |timestamp|number|timestamp|
-|totalCount|number|total transfer|
 
 ## Query Sub-account Asset
 
@@ -2262,10 +2261,6 @@ Response:
 
 ```json
 {
-    "makerCommission": 20,
-    "takerCommission": 20,
-    "buyerCommission": 0,
-    "sellerCommission": 0,
     "canTrade": true,
     "canWithdraw": true,
     "canDeposit": true,
@@ -2304,10 +2299,6 @@ Response:
 
 | Name             | Description     |
 | ---------------- | --------------- |
-| makerCommission  | maker fee       |
-| takerCommission  | taker fee       |
-| buyerCommission  | buyer fee       |
-| sellerCommission | seller fee      |
 | canTrade         | Can Trade       |
 | canWithdraw      | Can Withdraw    |
 | canDeposit       | Can Deposit     |
