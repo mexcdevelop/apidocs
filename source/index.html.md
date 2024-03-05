@@ -1647,7 +1647,7 @@ get /api/v3/capital/sub-account/universalTransfer
 |toSymbol|string|杠杆转出交易对|
 |status|string|划转状态:成功，失败，划转中，中断|
 |timestamp|number|划转时间|
-|totalCount|number||
+
 
 ## 查询子账户资产
 
@@ -2320,10 +2320,6 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 
 ```json
 {
-    "makerCommission": 20,
-    "takerCommission": 20,
-    "buyerCommission": 0,
-    "sellerCommission": 0,
     "canTrade": true,
     "canWithdraw": true,
     "canDeposit": true,
@@ -2366,10 +2362,6 @@ GET /api/v3/account?timestamp={{timestamp}}&signature={{signature}}
 
 | 参数名           | 说明       |
 | :---------------- | :---------- |
-| makerCommission  | maker 费率 |
-| takerCommission  | taker 费率 |
-| buyerCommission  |            |
-| sellerCommission |            |
 | canTrade         | 是否可交易 |
 | canWithdraw      | 是否可提现 |
 | canDeposit       | 是否可充值 |
