@@ -677,9 +677,6 @@
                     <a href="#dustlog" class="toc-h2 toc-link" data-title="DustLog">DustLog</a>
                   </li>
                   <li>
-                    <a href="#internal-transfer" class="toc-h2 toc-link" data-title="Internal Transfer">Internal Transfer</a>
-                  </li>
-                  <li>
                     <a href="#query-internal-transfer-history" class="toc-h2 toc-link" data-title="Query Internal Transfer history">Query Internal Transfer history</a>
                   </li>
               </ul>
@@ -6779,95 +6776,47 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">totalPage</td>
 </tr>
 </tbody></table>
-<h2 id='internal-transfer'>Internal Transfer</h2>
-<blockquote>
-<p>Request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/transfer/internal?&amp;timestamp={{timestamp}}&amp;signature={{signature}}
-</code></pre></div>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c45d800a47ba4cbc876a5cd29388319"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
 
-</span></code></pre></div>
-<ul>
-<li><strong>POST</strong> <code>/api/v3/capital/transfer/internal</code><br></li>
-</ul>
+<!-- ## Internal Transfer
 
-<p><strong>Permission:</strong> SPOT_WITHDRAW_WRITE</p>
+> Request
 
-<p><strong>Weight(IP):</strong> 1</p>
+```
+post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
 
-<p><strong>Parameters</strong></p>
+```json
+  {
+    "tranId": "c45d800a47ba4cbc876a5cd29388319"
+  }
 
-<table><thead>
-<tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Mandatory</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">toAccountType</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">Yes</td>
-<td style="text-align: left">toAccountTyp:EMAIL/UID/MOBILE</td>
-</tr>
-<tr>
-<td style="text-align: left">toAccount</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">Yes</td>
-<td style="text-align: left">toAccount:EMAIL/UID/MOBILE</td>
-</tr>
-<tr>
-<td style="text-align: left">areaCode</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">No</td>
-<td style="text-align: left">areaCode of mobile</td>
-</tr>
-<tr>
-<td style="text-align: left">asset</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">Yes</td>
-<td style="text-align: left">asset</td>
-</tr>
-<tr>
-<td style="text-align: left">amount</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">Yes</td>
-<td style="text-align: left">amount</td>
-</tr>
-<tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">Yes</td>
-<td style="text-align: left">timestamp</td>
-</tr>
-<tr>
-<td style="text-align: left">signature</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">Yes</td>
-<td style="text-align: left">signature</td>
-</tr>
-</tbody></table>
+```
 
-<p><strong>Response</strong></p>
+- **POST** ```/api/v3/capital/transfer/internal```  
 
-<table><thead>
-<tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">tranId</td>
-<td style="text-align: left">tranId</td>
-</tr>
-</tbody></table>
+**Permission:** SPOT_WITHDRAW_WRITE
+
+**Weight(IP):** 1
+
+**Parameters**
+
+| Name | Type| Mandatory | Description               | 
+| :------ | :-------- |:-----|:-----------------|
+|toAccountType|string| Yes    | toAccountTyp:EMAIL/UID/MOBILE  |
+|toAccount|string| Yes    | toAccount:EMAIL/UID/MOBILE   |
+|areaCode|string| No    | areaCode of mobile            |
+|asset|string| Yes    | asset        |
+|amount|string| Yes    | amount       |
+|timestamp|string| Yes    | timestamp        |
+|signature|string| Yes    | signature      |
+
+**Response**
+
+| Name | Description  |
+| :------------ | :-------- | 
+|tranId|tranId|
+ -->
 <h2 id='query-internal-transfer-history'>Query Internal Transfer history</h2>
 <blockquote>
 <p>Request</p>
