@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-04-04**
+
+- Update response params of Get Withdraw History endpoint
+
 ## **2024-01-12**
 
 - Add query sub-account asset endpoint
@@ -2716,7 +2720,11 @@ get /api/v3/capital/withdraw/history?coin=USDT&timestamp={{timestamp}}&signature
         "confirmNo": null,
         "applyTime": 1665300874000,
         "remark": "",
-        "memo": "MX10086"
+        "memo": "MX10086",
+        "transHash": "0x0ced593b8b5adc9f600334d0d7335456a7ed772ea5547beda7ffc4f33a065c",
+        "updateTime": 1712134082000,
+        "coinId": "128f589271cb495b03e71e6323eb7be",
+        "vcoinId": "af42c6414b9a46c8869ce30fd51660f"
   }
 ]
 ```
@@ -2764,6 +2772,11 @@ Response:
 |confirmNo| confirmNo|
 |txId|txId|
 |remark|remark|
+|memo|memo|
+|transHash|transaction Hash|
+|coinId|asset id|
+|vcoinId|currency id|
+
 
 ## Generate deposit address (supporting network) 
 
