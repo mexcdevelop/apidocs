@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-04-08**
+- 获取提币历史接口更新返回参数
+
 ## **2024-01-12**
 - 新增查询子账户资产接口
 
@@ -2786,7 +2789,11 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
         "confirmNo": null,
         "applyTime": 1665300874000,
         "remark": "",
-        "memo": "MX10086"
+        "memo": "MX10086",
+        "transHash": "0x0ced593b8b5adc9f6003a934d0d7335456a7ed772ea5547beda4f33a065c",
+        "updateTime": 1712134082000,
+        "coinId": "128f589271cb491b03e71e6323eb7be",
+        "vcoinId": "af42c6414b9a43869ce30fd51660f"
   }
 ]
 ```
@@ -2832,6 +2839,9 @@ get /api/v3/capital/withdraw/history?coin=EOS&timestamp={{timestamp}}&signature=
 |txId| 提现交易id|
 |remark|提现记录备注|
 |memo|memo|
+|transHash|交易hash|
+|coinId|资产id|
+|vcoinId|币种id|
 
 ## 生成充值地址 (支持多网络)
 
