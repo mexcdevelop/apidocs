@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-04-08" class="toc-h2 toc-link" data-title="2024-04-08"><strong>2024-04-08</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-01-12" class="toc-h2 toc-link" data-title="2024-01-12"><strong>2024-01-12</strong></a>
                   </li>
                   <li>
@@ -840,7 +843,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2024-01-12'><strong>2024-01-12</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2024-04-08'><strong>2024-04-08</strong></h2>
+<ul>
+<li>获取提币历史接口更新返回参数</li>
+</ul>
+<h2 id='2024-01-12'><strong>2024-01-12</strong></h2>
 <ul>
 <li>新增查询子账户资产接口</li>
 </ul>
@@ -5798,7 +5805,11 @@ body
         </span><span class="nl">"confirmNo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"applyTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1665300874000</span><span class="p">,</span><span class="w">
         </span><span class="nl">"remark"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX10086"</span><span class="w">
+        </span><span class="nl">"memo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MX10086"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"transHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0ced593b8b5adc9f6003a934d0d7335456a7ed772ea5547beda4f33a065c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1712134082000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"coinId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128f589271cb491b03e71e6323eb7be"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"vcoinId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"af42c6414b9a43869ce30fd51660f"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -5935,6 +5946,18 @@ body
 <tr>
 <td style="text-align: left">memo</td>
 <td style="text-align: left">memo</td>
+</tr>
+<tr>
+<td style="text-align: left">transHash</td>
+<td style="text-align: left">交易hash</td>
+</tr>
+<tr>
+<td style="text-align: left">coinId</td>
+<td style="text-align: left">资产id</td>
+</tr>
+<tr>
+<td style="text-align: left">vcoinId</td>
+<td style="text-align: left">币种id</td>
 </tr>
 </tbody></table>
 <h2 id='97fb427a63'>生成充值地址 (支持多网络)</h2>
