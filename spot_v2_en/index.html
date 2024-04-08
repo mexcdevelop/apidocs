@@ -442,9 +442,6 @@
                     <a href="#place-order-in-batch" class="toc-h2 toc-link" data-title="Place Order In Batch">Place Order In Batch</a>
                   </li>
                   <li>
-                    <a href="#place-order-in-batch-enhanced" class="toc-h2 toc-link" data-title="Place Order In Batch(enhanced)">Place Order In Batch(enhanced)</a>
-                  </li>
-                  <li>
                     <a href="#open-orders" class="toc-h2 toc-link" data-title="Open Orders">Open Orders</a>
                   </li>
                   <li>
@@ -582,17 +579,7 @@ API V1 will no longer be maintained starting from the end of June 2021. Please p
 <td>Update</td>
 <td>add parameter: client_order_id and trade_id and order_id</td>
 </tr>
-<tr>
-<td>2022-08-23</td>
-<td>/open/api/v2/order/advanced/place_batch</td>
-<td>ADD</td>
-<td>Add Place Order In Batch(enhanced) endpoint</td>
-</tr>
 </tbody></table>
-
-<!-- |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|Update|add parameter: eventTime and isTaker|
-|2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
-|2022-07-15|operation sub.personal|Update|Add parameter: avgPrice, executedQty and cumulativeQuoteQty| -->
 <h1 id='integration-guide'>Integration guide</h1><h2 id='access-urls'>Access URLs</h2>
 <p>Please make API requests with the following base urls:</p>
 
@@ -1997,7 +1984,9 @@ It's the user's responsibility to maintain the uniqueness of the client order id
 <aside class="notice">
 For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
 </aside>
-<h2 id='place-order-in-batch-enhanced'>Place Order In Batch(enhanced)</h2>
+
+<!-- ## Place Order In Batch(enhanced)
+
 <aside class="notice">
  This version of batch ordering is about 8-10 times faster than the previous batch ordering interface `/open/ API/V2 /order/place_batch` with a response time of 20 orders per batch, but use with caution if in doubt about the following differences:<br/>
 
@@ -2006,113 +1995,57 @@ For each batch request, the parameter client_order_id should be consistent, mean
 3. Transaction pairs within batches must be the same.<br/>
 </aside>
 
-<blockquote>
-<p>Request Payload</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT_ORDER"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0002"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RACA_USDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BID"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"client_order_id"</span><span class="p">:</span><span class="w">  </span><span class="mi">9588234</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT_ORDER"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00846945"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RACA_USDT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"trade_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ASK"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Response Payload</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"1572936"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c8663a12a2fc457fbfdd55307b463495"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"1572937"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ec42569b4f4349f7aabe26f78b0f8bd2"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"1572938"</span><span class="p">:</span><span class="w"> </span><span class="s2">"70669675cac2414c90493be2dcfaf7e3"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<ul>
-<li><strong>POST</strong> <code>/open/api/v2/order/advanced/place_batch</code></li>
-</ul>
+> Request Payload
 
-<p><strong>Request Parameters:</strong></p>
+```json
+[
+    {
+        "order_type": "LIMIT_ORDER",
+        "price": "40000",
+        "quantity": "0.0002",
+        "symbol": "RACA_USDT",
+        "trade_type": "BID",
+        "client_order_id":  9588234
+    },
+    {
+        "order_type": "LIMIT_ORDER",
+        "price": "0.00846945",
+        "quantity": "1",
+        "symbol": "RACA_USDT",
+        "trade_type": "ASK"
+    }
+]
+```
+> Response Payload
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data type</th>
-<th>Mandatory</th>
-<th>Description</th>
-<th>Allowed range</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>YES</td>
-<td>symbol</td>
-<td></td>
-</tr>
-<tr>
-<td>price</td>
-<td>string</td>
-<td>YES</td>
-<td>order price</td>
-<td></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>string</td>
-<td>YES</td>
-<td>quantity</td>
-<td></td>
-</tr>
-<tr>
-<td>trade_type</td>
-<td>string</td>
-<td>YES</td>
-<td>trade_type</td>
-<td>BID,ASK</td>
-</tr>
-<tr>
-<td>order_type</td>
-<td>string</td>
-<td>YES</td>
-<td>order_type</td>
-<td>LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL</td>
-</tr>
-<tr>
-<td>client_order_id</td>
-<td>string</td>
-<td>YES</td>
-<td>clientOrderId</td>
-<td>maximum 32 characters. The user must maintain theuniqueness of the clientOrderID</td>
-</tr>
-</tbody></table>
+```json
+{
+    "code": 200,
+    "data": {
+        "1572936": "c8663a12a2fc457fbfdd55307b463495",
+        "1572937": "ec42569b4f4349f7aabe26f78b0f8bd2",
+        "1572938": "70669675cac2414c90493be2dcfaf7e3"
+    }
+}
+```
+- **POST** ```/open/api/v2/order/advanced/place_batch```
 
-<p><strong>Response Parameters:</strong></p>
+**Request Parameters:**
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>data</td>
-<td>map</td>
-<td>client_order_id:order_id</td>
-</tr>
-</tbody></table>
+| Parameter       | Data type | Mandatory | Description  | Allowed range                            |
+| --------------- | -------- | -------- | ---------- | ------------------------------------------- |
+| symbol          | string   | YES       | symbol |                                               |
+| price           | string   | YES       | order price  |                                               |
+| quantity        | string   | YES       | quantity     |                                               |
+| trade_type      | string   | YES       | trade_type   | BID,ASK                                       |
+| order_type      | string   | YES       | order_type   | LIMIT_ORDER,POST_ONLY,IMMEDIATE_OR_CANCEL     |
+| client_order_id | string   | YES       | clientOrderId |  maximum 32 characters. The user must maintain theuniqueness of the clientOrderID |
+
+**Response Parameters:**
+
+| Parameter | Data type | Description                                  |
+| ------ | -------- | ------------------------------------------------- |
+| data   | map      | client_order_id:order_id| -->
 <h2 id='open-orders'>Open Orders</h2>
 <blockquote>
 <p>Response example</p>
