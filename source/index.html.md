@@ -63,7 +63,6 @@ API V1将于2021年6月底停用，不再维护，请提前做好准备。
 | 2021-03-01 | /open/api/v2/order/list                                                                   | 修改     | 入参states由非必填改为必填，且只能单状态查询；入参start_time修改为默认查询最近7天，最多查询30天；修复入参start_time时间不准确的情况 |
 | 2021-08-27 | /open/api/v2/market/api_default_symbols                                                   | 新增     | 新增获取平台支持API交易的交易对接口；取消展示签名方式二，保留同合约的签名方式                                                       |
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|更新| 接口/推送增加client_order_id和trade_id和order_id|
-|2022-08-23|/open/api/v2/order/advanced/place_batch|增加|增加批量下单加强版接口|
 
 
 # 接入说明
@@ -942,7 +941,7 @@ None
 对于同一次批量下单的操作，参数中的订单元素需要统一客户订单id行为，不能有些元素带有客户订单id另一些元素不带
 </aside>
 
-## 批量下单(加强)
+<!-- ## 批量下单(加强)
 
 <aside class="notice">
 该版本的批量下单会比之前的批量下单接口 `/open/api/v2/order/place_batch`，响应时间上快 8-10倍左右（以每个批次20个订单的量计算），但是如果对以下差异点有疑问，请慎用:<br/> 
@@ -1115,7 +1114,7 @@ None
 | create_time     | string   | 下单时间   |
 | state           | string   | 订单状态   |
 | type            | string   | 订单类型   |
-| client_order_id | string   | 客户订单id |
+| client_order_id | string   | 客户订单id | -->
 
 ## 查询订单
 
