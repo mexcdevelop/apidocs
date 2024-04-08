@@ -70,7 +70,7 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
-## **2024-04-04**
+## **2024-04-08**
 
 - Update response params of Get Withdraw History endpoint
 
