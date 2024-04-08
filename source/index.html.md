@@ -63,11 +63,6 @@ We recommend that all users build their applications on V2 of the API. Using V2 
 |2021-03-01|/open/api/v2/order/list| change | Parameter states change to the mandatory than optional, and only single statu query supported; Parameter start_time default queries in last 7 days, maximum is 30 days; Fixed the situation of incorrect time about parameter start_time|
 |2021-08-27|/open/api/v2/market/api_default_symbols|Add|The newly acquired platform supports the trading pair endpoint of API transactions; Cancel the display of signature method 2 and retain the signature method of the same futures.|
 |2022-03-17|/open/api/v2/order/deals<br/>/open/api/v2/order/deal_detail|Update| add parameter: client_order_id and trade_id and order_id|
-|2022-08-23|/open/api/v2/order/advanced/place_batch|ADD|Add Place Order In Batch(enhanced) endpoint|
-
-<!-- |2022-04-14|operation sub.personal<br/>operation sub.personal.deals|Update|add parameter: eventTime and isTaker|
-|2022-06-16| wss://wbs.mexc.com/raw/ws|Update|Add spot websocket Doc|
-|2022-07-15|operation sub.personal|Update|Add parameter: avgPrice, executedQty and cumulativeQuoteQty| -->
 
 
 
@@ -886,7 +881,7 @@ It's the user's responsibility to maintain the uniqueness of the client order id
 For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
 </aside>
 
-## Place Order In Batch(enhanced)
+<!-- ## Place Order In Batch(enhanced)
 
 <aside class="notice">
  This version of batch ordering is about 8-10 times faster than the previous batch ordering interface `/open/ API/V2 /order/place_batch` with a response time of 20 orders per batch, but use with caution if in doubt about the following differences:<br/>
@@ -946,7 +941,7 @@ For each batch request, the parameter client_order_id should be consistent, mean
 
 | Parameter | Data type | Description                                  |
 | ------ | -------- | ------------------------------------------------- |
-| data   | map      | client_order_id:order_id|
+| data   | map      | client_order_id:order_id| -->
 
 ## Open Orders
 
