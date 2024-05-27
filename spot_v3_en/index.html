@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-05-15" class="toc-h2 toc-link" data-title="2024-05-15"><strong>2024-05-15</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-04-08" class="toc-h2 toc-link" data-title="2024-04-08"><strong>2024-04-08</strong></a>
                   </li>
                   <li>
@@ -632,6 +635,9 @@
                   <li>
                     <a href="#query-mx-deduct-status" class="toc-h2 toc-link" data-title="Query MX Deduct Status">Query MX Deduct Status</a>
                   </li>
+                  <li>
+                    <a href="#query-symbol-commission" class="toc-h2 toc-link" data-title="Query Symbol Commission">Query Symbol Commission</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -835,7 +841,11 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2024-04-08'><strong>2024-04-08</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2024-05-15'><strong>2024-05-15</strong></h2>
+<ul>
+<li>Add query commission endpoint</li>
+</ul>
+<h2 id='2024-04-08'><strong>2024-04-08</strong></h2>
 <ul>
 <li>Update response params of Get Withdraw History endpoint</li>
 </ul>
@@ -5176,6 +5186,91 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">mxDeductEnable</td>
 <td style="text-align: left">boolean</td>
 <td style="text-align: left">true:enable,false:disable</td>
+</tr>
+</tbody></table>
+<h2 id='query-symbol-commission'>Query Symbol Commission</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get api/v3/tradeFee?symbol=MXUSDT&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>return</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="mf">0.003000000000000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="mf">0.003000000000000000</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="mi">1669109672717</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>api/v3/tradeFee</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
+
+<p><strong>Weight(IP):</strong> 20</p>
+
+<p><strong>request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left">recvWindow</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">no</td>
+<td style="text-align: left">recvWindow</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>return</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">makerCommission</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">User Maker Commission</td>
+</tr>
+<tr>
+<td style="text-align: left">takerCommission</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">User Taker Commission</td>
 </tr>
 </tbody></table>
 <h1 id='wallet-endpoints'>Wallet Endpoints</h1><h2 id='query-the-currency-information'>Query the currency information</h2>
