@@ -70,6 +70,9 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-05-15**
+- Add query commission endpoint
+
 ## **2024-04-08**
 
 - Update response params of Get Withdraw History endpoint
@@ -2466,6 +2469,53 @@ get api/v3/mxDeduct/enable
 | Name  |Type | Description|
 | :------------ | :-------- | :--------|
 |mxDeductEnable|boolean|true:enable,false:disable|
+
+## Query Symbol Commission
+
+> request
+
+```
+get api/v3/tradeFee?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> return
+
+```json
+{
+  "data":{
+    "makerCommission":0.003000000000000000,
+    "takerCommission":0.003000000000000000
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672717
+}
+```
+**HTTP请求**
+
+- **GET** ```api/v3/tradeFee```  
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 20
+
+**request**
+
+| Name | Type| Mandatory  | Description | 
+| :------ | :-------- | :-------- | :---------- |
+|symbol|string|yes|symbol|
+|recvWindow|long|no|recvWindow|
+|timestamp|long|yes|timestamp|
+|signature|string|yes|signature|
+
+
+**return**
+
+| Name | Type | Description|
+| :------------ | :-------- | :--------|
+|makerCommission|long|User Maker Commission|
+|takerCommission|long|User Taker Commission|
+
+
 
 # Wallet Endpoints
 
