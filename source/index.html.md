@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-05-15**
+- 新增获取手续费率接口
+
 ## **2024-04-08**
 - 获取提币历史接口更新返回参数
 
@@ -2453,7 +2456,7 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 > 请求示例
 
 ```
-post api/v3/mxDeduct/enable
+post api/v3/mxDeduct/enable?timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
@@ -2498,7 +2501,7 @@ post api/v3/mxDeduct/enable
 > 请求示例
 
 ```
-get api/v3/mxDeduct/enable
+get api/v3/mxDeduct/enable?timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
@@ -2534,6 +2537,52 @@ get api/v3/mxDeduct/enable
 | 参数名  |类型 | 说明|
 | :------------ | :-------- | :--------|
 |mxDeductEnable|boolean|是否开启了MX抵扣,true:已开启,false:已关闭.|
+
+## 查看手续费率
+
+> 请求示例
+
+```
+get api/v3/tradeFee?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+{
+  "data":{
+    "makerCommission":0.003000000000000000,
+    "takerCommission":0.003000000000000000
+  },
+  "code":0,
+  "msg":"success",
+  "timestamp":1669109672717
+}
+```
+**HTTP请求**
+
+- **GET** ```api/v3/tradeFee```  
+
+**接口权限要求:** 账户信息读 / SPOT_ACCOUNT_R
+
+**权重(IP):** 20
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须  | 说明 | 
+| :------ | :-------- | :-------- | :---------- |
+|symbol|string|yes|交易对|
+|recvWindow|long|no|同步时间|
+|timestamp|long|yes|时间戳|
+|signature|string|yes|签名|
+
+
+**返回参数**
+
+| 参数名  |类型 | 说明|
+| :------------ | :-------- | :--------|
+|makerCommission|long|用户maker费率|
+|takerCommission|long|用户taker费率|
+
 
 # 钱包接口
 
