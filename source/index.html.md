@@ -70,6 +70,10 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-06-09**
+- Query The Currency Information endpoint add params:netWork,network will offline soon.
+- Add new withdraw endpoint,previous withdraw endpoint will offline soon.
+
 ## **2024-05-15**
 - Add query commission endpoint
 
@@ -2549,7 +2553,8 @@ Get /api/v3/capital/config/getall
           "sameAddress": false,
           "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9",
           "withdrawTips": "Both a MEMO and an Address are required.",
-          "depositTips": "Both a MEMO and an Address are required."
+          "depositTips": "Both a MEMO and an Address are required.",
+          "netWork": "EOS"
       },
       {
           "coin": "BTC",
@@ -2566,7 +2571,8 @@ Get /api/v3/capital/config/getall
           "sameAddress": false,
           "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
           "withdrawTips": null,
-          "depositTips": null
+          "depositTips": null,
+          "network": "BTC"
       }
     ]
   },
@@ -2592,7 +2598,6 @@ Response:
 | Name | Description  | 
 | :------------ | :-------- | 
 |depositEnable|depositEnable|
-|network|withdraw network|
 |withdrawEnable|withdrawEnable|
 |withdrawFee|withdrawFee|
 |withdrawMax|Max withdraw amount|
@@ -2600,26 +2605,26 @@ Response:
 |contract|coin contract|
 |withdrawTips|withdrawTips|
 |depositTips|depositTips|
+|network|withdraw network(previous params,offline soon)|
+|netWork|withdraw network(new params,for new withdraw endpoint)|
 
-## Withdraw
+## Withdraw(new)
 
 > Request
 
 ```
-post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
+post /api/v3/capital/withdraw?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
 ```
 > Response
 
 ```json
-[
-  {
+{
     "id":"7213fea8e94b4a5593d507237e5a555b"
-  }
-]
+}
 ```
 
 
-- **POST** ```/api/v3/capital/withdraw/apply```  
+- **POST** ```/api/v3/capital/withdraw```  
 
 **Permission:** SPOT_WITHDRAW_WRITE
 
@@ -2631,7 +2636,8 @@ Parameters:
 | :------ | :-------- |:----------|:---------------------------------------------------------------|
 |coin|string| YES       | coin                                                           |
 |withdrawOrderId|string| NO        | withdrawOrderId                                                |
-|network|string| NO        | withdraw network                                               |
+|netWork|string| NO        | withdraw network                                               |
+|contractAddress|string| NO        | coin contract address                                               |
 |address|string| YES       | withdraw address                                               |
 |memo|string| NO        | memo(If memo is required in the address, it must be passed in) |
 |amount|string| YES       | withdraw amount                                                |
@@ -2639,7 +2645,7 @@ Parameters:
 |timestamp|string| YES       | timestamp                                                      |
 |signature|string| YES       | signature                                                      |
  
-Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList`.
+Can get `netWork` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList`.
 
 Response:
 
@@ -3484,6 +3490,53 @@ If startTime and endTime are not provided, will default to returning data from t
 |toAccountType	|toAccountType|
 |status	|status|
 |timestamp	|timestamp|
+
+## Withdraw(previous,offline soon)
+
+> Request
+
+```
+post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
+```
+> Response
+
+```json
+[
+  {
+    "id":"7213fea8e94b4a5593d507237e5a555b"
+  }
+]
+```
+
+
+- **POST** ```/api/v3/capital/withdraw/apply```  
+
+**Permission:** SPOT_WITHDRAW_WRITE
+
+**Weight(IP):** 1
+
+Parameters: 
+
+| Name | Type| Mandatory | Description                                                    | 
+| :------ | :-------- |:----------|:---------------------------------------------------------------|
+|coin|string| YES       | coin                                                           |
+|withdrawOrderId|string| NO        | withdrawOrderId                                                |
+|network|string| NO        | withdraw network                                               |
+|address|string| YES       | withdraw address                                               |
+|memo|string| NO        | memo(If memo is required in the address, it must be passed in) |
+|amount|string| YES       | withdraw amount                                                |
+|remark|string| NO        | remark                                                         |
+|timestamp|string| YES       | timestamp                                                      |
+|signature|string| YES       | signature                                                      |
+ 
+Can get `network` via endpoints `Get /api/v3/capital/config/getall`'s response params `networkList`.
+
+Response:
+
+| Name | Description  |
+| :------------ | :-------- | 
+|id|withdraw ID|
+
 
 # ETF
 
