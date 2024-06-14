@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-06-09" class="toc-h2 toc-link" data-title="2024-06-09"><strong>2024-06-09</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-05-15" class="toc-h2 toc-link" data-title="2024-05-15"><strong>2024-05-15</strong></a>
                   </li>
                   <li>
@@ -647,7 +650,7 @@
                     <a href="#query-the-currency-information" class="toc-h2 toc-link" data-title="Query the currency information">Query the currency information</a>
                   </li>
                   <li>
-                    <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
+                    <a href="#withdraw-new" class="toc-h2 toc-link" data-title="Withdraw(new)">Withdraw(new)</a>
                   </li>
                   <li>
                     <a href="#cancel-withdraw" class="toc-h2 toc-link" data-title="Cancel withdraw">Cancel withdraw</a>
@@ -687,6 +690,9 @@
                   </li>
                   <li>
                     <a href="#query-internal-transfer-history" class="toc-h2 toc-link" data-title="Query Internal Transfer history">Query Internal Transfer history</a>
+                  </li>
+                  <li>
+                    <a href="#withdraw-previous-offline-soon" class="toc-h2 toc-link" data-title="Withdraw(previous,offline soon)">Withdraw(previous,offline soon)</a>
                   </li>
               </ul>
           </li>
@@ -841,7 +847,12 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2024-05-15'><strong>2024-05-15</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2024-06-09'><strong>2024-06-09</strong></h2>
+<ul>
+<li>Query The Currency Information endpoint add params:netWork,network will offline soon.</li>
+<li>Add new withdraw endpoint,previous withdraw endpoint will offline soon.</li>
+</ul>
+<h2 id='2024-05-15'><strong>2024-05-15</strong></h2>
 <ul>
 <li>Add query commission endpoint</li>
 </ul>
@@ -5302,7 +5313,8 @@ post /api/v3/sub-account/margin
           </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawTips"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Both a MEMO and an Address are required."</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Both a MEMO and an Address are required."</span><span class="w">
+          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Both a MEMO and an Address are required."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netWork"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
           </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
@@ -5319,7 +5331,8 @@ post /api/v3/sub-account/margin
           </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawTips"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -5352,10 +5365,6 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">depositEnable</td>
 </tr>
 <tr>
-<td style="text-align: left">network</td>
-<td style="text-align: left">withdraw network</td>
-</tr>
-<tr>
 <td style="text-align: left">withdrawEnable</td>
 <td style="text-align: left">withdrawEnable</td>
 </tr>
@@ -5383,24 +5392,30 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">depositTips</td>
 <td style="text-align: left">depositTips</td>
 </tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">withdraw network(previous params,offline soon)</td>
+</tr>
+<tr>
+<td style="text-align: left">netWork</td>
+<td style="text-align: left">withdraw network(new params,for new withdraw endpoint)</td>
+</tr>
 </tbody></table>
-<h2 id='withdraw'>Withdraw</h2>
+<h2 id='withdraw-new'>Withdraw(new)</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw/apply?coin=EOS&amp;address=zzqqqqqqqqqq&amp;amount=10&amp;network=EOS&amp;memo=MX10086&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw?coin=EOS&amp;address=zzqqqqqqqqqq&amp;amount=10&amp;network=EOS&amp;memo=MX10086&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"7213fea8e94b4a5593d507237e5a555b"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw</code><br></li>
 </ul>
 
 <p><strong>Permission:</strong> SPOT_WITHDRAW_WRITE</p>
@@ -5430,10 +5445,16 @@ post /api/v3/sub-account/margin
 <td style="text-align: left">withdrawOrderId</td>
 </tr>
 <tr>
-<td style="text-align: left">network</td>
+<td style="text-align: left">netWork</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">NO</td>
 <td style="text-align: left">withdraw network</td>
+</tr>
+<tr>
+<td style="text-align: left">contractAddress</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">coin contract address</td>
 </tr>
 <tr>
 <td style="text-align: left">address</td>
@@ -5473,7 +5494,7 @@ post /api/v3/sub-account/margin
 </tr>
 </tbody></table>
 
-<p>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code>.</p>
+<p>Can get <code>netWork</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code>.</p>
 
 <p>Response:</p>
 
@@ -7088,6 +7109,110 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 <tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='withdraw-previous-offline-soon'>Withdraw(previous,offline soon)</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw/apply?coin=EOS&amp;address=zzqqqqqqqqqq&amp;amount=10&amp;network=EOS&amp;memo=MX10086&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"7213fea8e94b4a5593d507237e5a555b"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
+</ul>
+
+<p><strong>Permission:</strong> SPOT_WITHDRAW_WRITE</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p>Parameters: </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">coin</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawOrderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">withdrawOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">withdraw network</td>
+</tr>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">withdraw address</td>
+</tr>
+<tr>
+<td style="text-align: left">memo</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">memo(If memo is required in the address, it must be passed in)</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">withdraw amount</td>
+</tr>
+<tr>
+<td style="text-align: left">remark</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">NO</td>
+<td style="text-align: left">remark</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">YES</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p>Can get <code>network</code> via endpoints <code>Get /api/v3/capital/config/getall</code>&#39;s response params <code>networkList</code>.</p>
+
+<p>Response:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">withdraw ID</td>
 </tr>
 </tbody></table>
 <h1 id='etf'>ETF</h1><h2 id='get-etf-info'>Get ETF info</h2>
