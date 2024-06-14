@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-06-09" class="toc-h2 toc-link" data-title="2024-06-09"><strong>2024-06-09</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-05-15" class="toc-h2 toc-link" data-title="2024-05-15"><strong>2024-05-15</strong></a>
                   </li>
                   <li>
@@ -650,7 +653,7 @@
                     <a href="#2a7110133d" class="toc-h2 toc-link" data-title="查询币种信息">查询币种信息</a>
                   </li>
                   <li>
-                    <a href="#096be69702" class="toc-h2 toc-link" data-title="提币">提币</a>
+                    <a href="#1435ca7432" class="toc-h2 toc-link" data-title="提币（新增）">提币（新增）</a>
                   </li>
                   <li>
                     <a href="#534d29990b" class="toc-h2 toc-link" data-title="取消提币">取消提币</a>
@@ -690,6 +693,9 @@
                   </li>
                   <li>
                     <a href="#494acec9de" class="toc-h2 toc-link" data-title="查询用户内部转账历史接口">查询用户内部转账历史接口</a>
+                  </li>
+                  <li>
+                    <a href="#844d12c0d7" class="toc-h2 toc-link" data-title="提币（旧接口，即将下线）">提币（旧接口，即将下线）</a>
                   </li>
               </ul>
           </li>
@@ -849,7 +855,12 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2024-05-15'><strong>2024-05-15</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2024-06-09'><strong>2024-06-09</strong></h2>
+<ul>
+<li>查询币种信息接口新增币种网络新参数，旧币种网络参数即将下线</li>
+<li>新增提币新接口，旧提币接口即将下线</li>
+</ul>
+<h2 id='2024-05-15'><strong>2024-05-15</strong></h2>
 <ul>
 <li>新增获取手续费率接口</li>
 </ul>
@@ -5477,7 +5488,8 @@ body
           </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawTips"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Both a MEMO and an Address are required."</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Both a MEMO and an Address are required."</span><span class="w">
+          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Both a MEMO and an Address are required."</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netWork"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EOS"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
           </span><span class="nl">"coin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
@@ -5494,7 +5506,8 @@ body
           </span><span class="nl">"sameAddress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
           </span><span class="nl">"contract"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c"</span><span class="p">,</span><span class="w">
           </span><span class="nl">"withdrawTips"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="nl">"depositTips"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"netWork"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -5547,10 +5560,6 @@ body
 <td style="text-align: left">是否可充值</td>
 </tr>
 <tr>
-<td style="text-align: left">network</td>
-<td style="text-align: left">币种所支持的网络</td>
-</tr>
-<tr>
 <td style="text-align: left">withdrawEnable</td>
 <td style="text-align: left">是否可提币</td>
 </tr>
@@ -5570,26 +5579,32 @@ body
 <td style="text-align: left">contract</td>
 <td style="text-align: left">币种智能合约地址</td>
 </tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">币种所支持的网络（旧参数，即将下线，建议提币使用提币新接口）</td>
+</tr>
+<tr>
+<td style="text-align: left">netWork</td>
+<td style="text-align: left">币种所支持的网络（新参数，适用于提币新接口）</td>
+</tr>
 </tbody></table>
-<h2 id='096be69702'>提币</h2>
+<h2 id='1435ca7432'>提币（新增）</h2>
 <blockquote>
 <p>请求示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw/apply?coin=EOS&amp;address=zzqqqqqqqqqq&amp;amount=10&amp;network=EOS&amp;memo=MX10086&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw?coin=EOS&amp;address=zzqqqqqqqqqq&amp;amount=10&amp;network=EOS&amp;memo=MX10086&amp;timestamp={{timestamp}}&amp;signature={{signature}}
 </code></pre></div>
 <blockquote>
 <p>返回示例</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"7213fea8e94b4a5593d507237e5a555b"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><strong>HTTP请求</strong></p>
 
 <ul>
-<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw</code><br></li>
 </ul>
 
 <p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W</p>
@@ -5619,10 +5634,16 @@ body
 <td style="text-align: left">自定义提币ID</td>
 </tr>
 <tr>
-<td style="text-align: left">network</td>
+<td style="text-align: left">netWork</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">否</td>
 <td style="text-align: left">提币网络</td>
+</tr>
+<tr>
+<td style="text-align: left">contractAddress</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">币种智能合约地址</td>
 </tr>
 <tr>
 <td style="text-align: left">address</td>
@@ -5662,7 +5683,7 @@ body
 </tr>
 </tbody></table>
 
-<p>可以在接口 <code>Get /api/v3/capital/config/getall</code>的返回值中某币种的<code>networkList</code>获取<code>network</code>网络字段。</p>
+<p>可以在接口 <code>Get /api/v3/capital/config/getall</code>的返回值中某币种的<code>networkList</code>获取<code>netWork</code>网络字段。</p>
 
 <p><strong>返回参数</strong></p>
 
@@ -7293,6 +7314,112 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 <tr>
 <td style="text-align: left">timestamp</td>
 <td style="text-align: left">划转时间</td>
+</tr>
+</tbody></table>
+<h2 id='844d12c0d7'>提币（旧接口，即将下线）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/withdraw/apply?coin=EOS&amp;address=zzqqqqqqqqqq&amp;amount=10&amp;network=EOS&amp;memo=MX10086&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="s2">"7213fea8e94b4a5593d507237e5a555b"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/withdraw/apply</code><br></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">coin</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">币种</td>
+</tr>
+<tr>
+<td style="text-align: left">withdrawOrderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">自定义提币ID</td>
+</tr>
+<tr>
+<td style="text-align: left">network</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">提币网络</td>
+</tr>
+<tr>
+<td style="text-align: left">address</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">提币地址</td>
+</tr>
+<tr>
+<td style="text-align: left">memo</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">如地址中需求memo，则此处必传</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">remark</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">备注</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p>可以在接口 <code>Get /api/v3/capital/config/getall</code>的返回值中某币种的<code>networkList</code>获取<code>network</code>网络字段。</p>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">id</td>
+<td style="text-align: left">提币ID</td>
 </tr>
 </tbody></table>
 <h1 id='etf'>ETF接口</h1><h2 id='etf-2'>获取ETF基础信息</h2>
