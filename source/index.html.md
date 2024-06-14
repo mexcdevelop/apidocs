@@ -75,6 +75,10 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-06-09**
+- 查询币种信息接口新增币种网络新参数，旧币种网络参数即将下线
+- 新增提币新接口，旧提币接口即将下线
+
 ## **2024-05-15**
 - 新增获取手续费率接口
 
@@ -2617,7 +2621,8 @@ Get /api/v3/capital/config/getall
           "sameAddress": false,
           "contract": "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxbm9",
           "withdrawTips": "Both a MEMO and an Address are required.",
-          "depositTips": "Both a MEMO and an Address are required."
+          "depositTips": "Both a MEMO and an Address are required.",
+          "netWork": "EOS"
       },
       {
           "coin": "BTC",
@@ -2634,7 +2639,8 @@ Get /api/v3/capital/config/getall
           "sameAddress": false,
           "contract": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
           "withdrawTips": null,
-          "depositTips": null
+          "depositTips": null,
+          "netWork": "BTC"
       }
     ]
   },
@@ -2661,32 +2667,32 @@ Get /api/v3/capital/config/getall
 | 参数名 | 说明  | 
 | :------------ | :------------ |
 |depositEnable|是否可充值|
-|network|币种所支持的网络| 
 |withdrawEnable|是否可提币|
 |withdrawFee|提币手续费| 
 |withdrawMax|最大提币限额|
 |withdrawMin|最小提币限额|
 |contract|币种智能合约地址|
+|network|币种所支持的网络（旧参数，即将下线，建议提币使用提币新接口）| 
+|netWork|币种所支持的网络（新参数，适用于提币新接口）| 
 
-## 提币
+
+## 提币（新增）
 
 > 请求示例
 
 ```
-post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
+post /api/v3/capital/withdraw?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
 ```
 > 返回示例
 
 ```json
-[
-  {
+{
     "id":"7213fea8e94b4a5593d507237e5a555b"
-  }
-]
+}
 ```
 **HTTP请求**
 
-- **POST** ```/api/v3/capital/withdraw/apply```  
+- **POST** ```/api/v3/capital/withdraw```  
 
 **接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
 
@@ -2698,7 +2704,8 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 | :------ | :-------- |:-----|:-----------------|
 |coin|string| 是    | 币种               |
 |withdrawOrderId|string| 否    | 自定义提币ID   |
-|network|string| 否    | 提币网络             |
+|netWork|string| 否    | 提币网络             |
+|contractAddress|string| 否    | 币种智能合约地址             |
 |address|string| 是    | 提币地址             |
 |memo|string| 否    | 如地址中需求memo，则此处必传 |
 |amount|string| 是    | 数量               |
@@ -2707,7 +2714,7 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 |signature|string| 是    | 签名               |
  
 
-可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段。
+可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`netWork`网络字段。
 
 
 **返回参数**
@@ -3543,6 +3550,54 @@ get /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signa
 |toAccountType	|划入业务账户|
 |status	|划转状态|
 |timestamp	|划转时间|
+
+## 提币（旧接口，即将下线）
+
+> 请求示例
+
+```
+post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&network=EOS&memo=MX10086&timestamp={{timestamp}}&signature={{signature}}
+```
+> 返回示例
+
+```json
+[
+  {
+    "id":"7213fea8e94b4a5593d507237e5a555b"
+  }
+]
+```
+**HTTP请求**
+
+- **POST** ```/api/v3/capital/withdraw/apply```  
+
+**接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名 | 数据类型| 是否必须 | 说明               | 
+| :------ | :-------- |:-----|:-----------------|
+|coin|string| 是    | 币种               |
+|withdrawOrderId|string| 否    | 自定义提币ID   |
+|network|string| 否    | 提币网络             |
+|address|string| 是    | 提币地址             |
+|memo|string| 否    | 如地址中需求memo，则此处必传 |
+|amount|string| 是    | 数量               |
+|remark|string| 否    | 备注               |
+|timestamp|string| 是    | 时间戳              |
+|signature|string| 是    | 签名               |
+ 
+
+可以在接口 `Get /api/v3/capital/config/getall`的返回值中某币种的`networkList`获取`network`网络字段。
+
+
+**返回参数**
+
+| 参数名 | 说明  |
+| :------------ | :-------- | 
+|id|提币ID|
 
 
 # ETF接口
