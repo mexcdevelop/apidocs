@@ -2431,7 +2431,7 @@ GET /api/v3/myTrades?symbol=MXUSDT&timestamp={{timestamp}}&signature={{signature
 | orderId    | string   | 否       | 必须和symbol一起使用 |
 | startTime  | long     | 否       |                      |
 | endTime    | long     | 否       |                      |
-| limit      | int      | 否       | 默认 500; 最大 1000; |
+| limit      | int      | 否       | 默认 100; 最大 100; |
 | recvWindow | long     | 否       |                      |
 | timestamp  | long     | 是       |                      |
 
