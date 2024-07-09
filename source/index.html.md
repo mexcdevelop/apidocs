@@ -2363,7 +2363,7 @@ Parameters:
 | orderId    | string | NO        | order Id               |
 | startTime  | long   | NO        |                        |
 | endTime    | long   | NO        |                        |
-| limit      | int    | NO        | Default 500; max 1000; |
+| limit      | int    | NO        | Default 100; max 100; |
 | recvWindow | long   | NO        |                        |
 | timestamp  | long   | YES       |                        |
 
