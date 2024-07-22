@@ -273,12 +273,10 @@ get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&signature={{signatu
     "code": "0",
     "message": "",
     "data": [{
-        "isFreeze": true,
         "subAccount": "mexc1",
         "note": "1",
         "timestamp": "1597026383085"
     }, {
-        "isFreeze": true,
         "subAccount": "mexc2",
         "note": "2",
         "timestamp": "1597026383787"
@@ -294,24 +292,55 @@ get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&signature={{signatu
 
 | 参数名 | 数据类型| 是否必须 | 说明 | 
 | ------ | -------- | -------- | ---------- |
-|isFreeze|string|no|子账户状态，true:正常使用 false:冻结|
 |subAccount|string|no|子账户名称|
 |page|string|no|分页参数：页码。默认: 1|
 |limit|string|no|分页参数：页容量。默认: 10, 最大: 200|
 |timestamp|string|yes|时间|
 |signature|string|yes|签名|
 
-<aside class="notice">【subaccount和isFreeze ，二选一传，都不传时返回所有subaccount的list.】</aside>
-<aside class="notice">【subaccount和isFreeze都传，且不匹配，返回空.】</aside>
-
 **返回参数：**
 
 | 参数名 | 类型 | 说明 |
 | ------ | ---- | ---- |
 |subAccount	|string| 子账户名称|
-|isFreeze	|boolean| 是否冻结|
 |timestamp	|number| 创建时间|
 |note	|string| 备注|
+
+##  查看子账户状态
+
+> 请求示例
+
+```
+
+get  /api/v3/broker/sub-account/status?subAccount=subAccountName&timestamp={{timestamp}}&signature={{signature}}
+
+```
+
+> 返回示例
+
+```json
+{
+    "status": "1",
+}
+```
+
+**HTTP请求：**
+
+- **GET** ```/api/v3/broker/sub-account/status```
+
+**请求参数：**
+
+| 参数名 | 数据类型| 是否必须 | 说明 | 
+| ------ | -------- | -------- | ---------- |
+|subAccount|string|yes|子账户名称|
+|timestamp|string|yes|时间|
+|signature|string|yes|签名|
+
+**返回参数：**
+
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+|status	|string| 1:正常；2:冻结 |
 
 ##  创建子账户的APIKey
 
