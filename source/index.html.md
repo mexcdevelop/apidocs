@@ -1836,7 +1836,7 @@ Additional mandatory parameters based on `type`:
 
 Other info:
 
-MARKET: When type is market, if it is a buy order, `quoteOrderQty` is a required. If it is a sell order, `quantity` is a required.
+MARKET: When type is market,  `quoteOrderQty` or `quantity` required to choose anyone.
 
 - `MARKET` orders using the `quantity` field specifies the amount of the `base asset` the user wants to sell at the market price
   - For example, sending a `MARKET` order on BTCUSDT will specify how much BTC the user is selling.
@@ -4883,7 +4883,7 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 
 If startTime and endTime are not sent, the data from T-7 to T is returned. If type is not sent, the data of all types is returned,maximum 30 days data can be queried at one time.
 
-<!-- ## Get Affiliate Campaign Data (affiliate only)
+## Get Affiliate Campaign Data (affiliate only)
 
 > request
 
@@ -4968,7 +4968,7 @@ get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&signature={{signat
 | commission|string|commission|
 
 
-If startTime and endTime are not sent, the data from T-7 to T is returned. -->
+If startTime and endTime are not sent, the data from T-7 to T is returned.
 
 ## Get Affiliate Referral Data（affiliate only）
 
