@@ -266,12 +266,10 @@ get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&signature={{signatu
     "code": "0",
     "message": "",
     "data": [{
-        "isFreeze": true,
         "subAccount": "mexc1",
         "note": "1",
         "timestamp": "1597026383085"
     }, {
-        "isFreeze": true,
         "subAccount": "mexc2",
         "note": "2",
         "timestamp": "1597026383787"
@@ -287,24 +285,57 @@ get  /api/v3/broker/sub-account/list?timestamp={{timestamp}}&signature={{signatu
 
 | Name       | Type   | Mandatory | Description                                 |
 | ---------- | ------ | --------- | ------------------------------------------- |
-| isFreeze   | string | no        | subAccount stauts,true:normal  false:freeze |
 | subAccount | string | no        | subAccount name                             |
 | page       | string | no        | Default value: 1                            |
 | limit      | string | no        | Default value: 10, Max value: 200           |
 | timestamp  | string | yes       | timestamp                                   |
 | signature  | string | yes       | signature                                   |
 
-<aside class="notice">[Choose one of `subaccount` and `isFreeze` to send,Return the list of all subAccounts if you do not send either subaccount or isFreeze.]</aside>
-<aside class="notice">[send both`subaccount` and `isFreeze`,if don't match,will return null]</aside>
 
 **Response Parameter:**
 
 | Name       | Type    | Description     |
 | ---------- | ------- | --------------- |
 | subAccount | string  | subAccount name |
-| isFreeze   | boolean | isFreeze        |
 | timestamp  | number  | create time     |
 | note       | string  | note            |
+
+##  Query Sub-account Status
+
+> request
+
+```
+
+get  /api/v3/broker/sub-account/status?subAccount=subAccountName&timestamp={{timestamp}}&signature={{signature}}
+
+```
+
+> response
+
+```json
+{
+    "status": "1",
+}
+```
+
+**Http Request:**
+
+- **GET** ```/api/v3/broker/sub-account/status```
+
+**Request Parameter:**
+
+| Name | Type| Mandatory | Description | 
+| ------ | -------- | -------- | ---------- |
+|subAccount|string|yes|subAccount name|
+|timestamp|string|yes|timestamp|
+|signature|string|yes|signature|
+
+**Response Parameter:**
+
+| Name | Type | Description |
+| ------ | ---- | ---- |
+|status	|string| 1:normal；2:freeze |
+
 
 ## Create an APIKey for a Sub-account
 
