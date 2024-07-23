@@ -1837,8 +1837,7 @@ POST /api/v3/order?symbol=MXUSDT&side=BUY&type=LIMIT&quantity=50&price=0.1&times
 
 其他说明：
 
-MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数。
-若为卖单，quantity为必填参数，
+MARKET：当type是market时，不论是买单或者卖单，quoteOrderQty和quantity参数任选其一。
 
 - 比如在`BTCUSDT`上下一个市价买单, 明确的是买入时想要花费的计价资产数量。此时的报单数量将会以市场流动性和`quoteOrderQty`被计算出来（实际成交数量以最终订单详情为准）。
   以`BTCUSDT`为例，`quoteOrderQty=100`:下买单的时候, 订单会尽可能的买进价值100USDT的BTC.
@@ -4946,7 +4945,7 @@ get /api/v3/rebate/affiliate/commission/detail?timestamp={{timestamp}}&signature
 
 若startTime和endTime均未发送,返回T-7~T的日期(近8天內日期)的数据,type不填则返回全部种类数据。
 
-<!-- ## 获取代理活动页面数据 （代理账户）
+## 获取代理活动页面数据 （代理账户）
 
 > 请求示例
 
@@ -5031,7 +5030,7 @@ get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&signature={{signat
 | commission|string|佣金|
 
 
-startTime、endTime若不填写，则预设查询T-7~T日內数据。 -->
+startTime、endTime若不填写，则预设查询T-7~T日內数据。
 
 ## 查询直客页面数据（代理账户）
 
