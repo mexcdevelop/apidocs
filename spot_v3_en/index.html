@@ -775,6 +775,9 @@
                     <a href="#get-affiliate-commission-detail-record-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Commission Detail Record (affiliate only)">Get Affiliate Commission Detail Record (affiliate only)</a>
                   </li>
                   <li>
+                    <a href="#get-affiliate-campaign-data-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Campaign Data (affiliate only)">Get Affiliate Campaign Data (affiliate only)</a>
+                  </li>
+                  <li>
                     <a href="#get-affiliate-referral-data-affiliate-only" class="toc-h2 toc-link" data-title="Get Affiliate Referral Data（affiliate only）">Get Affiliate Referral Data（affiliate only）</a>
                   </li>
                   <li>
@@ -3887,7 +3890,7 @@ post /api/v3/sub-account/margin
 
 <p>Other info:</p>
 
-<p>MARKET: When type is market, if it is a buy order, <code>quoteOrderQty</code> is a required. If it is a sell order, <code>quantity</code> is a required.</p>
+<p>MARKET: When type is market,  <code>quoteOrderQty</code> or <code>quantity</code> required to choose anyone.</p>
 
 <ul>
 <li><code>MARKET</code> orders using the <code>quantity</code> field specifies the amount of the <code>base asset</code> the user wants to sell at the market price
@@ -9587,93 +9590,175 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 </tbody></table>
 
 <p>If startTime and endTime are not sent, the data from T-7 to T is returned. If type is not sent, the data of all types is returned,maximum 30 days data can be queried at one time.</p>
+<h2 id='get-affiliate-campaign-data-affiliate-only'>Get Affiliate Campaign Data (affiliate only)</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"campaign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11kd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc-11Kd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"clickTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1695125287000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"signup"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"traded"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposited"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"depositAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tradingAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"campaign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New10"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc-newcode"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"clickTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1693152531000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"signup"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"traded"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposited"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"depositAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tradingAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<!-- ## Get Affiliate Campaign Data (affiliate only)
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
 
-> request
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/campaign</code><br></li>
+</ul>
 
-```
-get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&signature={{signature}}
-```
-> response
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
 
-```json
-{
-    "success": true,
-    "code": 0,
-    "message": null,
-    "data": {
-        "pageSize": 10,
-        "totalCount": 15,
-        "totalPage": 2,
-        "currentPage": 1,
-        "resultList": [
-            {
-                "campaign": "11kd",
-                "inviteCode": "mexc-11Kd",
-                "clickTime": 0,
-                "createTime": 1695125287000,
-                "signup": 0,
-                "traded": 0,
-                "deposited": 0,
-                "depositAmount": "0",
-                "tradingAmount": "0",
-                "commission": "0"
-            },
-            {
-                "campaign": "New10",
-                "inviteCode": "mexc-newcode",
-                "clickTime": 7,
-                "createTime": 1693152531000,
-                "signup": 0,
-                "traded": 0,
-                "deposited": 0,
-                "depositAmount": "0",
-                "tradingAmount": "0",
-                "commission": "0"
-            }
-        ]
-    }
-}
+<p><strong>Weight(IP):</strong> 1</p>
 
-​
-```
-**HTTP Request**
+<p><strong>Request</strong></p>
 
-- **GET** ```/api/v3/rebate/affiliate/campaign```  
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">startTime</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">endTime</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">page</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">No</td>
+<td style="text-align: left">pageSize,default: 10</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
 
-**Permission:** SPOT_ACCOUNT_READ
+<p><strong>Response</strong></p>
 
-**Weight(IP):** 1
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">campaign</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">campaign name</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">campaign inviteCode</td>
+</tr>
+<tr>
+<td style="text-align: left">createTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">campaign createTime</td>
+</tr>
+<tr>
+<td style="text-align: left">clickTime</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">inviteCode clickTime</td>
+</tr>
+<tr>
+<td style="text-align: left">signup</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">signup number</td>
+</tr>
+<tr>
+<td style="text-align: left">deposited</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">deposited number</td>
+</tr>
+<tr>
+<td style="text-align: left">depositAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">depositAmount(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">tradingAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">tradingAmount(usdt)</td>
+</tr>
+<tr>
+<td style="text-align: left">traded</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">traded number</td>
+</tr>
+<tr>
+<td style="text-align: left">commission</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">commission</td>
+</tr>
+</tbody></table>
 
-**Request**
-
-| Name | Type| Mandatory  | Description | 
-| :------ | :-------- | :-------- | :---------- |
-| startTime  | long    | No       | startTime |
-| endTime    | long    | No       | endTime  |
-| page       | int     | No       | page |
-| pageSize   | int     | No       | pageSize,default: 10  |
-| timestamp  | long    | Yes       | timestamp   |
-| signature  | string  | Yes       |  signature |
-
-**Response**
-
-| Name  |Type | Description|
-| :------------ | :-------- | :--------|
-| campaign|string|campaign name|
-| inviteCode|string|campaign inviteCode|
-| createTime|long|campaign createTime|
-| clickTime|int|inviteCode clickTime|
-| signup|int|signup number|
-| deposited|int|deposited number|
-| depositAmount|string|depositAmount(usdt)|
-| tradingAmount|string|tradingAmount(usdt)|
-| traded|int|traded number|
-| commission|string|commission|
-
-
-If startTime and endTime are not sent, the data from T-7 to T is returned. -->
+<p>If startTime and endTime are not sent, the data from T-7 to T is returned.</p>
 <h2 id='get-affiliate-referral-data-affiliate-only'>Get Affiliate Referral Data（affiliate only）</h2>
 <blockquote>
 <p>request</p>
