@@ -781,6 +781,9 @@
                     <a href="#953e360b31" class="toc-h2 toc-link" data-title="获取代理返佣明细 （代理账户）">获取代理返佣明细 （代理账户）</a>
                   </li>
                   <li>
+                    <a href="#f722ca45cc" class="toc-h2 toc-link" data-title="获取代理活动页面数据 （代理账户）">获取代理活动页面数据 （代理账户）</a>
+                  </li>
+                  <li>
                     <a href="#d981cb49a3" class="toc-h2 toc-link" data-title="查询直客页面数据（代理账户）">查询直客页面数据（代理账户）</a>
                   </li>
                   <li>
@@ -3938,8 +3941,7 @@ body
 
 <p>其他说明：</p>
 
-<p>MARKET：当type是market时，若为买单，则quoteOrderQty，为必填参数。
-若为卖单，quantity为必填参数，</p>
+<p>MARKET：当type是market时，不论是买单或者卖单，quoteOrderQty和quantity参数任选其一。</p>
 
 <ul>
 <li><p>比如在<code>BTCUSDT</code>上下一个市价买单, 明确的是买入时想要花费的计价资产数量。此时的报单数量将会以市场流动性和<code>quoteOrderQty</code>被计算出来（实际成交数量以最终订单详情为准）。
@@ -9826,93 +9828,175 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 </tbody></table>
 
 <p>若startTime和endTime均未发送,返回T-7~T的日期(近8天內日期)的数据,type不填则返回全部种类数据。</p>
+<h2 id='f722ca45cc'>获取代理活动页面数据 （代理账户）</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"resultList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"campaign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11kd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc-11Kd"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"clickTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1695125287000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"signup"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"traded"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposited"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"depositAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tradingAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"campaign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New10"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"inviteCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mexc-newcode"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"clickTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1693152531000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"signup"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"traded"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"deposited"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"depositAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tradingAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<!-- ## 获取代理活动页面数据 （代理账户）
+</span><span class="err">​</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
 
-> 请求示例
+<ul>
+<li><strong>GET</strong> <code>/api/v3/rebate/affiliate/campaign</code><br></li>
+</ul>
 
-```
-get /api/v3/rebate/affiliate/campaign?timestamp={{timestamp}}&signature={{signature}}
-```
-> 返回示例
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_R</p>
 
-```json
-{
-    "success": true,
-    "code": 0,
-    "message": null,
-    "data": {
-        "pageSize": 10,
-        "totalCount": 15,
-        "totalPage": 2,
-        "currentPage": 1,
-        "resultList": [
-            {
-                "campaign": "11kd",
-                "inviteCode": "mexc-11Kd",
-                "clickTime": 0,
-                "createTime": 1695125287000,
-                "signup": 0,
-                "traded": 0,
-                "deposited": 0,
-                "depositAmount": "0",
-                "tradingAmount": "0",
-                "commission": "0"
-            },
-            {
-                "campaign": "New10",
-                "inviteCode": "mexc-newcode",
-                "clickTime": 7,
-                "createTime": 1693152531000,
-                "signup": 0,
-                "traded": 0,
-                "deposited": 0,
-                "depositAmount": "0",
-                "tradingAmount": "0",
-                "commission": "0"
-            }
-        ]
-    }
-}
+<p><strong>权重(IP):</strong> 1</p>
 
-​
-```
-**HTTP请求**
+<p><strong>请求参数</strong></p>
 
-- **GET** ```/api/v3/rebate/affiliate/campaign```  
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">startTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">开始时间（佣金、入金数据时间）</td>
+</tr>
+<tr>
+<td style="text-align: left">endTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">截止时间（佣金、入金数据时间）</td>
+</tr>
+<tr>
+<td style="text-align: left">page</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页数</td>
+</tr>
+<tr>
+<td style="text-align: left">pageSize</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">页面内容,不传默认10</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
 
-**接口权限要求:** 账户读 / SPOT_ACCOUNT_R
+<p><strong>返回参数</strong></p>
 
-**权重(IP):** 1
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">campaign</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">活动名称</td>
+</tr>
+<tr>
+<td style="text-align: left">inviteCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">活动邀请码</td>
+</tr>
+<tr>
+<td style="text-align: left">createTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">活动创建时间</td>
+</tr>
+<tr>
+<td style="text-align: left">clickTime</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">邀请码点击次数</td>
+</tr>
+<tr>
+<td style="text-align: left">signup</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">注册人数</td>
+</tr>
+<tr>
+<td style="text-align: left">deposited</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">已入金人数</td>
+</tr>
+<tr>
+<td style="text-align: left">depositAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">入金量，以usdt计算</td>
+</tr>
+<tr>
+<td style="text-align: left">tradingAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易量，以usdt计算</td>
+</tr>
+<tr>
+<td style="text-align: left">traded</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">交易人数</td>
+</tr>
+<tr>
+<td style="text-align: left">commission</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">佣金</td>
+</tr>
+</tbody></table>
 
-**请求参数**
-
-| 参数名 | 数据类型| 是否必须  | 说明 | 
-| :------ | :-------- | :-------- | :---------- |
-| startTime  | long    | 否       | 开始时间（佣金、入金数据时间） |
-| endTime    | long    | 否       | 截止时间（佣金、入金数据时间） |
-| page       | int     | 否       | 页数  |
-| pageSize   | int     | 否       | 页面内容,不传默认10  |
-| timestamp  | long    | 是       | 时间戳    |
-| signature  | string  | 是       |  签名  |
-
-**返回参数**
-
-| 参数名  |类型 | 说明|
-| :------------ | :-------- | :--------|
-| campaign|string|活动名称|
-| inviteCode|string|活动邀请码|
-| createTime|long|活动创建时间|
-| clickTime|int|邀请码点击次数|
-| signup|int|注册人数|
-| deposited|int|已入金人数|
-| depositAmount|string|入金量，以usdt计算|
-| tradingAmount|string|交易量，以usdt计算|
-| traded|int|交易人数|
-| commission|string|佣金|
-
-
-startTime、endTime若不填写，则预设查询T-7~T日內数据。 -->
+<p>startTime、endTime若不填写，则预设查询T-7~T日內数据。</p>
 <h2 id='d981cb49a3'>查询直客页面数据（代理账户）</h2>
 <blockquote>
 <p>请求示例</p>
