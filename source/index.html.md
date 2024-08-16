@@ -312,7 +312,8 @@ m -> minute; h -> hour; d -> day; M -> month
       "taker_fee_rate": "0.002",
       "limited": false,
       "etf_mark": 0,
-      "symbol_partition": "MAIN"
+      "symbol_partition": "MAIN",
+      "tradeSideType":"1"
     }
   ]
 }
@@ -327,7 +328,7 @@ Response
 | Feild | Data type | Description |
 |----------|------------|------------|
 |symbol|string|symbol name|
-|state|string|symbol status, whether available for trading|
+|state|string|symbol status:1 - online, 2 - Pause, 3 - offline|
 |price_scale|integer|price precision|
 |quantity_scale|integer|quantity precision|
 |min_amount|string|minimum amount|
@@ -337,6 +338,8 @@ Response
 |limited|string|API trading enables marking (Valid values: true, false)|
 |etf_mark|integer|Etf identification, 0 represents not ETF, and positive and negative integers represent ETF|
 |symbol-partition|string|Trading areas, such as the Main|
+|tradeSideType|string|tradeSide Type:1 - All, 2 - buy order only, 3 - Sell order only, 4 - Close|
+
 
 ## Current System Time
 
