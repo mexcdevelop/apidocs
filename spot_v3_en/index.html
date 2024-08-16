@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-08-16" class="toc-h2 toc-link" data-title="2024-08-16"><strong>2024-08-16</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-06-09" class="toc-h2 toc-link" data-title="2024-06-09"><strong>2024-06-09</strong></a>
                   </li>
                   <li>
@@ -850,7 +853,11 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2024-06-09'><strong>2024-06-09</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2024-08-16'><strong>2024-08-16</strong></h2>
+<ul>
+<li>Exchange Information endpoint update params:status and tradeSideType.</li>
+</ul>
+<h2 id='2024-06-09'><strong>2024-06-09</strong></h2>
 <ul>
 <li>Query The Currency Information endpoint add params:netWork,network will offline soon.</li>
 <li>Add new withdraw endpoint,previous withdraw endpoint will offline soon.</li>
@@ -1367,8 +1374,8 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <ul>
 <li>According to the two modes of IP and UID (account) limit, each are independent.</li>
 <li>Endpoints are marked according to IP or UID limit and their corresponding weight value.</li>
-<li>Each endpoint with IP limits has an independent 20000 per minute limit.</li>
-<li>Each endpoint with UID limits has an independent 240000 per minute limit.</li>
+<li>Each endpoint with IP limits has an independent 500 every 10 second limit.</li>
+<li>Each endpoint with UID limits has an independent 500 every 10 second limit.</li>
 </ul>
 <h3 id='limits-error'>Limits Error</h3>
 <ul>
@@ -1877,7 +1884,8 @@ The account is used as the basic unit of speed limit for the endpoints that need
     </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"maxQuoteAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000000"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="w">
+    </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tradeSideType"</span><span class="p">:</span><span class="s2">"1"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
@@ -1950,7 +1958,7 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left">String</td>
-<td style="text-align: left">status</td>
+<td style="text-align: left">status:1 - online, 2 - Pause, 3 - offline</td>
 </tr>
 <tr>
 <td style="text-align: left">baseAsset</td>
@@ -2046,6 +2054,11 @@ The account is used as the basic unit of speed limit for the endpoints that need
 <td style="text-align: left">maxQuoteAmountMarket</td>
 <td style="text-align: left">String</td>
 <td style="text-align: left">max quote Amount in market order</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeSideType</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">tradeSide Type:1 - All, 2 - buy order only, 3 - Sell order only, 4 - Close</td>
 </tr>
 </tbody></table>
 <h2 id='order-book'>Order Book</h2>
