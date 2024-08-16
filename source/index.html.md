@@ -304,7 +304,8 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
       "taker_fee_rate": "0.002",
       "limited": false,
       "etf_mark": 0,
-      "symbol_partition": "MAIN"
+      "symbol_partition": "MAIN",
+      "tradeSideType ":"1"
     }
   ]
 }
@@ -319,7 +320,7 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 | 字段名         | 数据类型 | 是否必须                         |
 | -------------- | -------- | -------------------------------- |
 | symbol         | string   | 交易对名称                       |
-| state          | string   | 交易对状态，当前是否可以进行交易 |
+| state          | string   | 交易对状态:1 - 开放， 2 - 暂停， 3 - 下线 |
 | price_scale    | integer  | 价格精度                         |
 | quantity_scale | integer  | 数量精度                         | 
 | min_amount       | string   | 最小交易金额                             |
@@ -329,6 +330,8 @@ m -> 分钟; h -> 小时; d -> 天; M -> 月
 | limited          | string   | API交易使能标记（有效值：true, false）   |
 | etf_mark         | integer  | Etf标识，0代表不是ETF，正负整数代表是ETF |
 | symbol-partition | string   | 交易区，如主板区                         |
+| tradeSideType    | string   | 交易对可交易方向:1 - 全部， 2 - 仅买单， 3 - 仅卖单，4 - 关闭 |
+
 
 
 
