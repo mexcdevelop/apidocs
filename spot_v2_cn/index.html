@@ -916,7 +916,8 @@ Secret key仅在申请时展示，请做好记录留存
       </span><span class="nl">"taker_fee_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"limited"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"etf_mark"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"symbol_partition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAIN"</span><span class="w">
+      </span><span class="nl">"symbol_partition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAIN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeSideType "</span><span class="p">:</span><span class="s2">"1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -944,7 +945,7 @@ Secret key仅在申请时展示，请做好记录留存
 <tr>
 <td>state</td>
 <td>string</td>
-<td>交易对状态，当前是否可以进行交易</td>
+<td>交易对状态:1 - 开放， 2 - 暂停， 3 - 下线</td>
 </tr>
 <tr>
 <td>price_scale</td>
@@ -990,6 +991,11 @@ Secret key仅在申请时展示，请做好记录留存
 <td>symbol-partition</td>
 <td>string</td>
 <td>交易区，如主板区</td>
+</tr>
+<tr>
+<td>tradeSideType</td>
+<td>string</td>
+<td>交易对可交易方向:1 - 全部， 2 - 仅买单， 3 - 仅卖单，4 - 关闭</td>
 </tr>
 </tbody></table>
 <h2 id='97e5358548'>当前系统时间</h2>
