@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-08-16" class="toc-h2 toc-link" data-title="2024-08-16"><strong>2024-08-16</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-06-09" class="toc-h2 toc-link" data-title="2024-06-09"><strong>2024-06-09</strong></a>
                   </li>
                   <li>
@@ -858,7 +861,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2024-06-09'><strong>2024-06-09</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2024-08-16'><strong>2024-08-16</strong></h2>
+<ul>
+<li>交易规范信息接口更新返回参数</li>
+</ul>
+<h2 id='2024-06-09'><strong>2024-06-09</strong></h2>
 <ul>
 <li>查询币种信息接口新增币种网络新参数，旧币种网络参数即将下线</li>
 <li>新增提币新接口，旧提币接口即将下线</li>
@@ -1354,7 +1361,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <h3 id='689795b646'>限频说明</h3>
 <ul>
 <li>每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。</li>
-<li><strong>按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。</strong></li>
+<li><strong>按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用500权重/10秒；按UID权重限频的接口，所有接口共用500权重/10秒。</strong></li>
 </ul>
 <h3 id='e6648e5f0c'>超频报错</h3>
 <ul>
@@ -1897,7 +1904,8 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
             </span><span class="nl">"filters"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
             </span><span class="nl">"maxQuoteAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5000000"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"makerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="w">
+            </span><span class="nl">"takerCommission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tradeSideType"</span><span class="p">:</span><span class="s2">"1"</span><span class="w">
         </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -1971,7 +1979,7 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <tr>
 <td style="text-align: left">status</td>
 <td style="text-align: left">String</td>
-<td style="text-align: left">状态</td>
+<td style="text-align: left">状态:1 - 开放， 2 - 暂停， 3 - 下线</td>
 </tr>
 <tr>
 <td style="text-align: left">baseAsset</td>
@@ -2067,6 +2075,11 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td style="text-align: left">maxQuoteAmountMarket</td>
 <td style="text-align: left">String</td>
 <td style="text-align: left">市价最大下单金额</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeSideType</td>
+<td style="text-align: left">String</td>
+<td style="text-align: left">交易对可交易方向:1 - 全部， 2 - 仅买单， 3 - 仅卖单，4 - 关闭</td>
 </tr>
 </tbody></table>
 <h2 id='38a975b802'>深度信息</h2>
