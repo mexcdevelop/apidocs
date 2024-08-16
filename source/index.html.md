@@ -70,6 +70,9 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-08-16**
+- Exchange Information endpoint update params:status and tradeSideType.
+
 ## **2024-06-09**
 - Query The Currency Information endpoint add params:netWork,network will offline soon.
 - Add new withdraw endpoint,previous withdraw endpoint will offline soon.
@@ -526,8 +529,8 @@ The account is used as the basic unit of speed limit for the endpoints that need
 
 - According to the two modes of IP and UID (account) limit, each are independent.
 - Endpoints are marked according to IP or UID limit and their corresponding weight value.
-- Each endpoint with IP limits has an independent 20000 per minute limit.
-- Each endpoint with UID limits has an independent 240000 per minute limit.
+- Each endpoint with IP limits has an independent 500 every 10 second limit.
+- Each endpoint with UID limits has an independent 500 every 10 second limit.
 
 ### Limits Error
 
@@ -754,7 +757,8 @@ NONE
     "filters": [],
     "maxQuoteAmount": "5000000",
     "makerCommission": "0.002",
-    "takerCommission": "0.002"
+    "takerCommission": "0.002",
+    "tradeSideType":"1"
 }
 
 ```
@@ -784,7 +788,7 @@ There are 3 possible options:
 | rateLimits | Array | rate Limits                     |
 | exchangeFilters | Array | exchange Filters                     |
 | symbol | String | symbol                      |
-| status | String | status                       |
+| status | String | status:1 - online, 2 - Pause, 3 - offline                       |
 | baseAsset | String | base Asset                      |
 | baseAssetPrecision | Int | base Asset Precision                   |
 | quoteAsset | String | quote Asset                      |
@@ -804,6 +808,8 @@ There are 3 possible options:
 | baseSizePrecision|string|  min order quantity                 |
 | quoteAmountPrecisionMarket |string| min order amount  in market order       |
 | maxQuoteAmountMarket | String | max quote Amount in market order       |
+| tradeSideType | String | tradeSide Type:1 - All, 2 - buy order only, 3 - Sell order only, 4 - Close                      |
+
 
 
 
