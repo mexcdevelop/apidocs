@@ -783,7 +783,8 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
             "filters": [],
             "maxQuoteAmount": "5000000",
             "makerCommission": "0.002",
-            "takerCommission": "0.002"
+            "takerCommission": "0.002",
+            "tradeSideType":"1"
         }
 }
 
