@@ -913,7 +913,8 @@ Secret key will ONLY be displayed in the page when API key is generated, please 
       </span><span class="nl">"taker_fee_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.002"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"limited"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nl">"etf_mark"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"symbol_partition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAIN"</span><span class="w">
+      </span><span class="nl">"symbol_partition"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAIN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tradeSideType"</span><span class="p">:</span><span class="s2">"1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -941,7 +942,7 @@ Secret key will ONLY be displayed in the page when API key is generated, please 
 <tr>
 <td>state</td>
 <td>string</td>
-<td>symbol status, whether available for trading</td>
+<td>symbol status:1 - online, 2 - Pause, 3 - offline</td>
 </tr>
 <tr>
 <td>price_scale</td>
@@ -987,6 +988,11 @@ Secret key will ONLY be displayed in the page when API key is generated, please 
 <td>symbol-partition</td>
 <td>string</td>
 <td>Trading areas, such as the Main</td>
+</tr>
+<tr>
+<td>tradeSideType</td>
+<td>string</td>
+<td>tradeSide Type:1 - All, 2 - buy order only, 3 - Sell order only, 4 - Close</td>
 </tr>
 </tbody></table>
 <h2 id='current-system-time'>Current System Time</h2>
