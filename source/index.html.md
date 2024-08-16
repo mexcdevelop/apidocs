@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-08-16**
+- 交易规范信息接口更新返回参数
+
 ## **2024-06-09**
 - 查询币种信息接口新增币种网络新参数，旧币种网络参数即将下线
 - 新增提币新接口，旧提币接口即将下线
@@ -515,7 +518,7 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 ### 限频说明
 
 - 每个接口会标明是按照IP或者按照UID统计, 以及相应请求一次的权重值。不同接口拥有不同的权重，越消耗资源的接口权重就会越大。
-- **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用每分钟20000限制，按照UID统计的单接口权重总额是每分钟240000。**
+- **按IP和按UID(account)两种模式分别统计, 两者互相独立。按IP权重限频的接口，所有接口共用500权重/10秒；按UID权重限频的接口，所有接口共用500权重/10秒。**
 
 ### 超频报错
 
@@ -780,7 +783,8 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
             "filters": [],
             "maxQuoteAmount": "5000000",
             "makerCommission": "0.002",
-            "takerCommission": "0.002"
+            "takerCommission": "0.002",
+            "tradeSideType":"1"
         }
 }
 
@@ -810,7 +814,7 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 | rateLimits | Array | 频率限制                     |
 | exchangeFilters | Array | 过滤器                      |
 | symbol | String | 交易对                      |
-| status | String | 状态                       |
+| status | String | 状态:1 - 开放， 2 - 暂停， 3 - 下线           |
 | baseAsset | String | 交易币                      |
 | baseAssetPrecision | Int | 交易币精度                    |
 | quoteAsset | String | 计价币                      |
@@ -830,6 +834,7 @@ GET /api/v3/exchangeInfo?symbol=BTCUSDT
 | baseSizePrecision|string| 最小下单数量                   |
 | quoteAmountPrecisionMarket |string| 市价最小下单金额                   |
 | maxQuoteAmountMarket | String | 市价最大下单金额                   |
+| tradeSideType | String | 交易对可交易方向:1 - 全部， 2 - 仅买单， 3 - 仅卖单，4 - 关闭     |
 
 
 
