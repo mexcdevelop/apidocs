@@ -695,6 +695,9 @@
                     <a href="#9519463098" class="toc-h2 toc-link" data-title="查询小额资产兑换历史">查询小额资产兑换历史</a>
                   </li>
                   <li>
+                    <a href="#1f11f9bc12" class="toc-h2 toc-link" data-title="用户站内转账接口">用户站内转账接口</a>
+                  </li>
+                  <li>
                     <a href="#494acec9de" class="toc-h2 toc-link" data-title="查询用户内部转账历史接口">查询用户内部转账历史接口</a>
                   </li>
                   <li>
@@ -7136,48 +7139,97 @@ body
 <td style="text-align: left">总页数</td>
 </tr>
 </tbody></table>
+<h2 id='1f11f9bc12'>用户站内转账接口</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>post /api/v3/capital/transfer/internal?&amp;timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"tranId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c45d800a47ba4cbc876a5cd29388319"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 
-<!-- ## 用户站内转账接口
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
 
-> 请求示例
+<ul>
+<li><strong>POST</strong> <code>/api/v3/capital/transfer/internal</code><br></li>
+</ul>
 
-```
-post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{signature}}
-```
-> 返回示例
+<p><strong>接口权限要求:</strong> 钱包提现相关写 / SPOT_WITHDRAW_W</p>
 
-```json
-  {
-    "tranId": "c45d800a47ba4cbc876a5cd29388319"
-  }
+<p><strong>权重(IP):</strong> 1</p>
 
-```
-**HTTP请求**
+<p><strong>请求参数</strong></p>
 
-- **POST** ```/api/v3/capital/transfer/internal```  
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">toAccountType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">收款账户类型，支持填入手机号/邮箱或者UID</td>
+</tr>
+<tr>
+<td style="text-align: left">toAccount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">收款账户地址，支持填入手机号/邮箱或者UID</td>
+</tr>
+<tr>
+<td style="text-align: left">areaCode</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">否</td>
+<td style="text-align: left">如果toAccount为手机号，该字段为该手机号的必填区号</td>
+</tr>
+<tr>
+<td style="text-align: left">asset</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">资产</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
 
-**接口权限要求:** 钱包提现相关写 / SPOT_WITHDRAW_W
+<p><strong>返回参数</strong></p>
 
-**权重(IP):** 1
-
-**请求参数**
-
-| 参数名 | 数据类型| 是否必须 | 说明               | 
-| :------ | :-------- |:-----|:-----------------|
-|toAccountType|string| 是    | 收款账户类型，支持填入手机号/邮箱或者UID  |
-|toAccount|string| 是    | 收款账户地址，支持填入手机号/邮箱或者UID   |
-|areaCode|string| 否    | 如果toAccount为手机号，该字段为该手机号的必填区号            |
-|asset|string| 是    | 资产            |
-|amount|string| 是    | 数量           |
-|timestamp|string| 是    | 时间戳              |
-|signature|string| 是    | 签名               |
-
-**返回参数**
-
-| 参数名 | 说明  |
-| :------------ | :-------- | 
-|tranId|划转ID|
- -->
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">tranId</td>
+<td style="text-align: left">划转ID</td>
+</tr>
+</tbody></table>
 <h2 id='494acec9de'>查询用户内部转账历史接口</h2>
 <blockquote>
 <p>请求示例</p>
