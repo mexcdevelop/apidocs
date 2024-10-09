@@ -3437,7 +3437,7 @@ get {{api_url}}/api/v3/capital/convert?timestamp={{timestamp}}&signature={{signa
 |totalPage|int|总页数|
 
 
-<!-- ## 用户站内转账接口
+## 用户站内转账接口
 
 > 请求示例
 
@@ -3477,7 +3477,7 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 | 参数名 | 说明  |
 | :------------ | :-------- | 
 |tranId|划转ID|
- -->
+
 
 ## 查询用户内部转账历史接口
 
