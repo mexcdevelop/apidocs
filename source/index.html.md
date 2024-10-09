@@ -3380,7 +3380,7 @@ Response:
 |totalRecords|int|totalRecords|
 |totalPage|int|totalPage|
 
-<!-- ## Internal Transfer
+## Internal Transfer
 
 > Request
 
@@ -3419,7 +3419,7 @@ post /api/v3/capital/transfer/internal?&timestamp={{timestamp}}&signature={{sign
 | Name | Description  |
 | :------------ | :-------- | 
 |tranId|tranId|
- -->
+
 
 ## Query Internal Transfer history
 
