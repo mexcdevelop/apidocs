@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-10-17" class="toc-h2 toc-link" data-title="2024-10-17"><strong>2024-10-17</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-08-16" class="toc-h2 toc-link" data-title="2024-08-16"><strong>2024-08-16</strong></a>
                   </li>
                   <li>
@@ -606,6 +609,9 @@
             <a href="#c15d2e6b39" class="toc-h1 toc-link" data-title="现货账户和交易接口">现货账户和交易接口</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#kyc" class="toc-h2 toc-link" data-title="查询账户KYC状态">查询账户KYC状态</a>
+                  </li>
+                  <li>
                     <a href="#api-3" class="toc-h2 toc-link" data-title="用户API交易对">用户API交易对</a>
                   </li>
                   <li>
@@ -864,7 +870,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2024-08-16'><strong>2024-08-16</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2024-10-17'><strong>2024-10-17</strong></h2>
+<ul>
+<li>新增查询账户KYC状态接口</li>
+</ul>
+<h2 id='2024-08-16'><strong>2024-08-16</strong></h2>
 <ul>
 <li>交易规范信息接口更新返回参数</li>
 </ul>
@@ -3761,7 +3771,69 @@ body
 <td style="text-align: left">冻结数量</td>
 </tr>
 </tbody></table>
-<h1 id='c15d2e6b39'>现货账户和交易接口</h1><h2 id='api-3'>用户API交易对</h2>
+<h1 id='c15d2e6b39'>现货账户和交易接口</h1><h2 id='kyc'>查询账户KYC状态</h2>
+<blockquote>
+<p>请求示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/kyc/status?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>返回示例</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP请求</strong></p>
+
+<ul>
+<li><strong>GET</strong> <code>/api/v3/kyc/status</code></li>
+</ul>
+
+<p><strong>接口权限要求:</strong> 账户读 / SPOT_ACCOUNT_READ</p>
+
+<p><strong>权重(IP):</strong> 1</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">是否必须</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">时间戳</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">是</td>
+<td style="text-align: left">签名</td>
+</tr>
+</tbody></table>
+
+<p><strong>返回参数</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">1:未kyc  2:初级kyc  3:高级kyc 4:机构kyc</td>
+</tr>
+</tbody></table>
+<h2 id='api-3'>用户API交易对</h2>
 <p>获取用户可API交易的交易对</p>
 
 <blockquote>
