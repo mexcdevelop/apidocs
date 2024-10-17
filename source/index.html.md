@@ -70,6 +70,9 @@ To apply for a partnership, please contact: **broker@mexc.com**
 
 # Change Log
 
+## **2024-10-17**
+- Add Query Kyc status endpoint
+
 ## **2024-08-16**
 - Exchange Information endpoint update params:status and tradeSideType.
 
@@ -1712,6 +1715,42 @@ post /api/v3/sub-account/margin
  -->
 
 # Spot Account/Trade
+
+## Query KYC status 
+
+> request
+
+```
+GET /api/v3/kyc/status?timestamp={{timestamp}}&signature={{signature}}
+```
+
+> response
+
+```json
+{
+"status": "1"
+}
+```
+
+**GET** ```/api/v3/kyc/status ```
+
+**Permission:** SPOT_ACCOUNT_READ
+
+**Weight(IP):** 1
+
+**Request**
+
+| Name     | Type | Mandatory | Description                 |
+| :---------- | :-------- | :-------- | :-------------------- |
+|timestamp    |string     |Yes         |   timestamp        |
+|signature    |string     |Yes        |signature    |
+
+**Response**
+
+| Name       | Type | Description                       |
+| :------------ | :-------- |:-------------------------|
+| status | string | 1:Unverified  2:Primary kyc  3:Advanced kyc 4:Institutional kyc  |
+
 
 ## User API default symbol
 
