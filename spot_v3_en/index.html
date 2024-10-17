@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2024-10-17" class="toc-h2 toc-link" data-title="2024-10-17"><strong>2024-10-17</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-08-16" class="toc-h2 toc-link" data-title="2024-08-16"><strong>2024-08-16</strong></a>
                   </li>
                   <li>
@@ -603,6 +606,9 @@
             <a href="#spot-account-trade" class="toc-h1 toc-link" data-title="Spot Account/Trade">Spot Account/Trade</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#query-kyc-status" class="toc-h2 toc-link" data-title="Query KYC status">Query KYC status</a>
+                  </li>
+                  <li>
                     <a href="#user-api-default-symbol" class="toc-h2 toc-link" data-title="User API default symbol">User API default symbol</a>
                   </li>
                   <li>
@@ -856,7 +862,11 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2024-08-16'><strong>2024-08-16</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2024-10-17'><strong>2024-10-17</strong></h2>
+<ul>
+<li>Add Query Kyc status endpoint</li>
+</ul>
+<h2 id='2024-08-16'><strong>2024-08-16</strong></h2>
 <ul>
 <li>Exchange Information endpoint update params:status and tradeSideType.</li>
 </ul>
@@ -3683,7 +3693,65 @@ post /api/v3/sub-account/margin
 |timestamp|string|response time|
 
  -->
-<h1 id='spot-account-trade'>Spot Account/Trade</h1><h2 id='user-api-default-symbol'>User API default symbol</h2>
+<h1 id='spot-account-trade'>Spot Account/Trade</h1><h2 id='query-kyc-status'>Query KYC status</h2>
+<blockquote>
+<p>request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/kyc/status?timestamp={{timestamp}}&amp;signature={{signature}}
+</code></pre></div>
+<blockquote>
+<p>response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+</span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>GET</strong> <code>/api/v3/kyc/status</code></p>
+
+<p><strong>Permission:</strong> SPOT_ACCOUNT_READ</p>
+
+<p><strong>Weight(IP):</strong> 1</p>
+
+<p><strong>Request</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Mandatory</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">timestamp</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">timestamp</td>
+</tr>
+<tr>
+<td style="text-align: left">signature</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">Yes</td>
+<td style="text-align: left">signature</td>
+</tr>
+</tbody></table>
+
+<p><strong>Response</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Name</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">status</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">1:Unverified  2:Primary kyc  3:Advanced kyc 4:Institutional kyc</td>
+</tr>
+</tbody></table>
+<h2 id='user-api-default-symbol'>User API default symbol</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
