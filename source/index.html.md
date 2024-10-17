@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2024-10-17**
+- 新增查询账户KYC状态接口
+
 ## **2024-08-16**
 - 交易规范信息接口更新返回参数
 
@@ -1719,6 +1722,43 @@ get /api/v3/sub-account/asset?subAccount=account1&accountType=SPOT&timestamp={{t
 
 
 # 现货账户和交易接口
+
+## 查询账户KYC状态
+
+> 请求示例
+
+```
+GET /api/v3/kyc/status?timestamp={{timestamp}}&signature={{signature}}
+```
+
+> 返回示例
+
+```json
+{
+"status": "1"
+}
+```
+**HTTP请求**
+
+- **GET** ```/api/v3/kyc/status ```
+
+**接口权限要求:** 账户读 / SPOT_ACCOUNT_READ
+
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数名     | 数据类型 | 是否必须 | 说明                 |
+| :---------- | :-------- | :-------- | :-------------------- |
+|timestamp    |string     |是         |   时间戳        |
+|signature    |string     |是         |签名            |
+
+**返回参数**
+
+| 参数名       | 数据类型 | 说明                       |
+| :------------ | :-------- |:-------------------------|
+| status | string | 1:未kyc  2:初级kyc  3:高级kyc 4:机构kyc  |
+
 
 ## 用户API交易对
 
