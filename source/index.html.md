@@ -58,7 +58,7 @@ This includes copy trade platforms, trading bots, quantitative strategy platform
 
 This includes wallet platforms, market data platforms, aggregation trading platforms, stockbrokers, as well as stock and securities trading platforms, etc., all of which have their own independent users. MEXC can provide order matching systems, account management systems, settlement systems, as well as main and sub-account systems, etc. Independent brokers can share the trading fluidity and depth over the MEXC platform and receive profit shares from fees.
 
-To apply for a partnership, please contact: **broker@mexc.com**
+To apply for a partnership, please contact: **institution@mexc.com**
 
 ## Contact us
 
