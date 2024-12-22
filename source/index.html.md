@@ -1892,7 +1892,7 @@ MARKET: When type is market,  `quoteOrderQty` or `quantity` required to choose a
 
 ## Batch Orders
 
-Supports 20 orders with a same symbol in a batch,rate limit:2 times/s.
+Supports 30 orders with a same symbol in a batch,rate limit:2 times/s.
 
 > Request
 
@@ -1950,7 +1950,7 @@ Parameters:
 
 | Name             | type    | Mandatory | Description                                |
 | :--------------- | :------ | :------- |:-------------------------------------------|
-| batchOrders      | LIST  | YES      | list of batchOrders,supports max 20 orders |
+| batchOrders      | LIST  | YES      | list of batchOrders,supports max 30 orders |
 | symbol           | STRING  | YES      | symbol                                     |
 | side             | ENUM    | YES      | <a href="#order_side">order side</a>       |
 | type             | ENUM    | YES      | <a href="#order_type">order type</a>       |
@@ -3583,7 +3583,7 @@ Response:
 |id|withdraw ID|
 
 
-# ETF
+<!-- # ETF
 
 ## Get ETF info
 
@@ -3629,7 +3629,7 @@ Response:
 |realLeverage|string | real leverage    |
 |mergedTimes |string | mergedTimes      |
 |lastMergedTime|long | lastMergedTime   |
-|basket     |string  | Basket After  |
+|basket     |string  | Basket After  | -->
 
 # Websocket Market Streams
 
