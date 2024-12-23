@@ -712,14 +712,6 @@
               </ul>
           </li>
           <li>
-            <a href="#etf" class="toc-h1 toc-link" data-title="ETF接口">ETF接口</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#etf-2" class="toc-h2 toc-link" data-title="获取ETF基础信息">获取ETF基础信息</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#websocket-2" class="toc-h1 toc-link" data-title="Websocket 行情推送">Websocket 行情推送</a>
               <ul class="toc-list-h2">
                   <li>
@@ -854,7 +846,7 @@
 <p><strong>2. 独立经纪商：</strong>
 包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。</p>
 
-<p>合作请联系：broker@mexc.com</p>
+<p>合作请联系：institution@mexc.com</p>
 <h2 id='152d3db758'>联系我们</h2>
 <ul>
 <li>MEXC API电报群 <a href="https://t.me/MEXCAPIsupport">MEXC API Support Group</a>
@@ -4088,7 +4080,7 @@ body
 </tr>
 </tbody></table>
 <h2 id='de93fae07b'>批量下单</h2>
-<p>支持单次批量下20单,要求必须是同一交易对。</p>
+<p>支持单次批量下30单,要求必须是同一交易对。</p>
 
 <blockquote>
 <p>请求示例</p>
@@ -4156,7 +4148,7 @@ body
 <td style="text-align: left">batchOrders</td>
 <td style="text-align: left">LIST</td>
 <td style="text-align: left">是</td>
-<td style="text-align: left">订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例)</td>
+<td style="text-align: left">订单列表，最多支持30个订单(list of JSON格式填写订单参数,参考请求示例)</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
@@ -7561,113 +7553,61 @@ body
 <td style="text-align: left">提币ID</td>
 </tr>
 </tbody></table>
-<h1 id='etf'>ETF接口</h1><h2 id='etf-2'>获取ETF基础信息</h2>
-<p>获取ETF的基础信息，如可交易币对、最新净值和管理费率。</p>
 
-<blockquote>
-<p>请求示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>GET /api/v3/etf/info
-</code></pre></div>
-<blockquote>
-<p>返回示例</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OP3SUSDT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"netValue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.332"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"feeRate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00001"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1661494588543</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">-3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"realLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.9126</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"mergedTimes"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"lastMergedTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1659063531000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"basket"</span><span class="p">:</span><span class="w"> </span><span class="mf">24678.0916</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<!-- # ETF接口
 
-</span></code></pre></div>
-<p><strong>HTTP请求</strong></p>
+## 获取ETF基础信息
+获取ETF的基础信息，如可交易币对、最新净值和管理费率。
 
-<ul>
-<li><strong>GET</strong> <code>api/v3/etf/info</code><br></li>
-</ul>
+> 请求示例
 
-<p><strong>权重(IP):</strong> 1</p>
+```
+GET /api/v3/etf/info
+```
+> 返回示例
 
-<p><strong>请求参数</strong></p>
+```json
+{
+  "symbol": "OP3SUSDT",
+  "netValue": "0.332",
+  "feeRate": "0.00001",
+  "timestamp": 1661494588543,
+  "leverage": -3,
+  "realLeverage": 2.9126,
+  "mergedTimes": 3,
+  "lastMergedTime": 1659063531000,
+  "basket": 24678.0916
+}
 
-<table><thead>
-<tr>
-<th style="text-align: left">参数</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">是否必须</th>
-<th style="text-align: left">默认值</th>
-<th style="text-align: left">描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">否</td>
-<td style="text-align: left">NA</td>
-<td style="text-align: left">ETF交易对，不填返回所有</td>
-</tr>
-</tbody></table>
+```
+**HTTP请求**
 
-<p><strong>返回参数</strong></p>
+- **GET** ```api/v3/etf/info```  
 
-<table><thead>
-<tr>
-<th style="text-align: left">字段名称</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF交易对</td>
-</tr>
-<tr>
-<td style="text-align: left">netValue</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">最新净值</td>
-</tr>
-<tr>
-<td style="text-align: left">feeRate</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">管理费率</td>
-</tr>
-<tr>
-<td style="text-align: left">timestamp</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">系统时间</td>
-</tr>
-<tr>
-<td style="text-align: left">leverage</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">目标杠杆</td>
-</tr>
-<tr>
-<td style="text-align: left">realLeverage</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">当前杠杆</td>
-</tr>
-<tr>
-<td style="text-align: left">mergedTimes</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">合并次数</td>
-</tr>
-<tr>
-<td style="text-align: left">lastMergedTime</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">最近合并时间</td>
-</tr>
-<tr>
-<td style="text-align: left">basket</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">再平衡后篮子</td>
-</tr>
-</tbody></table>
+**权重(IP):** 1
+
+**请求参数**
+
+| 参数   | 数据类型 | 是否必须 | 默认值 | 描述                    |
+| :------ | :-------- | :-------- | :------ | :----------------------- |
+| symbol | string   | 否       | NA     | ETF交易对，不填返回所有 |
+
+
+
+**返回参数**
+
+| 字段名称  | 数据类型 | 描述          |
+| :--------- | :-------- | :------------- |
+| symbol     | string   | ETF交易对 |
+| netValue   | string   | 最新净值      |
+| feeRate    | string   | 管理费率      |
+| timestamp  | long     | 系统时间      |
+|leverage    |string    | 目标杠杆      |
+|realLeverage|string    | 当前杠杆      |
+|mergedTimes |string    | 合并次数      |
+|lastMergedTime|long   | 最近合并时间   |
+|basket     |string    | 再平衡后篮子   |
+ -->
 <h1 id='websocket-2'>Websocket 行情推送</h1>
 <ul>
 <li>本篇所列出的所有wss接口的baseurl为: <strong>wss://wbs.mexc.com/ws</strong></li>
