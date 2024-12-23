@@ -62,7 +62,7 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 **2. 独立经纪商：**
 包括钱包商、行情资讯平台、聚合交易平台、券商和股票证券交易平台等，有自己独立用户，MEXC可以提供订单撮合系统、账户管理系统、结算系统以及母子账户系统等，独立经纪商可共享全站流动性和深度，获得高额手续费分润。
 
-合作请联系：broker@mexc.com
+合作请联系：institution@mexc.com
 
 ## 联系我们
 
@@ -1905,7 +1905,7 @@ MARKET：当type是market时，不论是买单或者卖单，quoteOrderQty和qua
 
 
 ## 批量下单
-支持单次批量下20单,要求必须是同一交易对。
+支持单次批量下30单,要求必须是同一交易对。
 
 > 请求示例
 
@@ -1962,7 +1962,7 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 | 名称             | 类型    | 是否必需 | 说明                   |
 | :--------------- | :------ | :------- | :--------------------- |
-| batchOrders      | LIST  | 是      | 订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例) |
+| batchOrders      | LIST  | 是      | 订单列表，最多支持30个订单(list of JSON格式填写订单参数,参考请求示例) |
 | symbol           | string  | 是      | 交易对                 |
 | side             | ENUM    | 是      | 详见枚举定义：<a href="#order_side">订单方向</a> |
 | type             | ENUM    | 是      | 详见枚举定义：<a href="#order_type">订单类型</a> |
@@ -3644,7 +3644,7 @@ post /api/v3/capital/withdraw/apply?coin=EOS&address=zzqqqqqqqqqq&amount=10&netw
 |id|提币ID|
 
 
-# ETF接口
+<!-- # ETF接口
 
 ## 获取ETF基础信息
 获取ETF的基础信息，如可交易币对、最新净值和管理费率。
@@ -3697,7 +3697,7 @@ GET /api/v3/etf/info
 |mergedTimes |string    | 合并次数      |
 |lastMergedTime|long   | 最近合并时间   |
 |basket     |string    | 再平衡后篮子   |
-
+ -->
 
 # Websocket 行情推送
 
