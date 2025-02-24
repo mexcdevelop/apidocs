@@ -3655,7 +3655,7 @@ The current websocket push uses the protobuf format. The specific integration pr
    The PB definition files can be obtained via the provided link.
 
 2.**Generate Deserialization Code**  
-   Use the tool available at https://github.com/protocolbuffers/protobuf to compile the .proto files and generate deserialization code.
+   Use the tool available at [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf) to compile the .proto files and generate deserialization code.
 
   > **Java**
 
@@ -3671,7 +3671,9 @@ The current websocket push uses the protobuf format. The specific integration pr
 
   > **Others**
 
-   Multiple languages are supported, including C++, C#, Go, Ruby, PHP, JS, etc. For details, see https://github.com/protocolbuffers/protobuf.
+   ```
+   Multiple languages are supported, including C++, C#, Go, Ruby, PHP, JS, etc. For details, see [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf).
+   ```
 
 3.**Data Deserialization**  
    Use the code generated in the previous step to deserialize the data.
