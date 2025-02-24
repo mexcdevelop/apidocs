@@ -3701,7 +3701,7 @@ GET /api/v3/etf/info
 
 # Websocket 行情推送
 
-- 本篇所列出的所有wss接口的baseurl为: **ws://[wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
+- 本篇所列出的所有wss接口的baseurl为: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
 - 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连
 - symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api.pb@<symbol>`</br>实例：`spot@public.deals.v3.api.pb@BTCUSDT`
 - websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接
@@ -3722,7 +3722,7 @@ GET /api/v3/etf/info
    PB定义文件可以在此连接处获取
    
 2.**生成反序列化代码**
-   使用 https://github.com/protocolbuffers/protobuf 工具编译.proto文件，生成反序列化代码
+   使用[https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)工具编译.proto文件，生成反序列化代码
 
 > **Java**
 
@@ -3739,7 +3739,7 @@ GET /api/v3/etf/info
 > **其他**
 
 ```
- 支持多种语言，包括 C++,C#, Go, Ruby, PHP, JS等。详见https://github.com/protocolbuffers/protobuf。
+ 支持多种语言，包括 C++,C#, Go, Ruby, PHP, JS等。详见[https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)。
 ```
 3.**数据反序列化**
    使用上一步生成的代码，反序列化数据
