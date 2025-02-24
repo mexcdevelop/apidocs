@@ -3633,7 +3633,7 @@ Response:
 
 # Websocket Market Streams
 
-- The base endpoint is: **ws://[wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
+- The base endpoint is: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
 - Each connection to **wbs.mexc.com** is valid for no more than 24 hours. Please handle disconnections and reconnections properly.
 - All trading pair names in the symbol must be in **uppercase**. For example: `spot@public.deals.v3.api.pb@<symbol>`  
   Example: `spot@public.deals.v3.api.pb@BTCUSDT`
