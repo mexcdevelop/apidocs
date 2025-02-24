@@ -3663,13 +3663,13 @@ The current websocket push uses the protobuf format. The specific integration pr
   > **Java**
 
    ```shell
-   protoc --java_out=custom_path/java-out -I=custom_path/proto-v3-api custom_path/proto-v3-api/*.proto
+   protoc *.proto --java_out=python custom_path
    ```
 
   > **Python**
 
    ```shell
-   protoc --python_out=custom_path/python-out -I=custom_path/proto-v3-api custom_path/proto-v3-api/*
+   protoc *.proto --python_out=python custom_path
    ```
 
   > **Others**
