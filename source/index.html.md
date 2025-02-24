@@ -70,6 +70,9 @@ To apply for a partnership, please contact: **institution@mexc.com**
 
 # Change Log
 
+## **2025-02-24**
+- Update Protocol Buffers websocket channels
+
 ## **2024-10-17**
 - Add Query Kyc status endpoint
 
