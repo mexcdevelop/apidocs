@@ -3730,13 +3730,15 @@ GET /api/v3/etf/info
 > **Java**
 
 ```
- 	protoc --java_out=自定义路径/iava-out-I=自定义路径/proto-v3-api 自定义路径/proto-v3-api/*.p
+//在proto文件夹下执行
+protoc *.proto --java_out=python文件输出路径
 ```
 
 > **python**
 
 ```
- 	protoc --python_out=自定义路径/java-out-I=自定义路径/proto-v3-api 自定义路径/proto-v3-api/*
+//在proto文件夹下执行
+protoc *.proto --python_out=python文件输出路径
 ```
 
 > **其他**
