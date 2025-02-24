@@ -3731,7 +3731,7 @@ GET /api/v3/etf/info
 
 ```
 //在proto文件夹下执行
-protoc *.proto --java_out=python文件输出路径
+protoc *.proto --java_out=java文件输出路径
 ```
 
 > **python**
