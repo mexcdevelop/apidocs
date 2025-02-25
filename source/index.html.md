@@ -3655,7 +3655,7 @@ Response:
 The current websocket push uses the protobuf format. The specific integration process is as follows:
 
 1.**PB File Definition**  
-   The PB definition files can be obtained via the provided link.
+   The PB definition files can be obtained via the provided link:[https://github.com/mexcdevelop/websocket-proto](https://github.com/mexcdevelop/websocket-proto)
 
 2.**Generate Deserialization Code**  
    Use the tool available at [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf) to compile the .proto files and generate deserialization code.
