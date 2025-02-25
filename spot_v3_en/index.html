@@ -344,6 +344,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2025-02-24" class="toc-h2 toc-link" data-title="2025-02-24"><strong>2025-02-24</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-10-17" class="toc-h2 toc-link" data-title="2024-10-17"><strong>2024-10-17</strong></a>
                   </li>
                   <li>
@@ -712,16 +715,22 @@
             <a href="#websocket-market-streams" class="toc-h1 toc-link" data-title="Websocket Market Streams">Websocket Market Streams</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#live-subscribing-unsubscribing-to-streams" class="toc-h2 toc-link" data-title="Live Subscribing/Unsubscribing to streams">Live Subscribing/Unsubscribing to streams</a>
+                    <a href="#live-subscription-unsubscription-to-data-streams" class="toc-h2 toc-link" data-title="Live Subscription/Unsubscription to Data Streams">Live Subscription/Unsubscription to Data Streams</a>
+                  </li>
+                  <li>
+                    <a href="#protocol-buffers-integration" class="toc-h2 toc-link" data-title="Protocol Buffers Integration">Protocol Buffers Integration</a>
                   </li>
                   <li>
                     <a href="#trade-streams" class="toc-h2 toc-link" data-title="Trade Streams">Trade Streams</a>
                   </li>
                   <li>
-                    <a href="#kline-streams" class="toc-h2 toc-link" data-title="Kline Streams">Kline Streams</a>
+                    <a href="#k-line-streams" class="toc-h2 toc-link" data-title="K-line Streams">K-line Streams</a>
                   </li>
                   <li>
                     <a href="#diff-depth-stream" class="toc-h2 toc-link" data-title="Diff.Depth Stream">Diff.Depth Stream</a>
+                  </li>
+                  <li>
+                    <a href="#diff-depth-stream-batch-aggregation" class="toc-h2 toc-link" data-title="Diff.Depth Stream(Batch Aggregation)">Diff.Depth Stream(Batch Aggregation)</a>
                   </li>
                   <li>
                     <a href="#partial-book-depth-streams" class="toc-h2 toc-link" data-title="Partial Book Depth Streams">Partial Book Depth Streams</a>
@@ -730,10 +739,10 @@
                     <a href="#individual-symbol-book-ticker-streams" class="toc-h2 toc-link" data-title="Individual Symbol Book Ticker Streams">Individual Symbol Book Ticker Streams</a>
                   </li>
                   <li>
-                    <a href="#miniticker" class="toc-h2 toc-link" data-title="MiniTicker">MiniTicker</a>
+                    <a href="#individual-symbol-book-ticker-streams-batch-aggregation" class="toc-h2 toc-link" data-title="Individual Symbol Book Ticker Streams(Batch Aggregation)">Individual Symbol Book Ticker Streams(Batch Aggregation)</a>
                   </li>
                   <li>
-                    <a href="#minitickers" class="toc-h2 toc-link" data-title="MiniTickers">MiniTickers</a>
+                    <a href="#how-to-properly-maintain-a-local-copy-of-the-order-book" class="toc-h2 toc-link" data-title="How to Properly Maintain a Local Copy of the Order Book">How to Properly Maintain a Local Copy of the Order Book</a>
                   </li>
               </ul>
           </li>
@@ -744,7 +753,7 @@
                     <a href="#listen-key" class="toc-h2 toc-link" data-title="Listen Key">Listen Key</a>
                   </li>
                   <li>
-                    <a href="#spot-account-upadte" class="toc-h2 toc-link" data-title="Spot Account Upadte">Spot Account Upadte</a>
+                    <a href="#spot-account-update" class="toc-h2 toc-link" data-title="Spot Account Update">Spot Account Update</a>
                   </li>
                   <li>
                     <a href="#spot-account-deals" class="toc-h2 toc-link" data-title="Spot Account Deals">Spot Account Deals</a>
@@ -854,7 +863,11 @@ Any problem please submit <a href="https://github.com/mexcdevelop/mexc-api-sdk/i
 <li> For cases such as missing funds, help with 2FA, etc.</li>
 </ul></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='2024-10-17'><strong>2024-10-17</strong></h2>
+<h1 id='change-log'>Change Log</h1><h2 id='2025-02-24'><strong>2025-02-24</strong></h2>
+<ul>
+<li>Update Protocol Buffers websocket channels</li>
+</ul>
+<h2 id='2024-10-17'><strong>2024-10-17</strong></h2>
 <ul>
 <li>Add Query Kyc status endpoint</li>
 </ul>
@@ -7392,261 +7405,355 @@ Response:
 |basket     |string  | Basket After  | -->
 <h1 id='websocket-market-streams'>Websocket Market Streams</h1>
 <ul>
-<li><p>The base endpoint is: <strong>wss://wbs.mexc.com/ws</strong>.</p></li>
-<li><p>A single connection to <strong>wbs.mexc.com</strong> is only valid for 24 hours; expect to be disconnected at the 24 hour mark.</p></li>
-<li><p>All symbols are <strong>Uppercase</strong> <br/>eg:<code>spot@public.deals.v3.api@&lt;symbol&gt;</code></br>-&gt;<code>spot@public.deals.v3.api@BTCUSDT</code>.</p></li>
-<li><p>If there is no valid websocket subscription, the server will disconnect in <strong>30 seconds</strong>. If the subscription is successful but there is no streams, the server will disconnect in <strong>1 minute</strong>. The client can send <code>PING</code> to maintain the connection.</p></li>
-<li><p>Every websocket connection maximun support 30 subscriptions at one time.</p></li>
+<li>The base endpoint is: <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong></li>
+<li>Each connection to <strong>wbs.mexc.com</strong> is valid for no more than 24 hours. Please handle disconnections and reconnections properly.</li>
+<li>All trading pair names in the symbol must be in <strong>uppercase</strong>. For example: <code>spot@public.deals.v3.api.pb@&lt;symbol&gt;</code><br>
+Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
+<li>If there is no valid subscription on the websocket, the server will actively disconnect after <strong>30 seconds</strong>. If the subscription is successful but there is no data flow, the server will disconnect after <strong>one minute</strong>. The client can send a ping to keep the connection alive.</li>
+<li>One ws connection supports a maximum of 30 subscriptions.</li>
+<li>Please process the data according to the parameters returned in the documentation. Parameters not returned in the documentation will be optimized soon, so please do not use them.</li>
 </ul>
-<h2 id='live-subscribing-unsubscribing-to-streams'>Live Subscribing/Unsubscribing to streams</h2>
+<h2 id='live-subscription-unsubscription-to-data-streams'>Live Subscription/Unsubscription to Data Streams</h2>
 <ul>
-<li><p>The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.</p></li>
-<li><p>The id used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.</p></li>
-<li><p>In the response, if the <code>msg</code>  received is same as request params, this means the request sent was a success.</p></li>
+<li>The following data can be sent via websocket to subscribe or unsubscribe from data streams. Examples are provided below.</li>
+<li>The <code>id</code> in the response is an unsigned integer and serves as the unique identifier for communication.</li>
+<li>If the <code>msg</code> in the response matches the corresponding request field, it indicates that the request was sent successfully.</li>
 </ul>
-<h3 id='subscribe-to-a-stream'>Subscribe to a stream</h3>
+<h2 id='protocol-buffers-integration'>Protocol Buffers Integration</h2>
+<p>The current websocket push uses the protobuf format. The specific integration process is as follows:</p>
+
+<p>1.<strong>PB File Definition</strong><br>
+   The PB definition files can be obtained via the provided link:<a href="https://github.com/mexcdevelop/websocket-proto">https://github.com/mexcdevelop/websocket-proto</a></p>
+
+<p>2.<strong>Generate Deserialization Code</strong><br>
+   Use the tool available at <a href="https://github.com/protocolbuffers/protobuf">https://github.com/protocolbuffers/protobuf</a> to compile the .proto files and generate deserialization code.</p>
+
 <blockquote>
-<p><strong>Subscribe Response</strong></p>
+<p><strong>Java</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code> {
-  "id":0,
-  "code":0,
-  "msg":"spot@public.deals.v3.api@BTCUSDT"
- }
+<div class="highlight"><pre class="highlight shell tab-shell"><code>   protoc <span class="k">*</span>.proto <span class="nt">--java_out</span><span class="o">=</span>python custom_path
 </code></pre></div>
+<blockquote>
+<p><strong>Python</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>   protoc <span class="k">*</span>.proto <span class="nt">--python_out</span><span class="o">=</span>python custom_path
+</code></pre></div>
+<blockquote>
+<p><strong>Others</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>   Multiple languages are supported, including C++, C#, Go, Ruby, PHP, JS, etc. For details, see [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf).
+</code></pre></div>
+<p>3.<strong>Data Deserialization</strong><br>
+   Use the code generated in the previous step to deserialize the data.</p>
+
+<blockquote>
+<p><strong>Java</strong><br>
+   Include the protobuf-java dependency:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight xml tab-xml"><code>   <span class="nt">&lt;dependency&gt;</span>
+       <span class="nt">&lt;groupId&gt;</span>com.google.protobuf<span class="nt">&lt;/groupId&gt;</span>
+       <span class="nt">&lt;artifactId&gt;</span>protobuf-java<span class="nt">&lt;/artifactId&gt;</span>
+       <span class="nt">&lt;version&gt;</span>{protobuf.version}<span class="nt">&lt;/version&gt;</span> <span class="c">&lt;!-- Specify the version as per your project requirements --&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code>   <span class="c1">//Parsing example:</span>
+
+   <span class="c1">// Assemble the object</span>
+   <span class="nc">PushDataV3ApiWrapper</span> <span class="n">pushDataV3ApiWrapper</span> <span class="o">=</span> <span class="nc">PushDataV3ApiWrapper</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">()</span>
+           <span class="o">.</span><span class="na">setChannel</span><span class="o">(</span><span class="s">"spot@public.aggre.depth.v3.api.pb"</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">setSymbol</span><span class="o">(</span><span class="s">"BTCUSDT"</span><span class="o">)</span>
+           <span class="o">.</span><span class="na">setSendTime</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">())</span>
+           <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+   <span class="c1">// Serialize to a byte array</span>
+   <span class="kt">byte</span><span class="o">[]</span> <span class="n">serializedData</span> <span class="o">=</span> <span class="n">pushDataV3ApiWrapper</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+
+   <span class="c1">// Deserialize into a PushDataV3ApiWrapper object</span>
+   <span class="nc">PushDataV3ApiWrapper</span> <span class="n">resultV3</span> <span class="o">=</span> <span class="nc">PushDataV3ApiWrapper</span><span class="o">.</span><span class="na">parseFrom</span><span class="o">(</span><span class="n">serializedData</span><span class="o">);</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Python</strong> </p>
+</blockquote>
+<div class="highlight"><pre class="highlight python tab-python"><code>   <span class="c1">#Parsing example:
+</span>
+   <span class="kn">import</span> <span class="nn">PushDataV3ApiWrapper_pb2</span>
+
+   <span class="c1"># Assemble the object
+</span>   <span class="n">pushData</span> <span class="o">=</span> <span class="n">PushDataV3ApiWrapper_pb2</span><span class="p">.</span><span class="n">PushDataV3ApiWrapper</span><span class="p">()</span>
+   <span class="n">pushData</span><span class="p">.</span><span class="n">channel</span> <span class="o">=</span> <span class="s">'spot@public.aggre.depth.v3.api.pb'</span>
+   <span class="n">pushData</span><span class="p">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'BTCUSDT'</span>
+
+   <span class="c1"># Serialize to a string
+</span>   <span class="n">serializedData</span> <span class="o">=</span> <span class="n">pushData</span><span class="p">.</span><span class="n">SerializeToString</span><span class="p">()</span>
+
+   <span class="c1"># Deserialize into a PushDataV3ApiWrapper object
+</span>   <span class="n">result</span> <span class="o">=</span> <span class="n">PushDataV3ApiWrapper_pb2</span><span class="p">.</span><span class="n">PushDataV3ApiWrapper</span><span class="p">()</span>
+   <span class="n">result</span><span class="p">.</span><span class="n">ParseFromString</span><span class="p">(</span><span class="n">serializedData</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+<hr>
+<h3 id='subscribe-to-a-data-stream'>Subscribe to a Data Stream</h3>
+<blockquote>
+<p><strong>Subscription Channel Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.deals.v3.api.pb@BTCUSDT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <ul>
 <li><strong>Request</strong></li>
 </ul>
 
 <p>{
- &quot;method&quot;:&quot;SUBSCRIPTION&quot;,
- &quot;params&quot;:[&quot;spot@public.deals.v3.api@BTCUSDT&quot;]
+ &quot;method&quot;: &quot;SUBSCRIPTION&quot;,
+ &quot;params&quot;: [&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
 }</p>
-<h3 id='unsubscribe-to-a-stream'>Unsubscribe to a stream</h3>
+
+<hr>
+<h3 id='unsubscribe-from-a-data-stream'>Unsubscribe from a Data Stream</h3>
 <blockquote>
-<p><strong>Unsubscribe Response</strong></p>
+<p><strong>Unsubscription Response</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code> {
-  "id":0,
-  "code":0,
-  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.increase.depth.v3.api.pb@BTCUSDT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <ul>
 <li><strong>Request</strong></li>
 </ul>
 
 <p>{
- &quot;method&quot;:&quot;UNSUBSCRIPTION&quot;,
- &quot;params&quot;:[&quot;spot@public.deals.v3.api@BTCUSDT&quot;,&quot;spot@public.increase.depth.v3.api@BTCUSDT&quot;]
+ &quot;method&quot;: &quot;UNSUBSCRIPTION&quot;,
+ &quot;params&quot;: [&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
 }</p>
-<h3 id='ping-pong'>PING/PONG</h3>
+
+<hr>
+<h3 id='ping-pong-mechanism'>PING/PONG Mechanism</h3>
 <blockquote>
 <p><strong>PING/PONG Response</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code> {
-  "id":0,
-  "code":0,
-  "msg":"PONG"
- }
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PONG"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <ul>
 <li><strong>Request</strong></li>
 </ul>
 
-<p>{&quot;method&quot;:&quot;PING&quot;}</p>
+<p>{&quot;method&quot;: &quot;PING&quot;}</p>
+
+<hr>
 <h2 id='trade-streams'>Trade Streams</h2>
 <blockquote>
-<p><strong>request:</strong></p>
+<p><strong>Request:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.deals.v3.api@BTCUSDT"
-    ]
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "c":"spot@public.deals.v3.api@BTCUSDT",    
-    "d":{
-            "deals":[{
-                    "S":2,                             //tradeType
-                    "p":"20233.84",                    //price
-                    "t":1661927587825,                         //dealTime
-                    "v":"0.001028"}],                            //quantity
-            "e":"spot@public.deals.v3.api"},        //eventType                  
-    "s":"BTCUSDT",                                             //symbol
-    "t":1661927587836                          //eventTime
-}                                        
-</code></pre></div>
-<p><strong>Request:</strong>   <code>spot@public.deals.v3.api@&lt;symbol&gt;</code></p>
-
-<p>The Trade Streams push raw trade information; each trade has a unique buyer and seller.</p>
-
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publicdeals"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"dealsList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93220.00"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trade</span><span class="w"> </span><span class="err">price</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04438243"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trade</span><span class="w"> </span><span class="err">quantity</span><span class="w">
+        </span><span class="nl">"tradetype"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trade</span><span class="w"> </span><span class="err">type</span><span class="w"> </span><span class="err">(</span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="err">Buy</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span><span class="w"> </span><span class="err">Sell)</span><span class="w">
+        </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736409765051</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trade</span><span class="w"> </span><span class="err">time</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"eventtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.deals.v3.api.pb@100ms"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">type</span><span class="w"> 
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trading</span><span class="w"> </span><span class="err">pair</span><span class="w">
+  </span><span class="nl">"sendtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736409765052</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">time</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
+
+<p>The Trade Streams push raw trade information; each trade has a unique buyer and seller</p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">deals</td>
-<td style="text-align: left">array</td>
-<td style="text-align: left">dealsInfo</td>
+<td>dealsList</td>
+<td>array</td>
+<td>Trade information</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">tradeType 1:buy 2:sell</td>
+<td>price</td>
+<td>string</td>
+<td>Trade price</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">price</td>
+<td>quantity</td>
+<td>string</td>
+<td>Trade quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">dealTime</td>
+<td>tradetype</td>
+<td>int</td>
+<td>Trade type (1: Buy, 2: Sell)</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">quantity</td>
+<td>time</td>
+<td>long</td>
+<td>Trade time</td>
 </tr>
 <tr>
-<td style="text-align: left">e</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">eventType</td>
+<td>eventtype</td>
+<td>string</td>
+<td>Event type</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>sendtime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 </tbody></table>
-<h2 id='kline-streams'>Kline Streams</h2>
-<blockquote>
-<p><strong>request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.kline.v3.api@BTCUSDT@Min15"
-    ]
-}
-</code></pre></div>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
-    "d":{
-            "k":{
-                "T":1661931900,                     
-                "a":29043.48804658,  
-                "c":20279.43,                
-                "h":20284.93,                
-                "i":"Min15",                 
-                "l":20277.52,                
-                "o":20284.93,                
-                "t":1661931000,          
-                "v":1.43211},                
-            "e":"spot@public.kline.v3.api"},                    
-    "s":"BTCUSDT",                      
-    "t":1661931016878                    
-}
 
-</code></pre></div>
+<hr>
+<h2 id='k-line-streams'>K-line Streams</h2>
+<blockquote>
+<p><strong>Request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.kline.v3.api.pb@BTCUSDT@Min15"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.kline.v3.api.pb@BTCUSDT@Min15"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publicspotkline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Min15"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">K-line</span><span class="w"> </span><span class="err">interval</span><span class="w">
+    </span><span class="nl">"windowstart"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736410500</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Start</span><span class="w"> </span><span class="err">time</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"openingprice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92925"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Opening</span><span class="w"> </span><span class="err">trade</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">during</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"closingprice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93158.47"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Closing</span><span class="w"> </span><span class="err">trade</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">during</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"highestprice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93158.47"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Highest</span><span class="w"> </span><span class="err">trade</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">during</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"lowestprice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92800"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Lowest</span><span class="w"> </span><span class="err">trade</span><span class="w"> </span><span class="err">price</span><span class="w"> </span><span class="err">during</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36.83803224"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trade</span><span class="w"> </span><span class="err">volume</span><span class="w"> </span><span class="err">during</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3424811.05"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trade</span><span class="w"> </span><span class="err">amount</span><span class="w"> </span><span class="err">during</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">K-line</span><span class="w">
+    </span><span class="nl">"windowend"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736411400</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">End</span><span class="w"> </span><span class="err">time</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">K-line</span><span class="w">   
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbolid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2fb942154ef44a4ab2ef98c8afb6a4a7"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"createtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736410707571</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>The Kline/Candlestick Stream push updates to the current klines/candlestick every second.</p>
 
-<p><strong>Request:</strong> <code>spot@public.kline.v3.api@&lt;symbol&gt;@&lt;interval&gt;</code></p>
+<p><strong>Request Parameter:</strong> <code>spot@public.kline.v3.api.pb@&lt;symbol&gt;@&lt;interval&gt;</code></p>
 
-<p><strong>Response:</strong></p>
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">k</td>
-<td style="text-align: left">object</td>
-<td style="text-align: left">klineInfo</td>
+<td>publicspotkline</td>
+<td>object</td>
+<td>K-line information</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; T</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">endTime</td>
+<td>interval</td>
+<td>string</td>
+<td>K-line interval</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; a</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">volume</td>
+<td>windowstart</td>
+<td>long</td>
+<td>Start time of the K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">closingPrice</td>
+<td>openingprice</td>
+<td>bigDecimal</td>
+<td>Opening trade price during this K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; h</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">highestPrice</td>
+<td>closingprice</td>
+<td>bigDecimal</td>
+<td>Closing trade price during this K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">interval</td>
-<td style="text-align: left">interval</td>
+<td>highestprice</td>
+<td>bigDecimal</td>
+<td>Highest trade price during this K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; l</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">lowestPrice</td>
+<td>lowestprice</td>
+<td>bigDecimal</td>
+<td>Lowest trade price during this K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; o</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">openingPrice</td>
+<td>volume</td>
+<td>bigDecimal</td>
+<td>Trade volume during this K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">stratTime</td>
+<td>amount</td>
+<td>bigDecimal</td>
+<td>Trade amount during this K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">quantity</td>
+<td>windowend</td>
+<td>long</td>
+<td>End time of the K-line</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>symbolid</td>
+<td>string</td>
+<td>Trading pair ID</td>
+</tr>
+<tr>
+<td>createtime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 </tbody></table>
 
-<p><strong>Kline chart intervals:</strong></p>
+<p><strong>K-line Interval Parameters:</strong></p>
 
-<p>Min -&gt; minutes; Hour -&gt; hours; Day -&gt; days; Week -&gt; weeks, M -&gt; months</p>
+<ul>
+<li>Min: Minutes; Hour: Hours; Day: Days; Week: Weeks; M: Month</li>
+</ul>
+
+<p>Available intervals:</p>
 
 <ul>
 <li>Min1</li>
@@ -7660,1012 +7767,893 @@ Response:
 <li>Week1</li>
 <li>Month1</li>
 </ul>
+
+<hr>
 <h2 id='diff-depth-stream'>Diff.Depth Stream</h2>
 <blockquote>
-<p><strong>request:</strong></p>
+<p><strong>Request:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.increase.depth.v3.api@BTCUSDT"
-    ]
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-{
-    "c":"spot@public.increase.depth.v3.api@BTCUSDT",  
-    "d":{
-        "asks":[{                                   
-            "p":"20290.89",     
-            "v":"0.000000"}], 
-        "e":"spot@public.increase.depth.v3.api", 
-    "r":"3407459756"},   
-    "s":"BTCUSDT",                      
-    "t":1661932660144                   
-}
-</code></pre></div>
-<p>If the quantity is 0, it means that the order of the price has been cancel or traded,remove the price level.</p>
-
-<p><strong>Request:</strong> <code>spot@public.increase.depth.v3.api@&lt;symbol&gt;</code></p>
-
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publicincreasedepths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"asksList"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">asks:</span><span class="w"> </span><span class="err">Sell</span><span class="w"> </span><span class="err">orders</span><span class="w">
+    </span><span class="nl">"bidsList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">bids:</span><span class="w"> </span><span class="err">Buy</span><span class="w"> </span><span class="err">orders</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92877.58"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Price</span><span class="w"> </span><span class="err">level</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">change</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Quantity</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"eventtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.depth.v3.api.pb@100ms"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">type</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36913293511"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Version</span><span class="w"> </span><span class="err">number</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trading</span><span class="w"> </span><span class="err">pair</span><span class="w">
+  </span><span class="nl">"sendtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736411507002</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">time</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>If the order quantity (<code>quantity</code>) for a price level is 0, it indicates that the order at that price has been canceled or executed, and that price level should be removed.</p>
+
+<p><strong>Request Parameter:</strong> <code>spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">price</td>
+<td>price</td>
+<td>string</td>
+<td>Price level of change</td>
 </tr>
 <tr>
-<td style="text-align: left">v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">quantity</td>
+<td>quantity</td>
+<td>string</td>
+<td>Quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">e</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">eventType</td>
+<td>eventtype</td>
+<td>string</td>
+<td>Event type</td>
 </tr>
 <tr>
-<td style="text-align: left">r</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">version</td>
+<td>version</td>
+<td>string</td>
+<td>Version number</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>sendtime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 </tbody></table>
+
+<hr>
+<h2 id='diff-depth-stream-batch-aggregation'>Diff.Depth Stream(Batch Aggregation)</h2>
+<blockquote>
+<p><strong>Request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sendTime"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1739502064578"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publicIncreaseDepthsBatch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"items"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96578.48"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145507"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96578.90"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145508"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96579.31"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145509"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96579.84"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145510"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96576.69"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"4.88725694"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145511"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.increase.depth.batch.v3.api.pb"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>In the batch aggregation version, if the number of entries exceeds 5 or the time interval exceeds 5ms, the data is pushed once. If the order quantity for a price level is 0, it indicates that the order at that price has been canceled or executed, and that price level should be removed.</p>
+
+<p><strong>Request Parameter:</strong> <code>spot@public.increase.depth.batch.v3.api.pb@&lt;symbol&gt;</code></p>
+
+<p><strong>Response Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>price</td>
+<td>string</td>
+<td>Price level of change</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>string</td>
+<td>Quantity</td>
+</tr>
+<tr>
+<td>eventtype</td>
+<td>string</td>
+<td>Event type</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>Version number</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
+</tr>
+<tr>
+<td>sendtime</td>
+<td>long</td>
+<td>Event time</td>
+</tr>
+</tbody></table>
+
+<hr>
 <h2 id='partial-book-depth-streams'>Partial Book Depth Streams</h2>
-<p>Top bids and asks, Valid are 5, 10, or 20.</p>
+<p>This stream pushes limited level depth information. The “levels” indicate the number of order levels for buy and sell orders, which can be 5, 10, or 20 levels.</p>
 
 <blockquote>
-<p><strong>request:</strong></p>
+<p><strong>Request:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-                "spot@public.limit.depth.v3.api@BTCUSDT@5"
-
-   ]
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.limit.depth.v3.api.pb@BTCUSDT@5"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-{
-  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
-  "d":{
-    "asks":[{                 
-            "p":"20290.89",   
-            "v":"0.650000"}], 
-    "e":"spot@public.limit.depth.v3.api",  
-    "r":"3407459756"},  
-  "s":"BTCUSDT",             
-  "t":1661932660144          
-}
-</code></pre></div>
-<p><strong>Request:</strong> <code>spot@public.limit.depth.v3.api@&lt;symbol&gt;@&lt;level&gt;</code></p>
-
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.limit.depth.v3.api.pb@BTCUSDT@5"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publiclimitdepths"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"asksList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">asks:</span><span class="w"> </span><span class="err">Sell</span><span class="w"> </span><span class="err">orders</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93180.18"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Price</span><span class="w"> </span><span class="err">level</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">change</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.21976424"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Quantity</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"bidsList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">bids:</span><span class="w"> </span><span class="err">Buy</span><span class="w"> </span><span class="err">orders</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93179.98"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.82651000"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"eventtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.limit.depth.v3.api.pb"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">type</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36913565463"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Version</span><span class="w"> </span><span class="err">number</span><span class="w"> 
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trading</span><span class="w"> </span><span class="err">pair</span><span class="w">
+  </span><span class="nl">"sendtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736411838730</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">time</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@public.limit.depth.v3.api.pb@&lt;symbol&gt;@&lt;level&gt;</code></p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">price</td>
+<td>price</td>
+<td>string</td>
+<td>Price level of change</td>
 </tr>
 <tr>
-<td style="text-align: left">v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">quantity</td>
+<td>quantity</td>
+<td>string</td>
+<td>Quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">e</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">eventType</td>
+<td>eventtype</td>
+<td>string</td>
+<td>Event type</td>
 </tr>
 <tr>
-<td style="text-align: left">r</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">version</td>
+<td>version</td>
+<td>string</td>
+<td>Version number</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>sendtime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 </tbody></table>
+
+<hr>
 <h2 id='individual-symbol-book-ticker-streams'>Individual Symbol Book Ticker Streams</h2>
 <p>Pushes any update to the best bid or ask&#39;s price or quantity in real-time for a specified symbol.</p>
 
 <blockquote>
-<p><strong>request:</strong></p>
+<p><strong>Request:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-                "spot@public.bookTicker.v3.api@BTCUSDT"
-      ]
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-{
- "c":"spot@public.bookTicker.v3.api@&lt;BTCUSDT&gt;",
- "d":{
-    
-    "A":"40.66000000" 
-    "B":"31.21000000",  
-    "a":"25.36520000",
-    "b":"25.35190000",},  
- "s":"BTCUSDT", 
- "t":1661932660144 
-}
-</code></pre></div>
-<p><strong>Request:</strong> <code>spot@public.bookTicker.v3.api@&lt;symbol&gt;</code></p>
-
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publicbookticker"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bidprice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93387.28"</span><span class="p">,</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">Best</span><span class="w"> </span><span class="err">bid</span><span class="w"> </span><span class="err">price</span><span class="w">
+    </span><span class="nl">"bidquantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.73485"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Best</span><span class="w"> </span><span class="err">bid</span><span class="w"> </span><span class="err">quantity</span><span class="w">
+    </span><span class="nl">"askprice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93387.29"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Best</span><span class="w"> </span><span class="err">ask</span><span class="w"> </span><span class="err">price</span><span class="w">
+    </span><span class="nl">"askquantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.669875"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Best</span><span class="w"> </span><span class="err">ask</span><span class="w"> </span><span class="err">quantity</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trading</span><span class="w"> </span><span class="err">pair</span><span class="w">
+  </span><span class="nl">"sendtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736412092433</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">time</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@public.aggre.bookTicker.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">A</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">best ask qty</td>
+<td>bidprice</td>
+<td>string</td>
+<td>Best bid price</td>
 </tr>
 <tr>
-<td style="text-align: left">B</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">best bid qty</td>
+<td>bidquantity</td>
+<td>string</td>
+<td>Best bid quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">a</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">best ask price</td>
+<td>askprice</td>
+<td>string</td>
+<td>Best ask price</td>
 </tr>
 <tr>
-<td style="text-align: left">b</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">best bid price</td>
+<td>askquantity</td>
+<td>string</td>
+<td>Best ask quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>sendtime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 </tbody></table>
-<h2 id='miniticker'>MiniTicker</h2>
-<blockquote>
-<p><strong>request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
-    ]
-}
-</code></pre></div>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "d":
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--",
-    "t":"1699502456050"},
-  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
-  "t":1699502456051,
-  "s":"BTCUSDT"
-}                                        
-</code></pre></div>
-<p><strong>Request:</strong>   <code>spot@public.miniTicker.v3.api@&lt;symbol&gt;@&lt;timezone&gt;</code></p>
 
+<hr>
+<h2 id='individual-symbol-book-ticker-streams-batch-aggregation'>Individual Symbol Book Ticker Streams(Batch Aggregation)</h2>
+<p>This batch aggregation version pushes the best order information for a specified trading pair.</p>
+
+<blockquote>
+<p><strong>Request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@public.bookTicker.batch.v3.api.pb@BTCUSDT"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.bookTicker.batch.v3.api.pb@BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sendTime"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1739503249114"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"publicBookTickerBatch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"items"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"bidPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96567.37"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"bidQuantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"3.362925"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"askPrice"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96567.38"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"askQuantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1.545255"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@public.bookTicker.batch.v3.api.pb@&lt;symbol&gt;</code></p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">channel name</td>
+<td>bidprice</td>
+<td>string</td>
+<td>Best bid price</td>
 </tr>
 <tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">data</td>
-<td style="text-align: left">data</td>
+<td>bidquantity</td>
+<td>string</td>
+<td>Best bid quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
+<td>askprice</td>
+<td>string</td>
+<td>Best ask price</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">deal price</td>
+<td>askquantity</td>
+<td>string</td>
+<td>Best ask quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;r</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">price Change Percent in utc8</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;tr</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">price Change Percent in time zone</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;h</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h high price</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;l</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h low price</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h volume</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;q</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h quote Volume</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;lastRT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">etf Last Rebase Time</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;MT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">etf Merge Times</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;NV</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">etf Net Value</td>
-</tr>
-</tbody></table>
-<h2 id='minitickers'>MiniTickers</h2>
-<blockquote>
-<p><strong>request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.miniTickers.v3.api@UTC+8"
-    ]
-}
-</code></pre></div>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "d":
-  [{"s":"SENSOUSDT",
-    "p":"0.07642",
-    "r":"-0.0383",
-    "tr":"-0.0383",
-    "h":"0.08032",
-    "l":"0.07463",
-    "v":"25052.6533",
-    "q":"323777.17",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-  "c":"spot@public.miniTickers.v3.api@UTC+8",
-  "t":1699502456051,
-}                                        
-</code></pre></div>
-<p><strong>Request:</strong>   <code>spot@public.miniTickers.v3.api@&lt;timezone&gt;</code></p>
-
-<p><strong>Response:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">channel name</td>
-</tr>
-<tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">data</td>
-<td style="text-align: left">data</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">deal price</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;r</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h price Change Percent in utc8</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;tr</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h price Change Percent in time zone</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;h</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h high price</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;l</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h low price</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h volume</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;q</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">24h quote Volume</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;lastRT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">etf Last Rebase Time</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;MT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">etf Merge Times</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;NV</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">etf Net Value</td>
+<td>sendtime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 </tbody></table>
 
-<p><strong>How is incremental depth information maintained:</strong></p>
-
+<hr>
+<h2 id='how-to-properly-maintain-a-local-copy-of-the-order-book'>How to Properly Maintain a Local Copy of the Order Book</h2>
 <ol>
-<li>Though <strong>spot@public.increase.depth.v3.api@<symbol></strong> to get full amount of depth information, save the current version.</li>
-<li>Subscribe to ws depth information, if the received data version more than the current version after update,  the later received update cover the previous one at the same price.</li>
-<li>Through <strong>https://api.mexc.com/api/v3/depth?symbol=MXBTC&amp;limit=1000</strong> get  the latest 1000 depth snapshots.</li>
+<li>Subscribe to <code>spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code> to get full amount of depth information, save the current version.</li>
+<li>Subscribe to ws depth information, if the received data version more than the current version after update, the later received update cover the previous one at the same price.</li>
+<li>Through <strong>https://api.mexc.com/api/v3/depth?symbol=MXBTC&amp;limit=1000</strong> to get the latest 1000 depth snapshots.</li>
 <li>Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information</li>
 <li>Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS</li>
 <li>The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.</li>
 <li>The amount of hanging orders in each event represents the <strong>absolute value</strong> of the current hanging orders of the price, rather than the relative change.</li>
 <li>If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.</li>
 </ol>
+
+<p>Note: Because the depth snapshot has a limitation on the number of price levels, any price levels not included in the initial snapshot and without quantity changes will not appear in the incremental depth updates. Therefore, even after applying all incremental updates, these price levels may not be visible in your local order book, and there may be some discrepancies between your local order book and the real order book. However, for most use cases, a depth limit of 5000 levels is sufficient to understand the market and trading activity effectively.</p>
+
+<hr>
 <h1 id='websocket-user-data-streams'>Websocket User Data Streams</h1>
 <ul>
-<li><p>The base API endpoint is: <strong>https://api.mexc.com</strong></p></li>
-<li><p>A User Data Stream <code>listenKey</code> is valid for 60 minutes after creation.</p></li>
-<li><p>Doing a <code>PUT</code> on a <code>listenKey</code> will extend its validity for 60 minutes.</p></li>
-<li><p>Doing a <code>DELETE</code> on a <code>listenKey</code> will close the stream and invalidate the <code>listenKey</code>.</p></li>
-<li><p>websocket baseurl: <strong>wss://wbs.mexc.com/ws</strong></p></li>
-<li><p>User Data Streams are accessed at <strong>/ws?listenKey=listenKey</strong> <br/>eg:<strong>wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></p></li>
-<li><p>A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.</p></li>
-<li><p>Each UID can apply for a maximum of 60 listen keys (excluding invalid listen keys).</p></li>
-<li><p>Each listen key maximum support  5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).</p></li>
+<li>The base API endpoint is: <strong>https://api.mexc.com</strong></li>
+<li>A User Data Stream <code>listenKey</code> is valid for 60 minutes after creation.</li>
+<li>Doing a <code>PUT</code> on a  <code>listenKey</code> will extend its validity for 60 minutes.</li>
+<li>Doing a <code>DELETE</code> on a <code>listenKey</code> will close the stream and invalidate the <code>listenKey</code>.</li>
+<li>websocket baseurl: <strong>ws://wbs-api.mexc.com/ws</strong></li>
+<li>User Data Streams are accessed at  <strong>/ws?listenKey=listenKey</strong><br>
+For example: <strong>ws://wbs-api.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
+<li>A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.</li>
+<li>Each UID can apply for a maximum of 60 listen keys (excluding invalid listen keys).</li>
+<li>Each listen key maximum support 5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).</li>
 </ul>
-<h2 id='listen-key'>Listen Key</h2><h3 id='create-a-listenkey'>Create a ListenKey</h3>
+<h2 id='listen-key'>Listen Key</h2><h3 id='generate-listen-key'>Generate Listen Key</h3>
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
-}
-</code></pre></div>
-<p><strong>Permission:</strong>  SPOT_ACCOUNT_R</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"listenKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Required Permissions:</strong> Account Read / SPOT_ACCOUNT_R</p>
 
-<p><strong>HTTP</strong></p>
+<p><strong>HTTP Request</strong></p>
 
 <ul>
-<li><strong>POST</strong>  <code>/api/v3/userDataStream</code></li>
+<li><strong>POST</strong> <code>/api/v3/userDataStream</code></li>
 </ul>
 
-<p>Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. </p>
+<p>Starts a new data stream. The stream will close 60 minutes after creation unless a keepalive is sent.</p>
 
-<p><strong>request:</strong></p>
+<p><strong>Parameters:</strong></p>
 
 <p>NONE</p>
-<h3 id='query-all-listenkey'>Query all ListenKey</h3>
+
+<hr>
+<h3 id='get-valid-listen-keys'>Get Valid Listen Keys</h3>
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "listenKey": [
-        "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
-        "87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb",
-        "dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"
-    ]
-}
-</code></pre></div>
-<p><strong>Permission:</strong>  SPOT_ACCOUNT_R</p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"listenKey"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"87cb8da0fb150e36c232c2c060bc3848693312008caf3acae73bbbbbbbbbbbb"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dc027517ebee2328b75268461a9df4d21addfac6ebebab8f5a6cccccccccccccc"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Required Permissions:</strong> Account Read / SPOT_ACCOUNT_R</p>
 
-<p><strong>HTTP</strong></p>
+<p><strong>HTTP Request</strong></p>
 
 <ul>
-<li><strong>GET</strong>  <code>/api/v3/userDataStream</code></li>
+<li><strong>GET</strong> <code>/api/v3/userDataStream</code></li>
 </ul>
 
-<p>get all valid listenKey</p>
+<p>Retrieves all currently valid listen keys.</p>
 
-<p><strong>request:</strong></p>
+<p><strong>Parameters:</strong></p>
 
 <p>NONE</p>
-<h3 id='keep-alive-a-listenkey'>Keep-alive a ListenKey</h3>
+
+<hr>
+<h3 id='extend-listen-key-validity'>Extend Listen Key Validity</h3>
 <blockquote>
 <p><strong>Response</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
-}
-</code></pre></div>
-<p><strong>HTTP</strong></p>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"listenKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
 
 <ul>
-<li><strong>PUT</strong>  <code>/api/v3/userDataStream</code></li>
+<li><strong>PUT</strong> <code>/api/v3/userDataStream</code></li>
 </ul>
 
-<p>Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It&#39;s recommended to send a ping about every 30 minutes.</p>
+<p>Extends the validity to 60 minutes from the time of this call. It is recommended to send a request every 30 minutes.</p>
 
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>listenKey</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<hr>
+<h3 id='close-listen-key'>Close Listen Key</h3>
+<blockquote>
+<p><strong>Response</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"listenKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>HTTP Request</strong></p>
+
+<ul>
+<li><strong>DELETE</strong> <code>/api/v3/userDataStream</code></li>
+</ul>
+
+<p>Closes the user data stream.</p>
+
+<p><strong>Request Parameters:</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>listenKey</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<hr>
+<h2 id='spot-account-update'>Spot Account Update</h2>
+<p>After a successful subscription, whenever the account balance or available balance changes, the server will push updates of the account assets.</p>
+
+<blockquote>
 <p><strong>Request:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Mandatory</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">listenKey</td>
-<td style="text-align: left">STRING</td>
-<td style="text-align: left">YES</td>
-<td style="text-align: left"></td>
-</tr>
-</tbody></table>
-
-<p>### Close a ListenKey  </p>
-
-<blockquote>
-<p><strong>Response</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code> {
-     "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
- }
-</code></pre></div>
-<p><strong>HTTP</strong></p>
-
-<ul>
-<li><strong>DELETE</strong>  <code>/api/v3/userDataStream</code></li>
-</ul>
-
-<p>Close out a user data stream.</p>
-<h2 id='spot-account-upadte'>Spot Account Upadte</h2>
-<p>The server will push an update of the account assets when the account balance changes.  </p>
-
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@private.account.v3.api.pb"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
-<p><strong>request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-    "spot@private.account.v3.api"
-    ]
-}
-</code></pre></div>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "c": "spot@private.account.v3.api",
-    "d": {
-        "a": "USDT",
-        "c": 1678185928428,
-        "f": "302.185113007893322435",
-        "fd": "-4.990689704",
-        "l": "4.990689704",
-        "ld": "4.990689704",
-        "o": "ENTRUST_PLACE"
-    },
-    "t": 1678185928435
-}
-</code></pre></div>
-<p><strong>Request:</strong> <code>spot@private.account.v3.api</code></p>
-
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="s2">"spot@private.account.v3.api.pb"</span><span class="p">,</span><span class="w">
+  </span><span class="err">createTime:</span><span class="w"> </span><span class="mi">1736417034305</span><span class="p">,</span><span class="w">
+  </span><span class="err">sendTime:</span><span class="w"> </span><span class="mi">1736417034307</span><span class="p">,</span><span class="w">
+  </span><span class="err">privateAccount</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">vcoinName:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="err">coinId:</span><span class="w"> </span><span class="s2">"128f589271cb4951b03e71e6323eb7be"</span><span class="p">,</span><span class="w">
+    </span><span class="err">balanceAmount:</span><span class="w"> </span><span class="s2">"21.94210356004384"</span><span class="p">,</span><span class="w">
+    </span><span class="err">balanceAmountChange:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="err">frozenAmount:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="err">frozenAmountChange:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="err">type:</span><span class="w"> </span><span class="s2">"CONTRACT_TRANSFER"</span><span class="p">,</span><span class="w">
+    </span><span class="err">time:</span><span class="w"> </span><span class="mi">1736416910000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@private.account.v3.api.pb</code></p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">json</td>
-<td style="text-align: left">account updates</td>
+<td>privateAccount</td>
+<td>json</td>
+<td>Account information</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; a</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">asset</td>
+<td>vcoinName</td>
+<td>string</td>
+<td>Asset name</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">change time</td>
+<td>balanceAmount</td>
+<td>string</td>
+<td>Available balance</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; f</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">free balance</td>
+<td>balanceAmountChange</td>
+<td>string</td>
+<td>Change in available balance</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; fd</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">free changed amount</td>
+<td>frozenAmount</td>
+<td>string</td>
+<td>Frozen balance</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; l</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">frozen amount</td>
+<td>frozenAmountChange</td>
+<td>string</td>
+<td>Change in frozen balance</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; ld</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">frozen changed amount</td>
+<td>type</td>
+<td>string</td>
+<td>Change type (<a href=\"#account_position\">see details</a>)</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; o</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left"><a href="#account_position">changed type</a></td>
-</tr>
-<tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>time</td>
+<td>long</td>
+<td>Settlement time</td>
 </tr>
 </tbody></table>
+
+<hr>
 <h2 id='spot-account-deals'>Spot Account Deals</h2>
 <blockquote>
-<p><strong>request:</strong></p>
+<p><strong>Request:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@private.deals.v3.api"
-    ]
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"spot@private.deals.v3.api.pb"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "c": "spot@private.deals.v3.api",
-    "d": {
-        "p": "1.804",
-        "v": "0.31",
-        "a": "0.55924",
-        "S": 1,
-        "T": 1678901086198,
-        "t": "5bbb6ad8b4474570b155610e30d960cd",
-        "c": "",
-        "i": "2dd9655f9fa2438fa1709510d7c1afd9",
-        "m": 0,
-        "st": 0,
-        "n": "0.000248206380027431",
-        "N": "MX"
-    },
-    "s": "MXUSDT",
-    "t": 1661938980285
-}
-</code></pre></div>
-<p><strong>Request:</strong> <code>spot@private.deals.v3.api</code></p>
-
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="s2">"spot@private.deals.v3.api.pb"</span><span class="p">,</span><span class="w">
+  </span><span class="err">symbol:</span><span class="w"> </span><span class="s2">"MXUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="err">sendTime:</span><span class="w"> </span><span class="mi">1736417034332</span><span class="p">,</span><span class="w">
+  </span><span class="err">privateDeals</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">price:</span><span class="w"> </span><span class="s2">"3.6962"</span><span class="p">,</span><span class="w">
+    </span><span class="err">quantity:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">amount:</span><span class="w"> </span><span class="s2">"3.6962"</span><span class="p">,</span><span class="w">
+    </span><span class="err">tradeType:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="err">tradeId:</span><span class="w"> </span><span class="s2">"505979017439002624X1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">orderId:</span><span class="w"> </span><span class="s2">"C02__505979017439002624115"</span><span class="p">,</span><span class="w">
+    </span><span class="err">feeAmount:</span><span class="w"> </span><span class="s2">"0.0003998377369698171"</span><span class="p">,</span><span class="w">
+    </span><span class="err">feeCurrency:</span><span class="w"> </span><span class="s2">"MX"</span><span class="p">,</span><span class="w">
+    </span><span class="err">time:</span><span class="w"> </span><span class="mi">1736417034280</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@private.deals.v3.api.pb</code></p>
+
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">json</td>
-<td style="text-align: left">dealsInfo</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">tradetype 1:buy 2:sell</td>
+<td>sendTime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; T</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">tradeTime</td>
+<td>privateDeals</td>
+<td>json</td>
+<td>Account trade information</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">clientOrderId</td>
+<td>price</td>
+<td>string</td>
+<td>Trade price</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">orderId</td>
+<td>quantity</td>
+<td>string</td>
+<td>Trade quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; m</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">isMaker</td>
+<td>amount</td>
+<td>string</td>
+<td>Trade amount</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">price</td>
+<td>tradeType</td>
+<td>int</td>
+<td>Trade type (1: Buy, 2: Sell)</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; st</td>
-<td style="text-align: left">byte</td>
-<td style="text-align: left">isSelfTrade</td>
+<td>tradeId</td>
+<td>string</td>
+<td>Trade ID</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; t</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">tradeId</td>
+<td>orderId</td>
+<td>string</td>
+<td>Order ID</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">quantity</td>
+<td>clientOrderId</td>
+<td>string</td>
+<td>User-defined order ID</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; a</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">deals amount</td>
+<td>feeAmount</td>
+<td>string</td>
+<td>Fee amount</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; n</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">commission fee</td>
+<td>feeCurrency</td>
+<td>string</td>
+<td>Fee currency</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; N</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">commissionAsset）</td>
-</tr>
-<tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
-</tr>
-<tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>time</td>
+<td>long</td>
+<td>Trade time</td>
 </tr>
 </tbody></table>
+
+<hr>
 <h2 id='spot-account-orders'>Spot Account Orders</h2>
 <blockquote>
-<p><strong>request:</strong></p>
+<p><strong>Request:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "method": "SUBSCRIPTION",
-  "params": [
-      "spot@private.orders.v3.api"
-  ]
-}
-</code></pre></div>
-<p><strong>Request:</strong> <code>spot@private.orders.v3.api</code></p>
-<h3 id='1-limit-market-orders'>1. Limit/Market Orders</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"spot@private.orders.v3.api.pb"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Request Parameter:</strong> <code>spot@private.orders.v3.api.pb</code></p>
+
 <blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "A":8.0,
-        "O":1661938138000,
-        "S":1,
-        "V":10,
-        "a":8,
-        "c":"",
-        "i":"e03a5c7441e44ed899466a7140b71391",
-        "m":0,
-        "o":1,
-        "p":0.8,
-        "s":1,
-        "v":10,
-        "ap":0,  
-        "cv":0,     
-        "ca":0 
-  },
-  "s": "MXUSDT",
-  "t": 1661938138193
-}
-</code></pre></div>
 <p><strong>Response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">channel:</span><span class="w"> </span><span class="s2">"spot@private.orders.v3.api.pb"</span><span class="p">,</span><span class="w">
+  </span><span class="err">symbol:</span><span class="w"> </span><span class="s2">"MXUSDT"</span><span class="p">,</span><span class="w">
+  </span><span class="err">sendTime:</span><span class="w"> </span><span class="mi">1736417034281</span><span class="p">,</span><span class="w">
+  </span><span class="err">privateOrders</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">id:</span><span class="w"> </span><span class="s2">"C02__505979017439002624115"</span><span class="p">,</span><span class="w">
+    </span><span class="err">price:</span><span class="w"> </span><span class="s2">"3.5121"</span><span class="p">,</span><span class="w">
+    </span><span class="err">quantity:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">amount:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="err">avgPrice:</span><span class="w"> </span><span class="s2">"3.6962"</span><span class="p">,</span><span class="w">
+    </span><span class="err">orderType:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="err">tradeType:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="err">remainAmount:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="err">remainQuantity:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="err">lastDealQuantity:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">cumulativeQuantity:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="err">cumulativeAmount:</span><span class="w"> </span><span class="s2">"3.6962"</span><span class="p">,</span><span class="w">
+    </span><span class="err">status:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="err">createTime:</span><span class="w"> </span><span class="mi">1736417034259</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>Response Parameters:</strong></p>
 
 <table><thead>
 <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
+<th>Parameter</th>
+<th>Data Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">json</td>
-<td style="text-align: left">orderInfo</td>
+<td>symbol</td>
+<td>string</td>
+<td>Trading pair</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; A</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">remainAmount</td>
+<td>sendTime</td>
+<td>long</td>
+<td>Event time</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; O</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">createTime</td>
+<td>privateOrders</td>
+<td>json</td>
+<td>Account order information</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">tradetype 1:buy 2:sell</td>
+<td>id</td>
+<td>string</td>
+<td>Order ID</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; V</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">remainQuantity</td>
+<td>price</td>
+<td>bigDecimal</td>
+<td>Order price</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; a</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">amount</td>
+<td>quantity</td>
+<td>bigDecimal</td>
+<td>Order quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">clientOrderId</td>
+<td>amount</td>
+<td>bigDecimal</td>
+<td>Total order amount</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">orderId</td>
+<td>avgPrice</td>
+<td>bigDecimal</td>
+<td>Average trade price</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; m</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">isMaker</td>
+<td>orderType</td>
+<td>int</td>
+<td>Order type: LIMIT_ORDER (1), POST_ONLY (2), IMMEDIATE_OR_CANCEL (3), FILL_OR_KILL (4), MARKET_ORDER (5); Stop loss/take profit (100)</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; o</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100)</td>
+<td>tradeType</td>
+<td>int</td>
+<td>Trade type (1: Buy, 2: Sell)</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">PRICE</td>
+<td>remainAmount</td>
+<td>bigDecimal</td>
+<td>Remaining amount</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; s</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">status 1:New order 2:Filled 3:Partially filled 4:Order canceled 5:Order filled partially, and then the rest of the order is canceled</td>
+<td>remainQuantity</td>
+<td>bigDecimal</td>
+<td>Remaining quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">quantity</td>
+<td>cumulativeQuantity</td>
+<td>bigDecimal</td>
+<td>Cumulative trade quantity</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; ap</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">avgPrice</td>
+<td>cumulativeAmount</td>
+<td>bigDecimal</td>
+<td>Cumulative trade amount</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; cv</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">cumulativeQuantity</td>
+<td>status</td>
+<td>int</td>
+<td>Order status: 1: Not traded, 2: Fully traded, 3: Partially traded, 4: Canceled, 5: Partially canceled</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; ca</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">cumulativeAmount</td>
-</tr>
-<tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
-</tr>
-<tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
-</tr>
-</tbody></table>
-<h3 id='2-stop-limit-order'>2. Stop Limit Order</h3>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "N":"USDT",
-        "O":1661938853715,
-        "P":0.9,
-        "S":1,
-        "T":1,
-        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
-        "o":100,
-        "p":1.01,
-        "s":"NEW",
-        "v":6
-  },
-  "s": "MXUSDT",
-  "t": 1661938853727
-}
-</code></pre></div>
-<p><strong>Response:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">json</td>
-<td style="text-align: left">orderInfo</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; N</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">commissionAsset</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; O</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">createTime</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; P</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">triggerPrice</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">tradetype 1:buy 2:sell</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; T</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">0: GE(price is higher than triggerPrice) 1: LE(price is lower than triggerPrice)</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">orderId</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;  o</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">orderType LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100)</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">price</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">state  NEW,CANCELED,EXECUTED,FAILED</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">quantity</td>
-</tr>
-<tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">symbol</td>
-</tr>
-<tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">eventTime</td>
+<td>createTime</td>
+<td>long</td>
+<td>Order creation time</td>
 </tr>
 </tbody></table>
 <h1 id='rebate-endpoints'>Rebate Endpoints</h1><h2 id='get-rebate-history-records'>Get Rebate History Records</h2>
