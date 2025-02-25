@@ -75,6 +75,9 @@ MEXC致力于构建加密货币基础设施，提供有价值服务的API 经纪
 
 # 更新日志
 
+## **2025-02-24**
+- 新增Protocol Buffers形式的websocket推送频道
+
 ## **2024-10-17**
 - 新增查询账户KYC状态接口
 
@@ -3701,9 +3704,9 @@ GET /api/v3/etf/info
 
 # Websocket 行情推送
 
-- 本篇所列出的所有wss接口的baseurl为: **wss://wbs.mexc.com/ws**
+- 本篇所列出的所有wss接口的baseurl为: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
 - 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连
-- symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api@<symbol>`</br>实例：`spot@public.deals.v3.api@BTCUSDT`
+- symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api.pb@<symbol>`</br>实例：`spot@public.deals.v3.api.pb@BTCUSDT`
 - websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接
 - 1个 ws 连接最多30个订阅
 - 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用
@@ -3714,6 +3717,87 @@ GET /api/v3/etf/info
 - 响应内容中的`id`是无符号整数，作为往来信息的唯一标识。
 - 如果相应内容中的 `msg` 为相应的请求字段，表示请求发送成功。
 
+## protocolbuffers接入方案
+
+当前ws推送采用protobuf的形式，具体接入流程如下：
+
+1.**PB文件定义**
+   PB定义文件可以在此连接处获取:[https://github.com/mexcdevelop/websocket-proto](https://github.com/mexcdevelop/websocket-proto)
+   
+2.**生成反序列化代码**
+   使用[https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)工具编译.proto文件，生成反序列化代码
+
+> **Java**
+
+```
+//在proto文件夹下执行
+protoc *.proto --java_out=java文件输出路径
+```
+
+> **python**
+
+```
+//在proto文件夹下执行
+protoc *.proto --python_out=python文件输出路径
+```
+
+> **其他**
+
+```
+ 支持多种语言，包括 C++,C#, Go, Ruby, PHP, JS等。详见[https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)。
+```
+3.**数据反序列化**
+   使用上一步生成的代码，反序列化数据
+
+> **Java**
+ 引入protobuf-java:
+
+```
+  <dependency>
+ 		<groupId>com.google.protobuf</groupId>
+ 		<artifactId>protobuf-java</artifactId>	
+ 		<version>S{protobuf.version}/version><!-- 根据项目实际情况指定版本 -->	
+ 	</dependency>
+
+
+ 解析示例:
+
+ 	// 组装对象
+ 	PushDataV3ApiWrapper pushDataV3ApiWrapper = PushDataV3ApiWrapper.newBuilder()
+ 			.setChannel("spot@public.aggre.depth.v3.api.pb")
+ 			.setSymbol("BTCUSDTI)
+ 			.setSendTime(System.currentTimeMillis())
+ 			.build();
+ 	
+ 	// 序列化为byte数组
+ 	byte[] serializedData = pushDataV3ApiWrapper.toByteArray();
+ 	
+ 	// 反序列化为 PushDataV3ApiWrapper 对象
+ 	PushDataV3ApiWrapper resultV3 = PushDataV3ApiWrapper.parseFrom(serializedData);
+```
+> **python**
+
+```
+ 解析示例:
+ 	
+
+ 	import PushDataV3ApiWrapper_pb2
+ 	
+ 	#组装对象
+ 	PushDataV3ApiWrapper = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
+ 	PushDataV3ApiWrapper.channel = 'spot@public.aggre.depth.v3.api.pb'
+ 	PushDataV3ApiWrapper.symbol ='BTCUSDT'
+ 	
+ 	#序列化为字符串
+ 	serializedData = PushDataV3ApiWrapper.SerializeToString()
+ 	
+ 	# 反序列化为 PushDataV3ApiWrapper 对象
+ 	result = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
+ 	result.ParseFromString(serializedData)
+ 	print(result)
+```
+
+
 ### 订阅一个信息流
 
 > **订阅频道响应**
@@ -3722,7 +3806,7 @@ GET /api/v3/etf/info
  {
   "id":0,
   "code":0,
-  "msg":"spot@public.deals.v3.api@BTCUSDT"
+  "msg":"spot@public.deals.v3.api.pb@BTCUSDT"
  }
 ```
 
@@ -3731,8 +3815,9 @@ GET /api/v3/etf/info
 
 {
  "method":"SUBSCRIPTION",
- "params":["spot@public.deals.v3.api@BTCUSDT"]
+ "params":["spot@public.deals.v3.api.pb@BTCUSDT"]
 }
+
 
 ### 取消订阅一个信息流
 
@@ -3742,16 +3827,18 @@ GET /api/v3/etf/info
  {
   "id":0,
   "code":0,
-  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
+  "msg":"spot@public.increase.depth.v3.api.pb@BTCUSDT"
  }
 ```
 
 - **请求**
 
+
 {
  "method":"UNSUBSCRIPTION",
- "params":["spot@public.deals.v3.api@BTCUSDT","spot@public.increase.depth.v3.api@BTCUSDT"]
+ "params":["spot@public.deals.v3.api.pb@BTCUSDT"]
 }
+
 
 ### PING/PONG机制
 
@@ -3767,9 +3854,11 @@ GET /api/v3/etf/info
 
 - **请求**
 
+
 {"method":"PING"}
 
-## 逐笔交易(实时)
+
+## 逐笔交易
 
 >**request:**
 
@@ -3777,43 +3866,48 @@ GET /api/v3/etf/info
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.deals.v3.api@BTCUSDT"
+        "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 ```
+
 > **response:**
 
 ```
-{
-	"c":"spot@public.deals.v3.api@BTCUSDT",    
-	"d":{
-			"deals":[{
-					"S":2,                             //交易类型tradeType
-					"p":"20233.84",                    //成交价格price
-					"t":1661927587825,  				       //成交时间dealTime
-					"v":"0.001028"}],  						     //成交数量quantity
-			"e":"spot@public.deals.v3.api"},        //事件类型eventType			         
-	"s":"BTCUSDT",  								           //交易对symbol
-	"t":1661927587836                          //事件时间eventTime
-} 								         
+ {
+  "channel": "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT",
+  "publicdeals": {
+    "dealsList": [
+      {
+        "price": "93220.00", //成交价格price
+        "quantity": "0.04438243", //成交数量quantity
+        "tradetype": 2,//交易类型tradeType
+        "time": 1736409765051 //成交时间dealTime
+      }
+    ],
+    "eventtype": "spot@public.aggre.deals.v3.api.pb@100ms" //事件类型eventType 
+  },
+  "symbol": "BTCUSDT", //交易对symbol
+  "sendtime": 1736409765052 //事件时间eventTime
+}
 ```
 
-**请求参数：**   `spot@public.deals.v3.api@<symbol>`
+**请求参数：**   `spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`
 
 逐笔交易推送每一笔成交的信息。**成交**，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| deals | array | 成交信息  |
-| > S | int | 交易类型 1:买 2:卖 |
-| > p | string | 成交价格 |
-| > t | long | 成交时间 |
-| > v | string | 成交数量 |
-| e | string | 事件类型 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
+| 参数名    | 数据类型 | 说明               |
+| :-------- | :------- | :----------------- |
+| dealsList | array    | 成交信息           |
+| price     | string   | 成交价格           |
+| quantity  | string   | 成交数量           |
+| tradetype | int      | 交易类型 1:买 2:卖 |
+| time      | long     | 成交时间           |
+| eventtype | string   | 事件类型           |
+| symbol    | string   | 交易对             |
+| sendtime  | long     | 事件时间           |
 
 ## K线 Streams
 
@@ -3823,7 +3917,7 @@ GET /api/v3/etf/info
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.kline.v3.api@BTCUSDT@Min15"
+        "spot@public.kline.v3.api.pb@BTCUSDT@Min15"
     ]
 }
 ```
@@ -3832,47 +3926,46 @@ GET /api/v3/etf/info
 
 ```
 {
-	"c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
-	"d":{
-			"k":{
-				"T":1661931900,      //这根K线的结束时间                      
-				"a":29043.48804658,	 //这根K线期间成交额
-				"c":20279.43,				 //这根K线期间末一笔成交价
-				"h":20284.93,				 //这根K线期间最高成交价
-				"i":"Min15",				 //K线间隔
-				"l":20277.52,				 //这根K线期间最低成交价
-				"o":20284.93,				 //这根K线期间第一笔成交价
-				"s":"BTCUSDT",			 //交易对
-				"t":1661931000,			 //这根K线的起始时间
-				"v":1.43211},				 //这根K线期间成交量
-			"e":"spot@public.kline.v3.api"},					 //事件类型
-	"s":"BTCUSDT",						 //交易对
-	"t":1661931016878					 //事件时间
+  "channel": "spot@public.kline.v3.api.pb@BTCUSDT@Min15",
+  "publicspotkline": {
+    "interval": "Min15", //K线间隔
+    "windowstart": 1736410500, //这根K线的起始时间
+    "openingprice": "92925", //这根K线期间第一笔成交价
+    "closingprice": "93158.47", //这根K线期间末一笔成交价
+    "highestprice": "93158.47", //这根K线期间最高成交价
+    "lowestprice": "92800", //这根K线期间最低成交价
+    "volume": "36.83803224", //这根K线期间成交量
+    "amount": "3424811.05", //这根K线期间成交额
+    "windowend": 1736411400 //这根K线的结束时间   
+  },
+  "symbol": "BTCUSDT",
+  "symbolid": "2fb942154ef44a4ab2ef98c8afb6a4a7",
+  "createtime": 1736410707571
 }
 
 ```
 
 K线逐秒推送所请求的K线种类(最新一根K线)的更新。
 
-**请求参数：** `spot@public.kline.v3.api@<symbol>@<interval>`
+**请求参数：** `spot@public.kline.v3.api.pb@<symbol>@<interval>`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| e | string | 事件类型 |
-| k | object| k线信息 |
-| > T | long | 这根K线的结束时间 |
-| > a | bigDecimal | 这根K线期间成交额 |
-| > c | bigDecimal | 这根K线期间末一笔成交价 |
-| > h | bigDecimal | 这根K线期间最高成交价 |
-| > i | interval | K线间隔 |
-| > l | bigDecimal | 这根K线期间最低成交价 |
-| > o | bigDecimal | 这根K线期间第一笔成交价 |
-| > t | long | 这根K线的起始时间 |
-| > v | bigDecimal | 这根K线期间成交量 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
+| 参数名          | 数据类型   | 说明                    |
+| :-------------- | :--------- | :---------------------- |
+| publicspotkline | object     | k线信息                 |
+| interval        | interval   | K线间隔                 |
+| windowstart     | long       | 这根K线的起始时间       |
+| openingprice    | bigDecimal | 这根K线期间第一笔成交价 |
+| closingprice    | bigDecimal | 这根K线期间末一笔成交价 |
+| highestprice    | bigDecimal | 这根K线期间最高成交价   |
+| lowestprice     | bigDecimal | 这根K线期间最低成交价   |
+| volume          | bigDecimal | 这根K线期间成交量       |
+| amount          | bigDecimal | 这根K线期间成交额       |
+| windowend       | long       | 这根K线的结束时间       |
+| symbol          | string     | 交易对                  |
+| symbolid        | string     | 交易对id                |
+| createtime      | long       | 事件时间                |
 
 **K线图间隔参数:**
 
@@ -3889,7 +3982,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 - Week1
 - Month1
 
-## 增量深度信息(实时)
+## 增量深度信息
 
 >**request:**
 
@@ -3897,7 +3990,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.increase.depth.v3.api@BTCUSDT"
+        "spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 ```
@@ -3905,37 +3998,124 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 > **response:**
 
 ```
-
 {
-	"c":"spot@public.increase.depth.v3.api@BTCUSDT",  
-	"d":{
-		"asks":[{									//bids:买单,asks:卖单
-			"p":"20290.89",		//变动的价格档位
-			"v":"0.000000"}], //数量
-		"e":"spot@public.increase.depth.v3.api",  //事件类型
-    "r":"3407459756"},	 //版本号
-	"s":"BTCUSDT",							//交易对
-	"t":1661932660144						//事件时间
+  "channel": "spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT",
+  "publicincreasedepths": {
+    "asksList": [], //asks:卖单
+    "bidsList": [ //bids:买单
+      {
+        "price": "92877.58", //变动的价格档位
+        "quantity": "0.00000000" //数量
+      }
+    ],
+    "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", //事件类型
+    "version": "36913293511" //版本号
+  },
+  "symbol": "BTCUSDT", //交易对
+  "sendtime": 1736411507002 //事件时间
 }
 ```
 
-如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+如果某个价格对应的挂单量(quantity)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
 
-**请求参数:** `spot@public.increase.depth.v3.api@<symbol>`
+**请求参数:** `spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| p | string | 变动的价格档位 |
-| v | string | 数量 |
-| e | string | 事件类型 |
-| r | string | 版本号 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
+| 参数名    | 数据类型 | 说明           |
+| :-------- | :------- | :------------- |
+| price     | string   | 变动的价格档位 |
+| quantity  | string   | 数量           |
+| eventtype | string   | 事件类型       |
+| version   | string   | 版本号         |
+| symbol    | string   | 交易对         |
+| sendtime  | long     | 事件时间       |
 
+
+## 增量深度信息(批量聚合)
+
+>**request:**
+
+```
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"
+    ]
+}
+```
+
+> **response:**
+
+```
+{
+  "channel" : "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739502064578",
+  "publicIncreaseDepthsBatch" : {
+    "items" : [ {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.48",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145507"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.90",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145508"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.31",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145509"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.84",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145510"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96576.69",
+        "quantity" : "4.88725694"
+      } ],
+      "eventType" : "",
+      "version" : "39003145511"
+    } ],
+    "eventType" : "spot@public.increase.depth.batch.v3.api.pb"
+  }
+}
+```
+
+批量聚合版本，条数超过5条或者时间超过5ms就推送一次，如果某个价格对应的挂单量(quantity)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+
+**请求参数:** `spot@public.increase.depth.batch.v3.api.pb@<symbol>`
+
+**返回参数:**
+
+| 参数名    | 数据类型 | 说明           |
+| :-------- | :------- | :------------- |
+| price     | string   | 变动的价格档位 |
+| quantity  | string   | 数量           |
+| eventtype | string   | 事件类型       |
+| version   | string   | 版本号         |
+| symbol    | string   | 交易对         |
+| sendtime  | long     | 事件时间       |
 
 ## 有限档位深度信息
+
 推送有限档深度信息，levels表示几档买卖单信息, 可选 5/10/20档。
 
 >**request:**
@@ -3944,7 +4124,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 {
     "method": "SUBSCRIPTION",
     "params": [
-                "spot@public.limit.depth.v3.api@BTCUSDT@5"
+                "spot@public.limit.depth.v3.api.pb@BTCUSDT@5"
 
    ]
 }
@@ -3953,80 +4133,46 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 > **response:**
 
 ```
-
 {
-  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
-  "d":{
-    "asks":[{                 //bids:买单,asks:卖单
-            "p":"20290.89",   //变动的价格档位
-            "v":"0.000000"}], //数量
-    "e":"spot@public.limit.depth.v3.api",  //事件类型
-    "r":"3407459756"},  //版本号 
-  "s":"BTCUSDT",              //交易对
-  "t":1661932660144           //事件时间
+  "channel": "spot@public.limit.depth.v3.api.pb@BTCUSDT@5",
+  "publiclimitdepths": {
+    "asksList": [ //asks:卖单
+      {
+        "price": "93180.18", //变动的价格档位
+        "quantity": "0.21976424" //数量
+      }
+    ],
+    "bidsList": [ //bids:买单
+      {
+        "price": "93179.98",
+        "quantity": "2.82651000"
+      }
+    ],
+    "eventtype": "spot@public.limit.depth.v3.api.pb", //事件类型
+    "version": "36913565463" //版本号 
+  },
+  "symbol": "BTCUSDT", //交易对
+  "sendtime": 1736411838730 //事件时间
 }
 ```
 
 
-**请求参数:** `spot@public.limit.depth.v3.api@<symbol>@<level>`
+**请求参数:** `spot@public.limit.depth.v3.api.pb@<symbol>@<level>`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| p | string | 变动的价格档位 |
-| v | string | 数量 |
-| e | string | 事件类型 |
-| r | string | 版本号 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
+| 参数名    | 数据类型 | 说明           |
+| :-------- | :------- | :------------- |
+| price     | string   | 变动的价格档位 |
+| quantity  | string   | 数量           |
+| eventtype | string   | 事件类型       |
+| version   | string   | 版本号         |
+| symbol    | string   | 交易对         |
+| sendtime  | long     | 事件时间       |
 
 ## 按Symbol的最优挂单信息
-实时推送指定交易对最优挂单信息。
 
->**request:**
-
-```
-{
-    "method": "SUBSCRIPTION",
-    "params": [
-                "spot@public.bookTicker.v3.api@BTCUSDT"
-      ]
-}
-```
-
-> **response:**
-
-```
-
-{
- "c":"spot@public.bookTicker.v3.api@<BTCUSDT>",
- "d":{
-    "A":"40.66000000"},  //卖单最优挂单数量
-    "B":"31.21000000",  //买单最优挂单数量
-    "a":"25.36520000", //卖单最优挂单价格
-    "b":"25.35190000", // 买单最优挂单价格 
-  },  
- "s":"BTCUSDT", //交易对
- "t":1661932660144 //事件时间
-}
-```
-
-
-**请求参数:** `spot@public.bookTicker.v3.api@<symbol>`
-
-**返回参数:**
-
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| A | string | 卖单最优挂单数量 |
-| B | string | 买单最优挂单数量 |
-| a | string | 卖单最优挂单价格 |
-| b | string | 买单最优挂单价格 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
-
-## MiniTicker
+推送指定交易对最优挂单信息。
 
 >**request:**
 
@@ -4034,56 +4180,43 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
-    ]
+                "spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT"
+      ]
 }
 ```
+
 > **response:**
 
 ```
 {
-  "d":
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--",
-    "t":"1699502456050"},
-  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
-  "t":1699502456051,
-  "s":"BTCUSDT"
-}								         
+  "channel": "spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT",
+  "publicbookticker": {
+    "bidprice": "93387.28",  // 买单最优挂单价格 
+    "bidquantity": "3.73485", //买单最优挂单数量
+    "askprice": "93387.29", //卖单最优挂单价格
+    "askquantity": "7.669875" //卖单最优挂单数量
+  },
+  "symbol": "BTCUSDT", //交易对
+  "sendtime": 1736412092433 //事件时间
+}
 ```
 
-**请求参数：**   `spot@public.miniTicker.v3.api@<symbol>@<timezone>`
-
+**请求参数:** `spot@public.aggre.bookTicker.v3.api.pb@(100ms|10ms)@<symbol>`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| c	| string	| 订阅频道名称| 
-| d	| data| data| 
-| >s	| string	|交易对symbol|
-| >p	| string	|交易对最新成交价|
-| >r	| string	|交易对的订阅utc8时区涨跌幅|
-| >tr	| string	|交易对的订阅时区涨跌幅|
-| >h	| string	|交易对的24小时最高价|
-| >l	| string	|交易对的24小时最低价|
-| >v	| string	|交易对的24小时交易额|
-| >q	| string	|交易对的24小时交易量|
-| >lastRT	| string	|ETF最近合并时间|
-| >MT	| string	|ETF合并次数|
-| >NV	| string	|ETF净值|
+| 参数名      | 数据类型 | 说明             |
+| :---------- | :------- | :--------------- |
+| bidprice    | string   | 买单最优挂单价格 |
+| bidquantity | string   | 买单最优挂单数量 |
+| askprice    | string   | 卖单最优挂单价格 |
+| askquantity | string   | 卖单最优挂单数量 |
+| symbol      | string   | 交易对           |
+| sendtime    | long     | 事件时间         |
 
+## 按Symbol的最优挂单信息（批量聚合）
 
-## MiniTickers
+批量聚合版本，推送指定交易对最优挂单信息。
 
 >**request:**
 
@@ -4091,68 +4224,47 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.miniTickers.v3.api@UTC+8"
-    ]
+                "spot@public.bookTicker.batch.v3.api.pb@BTCUSDT"
+      ]
 }
 ```
+
 > **response:**
 
 ```
 {
-  "d":
-  [{"s":"SENSOUSDT",
-    "p":"0.07642",
-    "r":"-0.0383",
-    "tr":"-0.0383",
-    "h":"0.08032",
-    "l":"0.07463",
-    "v":"25052.6533",
-    "q":"323777.17",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-  "c":"spot@public.miniTickers.v3.api@UTC+8",
-  "t":1699502456051,
-}								         
+  "channel" : "spot@public.bookTicker.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739503249114",
+  "publicBookTickerBatch" : {
+    "items" : [ {
+      "bidPrice" : "96567.37",
+      "bidQuantity" : "3.362925",
+      "askPrice" : "96567.38",
+      "askQuantity" : "1.545255"
+    } ]
+  }
+}
 ```
 
-**请求参数：**   `spot@public.miniTickers.v3.api@<timezone>`
-
+**请求参数:** `spot@public.bookTicker.batch.v3.api.pb@<symbol>`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| c	| string	| 订阅频道名称| 
-| d	| data| data| 
-| >s	| string	|交易对symbol|
-| >p	| string	|交易对最新成交价|
-| >r	| string	|交易对的订阅utc8时区涨跌幅|
-| >tr	| string	|交易对的订阅时区涨跌幅|
-| >h	| string	|交易对的24小时最高价|
-| >l	| string	|交易对的24小时最低价|
-| >v	| string	|交易对的24小时交易额|
-| >q	| string	|交易对的24小时交易量|
-| >lastRT	| string	|ETF最近合并时间|
-| >MT	| string	|ETF合并次数|
-| >NV	| string	|ETF净值|
+| 参数名      | 数据类型 | 说明             |
+| :---------- | :------- | :--------------- |
+| bidprice    | string   | 买单最优挂单价格 |
+| bidquantity | string   | 买单最优挂单数量 |
+| askprice    | string   | 卖单最优挂单价格 |
+| askquantity | string   | 卖单最优挂单数量 |
+| symbol      | string   | 交易对           |
+| sendtime    | long     | 事件时间         |
 
 
 ## 如何正确在本地维护一个orderbook副本
 
-1. 通过订阅 **spot@public.increase.depth.v3.api@<symbol>**获取全量深度信息，保存当前version。
-2. 订阅ws深度信息，收到更新后，如果收到的数据version>当前version,同一个价位，后收到的更新覆盖前面的。
+1. 通过订阅spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>获取全量深度信息，保存当前version。
+2. 订阅ws深度信息，收到更新后，如果收到的数据version > 当前version,同一个价位，后收到的更新覆盖前面的。
 3. 访问Rest接口 **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** 获得一个1000档的深度快照
 4. 将目前缓存的深度信息中同一价格，version<步骤3获取到的快照中的version的数据丢弃。
 5. 将深度快照中的内容更新至本地缓存，并从ws接收到的event开始继续更新。
@@ -4170,8 +4282,8 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 - 用于订阅账户数据的 `listenKey` 从创建时刻起有效期为60分钟
 - 可以通过 `PUT` 一个 `listenKey` 延长60分钟有效期
 - 可以通过`DELETE`一个 `listenKey` 立即关闭当前数据流，并使该`listenKey` 无效
-- websocket接口的baseurl: **wss://wbs.mexc.com/ws**
-- 订阅账户数据流的stream名称为 **/ws?listenKey=listenKey** <br/>  如：**wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
+- websocket接口的baseurl: **ws://wbs-api.mexc.com/ws**
+- 订阅账户数据流的stream名称为 **/ws?listenKey=listenKey** <br/>  如：**ws://wbs-api.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
 - 每个链接有效期不超过24小时，请妥善处理断线重连
 - 每个UID，最多申请60个listen key（不包含已失效listen key）
 - ws链接数的数量限制：每个listen key最多5个ws链接（即：每个uid最多申请的60个listen key，300个ws链接）
@@ -4247,7 +4359,7 @@ NONE
 
 | 参数名    | 数据类型 | 是否必需 | 说明 |
 | :-------- | :------- | :------- | :--- |
-| listenKey | string   | 是      |      |
+| listenKey | string   | 是       |      |
 
 ### 关闭 Listen Key  
 
@@ -4269,9 +4381,10 @@ NONE
 
 | 参数名    | 数据类型 | 是否必需 | 说明 |
 | :-------- | :------- | :------- | :--- |
-| listenKey | string   | 是      |      |  
+| listenKey | string   | 是       |      |
 
-## 现货账户信息(实时)  
+## 现货账户信息 
+
 在订阅成功后，每当账户余额发生变动或可用余额发生变动时，服务器将推送账户资产的更新。  
 
 >**request:**
@@ -4280,7 +4393,7 @@ NONE
 {
     "method": "SUBSCRIPTION",
     "params": [
-    "spot@private.account.v3.api"
+    "spot@private.account.v3.api.pb"
     ]
 }
 ```
@@ -4289,37 +4402,38 @@ NONE
 
 ```
 {
-    "c": "spot@private.account.v3.api",
-    "d": {
-        "a": "USDT",
-        "c": 1678185928428,
-        "f": "302.185113007893322435",
-        "fd": "-4.990689704",
-        "l": "4.990689704",
-        "ld": "4.990689704",
-        "o": "ENTRUST_PLACE"
-    },
-    "t": 1678185928435
+	channel: "spot@private.account.v3.api.pb"
+	createTime: 1736417034305
+	sendTime: 1736417034307
+	privateAccount {
+  	vcoinName: "USDT"
+  	coinId: "128f589271cb4951b03e71e6323eb7be"
+  	balanceAmount: "21.94210356004384"
+  	balanceAmountChange: "10"
+  	frozenAmount: "0"
+  	frozenAmountChange: "0"
+  	type: "CONTRACT_TRANSFER"
+  	time: 1736416910000
+	}
 }
 ```
 
-**请求参数：** `spot@private.account.v3.api`
+**请求参数：** `spot@private.account.v3.api.pb`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| d | json | 账户信息 |
-| > a | string | 资产名称 |
-| > c | long | 结算时间 |
-| > f | string | 可用余额 |
-| > fd | string | 可用变动金额 |
-| > l | string | 冻结余额 |
-| > ld | string | 冻结变动金额 |
-| > o | string | <a href="#account_position">变动类型</a>|
-| t | long | 事件时间 |
+| 参数名              | 数据类型 | 说明                                     |
+| :------------------ | :------- | :--------------------------------------- |
+| privateAccount      | json     | 账户信息                                 |
+| vcoinName           | string   | 资产名称                                 |
+| balanceAmount       | string   | 可用余额                                 |
+| balanceAmountChange | string   | 可用变动金额                             |
+| frozenAmount        | string   | 冻结余额                                 |
+| frozenAmountChange  | string   | 冻结变动金额                             |
+| type                | string   | <a href="#account_position">变动类型</a> |
+| time                | long     | 结算时间                                 |
 
-## 现货账户成交(实时)
+## 现货账户成交
 
 >**request:**
 
@@ -4327,7 +4441,7 @@ NONE
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@private.deals.v3.api"
+        "spot@private.deals.v3.api.pb"
     ]
 }
 ```
@@ -4336,49 +4450,44 @@ NONE
 
 ```
 {
-    "c": "spot@private.deals.v3.api",
-    "d": {
-        "p": "1.804",
-        "v": "0.31",
-        "a": "0.55924",
-        "S": 1,
-        "T": 1678901086198,
-        "t": "5bbb6ad8b4474570b155610e3960cd",
-        "c": "",
-        "i": "2dd9655f9fa2438fa1709510d7afd9",
-        "m": 0,
-        "st": 0,
-        "n": "0.000248206380027431",
-        "N": "MX"
-    },
-    "s": "MXUSDT",
-    "t": 1661938980285
+	channel: "spot@private.deals.v3.api.pb"
+	symbol: "MXUSDT"
+	sendTime: 1736417034332
+	privateDeals {
+  	price: "3.6962"
+		quantity: "1"
+ 		amount: "3.6962"
+	  tradeType: 2
+	  tradeId: "505979017439002624X1"
+	  orderId: "C02__505979017439002624115"
+	  feeAmount: "0.0003998377369698171"
+ 		feeCurrency: "MX"
+	  time: 1736417034280
+	}
 }
 ```
 
-**请求参数：** `spot@private.deals.v3.api`
+**请求参数：** `spot@private.deals.v3.api.pb`
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| d | json | 账户成交信息 |
-| > S | int | 交易类型 1:买 2:卖 |
-| > T | long | 成交时间 |
-| > c | string | 用户自定义订单id: clientOrderId |
-| > i | string | 订单id: orderId |
-| > m | int | 是否是挂单: isMaker |
-| > p | string | 交易价格 |
-| > st | byte | 是否自成交：isSelfTrade |
-| > t | string | 成交id: tradeId |
-| > v | string | 交易数量 |
-| > a | string | 交易金额 |
-| > n | string | 手续费数量 |
-| > N | string | 手续费币种 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
+| 参数名        | 数据类型 | 说明                            |
+| :------------ | :------- | :------------------------------ |
+| symbol        | string   | 交易对                          |
+| sendTime      | long     | 事件时间                        |
+| privateDeals  | json     | 账户成交信息                    |
+| price         | string   | 交易价格                        |
+| quantity      | string   | 交易数量                        |
+| amount        | string   | 交易金额                        |
+| tradeType     | int      | 交易类型 1:买 2:卖              |
+| tradeId       | string   | 成交id: tradeId                 |
+| orderId       | string   | 订单id: orderId                 |
+| clientOrderId | string   | 用户自定义订单id: clientOrderId |
+| feeAmount     | string   | 手续费数量                      |
+| feeCurrency   | string   | 手续费币种                      |
+| time          | long     | 成交时间                        |
 
-## 现货账户订单(实时)
+## 现货账户订单
 
 >**request:**
 
@@ -4386,106 +4495,59 @@ NONE
 {
   "method": "SUBSCRIPTION",
   "params": [
-      "spot@private.orders.v3.api"
+      "spot@private.orders.v3.api.pb"
   ]
 }
 ```
 
-**请求参数：** `spot@private.orders.v3.api`
-
-### a.限价/市价订单 (实时)
+**请求参数：** `spot@private.orders.v3.api.pb`
 
 > **response:**
 
 ```
 {
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "A":8.0,
-        "O":1661938138000,
-        "S":1,
-        "V":10,
-        "a":8,
-        "c":"",
-        "i":"e03a5c7441e44ed899466a7140b71391",
-        "m":0,
-        "o":1,
-        "p":0.8,
-        "s":1,
-        "v":10,
-        "ap":0,  
-        "cv":0, 	
-        "ca":0  
-  },
-  "s": "MXUSDT",
-  "t": 1661938138193
+	channel: "spot@private.orders.v3.api.pb"
+	symbol: "MXUSDT"
+	sendTime: 1736417034281
+	privateOrders {
+	  id: "C02__505979017439002624115"
+	  price: "3.5121"
+	  quantity: "1"
+	  amount: "0"
+	  avgPrice: "3.6962"
+	  orderType: 5
+	  tradeType: 2
+	  remainAmount: "0"
+	  remainQuantity: "0"
+	  lastDealQuantity: "1"
+	  cumulativeQuantity: "1"
+	  cumulativeAmount: "3.6962"
+	  status: 2
+	  createTime: 1736417034259
+	}
 }
 ```
 
 **返回参数:**
 
-| 参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| d | json | 账户订单信息 |
-| > A | bigDecimal | 实际剩余金额: remainAmount |
-| > O | long | 订单创建时间 |
-| > S | int | 交易类型 1:买 2:卖 |
-| > V | bigDecimal | 实际剩余数量: remainQuantity |
-| > a | bigDecimal | 下单总金额 |
-| > c | string | 用户自定义订单id: clientOrderId |
-| > i | string | 订单id |
-| > m | int | 是否是挂单: isMaker |
-| > o | int | 订单类型LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100） |
-| > p | bigDecimal | 下单价格 |
-| > s | int | 订单状态 1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单 |
-| > v | bigDecimal | 下单数量 |
-| > ap | bigDecimal | 平均成交价 |
-| > cv | bigDecimal | 累计成交数量 |
-| > ca | bigDecimal | 累计成交金额 |
-| t | long | 事件时间 |
-| s | string | 交易对 |
-
-### b.账户止盈止损订单(实时)
-
-> **response:**
-
-```
-{
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "N":"USDT",
-        "O":1661938853715,
-        "P":0.9,
-        "S":1,
-        "T":1,
-        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
-        "o":100,
-        "p":1.01,
-        "s":"NEW",
-        "v":6
-  },
-  "s": "MXUSDT",
-  "t": 1661938853727
-}
-```
-
-**返回参数:**
-
-|  参数名      | 数据类型   | 说明 |
-| :-------- | :----- | :--- |
-| d            | json | 账户订单信息 |
-| > N | string | 手续费资产类别 |
-|  > O | long | 订单创建时间 |
-|  > P | bigDecimal | 触发价格 |
-|  > S | int | 交易类型 1: 买 2: 卖 |
-|  > T | int | 0: GE(买入价大过触发价) 1: LE(买入价小于触发价) |
-|  > i | string | 订单id |
-| >  o | int | 订单类型 LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100） |
-|  > p | bigDecimal | 下单价格 |
-| > s | string | 订单状态  NEW ,CANCELED ,EXECUTED, FAILED |
-|  > v | bigDecimal | 下单数量 |
-| s | string | 交易对 |
-| t | long | 事件时间 |
+| 参数名             | 数据类型   | 说明                                                         |
+| :----------------- | :--------- | :----------------------------------------------------------- |
+| symbol             | string     | 交易对                                                       |
+| sendTime           | long       | 事件时间                                                     |
+| privateOrders      | json       | 账户订单信息                                                 |
+| id                 | string     | 订单id                                                       |
+| price              | bigDecimal | 下单价格                                                     |
+| quantity           | bigDecimal | 下单数量                                                     |
+| amount             | bigDecimal | 下单总金额                                                   |
+| avgPrice           | bigDecimal | 平均成交价                                                   |
+| orderType          | int        | 订单类型LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100） |
+| tradeType          | int        | 交易类型 1:买 2:卖                                           |
+| remainAmount       | bigDecimal | 实际剩余金额: remainAmount                                   |
+| remainQuantity     | bigDecimal | 实际剩余数量: remainQuantity                                 |
+| cumulativeQuantity | bigDecimal | 累计成交数量                                                 |
+| cumulativeAmount   | bigDecimal | 累计成交金额                                                 |
+| status             | int        | 订单状态 1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单    |
+| createTime         | long       | 订单创建时间                                                 |
 
 # 邀请返佣接口
 
