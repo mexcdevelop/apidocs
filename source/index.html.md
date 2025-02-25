@@ -3722,7 +3722,7 @@ GET /api/v3/etf/info
 当前ws推送采用protobuf的形式，具体接入流程如下：
 
 1.**PB文件定义**
-   PB定义文件可以在此连接处获取
+   PB定义文件可以在此连接处获取:[https://github.com/mexcdevelop/websocket-proto](https://github.com/mexcdevelop/websocket-proto)
    
 2.**生成反序列化代码**
    使用[https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)工具编译.proto文件，生成反序列化代码
