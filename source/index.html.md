@@ -70,6 +70,9 @@ To apply for a partnership, please contact: **institution@mexc.com**
 
 # Change Log
 
+## **2025-02-24**
+- Update Protocol Buffers websocket channels
+
 ## **2024-10-17**
 - Add Query Kyc status endpoint
 
@@ -3633,185 +3636,285 @@ Response:
 
 # Websocket Market Streams
 
-- The base endpoint is: **wss://wbs.mexc.com/ws**.
+- The base endpoint is: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
+- Each connection to **wbs.mexc.com** is valid for no more than 24 hours. Please handle disconnections and reconnections properly.
+- All trading pair names in the symbol must be in **uppercase**. For example: `spot@public.deals.v3.api.pb@<symbol>`  
+  Example: `spot@public.deals.v3.api.pb@BTCUSDT`
+- If there is no valid subscription on the websocket, the server will actively disconnect after **30 seconds**. If the subscription is successful but there is no data flow, the server will disconnect after **one minute**. The client can send a ping to keep the connection alive.
+- One ws connection supports a maximum of 30 subscriptions.
+- Please process the data according to the parameters returned in the documentation. Parameters not returned in the documentation will be optimized soon, so please do not use them.
 
-- A single connection to **wbs.mexc.com** is only valid for 24 hours; expect to be disconnected at the 24 hour mark.
+## Live Subscription/Unsubscription to Data Streams
 
-- All symbols are **Uppercase** <br/>eg:`spot@public.deals.v3.api@<symbol>`</br>->`spot@public.deals.v3.api@BTCUSDT`.
+- The following data can be sent via websocket to subscribe or unsubscribe from data streams. Examples are provided below.
+- The `id` in the response is an unsigned integer and serves as the unique identifier for communication.
+- If the `msg` in the response matches the corresponding request field, it indicates that the request was sent successfully.
 
-- If there is no valid websocket subscription, the server will disconnect in **30 seconds**. If the subscription is successful but there is no streams, the server will disconnect in **1 minute**. The client can send `PING` to maintain the connection.
+## Protocol Buffers Integration
 
-- Every websocket connection maximun support 30 subscriptions at one time.
+The current websocket push uses the protobuf format. The specific integration process is as follows:
 
-## Live Subscribing/Unsubscribing to streams
+1.**PB File Definition**  
+   The PB definition files can be obtained via the provided link:[https://github.com/mexcdevelop/websocket-proto](https://github.com/mexcdevelop/websocket-proto)
 
-- The following data can be sent through the websocket instance in order to subscribe/unsubscribe from streams. Examples can be seen below.
+2.**Generate Deserialization Code**  
+   Use the tool available at [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf) to compile the .proto files and generate deserialization code.
 
-- The id used in the JSON payloads is an unsigned INT used as an identifier to uniquely identify the messages going back and forth.
+  > **Java**
 
-- In the response, if the `msg`  received is same as request params, this means the request sent was a success.
+   ```shell
+   protoc *.proto --java_out=python custom_path
+   ```
 
-### Subscribe to a stream
+  > **Python**
 
-> **Subscribe Response**
+   ```shell
+   protoc *.proto --python_out=python custom_path
+   ```
 
-```
- {
-  "id":0,
-  "code":0,
-  "msg":"spot@public.deals.v3.api@BTCUSDT"
- }
+  > **Others**
+
+   ```
+   Multiple languages are supported, including C++, C#, Go, Ruby, PHP, JS, etc. For details, see [https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf).
+   ```
+
+3.**Data Deserialization**  
+   Use the code generated in the previous step to deserialize the data.
+
+  > **Java**  
+   Include the protobuf-java dependency:
+
+   ```xml
+   <dependency>
+       <groupId>com.google.protobuf</groupId>
+       <artifactId>protobuf-java</artifactId>
+       <version>{protobuf.version}</version> <!-- Specify the version as per your project requirements -->
+   </dependency>
+   ```
+
+   
+
+   ```java
+   //Parsing example:
+
+   // Assemble the object
+   PushDataV3ApiWrapper pushDataV3ApiWrapper = PushDataV3ApiWrapper.newBuilder()
+           .setChannel("spot@public.aggre.depth.v3.api.pb")
+           .setSymbol("BTCUSDT")
+           .setSendTime(System.currentTimeMillis())
+           .build();
+   
+   // Serialize to a byte array
+   byte[] serializedData = pushDataV3ApiWrapper.toByteArray();
+   
+   // Deserialize into a PushDataV3ApiWrapper object
+   PushDataV3ApiWrapper resultV3 = PushDataV3ApiWrapper.parseFrom(serializedData);
+   ```
+
+  > **Python** 
+
+   ```python 
+   #Parsing example:
+   
+   import PushDataV3ApiWrapper_pb2
+   
+   # Assemble the object
+   pushData = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
+   pushData.channel = 'spot@public.aggre.depth.v3.api.pb'
+   pushData.symbol = 'BTCUSDT'
+   
+   # Serialize to a string
+   serializedData = pushData.SerializeToString()
+   
+   # Deserialize into a PushDataV3ApiWrapper object
+   result = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
+   result.ParseFromString(serializedData)
+   print(result)
+   ```
+
+---
+
+### Subscribe to a Data Stream
+
+> **Subscription Channel Response**
+
+```json
+{
+  "id": 0,
+  "code": 0,
+  "msg": "spot@public.deals.v3.api.pb@BTCUSDT"
+}
 ```
 
 - **Request**
 
 
 {
- "method":"SUBSCRIPTION",
- "params":["spot@public.deals.v3.api@BTCUSDT"]
+ "method": "SUBSCRIPTION",
+ "params": ["spot@public.deals.v3.api.pb@BTCUSDT"]
 }
 
-### Unsubscribe to a stream
 
-> **Unsubscribe Response**
+---
 
-```
- {
-  "id":0,
-  "code":0,
-  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
- }
+### Unsubscribe from a Data Stream
+
+> **Unsubscription Response**
+
+```json
+{
+  "id": 0,
+  "code": 0,
+  "msg": "spot@public.increase.depth.v3.api.pb@BTCUSDT"
+}
 ```
 
 - **Request**
 
+
 {
- "method":"UNSUBSCRIPTION",
- "params":["spot@public.deals.v3.api@BTCUSDT","spot@public.increase.depth.v3.api@BTCUSDT"]
+ "method": "UNSUBSCRIPTION",
+ "params": ["spot@public.deals.v3.api.pb@BTCUSDT"]
 }
 
-### PING/PONG
+
+---
+
+### PING/PONG Mechanism
 
 > **PING/PONG Response**
 
-```
- {
-  "id":0,
-  "code":0,
-  "msg":"PONG"
- }
+```json
+{
+  "id": 0,
+  "code": 0,
+  "msg": "PONG"
+}
 ```
 
 - **Request**
 
-{"method":"PING"}
+
+{"method": "PING"}
+
+
+---
 
 ## Trade Streams
 
->**request:**
+> **Request:**
 
-```
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.deals.v3.api@BTCUSDT"
-    ]
-}
-```
-> **response:**
-
-```
-{
-	"c":"spot@public.deals.v3.api@BTCUSDT",    
-	"d":{
-			"deals":[{
-					"S":2,                             //tradeType
-					"p":"20233.84",                    //price
-					"t":1661927587825,  				       //dealTime
-					"v":"0.001028"}],  						     //quantity
-			"e":"spot@public.deals.v3.api"},        //eventType			         
-	"s":"BTCUSDT",  								           //symbol
-	"t":1661927587836                          //eventTime
-} 								         
-```
-
-**Request:**   `spot@public.deals.v3.api@<symbol>`
-
-The Trade Streams push raw trade information; each trade has a unique buyer and seller.
-
-**Response:**
-
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| deals | array | dealsInfo  |
-| > S | int | tradeType 1:buy 2:sell |
-| > p | string | price |
-| > t | long | dealTime |
-| > v | string | quantity |
-| e | string | eventType |
-| s | string | symbol |
-| t | long | eventTime |
-
-## Kline Streams
-
->**request:**
-
-```
-{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.kline.v3.api@BTCUSDT@Min15"
+        "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 ```
 
-> **response:**
+> **Response:**
 
-```
+```json
 {
-	"c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
-	"d":{
-			"k":{
-				"T":1661931900,                     
-				"a":29043.48804658,	 
-				"c":20279.43,				 
-				"h":20284.93,				 
-				"i":"Min15",				 
-				"l":20277.52,				 
-				"o":20284.93,				 
-				"t":1661931000,			 
-				"v":1.43211},				 
-			"e":"spot@public.kline.v3.api"},					
-	"s":"BTCUSDT",						
-	"t":1661931016878					 
+  "channel": "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT",
+  "publicdeals": {
+    "dealsList": [
+      {
+        "price": "93220.00", // Trade price
+        "quantity": "0.04438243", // Trade quantity
+        "tradetype": 2, // Trade type (1: Buy, 2: Sell)
+        "time": 1736409765051 // Trade time
+      }
+    ],
+    "eventtype": "spot@public.aggre.deals.v3.api.pb@100ms" // Event type 
+  },
+  "symbol": "BTCUSDT", // Trading pair
+  "sendtime": 1736409765052 // Event time
 }
+```
 
+**Request Parameter:** `spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`
+
+The Trade Streams push raw trade information; each trade has a unique buyer and seller
+
+**Response Parameters:**
+
+| Parameter | Data Type | Description                  |
+| --------- | --------- | ---------------------------- |
+| dealsList | array     | Trade information            |
+| price     | string    | Trade price                  |
+| quantity  | string    | Trade quantity               |
+| tradetype | int       | Trade type (1: Buy, 2: Sell) |
+| time      | long      | Trade time                   |
+| eventtype | string    | Event type                   |
+| symbol    | string    | Trading pair                 |
+| sendtime  | long      | Event time                   |
+
+---
+
+## K-line Streams
+
+> **Request:**
+
+```json
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.kline.v3.api.pb@BTCUSDT@Min15"
+    ]
+}
+```
+
+> **Response:**
+
+```json
+{
+  "channel": "spot@public.kline.v3.api.pb@BTCUSDT@Min15",
+  "publicspotkline": {
+    "interval": "Min15", // K-line interval
+    "windowstart": 1736410500, // Start time of the K-line
+    "openingprice": "92925", // Opening trade price during this K-line
+    "closingprice": "93158.47", // Closing trade price during this K-line
+    "highestprice": "93158.47", // Highest trade price during this K-line
+    "lowestprice": "92800", // Lowest trade price during this K-line
+    "volume": "36.83803224", // Trade volume during this K-line
+    "amount": "3424811.05", // Trade amount during this K-line
+    "windowend": 1736411400 // End time of the K-line   
+  },
+  "symbol": "BTCUSDT",
+  "symbolid": "2fb942154ef44a4ab2ef98c8afb6a4a7",
+  "createtime": 1736410707571
+}
 ```
 
 The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
 
-**Request:** `spot@public.kline.v3.api@<symbol>@<interval>`
+**Request Parameter:** `spot@public.kline.v3.api.pb@<symbol>@<interval>`
 
-**Response:**
+**Response Parameters:**
 
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| k | object| klineInfo |
-| > T | long | endTime |
-| > a | bigDecimal | volume |
-| > c | bigDecimal | closingPrice |
-| > h | bigDecimal | highestPrice |
-| > i | interval | interval |
-| > l | bigDecimal | lowestPrice |
-| > o | bigDecimal | openingPrice |
-| > t | long | stratTime |
-| > v | bigDecimal | quantity |
-| s | string | symbol |
-| t | long | eventTime |
+| Parameter       | Data Type  | Description                            |
+| --------------- | ---------- | -------------------------------------- |
+| publicspotkline | object     | K-line information                     |
+| interval        | string     | K-line interval                        |
+| windowstart     | long       | Start time of the K-line               |
+| openingprice    | bigDecimal | Opening trade price during this K-line |
+| closingprice    | bigDecimal | Closing trade price during this K-line |
+| highestprice    | bigDecimal | Highest trade price during this K-line |
+| lowestprice     | bigDecimal | Lowest trade price during this K-line  |
+| volume          | bigDecimal | Trade volume during this K-line        |
+| amount          | bigDecimal | Trade amount during this K-line        |
+| windowend       | long       | End time of the K-line                 |
+| symbol          | string     | Trading pair                           |
+| symbolid        | string     | Trading pair ID                        |
+| createtime      | long       | Event time                             |
 
-**Kline chart intervals:**
+**K-line Interval Parameters:**
 
-Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
+- Min: Minutes; Hour: Hours; Day: Days; Week: Weeks; M: Month
+
+Available intervals:
 
 - Min1
 - Min5
@@ -3824,326 +3927,352 @@ Min -> minutes; Hour -> hours; Day -> days; Week -> weeks, M -> months
 - Week1
 - Month1
 
+---
+
 ## Diff.Depth Stream
 
-> **request:**
+> **Request:**
 
-```
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.increase.depth.v3.api@BTCUSDT"
+        "spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 ```
 
-> **response:**
+> **Response:**
 
-```
-
+```json
 {
-	"c":"spot@public.increase.depth.v3.api@BTCUSDT",  
-	"d":{
-		"asks":[{									
-			"p":"20290.89",		
-			"v":"0.000000"}], 
-		"e":"spot@public.increase.depth.v3.api", 
-    "r":"3407459756"},	 
-	"s":"BTCUSDT",						
-	"t":1661932660144					
+  "channel": "spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT",
+  "publicincreasedepths": {
+    "asksList": [], // asks: Sell orders
+    "bidsList": [ // bids: Buy orders
+      {
+        "price": "92877.58", // Price level of change
+        "quantity": "0.00000000" // Quantity
+      }
+    ],
+    "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", // Event type
+    "version": "36913293511" // Version number
+  },
+  "symbol": "BTCUSDT", // Trading pair
+  "sendtime": 1736411507002 // Event time
 }
 ```
 
-If the quantity is 0, it means that the order of the price has been cancel or traded,remove the price level.
+If the order quantity (`quantity`) for a price level is 0, it indicates that the order at that price has been canceled or executed, and that price level should be removed.
 
-**Request:** `spot@public.increase.depth.v3.api@<symbol>`
+**Request Parameter:** `spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>`
 
-**Response:**
+**Response Parameters:**
 
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| p | string | price |
-| v | string | quantity |
-| e | string | eventType |
-| r | string | version |
-| s | string | symbol |
-| t | long | eventTime |
+| Parameter | Data Type | Description           |
+| --------- | --------- | --------------------- |
+| price     | string    | Price level of change |
+| quantity  | string    | Quantity              |
+| eventtype | string    | Event type            |
+| version   | string    | Version number        |
+| symbol    | string    | Trading pair          |
+| sendtime  | long      | Event time            |
+
+---
+
+## Diff.Depth Stream(Batch Aggregation)
+
+> **Request:**
+
+```json
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"
+    ]
+}
+```
+
+> **Response:**
+
+```json
+{
+  "channel" : "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739502064578",
+  "publicIncreaseDepthsBatch" : {
+    "items" : [ {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.48",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145507"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.90",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145508"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.31",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145509"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.84",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145510"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96576.69",
+        "quantity" : "4.88725694"
+      } ],
+      "eventType" : "",
+      "version" : "39003145511"
+    } ],
+    "eventType" : "spot@public.increase.depth.batch.v3.api.pb"
+  }
+}
+```
+
+In the batch aggregation version, if the number of entries exceeds 5 or the time interval exceeds 5ms, the data is pushed once. If the order quantity for a price level is 0, it indicates that the order at that price has been canceled or executed, and that price level should be removed.
+
+**Request Parameter:** `spot@public.increase.depth.batch.v3.api.pb@<symbol>`
+
+**Response Parameters:**
+
+| Parameter | Data Type | Description           |
+| --------- | --------- | --------------------- |
+| price     | string    | Price level of change |
+| quantity  | string    | Quantity              |
+| eventtype | string    | Event type            |
+| version   | string    | Version number        |
+| symbol    | string    | Trading pair          |
+| sendtime  | long      | Event time            |
+
+---
 
 ## Partial Book Depth Streams
-Top bids and asks, Valid are 5, 10, or 20.
 
->**request:**
+This stream pushes limited level depth information. The “levels” indicate the number of order levels for buy and sell orders, which can be 5, 10, or 20 levels.
 
-```
+> **Request:**
+
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-                "spot@public.limit.depth.v3.api@BTCUSDT@5"
-
-   ]
+        "spot@public.limit.depth.v3.api.pb@BTCUSDT@5"
+    ]
 }
 ```
 
-> **response:**
+> **Response:**
 
-```
-
+```json
 {
-  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
-  "d":{
-    "asks":[{                 
-            "p":"20290.89",   
-            "v":"0.650000"}], 
-    "e":"spot@public.limit.depth.v3.api",  
-    "r":"3407459756"},  
-  "s":"BTCUSDT",             
-  "t":1661932660144          
+  "channel": "spot@public.limit.depth.v3.api.pb@BTCUSDT@5",
+  "publiclimitdepths": {
+    "asksList": [ // asks: Sell orders
+      {
+        "price": "93180.18", // Price level of change
+        "quantity": "0.21976424" // Quantity
+      }
+    ],
+    "bidsList": [ // bids: Buy orders
+      {
+        "price": "93179.98",
+        "quantity": "2.82651000"
+      }
+    ],
+    "eventtype": "spot@public.limit.depth.v3.api.pb", // Event type
+    "version": "36913565463" // Version number 
+  },
+  "symbol": "BTCUSDT", // Trading pair
+  "sendtime": 1736411838730 // Event time
 }
 ```
 
+**Request Parameter:** `spot@public.limit.depth.v3.api.pb@<symbol>@<level>`
 
-**Request:** `spot@public.limit.depth.v3.api@<symbol>@<level>`
+**Response Parameters:**
 
-**Response:**
+| Parameter | Data Type | Description           |
+| --------- | --------- | --------------------- |
+| price     | string    | Price level of change |
+| quantity  | string    | Quantity              |
+| eventtype | string    | Event type            |
+| version   | string    | Version number        |
+| symbol    | string    | Trading pair          |
+| sendtime  | long      | Event time            |
 
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| p | string | price |
-| v | string | quantity |
-| e | string | eventType |
-| r | string | version |
-| s | string | symbol |
-| t | long | eventTime |
+---
 
 ## Individual Symbol Book Ticker Streams
+
 Pushes any update to the best bid or ask's price or quantity in real-time for a specified symbol.
 
-> **request:**
+> **Request:**
 
-```
-{
-    "method": "SUBSCRIPTION",
-    "params": [
-                "spot@public.bookTicker.v3.api@BTCUSDT"
-      ]
-}
-```
-
-> **response:**
-
-```
-
-{
- "c":"spot@public.bookTicker.v3.api@<BTCUSDT>",
- "d":{
-    
-    "A":"40.66000000" 
-    "B":"31.21000000",  
-    "a":"25.36520000",
-    "b":"25.35190000",},  
- "s":"BTCUSDT", 
- "t":1661932660144 
-}
-```
-
-
-**Request:** `spot@public.bookTicker.v3.api@<symbol>`
-
-**Response:**
-
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| A | string | best ask qty |
-| B | string | best bid qty |
-| a | string | best ask price |
-| b | string | best bid price |
-| s | string | symbol |
-| t | long | eventTime |
-
-## MiniTicker
-
->**request:**
-
-```
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
+        "spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 ```
-> **response:**
 
-```
+> **Response:**
+
+```json
 {
-  "d":
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--",
-    "t":"1699502456050"},
-  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
-  "t":1699502456051,
-  "s":"BTCUSDT"
-}								         
+  "channel": "spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT",
+  "publicbookticker": {
+    "bidprice": "93387.28",  // Best bid price
+    "bidquantity": "3.73485", // Best bid quantity
+    "askprice": "93387.29", // Best ask price
+    "askquantity": "7.669875" // Best ask quantity
+  },
+  "symbol": "BTCUSDT", // Trading pair
+  "sendtime": 1736412092433 // Event time
+}
 ```
 
-**Request:**   `spot@public.miniTicker.v3.api@<symbol>@<timezone>`
+**Request Parameter:** `spot@public.aggre.bookTicker.v3.api.pb@(100ms|10ms)@<symbol>`
 
+**Response Parameters:**
 
-**Response:**
+| Parameter   | Data Type | Description       |
+| ----------- | --------- | ----------------- |
+| bidprice    | string    | Best bid price    |
+| bidquantity | string    | Best bid quantity |
+| askprice    | string    | Best ask price    |
+| askquantity | string    | Best ask quantity |
+| symbol      | string    | Trading pair      |
+| sendtime    | long      | Event time        |
 
-| Name     | Type   | Description |
-| :-------- | :----- | :--- |
-| c	| string	| channel name| 
-| d	| data| data| 
-| >s	| string	|symbol|
-| >p	| string	|deal price|
-| >r	| string	|price Change Percent in utc8|
-| >tr	| string	|price Change Percent in time zone|
-| >h	| string	|24h high price |
-| >l	| string	|24h low price |
-| >v	| string	|24h volume|
-| >q	| string	|24h quote Volume|
-| >lastRT	| string	|etf Last Rebase Time|
-| >MT	| string	|etf Merge Times|
-| >NV	| string	|etf Net Value|
+---
 
+## Individual Symbol Book Ticker Streams(Batch Aggregation)
 
-## MiniTickers
+This batch aggregation version pushes the best order information for a specified trading pair.
 
->**request:**
+> **Request:**
 
-```
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.miniTickers.v3.api@UTC+8"
+        "spot@public.bookTicker.batch.v3.api.pb@BTCUSDT"
     ]
 }
 ```
-> **response:**
 
-```
+> **Response:**
+
+```json
 {
-  "d":
-  [{"s":"SENSOUSDT",
-    "p":"0.07642",
-    "r":"-0.0383",
-    "tr":"-0.0383",
-    "h":"0.08032",
-    "l":"0.07463",
-    "v":"25052.6533",
-    "q":"323777.17",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-  "c":"spot@public.miniTickers.v3.api@UTC+8",
-  "t":1699502456051,
-}								         
+  "channel" : "spot@public.bookTicker.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739503249114",
+  "publicBookTickerBatch" : {
+    "items" : [ {
+      "bidPrice" : "96567.37",
+      "bidQuantity" : "3.362925",
+      "askPrice" : "96567.38",
+      "askQuantity" : "1.545255"
+    } ]
+  }
+}
 ```
 
-**Request:**   `spot@public.miniTickers.v3.api@<timezone>`
+**Request Parameter:** `spot@public.bookTicker.batch.v3.api.pb@<symbol>`
 
+**Response Parameters:**
 
-**Response:**
+| Parameter   | Data Type | Description       |
+| ----------- | --------- | ----------------- |
+| bidprice    | string    | Best bid price    |
+| bidquantity | string    | Best bid quantity |
+| askprice    | string    | Best ask price    |
+| askquantity | string    | Best ask quantity |
+| symbol      | string    | Trading pair      |
+| sendtime    | long      | Event time        |
 
-| Name     | Type   | Description |
-| :-------- | :----- | :--- |
-| c	| string	| channel name| 
-| d	| data| data| 
-| >s	| string	|symbol|
-| >p	| string	|deal price|
-| >r	| string	|24h price Change Percent in utc8|
-| >tr	| string	|24h price Change Percent in time zone|
-| >h	| string	|24h high price |
-| >l	| string	|24h low price |
-| >v	| string	|24h volume|
-| >q	| string	|24h quote Volume|
-| >lastRT	| string	|etf Last Rebase Time|
-| >MT	| string	|etf Merge Times|
-| >NV	| string	|etf Net Value|
+---
 
+## How to Properly Maintain a Local Copy of the Order Book
 
-
-**How is incremental depth information maintained:**
-
-1. Though **spot@public.increase.depth.v3.api@<symbol>** to get full amount of depth information, save the current version.
-2. Subscribe to ws depth information, if the received data version more than the current version after update,  the later received update cover the previous one at the same price.
-3. Through **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** get  the latest 1000 depth snapshots.
+1. Subscribe to `spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>` to get full amount of depth information, save the current version.
+2. Subscribe to ws depth information, if the received data version more than the current version after update, the later received update cover the previous one at the same price.
+3. Through **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** to get the latest 1000 depth snapshots.
 4. Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information
 5. Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS
 6. The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.
 7. The amount of hanging orders in each event represents the **absolute value** of the current hanging orders of the price, rather than the relative change.
 8. If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.
 
+Note: Because the depth snapshot has a limitation on the number of price levels, any price levels not included in the initial snapshot and without quantity changes will not appear in the incremental depth updates. Therefore, even after applying all incremental updates, these price levels may not be visible in your local order book, and there may be some discrepancies between your local order book and the real order book. However, for most use cases, a depth limit of 5000 levels is sufficient to understand the market and trading activity effectively.
+
+---
+
 # Websocket User Data Streams
 
 - The base API endpoint is: **https://api.mexc.com**
-
 - A User Data Stream `listenKey` is valid for 60 minutes after creation.
-
-- Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
-
+- Doing a `PUT` on a  `listenKey` will extend its validity for 60 minutes.
 - Doing a `DELETE` on a `listenKey` will close the stream and invalidate the `listenKey`.
-
-- websocket baseurl: **wss://wbs.mexc.com/ws**
-
-- User Data Streams are accessed at **/ws?listenKey=listenKey** <br/>eg:**wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
-
+- websocket baseurl: **ws://wbs-api.mexc.com/ws**
+- User Data Streams are accessed at  **/ws?listenKey=listenKey**  
+  For example: **ws://wbs-api.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1**
 - A single connection is only valid for 24 hours; expect to be disconnected at the 24 hour mark.
-
 - Each UID can apply for a maximum of 60 listen keys (excluding invalid listen keys).
+- Each listen key maximum support 5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).
 
-- Each listen key maximum support  5 websocket connection (which means each uid can applies for a maximum of 60 listen keys and 300 ws links).
+## Listen Key
 
-## Listen Key 
-
-### Create a ListenKey
+### Generate Listen Key
 
 > **Response**
 
-```
+```json
 {
   "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
 }
 ```
 
-**Permission:**  SPOT_ACCOUNT_R
+**Required Permissions:** Account Read / SPOT_ACCOUNT_R
 
-**HTTP**
+**HTTP Request**
 
-- **POST**  ` /api/v3/userDataStream`
+- **POST** `/api/v3/userDataStream`
 
-Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent. 
+Starts a new data stream. The stream will close 60 minutes after creation unless a keepalive is sent.
 
-**request:**
+**Parameters:**
 
 NONE
 
-### Query all ListenKey
+---
+
+### Get Valid Listen Keys
 
 > **Response**
 
-```
+```json
 {
     "listenKey": [
         "c285bc363cfeac6646576b801a2ed1f9523310fcda9e927e509aaaaaaaaaaaaaa",
@@ -4153,275 +4282,237 @@ NONE
 }
 ```
 
-**Permission:**  SPOT_ACCOUNT_R
+**Required Permissions:** Account Read / SPOT_ACCOUNT_R
 
-**HTTP**
+**HTTP Request**
 
-- **GET**  ` /api/v3/userDataStream`
+- **GET** `/api/v3/userDataStream`
 
-get all valid listenKey
+Retrieves all currently valid listen keys.
 
-**request:**
+**Parameters:**
 
 NONE
 
+---
 
-### Keep-alive a ListenKey 
+### Extend Listen Key Validity
 
 > **Response**
 
-```
+```json
 {
     "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
 }
 ```
-**HTTP**
 
-- **PUT**  ` /api/v3/userDataStream`
+**HTTP Request**
 
-Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
+- **PUT** `/api/v3/userDataStream`
 
-**Request:**
+Extends the validity to 60 minutes from the time of this call. It is recommended to send a request every 30 minutes.
 
-| Name    | Type | Mandatory | Description |
-| :-------- | :------- | :------- | :--- |
-| listenKey | STRING   | YES      |      |
+**Request Parameters:**
 
- ### Close a ListenKey  
+| Parameter | Data Type | Required | Description |
+| --------- | --------- | -------- | ----------- |
+| listenKey | string    | Yes      |             |
 
- > **Response**
+---
 
- ```
- {
-     "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
- }
- ```
+### Close Listen Key
 
- **HTTP**
+> **Response**
 
- - **DELETE**  ` /api/v3/userDataStream`
-
- Close out a user data stream.
-
-
-## Spot Account Upadte  
-
-The server will push an update of the account assets when the account balance changes.  
-
->**request:**
-
+```json
+{
+    "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
+}
 ```
+
+**HTTP Request**
+
+- **DELETE** `/api/v3/userDataStream`
+
+Closes the user data stream.
+
+**Request Parameters:**
+
+| Parameter | Data Type | Required | Description |
+| --------- | --------- | -------- | ----------- |
+| listenKey | string    | Yes      |             |
+
+---
+
+## Spot Account Update
+
+After a successful subscription, whenever the account balance or available balance changes, the server will push updates of the account assets.
+
+> **Request:**
+
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-    "spot@private.account.v3.api"
+        "spot@private.account.v3.api.pb"
     ]
 }
 ```
 
-> **response:**
+> **Response:**
 
-```
+```json
 {
-    "c": "spot@private.account.v3.api",
-    "d": {
-        "a": "USDT",
-        "c": 1678185928428,
-        "f": "302.185113007893322435",
-        "fd": "-4.990689704",
-        "l": "4.990689704",
-        "ld": "4.990689704",
-        "o": "ENTRUST_PLACE"
-    },
-    "t": 1678185928435
+  channel: "spot@private.account.v3.api.pb",
+  createTime: 1736417034305,
+  sendTime: 1736417034307,
+  privateAccount {
+    vcoinName: "USDT",
+    coinId: "128f589271cb4951b03e71e6323eb7be",
+    balanceAmount: "21.94210356004384",
+    balanceAmountChange: "10",
+    frozenAmount: "0",
+    frozenAmountChange: "0",
+    type: "CONTRACT_TRANSFER",
+    time: 1736416910000
+  }
 }
 ```
 
-**Request:** `spot@private.account.v3.api`
+**Request Parameter:** `spot@private.account.v3.api.pb`
 
-**Response:**
+**Response Parameters:**
 
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| d | json | account updates |
-| > a | string | asset |
-| > c | long | change time |
-| > f | string | free balance |
-| > fd | string | free changed amount |
-| > l | string | frozen amount |
-| > ld | string | frozen changed amount|
-| > o | string | <a href="#account_position">changed type</a>|
-| t | long | eventTime |
+| Parameter           | Data Type | Description                                                 |
+| ------------------- | --------- | ----------------------------------------------------------- |
+| privateAccount      | json      | Account information                                         |
+| vcoinName           | string    | Asset name                                                  |
+| balanceAmount       | string    | Available balance                                           |
+| balanceAmountChange | string    | Change in available balance                                 |
+| frozenAmount        | string    | Frozen balance                                              |
+| frozenAmountChange  | string    | Change in frozen balance                                    |
+| type                | string    | Change type (<a href=\"#account_position\">see details</a>) |
+| time                | long      | Settlement time                                             |
 
+---
 
+## Spot Account Deals 
 
-## Spot Account Deals
+> **Request:**
 
->**request:**
-
-```
+```json
 {
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@private.deals.v3.api"
+        "spot@private.deals.v3.api.pb"
     ]
 }
 ```
 
-> **response:**
+> **Response:**
 
-```
+```json
 {
-    "c": "spot@private.deals.v3.api",
-    "d": {
-        "p": "1.804",
-        "v": "0.31",
-        "a": "0.55924",
-        "S": 1,
-        "T": 1678901086198,
-        "t": "5bbb6ad8b4474570b155610e30d960cd",
-        "c": "",
-        "i": "2dd9655f9fa2438fa1709510d7c1afd9",
-        "m": 0,
-        "st": 0,
-        "n": "0.000248206380027431",
-        "N": "MX"
-    },
-    "s": "MXUSDT",
-    "t": 1661938980285
+  channel: "spot@private.deals.v3.api.pb",
+  symbol: "MXUSDT",
+  sendTime: 1736417034332,
+  privateDeals {
+    price: "3.6962",
+    quantity: "1",
+    amount: "3.6962",
+    tradeType: 2,
+    tradeId: "505979017439002624X1",
+    orderId: "C02__505979017439002624115",
+    feeAmount: "0.0003998377369698171",
+    feeCurrency: "MX",
+    time: 1736417034280
+  }
 }
 ```
 
-**Request:** `spot@private.deals.v3.api`
+**Request Parameter:** `spot@private.deals.v3.api.pb`
 
-**Response:**
+**Response Parameters:**
 
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| d | json | dealsInfo |
-| > S | int | tradetype 1:buy 2:sell |
-| > T | long | tradeTime |
-| > c | string | clientOrderId |
-| > i | string | orderId |
-| > m | int | isMaker |
-| > p | string | price |
-| > st | byte | isSelfTrade |
-| > t | string | tradeId |
-| > v | string | quantity |
-| > a | string | deals amount |
-| > n | string | commission fee|
-| > N | string | commissionAsset）|
-| s | string | symbol |
-| t | long |eventTime |
+| Parameter     | Data Type | Description                  |
+| ------------- | --------- | ---------------------------- |
+| symbol        | string    | Trading pair                 |
+| sendTime      | long      | Event time                   |
+| privateDeals  | json      | Account trade information    |
+| price         | string    | Trade price                  |
+| quantity      | string    | Trade quantity               |
+| amount        | string    | Trade amount                 |
+| tradeType     | int       | Trade type (1: Buy, 2: Sell) |
+| tradeId       | string    | Trade ID                     |
+| orderId       | string    | Order ID                     |
+| clientOrderId | string    | User-defined order ID        |
+| feeAmount     | string    | Fee amount                   |
+| feeCurrency   | string    | Fee currency                 |
+| time          | long      | Trade time                   |
 
-## Spot Account Orders
+---
 
->**request:**
+## Spot Account Orders 
 
-```
+> **Request:**
+
+```json
 {
   "method": "SUBSCRIPTION",
   "params": [
-      "spot@private.orders.v3.api"
+      "spot@private.orders.v3.api.pb"
   ]
 }
 ```
 
-**Request:** `spot@private.orders.v3.api`
+**Request Parameter:** `spot@private.orders.v3.api.pb`
 
-### 1. Limit/Market Orders 
+> **Response:**
 
-> **response:**
-
-```
+```json
 {
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "A":8.0,
-        "O":1661938138000,
-        "S":1,
-        "V":10,
-        "a":8,
-        "c":"",
-        "i":"e03a5c7441e44ed899466a7140b71391",
-        "m":0,
-        "o":1,
-        "p":0.8,
-        "s":1,
-        "v":10,
-        "ap":0,  
-        "cv":0, 	
-        "ca":0 
-  },
-  "s": "MXUSDT",
-  "t": 1661938138193
+  channel: "spot@private.orders.v3.api.pb",
+  symbol: "MXUSDT",
+  sendTime: 1736417034281,
+  privateOrders {
+    id: "C02__505979017439002624115",
+    price: "3.5121",
+    quantity: "1",
+    amount: "0",
+    avgPrice: "3.6962",
+    orderType: 5,
+    tradeType: 2,
+    remainAmount: "0",
+    remainQuantity: "0",
+    lastDealQuantity: "1",
+    cumulativeQuantity: "1",
+    cumulativeAmount: "3.6962",
+    status: 2,
+    createTime: 1736417034259
+  }
 }
 ```
 
-**Response:**
+**Response Parameters:**
 
-| Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| d | json | orderInfo |
-| > A | bigDecimal | remainAmount |
-| > O | long | createTime|
-| > S | int | tradetype 1:buy 2:sell |
-| > V | bigDecimal | remainQuantity |
-| > a | bigDecimal | amount |
-| > c | string | clientOrderId |
-| > i | string | orderId |
-| > m | int | isMaker |
-| > o | int | LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100) |
-| > p | bigDecimal | PRICE |
-| > s | int | status 1:New order 2:Filled 3:Partially filled 4:Order canceled 5:Order filled partially, and then the rest of the order is canceled |
-| > v | bigDecimal | quantity |
-| > ap | bigDecimal | avgPrice |
-| > cv | bigDecimal | cumulativeQuantity |
-| > ca | bigDecimal | cumulativeAmount |
-| t | long | eventTime |
-| s | string | symbol |
-
-### 2. Stop Limit Order
-
-> **response:**
-
-```
-{
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "N":"USDT",
-        "O":1661938853715,
-        "P":0.9,
-        "S":1,
-        "T":1,
-        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
-        "o":100,
-        "p":1.01,
-        "s":"NEW",
-        "v":6
-  },
-  "s": "MXUSDT",
-  "t": 1661938853727
-}
-```
-
-**Response:**
-
-|  Name      | Type   | Description |
-| :-------- | :----- | :--- |
-| d            | json | orderInfo |
-| > N | string | commissionAsset |
-|  > O | long | createTime |
-|  > P | bigDecimal | triggerPrice |
-|  > S | int | tradetype 1:buy 2:sell |
-|  > T | int | 0: GE(price is higher than triggerPrice) 1: LE(price is lower than triggerPrice) |
-|  > i | string | orderId |
-| >  o | int | orderType LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5);STOP_LIMIT(100) |
-|  > p | bigDecimal | price |
-| > s | string | state  NEW,CANCELED,EXECUTED,FAILED |
-|  > v | bigDecimal | quantity |
-| s | string | symbol |
-| t | long | eventTime |
+| Parameter          | Data Type  | Description                                                  |
+| ------------------ | ---------- | ------------------------------------------------------------ |
+| symbol             | string     | Trading pair                                                 |
+| sendTime           | long       | Event time                                                   |
+| privateOrders      | json       | Account order information                                    |
+| id                 | string     | Order ID                                                     |
+| price              | bigDecimal | Order price                                                  |
+| quantity           | bigDecimal | Order quantity                                               |
+| amount             | bigDecimal | Total order amount                                           |
+| avgPrice           | bigDecimal | Average trade price                                          |
+| orderType          | int        | Order type: LIMIT_ORDER (1), POST_ONLY (2), IMMEDIATE_OR_CANCEL (3), FILL_OR_KILL (4), MARKET_ORDER (5); Stop loss/take profit (100) |
+| tradeType          | int        | Trade type (1: Buy, 2: Sell)                                 |
+| remainAmount       | bigDecimal | Remaining amount                                             |
+| remainQuantity     | bigDecimal | Remaining quantity                                           |
+| cumulativeQuantity | bigDecimal | Cumulative trade quantity                                    |
+| cumulativeAmount   | bigDecimal | Cumulative trade amount                                      |
+| status             | int        | Order status: 1: Not traded, 2: Fully traded, 3: Partially traded, 4: Canceled, 5: Partially canceled |
+| createTime         | long       | Order creation time                                          |
 
 
 # Rebate Endpoints
