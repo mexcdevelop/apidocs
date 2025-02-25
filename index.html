@@ -347,6 +347,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2025-02-24" class="toc-h2 toc-link" data-title="2025-02-24"><strong>2025-02-24</strong></a>
+                  </li>
+                  <li>
                     <a href="#2024-10-17" class="toc-h2 toc-link" data-title="2024-10-17"><strong>2024-10-17</strong></a>
                   </li>
                   <li>
@@ -718,13 +721,19 @@
                     <a href="#3c863d56da" class="toc-h2 toc-link" data-title="实时订阅/取消数据流">实时订阅/取消数据流</a>
                   </li>
                   <li>
-                    <a href="#2947d06b59" class="toc-h2 toc-link" data-title="逐笔交易(实时)">逐笔交易(实时)</a>
+                    <a href="#protocolbuffers" class="toc-h2 toc-link" data-title="protocolbuffers接入方案">protocolbuffers接入方案</a>
+                  </li>
+                  <li>
+                    <a href="#2b149598d9" class="toc-h2 toc-link" data-title="逐笔交易">逐笔交易</a>
                   </li>
                   <li>
                     <a href="#k-streams" class="toc-h2 toc-link" data-title="K线 Streams">K线 Streams</a>
                   </li>
                   <li>
-                    <a href="#efff33c875" class="toc-h2 toc-link" data-title="增量深度信息(实时)">增量深度信息(实时)</a>
+                    <a href="#1654ad2dd2" class="toc-h2 toc-link" data-title="增量深度信息">增量深度信息</a>
+                  </li>
+                  <li>
+                    <a href="#1b831cddd8" class="toc-h2 toc-link" data-title="增量深度信息(批量聚合)">增量深度信息(批量聚合)</a>
                   </li>
                   <li>
                     <a href="#1fecb05b1e" class="toc-h2 toc-link" data-title="有限档位深度信息">有限档位深度信息</a>
@@ -733,10 +742,7 @@
                     <a href="#symbol" class="toc-h2 toc-link" data-title="按Symbol的最优挂单信息">按Symbol的最优挂单信息</a>
                   </li>
                   <li>
-                    <a href="#miniticker" class="toc-h2 toc-link" data-title="MiniTicker">MiniTicker</a>
-                  </li>
-                  <li>
-                    <a href="#minitickers" class="toc-h2 toc-link" data-title="MiniTickers">MiniTickers</a>
+                    <a href="#symbol-2" class="toc-h2 toc-link" data-title="按Symbol的最优挂单信息（批量聚合）">按Symbol的最优挂单信息（批量聚合）</a>
                   </li>
                   <li>
                     <a href="#orderbook" class="toc-h2 toc-link" data-title="如何正确在本地维护一个orderbook副本">如何正确在本地维护一个orderbook副本</a>
@@ -750,13 +756,13 @@
                     <a href="#listen-key" class="toc-h2 toc-link" data-title="Listen Key">Listen Key</a>
                   </li>
                   <li>
-                    <a href="#e2afeb0acf" class="toc-h2 toc-link" data-title="现货账户信息(实时)">现货账户信息(实时)</a>
+                    <a href="#060643caef" class="toc-h2 toc-link" data-title="现货账户信息">现货账户信息</a>
                   </li>
                   <li>
-                    <a href="#df446b56c7" class="toc-h2 toc-link" data-title="现货账户成交(实时)">现货账户成交(实时)</a>
+                    <a href="#84f7e49ea9" class="toc-h2 toc-link" data-title="现货账户成交">现货账户成交</a>
                   </li>
                   <li>
-                    <a href="#c0207ed499" class="toc-h2 toc-link" data-title="现货账户订单(实时)">现货账户订单(实时)</a>
+                    <a href="#365a4763c4" class="toc-h2 toc-link" data-title="现货账户订单">现货账户订单</a>
                   </li>
               </ul>
           </li>
@@ -862,7 +868,11 @@
 <li>咨询关于钱包、短信、2FA等问题</li>
 </ul></li>
 </ul>
-<h1 id='185368440e'>更新日志</h1><h2 id='2024-10-17'><strong>2024-10-17</strong></h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='2025-02-24'><strong>2025-02-24</strong></h2>
+<ul>
+<li>新增Protocol Buffers形式的websocket推送频道</li>
+</ul>
+<h2 id='2024-10-17'><strong>2024-10-17</strong></h2>
 <ul>
 <li>新增查询账户KYC状态接口</li>
 </ul>
@@ -7610,9 +7620,9 @@ GET /api/v3/etf/info
  -->
 <h1 id='websocket-2'>Websocket 行情推送</h1>
 <ul>
-<li>本篇所列出的所有wss接口的baseurl为: <strong>wss://wbs.mexc.com/ws</strong></li>
+<li>本篇所列出的所有wss接口的baseurl为: <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong></li>
 <li>每个到 <strong>wbs.mexc.com</strong> 的链接有效期不超过24小时，请妥善处理断线重连</li>
-<li>symbol名称中所有交易对均为<strong>大写</strong>，如：<code>spot@public.deals.v3.api@&lt;symbol&gt;</code></br>实例：<code>spot@public.deals.v3.api@BTCUSDT</code></li>
+<li>symbol名称中所有交易对均为<strong>大写</strong>，如：<code>spot@public.deals.v3.api.pb@&lt;symbol&gt;</code></br>实例：<code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
 <li>websocket没有有效订阅的话，服务器会在<strong>30秒</strong>时主动断开连接，如果订阅成功但是没有流量，服务器会在<strong>一分钟</strong>时主动断开，客户端可以发送ping来保持链接</li>
 <li>1个 ws 连接最多30个订阅</li>
 <li>请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用</li>
@@ -7623,14 +7633,89 @@ GET /api/v3/etf/info
 <li>响应内容中的<code>id</code>是无符号整数，作为往来信息的唯一标识。</li>
 <li>如果相应内容中的 <code>msg</code> 为相应的请求字段，表示请求发送成功。</li>
 </ul>
-<h3 id='2a11d883e8'>订阅一个信息流</h3>
+<h2 id='protocolbuffers'>protocolbuffers接入方案</h2>
+<p>当前ws推送采用protobuf的形式，具体接入流程如下：</p>
+
+<p>1.<strong>PB文件定义</strong>
+   PB定义文件可以在此连接处获取:<a href="https://github.com/mexcdevelop/websocket-proto">https://github.com/mexcdevelop/websocket-proto</a></p>
+
+<p>2.<strong>生成反序列化代码</strong>
+   使用<a href="https://github.com/protocolbuffers/protobuf">https://github.com/protocolbuffers/protobuf</a>工具编译.proto文件，生成反序列化代码</p>
+
+<blockquote>
+<p><strong>Java</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>//在proto文件夹下执行
+protoc *.proto --java_out=java文件输出路径
+</code></pre></div>
+<blockquote>
+<p><strong>python</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>//在proto文件夹下执行
+protoc *.proto --python_out=python文件输出路径
+</code></pre></div>
+<blockquote>
+<p><strong>其他</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> 支持多种语言，包括 C++,C#, Go, Ruby, PHP, JS等。详见[https://github.com/protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf)。
+</code></pre></div>
+<p>3.<strong>数据反序列化</strong>
+   使用上一步生成的代码，反序列化数据</p>
+
+<blockquote>
+<p><strong>Java</strong>
+ 引入protobuf-java:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>  &lt;dependency&gt;
+        &lt;groupId&gt;com.google.protobuf&lt;/groupId&gt;
+        &lt;artifactId&gt;protobuf-java&lt;/artifactId&gt;  
+        &lt;version&gt;S{protobuf.version}/version&gt;&lt;!-- 根据项目实际情况指定版本 --&gt;  
+    &lt;/dependency&gt;
+
+
+ 解析示例:
+
+    // 组装对象
+    PushDataV3ApiWrapper pushDataV3ApiWrapper = PushDataV3ApiWrapper.newBuilder()
+            .setChannel("spot@public.aggre.depth.v3.api.pb")
+            .setSymbol("BTCUSDTI)
+            .setSendTime(System.currentTimeMillis())
+            .build();
+
+    // 序列化为byte数组
+    byte[] serializedData = pushDataV3ApiWrapper.toByteArray();
+
+    // 反序列化为 PushDataV3ApiWrapper 对象
+    PushDataV3ApiWrapper resultV3 = PushDataV3ApiWrapper.parseFrom(serializedData);
+</code></pre></div>
+<blockquote>
+<p><strong>python</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code> 解析示例:
+
+
+    import PushDataV3ApiWrapper_pb2
+
+    #组装对象
+    PushDataV3ApiWrapper = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
+    PushDataV3ApiWrapper.channel = 'spot@public.aggre.depth.v3.api.pb'
+    PushDataV3ApiWrapper.symbol ='BTCUSDT'
+
+    #序列化为字符串
+    serializedData = PushDataV3ApiWrapper.SerializeToString()
+
+    # 反序列化为 PushDataV3ApiWrapper 对象
+    result = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
+    result.ParseFromString(serializedData)
+    print(result)
+</code></pre></div><h3 id='2a11d883e8'>订阅一个信息流</h3>
 <blockquote>
 <p><strong>订阅频道响应</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code> {
   "id":0,
   "code":0,
-  "msg":"spot@public.deals.v3.api@BTCUSDT"
+  "msg":"spot@public.deals.v3.api.pb@BTCUSDT"
  }
 </code></pre></div>
 <ul>
@@ -7639,7 +7724,7 @@ GET /api/v3/etf/info
 
 <p>{
  &quot;method&quot;:&quot;SUBSCRIPTION&quot;,
- &quot;params&quot;:[&quot;spot@public.deals.v3.api@BTCUSDT&quot;]
+ &quot;params&quot;:[&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
 }</p>
 <h3 id='122d1b11ee'>取消订阅一个信息流</h3>
 <blockquote>
@@ -7648,7 +7733,7 @@ GET /api/v3/etf/info
 <div class="highlight"><pre class="highlight plaintext"><code> {
   "id":0,
   "code":0,
-  "msg":"spot@public.increase.depth.v3.api@BTCUSDT,spot@public.deals.v3.api@BTCUSDT"
+  "msg":"spot@public.increase.depth.v3.api.pb@BTCUSDT"
  }
 </code></pre></div>
 <ul>
@@ -7657,7 +7742,7 @@ GET /api/v3/etf/info
 
 <p>{
  &quot;method&quot;:&quot;UNSUBSCRIPTION&quot;,
- &quot;params&quot;:[&quot;spot@public.deals.v3.api@BTCUSDT&quot;,&quot;spot@public.increase.depth.v3.api@BTCUSDT&quot;]
+ &quot;params&quot;:[&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
 }</p>
 <h3 id='ping-pong'>PING/PONG机制</h3>
 <blockquote>
@@ -7674,34 +7759,38 @@ GET /api/v3/etf/info
 </ul>
 
 <p>{&quot;method&quot;:&quot;PING&quot;}</p>
-<h2 id='2947d06b59'>逐笔交易(实时)</h2>
+<h2 id='2b149598d9'>逐笔交易</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.deals.v3.api@BTCUSDT"
+        "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 </code></pre></div>
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "c":"spot@public.deals.v3.api@BTCUSDT",    
-    "d":{
-            "deals":[{
-                    "S":2,                             //交易类型tradeType
-                    "p":"20233.84",                    //成交价格price
-                    "t":1661927587825,                         //成交时间dealTime
-                    "v":"0.001028"}],                            //成交数量quantity
-            "e":"spot@public.deals.v3.api"},        //事件类型eventType                  
-    "s":"BTCUSDT",                                             //交易对symbol
-    "t":1661927587836                          //事件时间eventTime
-}                                        
+<div class="highlight"><pre class="highlight plaintext"><code> {
+  "channel": "spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT",
+  "publicdeals": {
+    "dealsList": [
+      {
+        "price": "93220.00", //成交价格price
+        "quantity": "0.04438243", //成交数量quantity
+        "tradetype": 2,//交易类型tradeType
+        "time": 1736409765051 //成交时间dealTime
+      }
+    ],
+    "eventtype": "spot@public.aggre.deals.v3.api.pb@100ms" //事件类型eventType 
+  },
+  "symbol": "BTCUSDT", //交易对symbol
+  "sendtime": 1736409765052 //事件时间eventTime
+}
 </code></pre></div>
-<p><strong>请求参数：</strong>   <code>spot@public.deals.v3.api@&lt;symbol&gt;</code></p>
+<p><strong>请求参数：</strong>   <code>spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
 
 <p>逐笔交易推送每一笔成交的信息。<strong>成交</strong>，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易</p>
 
@@ -7715,42 +7804,42 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">deals</td>
+<td style="text-align: left">dealsList</td>
 <td style="text-align: left">array</td>
 <td style="text-align: left">成交信息</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">交易类型 1:买 2:卖</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; p</td>
+<td style="text-align: left">price</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">成交价格</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">成交时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">quantity</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">成交数量</td>
 </tr>
 <tr>
-<td style="text-align: left">e</td>
+<td style="text-align: left">tradetype</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">交易类型 1:买 2:卖</td>
+</tr>
+<tr>
+<td style="text-align: left">time</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">成交时间</td>
+</tr>
+<tr>
+<td style="text-align: left">eventtype</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">事件类型</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">sendtime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
 </tr>
@@ -7762,7 +7851,7 @@ GET /api/v3/etf/info
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.kline.v3.api@BTCUSDT@Min15"
+        "spot@public.kline.v3.api.pb@BTCUSDT@Min15"
     ]
 }
 </code></pre></div>
@@ -7770,28 +7859,27 @@ GET /api/v3/etf/info
 <p><strong>response:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
-    "c":"spot@public.kline.v3.api@BTCUSDT@Min15",  
-    "d":{
-            "k":{
-                "T":1661931900,      //这根K线的结束时间                      
-                "a":29043.48804658,  //这根K线期间成交额
-                "c":20279.43,                //这根K线期间末一笔成交价
-                "h":20284.93,                //这根K线期间最高成交价
-                "i":"Min15",                 //K线间隔
-                "l":20277.52,                //这根K线期间最低成交价
-                "o":20284.93,                //这根K线期间第一笔成交价
-                "s":"BTCUSDT",           //交易对
-                "t":1661931000,          //这根K线的起始时间
-                "v":1.43211},                //这根K线期间成交量
-            "e":"spot@public.kline.v3.api"},                     //事件类型
-    "s":"BTCUSDT",                       //交易对
-    "t":1661931016878                    //事件时间
+  "channel": "spot@public.kline.v3.api.pb@BTCUSDT@Min15",
+  "publicspotkline": {
+    "interval": "Min15", //K线间隔
+    "windowstart": 1736410500, //这根K线的起始时间
+    "openingprice": "92925", //这根K线期间第一笔成交价
+    "closingprice": "93158.47", //这根K线期间末一笔成交价
+    "highestprice": "93158.47", //这根K线期间最高成交价
+    "lowestprice": "92800", //这根K线期间最低成交价
+    "volume": "36.83803224", //这根K线期间成交量
+    "amount": "3424811.05", //这根K线期间成交额
+    "windowend": 1736411400 //这根K线的结束时间   
+  },
+  "symbol": "BTCUSDT",
+  "symbolid": "2fb942154ef44a4ab2ef98c8afb6a4a7",
+  "createtime": 1736410707571
 }
 
 </code></pre></div>
 <p>K线逐秒推送所请求的K线种类(最新一根K线)的更新。</p>
 
-<p><strong>请求参数：</strong> <code>spot@public.kline.v3.api@&lt;symbol&gt;@&lt;interval&gt;</code></p>
+<p><strong>请求参数：</strong> <code>spot@public.kline.v3.api.pb@&lt;symbol&gt;@&lt;interval&gt;</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -7803,67 +7891,67 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">e</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">事件类型</td>
-</tr>
-<tr>
-<td style="text-align: left">k</td>
+<td style="text-align: left">publicspotkline</td>
 <td style="text-align: left">object</td>
 <td style="text-align: left">k线信息</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; T</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">这根K线的结束时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; a</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">这根K线期间成交额</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">这根K线期间末一笔成交价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; h</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">这根K线期间最高成交价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; i</td>
+<td style="text-align: left">interval</td>
 <td style="text-align: left">interval</td>
 <td style="text-align: left">K线间隔</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; l</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">这根K线期间最低成交价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; o</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">这根K线期间第一笔成交价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; t</td>
+<td style="text-align: left">windowstart</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">这根K线的起始时间</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; v</td>
+<td style="text-align: left">openingprice</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">这根K线期间第一笔成交价</td>
+</tr>
+<tr>
+<td style="text-align: left">closingprice</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">这根K线期间末一笔成交价</td>
+</tr>
+<tr>
+<td style="text-align: left">highestprice</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">这根K线期间最高成交价</td>
+</tr>
+<tr>
+<td style="text-align: left">lowestprice</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">这根K线期间最低成交价</td>
+</tr>
+<tr>
+<td style="text-align: left">volume</td>
 <td style="text-align: left">bigDecimal</td>
 <td style="text-align: left">这根K线期间成交量</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">这根K线期间成交额</td>
+</tr>
+<tr>
+<td style="text-align: left">windowend</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">这根K线的结束时间</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">symbolid</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对id</td>
+</tr>
+<tr>
+<td style="text-align: left">createtime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
 </tr>
@@ -7885,36 +7973,40 @@ GET /api/v3/etf/info
 <li>Week1</li>
 <li>Month1</li>
 </ul>
-<h2 id='efff33c875'>增量深度信息(实时)</h2>
+<h2 id='1654ad2dd2'>增量深度信息</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.increase.depth.v3.api@BTCUSDT"
+        "spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT"
     ]
 }
 </code></pre></div>
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-{
-    "c":"spot@public.increase.depth.v3.api@BTCUSDT",  
-    "d":{
-        "asks":[{                                   //bids:买单,asks:卖单
-            "p":"20290.89",     //变动的价格档位
-            "v":"0.000000"}], //数量
-        "e":"spot@public.increase.depth.v3.api",  //事件类型
-    "r":"3407459756"},   //版本号
-    "s":"BTCUSDT",                          //交易对
-    "t":1661932660144                       //事件时间
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "channel": "spot@public.aggre.depth.v3.api.pb@100ms@BTCUSDT",
+  "publicincreasedepths": {
+    "asksList": [], //asks:卖单
+    "bidsList": [ //bids:买单
+      {
+        "price": "92877.58", //变动的价格档位
+        "quantity": "0.00000000" //数量
+      }
+    ],
+    "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", //事件类型
+    "version": "36913293511" //版本号
+  },
+  "symbol": "BTCUSDT", //交易对
+  "sendtime": 1736411507002 //事件时间
 }
 </code></pre></div>
-<p>如果某个价格对应的挂单量(v)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。</p>
+<p>如果某个价格对应的挂单量(quantity)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。</p>
 
-<p><strong>请求参数:</strong> <code>spot@public.increase.depth.v3.api@&lt;symbol&gt;</code></p>
+<p><strong>请求参数:</strong> <code>spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -7926,32 +8018,140 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">p</td>
+<td style="text-align: left">price</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">变动的价格档位</td>
 </tr>
 <tr>
-<td style="text-align: left">v</td>
+<td style="text-align: left">quantity</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">数量</td>
 </tr>
 <tr>
-<td style="text-align: left">e</td>
+<td style="text-align: left">eventtype</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">事件类型</td>
 </tr>
 <tr>
-<td style="text-align: left">r</td>
+<td style="text-align: left">version</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">版本号</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">sendtime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">事件时间</td>
+</tr>
+</tbody></table>
+<h2 id='1b831cddd8'>增量深度信息(批量聚合)</h2>
+<blockquote>
+<p><strong>request:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"
+    ]
+}
+</code></pre></div>
+<blockquote>
+<p><strong>response:</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "channel" : "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739502064578",
+  "publicIncreaseDepthsBatch" : {
+    "items" : [ {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.48",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145507"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.90",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145508"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.31",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145509"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.84",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145510"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96576.69",
+        "quantity" : "4.88725694"
+      } ],
+      "eventType" : "",
+      "version" : "39003145511"
+    } ],
+    "eventType" : "spot@public.increase.depth.batch.v3.api.pb"
+  }
+}
+</code></pre></div>
+<p>批量聚合版本，条数超过5条或者时间超过5ms就推送一次，如果某个价格对应的挂单量(quantity)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。</p>
+
+<p><strong>请求参数:</strong> <code>spot@public.increase.depth.batch.v3.api.pb@&lt;symbol&gt;</code></p>
+
+<p><strong>返回参数:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">参数名</th>
+<th style="text-align: left">数据类型</th>
+<th style="text-align: left">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">price</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">变动的价格档位</td>
+</tr>
+<tr>
+<td style="text-align: left">quantity</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">数量</td>
+</tr>
+<tr>
+<td style="text-align: left">eventtype</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">事件类型</td>
+</tr>
+<tr>
+<td style="text-align: left">version</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">版本号</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">sendtime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
 </tr>
@@ -7965,7 +8165,7 @@ GET /api/v3/etf/info
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-                "spot@public.limit.depth.v3.api@BTCUSDT@5"
+                "spot@public.limit.depth.v3.api.pb@BTCUSDT@5"
 
    ]
 }
@@ -7973,20 +8173,29 @@ GET /api/v3/etf/info
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-{
-  "c":"spot@public.limit.depth.v3.api@BTCUSDT@5",  
-  "d":{
-    "asks":[{                 //bids:买单,asks:卖单
-            "p":"20290.89",   //变动的价格档位
-            "v":"0.000000"}], //数量
-    "e":"spot@public.limit.depth.v3.api",  //事件类型
-    "r":"3407459756"},  //版本号 
-  "s":"BTCUSDT",              //交易对
-  "t":1661932660144           //事件时间
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "channel": "spot@public.limit.depth.v3.api.pb@BTCUSDT@5",
+  "publiclimitdepths": {
+    "asksList": [ //asks:卖单
+      {
+        "price": "93180.18", //变动的价格档位
+        "quantity": "0.21976424" //数量
+      }
+    ],
+    "bidsList": [ //bids:买单
+      {
+        "price": "93179.98",
+        "quantity": "2.82651000"
+      }
+    ],
+    "eventtype": "spot@public.limit.depth.v3.api.pb", //事件类型
+    "version": "36913565463" //版本号 
+  },
+  "symbol": "BTCUSDT", //交易对
+  "sendtime": 1736411838730 //事件时间
 }
 </code></pre></div>
-<p><strong>请求参数:</strong> <code>spot@public.limit.depth.v3.api@&lt;symbol&gt;@&lt;level&gt;</code></p>
+<p><strong>请求参数:</strong> <code>spot@public.limit.depth.v3.api.pb@&lt;symbol&gt;@&lt;level&gt;</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -7998,66 +8207,65 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">p</td>
+<td style="text-align: left">price</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">变动的价格档位</td>
 </tr>
 <tr>
-<td style="text-align: left">v</td>
+<td style="text-align: left">quantity</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">数量</td>
 </tr>
 <tr>
-<td style="text-align: left">e</td>
+<td style="text-align: left">eventtype</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">事件类型</td>
 </tr>
 <tr>
-<td style="text-align: left">r</td>
+<td style="text-align: left">version</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">版本号</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">sendtime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
 </tr>
 </tbody></table>
 <h2 id='symbol'>按Symbol的最优挂单信息</h2>
-<p>实时推送指定交易对最优挂单信息。</p>
+<p>推送指定交易对最优挂单信息。</p>
 
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-                "spot@public.bookTicker.v3.api@BTCUSDT"
-      ]
+    "method": "SUBSCRIPTION",
+    "params": [
+                "spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT"
+      ]
 }
 </code></pre></div>
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>
-{
- "c":"spot@public.bookTicker.v3.api@&lt;BTCUSDT&gt;",
- "d":{
-    "A":"40.66000000"},  //卖单最优挂单数量
-    "B":"31.21000000",  //买单最优挂单数量
-    "a":"25.36520000", //卖单最优挂单价格
-    "b":"25.35190000", // 买单最优挂单价格 
-  },  
- "s":"BTCUSDT", //交易对
- "t":1661932660144 //事件时间
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "channel": "spot@public.aggre.bookTicker.v3.api.pb@100ms@BTCUSDT",
+  "publicbookticker": {
+    "bidprice": "93387.28",  // 买单最优挂单价格 
+    "bidquantity": "3.73485", //买单最优挂单数量
+    "askprice": "93387.29", //卖单最优挂单价格
+    "askquantity": "7.669875" //卖单最优挂单数量
+  },
+  "symbol": "BTCUSDT", //交易对
+  "sendtime": 1736412092433 //事件时间
 }
 </code></pre></div>
-<p><strong>请求参数:</strong> <code>spot@public.bookTicker.v3.api@&lt;symbol&gt;</code></p>
+<p><strong>请求参数:</strong> <code>spot@public.aggre.bookTicker.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -8069,70 +8277,67 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">A</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">卖单最优挂单数量</td>
-</tr>
-<tr>
-<td style="text-align: left">B</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">买单最优挂单数量</td>
-</tr>
-<tr>
-<td style="text-align: left">a</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">卖单最优挂单价格</td>
-</tr>
-<tr>
-<td style="text-align: left">b</td>
+<td style="text-align: left">bidprice</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">买单最优挂单价格</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
+<td style="text-align: left">bidquantity</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">买单最优挂单数量</td>
+</tr>
+<tr>
+<td style="text-align: left">askprice</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">卖单最优挂单价格</td>
+</tr>
+<tr>
+<td style="text-align: left">askquantity</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">卖单最优挂单数量</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">sendtime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
 </tr>
 </tbody></table>
-<h2 id='miniticker'>MiniTicker</h2>
+<h2 id='symbol-2'>按Symbol的最优挂单信息（批量聚合）</h2>
+<p>批量聚合版本，推送指定交易对最优挂单信息。</p>
+
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@public.miniTicker.v3.api@BTCUSDT@UTC+8"
-    ]
+                "spot@public.bookTicker.batch.v3.api.pb@BTCUSDT"
+      ]
 }
 </code></pre></div>
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
-  "d":
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--",
-    "t":"1699502456050"},
-  "c":"spot@public.miniTicker.v3.api@BTCUSDT@UTC+8",
-  "t":1699502456051,
-  "s":"BTCUSDT"
-}                                        
+  "channel" : "spot@public.bookTicker.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739503249114",
+  "publicBookTickerBatch" : {
+    "items" : [ {
+      "bidPrice" : "96567.37",
+      "bidQuantity" : "3.362925",
+      "askPrice" : "96567.38",
+      "askQuantity" : "1.545255"
+    } ]
+  }
+}
 </code></pre></div>
-<p><strong>请求参数：</strong>   <code>spot@public.miniTicker.v3.api@&lt;symbol&gt;@&lt;timezone&gt;</code></p>
+<p><strong>请求参数:</strong> <code>spot@public.bookTicker.batch.v3.api.pb@&lt;symbol&gt;</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -8144,194 +8349,40 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">c</td>
+<td style="text-align: left">bidprice</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">订阅频道名称</td>
+<td style="text-align: left">买单最优挂单价格</td>
 </tr>
 <tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">data</td>
-<td style="text-align: left">data</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;s</td>
+<td style="text-align: left">bidquantity</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">交易对symbol</td>
+<td style="text-align: left">买单最优挂单数量</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;p</td>
+<td style="text-align: left">askprice</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">交易对最新成交价</td>
+<td style="text-align: left">卖单最优挂单价格</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;r</td>
+<td style="text-align: left">askquantity</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">交易对的订阅utc8时区涨跌幅</td>
+<td style="text-align: left">卖单最优挂单数量</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;tr</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">交易对的订阅时区涨跌幅</td>
+<td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt;h</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时最高价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;l</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时最低价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时交易额</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;q</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时交易量</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;lastRT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF最近合并时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;MT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF合并次数</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;NV</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF净值</td>
-</tr>
-</tbody></table>
-<h2 id='minitickers'>MiniTickers</h2>
-<blockquote>
-<p><strong>request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-    "method": "SUBSCRIPTION",
-    "params": [
-        "spot@public.miniTickers.v3.api@UTC+8"
-    ]
-}
-</code></pre></div>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "d":
-  [{"s":"SENSOUSDT",
-    "p":"0.07642",
-    "r":"-0.0383",
-    "tr":"-0.0383",
-    "h":"0.08032",
-    "l":"0.07463",
-    "v":"25052.6533",
-    "q":"323777.17",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-   {"s":"BTCUSDT",
-    "p":"36474.74",
-    "r":"0.0354",
-    "tr":"0.0354",
-    "h":"36549.72",
-    "l":"35101.68",
-    "v":"375173478.65",
-    "q":"10557.72895",
-    "lastRT":"-1",
-    "MT":"0",
-    "NV":"--"},
-  "c":"spot@public.miniTickers.v3.api@UTC+8",
-  "t":1699502456051,
-}                                        
-</code></pre></div>
-<p><strong>请求参数：</strong>   <code>spot@public.miniTickers.v3.api@&lt;timezone&gt;</code></p>
-
-<p><strong>返回参数:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">参数名</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">订阅频道名称</td>
-</tr>
-<tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">data</td>
-<td style="text-align: left">data</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对symbol</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对最新成交价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;r</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的订阅utc8时区涨跌幅</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;tr</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的订阅时区涨跌幅</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;h</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时最高价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;l</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时最低价</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时交易额</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;q</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对的24小时交易量</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;lastRT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF最近合并时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;MT</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF合并次数</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;NV</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">ETF净值</td>
+<td style="text-align: left">sendtime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">事件时间</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook'>如何正确在本地维护一个orderbook副本</h2>
 <ol>
-<li>通过订阅 <strong>spot@public.increase.depth.v3.api@<symbol></strong>获取全量深度信息，保存当前version。</li>
-<li>订阅ws深度信息，收到更新后，如果收到的数据version&gt;当前version,同一个价位，后收到的更新覆盖前面的。</li>
+<li>通过订阅spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>获取全量深度信息，保存当前version。</li>
+<li>订阅ws深度信息，收到更新后，如果收到的数据version &gt; 当前version,同一个价位，后收到的更新覆盖前面的。</li>
 <li>访问Rest接口 <strong>https://api.mexc.com/api/v3/depth?symbol=MXBTC&amp;limit=1000</strong> 获得一个1000档的深度快照</li>
 <li>将目前缓存的深度信息中同一价格，version&lt;步骤3获取到的快照中的version的数据丢弃。</li>
 <li>将深度快照中的内容更新至本地缓存，并从ws接收到的event开始继续更新。</li>
@@ -8347,8 +8398,8 @@ GET /api/v3/etf/info
 <li>用于订阅账户数据的 <code>listenKey</code> 从创建时刻起有效期为60分钟</li>
 <li>可以通过 <code>PUT</code> 一个 <code>listenKey</code> 延长60分钟有效期</li>
 <li>可以通过<code>DELETE</code>一个 <code>listenKey</code> 立即关闭当前数据流，并使该<code>listenKey</code> 无效</li>
-<li>websocket接口的baseurl: <strong>wss://wbs.mexc.com/ws</strong></li>
-<li>订阅账户数据流的stream名称为 <strong>/ws?listenKey=listenKey</strong> <br/>  如：<strong>wss://wbs.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
+<li>websocket接口的baseurl: <strong>ws://wbs-api.mexc.com/ws</strong></li>
+<li>订阅账户数据流的stream名称为 <strong>/ws?listenKey=listenKey</strong> <br/>  如：<strong>ws://wbs-api.mexc.com/ws?listenKey=pqia91ma19a5s61cv6a81va65sd099v8a65a1a5s61cv6a81va65sdf19v8a65a1</strong></li>
 <li>每个链接有效期不超过24小时，请妥善处理断线重连</li>
 <li>每个UID，最多申请60个listen key（不包含已失效listen key）</li>
 <li>ws链接数的数量限制：每个listen key最多5个ws链接（即：每个uid最多申请的60个listen key，300个ws链接）</li>
@@ -8465,7 +8516,7 @@ GET /api/v3/etf/info
 <td style="text-align: left"></td>
 </tr>
 </tbody></table>
-<h2 id='e2afeb0acf'>现货账户信息(实时)</h2>
+<h2 id='060643caef'>现货账户信息</h2>
 <p>在订阅成功后，每当账户余额发生变动或可用余额发生变动时，服务器将推送账户资产的更新。  </p>
 
 <blockquote>
@@ -8474,7 +8525,7 @@ GET /api/v3/etf/info
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-    "spot@private.account.v3.api"
+    "spot@private.account.v3.api.pb"
     ]
 }
 </code></pre></div>
@@ -8482,20 +8533,22 @@ GET /api/v3/etf/info
 <p><strong>response:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
-    "c": "spot@private.account.v3.api",
-    "d": {
-        "a": "USDT",
-        "c": 1678185928428,
-        "f": "302.185113007893322435",
-        "fd": "-4.990689704",
-        "l": "4.990689704",
-        "ld": "4.990689704",
-        "o": "ENTRUST_PLACE"
-    },
-    "t": 1678185928435
+    channel: "spot@private.account.v3.api.pb"
+    createTime: 1736417034305
+    sendTime: 1736417034307
+    privateAccount {
+    vcoinName: "USDT"
+    coinId: "128f589271cb4951b03e71e6323eb7be"
+    balanceAmount: "21.94210356004384"
+    balanceAmountChange: "10"
+    frozenAmount: "0"
+    frozenAmountChange: "0"
+    type: "CONTRACT_TRANSFER"
+    time: 1736416910000
+    }
 }
 </code></pre></div>
-<p><strong>请求参数：</strong> <code>spot@private.account.v3.api</code></p>
+<p><strong>请求参数：</strong> <code>spot@private.account.v3.api.pb</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -8507,59 +8560,54 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">d</td>
+<td style="text-align: left">privateAccount</td>
 <td style="text-align: left">json</td>
 <td style="text-align: left">账户信息</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">vcoinName</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">资产名称</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">结算时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; f</td>
+<td style="text-align: left">balanceAmount</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">可用余额</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; fd</td>
+<td style="text-align: left">balanceAmountChange</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">可用变动金额</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; l</td>
+<td style="text-align: left">frozenAmount</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">冻结余额</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; ld</td>
+<td style="text-align: left">frozenAmountChange</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">冻结变动金额</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; o</td>
+<td style="text-align: left">type</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left"><a href="#account_position">变动类型</a></td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">time</td>
 <td style="text-align: left">long</td>
-<td style="text-align: left">事件时间</td>
+<td style="text-align: left">结算时间</td>
 </tr>
 </tbody></table>
-<h2 id='df446b56c7'>现货账户成交(实时)</h2>
+<h2 id='84f7e49ea9'>现货账户成交</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
     "method": "SUBSCRIPTION",
     "params": [
-        "spot@private.deals.v3.api"
+        "spot@private.deals.v3.api.pb"
     ]
 }
 </code></pre></div>
@@ -8567,26 +8615,23 @@ GET /api/v3/etf/info
 <p><strong>response:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
-    "c": "spot@private.deals.v3.api",
-    "d": {
-        "p": "1.804",
-        "v": "0.31",
-        "a": "0.55924",
-        "S": 1,
-        "T": 1678901086198,
-        "t": "5bbb6ad8b4474570b155610e3960cd",
-        "c": "",
-        "i": "2dd9655f9fa2438fa1709510d7afd9",
-        "m": 0,
-        "st": 0,
-        "n": "0.000248206380027431",
-        "N": "MX"
-    },
-    "s": "MXUSDT",
-    "t": 1661938980285
+    channel: "spot@private.deals.v3.api.pb"
+    symbol: "MXUSDT"
+    sendTime: 1736417034332
+    privateDeals {
+    price: "3.6962"
+        quantity: "1"
+        amount: "3.6962"
+      tradeType: 2
+      tradeId: "505979017439002624X1"
+      orderId: "C02__505979017439002624115"
+      feeAmount: "0.0003998377369698171"
+        feeCurrency: "MX"
+      time: 1736417034280
+    }
 }
 </code></pre></div>
-<p><strong>请求参数：</strong> <code>spot@private.deals.v3.api</code></p>
+<p><strong>请求参数：</strong> <code>spot@private.deals.v3.api.pb</code></p>
 
 <p><strong>返回参数:</strong></p>
 
@@ -8598,118 +8643,107 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">json</td>
-<td style="text-align: left">账户成交信息</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">交易类型 1:买 2:卖</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; T</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">成交时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">用户自定义订单id: clientOrderId</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">订单id: orderId</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; m</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">是否是挂单: isMaker</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易价格</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; st</td>
-<td style="text-align: left">byte</td>
-<td style="text-align: left">是否自成交：isSelfTrade</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; t</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">成交id: tradeId</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易数量</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; a</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易金额</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; n</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">手续费数量</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; N</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">手续费币种</td>
-</tr>
-<tr>
-<td style="text-align: left">s</td>
+<td style="text-align: left">symbol</td>
 <td style="text-align: left">string</td>
 <td style="text-align: left">交易对</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
+<td style="text-align: left">sendTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">事件时间</td>
 </tr>
+<tr>
+<td style="text-align: left">privateDeals</td>
+<td style="text-align: left">json</td>
+<td style="text-align: left">账户成交信息</td>
+</tr>
+<tr>
+<td style="text-align: left">price</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易价格</td>
+</tr>
+<tr>
+<td style="text-align: left">quantity</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易数量</td>
+</tr>
+<tr>
+<td style="text-align: left">amount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易金额</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeType</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">交易类型 1:买 2:卖</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">成交id: tradeId</td>
+</tr>
+<tr>
+<td style="text-align: left">orderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订单id: orderId</td>
+</tr>
+<tr>
+<td style="text-align: left">clientOrderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">用户自定义订单id: clientOrderId</td>
+</tr>
+<tr>
+<td style="text-align: left">feeAmount</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">手续费数量</td>
+</tr>
+<tr>
+<td style="text-align: left">feeCurrency</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">手续费币种</td>
+</tr>
+<tr>
+<td style="text-align: left">time</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">成交时间</td>
+</tr>
 </tbody></table>
-<h2 id='c0207ed499'>现货账户订单(实时)</h2>
+<h2 id='365a4763c4'>现货账户订单</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
   "method": "SUBSCRIPTION",
   "params": [
-      "spot@private.orders.v3.api"
+      "spot@private.orders.v3.api.pb"
   ]
 }
 </code></pre></div>
-<p><strong>请求参数：</strong> <code>spot@private.orders.v3.api</code></p>
-<h3 id='a'>a.限价/市价订单 (实时)</h3>
+<p><strong>请求参数：</strong> <code>spot@private.orders.v3.api.pb</code></p>
+
 <blockquote>
 <p><strong>response:</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>{
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "A":8.0,
-        "O":1661938138000,
-        "S":1,
-        "V":10,
-        "a":8,
-        "c":"",
-        "i":"e03a5c7441e44ed899466a7140b71391",
-        "m":0,
-        "o":1,
-        "p":0.8,
-        "s":1,
-        "v":10,
-        "ap":0,  
-        "cv":0,     
-        "ca":0  
-  },
-  "s": "MXUSDT",
-  "t": 1661938138193
+    channel: "spot@private.orders.v3.api.pb"
+    symbol: "MXUSDT"
+    sendTime: 1736417034281
+    privateOrders {
+      id: "C02__505979017439002624115"
+      price: "3.5121"
+      quantity: "1"
+      amount: "0"
+      avgPrice: "3.6962"
+      orderType: 5
+      tradeType: 2
+      remainAmount: "0"
+      remainQuantity: "0"
+      lastDealQuantity: "1"
+      cumulativeQuantity: "1"
+      cumulativeAmount: "3.6962"
+      status: 2
+      createTime: 1736417034259
+    }
 }
 </code></pre></div>
 <p><strong>返回参数:</strong></p>
@@ -8722,191 +8756,84 @@ GET /api/v3/etf/info
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">d</td>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">交易对</td>
+</tr>
+<tr>
+<td style="text-align: left">sendTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">事件时间</td>
+</tr>
+<tr>
+<td style="text-align: left">privateOrders</td>
 <td style="text-align: left">json</td>
 <td style="text-align: left">账户订单信息</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; A</td>
+<td style="text-align: left">id</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">订单id</td>
+</tr>
+<tr>
+<td style="text-align: left">price</td>
 <td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">实际剩余金额: remainAmount</td>
+<td style="text-align: left">下单价格</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; O</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">订单创建时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">交易类型 1:买 2:卖</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; V</td>
+<td style="text-align: left">quantity</td>
 <td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">实际剩余数量: remainQuantity</td>
+<td style="text-align: left">下单数量</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; a</td>
+<td style="text-align: left">amount</td>
 <td style="text-align: left">bigDecimal</td>
 <td style="text-align: left">下单总金额</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; c</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">用户自定义订单id: clientOrderId</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">订单id</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; m</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">是否是挂单: isMaker</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; o</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">订单类型LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100）</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">下单价格</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; s</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">订单状态 1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">下单数量</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; ap</td>
+<td style="text-align: left">avgPrice</td>
 <td style="text-align: left">bigDecimal</td>
 <td style="text-align: left">平均成交价</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; cv</td>
+<td style="text-align: left">orderType</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">订单类型LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100）</td>
+</tr>
+<tr>
+<td style="text-align: left">tradeType</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">交易类型 1:买 2:卖</td>
+</tr>
+<tr>
+<td style="text-align: left">remainAmount</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">实际剩余金额: remainAmount</td>
+</tr>
+<tr>
+<td style="text-align: left">remainQuantity</td>
+<td style="text-align: left">bigDecimal</td>
+<td style="text-align: left">实际剩余数量: remainQuantity</td>
+</tr>
+<tr>
+<td style="text-align: left">cumulativeQuantity</td>
 <td style="text-align: left">bigDecimal</td>
 <td style="text-align: left">累计成交数量</td>
 </tr>
 <tr>
-<td style="text-align: left">&gt; ca</td>
+<td style="text-align: left">cumulativeAmount</td>
 <td style="text-align: left">bigDecimal</td>
 <td style="text-align: left">累计成交金额</td>
 </tr>
 <tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">事件时间</td>
+<td style="text-align: left">status</td>
+<td style="text-align: left">int</td>
+<td style="text-align: left">订单状态 1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单</td>
 </tr>
 <tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对</td>
-</tr>
-</tbody></table>
-<h3 id='b'>b.账户止盈止损订单(实时)</h3>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "c": "spot@private.orders.v3.api",
-  "d": {
-        "N":"USDT",
-        "O":1661938853715,
-        "P":0.9,
-        "S":1,
-        "T":1,
-        "i":"f6d82e5f41d745f59fe9d3cafffd80b5",
-        "o":100,
-        "p":1.01,
-        "s":"NEW",
-        "v":6
-  },
-  "s": "MXUSDT",
-  "t": 1661938853727
-}
-</code></pre></div>
-<p><strong>返回参数:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">参数名</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">d</td>
-<td style="text-align: left">json</td>
-<td style="text-align: left">账户订单信息</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; N</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">手续费资产类别</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; O</td>
+<td style="text-align: left">createTime</td>
 <td style="text-align: left">long</td>
 <td style="text-align: left">订单创建时间</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; P</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">触发价格</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; S</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">交易类型 1: 买 2: 卖</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; T</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">0: GE(买入价大过触发价) 1: LE(买入价小于触发价)</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; i</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">订单id</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt;  o</td>
-<td style="text-align: left">int</td>
-<td style="text-align: left">订单类型 LIMIT_ORDER(1),POST_ONLY(2),IMMEDIATE_OR_CANCEL(3),<br />FILL_OR_KILL(4),MARKET_ORDER(5); 止盈止损（100）</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; p</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">下单价格</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">订单状态  NEW ,CANCELED ,EXECUTED, FAILED</td>
-</tr>
-<tr>
-<td style="text-align: left">&gt; v</td>
-<td style="text-align: left">bigDecimal</td>
-<td style="text-align: left">下单数量</td>
-</tr>
-<tr>
-<td style="text-align: left">s</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对</td>
-</tr>
-<tr>
-<td style="text-align: left">t</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">事件时间</td>
 </tr>
 </tbody></table>
 <h1 id='0900514e9d'>邀请返佣接口</h1><h2 id='8254d412a1'>获取邀请返佣记录</h2>
