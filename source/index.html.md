@@ -3764,7 +3764,7 @@ protoc *.proto --python_out=python文件输出路径
 
  	// 组装对象
  	PushDataV3ApiWrapper pushDataV3ApiWrapper = PushDataV3ApiWrapper.newBuilder()
- 			.setChannel("spot@public.increase.depth.v3.api.pb")
+ 			.setChannel("spot@public.aggre.depth.v3.api.pb")
  			.setSymbol("BTCUSDTI)
  			.setSendTime(System.currentTimeMillis())
  			.build();
@@ -3785,7 +3785,7 @@ protoc *.proto --python_out=python文件输出路径
  	
  	#组装对象
  	PushDataV3ApiWrapper = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
- 	PushDataV3ApiWrapper.channel = 'spot@public.increase.depth.v3.api.pb'
+ 	PushDataV3ApiWrapper.channel = 'spot@public.aggre.depth.v3.api.pb'
  	PushDataV3ApiWrapper.symbol ='BTCUSDT'
  	
  	#序列化为字符串
