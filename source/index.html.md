@@ -3637,7 +3637,7 @@ Response:
 # Websocket Market Streams
 
 - The base endpoint is: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
-- Each connection to **wbs.mexc.com** is valid for no more than 24 hours. Please handle disconnections and reconnections properly.
+- Each connection to **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)** is valid for no more than 24 hours. Please handle disconnections and reconnections properly.
 - All trading pair names in the symbol must be in **uppercase**. For example: `spot@public.deals.v3.api.pb@<symbol>`  
   Example: `spot@public.deals.v3.api.pb@BTCUSDT`
 - If there is no valid subscription on the websocket, the server will actively disconnect after **30 seconds**. If the subscription is successful but there is no data flow, the server will disconnect after **one minute**. The client can send a ping to keep the connection alive.
@@ -3699,7 +3699,7 @@ The current websocket push uses the protobuf format. The specific integration pr
 
    // Assemble the object
    PushDataV3ApiWrapper pushDataV3ApiWrapper = PushDataV3ApiWrapper.newBuilder()
-           .setChannel("spot@public.aggre.depth.v3.api.pb")
+           .setChannel("spot@public.aggre.depth.v3.api.pb@10ms")
            .setSymbol("BTCUSDT")
            .setSendTime(System.currentTimeMillis())
            .build();
@@ -3720,7 +3720,7 @@ The current websocket push uses the protobuf format. The specific integration pr
    
    # Assemble the object
    pushData = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
-   pushData.channel = 'spot@public.aggre.depth.v3.api.pb'
+   pushData.channel = 'spot@public.aggre.depth.v3.api.pb@10ms'
    pushData.symbol = 'BTCUSDT'
    
    # Serialize to a string
@@ -4216,16 +4216,18 @@ This batch aggregation version pushes the best order information for a specified
 
 ## How to Properly Maintain a Local Copy of the Order Book
 
-1. Subscribe to `spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>` to get full amount of depth information, save the current version.
-2. Subscribe to ws depth information, if the received data version more than the current version after update, the later received update cover the previous one at the same price.
-3. Through **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** to get the latest 1000 depth snapshots.
-4. Discard version data from the snapshot obtained by Version (less than step 3 )for the same price in the current cached depth information
-5. Update the contents of the deep snapshots to the local cache and keep updating from the event received by the WS
-6. The version of each new event should be exactly equal to version+1 of the previous event, otherwise packet loss may occur. In case of packet loss or discontinuous version of the event retrieved, please re-initialize from Step 3.
-7. The amount of hanging orders in each event represents the **absolute value** of the current hanging orders of the price, rather than the relative change.
-8. If the amount of a hanging order corresponding to a certain price is 0, it means that the hanging order at that price has been cancelled, the price should be removed.
+1. Connect to the WebSocket and subscribe to `spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@MXBTC` to obtain incremental aggregated depth information.  
+2. Access the REST API `https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000` to obtain a depth snapshot with 1000 levels.  
+3. The `fromVersion` of each new push message should be exactly equal to the `toVersion + 1` of the previous message. Otherwise, packet loss has occurred, and reinitialization from step 2 is required.  
+4. The order quantity in each push message represents the absolute value of the current order quantity at that price level, not a relative change.  
+5. If the `toVersion` in the push message is smaller than the `version` in the snapshot, the message is outdated and should be ignored.  
+6. If the `fromVersion` in the push message is greater than the `version` in the snapshot, data is missing between the push message and the snapshot, requiring reinitialization from step 2.  
+7. Now that the `version` in the snapshot falls within the `[fromVersion, toVersion]` range of the push message, the push message can be integrated with the snapshot data as follows:  
+   - If the price level in the push message already exists in the snapshot, update the quantity based on the push message.  
+   - If the price level in the push message does not exist in the snapshot, insert a new entry with the quantity from the push message.  
+   - If a price level in the push message has a quantity of 0, remove that price level from the snapshot.  
 
-Note: Because the depth snapshot has a limitation on the number of price levels, any price levels not included in the initial snapshot and without quantity changes will not appear in the incremental depth updates. Therefore, even after applying all incremental updates, these price levels may not be visible in your local order book, and there may be some discrepancies between your local order book and the real order book. However, for most use cases, a depth limit of 5000 levels is sufficient to understand the market and trading activity effectively.
+**Note:** Since the depth snapshot has a limitation on the number of price levels, price levels outside the initial snapshot that have not changed in quantity will not appear in incremental push messages. Therefore, the local order book may differ slightly from the real order book. However, for most use cases, the 5000-depth limit is sufficient to effectively understand the market and trading activity.
 
 ---
 
