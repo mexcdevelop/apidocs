@@ -3705,7 +3705,7 @@ GET /api/v3/etf/info
 # Websocket 行情推送
 
 - 本篇所列出的所有wss接口的baseurl为: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
-- 每个到 **wbs.mexc.com** 的链接有效期不超过24小时，请妥善处理断线重连
+- 每个到 **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)** 的链接有效期不超过24小时，请妥善处理断线重连
 - symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api.pb@<symbol>`</br>实例：`spot@public.deals.v3.api.pb@BTCUSDT`
 - websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接
 - 1个 ws 连接最多30个订阅
@@ -4263,16 +4263,18 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 
 ## 如何正确在本地维护一个orderbook副本
 
-1. 通过订阅spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@<symbol>获取全量深度信息，保存当前version。
-2. 订阅ws深度信息，收到更新后，如果收到的数据version > 当前version,同一个价位，后收到的更新覆盖前面的。
-3. 访问Rest接口 **https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000** 获得一个1000档的深度快照
-4. 将目前缓存的深度信息中同一价格，version<步骤3获取到的快照中的version的数据丢弃。
-5. 将深度快照中的内容更新至本地缓存，并从ws接收到的event开始继续更新。
-6. 每一个新event的version应该恰好等于上一个event的version+1，否则可能出现了丢包，如出现丢包或者获取到的event的version不连续,请从步骤3重新进行初始化。
-7. 每一个event中的挂单量代表这个价格目前的挂单量**绝对值**，而不是相对变化。
-8. 如果某个价格对应的挂单量为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
+1. 连接 Websocket，并订阅 spot@public.aggre.depth.v3.api.pb@(100ms|10ms)@MXBTC 获取增量聚合深度信息
+2. 访问Rest接口 https://api.mexc.com/api/v3/depth?symbol=MXBTC&limit=1000 获得一个1000档的深度快照
+3. 每一个新推送消息的fromVersion应该恰好等于上一个推送消息的toVersion+1，否则表示出现了丢包，需要从步骤2重新进行初始化
+4. 每一个推送消息中的挂单量代表这个价位目前挂单量的绝对值，而不是相对变化。
+5. 如果推送消息中的toVersion值小于快照中的version，说明推送的消息为过期消息，忽略
+6. 如果推送消息中的fromVersion值大于快照中的version，说明推送的消息和快照数据之间有缺失，需要从步骤2重新进行初始化
+7. 现在快照中的version在推送消息的[fromVersion, toVersion]范围之内，可以将推送消息与快照数据进行整合，过程如下：
+- 推送消息中的价位在快照中已存在，按照推送消息中的数量，进行重新设置
+- 推送消息中的价位在快照中不存在，按照推送消息中的数量，插入新的值
+- 推送消息中存在数量为0的价位，在快照中删除此价位
 
-注意: 因为深度快照对价格档位数量有限制，初始快照之外的价格档位并且没有数量变化的价格档位不会出现在增量深度的更新信息内。因此，即使应用来自增量深度的所有更新，这些价格档位也不会在本地 order book 中可见，所以本地的 order book 与真实的 order book 可能会有一些差异。 不过对于大多数用例，5000 的深度限制足以有效地了解市场和交易。
+注意: 因为深度快照对价格档位数量有限制，初始快照之外的价格档位如果没有发生数量变化，是不会出现在增量推送消息中的。所以本地的 order book 与真实的 order book 可能会有一些差异。 不过对于大多数用例，5000 的深度限制足以有效地了解市场和交易。
 
 
 
