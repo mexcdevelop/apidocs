@@ -3699,7 +3699,7 @@ The current websocket push uses the protobuf format. The specific integration pr
 
    // Assemble the object
    PushDataV3ApiWrapper pushDataV3ApiWrapper = PushDataV3ApiWrapper.newBuilder()
-           .setChannel("spot@public.aggre.depth.v3.api.pb")
+           .setChannel("spot@public.aggre.depth.v3.api.pb@10ms")
            .setSymbol("BTCUSDT")
            .setSendTime(System.currentTimeMillis())
            .build();
@@ -3720,7 +3720,7 @@ The current websocket push uses the protobuf format. The specific integration pr
    
    # Assemble the object
    pushData = PushDataV3ApiWrapper_pb2.PushDataV3ApiWrapper()
-   pushData.channel = 'spot@public.aggre.depth.v3.api.pb'
+   pushData.channel = 'spot@public.aggre.depth.v3.api.pb@10ms'
    pushData.symbol = 'BTCUSDT'
    
    # Serialize to a string
