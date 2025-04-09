@@ -1895,7 +1895,7 @@ MARKET: When type is market,  `quoteOrderQty` or `quantity` required to choose a
 
 ## Batch Orders
 
-Supports 30 orders with a same symbol in a batch,rate limit:2 times/s.
+Supports 20 orders with a same symbol in a batch,rate limit:2 times/s.
 
 > Request
 
@@ -1953,7 +1953,7 @@ Parameters:
 
 | Name             | type    | Mandatory | Description                                |
 | :--------------- | :------ | :------- |:-------------------------------------------|
-| batchOrders      | LIST  | YES      | list of batchOrders,supports max 30 orders |
+| batchOrders      | LIST  | YES      | list of batchOrders,supports max 20 orders |
 | symbol           | STRING  | YES      | symbol                                     |
 | side             | ENUM    | YES      | <a href="#order_side">order side</a>       |
 | type             | ENUM    | YES      | <a href="#order_type">order type</a>       |
@@ -2121,7 +2121,7 @@ Response:
   "orderListId": -1,
   "clientOrderId": "myOrder1",
   "price": "0.1",
-  "origQty": "1.0",
+  "Qty": "1.0",
   "executedQty": "0.0",
   "cummulativeQuoteQty": "0.0",
   "status": "NEW",
@@ -2164,7 +2164,7 @@ Response:
 | orderId             | order id                             |
 | clientOrderId       | client order id                      |
 | price               | Price                                |
-| origOty             | Original order quantity              |
+| Qty                 | Original order quantity              |
 | executedQty         | Executed order quantity              |
 | cummulativeQuoteQty | Cummulative quote quantity           |
 | status              | <a href="#order_status">order status</a>                         |
