@@ -584,6 +584,12 @@
 <td>修改</td>
 <td>ws链接地址修改为wss://contract.mexc.com/edge</td>
 </tr>
+<tr>
+<td>2025-04-09</td>
+<td>*</td>
+<td>修改</td>
+<td>订阅ws增量深度数据，默认启用合并即compress为true</td>
+</tr>
 </tbody></table>
 <h1 id='2d07d50c97'>接入说明</h1><h2 id='url'>接入url</h2>
 <blockquote>
@@ -6897,7 +6903,8 @@ Recv-Window来自定义，其最大值为60，不推荐使用30秒以上的recv_
     </span><span class="nl">"ts"</span><span class="p">:</span><span class="mi">1587442022003</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>订阅、取消订阅、数据示例见右侧。</p>
+<p>订阅、取消订阅、数据示例见右侧。
+增量深度订阅，默认启用合并，如不需启用，订阅时请将compress设置为false</p>
 
 <p><strong>响应参数:</strong></p>
 
