@@ -25,6 +25,8 @@ meta:
 |2022-07-07|/contract/detail|Add|Get the contract information endpoint add a new field: apiAllowed(true or false),means Whether support API|
 |2022-07-25|*|maintenance|place order endpoints and cancel orders endpoints will be closed temporarily. The query endpoints can still be used|
 |2024-01-31|*|adjust|ws base url update:wss://contract.mexc.com/edge|
+|2025-04-09|*|adjust|Subscribe to ws incremental depth data, with merge enabled by default: `compress` is set to `true`|
+
 
 
 # Integration guide
@@ -3419,6 +3421,7 @@ subscribe , unsubscribe, example is shown on the right.
 ```
 
 subscribe , unsubscribe, example is shown on the right.
+Incremental depth subscription has merging enabled by default. If you do not want to enable it, please set `compress` to `false` when subscribing.
 
 **Response Parameter:**
 	
