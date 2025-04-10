@@ -1908,7 +1908,7 @@ MARKET：当type是market时，不论是买单或者卖单，quoteOrderQty和qua
 
 
 ## 批量下单
-支持单次批量下30单,要求必须是同一交易对。
+支持单次批量下20单,要求必须是同一交易对。
 
 > 请求示例
 
@@ -1965,7 +1965,7 @@ POST /api/v3/batchOrders?batchOrders=[{"type": "LIMIT_ORDER","price": "40000","q
 
 | 名称             | 类型    | 是否必需 | 说明                   |
 | :--------------- | :------ | :------- | :--------------------- |
-| batchOrders      | LIST  | 是      | 订单列表，最多支持30个订单(list of JSON格式填写订单参数,参考请求示例) |
+| batchOrders      | LIST  | 是      | 订单列表，最多支持20个订单(list of JSON格式填写订单参数,参考请求示例) |
 | symbol           | string  | 是      | 交易对                 |
 | side             | ENUM    | 是      | 详见枚举定义：<a href="#order_side">订单方向</a> |
 | type             | ENUM    | 是      | 详见枚举定义：<a href="#order_type">订单类型</a> |
@@ -2153,7 +2153,7 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
   "orderListId": -1, // OCO订单的ID，不然就是-1
   "clientOrderId": "myOrder1", // 客户自己设置的ID
   "price": "0.1", // 订单价格
-  "origQty": "1.0", // 用户设置的原始订单数量
+  "Qty": "1.0", // 用户设置的原始订单数量
   "executedQty": "0.0", // 交易的订单数量
   "cummulativeQuoteQty": "0.0", // 累计交易的金额
   "status": "NEW", // 订单状态
@@ -2196,7 +2196,7 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 | orderId             | 系统订单id                           |
 | clientOrderId       | 客户自定义id                          |
 | price               | 价格                               |
-| origOty             | 原始订单数量                           |
+| Qty                 | 原始订单数量                           |
 | executedQty         | 交易的订单数量                          |
 | cummulativeQuoteQty | 累计订单金额                           |
 | status              | <a href="#order_status">订单状态</a> |
