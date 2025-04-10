@@ -581,6 +581,12 @@
 <td>adjust</td>
 <td>ws base url update:wss://contract.mexc.com/edge</td>
 </tr>
+<tr>
+<td>2025-04-09</td>
+<td>*</td>
+<td>adjust</td>
+<td>Subscribe to ws incremental depth data, with merge enabled by default: <code>compress</code> is set to <code>true</code></td>
+</tr>
 </tbody></table>
 <h1 id='integration-guide'>Integration guide</h1><h2 id='access-to-url'>Access to url</h2>
 <blockquote>
@@ -7064,7 +7070,8 @@ Rate limit:20 times/2 seconds
     </span><span class="nl">"ts"</span><span class="p">:</span><span class="mi">1587442022003</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>subscribe , unsubscribe, example is shown on the right.</p>
+<p>subscribe , unsubscribe, example is shown on the right.
+Incremental depth subscription has merging enabled by default. If you do not want to enable it, please set <code>compress</code> to <code>false</code> when subscribing.</p>
 
 <p><strong>Response Parameter:</strong></p>
 
