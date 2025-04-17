@@ -1128,7 +1128,7 @@ curl "https://contract.mexc.com/api/v1/contract/funding_rate/history?symbol=BTC_
 | ------------ | ------------ | ------------ | ------------ |
 | symbol  | string  | true  | 合约名 |
 | page_num  | int  | true  | 当前页数,默认为1  |
-| page_size  | int  | true  | 每页大小,默认20,最大100  |
+| page_size  | int  | true  | 每页大小,默认20,最大1000  |
 
 **响应参数:**
     
