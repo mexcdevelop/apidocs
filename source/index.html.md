@@ -616,8 +616,6 @@ quantity=1&price=11&recvWindow=5000&timestamp=1644489390087
 | 700006 |  IP非白名单                                                   |
 | 700007 | 没有访问端点的权限                                           |
 | 700008 | 参数中有无效字节                                             |
-| 730001  | 交易对不存在                |
-| 730002  | 参数不合法                 |
 | 730000  | 请求失败,请联系客服人员          |
 | 730001  | 用户信息错误                |
 | 730002  | 参数错误,请检查              |
@@ -2859,7 +2857,7 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 |amount|数量|
 |coin|币种|
 |network|链类型|
-|status|充值状态，1:小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回|
+|status|充值状态，1:不入账的小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回，8:强充值退回，9:预入账，10:无效充值|
 |address|地址|
 |addressTag|地址标签|
 |txId|交易编号|
@@ -3228,7 +3226,7 @@ get /api/v3/capital/transfer
 |fromAccountType|转出业务账户|
 |toAccountType|划入业务账户|
 |symbol|转出交易对|
-|status|划转状态|
+|status|划转状态，枚举值："SUCCESS"成功，"FAILED"失败，"WAIT"处理中|
 |timestamp|划转时间|
 
 ## 查询用户万向划转历史（根据tranId）
