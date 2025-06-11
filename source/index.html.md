@@ -2857,7 +2857,7 @@ get /api/v3/capital/deposit/hisrec?coin=EOS&timestamp={{timestamp}}&signature={{
 |amount|数量|
 |coin|币种|
 |network|链类型|
-|status|充值状态，1:不入账的小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回，8:强充值退回，9:预入账，10:无效充值|
+|status|充值状态，1:不入账的小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回，8:强充值退回，9:预入账，10:无效充值，11:受限中，12 :已退回|
 |address|地址|
 |addressTag|地址标签|
 |txId|交易编号|
