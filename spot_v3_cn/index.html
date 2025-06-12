@@ -1689,14 +1689,6 @@ quantity=1&amp;price=11&amp;recvWindow=5000&amp;timestamp=1644489390087</p></li>
 <td>参数中有无效字节</td>
 </tr>
 <tr>
-<td>730001</td>
-<td>交易对不存在</td>
-</tr>
-<tr>
-<td>730002</td>
-<td>参数不合法</td>
-</tr>
-<tr>
 <td>730000</td>
 <td>请求失败,请联系客服人员</td>
 </tr>
@@ -5959,7 +5951,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left">充值状态，1:小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回</td>
+<td style="text-align: left">充值状态，1:不入账的小额充值，2:延遲到賬，3:大額充值，4:等待中，5:入账成功，6:审核中，7:驳回，8:强充值退回，9:预入账，10:无效充值，11:受限中，12 :已退回</td>
 </tr>
 <tr>
 <td style="text-align: left">address</td>
@@ -6722,7 +6714,7 @@ body
 </tr>
 <tr>
 <td style="text-align: left">status</td>
-<td style="text-align: left">划转状态</td>
+<td style="text-align: left">划转状态，枚举值：&quot;SUCCESS&quot;成功，&quot;FAILED&quot;失败，&quot;WAIT&quot;处理中</td>
 </tr>
 <tr>
 <td style="text-align: left">timestamp</td>
