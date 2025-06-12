@@ -2791,7 +2791,7 @@ Response:
 |amount|deposit amount|
 |coin|coin |
 |network|deposit network|
-|status|deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY,<br/>4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED|
+|status|deposit status,1:SMALL,2:TIME_DELAY,3:LARGE_DELAY,<br/>4:PENDING,5:SUCCESS,6:AUDITING,7:REJECTED<br/>8:REFUND,9:PRE_SUCCESS,10:INVALID,<br/>11:RESTRICTED,12:COMPLETED|
 |address|deposit adress|
 |addressTag|addressTag|
 |txId|txId|
@@ -3536,7 +3536,7 @@ If startTime and endTime are not provided, will default to returning data from t
 |amount	|amount|
 |fromAccountType	|fromAccountType|
 |toAccountType	|toAccountType|
-|status	|status|
+|status	|status:"SUCCESS","FAILED","WAIT"|
 |timestamp	|timestamp|
 
 ## Withdraw(previous,offline soon)
