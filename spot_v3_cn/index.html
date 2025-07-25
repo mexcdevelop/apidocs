@@ -733,9 +733,6 @@
                     <a href="#1654ad2dd2" class="toc-h2 toc-link" data-title="增量深度信息">增量深度信息</a>
                   </li>
                   <li>
-                    <a href="#1b831cddd8" class="toc-h2 toc-link" data-title="增量深度信息(批量聚合)">增量深度信息(批量聚合)</a>
-                  </li>
-                  <li>
                     <a href="#1fecb05b1e" class="toc-h2 toc-link" data-title="有限档位深度信息">有限档位深度信息</a>
                   </li>
                   <li>
@@ -4586,7 +4583,7 @@ body
 <tr>
 <td style="text-align: left">symbol</td>
 <td style="text-align: left">交易对</td>
-<td style="text-align: left">是</td>
+<td style="text-align: left">否</td>
 <td style="text-align: left"></td>
 </tr>
 <tr>
@@ -7990,7 +7987,8 @@ protoc *.proto --python_out=python文件输出路径
       }
     ],
     "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", //事件类型
-    "version": "36913293511" //版本号
+    "fromVersion" : "10589632359", // 开始version
+    "toVersion" : "10589632359" // 截止version
   },
   "symbol": "BTCUSDT", //交易对
   "sendtime": 1736411507002 //事件时间
@@ -8025,9 +8023,14 @@ protoc *.proto --python_out=python文件输出路径
 <td style="text-align: left">事件类型</td>
 </tr>
 <tr>
-<td style="text-align: left">version</td>
+<td style="text-align: left">fromversion</td>
 <td style="text-align: left">string</td>
-<td style="text-align: left">版本号</td>
+<td style="text-align: left">开始版本号</td>
+</tr>
+<tr>
+<td style="text-align: left">toversion</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">截止版本号</td>
 </tr>
 <tr>
 <td style="text-align: left">symbol</td>
@@ -8040,21 +8043,24 @@ protoc *.proto --python_out=python文件输出路径
 <td style="text-align: left">事件时间</td>
 </tr>
 </tbody></table>
-<h2 id='1b831cddd8'>增量深度信息(批量聚合)</h2>
-<blockquote>
-<p><strong>request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
+
+<!-- ## 增量深度信息(批量聚合)
+
+>**request:**
+
+```
+{
     "method": "SUBSCRIPTION",
     "params": [
         "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"
     ]
 }
-</code></pre></div>
-<blockquote>
-<p><strong>response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
+```
+
+> **response:**
+
+```
+{
   "channel" : "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT",
   "symbol" : "BTCUSDT",
   "sendTime" : "1739502064578",
@@ -8103,51 +8109,22 @@ protoc *.proto --python_out=python文件输出路径
     "eventType" : "spot@public.increase.depth.batch.v3.api.pb"
   }
 }
-</code></pre></div>
-<p>批量聚合版本，条数超过5条或者时间超过5ms就推送一次，如果某个价格对应的挂单量(quantity)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。</p>
+```
 
-<p><strong>请求参数:</strong> <code>spot@public.increase.depth.batch.v3.api.pb@&lt;symbol&gt;</code></p>
+批量聚合版本，条数超过5条或者时间超过5ms就推送一次，如果某个价格对应的挂单量(quantity)为0，表示该价位的挂单已经撤单或者被吃，应该移除这个价位。
 
-<p><strong>返回参数:</strong></p>
+**请求参数:** `spot@public.increase.depth.batch.v3.api.pb@<symbol>`
 
-<table><thead>
-<tr>
-<th style="text-align: left">参数名</th>
-<th style="text-align: left">数据类型</th>
-<th style="text-align: left">说明</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">price</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">变动的价格档位</td>
-</tr>
-<tr>
-<td style="text-align: left">quantity</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">数量</td>
-</tr>
-<tr>
-<td style="text-align: left">eventtype</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">事件类型</td>
-</tr>
-<tr>
-<td style="text-align: left">version</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">版本号</td>
-</tr>
-<tr>
-<td style="text-align: left">symbol</td>
-<td style="text-align: left">string</td>
-<td style="text-align: left">交易对</td>
-</tr>
-<tr>
-<td style="text-align: left">sendtime</td>
-<td style="text-align: left">long</td>
-<td style="text-align: left">事件时间</td>
-</tr>
-</tbody></table>
+**返回参数:**
+
+| 参数名    | 数据类型 | 说明           |
+| :-------- | :------- | :------------- |
+| price     | string   | 变动的价格档位 |
+| quantity  | string   | 数量           |
+| eventtype | string   | 事件类型       |
+| version   | string   | 版本号         |
+| symbol    | string   | 交易对         |
+| sendtime  | long     | 事件时间       | -->
 <h2 id='1fecb05b1e'>有限档位深度信息</h2>
 <p>推送有限档深度信息，levels表示几档买卖单信息, 可选 5/10/20档。</p>
 
