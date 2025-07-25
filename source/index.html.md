@@ -2148,7 +2148,7 @@ Parameters:
 
 | Name              | Type   | Mandatory | Description |
 | ----------------- | ------ | --------- | ----------- |
-| symbol            | String | YES       |             |
+| symbol            | String | No       |             |
 | origClientOrderId | String | NO        |             |
 | orderId           | String | NO        |             |
 | recvWindow        | long   | NO        |             |
@@ -3956,7 +3956,8 @@ Available intervals:
       }
     ],
     "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", // Event type
-    "version": "36913293511" // Version number
+    "fromVersion" : "10589632359", // from Version number
+    "toVersion" : "10589632359" // to Version number 
   },
   "symbol": "BTCUSDT", // Trading pair
   "sendtime": 1736411507002 // Event time
@@ -3974,13 +3975,14 @@ If the order quantity (`quantity`) for a price level is 0, it indicates that the
 | price     | string    | Price level of change |
 | quantity  | string    | Quantity              |
 | eventtype | string    | Event type            |
-| version   | string    | Version number        |
+| fromversion   | string    | From Version number        |
+| toversion   | string    | To Version number        |
 | symbol    | string    | Trading pair          |
 | sendtime  | long      | Event time            |
 
 ---
 
-## Diff.Depth Stream(Batch Aggregation)
+<!-- ## Diff.Depth Stream(Batch Aggregation)
 
 > **Request:**
 
@@ -4062,7 +4064,7 @@ In the batch aggregation version, if the number of entries exceeds 5 or the time
 | symbol    | string    | Trading pair          |
 | sendtime  | long      | Event time            |
 
----
+--- -->
 
 ## Partial Book Depth Streams
 
