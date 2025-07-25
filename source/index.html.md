@@ -4007,7 +4007,8 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
       }
     ],
     "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", //事件类型
-    "version": "36913293511" //版本号
+    "fromVersion" : "10589632359", // 开始version
+    "toVersion" : "10589632359" // 截止version
   },
   "symbol": "BTCUSDT", //交易对
   "sendtime": 1736411507002 //事件时间
@@ -4030,7 +4031,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | sendtime  | long     | 事件时间       |
 
 
-## 增量深度信息(批量聚合)
+<!-- ## 增量深度信息(批量聚合)
 
 >**request:**
 
@@ -4110,7 +4111,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | eventtype | string   | 事件类型       |
 | version   | string   | 版本号         |
 | symbol    | string   | 交易对         |
-| sendtime  | long     | 事件时间       |
+| sendtime  | long     | 事件时间       | -->
 
 ## 有限档位深度信息
 
