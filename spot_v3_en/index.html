@@ -730,9 +730,6 @@
                     <a href="#diff-depth-stream" class="toc-h2 toc-link" data-title="Diff.Depth Stream">Diff.Depth Stream</a>
                   </li>
                   <li>
-                    <a href="#diff-depth-stream-batch-aggregation" class="toc-h2 toc-link" data-title="Diff.Depth Stream(Batch Aggregation)">Diff.Depth Stream(Batch Aggregation)</a>
-                  </li>
-                  <li>
                     <a href="#partial-book-depth-streams" class="toc-h2 toc-link" data-title="Partial Book Depth Streams">Partial Book Depth Streams</a>
                   </li>
                   <li>
@@ -4477,7 +4474,7 @@ post /api/v3/sub-account/margin
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>YES</td>
+<td>No</td>
 <td></td>
 </tr>
 <tr>
@@ -7794,7 +7791,8 @@ Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"eventtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.depth.v3.api.pb@100ms"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">type</span><span class="w">
-    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36913293511"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Version</span><span class="w"> </span><span class="err">number</span><span class="w">
+    </span><span class="nl">"fromVersion"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"10589632359"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">Version</span><span class="w"> </span><span class="err">number</span><span class="w">
+    </span><span class="nl">"toVersion"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"10589632359"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">Version</span><span class="w"> </span><span class="err">number</span><span class="w"> 
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Trading</span><span class="w"> </span><span class="err">pair</span><span class="w">
   </span><span class="nl">"sendtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1736411507002</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Event</span><span class="w"> </span><span class="err">time</span><span class="w">
@@ -7829,9 +7827,14 @@ Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
 <td>Event type</td>
 </tr>
 <tr>
-<td>version</td>
+<td>fromversion</td>
 <td>string</td>
-<td>Version number</td>
+<td>From Version number</td>
+</tr>
+<tr>
+<td>toversion</td>
+<td>string</td>
+<td>To Version number</td>
 </tr>
 <tr>
 <td>symbol</td>
@@ -7846,116 +7849,90 @@ Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
 </tbody></table>
 
 <hr>
-<h2 id='diff-depth-stream-batch-aggregation'>Diff.Depth Stream(Batch Aggregation)</h2>
-<blockquote>
-<p><strong>Request:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBSCRIPTION"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p><strong>Response:</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"channel"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSDT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sendTime"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1739502064578"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"publicIncreaseDepthsBatch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"items"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96578.48"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145507"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96578.90"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145508"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96579.31"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145509"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96579.84"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145510"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"asks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"bids"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"price"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"96576.69"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"4.88725694"</span><span class="w">
-      </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-      </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"39003145511"</span><span class="w">
-    </span><span class="p">}</span><span class="w"> </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"eventType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.increase.depth.batch.v3.api.pb"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>In the batch aggregation version, if the number of entries exceeds 5 or the time interval exceeds 5ms, the data is pushed once. If the order quantity for a price level is 0, it indicates that the order at that price has been canceled or executed, and that price level should be removed.</p>
 
-<p><strong>Request Parameter:</strong> <code>spot@public.increase.depth.batch.v3.api.pb@&lt;symbol&gt;</code></p>
+<!-- ## Diff.Depth Stream(Batch Aggregation)
 
-<p><strong>Response Parameters:</strong></p>
+> **Request:**
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Data Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>price</td>
-<td>string</td>
-<td>Price level of change</td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>string</td>
-<td>Quantity</td>
-</tr>
-<tr>
-<td>eventtype</td>
-<td>string</td>
-<td>Event type</td>
-</tr>
-<tr>
-<td>version</td>
-<td>string</td>
-<td>Version number</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Trading pair</td>
-</tr>
-<tr>
-<td>sendtime</td>
-<td>long</td>
-<td>Event time</td>
-</tr>
-</tbody></table>
+```json
+{
+    "method": "SUBSCRIPTION",
+    "params": [
+        "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT"
+    ]
+}
+```
 
-<hr>
+> **Response:**
+
+```json
+{
+  "channel" : "spot@public.increase.depth.batch.v3.api.pb@BTCUSDT",
+  "symbol" : "BTCUSDT",
+  "sendTime" : "1739502064578",
+  "publicIncreaseDepthsBatch" : {
+    "items" : [ {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.48",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145507"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96578.90",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145508"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.31",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145509"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96579.84",
+        "quantity" : "0.00000000"
+      } ],
+      "eventType" : "",
+      "version" : "39003145510"
+    }, {
+      "asks" : [ ],
+      "bids" : [ {
+        "price" : "96576.69",
+        "quantity" : "4.88725694"
+      } ],
+      "eventType" : "",
+      "version" : "39003145511"
+    } ],
+    "eventType" : "spot@public.increase.depth.batch.v3.api.pb"
+  }
+}
+```
+
+In the batch aggregation version, if the number of entries exceeds 5 or the time interval exceeds 5ms, the data is pushed once. If the order quantity for a price level is 0, it indicates that the order at that price has been canceled or executed, and that price level should be removed.
+
+**Request Parameter:** `spot@public.increase.depth.batch.v3.api.pb@<symbol>`
+
+**Response Parameters:**
+
+| Parameter | Data Type | Description           |
+| --------- | --------- | --------------------- |
+| price     | string    | Price level of change |
+| quantity  | string    | Quantity              |
+| eventtype | string    | Event type            |
+| version   | string    | Version number        |
+| symbol    | string    | Trading pair          |
+| sendtime  | long      | Event time            |
+
+--- -->
 <h2 id='partial-book-depth-streams'>Partial Book Depth Streams</h2>
 <p>This stream pushes limited level depth information. The “levels” indicate the number of order levels for buy and sell orders, which can be 5, 10, or 20 levels.</p>
 
