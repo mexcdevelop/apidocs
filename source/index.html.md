@@ -2178,7 +2178,7 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 
 | 参数名            | 数据类型         | 是否必须 | 说明 |
 | :----------------- | :---------------- | :-------- | :---- |
-| symbol            | 交易对           | 是       |      |
+| symbol            | 交易对           | 否       |      |
 | origClientOrderId | 原始客户端订单id | 否       |      |
 | orderId           | 订单id           | 否       |      |
 | recvWindow        | long             | 否       |      |
