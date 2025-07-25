@@ -4026,7 +4026,8 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | price     | string   | 变动的价格档位 |
 | quantity  | string   | 数量           |
 | eventtype | string   | 事件类型       |
-| version   | string   | 版本号         |
+| fromversion   | string   | 开始版本号         |
+| toversion   | string   | 截止版本号         |
 | symbol    | string   | 交易对         |
 | sendtime  | long     | 事件时间       |
 
