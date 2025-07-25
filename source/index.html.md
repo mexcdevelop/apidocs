@@ -2178,7 +2178,7 @@ GET /api/v3/order?symbol=BTCUSDT&orderId=129402018493145088&timestamp={{timestam
 
 | 参数名            | 数据类型         | 是否必须 | 说明 |
 | :----------------- | :---------------- | :-------- | :---- |
-| symbol            | 交易对           | 是       |      |
+| symbol            | 交易对           | 否       |      |
 | origClientOrderId | 原始客户端订单id | 否       |      |
 | orderId           | 订单id           | 否       |      |
 | recvWindow        | long             | 否       |      |
@@ -4007,7 +4007,8 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
       }
     ],
     "eventtype": "spot@public.aggre.depth.v3.api.pb@100ms", //事件类型
-    "version": "36913293511" //版本号
+    "fromVersion" : "10589632359", // 开始version
+    "toVersion" : "10589632359" // 截止version
   },
   "symbol": "BTCUSDT", //交易对
   "sendtime": 1736411507002 //事件时间
@@ -4025,12 +4026,13 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | price     | string   | 变动的价格档位 |
 | quantity  | string   | 数量           |
 | eventtype | string   | 事件类型       |
-| version   | string   | 版本号         |
+| fromversion   | string   | 开始版本号         |
+| toversion   | string   | 截止版本号         |
 | symbol    | string   | 交易对         |
 | sendtime  | long     | 事件时间       |
 
 
-## 增量深度信息(批量聚合)
+<!-- ## 增量深度信息(批量聚合)
 
 >**request:**
 
@@ -4110,7 +4112,7 @@ Min -> 分钟; Hour -> 小时; Day -> 天; Week -> 周, M -> 月
 | eventtype | string   | 事件类型       |
 | version   | string   | 版本号         |
 | symbol    | string   | 交易对         |
-| sendtime  | long     | 事件时间       |
+| sendtime  | long     | 事件时间       | -->
 
 ## 有限档位深度信息
 
