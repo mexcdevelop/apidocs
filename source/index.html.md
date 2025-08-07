@@ -3638,7 +3638,7 @@ Response:
 
 - The base endpoint is: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
 - Each connection to **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)** is valid for no more than 24 hours. Please handle disconnections and reconnections properly.
-- All trading pair names in the symbol must be in **uppercase**. For example: `spot@public.deals.v3.api.pb@<symbol>`  
+- All trading pair names in the symbol must be in **uppercase**. For example: `spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`  
   Example: `spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT`
 - If there is no valid subscription on the websocket, the server will actively disconnect after **30 seconds**. If the subscription is successful but there is no data flow, the server will disconnect after **one minute**. The client can send a ping to keep the connection alive.
 - One ws connection supports a maximum of 30 subscriptions.
