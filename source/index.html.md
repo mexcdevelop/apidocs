@@ -3704,7 +3704,11 @@ GET /api/v3/etf/info
 
 - 本篇所列出的所有wss接口的baseurl为: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
 - 每个到 **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)** 的链接有效期不超过24小时，请妥善处理断线重连
+<<<<<<< Updated upstream
 - symbol名称中所有交易对均为**大写**，如：`spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`</br>实例：`spot@public.aggre.deals.v3.api.pb@BTCUSDT`
+=======
+- symbol名称中所有交易对均为**大写**，如：`spot@public.aggre.deals.v3.api.pb@<symbol>`</br>实例：`spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT`
+>>>>>>> Stashed changes
 - websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接
 - 1个 ws 连接最多30个订阅
 - 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用
