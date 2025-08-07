@@ -3704,7 +3704,7 @@ GET /api/v3/etf/info
 
 - 本篇所列出的所有wss接口的baseurl为: **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)**
 - 每个到 **[ws://wbs-api.mexc.com/ws](http://wbs-api.mexc.com/ws)** 的链接有效期不超过24小时，请妥善处理断线重连
-- symbol名称中所有交易对均为**大写**，如：`spot@public.deals.v3.api.pb@<symbol>`</br>实例：`spot@public.deals.v3.api.pb@BTCUSDT`
+- symbol名称中所有交易对均为**大写**，如：`spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`</br>实例：`spot@public.aggre.deals.v3.api.pb@BTCUSDT`
 - websocket没有有效订阅的话，服务器会在**30秒**时主动断开连接，如果订阅成功但是没有流量，服务器会在**一分钟**时主动断开，客户端可以发送ping来保持链接
 - 1个 ws 连接最多30个订阅
 - 请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用
@@ -3804,7 +3804,7 @@ protoc *.proto --python_out=python文件输出路径
  {
   "id":0,
   "code":0,
-  "msg":"spot@public.deals.v3.api.pb@BTCUSDT"
+  "msg":"spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"
  }
 ```
 
@@ -3813,7 +3813,7 @@ protoc *.proto --python_out=python文件输出路径
 
 {
  "method":"SUBSCRIPTION",
- "params":["spot@public.deals.v3.api.pb@BTCUSDT"]
+ "params":["spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"]
 }
 
 
@@ -3834,7 +3834,7 @@ protoc *.proto --python_out=python文件输出路径
 
 {
  "method":"UNSUBSCRIPTION",
- "params":["spot@public.deals.v3.api.pb@BTCUSDT"]
+ "params":["spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"]
 }
 
 
@@ -3856,7 +3856,7 @@ protoc *.proto --python_out=python文件输出路径
 {"method":"PING"}
 
 
-## 逐笔交易
+## 成交信息
 
 >**request:**
 
@@ -3892,7 +3892,7 @@ protoc *.proto --python_out=python文件输出路径
 
 **请求参数：**   `spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@<symbol>`
 
-逐笔交易推送每一笔成交的信息。**成交**，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
+成交信息推送每一笔成交的信息。**成交**，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易
 
 **返回参数:**
 
