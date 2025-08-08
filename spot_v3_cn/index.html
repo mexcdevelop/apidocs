@@ -716,6 +716,9 @@
           </li>
           <li>
             <a href="#websocket-2" class="toc-h1 toc-link" data-title="Websocket 行情推送">Websocket 行情推送</a>
+          </li>
+          <li>
+            <a href="#symbol-spot-public-aggre-deals-v3-api-pb-100ms-10ms-lt-symbol-gt-spot-public-aggre-deals-v3-api-pb-btcusdt" class="toc-h1 toc-link" data-title="- symbol名称中所有交易对均为大写，如：spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;实例：spot@public.aggre.deals.v3.api.pb@BTCUSDT">- symbol名称中所有交易对均为<strong>大写</strong>，如：<code>spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code>实例：<code>spot@public.aggre.deals.v3.api.pb@BTCUSDT</code></a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#3c863d56da" class="toc-h2 toc-link" data-title="实时订阅/取消数据流">实时订阅/取消数据流</a>
@@ -724,7 +727,7 @@
                     <a href="#protocolbuffers" class="toc-h2 toc-link" data-title="protocolbuffers接入方案">protocolbuffers接入方案</a>
                   </li>
                   <li>
-                    <a href="#2b149598d9" class="toc-h2 toc-link" data-title="逐笔交易">逐笔交易</a>
+                    <a href="#f2d8904b73" class="toc-h2 toc-link" data-title="成交信息">成交信息</a>
                   </li>
                   <li>
                     <a href="#k-streams" class="toc-h2 toc-link" data-title="K线 Streams">K线 Streams</a>
@@ -7610,8 +7613,13 @@ GET /api/v3/etf/info
 <h1 id='websocket-2'>Websocket 行情推送</h1>
 <ul>
 <li>本篇所列出的所有wss接口的baseurl为: <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong></li>
-<li>每个到 <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong> 的链接有效期不超过24小时，请妥善处理断线重连</li>
-<li>symbol名称中所有交易对均为<strong>大写</strong>，如：<code>spot@public.deals.v3.api.pb@&lt;symbol&gt;</code></br>实例：<code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
+<li>每个到 <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong> 的链接有效期不超过24小时，请妥善处理断线重连
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</li>
+</ul>
+<h1 id='symbol-spot-public-aggre-deals-v3-api-pb-100ms-10ms-lt-symbol-gt-spot-public-aggre-deals-v3-api-pb-btcusdt'>- symbol名称中所有交易对均为<strong>大写</strong>，如：<code>spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></br>实例：<code>spot@public.aggre.deals.v3.api.pb@BTCUSDT</code></h1>
+<ul>
+<li>symbol名称中所有交易对均为<strong>大写</strong>，如：<code>spot@public.aggre.deals.v3.api.pb@&lt;symbol&gt;</code></br>实例：<code>spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT</code>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</li>
 <li>websocket没有有效订阅的话，服务器会在<strong>30秒</strong>时主动断开连接，如果订阅成功但是没有流量，服务器会在<strong>一分钟</strong>时主动断开，客户端可以发送ping来保持链接</li>
 <li>1个 ws 连接最多30个订阅</li>
 <li>请按照文档返回的参数进行处理数据，文档没有返回的参数近期将进行优化处理，请勿使用</li>
@@ -7704,7 +7712,7 @@ protoc *.proto --python_out=python文件输出路径
 <div class="highlight"><pre class="highlight plaintext"><code> {
   "id":0,
   "code":0,
-  "msg":"spot@public.deals.v3.api.pb@BTCUSDT"
+  "msg":"spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"
  }
 </code></pre></div>
 <ul>
@@ -7713,7 +7721,7 @@ protoc *.proto --python_out=python文件输出路径
 
 <p>{
  &quot;method&quot;:&quot;SUBSCRIPTION&quot;,
- &quot;params&quot;:[&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
+ &quot;params&quot;:[&quot;spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT&quot;]
 }</p>
 <h3 id='122d1b11ee'>取消订阅一个信息流</h3>
 <blockquote>
@@ -7731,7 +7739,7 @@ protoc *.proto --python_out=python文件输出路径
 
 <p>{
  &quot;method&quot;:&quot;UNSUBSCRIPTION&quot;,
- &quot;params&quot;:[&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
+ &quot;params&quot;:[&quot;spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT&quot;]
 }</p>
 <h3 id='ping-pong'>PING/PONG机制</h3>
 <blockquote>
@@ -7748,7 +7756,7 @@ protoc *.proto --python_out=python文件输出路径
 </ul>
 
 <p>{&quot;method&quot;:&quot;PING&quot;}</p>
-<h2 id='2b149598d9'>逐笔交易</h2>
+<h2 id='f2d8904b73'>成交信息</h2>
 <blockquote>
 <p><strong>request:</strong></p>
 </blockquote>
@@ -7781,7 +7789,7 @@ protoc *.proto --python_out=python文件输出路径
 </code></pre></div>
 <p><strong>请求参数：</strong>   <code>spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code></p>
 
-<p>逐笔交易推送每一笔成交的信息。<strong>成交</strong>，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易</p>
+<p>成交信息推送每一笔成交的信息。<strong>成交</strong>，或者说交易的定义是仅有一个吃单者与一个挂单者相互交易</p>
 
 <p><strong>返回参数:</strong></p>
 
