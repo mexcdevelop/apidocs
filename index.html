@@ -7404,8 +7404,8 @@ Response:
 <ul>
 <li>The base endpoint is: <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong></li>
 <li>Each connection to <strong><a href="http://wbs-api.mexc.com/ws">ws://wbs-api.mexc.com/ws</a></strong> is valid for no more than 24 hours. Please handle disconnections and reconnections properly.</li>
-<li>All trading pair names in the symbol must be in <strong>uppercase</strong>. For example: <code>spot@public.deals.v3.api.pb@&lt;symbol&gt;</code><br>
-Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
+<li>All trading pair names in the symbol must be in <strong>uppercase</strong>. For example: <code>spot@public.aggre.deals.v3.api.pb@(100ms|10ms)@&lt;symbol&gt;</code><br>
+Example: <code>spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT</code></li>
 <li>If there is no valid subscription on the websocket, the server will actively disconnect after <strong>30 seconds</strong>. If the subscription is successful but there is no data flow, the server will disconnect after <strong>one minute</strong>. The client can send a ping to keep the connection alive.</li>
 <li>One ws connection supports a maximum of 30 subscriptions.</li>
 <li>Please process the data according to the parameters returned in the documentation. Parameters not returned in the documentation will be optimized soon, so please do not use them.</li>
@@ -7495,7 +7495,7 @@ Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.deals.v3.api.pb@BTCUSDT"</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
@@ -7504,7 +7504,7 @@ Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
 
 <p>{
  &quot;method&quot;: &quot;SUBSCRIPTION&quot;,
- &quot;params&quot;: [&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
+ &quot;params&quot;: [&quot;spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT&quot;]
 }</p>
 
 <hr>
@@ -7524,7 +7524,7 @@ Example: <code>spot@public.deals.v3.api.pb@BTCUSDT</code></li>
 
 <p>{
  &quot;method&quot;: &quot;UNSUBSCRIPTION&quot;,
- &quot;params&quot;: [&quot;spot@public.deals.v3.api.pb@BTCUSDT&quot;]
+ &quot;params&quot;: [&quot;spot@public.aggre.deals.v3.api.pb@100ms@BTCUSDT&quot;]
 }</p>
 
 <hr>
